@@ -1,0 +1,33 @@
+# Build directories
+*-Debug/
+*-Release/
+*-MinSizeRel/
+*-RelWithDebInfo/
+build*/
+Build*/
+
+# Qt Creator user files
+*.autosave
+
+# Qt Design Studio auto-generated QRC files
+*.qmlrc.bin
+
+# IDE
+.qtc_clangd/
+.qt/
+.vscode/
+.idea/
+
+# CMake generated
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Archives
+*.rar
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db

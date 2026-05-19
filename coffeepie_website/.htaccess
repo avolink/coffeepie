@@ -1,0 +1,54 @@
+# --- START PRODUCTION CONFIG PARA COFFEE PIE ---
+
+# 1. Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /
+
+# 2. Replicate Firebase "cleanUrls": true
+# This allows access to /tienda without typing /tienda.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# Permanent Redirects
+Redirect 301 /princing /precios
+
+# 3. Explicit Rewrites from firebase.json
+# Note: These are redundant if cleanUrls logic above works, but kept for absolute 1:1 parity with Firebase
+RewriteRule ^precios$ precios.html [L]
+RewriteRule ^tienda$ tienda.html [L]
+RewriteRule ^tutoriales$ tutoriales.html [L]
+RewriteRule ^acerca-de$ acerca-de.html [L]
+RewriteRule ^api$ api.html [L]
+RewriteRule ^politica-de-envios$ politica-de-envios.html [L]
+RewriteRule ^politica-de-privacidad$ politica-de-privacidad.html [L]
+RewriteRule ^politica-de-retornos$ politica-de-retornos.html [L]
+RewriteRule ^terminos-y-condiciones$ terminos-y-condiciones.html [L]
+RewriteRule ^portal-de-inversionistas$ portal-de-inversionistas.html [L]
+RewriteRule ^accesibilidad$ accesibilidad.html [L]
+RewriteRule ^dispositivos-certificados$ dispositivos-certificados.html [L]
+RewriteRule ^fabricantes$ fabricantes.html [L]
+RewriteRule ^proveedores-nube$ proveedores-nube.html [L]
+RewriteRule ^carrito$ carrito.html [L]
+
+# 4. Custom 404 Page (matches your 404.html in public/)
+ErrorDocument 404 /404.html
+
+# 5. Performance: Enable Gzip Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# 6. Performance: Leverage Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# --- END PRODUCTION CONFIG ---

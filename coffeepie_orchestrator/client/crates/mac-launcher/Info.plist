@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- App name -->
+  <key>CFBundleName</key>
+  <string>UDS Launcher</string>
+
+  <!-- App Executable -->
+  <key>CFBundleExecutable</key>
+  <string>mac-launcher</string>
+
+  <!-- Unique identifier for app -->
+  <key>CFBundleIdentifier</key>
+  <string>org.openuds.launcher</string>
+
+  <!-- Short version and build version -->
+  <key>CFBundleShortVersionString</key>
+  <string>5.0</string>
+  <key>CFBundleVersion</key>
+  <string>5</string>
+
+  <!-- Package type: application -->
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+
+  <!-- Optional icon -->
+  <key>CFBundleIconFile</key>
+  <string>uds.icns</string>
+
+  <!-- Custom URL schemes -->
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>Viewer</string>
+      <key>CFBundleURLName</key>
+      <string>UDS Launcher</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>udssv2</string>
+      </array>
+    </dict>
+  </array>
+
+  <!-- Only macOS 10.13 and later -->
+  <key>LSMinimumSystemVersion</key>
+  <string>10.13</string>
+  <key>NSHighResolutionCapable</key>
+  <true/>
+</dict>
+</plist>

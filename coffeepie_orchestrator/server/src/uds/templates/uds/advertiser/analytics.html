@@ -1,0 +1,53 @@
+{% extends "uds/advertiser/base.html" %}
+{% block content %}
+<h2 style="margin-bottom:25px; font-weight:400;">Analíticas</h2>
+
+<div class="stats">
+    <div class="stat-card">
+        <div class="value">{{ total_spent }}</div>
+        <div class="label">Créditos gastados</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ total_impressions }}</div>
+        <div class="label">Impresiones</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ total_clicks }}</div>
+        <div class="label">Clics</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ ctr }}%</div>
+        <div class="label">CTR</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ cpm }} Cr</div>
+        <div class="label">CPM (costo por mil)</div>
+    </div>
+</div>
+
+{% if campaigns %}
+<h3 style="margin-bottom:15px; font-weight:400;">Rendimiento por campaña</h3>
+<table>
+    <tr><th>Nombre</th><th>Puja</th><th>Impresiones</th><th>Clics</th><th>CTR</th><th>Gastado</th><th>CPM</th></tr>
+    {% for c in campaigns %}
+    <tr>
+        <td>{{ c.campaign_name }}</td>
+        <td>{{ c.bid_amount }} Cr</td>
+        <td>{{ c.impressions }}</td>
+        <td>{{ c.clicks }}</td>
+        <td>
+            {% if c.impressions > 0 %}
+            {{ c.clicks|floatformat:2 }}%
+            {% else %}0%{% endif %}
+        </td>
+        <td>{{ c.spent }} Cr</td>
+        <td>
+            {% if c.impressions > 0 %}
+            {{ c.spent|floatformat:0 }} Cr
+            {% else %}0{% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

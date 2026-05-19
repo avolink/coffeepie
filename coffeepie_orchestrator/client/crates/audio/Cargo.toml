@@ -1,0 +1,10 @@
+[package]
+name = "audio"
+version = "5.0.0"
+edition = "2024"
+
+[dependencies]
+shared = { path = "../shared" }
+
+cpal = { workspace = true }
+flume = { workspace = true }

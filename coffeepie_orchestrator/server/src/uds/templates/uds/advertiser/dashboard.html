@@ -1,0 +1,59 @@
+{% extends "uds/advertiser/base.html" %}
+{% block content %}
+<h2 style="margin-bottom:25px; font-weight:400;">Dashboard</h2>
+
+<div class="stats">
+    <div class="stat-card">
+        <div class="value">{{ balance }}</div>
+        <div class="label">Créditos disponibles</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ active_count }}</div>
+        <div class="label">Campañas activas</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ total_spent }}</div>
+        <div class="label">Créditos gastados</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ total_impressions }}</div>
+        <div class="label">Impresiones totales</div>
+    </div>
+    <div class="stat-card">
+        <div class="value">{{ total_clicks }}</div>
+        <div class="label">Clics totales</div>
+    </div>
+</div>
+
+<h3 style="margin-bottom:15px; font-weight:400;">Campañas recientes</h3>
+{% if campaigns %}
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Puja</th>
+        <th>Presupuesto</th>
+        <th>Impresiones</th>
+        <th>Gastado</th>
+        <th>Estado</th>
+    </tr>
+    {% for c in campaigns %}
+    <tr>
+        <td>{{ c.campaign_name }}</td>
+        <td>{{ c.bid_amount }} Cr</td>
+        <td>{{ c.remaining_budget }}/{{ c.total_budget }} Cr</td>
+        <td>{{ c.impressions }}</td>
+        <td>{{ c.spent }} Cr</td>
+        <td>
+            {% if c.is_active and c.remaining_budget > 0 %}
+            <span class="badge badge-active">ACTIVA</span>
+            {% else %}
+            <span class="badge badge-paused">PAUSADA</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="empty">No hay campañas. Crea una para empezar a anunciarte.</div>
+{% endif %}
+{% endblock %}

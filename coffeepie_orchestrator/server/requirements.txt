@@ -1,0 +1,67 @@
+# Broker (and common)
+# Latest versions should work fine with master branch
+Django>5.2
+# Current "stable" ldap3 version (2.9.1) has a feature
+# that does not allows using latest pyasn, but "older" version
+# of pyasn has a bunerability (that should not affect us, but just in case..)
+git+https://github.com/cannatag/ldap3.git
+pytest
+pytest-django
+lark
+ldap3
+aiosmtpd
+pillow
+cairosvg
+bitarray
+numpy
+html5lib
+cryptography
+# Post quantum algorithms
+# Note: Not available on 1/2026 on python 3.14
+# Will give some time or switch implementation, even
+# to a rust based module if needed :)
+# git+https://github.com/backbone-hq/pqcrypto.git
+pqcrypto
+python3-saml
+six
+dnspython
+# lxml  must be installed source to avoid conflicts
+ovirt-engine-sdk-python
+pycurl
+matplotlib
+mysqlclient
+paramiko
+pyOpenSSL
+pyrad
+defusedxml
+python-dateutil
+requests
+WeasyPrint
+webencodings
+xml-marshaller
+ipython
+pyvmomi
+XenAPI
+PyJWT
+pylibmc
+gunicorn
+pywinrm
+pywinrm[credssp]
+whitenoise
+setproctitle
+openpyxl
+boto3
+uvicorn[standard]
+pandas
+xxhash
+psutil
+pyyaml
+pyotp
+qrcode
+qrcode[pil]
+art
+# For tunnel
+aiohttp
+uvloop
+argon2-cffi
+# psycopg2

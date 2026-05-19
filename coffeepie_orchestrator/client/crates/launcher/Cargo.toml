@@ -1,0 +1,36 @@
+[package]
+name = "launcher"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+shared = { path = "../shared" }
+js = { path = "../js" }
+gui = { path = "../gui" }
+rdp = { path = "../rdp/rdp" }
+crypt = { path = "../crypt" }
+connection = { path = "../connection" }
+
+anyhow = { workspace = true }
+
+tokio = { workspace = true }
+
+eframe = { workspace = true }
+image = { workspace = true }
+open = { workspace = true }
+
+# Persistence
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# i18n
+gettext = { workspace = true }
+rust-embed = { workspace = true }
+sys-locale = { workspace = true }
+
+flume = { workspace = true }
+
+[build-dependencies]
+builder = { path = "../builder" }

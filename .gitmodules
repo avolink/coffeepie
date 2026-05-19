@@ -1,0 +1,3 @@
+[submodule "coffeepie_frontend/moonlight-embedded"]
+	path = coffeepie_frontend/moonlight-embedded
+	url = https://github.com/moonlight-stream/moonlight-embedded.git

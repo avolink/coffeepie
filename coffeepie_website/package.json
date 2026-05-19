@@ -1,0 +1,31 @@
+{
+  "name": "coffee_pie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "auto-translate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-products": "node update_tienda_products.js",
+    "optimize-assets": "node tools/optimize_images.js",
+    "build": "npm run optimize-assets && npm run update-products"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avolink/coffee-pie.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/avolink/coffee-pie/issues"
+  },
+  "homepage": "https://github.com/avolink/coffee-pie#readme",
+  "dependencies": {
+    "jsdom": "^28.1.0",
+    "puppeteer": "^24.38.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

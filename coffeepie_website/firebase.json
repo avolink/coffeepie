@@ -1,0 +1,210 @@
+{
+    "hosting": {
+        "public": "public",
+        "cleanUrls": true,
+        "trailingSlash": false,
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**",
+            "tools/**",
+            "package.json",
+            "package-lock.json",
+            "firebase-debug.log",
+            "**/*.zip",
+            "**/*.rar",
+            "**/*.7z",
+            "**/*.tar",
+            "**/*.gz",
+            "**/*.py"
+        ],
+        "headers": [
+            {
+                "source": "**/*.@(jpg|jpeg|gif|png|webp|avif|svg)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=2592000, immutable"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.@(js|css)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=604800"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.@(woff|woff2|ttf|otf|eot)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=31536000, immutable"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.html",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=3600, must-revalidate"
+                    }
+                ]
+            },
+            {
+                "source": "sitemap.xml",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/xml; charset=utf-8"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=86400"
+                    }
+                ]
+            },
+            {
+                "source": "en_en-sitemap.xml",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/xml; charset=utf-8"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=86400"
+                    }
+                ]
+            },
+            {
+                "source": "robots.txt",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "text/plain; charset=utf-8"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=86400"
+                    }
+                ]
+            },
+            {
+                "source": "**",
+                "headers": [
+                    {
+                        "key": "X-Content-Type-Options",
+                        "value": "nosniff"
+                    },
+                    {
+                        "key": "X-Frame-Options",
+                        "value": "SAMEORIGIN"
+                    },
+                    {
+                        "key": "X-XSS-Protection",
+                        "value": "1; mode=block"
+                    },
+                    {
+                        "key": "Referrer-Policy",
+                        "value": "strict-origin-when-cross-origin"
+                    },
+                    {
+                        "key": "Strict-Transport-Security",
+                        "value": "max-age=31536000; includeSubDomains; preload"
+                    },
+                    {
+                        "key": "Permissions-Policy",
+                        "value": "camera=(), microphone=(), geolocation=(self)"
+                    }
+                ]
+            }
+        ],
+        "redirects": [
+            {
+                "source": "/princing",
+                "destination": "/precios",
+                "type": 301
+            },
+            {
+                "source": "/index.html",
+                "destination": "/",
+                "type": 301
+            }
+        ],
+        "rewrites": [
+            {
+                "source": "/precios",
+                "destination": "/precios.html"
+            },
+            {
+                "source": "/tienda",
+                "destination": "/tienda.html"
+            },
+            {
+                "source": "/tutoriales",
+                "destination": "/tutoriales.html"
+            },
+            {
+                "source": "/acerca-de",
+                "destination": "/acerca-de.html"
+            },
+            {
+                "source": "/api",
+                "destination": "/api.html"
+            },
+            {
+                "source": "/politica-de-envios",
+                "destination": "/politica-de-envios.html"
+            },
+            {
+                "source": "/politica-de-privacidad",
+                "destination": "/politica-de-privacidad.html"
+            },
+            {
+                "source": "/politica-de-retornos",
+                "destination": "/politica-de-retornos.html"
+            },
+            {
+                "source": "/terminos-y-condiciones",
+                "destination": "/terminos-y-condiciones.html"
+            },
+            {
+                "source": "/portal-de-inversionistas",
+                "destination": "/portal-de-inversionistas.html"
+            },
+            {
+                "source": "/accesibilidad",
+                "destination": "/accesibilidad.html"
+            },
+            {
+                "source": "/dispositivos-certificados",
+                "destination": "/dispositivos-certificados.html"
+            },
+            {
+                "source": "/fabricantes",
+                "destination": "/fabricantes.html"
+            },
+            {
+                "source": "/proveedores-nube",
+                "destination": "/proveedores-nube.html"
+            },
+            {
+                "source": "/pago-seguro",
+                "destination": "/pago-seguro.html"
+            },
+            {
+                "source": "/carrito",
+                "destination": "/carrito.html"
+            }
+        ]
+    }
+}

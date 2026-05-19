@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" id="avoDesktopViewport">
+    <meta name="generator" content="Avolink IT Services">
+    <link rel="icon" sizes="192x192" href="/assets/avo/media/557674_3c3a2d29a9434c33a754d6cac7b98b98.png" type="image/png">
+    <link rel="shortcut icon" href="/assets/avo/media/557674_3c3a2d29a9434c33a754d6cac7b98b98.png" type="image/png">
+    <link rel="apple-touch-icon" href="/assets/avo/media/557674_3c3a2d29a9434c33a754d6cac7b98b98.png" type="image/png">
+    <title>Pago Seguro | Coffee Pie</title>
+    <link rel="stylesheet" href="/assets/avo/css/main.68f9276d.min.css">
+    <style>
+        body { background: #111; font-family: Arial, Helvetica, sans-serif; }
+        .page-wrap { max-width: 900px; margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; text-align: center; }
+        h1 { font-size: 2rem; margin-bottom: 10px; }
+        h2 { font-size: 1.2rem; color: #666; font-weight: 400; margin-bottom: 30px; }
+        .cart-summary { margin: 30px 0; }
+        .cart-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+        .cart-table thead { background: #222; color: #fff; }
+        .cart-table th { padding: 10px 14px; }
+        .cart-table td { padding: 10px 14px; border-bottom: 1px solid #e0e0e0; }
+        .cart-table .cart-item-name { color: #333; }
+        .cart-table .cart-total td { border-bottom: none; padding-top: 14px; font-size: 1.1rem; }
+        .qr-container { display: flex; justify-content: center; gap: 40px; margin: 30px 0; flex-wrap: wrap; }
+        .qr-box { background: #f7f7f7; border: 2px solid #e0e0e0; border-radius: 12px; padding: 30px; min-width: 280px; }
+        .qr-box h3 { margin: 0 0 10px 0; font-size: 1.1rem; }
+        .qr-box .amount { font-size: 2rem; font-weight: bold; color: #000; margin: 10px 0; }
+        .qr-placeholder { width: 220px; height: 220px; margin: 20px auto; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px dashed #999; border-radius: 8px; }
+        .qr-placeholder svg { width: 200px; height: 200px; }
+        .transfer-info { background: #f7f7f7; padding: 25px; border-radius: 8px; margin: 30px 0; text-align: left; }
+        .transfer-info h3 { margin-top: 0; }
+        .transfer-info .field { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e0e0e0; }
+        .transfer-info .field:last-child { border-bottom: none; }
+        .btn-back { display: inline-block; padding: 12px 30px; background: #000; color: #fff; text-decoration: none; border-radius: 30px; margin-top: 30px; }
+        .btn-back:hover { background: #333; }
+        .instructions { font-size: 0.95rem; color: #555; margin: 20px 0; line-height: 1.6; }
+        .badge-secure { display: inline-flex; align-items: center; gap: 6px; background: #f0f0f0; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; margin-bottom: 20px; }
+        @media (max-width: 700px) {
+            .page-wrap { margin: 20px; padding: 20px; box-sizing: border-box; overflow: hidden; }
+            .qr-container { flex-direction: column; align-items: center; }
+            .qr-box { min-width: 0; width: 100%; padding: 6vw 4vw; box-sizing: border-box; }
+            .qr-box .amount { font-size: 7vw; word-break: break-word; }
+            .qr-placeholder { width: 55vw; height: 55vw; max-width: 200px; max-height: 200px; }
+            .qr-placeholder svg { width: 100%; height: 100%; }
+            .cart-table, .cart-table thead, .cart-table tbody, .cart-table tfoot, .cart-table tr, .cart-table th, .cart-table td { display: block; }
+            .cart-table thead { display: none; }
+            .cart-table tr { display: flex; flex-wrap: wrap; align-items: center; padding: 10px 0; border-bottom: 1px solid #e0e0e0; }
+            .cart-table tbody tr:last-child { border-bottom: none; }
+            .cart-table .cart-item-name { width: 100%; font-size: 4vw; margin-bottom: 6px; }
+            .cart-table td { border-bottom: none; padding: 4px 0; font-size: 3.5vw; }
+            .cart-table .cart-item-name ~ td { flex: 1; text-align: left; }
+            .cart-table .cart-item-name ~ td:last-child { text-align: right; font-weight: bold; }
+            .cart-table .cart-total td { padding: 12px 0; font-size: 5vw; }
+            .cart-table .cart-total td[colspan] { display: none; }
+            .cart-table .cart-total td:last-child { width: 100%; text-align: right; }
+            .instructions { font-size: 3.8vw; }
+            .transfer-info .field { flex-direction: column; gap: 4px; }
+            .transfer-info .field span { font-size: 3.5vw; }
+            .transfer-info .field strong { font-size: 3.8vw; word-break: break-all; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+        <div class="badge-secure">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            Pago seguro
+        </div>
+
+        <h1>Pago Seguro</h1>
+        <h2>Escanea el código QR con tu app Bancolombia para pagar tu carrito</h2>
+
+        <div class="cart-summary" id="cart-summary">
+            <table class="cart-table">
+                <thead>
+                    <tr><th>Producto</th><th>Cant.</th><th>Precio</th></tr>
+                </thead>
+                <tbody id="cart-items"></tbody>
+                <tfoot>
+                    <tr class="cart-total"><td colspan="2"><strong>Total</strong></td><td><strong id="cart-total-amount">$ 0</strong></td></tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="qr-container">
+            <div class="qr-box">
+                <h3>Total del carrito</h3>
+                <div class="amount" id="qr-total">$ 0</div>
+                <div style="font-size:0.8rem; color:#c18b44; margin-bottom:8px;">En Mantenimiento</div>
+                <div class="qr-placeholder" id="qr-single">
+                    <svg viewBox="0 0 200 200">
+                        <rect width="200" height="200" fill="#fff"/>
+                        <g fill="#000">
+                            <rect x="20" y="20" width="40" height="40" rx="4"/>
+                            <rect x="140" y="20" width="40" height="40" rx="4"/>
+                            <rect x="20" y="140" width="40" height="40" rx="4"/>
+                            <rect x="30" y="30" width="20" height="20"/>
+                            <rect x="150" y="30" width="20" height="20"/>
+                            <rect x="30" y="150" width="20" height="20"/>
+                            <rect x="140" y="140" width="40" height="40" rx="4"/>
+                            <rect x="150" y="150" width="20" height="20"/>
+                            <rect x="80" y="20" width="40" height="40"/>
+                            <rect x="60" y="80" width="20" height="40"/>
+                            <rect x="120" y="80" width="20" height="40"/>
+                            <rect x="80" y="140" width="40" height="40"/>
+                            <rect x="20" y="80" width="40" height="40"/>
+                            <rect x="60" y="60" width="80" height="80" rx="8"/>
+                            <rect x="80" y="80" width="40" height="40" fill="#fff"/>
+                            <rect x="85" y="85" width="14" height="14" fill="#000"/>
+                            <rect x="101" y="85" width="14" height="14" fill="#000"/>
+                            <rect x="85" y="101" width="14" height="14" fill="#000"/>
+                            <rect x="101" y="101" width="14" height="14" fill="#000"/>
+                        </g>
+                    </svg>
+                </div>
+                <div style="font-size:0.85rem; color:#666;">QR de pago — referencia única</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <strong>Instrucciones:</strong><br>
+            1. Abre la app <strong>Bancolombia</strong> en tu celular<br>
+            2. Toca "Pagar con QR" y escanea el código<br>
+            3. Verifica que el total coincida con el de tu carrito<br>
+            4. Confirma el pago desde la app<br>
+            5. Incluye el número de referencia en el campo "Concepto"<br>
+            6. Tus productos se activarán automáticamente en 5-10 minutos
+        </div>
+
+        <div class="transfer-info">
+            <h3>Datos de Transferencia</h3>
+            <div class="field"><span>Banco</span><strong>Bancolombia</strong></div>
+            <div class="field"><span>Tipo de Cuenta</span><strong>Cuenta Corriente</strong></div>
+            <div class="field"><span>Titular</span><strong>GRUPO 3P1 COLOMBIA S.A.S.</strong></div>
+            <div class="field"><span>NIT</span><strong>901.xxx.xxx-x</strong></div>
+            <div class="field"><span>Referencia</span><strong>CP-{usuario}-{orden}</strong></div>
+        </div>
+
+        <a href="/carrito" class="btn-back">Volver al carrito</a>
+    </div>
+
+    <script>
+        (function() {
+            var CART_KEY = 'coffee_pie_cart';
+
+            function parsePrice(priceStr) {
+                if (!priceStr) return 0;
+                var clean = priceStr.toString().replace(/[$\s]/g, '');
+                if (clean.indexOf('.') !== -1 && clean.indexOf(',') !== -1) {
+                    clean = clean.split('.').join('').replace(',', '.');
+                } else if (clean.indexOf(',') !== -1) {
+                    var parts = clean.split(',');
+                    if (parts[parts.length - 1].length === 3) {
+                        clean = parts.join('');
+                    } else {
+                        clean = clean.replace(',', '.');
+                    }
+                } else if (clean.indexOf('.') !== -1) {
+                    var dotParts = clean.split('.');
+                    if (dotParts[dotParts.length - 1].length === 3) {
+                        clean = dotParts.join('');
+                    }
+                }
+                var num = parseFloat(clean.replace(/[^0-9.]/g, ''));
+                return isNaN(num) ? 0 : num;
+            }
+
+            function fmtCOP(value) {
+                return '$ ' + Math.round(value).toLocaleString('es-CO');
+            }
+
+            function getCart() {
+                try {
+                    var raw = localStorage.getItem(CART_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            function renderCheckout() {
+                var cart = getCart();
+                var tbody = document.getElementById('cart-items');
+                var totalCell = document.getElementById('cart-total-amount');
+                var qrTotal = document.getElementById('qr-total');
+
+                if (!cart.length) {
+                    document.getElementById('cart-summary').innerHTML =
+                        '<div style="text-align:center; padding:40px 20px;">' +
+                        '<p style="font-size:1.1rem; color:#666;">Tu carrito está vacío.</p>' +
+                        '<a href="/carrito" class="btn-back">Volver al carrito</a>' +
+                        '</div>';
+                    qrTotal.textContent = '$ 0';
+                    return;
+                }
+
+                var total = 0;
+                var rows = '';
+
+                cart.forEach(function(item) {
+                    var p = parsePrice(item.price);
+                    var lineTotal = p * item.quantity;
+                    total += lineTotal;
+                    rows += '<tr>' +
+                        '<td class="cart-item-name">' + item.name + '</td>' +
+                        '<td>' + item.quantity + '</td>' +
+                        '<td>' + fmtCOP(lineTotal) + '</td>' +
+                        '</tr>';
+                });
+
+                tbody.innerHTML = rows;
+                totalCell.textContent = fmtCOP(total);
+                qrTotal.textContent = fmtCOP(total);
+            }
+
+            renderCheckout();
+        })();
+    </script>
+</body>
+</html>

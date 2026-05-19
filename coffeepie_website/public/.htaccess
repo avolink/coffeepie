@@ -1,0 +1,88 @@
+# Configuración para Apache (Equivalente a firebase.json)
+
+# Error 404
+ErrorDocument 404 /404.html
+
+# Habilitar motor de reescritura
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Evitar bucles de redirección
+    RewriteCond %{ENV:REDIRECT_STATUS} 200
+    RewriteRule ^ - [L]
+
+    # Force HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Redirección permanente de princing a precios
+    RewriteRule ^princing/?$ /precios [R=301,L]
+
+    # Redirect /index.html to / (canonical duplication fix)
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
+    RewriteRule ^index\.html$ / [R=301,L]
+
+    # Remover slash al final si no es un directorio (emular Firebase cleanUrls)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [R=301,L]
+
+    # Redirigir /pagina.html a /pagina (Clean URLs)
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
+    RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+
+    # Si la petición no es un archivo ni un directorio, y existe un archivo .html, servirlo
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME}\.html -f
+    RewriteRule ^(.+)$ $1.html [L]
+</IfModule>
+
+# Cabeceras de Seguridad y Cache (de firebase.json)
+<IfModule mod_headers.c>
+    # HSTS - Enforce HTTPS for 1 year
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+    # Cache Control para imágenes (30 días)
+    <FilesMatch "\.(jpg|jpeg|gif|png|webp|avif|svg)$">
+        Header set Cache-Control "public, max-age=2592000, immutable"
+    </FilesMatch>
+
+    # Cache Control para JS/CSS (7 días)
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
+
+    # Cache Control para fuentes (1 año)
+    <FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+
+    # Cache Control para HTML (1 hora, revalidar)
+    <FilesMatch "\.html$">
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+    </FilesMatch>
+
+    # Cabeceras de Seguridad Generales
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+</IfModule>
+
+# Compresión GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# MIME types correctos
+<IfModule mod_mime.c>
+    AddType application/xml .xml
+    AddType text/plain .txt
+</IfModule>

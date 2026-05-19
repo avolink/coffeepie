@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://coffeepie.co/</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/" />
+  </url>
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://coffeepie.co/precios</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/precios" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/precios?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/precios" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/tienda</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/tienda" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/tienda?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/tienda" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/tutoriales</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/tutoriales" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/tutoriales?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/tutoriales" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/acerca-de</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/acerca-de" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/acerca-de?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/acerca-de" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/api</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/api" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/api?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/api" />
+  </url>
+
+  <!-- Informational Pages -->
+  <url>
+    <loc>https://coffeepie.co/fabricantes</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/fabricantes" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/fabricantes?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/fabricantes" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/proveedores-nube</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/proveedores-nube" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/proveedores-nube?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/proveedores-nube" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/dispositivos-certificados</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/dispositivos-certificados" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/dispositivos-certificados?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/dispositivos-certificados" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/portal-de-inversionistas</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/portal-de-inversionistas" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/portal-de-inversionistas?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/portal-de-inversionistas" />
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://coffeepie.co/politica-de-envios</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/politica-de-envios" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/politica-de-envios?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/politica-de-envios" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/politica-de-privacidad</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/politica-de-privacidad" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/politica-de-privacidad?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/politica-de-privacidad" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/politica-de-retornos</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/politica-de-retornos" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/politica-de-retornos?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/politica-de-retornos" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/terminos-y-condiciones</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/terminos-y-condiciones" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/terminos-y-condiciones?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/terminos-y-condiciones" />
+  </url>
+  <url>
+    <loc>https://coffeepie.co/accesibilidad</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es-co" href="https://coffeepie.co/accesibilidad" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://coffeepie.co/accesibilidad?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://coffeepie.co/accesibilidad" />
+  </url>
+
+  <!-- Products: Commander Terminals -->
+  <url>
+    <loc>https://coffeepie.co/productos/terminal-codec-commander-basic-by-coffee-pie</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/terminal-codec-commander-core-by-coffee-pie</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/terminal-codec-commander-pro-by-coffee-pie</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Products: Switches -->
+  <url>
+    <loc>https://coffeepie.co/productos/tpe-optomechanical-switches-by-coffee-pie</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/optomechanical-switches-for-commander-by-razer</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/optomechanical-switches-for-commander-by-keychron</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Products: Keycaps & Stabilizers -->
+  <url>
+    <loc>https://coffeepie.co/productos/custom-keycaps-set-for-commander-by-lofree</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/custom-keycaps-set-for-commander-by-womier</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/low-profile-keycaps-set-for-commander</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/low-profile-stabilizers-set-for-commander-by-cherry</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Products: Commander Parts -->
+  <url>
+    <loc>https://coffeepie.co/productos/commander-back-io-panel</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/commander-base-heatsink</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/commander-keyboard-cover</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/hot-swappable-battery-for-commander-by-powerowl</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Products: Expansion Cards -->
+  <url>
+    <loc>https://coffeepie.co/productos/usb-c-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/usb-a-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/hdmi-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/displayport-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/audio-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/sd-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/micro-sd-expansion-card-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/storage-expansion-card-250gb-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/storage-expansion-card-1tb-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Products: Modules & Peripherals -->
+  <url>
+    <loc>https://coffeepie.co/productos/numpad-module-for-commander-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/touchpad-module-by-framework</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Products: Networking -->
+  <url>
+    <loc>https://coffeepie.co/productos/ethernet-rj45-adapter-by-tp-link</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/wifi-adapter-by-tp-link</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/wifi-and-bluetooth-adapter-by-ugreen</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://coffeepie.co/productos/rj45-to-sfp-optical-fiber-converter-by-xicom</loc>
+    <lastmod>2026-05-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

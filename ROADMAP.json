@@ -1,0 +1,117 @@
+{
+    "project_name": "CoffeePie",
+    "version": "0.1.0-alpha",
+    "governance_document": "CONSTITUTION.md",
+    "philosophy": "Open Standard, Protected Core, Zero E-Waste",
+    "last_updated": "2026-05-14",
+    "milestones": [
+    {
+        "id": "M1",
+        "title": "Autonomous Gatekeeper Implementation",
+        "status": "active",
+        "description": "Deployment of the AI-driven PR review system and formal verification layers.",
+        "tasks": [
+            {
+                "id": "T-101",
+                "description": "Integration of the Stochastic Review Agent with the project repository.",
+                "priority": "critical",
+                "tags": [
+                    "governance",
+                    "ai"
+                ],
+                "merit_weight": 0.9
+            },
+            {
+                "id": "T-102",
+                "description": "Implementation of Formal Verification checks for Core stability.",
+                "priority": "high",
+                "tags": [
+                    "security",
+                    "verification"
+                ],
+                "merit_weight": 1.2
+            }
+        ]
+    },
+    {
+        "id": "M2",
+        "title": "Scalability & Corporate Licensing Engine",
+        "status": "planned",
+        "description": "Development of the multi-node detection system and license key orchestration.",
+        "tasks": [
+            {
+                "id": "T-201",
+                "description": "Node-count detection logic for single-node vs. cluster deployments.",
+                "priority": "critical",
+                "tags": [
+                    "licensing",
+                    "core"
+                ],
+                "merit_weight": 0.7
+            },
+            {
+                "id": "T-202",
+                "description": "API integration for automated corporate dividend distribution to contributors.",
+                "priority": "medium",
+                "tags": [
+                    "monetization",
+                    "fintech"
+                ],
+                "merit_weight": 1.0
+            }
+        ]
+    },
+    {
+        "id": "M3",
+        "title": "Hardware-Software Circularity",
+        "status": "backlog",
+        "description": "Optimizing software for extended hardware lifecycle and e-waste reduction.",
+        "tasks": [
+            {
+                "id": "T-301",
+                "description": "Zero E-Waste Telemetry: Monitoring hardware health to suggest maintenance, repair or end of life for recycling.",
+                "priority": "high",
+                "tags": [
+                    "sustainability",
+                    "iot"
+                ],
+                "merit_weight": 1.1
+            },
+            {
+                "id": "T-302",
+                "description": "Low-power mode optimization for legacy hardware nodes.",
+                "priority": "medium",
+                "tags": [
+                    "performance",
+                    "sustainability"
+                ],
+                "merit_weight": 0.8
+            }
+        ]
+    },
+    {
+        "id": "M4",
+        "title": "Technological Sovereignty & Open IAM",
+        "status": "planned",
+        "description": "Migration of core backend identity services to open-source, self-hostable alternatives to prevent vendor lock-in.",
+        "tasks": [
+            {
+                "id": "T-401",
+                "description": "Migrate from Firebase Auth to Supabase (PostgreSQL-based IAM) for backend identity management.",
+                "priority": "high",
+                "tags": [
+                    "security",
+                    "sovereignty",
+                    "backend"
+                ],
+                "merit_weight": 1.5
+            }
+        ]
+    }
+    ],
+    "excluded_scopes": {
+    "proprietary_cloud": "No integration with non-standardized proprietary cloud providers.",
+    "telemetry": "No collection of user data beyond hardware health and licensing node-counts.",
+    "obsolescence": "Any feature promoting planned obsolescence is strictly prohibited."
+}
+}

@@ -1,0 +1,106 @@
+// Copyright (c) 2025 Virtual Cable S.L.U.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
+//
+//    * Redistributions of source code must retain the above copyright notice,
+//      this list of conditions and the following disclaimer.
+//    * Redistributions in binary form must reproduce the above copyright notice,
+//      this list of conditions and the following disclaimer in the documentation
+//      and/or other materials provided with the distribution.
+//    * Neither the name of Virtual Cable S.L.U. nor the names of its contributors
+//      may be used to endorse or promote products derived from this software
+//      without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/*!
+Author: Adolfo Gómez, dkmaster at dkmon dot com
+*/
+use anyhow::Result;
+
+use shared::{
+    log,
+    ws::{
+        server::ServerContext,
+        types::{Ping, Pong, RpcEnvelope, RpcMessage},
+        wait_message_arrival,
+    },
+};
+
+use crate::platform;
+
+pub async fn worker(server_info: ServerContext, platform: platform::Platform) -> Result<()> {
+    // Note that logout is a simple notification. No response expected (in fact, will return "ok" immediately)
+    let mut rx = server_info.from_ws.subscribe();
+    while let Some(env) = wait_message_arrival::<Ping>(&mut rx, Some(platform.get_stop())).await {
+        log::debug!("Received Ping with id {:?}", env.id);
+        // Send back Pong with same payload
+        server_info
+            .to_ws
+            .send(RpcEnvelope {
+                id: env.id,
+                msg: RpcMessage::Pong(Pong(env.msg.0)),
+            })
+            .await?;
+        log::debug!("Sent Pong response");
+    }
+
+    Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+
+    use shared::ws::types::{RpcEnvelope, RpcMessage};
+
+    use super::*;
+    use crate::testing::mock;
+    use std::time::Duration;
+
+    #[tokio::test]
+    async fn test_logout_worker() {
+        log::setup_logging("debug", shared::log::LogType::Tests);
+        let server_info = mock::mock_server_info().await;
+        let mocked_platform = mock::mock_platform().await;
+        let platform = mocked_platform.platform.clone();
+        let calls = mocked_platform.calls.clone();
+        platform.config().write().await.master_token = Some("mastertoken".into());
+
+        let wsclient_to_workers = server_info.from_ws.clone();
+        let _handle = tokio::spawn(async move {
+            worker(server_info, platform).await.unwrap();
+        });
+
+        // Wait to have at least one receiver
+        while wsclient_to_workers.receiver_count() == 0 {
+            tokio::time::sleep(Duration::from_millis(50)).await;
+        }
+        log::info!("wsclient_to_workers has receiver");
+
+        // Send 3 ping requests
+        for _i in 0..3 {
+            let req = RpcEnvelope {
+                id: None,
+                msg: RpcMessage::Ping(Ping(Vec::new())),
+            };
+            if let Err(e) = wsclient_to_workers.send(req) {
+                log::error!("Failed to send LogoutRequest: {}", e);
+            }
+        }
+        // Wait a bit to let processing happen
+        tokio::time::sleep(Duration::from_millis(200)).await;
+
+        // Inspect dummy broker_api
+        log::info!("calls: {:?}", calls.dump());
+    }
+}
