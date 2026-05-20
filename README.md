@@ -38,7 +38,7 @@ Coffee Pie® is an open technological ecosystem that provides a general-purpose 
     Prototyping & Automation: Python.<br>
 
  📐 The Atomic Unit - Coffee Pie® Slice:
-We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration, they can be added together like lego bricks or shipping containers to get more powerful machines according to your needs:<br>
+We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful machines according to your needs:<br>
 
 | Resource | Capacity | Description |
 |---|---|---|
