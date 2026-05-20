@@ -3541,11 +3541,24 @@
                                                         <span style="font-weight:bold;"
                                                             class="avoui-rich-text__text">Coffee Pie® Ads</span></p>
                                                 </div>
-                                                <div id="panel-balance" style="position:absolute;right:100px;top:50%;transform:translateY(-50%);z-index:10;display:flex;align-items:center;gap:8px;">
+                                                <div id="panel-balance" style="position:absolute;right:180px;top:50%;transform:translateY(-50%);z-index:10;display:flex;align-items:center;gap:8px;">
                                                     <span id="balance-label" style="font:var(--font_8);color:#fff;font-weight:bold;white-space:nowrap;">Balance:</span>
                                                     <span id="balance-value" style="font:var(--font_6);color:var(--cp-success);font-weight:bold;white-space:nowrap;">6'000'000</span>
                                                     <span id="balance-currency" style="font:var(--font_8);color:var(--cp-text-muted);white-space:nowrap;">Cr</span>
                                                 </div>
+                                                <select id="panel-lang-select" data-cp-no-translate onchange="if(window.CoffeePieLang)CoffeePieLang.set(this.value)" style="position:absolute;right:100px;top:50%;transform:translateY(-50%);z-index:10;padding:6px 10px;background:var(--cp-dark-card);border:1px solid var(--cp-border);border-radius:6px;color:var(--cp-text);font:var(--font_8);font-size:12px;cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23999%22 stroke-width=%222%22%3E%3Cpath d=%22M6 9l6 6 6-6%22%3E%3C/path%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 6px center;">
+                                                    <option value="es">ES</option>
+                                                    <option value="en">EN</option>
+                                                    <option value="pt">PT</option>
+                                                    <option value="fr">FR</option>
+                                                    <option value="de">DE</option>
+                                                    <option value="ja">JA</option>
+                                                    <option value="ko">KO</option>
+                                                    <option value="zh">ZH</option>
+                                                    <option value="ru">RU</option>
+                                                    <option value="ar">AR</option>
+                                                    <option value="hi">HI</option>
+                                                </select>
                                                 <div id="panel-logout-btn" class="panel-logout-wrapper">
                                                     <button onclick="window.location.href='/'"
                                                         class="panel-logout-button" aria-label="Cerrar Sesión"
@@ -3885,117 +3898,6 @@
                                                     </div>
                                                 </section>
 
-                                                <!-- Assets Section -->
-                                                <section id="section-assets" class="panel-section"
-                                                    style="display:none;">
-                                                    <div class="panel-header-row">
-                                                        <div>
-                                                            <h1 class="panel-title">Cargar Activos</h1>
-                                                            <p class="panel-subtitle">Sube imagenes, videos y documentos
-                                                                para tus campañas</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="content-grid">
-                                                        <div class="section-card">
-                                                            <div class="section-card-header">
-                                                                <span class="section-card-title">Subir Nuevo
-                                                                    Activo</span>
-                                                            </div>
-                                                            <div class="file-drop-zone" id="fileDropZone">
-                                                                <svg width="40" height="40" viewBox="0 0 24 24"
-                                                                    fill="none" stroke="currentColor"
-                                                                    stroke-width="1.5">
-                                                                    <path
-                                                                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                                                    <polyline points="17 8 12 3 7 8" />
-                                                                    <line x1="12" y1="3" x2="12" y2="15" />
-                                                                </svg>
-                                                                <div class="file-drop-label"><strong>Haz clic para
-                                                                        seleccionar</strong> o arrastra tus archivos
-                                                                    aqui</div>
-                                                                <div class="file-drop-hint">PNG, JPG, MP4, WebM, PDF
-                                                                    (max 250MB)</div>
-                                                                <input type="file" id="fileInput" multiple
-                                                                    accept="image/*,video/*,.pdf" style="display:none;">
-                                                            </div>
-                                                            <div class="form-group" style="margin-top:16px;">
-                                                                <label class="form-label">Nombre del Activo</label>
-                                                                <input class="form-input" type="text" id="assetName"
-                                                                    placeholder="Ej: Banner Lanzamiento Q2">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label">Categoria</label>
-                                                                <select class="form-input" id="assetCategory">
-                                                                    <option value="">Seleccionar categoria...</option>
-                                                                    <option value="banner">Banner</option>
-                                                                    <option value="video">Video</option>
-                                                                    <option value="display">Display Ad</option>
-                                                                    <option value="social">Social Media</option>
-                                                                    <option value="document">Documento / PDF</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label">Etiquetas</label>
-                                                                <input class="form-input" type="text" id="assetTags"
-                                                                    placeholder="producto, lanzamiento, Q2 (separar por comas)">
-                                                            </div>
-                                                            <button class="btn btn-primary" onclick="uploadAsset()"
-                                                                style="width:100%;justify-content:center;">
-                                                                <svg width="16" height="16" viewBox="0 0 24 24"
-                                                                    fill="none" stroke="currentColor" stroke-width="2">
-                                                                    <line x1="12" y1="5" x2="12" y2="19" />
-                                                                    <line x1="5" y1="12" x2="19" y2="12" />
-                                                                </svg>
-                                                                Subir Activo
-                                                            </button>
-                                                        </div>
-                                                        <div class="section-card">
-                                                            <div class="section-card-header">
-                                                                <span class="section-card-title">Activos Subidos</span>
-                                                                <span
-                                                                    style="font:var(--font_8);color:var(--cp-text-muted);">6
-                                                                    activos</span>
-                                                            </div>
-                                                            <div class="uploaded-assets" id="assetsGrid">
-                                                                <div class="asset-thumb">
-                                                                    <div style="font-size:28px;">&#x1f4f7;</div>
-                                                                    <span>Terminal-Pro-Banner</span><span
-                                                                        style="font-size:10px;color:#555;">1920x1080
-                                                                        PNG</span>
-                                                                </div>
-                                                                <div class="asset-thumb">
-                                                                    <div style="font-size:28px;">&#x1f3ac;</div>
-                                                                    <span>QFDM-Explainer</span><span
-                                                                        style="font-size:10px;color:#555;">MP4
-                                                                        2:30</span>
-                                                                </div>
-                                                                <div class="asset-thumb">
-                                                                    <div style="font-size:28px;">&#x1f4c4;</div>
-                                                                    <span>Pricing-Slide</span><span
-                                                                        style="font-size:10px;color:#555;">1200x800</span>
-                                                                </div>
-                                                                <div class="asset-thumb">
-                                                                    <div style="font-size:28px;">&#x1f3ac;</div>
-                                                                    <span>Ad-PreRoll</span><span
-                                                                        style="font-size:10px;color:#555;">MP4
-                                                                        0:15</span>
-                                                                </div>
-                                                                <div class="asset-thumb">
-                                                                    <div style="font-size:28px;">&#x1f4f7;</div>
-                                                                    <span>Eco-Impact</span><span
-                                                                        style="font-size:10px;color:#555;">PNG
-                                                                        800x600</span>
-                                                                </div>
-                                                                <div class="asset-thumb">
-                                                                    <div style="font-size:28px;">&#x1f4f7;</div>
-                                                                    <span>Hero-Desktop</span><span
-                                                                        style="font-size:10px;color:#555;">2560x1440</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </section>
-
                                                 <!-- Campaigns Section -->
                                                 <section id="section-campaigns" class="panel-section"
                                                     style="display:none;">
@@ -4070,8 +3972,137 @@
                                                             <div class="section-card-header"><span
                                                                     class="section-card-title">Campañas
                                                                     Activas</span><span
-                                                                    style="font:var(--font_8);color:var(--cp-text-muted);">3
-                                                                    campañas</span></div>
+                                                                    style="font:var(--font_8);color:var(--cp-text-muted);">3 <span>campañas</span></span></div>
+                                                            <div class="campaign-list">
+                                                                <div class="campaign-item">
+                                                                    <div class="campaign-status active"></div>
+                                                                    <div class="campaign-info">
+                                                                        <div class="campaign-name">Lanzamiento Q2 -
+                                                                            Terminal Pro</div>
+                                                                        <div class="campaign-meta">Reconocimiento -
+                                                                            $50/dia - Desde 01/04</div>
+                                                                    </div>
+                                                                    <div class="campaign-stats">
+                                                                        <div class="campaign-stat-value">12.4K</div>
+                                                                        <div class="campaign-stat-label">impresiones
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="campaign-item">
+                                                                    <div class="campaign-status active"></div>
+                                                                    <div class="campaign-info">
+                                                                        <div class="campaign-name">Back to School 2026
+                                                                        </div>
+                                                                        <div class="campaign-meta">Trafico - $120/dia -
+                                                                            Desde 15/03</div>
+                                                                    </div>
+                                                                    <div class="campaign-stats">
+                                                                        <div class="campaign-stat-value">8.7K</div>
+                                                                        <div class="campaign-stat-label">impresiones
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="campaign-item">
+                                                                    <div class="campaign-status paused"></div>
+                                                                    <div class="campaign-info">
+                                                                        <div class="campaign-name">Tech Summit
+                                                                            Sponsorship</div>
+                                                                        <div class="campaign-meta">Engagement - $75/dia
+                                                                            - Pausada</div>
+                                                                    </div>
+                                                                    <div class="campaign-stats">
+                                                                        <div class="campaign-stat-value">3.1K</div>
+                                                                        <div class="campaign-stat-label">impresiones
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="campaign-item">
+                                                                    <div class="campaign-status draft"></div>
+                                                                    <div class="campaign-info">
+                                                                        <div class="campaign-name">Earth Day Promo</div>
+                                                                        <div class="campaign-meta">Reconocimiento -
+                                                                            Borrador</div>
+                                                                    </div>
+                                                                    <div class="campaign-stats">
+                                                                        <div class="campaign-stat-value">--</div>
+                                                                        <div class="campaign-stat-label">no lanzada
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <!-- Assets Section -->
+                                                <section id="section-assets" class="panel-section"
+                                                    style="display:none;">
+                                                    <div class="panel-header-row">
+                                                        <div>
+                                                            <h1 class="panel-title">Cargar Activos</h1>
+                                                            <p class="panel-subtitle">Sube imagenes, videos y documentos
+                                                                para tus campañas</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="content-grid">
+                                                        <div class="section-card">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Subir Nuevo
+                                                                    Activo</span>
+                                                            </div>
+                                                            <div class="file-drop-zone" id="fileDropZone">
+                                                                <svg width="40" height="40" viewBox="0 0 24 24"
+                                                                    fill="none" stroke="currentColor"
+                                                                    stroke-width="1.5">
+                                                                    <path
+                                                                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                                    <polyline points="17 8 12 3 7 8" />
+                                                                    <line x1="12" y1="3" x2="12" y2="15" />
+                                                                </svg>
+                                                                <div class="file-drop-label"><strong>Haz clic para
+                                                                        seleccionar</strong> o arrastra tus archivos
+                                                                    aqui</div>
+                                                                <div class="file-drop-hint">PNG, JPG, MP4, WebM, PDF
+                                                                    (max 250MB)</div>
+                                                                <input type="file" id="fileInput" multiple
+                                                                    accept="image/*,video/*,.pdf" style="display:none;">
+                                                            </div>
+                                                            <div class="form-group" style="margin-top:16px;">
+                                                                <label class="form-label">Nombre del Activo</label>
+                                                                <input class="form-input" type="text" id="assetName"
+                                                                    placeholder="Ej: Banner Lanzamiento Q2">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Categoria</label>
+                                                                <select class="form-input" id="assetCategory">
+                                                                    <option value="">Seleccionar categoria...</option>
+                                                                    <option value="banner">Banner</option>
+                                                                    <option value="video">Video</option>
+                                                                    <option value="display">Display Ad</option>
+                                                                    <option value="social">Social Media</option>
+                                                                    <option value="document">Documento / PDF</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Etiquetas</label>
+                                                                <input class="form-input" type="text" id="assetTags"
+                                                                    placeholder="producto, lanzamiento, Q2 (separar por comas)">
+                                                            </div>
+                                                            <button class="btn btn-primary" onclick="uploadAsset()"
+                                                                style="width:100%;justify-content:center;">
+                                                                <svg width="16" height="16" viewBox="0 0 24 24"
+                                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                                </svg>
+                                                                Subir Activo
+                                                            </button>
+                                                        </div>
+                                                        <div class="section-card">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Activos Subidos</span>
+                                                                <span
+                                                                    style="font:var(--font_8);color:var(--cp-text-muted);">3 <span>campañas</span></span></div>
                                                             <div class="campaign-list">
                                                                 <div class="campaign-item">
                                                                     <div class="campaign-status active"></div>
@@ -4237,8 +4268,7 @@
                                                             <div class="section-card-header"><span
                                                                     class="section-card-title">Segmentos
                                                                     Definidos</span><span
-                                                                    style="font:var(--font_8);color:var(--cp-text-muted);">8
-                                                                    segmentos</span></div>
+                                                                    style="font:var(--font_8);color:var(--cp-text-muted);">8 <span>segmentos</span></span></div>
                                                             <div class="campaign-list" id="segmentsList">
                                                                 <div class="campaign-item"
                                                                     style="border-left:3px solid var(--cp-accent);">
@@ -4383,19 +4413,19 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Idioma</label>
-                                                                <select class="form-input" id="configLanguage">
-                                                                    <option value="es">Espanol</option>
-                                                                    <option value="en">English</option>
-                                                                    <option value="pt">Portugues</option>
-                                                                    <option value="fr">Francais</option>
-                                                                    <option value="de">Deutsch</option>
-                                                                    <option value="ja">日本語</option>
-                                                                    <option value="ko">한국어</option>
-                                                                    <option value="zh">中文</option>
-                                                                    <option value="ru">Русский</option>
-                                                                    <option value="ar">العربية</option>
-                                                                    <option value="hi">हिन्दी</option>
-                                                                </select>
+                                                                 <select class="form-input" id="configLanguage" data-cp-no-translate onchange="if(window.CoffeePieLang)CoffeePieLang.set(this.value)">
+                                                                     <option value="es">Español</option>
+                                                                     <option value="en">English</option>
+                                                                     <option value="pt">Português</option>
+                                                                     <option value="fr">Français</option>
+                                                                     <option value="de">Deutsch</option>
+                                                                     <option value="ja">日本語</option>
+                                                                     <option value="ko">한국어</option>
+                                                                     <option value="zh">中文</option>
+                                                                     <option value="ru">Русский</option>
+                                                                     <option value="ar">العربية</option>
+                                                                     <option value="hi">हिन्दी</option>
+                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Region</label>
@@ -4872,7 +4902,7 @@
                                                         <div class="section-card" style="grid-column:1/-1;">
                                                             <div class="section-card-header">
                                                                 <span class="section-card-title">Historial de Facturas</span>
-                                                                <span style="font:var(--font_8);color:var(--cp-text-muted);">8 facturas</span>
+                                                                <span style="font:var(--font_8);color:var(--cp-text-muted);">8 <span>facturas</span></span>
                                                             </div>
                                                             <div class="invoice-table-wrapper">
                                                                 <table class="invoice-table">
@@ -5709,6 +5739,45 @@
                 'tiktok-ads': 'TikTok Ads'
             };
             showToast('Conectando con ' + (labels[platform] || platform) + '... Redirigiendo a la configuracion de integracion.');
+        }
+
+        // Sync language selectors (header + config tab)
+        function syncLangSelects(lang) {
+            var headerSel = document.getElementById('panel-lang-select');
+            var configSel = document.getElementById('configLanguage');
+            if (headerSel && headerSel.value !== lang) headerSel.value = lang;
+            if (configSel && configSel.value !== lang) configSel.value = lang;
+        }
+
+        // Hook into CoffeePieLang after lang.js initializes
+        function hookLangSync() {
+            if (!window.CoffeePieLang) {
+                setTimeout(hookLangSync, 50);
+                return;
+            }
+            var origSet = window.CoffeePieLang.set;
+            window.CoffeePieLang.set = function (lang) {
+                origSet.call(window.CoffeePieLang, lang);
+                syncLangSelects(window.CoffeePieLang.get());
+            };
+            // Sync initial state
+            syncLangSelects(window.CoffeePieLang.get());
+
+            // Listen for header selector changes
+            var headerSel = document.getElementById('panel-lang-select');
+            if (headerSel) {
+                headerSel.addEventListener('change', function () {
+                    window.CoffeePieLang.set(this.value);
+                });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(hookLangSync, 100);
+            });
+        } else {
+            setTimeout(hookLangSync, 100);
         }
     </script>
 </body>

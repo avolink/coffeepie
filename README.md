@@ -1,7 +1,6 @@
-!    ░█▀▀░█▀█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀█░▀█▀░█▀▀ ®<br>
-!    ░█░░░█░█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀▀░░█░░█▀▀<br>
-!    ░▀▀▀░▀▀▀░▀░░░▀░░░▀▀▀░▀▀▀░░░▀░░░▀▀▀░▀▀▀<br>
-
+░█▀▀░█▀█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀█░▀█▀░█▀▀ ®<br>
+░█░░░█░█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀▀░░█░░█▀▀<br>
+░▀▀▀░▀▀▀░▀░░░▀░░░▀▀▀░▀▀▀░░░▀░░░▀▀▀░▀▀▀<br>
 
 🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.
 
@@ -52,7 +51,7 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived). |
 | IA | 3 TOPS | INT8 parallel processing capacity. |
 
-> Anti-Abuse Guardrail: If an instance exceeds its power limit (e.g., unauthorized cryptomining or spamming), warnings and automatic AI agent observation and recording will be triggered for human audit, if violating community rules, it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional law permits. We want to save the planet, not the bots!...<br>
+> Anti-Abuse Guardrail: If an instance exceeds its power limit (e.g., unauthorized cryptomining, spamming, etc), warnings and automatic AI agent observation and recording will be triggered for human audit, if violating community rules, it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional law permits. We want to save the planet, not the bots!...<br>
 
  🏗 System Architecture:<br>
  1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used (Proxmox Recommended).<br>
@@ -81,7 +80,7 @@ Contributing: We welcome anyone to contribute, but by contributing, you agree to
  - At least 10% of the profits will be used for granting internet access and terminal codecs in developing countries, mainly through libraries, elementary schools, high-schools, universities, cybercafes, NGOs, etc, until every human being, willing to, has access to our service.<br>
 
 ❌ Strictly Prohibited in the Ecosystem:<br>
-❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails, duly processed through the Coffee Pie Legal Department: legal@coffeepie.co.<br>
+❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails (.gov), duly processed through the Coffee Pie Legal Department: legal@coffeepie.co.<br>
 ❌ Illegal Content: Including, but not limited to, illicit drugs, counterfeit products and services that violate the law.<br>
 ❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability.<br>
 ❌ Violence and Disturbing Content: Incitement to violence, terrorism, animal cruelty or graphic images of damage.<br>
