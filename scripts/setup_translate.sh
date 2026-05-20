@@ -41,7 +41,7 @@ use_docker() {
         -p "${LIBRETRANSLATE_PORT}:5050" \
         "libretranslate/libretranslate:${LIBRETRANSLATE_TAG}" \
         --host 0.0.0.0 \
-        --load-only es,en,pt,fr,de,ja,ko,zh,ru,ar,hi
+        --load-only en,pt,fr,de,ja,ko,zh,ru,ar,hi
 
     log "Waiting for LibreTranslate to be ready..."
     for i in $(seq 1 60); do
@@ -75,7 +75,7 @@ import argostranslate.package
 import argostranslate.translate
 argostranslate.package.update_package_index()
 available = argostranslate.package.get_available_packages()
-targets = ['pt','fr','de','ja','ko','zh','ru','ar','hi']
+targets = ['en','pt','fr','de','ja','ko','zh','ru','ar','hi']
 for pkg in available:
     if pkg.from_code == 'es' and pkg.to_code in targets:
         print(f'  Installing es->{pkg.to_code} ...')
