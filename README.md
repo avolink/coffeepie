@@ -1,3 +1,8 @@
+!    ░█▀▀░█▀█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀█░▀█▀░█▀▀ ®<br>
+!    ░█░░░█░█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀▀░░█░░█▀▀<br>
+!    ░▀▀▀░▀▀▀░▀░░░▀░░░▀▀▀░▀▀▀░░░▀░░░▀▀▀░▀▀▀<br>
+
+
 🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.
 
 "In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can"

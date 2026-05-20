@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Coffee Pie - LibreTranslate Setup
-# Starts LibreTranslate locally on port 5000.
+# Starts LibreTranslate locally on port 5050.
 # Requires: Docker (or Python 3.10+ with pip for alt install).
 
 set -euo pipefail
@@ -11,7 +11,7 @@ warn() { printf "${CYAN}[warn]${NC}  %s\n" "$*"; }
 err()  { printf "${RED}[err]${NC}   %s\n" "$*"; exit 1; }
 
 CONTAINER_NAME="coffeepie-libretranslate"
-LIBRETRANSLATE_PORT="${LIBRETRANSLATE_PORT:-5000}"
+LIBRETRANSLATE_PORT="${LIBRETRANSLATE_PORT:-5050}"
 LIBRETRANSLATE_TAG="${LIBRETRANSLATE_TAG:-latest}"
 
 # ---- Docker path ----
@@ -38,7 +38,7 @@ use_docker() {
     docker run -d \
         --name "${CONTAINER_NAME}" \
         --restart unless-stopped \
-        -p "${LIBRETRANSLATE_PORT}:5000" \
+        -p "${LIBRETRANSLATE_PORT}:5050" \
         "libretranslate/libretranslate:${LIBRETRANSLATE_TAG}" \
         --host 0.0.0.0 \
         --load-only es,en,pt,fr,de,ja,ko,zh,ru,ar,hi

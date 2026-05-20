@@ -8,11 +8,11 @@ Usage:
   3. Validate output:       python3 -m json.tool public/translations.json > /dev/null
 
 Supports both backends:
-  - LibreTranslate REST API  (default, needs Docker container on :5000)
+  - LibreTranslate REST API  (default, needs Docker container on :5050)
   - Argos Translate offline  (set LIBRETRANSLATE_URL to empty string)
 
 Environment variables:
-  LIBRETRANSLATE_URL   API base URL (default: http://localhost:5000)
+  LIBRETRANSLATE_URL   API base URL (default: http://localhost:5050)
   BATCH_SIZE           Rows per batch (default: 20)
   SLEEP_MS             Delay between batches in ms (default: 300)
   TARGET_LANGS         Comma-separated list (default: pt,fr,de,ja,ko,zh,ru,ar,hi)
@@ -26,7 +26,7 @@ SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.join(SCRIPTS_DIR, '..', 'coffeepie_website')
 TRANSLATIONS_PATH = os.path.join(PROJECT_DIR, 'public', 'translations.json')
 BACKUP_DIR = os.path.join(PROJECT_DIR, 'public', 'translations_backups')
-API_URL = os.environ.get('LIBRETRANSLATE_URL', 'http://localhost:5000')
+API_URL = os.environ.get('LIBRETRANSLATE_URL', 'http://localhost:5050')
 BATCH_SIZE = int(os.environ.get('BATCH_SIZE', '20'))
 SLEEP_MS = float(os.environ.get('SLEEP_MS', '300'))
 TARGET_LANGS = os.environ.get('TARGET_LANGS', 'pt,fr,de,ja,ko,zh,ru,ar,hi').split(',')
