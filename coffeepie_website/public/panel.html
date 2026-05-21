@@ -3505,6 +3505,200 @@
                 flex-shrink: 0;
             }
         }
+
+        /* Licencias QFDM */
+        .license-key-code {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-family: monospace;
+            color: var(--cp-text-muted);
+            letter-spacing: 0.5px;
+            word-break: break-all;
+            max-width: 280px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .license-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            background: transparent;
+            border: 1px solid var(--cp-border);
+            border-radius: 6px;
+            color: var(--cp-text-muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .license-copy-btn:hover {
+            background: rgba(var(--cp-accent-rgb), 0.1);
+            border-color: var(--cp-accent);
+            color: var(--cp-accent);
+        }
+
+        .license-copy-btn.copied {
+            background: rgba(76, 175, 80, 0.15);
+            border-color: var(--cp-success);
+            color: var(--cp-success);
+        }
+
+        .license-revoke-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            background: transparent;
+            border: 1px solid var(--cp-border);
+            border-radius: 8px;
+            color: var(--cp-text-muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .license-revoke-btn:hover {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--cp-danger);
+            color: var(--cp-danger);
+        }
+
+        .license-status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .license-status-badge.active {
+            background: rgba(76, 175, 80, 0.12);
+            color: var(--cp-success);
+        }
+
+        .license-status-badge.expired {
+            background: rgba(244, 67, 54, 0.12);
+            color: var(--cp-danger);
+        }
+
+        .license-status-badge.pending {
+            background: rgba(255, 152, 0, 0.12);
+            color: #FF9800;
+        }
+
+        .pricing-tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .pricing-tier-card {
+            background: var(--cp-dark-card);
+            border: 2px solid var(--cp-border);
+            border-radius: 12px;
+            padding: 18px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+            position: relative;
+        }
+
+        .pricing-tier-card:hover {
+            border-color: var(--cp-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-tier-card.selected {
+            border-color: var(--cp-accent);
+            background: rgba(var(--cp-accent-rgb), 0.06);
+            box-shadow: 0 0 0 3px rgba(var(--cp-accent-rgb), 0.2);
+        }
+
+        .pricing-tier-card.recommended::after {
+            content: 'POPULAR';
+            position: absolute;
+            top: -10px;
+            right: 12px;
+            background: var(--cp-accent);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-tier-range {
+            font: var(--font_8);
+            font-size: 12px;
+            color: var(--cp-text-muted);
+            margin-bottom: 6px;
+        }
+
+        .pricing-tier-count {
+            font: var(--font_4);
+            font-size: 24px;
+            color: var(--cp-text);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .pricing-tier-price {
+            font: var(--font_8);
+            font-size: 18px;
+            color: var(--cp-accent);
+            font-weight: 600;
+        }
+
+        .pricing-tier-price small {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--cp-text-muted);
+        }
+
+        .license-purchase-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            align-items: end;
+        }
+
+        .license-purchase-total {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        .license-total-amount {
+            font: var(--font_4);
+            font-size: 28px;
+            color: var(--cp-accent);
+            font-weight: 700;
+        }
+
+        .license-total-label {
+            font: var(--font_8);
+            font-size: 12px;
+            color: var(--cp-text-muted);
+        }
+
+        .license-total-per-terminal {
+            font: var(--font_8);
+            font-size: 12px;
+            color: var(--cp-text-muted);
+        }
     </style>
     <script src="/js/lang.js"></script>
 </head>
@@ -3677,6 +3871,17 @@
                                                             <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
                                                         </svg>
                                                         API Keys
+                                                    </a>
+                                                    <a href="#licencias" data-section="licencias">
+                                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" width="18" height="18">
+                                                            <rect x="3" y="5" width="18" height="14" rx="2" />
+                                                            <line x1="3" y1="10" x2="21" y2="10" />
+                                                            <circle cx="6" cy="14" r="1.5" fill="currentColor" />
+                                                            <circle cx="9.5" cy="14" r="1.5" fill="currentColor" />
+                                                            <circle cx="13" cy="14" r="1.5" fill="currentColor" />
+                                                        </svg>
+                                                        Licencias
                                                     </a>
                                                     <hr class="sidebar-divider">
                                                     <span class="sidebar-section-label">Reportes</span>
@@ -5276,6 +5481,198 @@
                                                     </div>
                                                 </section>
 
+                                                <!-- Licencias QFDM Section -->
+                                                <section id="section-licencias" class="panel-section"
+                                                    style="display:none;">
+                                                    <div class="panel-header-row">
+                                                        <div>
+                                                            <h1 class="panel-title">Licencias QFDM</h1>
+                                                            <p class="panel-subtitle">Gestiona las licencias de tus Terminales Codec para conectar al Backend QFDM</p>
+                                                        </div>
+                                                        <a href="/legal/licensing" target="_blank" class="btn btn-secondary" style="text-decoration:none;">
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                                                <polyline points="15 3 21 3 21 9" />
+                                                                <line x1="10" y1="14" x2="21" y2="3" />
+                                                            </svg>
+                                                            Terminos de Licencia
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Bulk Pricing Tiers -->
+                                                    <div class="content-grid" style="margin-bottom:24px;">
+                                                        <div class="section-card" style="grid-column:1/-1;">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Planes por Volumen</span>
+                                                                <span style="font:var(--font_8);font-size:12px;color:var(--cp-text-muted);">Descuentos por volumen — Precios en USD</span>
+                                                            </div>
+                                                            <div class="pricing-tier-grid" id="pricingTierGrid">
+                                                                <div class="pricing-tier-card" data-tier="1" data-min="1" data-max="999" data-price="1.00" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">1 a 999</div>
+                                                                    <div class="pricing-tier-count">Estandar</div>
+                                                                    <div class="pricing-tier-price">$1.00 <small>/mes</small></div>
+                                                                </div>
+                                                                <div class="pricing-tier-card recommended" data-tier="2" data-min="1000" data-max="9999" data-price="0.90" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">1'000 a 9'999</div>
+                                                                    <div class="pricing-tier-count">Crecimiento</div>
+                                                                    <div class="pricing-tier-price">$0.90 <small>/mes</small></div>
+                                                                </div>
+                                                                <div class="pricing-tier-card" data-tier="3" data-min="10000" data-max="99999" data-price="0.70" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">10'000 a 99'999</div>
+                                                                    <div class="pricing-tier-count">Empresarial</div>
+                                                                    <div class="pricing-tier-price">$0.70 <small>/mes</small></div>
+                                                                </div>
+                                                                <div class="pricing-tier-card" data-tier="4" data-min="100000" data-max="999999" data-price="0.50" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">100'000 a 999'999</div>
+                                                                    <div class="pricing-tier-count">Corporativo</div>
+                                                                    <div class="pricing-tier-price">$0.50 <small>/mes</small></div>
+                                                                </div>
+                                                                <div class="pricing-tier-card" data-tier="5" data-min="1000000" data-max="999999999" data-price="0.30" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">+1'000'000</div>
+                                                                    <div class="pricing-tier-count">Global</div>
+                                                                    <div class="pricing-tier-price">$0.30 <small>/mes</small></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Purchase Form -->
+                                                    <div class="content-grid" style="margin-bottom:24px;">
+                                                        <div class="section-card" style="grid-column:1/-1;">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Adquirir Nueva Licencia</span>
+                                                            </div>
+                                                            <div class="license-purchase-form" style="padding:16px 0;">
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Cantidad de Terminales</label>
+                                                                    <input type="number" id="licenseQuantity" class="form-input" min="1" max="999999999" value="1" oninput="updateLicenseTotal()" placeholder="Ej: 50">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Periodo de Facturacion</label>
+                                                                    <select id="licensePeriod" class="form-input" onchange="updateLicenseTotal()">
+                                                                        <option value="monthly">Mensual</option>
+                                                                        <option value="annual">Anual (2 meses gratis)</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="form-label">Precio por Terminal</label>
+                                                                    <input type="text" id="licensePricePerUnit" class="form-input" value="$1.00" readonly style="background:rgba(255,255,255,0.03);">
+                                                                </div>
+                                                                <div class="license-purchase-total">
+                                                                    <div class="license-total-label">Total a Pagar</div>
+                                                                    <div class="license-total-amount" id="licenseTotalAmount">$1.00</div>
+                                                                    <div class="license-total-per-terminal" id="licenseTotalPerTerminal">$1.00 / terminal</div>
+                                                                </div>
+                                                                <button class="btn btn-primary" onclick="purchaseLicense()" style="align-self:end;">
+                                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                                                                    </svg>
+                                                                    Adquirir Licencia
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Active Licenses Table -->
+                                                    <div class="content-grid">
+                                                        <div class="section-card" style="grid-column:1/-1;">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Tus Licencias Activas</span>
+                                                                <span id="licenseCountLabel" style="font:var(--font_8);font-size:12px;color:var(--cp-text-muted);">0 licencias</span>
+                                                            </div>
+                                                            <div class="invoice-table-wrapper">
+                                                                <table class="invoice-table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Clave de Licencia</th>
+                                                                            <th>Terminales</th>
+                                                                            <th>Tipo</th>
+                                                                            <th>Inicio</th>
+                                                                            <th>Expiracion</th>
+                                                                            <th>Estado</th>
+                                                                            <th>Acciones</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="licensesTableBody">
+                                                                        <tr>
+                                                                            <td data-label="Clave de Licencia">
+                                                                                <code class="license-key-code">VK7JG-NPHTM-C97JM-9MPGT-3V66T</code>
+                                                                                <button class="license-copy-btn" onclick="copyLicenseKey('VK7JG-NPHTM-C97JM-9MPGT-3V66T', this)" title="Copiar licencia">
+                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                                                                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </td>
+                                                                            <td data-label="Terminales">50</td>
+                                                                            <td data-label="Tipo">Mensual</td>
+                                                                            <td data-label="Inicio">2026-05-01</td>
+                                                                            <td data-label="Expiracion">2026-06-01</td>
+                                                                            <td data-label="Estado"><span class="license-status-badge active">Activa</span></td>
+                                                                            <td data-label="Acciones">
+                                                                                <button class="license-revoke-btn" onclick="revokeLicense('VK7JG-NPHTM-C97JM-9MPGT-3V66T', this)" title="Revocar licencia">
+                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                        <polyline points="3 6 5 6 21 6" />
+                                                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td data-label="Clave de Licencia">
+                                                                                <code class="license-key-code">QJ8XW-LM2RN-D45BT-7FGYH-9KPVR</code>
+                                                                                <button class="license-copy-btn" onclick="copyLicenseKey('QJ8XW-LM2RN-D45BT-7FGYH-9KPVR', this)" title="Copiar licencia">
+                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                                                                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </td>
+                                                                            <td data-label="Terminales">200</td>
+                                                                            <td data-label="Tipo">Anual</td>
+                                                                            <td data-label="Inicio">2026-04-15</td>
+                                                                            <td data-label="Expiracion">2027-04-15</td>
+                                                                            <td data-label="Estado"><span class="license-status-badge active">Activa</span></td>
+                                                                            <td data-label="Acciones">
+                                                                                <button class="license-revoke-btn" onclick="revokeLicense('QJ8XW-LM2RN-D45BT-7FGYH-9KPVR', this)" title="Revocar licencia">
+                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                        <polyline points="3 6 5 6 21 6" />
+                                                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td data-label="Clave de Licencia">
+                                                                                <code class="license-key-code">B3NTD-RF89S-GH2PL-6MK4W-X7ZYQ</code>
+                                                                                <button class="license-copy-btn" onclick="copyLicenseKey('B3NTD-RF89S-GH2PL-6MK4W-X7ZYQ', this)" title="Copiar licencia">
+                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                        <rect x="9" y="9" width="13" height="13" rx="2" />
+                                                                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </td>
+                                                                            <td data-label="Terminales">10</td>
+                                                                            <td data-label="Tipo">Anual</td>
+                                                                            <td data-label="Inicio">2025-11-20</td>
+                                                                            <td data-label="Expiracion">2026-05-20</td>
+                                                                            <td data-label="Estado"><span class="license-status-badge expired">Expirada</span></td>
+                                                                            <td data-label="Acciones">
+                                                                                <button class="license-revoke-btn" onclick="revokeLicense('B3NTD-RF89S-GH2PL-6MK4W-X7ZYQ', this)" title="Revocar licencia">
+                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                        <polyline points="3 6 5 6 21 6" />
+                                                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
                                             </main>
                                         </div>
                                     </div>
@@ -5770,6 +6167,161 @@
             };
             showToast('Conectando con ' + (labels[platform] || platform) + '... Redirigiendo a la configuracion de integracion.');
         }
+
+        // Licencias: generate a license key (Microsoft-style 5x5 format)
+        function generateLicenseKey() {
+            var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            var groups = [];
+            for (var g = 0; g < 5; g++) {
+                var group = '';
+                for (var i = 0; i < 5; i++) {
+                    group += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                groups.push(group);
+            }
+            return groups.join('-');
+        }
+
+        // Licencias: select pricing tier
+        var selectedTier = null;
+        function selectPricingTier(card) {
+            document.querySelectorAll('.pricing-tier-card').forEach(function (c) {
+                c.classList.remove('selected');
+            });
+            card.classList.add('selected');
+            selectedTier = {
+                min: parseInt(card.dataset.min),
+                max: parseInt(card.dataset.max),
+                price: parseFloat(card.dataset.price)
+            };
+            document.getElementById('licensePricePerUnit').value = '$' + selectedTier.price.toFixed(2).replace('.', ',');
+            updateLicenseTotal();
+        }
+
+        // Licencias: update total price based on quantity and period
+        function updateLicenseTotal() {
+            var qty = parseInt(document.getElementById('licenseQuantity').value) || 1;
+            var period = document.getElementById('licensePeriod').value;
+
+            // Determine price per unit based on qty matching a tier
+            var pricePerUnit = 1.00;
+            var tiers = [
+                { min: 1, max: 999, price: 1.00 },
+                { min: 1000, max: 9999, price: 0.90 },
+                { min: 10000, max: 99999, price: 0.70 },
+                { min: 100000, max: 999999, price: 0.50 },
+                { min: 1000000, max: 999999999, price: 0.30 }
+            ];
+            for (var i = 0; i < tiers.length; i++) {
+                if (qty >= tiers[i].min && qty <= tiers[i].max) {
+                    pricePerUnit = tiers[i].price;
+                    break;
+                }
+            }
+
+            document.getElementById('licensePricePerUnit').value = '$' + pricePerUnit.toFixed(2).replace('.', ',');
+
+            var months = (period === 'annual') ? 10 : 1; // annual = 12 months, pay 10 (2 free)
+            var total = qty * pricePerUnit * months;
+
+            // Format with apostrophe as thousands separator and comma as decimal
+            var totalStr = total.toFixed(2).replace('.', ',');
+            var parts = totalStr.split(',');
+            var intPart = parseInt(parts[0]);
+            var formattedInt = intPart.toLocaleString('de-DE').replace(/\./g, "'");
+            var formatted = formattedInt + ',' + parts[1];
+
+            document.getElementById('licenseTotalAmount').textContent = '$' + formatted;
+            document.getElementById('licenseTotalPerTerminal').textContent = '$' + pricePerUnit.toFixed(2).replace('.', ',') + ' / terminal';
+        }
+
+        // Licencias: purchase a new license
+        function purchaseLicense() {
+            var qty = parseInt(document.getElementById('licenseQuantity').value) || 1;
+            var period = document.getElementById('licensePeriod').value;
+            var periodLabel = period === 'annual' ? 'Anual' : 'Mensual';
+            var newKey = generateLicenseKey();
+            var today = new Date();
+            var todayStr = today.toISOString().split('T')[0];
+
+            var expDate = new Date(today);
+            if (period === 'annual') {
+                expDate.setFullYear(expDate.getFullYear() + 1);
+            } else {
+                expDate.setMonth(expDate.getMonth() + 1);
+            }
+            var expStr = expDate.toISOString().split('T')[0];
+
+            var tbody = document.getElementById('licensesTableBody');
+            var tr = document.createElement('tr');
+            tr.innerHTML =
+                '<td data-label="Clave de Licencia">' +
+                    '<code class="license-key-code">' + newKey + '</code>' +
+                    '<button class="license-copy-btn" onclick="copyLicenseKey(\'' + newKey + '\', this)" title="Copiar licencia">' +
+                        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<rect x="9" y="9" width="13" height="13" rx="2" />' +
+                            '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />' +
+                        '</svg>' +
+                    '</button>' +
+                '</td>' +
+                '<td data-label="Terminales">' + qty.toLocaleString('de-DE').replace(/\./g, "'") + '</td>' +
+                '<td data-label="Tipo">' + periodLabel + '</td>' +
+                '<td data-label="Inicio">' + todayStr + '</td>' +
+                '<td data-label="Expiracion">' + expStr + '</td>' +
+                '<td data-label="Estado"><span class="license-status-badge active">Activa</span></td>' +
+                '<td data-label="Acciones">' +
+                    '<button class="license-revoke-btn" onclick="revokeLicense(\'' + newKey + '\', this)" title="Revocar licencia">' +
+                        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<polyline points="3 6 5 6 21 6" />' +
+                            '<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />' +
+                        '</svg>' +
+                    '</button>' +
+                '</td>';
+            tbody.prepend(tr);
+
+            copyLicenseKey(newKey, null);
+            updateLicenseCount();
+            showToast('Licencia generada: ' + newKey + ' (' + qty.toLocaleString('de-DE').replace(/\./g, "'") + ' terminales, ' + periodLabel.toLowerCase() + ')');
+        }
+
+        // Licencias: copy key to clipboard
+        function copyLicenseKey(key, btn) {
+            navigator.clipboard.writeText(key).then(function () {
+                if (btn) {
+                    btn.classList.add('copied');
+                    setTimeout(function () { btn.classList.remove('copied'); }, 1500);
+                }
+                showToast('Licencia copiada al portapapeles');
+            }).catch(function () {
+                showToast('Error al copiar la licencia');
+            });
+        }
+
+        // Licencias: revoke a license
+        function revokeLicense(key, btn) {
+            var row = btn.closest('tr');
+            if (row) {
+                row.style.opacity = '0';
+                row.style.transition = 'opacity 0.2s ease';
+                setTimeout(function () {
+                    row.remove();
+                    updateLicenseCount();
+                }, 200);
+                showToast('Licencia revocada: ' + key);
+            }
+        }
+
+        // Licencias: update license count label
+        function updateLicenseCount() {
+            var count = document.querySelectorAll('#licensesTableBody tr').length;
+            document.getElementById('licenseCountLabel').textContent = count + ' licencia' + (count !== 1 ? 's' : '');
+        }
+
+        // Licencias: initialize tier selection and counts
+        (function () {
+            updateLicenseCount();
+            updateLicenseTotal();
+        })();
 
         // Sync language selectors (header + config tab)
         function syncLangSelects(lang) {
