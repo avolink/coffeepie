@@ -275,6 +275,10 @@
         if (trimmed.length < 2) return;
         if (/^[\d\s.,'%$€£¥+#*\-–—]+$/.test(trimmed)) return;
 
+        // If parent has a stored original but this text node is just whitespace,
+        // skip it — it was never the node that got translated
+        if (original && textNode.textContent.trim().length === 0) return;
+
         var translated = translateText(workingText, toLang);
         if (translated !== null && translated !== workingText) {
             if (!original) {
@@ -295,7 +299,20 @@
             if (el.childNodes.length === 1 && el.firstChild && el.firstChild.nodeType === Node.TEXT_NODE) {
                 el.firstChild.textContent = original;
             } else {
-                el.textContent = original;
+                // Find and restore only the meaningful text node (skip whitespace/
+                // indentation nodes) to preserve sibling elements like SVG icons
+                var children = el.childNodes;
+                var restored = false;
+                for (var j = 0; j < children.length; j++) {
+                    if (children[j].nodeType === Node.TEXT_NODE && children[j].textContent.trim().length > 0) {
+                        children[j].textContent = original;
+                        restored = true;
+                        break;
+                    }
+                }
+                if (!restored) {
+                    el.textContent = original;
+                }
             }
             el.removeAttribute(TRANSLATED_ATTR);
         }
