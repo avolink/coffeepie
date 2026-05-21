@@ -53,13 +53,13 @@ function getSavedLang() {
 function doLanguageSwitch(lang) {
     lang = lang || getSavedLang();
     localStorage.setItem(STORAGE_KEY, lang);
-    syncAllDropdowns(lang);
+    syncAllLanguageSelectors(lang);
     if (window.CoffeePieLang && typeof window.CoffeePieLang.set === 'function') {
         window.CoffeePieLang.set(lang);
     }
 }
 
-function syncAllDropdowns(lang) {
+function syncAllLanguageSelectors(lang) {
     var activeLocale = findLangData(lang).locale;
 
     document.querySelectorAll('.cplang-option').forEach(function (btn) {
@@ -77,6 +77,12 @@ function syncAllDropdowns(lang) {
         toggle.setAttribute('aria-label', activeLocale);
         toggle.setAttribute('aria-current', 'true');
         toggle.classList.add('cplang-active');
+    });
+
+    document.querySelectorAll('#panel-lang-select, #configLanguage, select[data-cp-lang-select]').forEach(function (select) {
+        if (select.value !== lang) {
+            select.value = lang;
+        }
     });
 }
 
@@ -139,6 +145,33 @@ function setupLangDropdown(container) {
     });
 }
 
+function buildSelectOptionsHTML(activeLocale) {
+    var html = '';
+    for (var i = 0; i < LANGUAGES.length; i++) {
+        var l = LANGUAGES[i];
+        var selected = l.locale === activeLocale ? ' selected' : '';
+        html += '<option value="' + localeToLang(l.locale) + '"' + selected + '>' + localeToLang(l.locale).toUpperCase() + '</option>';
+    }
+    return html;
+}
+
+function populatePanelSelects() {
+    var savedLang = getSavedLang();
+    var activeData = findLangData(savedLang);
+    var selects = document.querySelectorAll('#panel-lang-select, #configLanguage, select[data-cp-lang-select]');
+    selects.forEach(function (select) {
+        if (select.value !== localeToLang(activeData.locale)) {
+            select.value = localeToLang(activeData.locale);
+        }
+        if (!select.dataset.cpLangListener) {
+            select.addEventListener('change', function () {
+                doLanguageSwitch(this.value);
+            });
+            select.dataset.cpLangListener = '1';
+        }
+    });
+}
+
 function populateHeaderDropdown() {
     var headerContainer = document.getElementById('cplang-header');
     if (!headerContainer) return;
@@ -157,6 +190,7 @@ function populateHeaderDropdown() {
     }
 
     setupLangDropdown(headerContainer);
+    populatePanelSelects();
 }
 
 function setupHamburgerMenu() {
@@ -249,6 +283,7 @@ function initSiteFixes() {
     setupHamburgerMenu();
     document.addEventListener('click', handleHamburgerClick, true);
     populateHeaderDropdown();
+    populatePanelSelects();
 
     var savedLang = getSavedLang();
     if (savedLang && savedLang !== 'es') {
