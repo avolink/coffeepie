@@ -45465,7 +45465,8 @@
                                                             class="ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-mcgihk6x1 avoui-rich-text"
                                                             data-testid="richTextElement">
                                                             <pre class="font_8 avoui-rich-text__text"
-                                                                style="font-family: monospace; white-space: pre-wrap; font-size: 14px;">
+                                                                data-cp-no-translate
+                                                                style="white-space: pre-wrap; font-family: Arial, sans-serif;">
 {
   "request_id": "123e4567-e89b-12d3-a456-426614174000",
   "user_context": {
@@ -45570,7 +45571,7 @@
                                                             <p class="font_8 avoui-rich-text__text"><span
                                                                     class="avoGuard avoui-rich-text__text">​</span></p>
 
-                                                            <p class="font_8 avoui-rich-text__text">{<br
+                                                            <p class="font_8 avoui-rich-text__text" data-cp-no-translate>{<br
                                                                     class="avoui-rich-text__text">
                                                                 &nbsp; "tools": [<br class="avoui-rich-text__text">
                                                                 &nbsp; &nbsp; {<br class="avoui-rich-text__text">
