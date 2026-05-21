@@ -194,15 +194,9 @@ function populateHeaderDropdown() {
 }
 
 function setupHamburgerMenu() {
+    if (window.location.pathname.indexOf('/panel') === 0) return;
     console.log('[CoffeePie] Setting up hamburger menu...');
     try {
-        if (!document.getElementById('custom-hamburger-style')) {
-            var style = document.createElement('style');
-            style.id = 'custom-hamburger-style';
-            style.textContent = '[data-hook="hamburger-overlay-root"],[data-part="hamburger-overlay"],.avoui-hamburger-overlay,.avoui-hamburger-menu-container,[data-semantic-classname="hamburger-overlay"]{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}';
-            document.head.appendChild(style);
-        }
-
         var existingMenu = document.getElementById('custom-hamburger-menu');
         if (existingMenu) existingMenu.remove();
 

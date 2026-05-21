@@ -7,75 +7,8 @@ header#comp-kbgakxea {
     z-index: 9999;
 }
 
-/* Ensure hamburger overlay renders above everything */
-#comp-kbgakxea_r_comp-lxu2mi3c {
-    z-index: 10000;
-}
-
-.sR1W7T {
-            opacity: var(--hamburger-menu-container-initial-opacity)
-        }
-
-.sR1W7T>* {
-            transform: var(--hamburger-menu-container-initial-transform)
-        }
-
-.sR1W7T[data-animation-name=revealFromRight] {
-            clip-path: inset(0)
-        }
-
-.sR1W7T[data-animation-name=revealFromRight]>* {
-            transition: transform .4s cubic-bezier(.645, .045, .355, 1)
-        }
-
-.sR1W7T[data-animation-name=revealFromRight][data-animation-state=enterActive]>*,
-        .sR1W7T[data-animation-name=revealFromRight][data-animation-state=enterDone]>* {
-            transform: translateX(0)
-        }
-
-.sR1W7T[data-animation-name=fadeIn] {
-            transition: opacity .4s cubic-bezier(.645, .045, .355, 1)
-        }
-
-.sR1W7T[data-animation-name=fadeIn][data-animation-state=enterActive],
-        .sR1W7T[data-animation-name=fadeIn][data-animation-state=enterDone] {
-            opacity: 1
-        }
-
-.CT8HKo {
-            --container-overflow-y: hidden
-        }
-
-body:has([data-prehydration] [data-hamburger-toggle][data-hamburger-animation=revealFromRight]:checked) .sR1W7T {
-            clip-path: inset(0)
-        }
-
-body:has([data-prehydration] [data-hamburger-toggle][data-hamburger-animation=revealFromRight]:checked) .sR1W7T>* {
-            transform: translateX(0);
-            transition: transform .4s cubic-bezier(.645, .045, .355, 1)
-        }
-
-body:has([data-prehydration] [data-hamburger-toggle][data-hamburger-animation=fadeIn]:checked) .sR1W7T {
-            opacity: 1;
-            transition: opacity .4s cubic-bezier(.645, .045, .355, 1)
-        }
-
 .gNqkn3 {
             border-radius: var(--overflow-wrapper-border-radius)
-        }
-
-.HamburgerMenuContainer502174924__root {
-            -archetype: paintBox;
-            left: 0
-        }
-
-.EdP9A9,
-        .HamburgerMenuContainer502174924__root {
-            box-sizing: border-box;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            width: 100%
         }
 
 div.c_pphB {
@@ -114,64 +47,6 @@ div.c_pphB[data-prehydration] [data-hamburger-btn-label] {
             display: inherit;
             height: inherit;
             width: auto
-        }
-
-.HamburgerOverlay547129737__root {
-            -archetype: paintBox;
-            box-sizing: border-box;
-            /* !important is required because we need to override size and position set on the root element by the Viewer. */
-            height: calc(100vh - var(--avo-ads-height)) !important;
-            left: 0;
-            position: fixed !important;
-            top: var(--avo-ads-height) !important;
-            visibility: hidden;
-            width: 100vw !important;
-            z-index: var(--above-all-z-index)
-        }
-
-.HamburgerOverlay547129737__overlay {
-            box-sizing: border-box;
-            height: 100%;
-            left: 0;
-            position: absolute;
-            top: 0;
-            width: 100%
-        }
-
-.HamburgerOverlay547129737__root.HamburgerOverlay547129737--isMenuOpen {
-            visibility: visible
-        }
-
-.HamburgerOverlay547129737__root:not(.HamburgerOverlay547129737--showBackgroundOverlay) {
-            background-color: transparent
-        }
-
-.HamburgerOverlay547129737__root.HamburgerOverlay547129737--shouldScroll {
-            overflow-x: hidden;
-            overflow-y: scroll
-        }
-
-.HamburgerOverlay547129737__scrollContent {
-            position: relative
-        }
-
-.scemAM[data-part=hamburger-overlay] {
-            opacity: var(--hamburger-overlay-initial-opacity)
-        }
-
-.scemAM[data-part=hamburger-overlay][data-animation-name=fadeIn] {
-            transition: opacity .4s
-        }
-
-.scemAM[data-part=hamburger-overlay][data-animation-name=fadeIn][data-animation-state=enterActive],
-        .scemAM[data-part=hamburger-overlay][data-animation-name=fadeIn][data-animation-state=enterDone] {
-            opacity: 1
-        }
-
-body:has([data-prehydration] [data-hamburger-toggle]:checked) [data-part=hamburger-overlay] {
-            opacity: 1 !important;
-            transition: opacity .4s cubic-bezier(.645, .045, .355, 1), visibility 0s linear 0s;
-            visibility: visible !important
         }
 
 .S6Dcte {

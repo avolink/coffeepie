@@ -3,55 +3,45 @@ Coffee Pie® - Custom Dual License
 
 Copyright (C) 2025  Grupo 3P1 Colombia. All rights reserved.
 
-This software and associated documentation files (the "Software") are the proprietary intellectual property of Grupo 3P1 Colombia. Unauthorized copying, distribution, modification, or use of the Software, via any medium, is strictly prohibited.<br>
+This software and associated documentation files (the "Software") are the proprietary intellectual property of Grupo 3P1 Colombia. Unauthorized copying, distribution, modification, or use of the Software, via any medium, is strictly prohibited.
 
-The Coffee Pie® name, logo, and QFDM (Quantized Fractional Distribution and
-Management System) are protected by trademark and patent law (Patent NC2025/0012723). Nothing in this license shall be construed as granting any rights under said patent or trademark.<br>
+The Coffee Pie® name, logo, and QFDM (Quantized Fractional Distribution and Management System) are protected by trademark and patent law (Patent NC2025/0012723). Nothing in this license shall be construed as granting any rights under said patent or trademark.
 
 DUAL LICENSING
 --------------
 
 The Software is available under a dual-licensing model:
 
-  1. COMMUNITY LICENSE (Open Core)<br>
-     The open-source components of this Software are available under the
-     GNU Affero General Public License v3 (AGPLv3) for up to nine (9)
-     nodes, free of charge, for non-commercial, community, home lab,
-     and educational use. See the LICENSE-AGPL file or
-     https://www.gnu.org/licenses/agpl-3.0.html.
+  1. COMMUNITY LICENSE (Open Core)
+     The open-source components of this Software are available under the GNU Affero General Public License v3 (AGPLv3) for up to nine (9) nodes, free of charge, for non-commercial, community, home lab, and educational use. See the LICENSE-AGPL file or https://www.gnu.org/licenses/agpl-3.0.html.
 
-  2. COMMERCIAL LICENSE<br>
-     Home Lab enthusiasts are encouraged to grow their deployments.
-     Once you reach ten (10) or more nodes, you become eligible to
-     apply for integration into the QFDM Backend Infrastructure as a
-     compensated provider, earning real money for your room, energy,
-     and maintenance contributions — subject to meeting basic
-     requirements such as proof of electricity bill origin, physical
-     safety compliance, and secured hardware access.
+  2. COMMERCIAL LICENSE
+     Home Lab enthusiasts are encouraged to grow their deployments. Once you reach ten (10) or more nodes, you become eligible to apply for integration into the QFDM Backend Infrastructure as a compensated provider, earning real money for your room, energy, and maintenance contributions — subject to meeting basic
+     requirements such as proof of electricity bill origin, physical safety compliance, and secured hardware access.
 
-    A separate commercial license is required for:<br>
-       - Each Codec Terminal willing to connect to the QFDM network.<br>
-            1 to 999 terminals: 1 USD/month per license<br>
-            1'000 a 9'999 terminals: 0,90 USD/month per license<br>
-            10'000 a 99'999 terminals: 0.70 USD/month per license<br>
-            100'000 a 999'999 terminals: 0.50 USD/month per license<br>
-            +1'000'000 terminals: 0.30 USD/month per license<br>
-       - Deployments of ten (10) or more nodes.<br>
-       - Hosting the service as a third-party provider.<br>
-       - Embedding the software in proprietary products.<br>
-       - Any use that directly or indirectly generates revenue.<br>
-       *Commercial licenses may include royalties, patent grants, warranties, support, and indemnification.<br>
+    A separate commercial license is required for:
+       - Each Codec Terminal willing to connect to the QFDM network.
+            1 to 999 terminals: 1 USD/month per license
+            1'000 a 9'999 terminals: 0,90 USD/month per license
+            10'000 a 99'999 terminals: 0.70 USD/month per license
+            100'000 a 999'999 terminals: 0.50 USD/month per license
+            +1'000'000 terminals: 0.30 USD/month per license
+       - Deployments of ten (10) or more nodes.
+       - Hosting the service as a third-party provider.
+       - Embedding the software in proprietary products.
+       - Any use that directly or indirectly generates revenue.
+       *Commercial licenses may include royalties, patent grants, warranties, support, and indemnification.
 
-To obtain a commercial license, please use the licensing tool at:<br>
+To obtain a commercial license, please use the licensing tool at:
 
-    Web:   https://www.coffeepie.co/panel => Licencing Tab<br>
+    Web:   https://www.coffeepie.co/panel => Licencing Tab
 
 THIRD-PARTY COMPONENTS
 ----------------------
 
 This Software includes third-party open-source components licensed under
 their respective terms. See individual subdirectories for applicable
-licenses (e.g., OpenUDS/BSD-3-Clause, Sunshine/GPLv3, Moonlight/GPLv3).<br>
+licenses (e.g., OpenUDS/BSD-3-Clause, Sunshine/GPLv3, Moonlight/GPLv3).
 
 DISCLAIMER
 ----------
@@ -66,4 +56,4 @@ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
 INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.<br>
+POSSIBILITY OF SUCH DAMAGE.

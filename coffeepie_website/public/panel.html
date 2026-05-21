@@ -1917,90 +1917,6 @@
             transform: rotate(180deg)
         }
 
-        .HamburgerMenuContainer502174924__root {
-            display: var(--l_display, var(--display, block));
-            height: var(--height-spx, 100%);
-            width: var(--width-spx, 100%)
-        }
-
-        .sR1W7T {
-            opacity: var(--hamburger-menu-container-initial-opacity)
-        }
-
-        .sR1W7T>* {
-            transform: var(--hamburger-menu-container-initial-transform)
-        }
-
-        .sR1W7T[data-animation-name=revealFromRight] {
-            clip-path: inset(0)
-        }
-
-        .sR1W7T[data-animation-name=revealFromRight]>* {
-            transition: transform .4s cubic-bezier(.645, .045, .355, 1)
-        }
-
-        .sR1W7T[data-animation-name=revealFromRight][data-animation-state=enterActive]>*,
-        .sR1W7T[data-animation-name=revealFromRight][data-animation-state=enterDone]>* {
-            transform: translateX(0)
-        }
-
-        .sR1W7T[data-animation-name=fadeIn] {
-            transition: opacity .4s cubic-bezier(.645, .045, .355, 1)
-        }
-
-        .sR1W7T[data-animation-name=fadeIn][data-animation-state=enterActive],
-        .sR1W7T[data-animation-name=fadeIn][data-animation-state=enterDone] {
-            opacity: 1
-        }
-
-        .CT8HKo {
-            --container-overflow-y: hidden
-        }
-
-        body:has([data-prehydration] [data-hamburger-toggle][data-hamburger-animation=revealFromRight]:checked) .sR1W7T {
-            clip-path: inset(0)
-        }
-
-        body:has([data-prehydration] [data-hamburger-toggle][data-hamburger-animation=revealFromRight]:checked) .sR1W7T>* {
-            transform: translateX(0)
-        }
-
-        body:has([data-prehydration] [data-hamburger-toggle][data-hamburger-animation=fadeIn]:checked) .sR1W7T {
-            opacity: 1
-        }
-
-        .sR1W7T[data-animation-state=exitActive] {
-            overflow: hidden
-        }
-
-        .HamburgerOverlay547129737__root {
-            visibility: var(--hamburger-overlay-initial-visibility)
-        }
-
-        .HamburgerOverlay547129737__overlay {
-            color: rgba(var(--hamburger-overlay-color, var(--color_11)), 1);
-            background: rgba(var(--hamburger-overlay-bg-color, var(--color_11)), var(--hamburger-overlay-bg-opacity, 1))
-        }
-
-        .scemAM {
-            display: var(--l_display, var(--display, block));
-            height: var(--height-spx, 100%);
-            width: var(--width-spx, 100%)
-        }
-
-        .HamburgerOpenButton3537389287__nav {
-            display: inline;
-            height: 100%;
-            width: 100%
-        }
-
-        .gNqkn3 {
-            border-radius: var(--overflow-wrapper-border-radius)
-        }
-
-        .comp-kbgakxea_r_comp-lxu2mi3c-overflow-wrapper {
-            border-radius: var(--overflow-wrapper-border-radius)
-        }
     </style>
 
     <style data-href="/assets/avo/css/rb_avoui.thunderbolt[LoginSocialBar].1057c3e0.min.css">
@@ -2483,6 +2399,21 @@
                 bottom: 6px !important;
                 transform: none !important;
             }
+        }
+
+        #panel-lang-select {
+            color: #ccc !important;
+        }
+
+        #panel-lang-select option {
+            background: var(--cp-dark-card);
+            color: var(--cp-text);
+        }
+
+        #panel-lang-select option:checked,
+        #panel-lang-select option:hover {
+            background: rgba(var(--cp-accent-rgb), 0.25);
+            color: #fff;
         }
 
         .panel-logout-button {
