@@ -1,6 +1,7 @@
 /**
  * Reusable Header Component Loader
  * Fetches header.html and injects it into the page.
+ * Also ensures language/translation support (lang.js) is loaded.
  * Hamburger menu is handled by translate.js (Vanilla JS implementation).
  */
 (function () {
@@ -14,6 +15,12 @@
         link.rel = 'stylesheet';
         link.href = '/header.css';
         document.head.appendChild(link);
+    }
+
+    if (!document.querySelector('script[src="/js/lang.js"]') && !window.CoffeePieLang) {
+        var langScript = document.createElement('script');
+        langScript.src = '/js/lang.js';
+        document.head.appendChild(langScript);
     }
 
     fetch('/header.html')

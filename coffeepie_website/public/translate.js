@@ -177,11 +177,13 @@ function populateHeaderDropdown() {
     if (!headerContainer) return;
     var optionsContainer = headerContainer.querySelector('.language-dropdown__options');
     if (!optionsContainer) return;
-    if (optionsContainer.children.length > 0) return;
 
     var savedLang = getSavedLang();
     var activeData = findLangData(savedLang);
-    optionsContainer.innerHTML = buildDropdownOptionsHTML(activeData.locale);
+
+    if (optionsContainer.children.length === 0) {
+        optionsContainer.innerHTML = buildDropdownOptionsHTML(activeData.locale);
+    }
 
     var toggle = headerContainer.querySelector('.language-dropdown__toggle');
     if (toggle) {
@@ -189,7 +191,11 @@ function populateHeaderDropdown() {
         toggle.setAttribute('aria-label', activeData.locale);
     }
 
-    setupLangDropdown(headerContainer);
+    if (!headerContainer.dataset.cpLangSetup) {
+        setupLangDropdown(headerContainer);
+        headerContainer.dataset.cpLangSetup = '1';
+    }
+
     populatePanelSelects();
 }
 
