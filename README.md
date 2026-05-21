@@ -41,15 +41,15 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 
 | Resource | Capacity | Description |
 |---|---|---|
-| PWR | 1 Wh | Max electrical consumption per hour. |
-| CPU | 1 vCore | Logical thread for serial processing. |
-| RAM | 1 GB | Volatile memory. |
-| SSD | 8 GB | High-speed OS & App storage. |
-| HDD | 125 GB | Low-speed bulk storage & backups. |
-| NET | 8 Mbps | Guaranteed backend bandwidth. |
-| GPU | 125 MB | VRAM for parallel processing (Vulkan, DirectX, SR-IOV). |
-| RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived). |
-| IA | 3 TOPS | INT8 parallel processing capacity. |
+| PWR | 1 Wh | Max electrical consumption per hour |
+| CPU | 1 vCore | Logical thread for serial processing |
+| RAM | 1 GB | Volatile memory |
+| SSD | 8 GB | High-speed OS & App storage |
+| HDD | 125 GB | Low-speed bulk storage & backups |
+| NET | 8 Mbps | Guaranteed backend bandwidth |
+| GPU | 125 MB | VRAM for parallel processing (Vulkan, DirectX, SR-IOV) |
+| RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived) |
+| IA | 3 TOPS | INT8 parallel processing capacity |
 
 > Anti-Abuse Guardrail: If an instance exceeds its power limit (e.g., unauthorized cryptomining, spamming, etc), warnings and automatic AI agent observation and recording will be triggered for human audit, if violating community rules, it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional law permits. We want to save the planet, not the bots!...<br>
 
