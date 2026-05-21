@@ -3325,6 +3325,38 @@
                 right: auto;
                 left: 0;
             }
+
+            .invoice-table tbody td[data-label="Clave de Licencia"] {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .invoice-table tbody td[data-label="Clave de Licencia"]::before {
+                margin-right: 0;
+            }
+
+            .license-key-code {
+                max-width: none;
+                font-size: 11px;
+                word-break: break-all;
+            }
+
+            .invoice-table tbody td[data-label="Clave API"] {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .invoice-table tbody td[data-label="Clave API"]::before {
+                margin-right: 0;
+            }
+
+            .api-key-code {
+                max-width: none;
+                font-size: 11px;
+                word-break: break-all;
+            }
         }
 
         /* API Keys */
@@ -3486,8 +3518,9 @@
             .api-platform-card {
                 text-align: left;
                 display: flex;
+                flex-wrap: wrap;
                 align-items: center;
-                gap: 16px;
+                gap: 6px 14px;
                 padding: 16px;
             }
 
@@ -3496,13 +3529,20 @@
                 flex-shrink: 0;
             }
 
+            .api-platform-name {
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
             .api-platform-desc {
+                flex: 0 0 100%;
                 margin-bottom: 0;
+                margin-left: 0;
             }
 
             .api-connect-btn {
-                width: auto;
-                flex-shrink: 0;
+                flex: 0 0 100%;
+                margin-top: 4px;
             }
         }
 
@@ -5489,7 +5529,7 @@
                                                             <h1 class="panel-title">Licencias QFDM</h1>
                                                             <p class="panel-subtitle">Gestiona las licencias de tus Terminales Codec para conectar al Backend QFDM</p>
                                                         </div>
-                                                        <a href="/legal/licensing" target="_blank" class="btn btn-secondary" style="text-decoration:none;">
+                                                        <a href="https://github.com/avolink/coffeepie/blob/main/LICENSE" target="_blank" class="btn btn-secondary" style="text-decoration:none;">
                                                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                                                                 <polyline points="15 3 21 3 21 9" />

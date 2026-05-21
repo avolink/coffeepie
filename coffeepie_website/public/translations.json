@@ -715,17 +715,17 @@
         "ar": "أسفل الصفحة"
     },
     "INICIO": {
-        "en": "INITIO",
         "es": "INICIO",
+        "en": "HOME",
         "pt": "INICIO",
         "fr": "INITIO",
         "de": "INITÄT",
         "ru": "ИНИЦИО",
         "hi": "INITIO",
-        "ja": "インティオ",
-        "zh": "印度",
-        "ko": "IR 정보",
-        "ar": "INITIO"
+        "ja": "ホーム",
+        "zh": "首页",
+        "ko": "홈",
+        "ar": "الرئيسية"
     },
     "تحياتنا للاصدقاء في النجوم يا ليت يجمعنا الزمان": {
         "en": "(a) The United Nations Office at Geneva",
@@ -11869,7 +11869,7 @@
         "ar": "مع Coffee Pie® بي إس الآن كل ما هو ممكن!"
     },
     "__group__hero": {
-        "en": "You imagine you can increase your computer's power of computation and capacity with a couple of clicks and no more pay?... h. 2; h. 3; h. 124; you imagine not having to throw your equipment away every  or  years because it is already slow, obsolete, you were damaged a port or key?... h. 124; h. 124; h. you imagine being able to change parts of your equipment without having to buy a new one that changes your needs?... h. 124; 124; 124; h. you imagine contributing to the social development, and now it is not possible to make it possible!",
+        "en": "Can you imagine being able to increase your computer's computing power and capacity with just a couple of clicks and without paying more?... ||| Can you imagine not having to throw your equipment away every 2 or 3 years because it's already slow, obsolete, a port or key got damaged?... ||| Can you imagine being able to change your equipment's parts without having to buy a new one every time your needs change?... ||| Can you imagine being able to contribute to social and industrial development, without harming the environment by stopping electronic waste generation?... ||| With Coffee Pie\u00ae now all of that is possible!",
         "es": "Te imaginas poder aumentar el poder de cómputo y capacidad de tu equipo con un par de clicks y sin pagar de más?... ||| Te imaginas no tener que tirar a la basura tu equipo cada 2 ó 3 años porque ya está lento, obsoleto, se te dañó un puerto o una tecla?... ||| Te imaginas poder cambiar las partes de tu equipo sin tener que comprar uno nuevo cada que cambien tus necesidades?... ||| Te imaginas poder contribuir al desarrollo social e industrial, pero sin afectar al medio ambiente dejando de generar basura electrónica?... ||| Con Coffee Pie® ahora todo eso es posible!",
         "pt": "Você imagina poder aumentar o poder de computação e capacidade de sua equipe com um par de cliques e sem pagar de mais?... ||Você imagina não ter que jogar no lixo a sua equipe a cada 2 ou 3 anos porque já está lento, obsoleto, foi dado um porto ou uma tecla? ... ||| Você imagina poder mudar as partes de sua equipe sem ter que comprar um novo cada que mudem suas necessidades?... ||| Você imagina poder contribuir para o desenvolvimento social e industrial, mas sem afetar o meio ambiente deixando de gerar lixo eletrônico?... || Com Coffee Pie® agora tudo isso é possível!",
         "fr": "Vous imaginez que vous pouvez augmenter la puissance de calcul et la capacité de votre ordinateur avec quelques clics et plus de salaire?... h. 2; h. 3; h. 124; vous imaginez ne pas avoir à jeter votre équipement tous les  ou  ans parce qu'il est déjà lent, obsolète, vous avez été endommagé un port ou une clé?... h. 124; h. 124; h. vous imaginez pouvoir changer des parties de votre équipement sans avoir à en acheter un nouveau qui change vos besoins?... h. 124; 124; h. vous imaginez contribuer au développement social, et maintenant il n'est pas possible de le rendre possible!",

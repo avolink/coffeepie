@@ -15,6 +15,7 @@ var LANGUAGES = [
 ];
 
 var DEFAULT_LOCALE = 'ES-CO';
+var STORAGE_KEY = 'cp_lang';
 
 function localeToLang(locale) {
     return (locale || '').split('-')[0].toLowerCase();
@@ -24,16 +25,16 @@ function findLangData(langCode) {
     for (var i = 0; i < LANGUAGES.length; i++) {
         if (localeToLang(LANGUAGES[i].locale) === langCode) return LANGUAGES[i];
     }
-    return LANGUAGES[0];
+    return LANGUAGES[1];
 }
 
 function buildDropdownOptionsHTML(activeLocale) {
     var html = '';
     for (var i = 0; i < LANGUAGES.length; i++) {
         var l = LANGUAGES[i];
-        var activeClass = l.locale === activeLocale ? ' wbgQXa' : '';
+        var activeClass = l.locale === activeLocale ? ' cplang-active' : '';
         var currentAttr = l.locale === activeLocale ? ' aria-current="true"' : ' aria-current="false"';
-        html += '<button aria-label="' + l.locale + '" class="avoui-language-menu__option language-dropdown__option' + activeClass + '" type="button" role="option"' + currentAttr + '><div class="LEHGju">' + l.flag + '</div><div class="J6PIw1">' + l.locale + '</div></button>';
+        html += '<button aria-label="' + l.locale + '" class="cplang-option language-dropdown__option' + activeClass + '" type="button" role="option"' + currentAttr + '><div class="LEHGju">' + l.flag + '</div><div class="J6PIw1">' + l.locale + '</div></button>';
     }
     return html;
 }
@@ -43,101 +44,40 @@ function buildDropdownToggleHTML(locale) {
     return '<div class="LEHGju">' + data.flag + '</div><div class="J6PIw1">' + data.locale + '</div><span class="language-dropdown__arrow">&#9662;</span>';
 }
 
-var translationsData = null;
-
-async function loadTranslations() {
-    if (!translationsData) {
-        try {
-            var response = await fetch('/translations.json');
-            var data = await response.json();
-            translationsData = {};
-            for (var key in data) {
-                var normalizedKey = key.trim().replace(/\s+/g, ' ');
-                translationsData[normalizedKey] = data[key];
-            }
-        } catch (e) {
-            console.error('[CoffeePie] Failed to load translations:', e);
-        }
-    }
-    return translationsData;
+function getSavedLang() {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return saved;
+    return localeToLang(DEFAULT_LOCALE);
 }
 
-function getTranslation(text, lang) {
-    if (!translationsData) return text;
-    var normalizedKey = text.trim().replace(/\s+/g, ' ');
-    if (translationsData[normalizedKey] && translationsData[normalizedKey][lang]) {
-        return translationsData[normalizedKey][lang];
+function doLanguageSwitch(lang) {
+    lang = lang || getSavedLang();
+    localStorage.setItem(STORAGE_KEY, lang);
+    syncAllDropdowns(lang);
+    if (window.CoffeePieLang && typeof window.CoffeePieLang.set === 'function') {
+        window.CoffeePieLang.set(lang);
     }
-    return text;
 }
 
 function syncAllDropdowns(lang) {
     var activeLocale = findLangData(lang).locale;
 
-    document.querySelectorAll('.language-dropdown__option').forEach(function (btn) {
-        var btnLocale = btn.getAttribute('aria-label');
-        if (btnLocale === activeLocale) {
+    document.querySelectorAll('.cplang-option').forEach(function (btn) {
+        if (btn.getAttribute('aria-label') === activeLocale) {
             btn.setAttribute('aria-current', 'true');
-            btn.classList.add('wbgQXa');
+            btn.classList.add('cplang-active');
         } else {
             btn.setAttribute('aria-current', 'false');
-            btn.classList.remove('wbgQXa');
+            btn.classList.remove('cplang-active');
         }
     });
 
     document.querySelectorAll('.language-dropdown__toggle').forEach(function (toggle) {
         toggle.innerHTML = buildDropdownToggleHTML(activeLocale);
         toggle.setAttribute('aria-label', activeLocale);
+        toggle.setAttribute('aria-current', 'true');
+        toggle.classList.add('cplang-active');
     });
-}
-
-async function setLanguage(lang) {
-    console.log('[CoffeePie] Setting language to:', lang);
-    var data = await loadTranslations();
-    if (!data) return;
-
-    localStorage.setItem('coffee_pie_lang', lang);
-
-    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-    var nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-
-    nodes.forEach(function (node) {
-        if (!node.parentElement) return;
-        var tag = node.parentElement.tagName;
-        if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') return;
-        if (node.parentElement.closest('#comp-mhgg3kom') || node.parentElement.closest('[data-no-translate="true"]')) return;
-
-        if (typeof node._originalValue === 'undefined') {
-            node._originalValue = node.nodeValue;
-        }
-
-        var text = (node._originalValue || '').trim().replace(/\s+/g, ' ');
-        if (text === 'EN' || text === 'ES' || text === 'IN' || text === 'IS') return;
-        if (/^[A-Z]{2}(-[A-Z]{2})?$/.test(text)) return;
-
-        if (text && data[text] && data[text][lang]) {
-            node.nodeValue = node._originalValue.replace(node._originalValue.trim(), data[text][lang]);
-        }
-    });
-
-    syncAllDropdowns(lang);
-}
-
-function handleLanguageClick(e) {
-    var btn = e.target.closest('.avoui-language-menu__option');
-    if (btn) {
-        if (btn.closest('.language-dropdown')) return;
-        console.log('[CoffeePie] Language button clicked');
-        e.preventDefault();
-        e.stopPropagation();
-        var labelEl = btn.querySelector('.J6PIw1') || btn.querySelector('div:last-child');
-        if (labelEl) {
-            var btnText = labelEl.textContent.trim();
-            var lang = btnText.split('-')[0].toLowerCase();
-            setLanguage(lang);
-        }
-    }
 }
 
 function setupLangDropdown(container) {
@@ -146,6 +86,7 @@ function setupLangDropdown(container) {
     if (!dropdown) return;
     var toggle = dropdown.querySelector('.language-dropdown__toggle');
     var optionsContainer = dropdown.querySelector('.language-dropdown__options');
+    if (!toggle || !optionsContainer) return;
 
     function openDropdown() {
         dropdown.classList.add('language-dropdown--open');
@@ -178,18 +119,14 @@ function setupLangDropdown(container) {
     });
 
     dropdown.addEventListener('click', function (e) {
-        var option = e.target.closest('.language-dropdown__option');
+        var option = e.target.closest('.cplang-option');
         if (option) {
             e.preventDefault();
             e.stopPropagation();
             var locale = option.getAttribute('aria-label');
             if (!locale) return;
             var lang = localeToLang(locale);
-            setLanguage(lang);
-            if (typeof window.translatePage === 'function') {
-                window.translatePage(lang);
-            }
-            document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: lang, locale: locale } }));
+            doLanguageSwitch(lang);
             closeDropdown();
         }
     });
@@ -202,7 +139,26 @@ function setupLangDropdown(container) {
     });
 }
 
-// --- HAMBURGER MENU LOGIC ---
+function populateHeaderDropdown() {
+    var headerContainer = document.getElementById('cplang-header');
+    if (!headerContainer) return;
+    var optionsContainer = headerContainer.querySelector('.language-dropdown__options');
+    if (!optionsContainer) return;
+    if (optionsContainer.children.length > 0) return;
+
+    var savedLang = getSavedLang();
+    var activeData = findLangData(savedLang);
+    optionsContainer.innerHTML = buildDropdownOptionsHTML(activeData.locale);
+
+    var toggle = headerContainer.querySelector('.language-dropdown__toggle');
+    if (toggle) {
+        toggle.innerHTML = buildDropdownToggleHTML(activeData.locale);
+        toggle.setAttribute('aria-label', activeData.locale);
+    }
+
+    setupLangDropdown(headerContainer);
+}
+
 function setupHamburgerMenu() {
     console.log('[CoffeePie] Setting up hamburger menu...');
     try {
@@ -216,19 +172,19 @@ function setupHamburgerMenu() {
         var existingMenu = document.getElementById('custom-hamburger-menu');
         if (existingMenu) existingMenu.remove();
 
-        var savedLang = localStorage.getItem('coffee_pie_lang') || localeToLang(DEFAULT_LOCALE);
+        var savedLang = getSavedLang();
         var activeData = findLangData(savedLang);
         var optionsHTML = buildDropdownOptionsHTML(activeData.locale);
         var toggleHTML = buildDropdownToggleHTML(activeData.locale);
 
         var menuHtml = '<div id="custom-hamburger-menu" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#5f6360;z-index:999999999;overflow-y:auto;">';
-        menuHtml += '<div style="position:relative;width:100%;min-height:100%;box-sizing:border-box;font-family:\'Inter\',Helvetica,Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding-top:80px;padding-bottom:40px;">';
+        menuHtml += '<div style="position:relative;width:100%;min-height:100%;box-sizing:border-box;font-family:Inter,Helvetica,Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding-top:80px;padding-bottom:40px;">';
         menuHtml += '<button id="close-hamburger-menu" style="position:absolute;top:30px;right:35px;background:transparent;border:none;cursor:pointer;color:white;padding:0;z-index:10;">';
         menuHtml += '<svg style="width:32px;height:32px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">';
         menuHtml += '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>';
-        menuHtml += '<div id="custom-hamburger-lang" style="padding:0 20px 24px 20px;">';
-        menuHtml += '<div class="language-dropdown language-dropdown--dark" data-testid="hamburger-lang-dropdown">';
-        menuHtml += '<button aria-label="' + activeData.locale + '" aria-current="true" class="avoui-language-menu__option wbgQXa language-dropdown__toggle" type="button">';
+        menuHtml += '<div id="cplang-hamburger" style="padding:0 20px 24px 20px;">';
+        menuHtml += '<div class="language-dropdown">';
+        menuHtml += '<button aria-label="' + activeData.locale + '" aria-current="true" class="cplang-active language-dropdown__toggle" type="button">';
         menuHtml += toggleHTML + '</button>';
         menuHtml += '<div class="language-dropdown__options" role="listbox">' + optionsHTML + '</div>';
         menuHtml += '</div></div>';
@@ -249,7 +205,7 @@ function setupHamburgerMenu() {
         div.innerHTML = menuHtml;
         document.body.appendChild(div.firstElementChild);
 
-        var hamburgerLang = document.getElementById('custom-hamburger-lang');
+        var hamburgerLang = document.getElementById('cplang-hamburger');
         if (hamburgerLang) {
             setupLangDropdown(hamburgerLang);
         }
@@ -272,6 +228,7 @@ function handleHamburgerClick(e) {
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
+        return;
     }
 
     var isClose = e.target.closest('#close-hamburger-menu') || e.target.closest('#custom-hamburger-menu a');
@@ -287,38 +244,15 @@ function handleHamburgerClick(e) {
     }
 }
 
-function populateHeaderDropdown() {
-    var headerContainer = document.getElementById('comp-kbgakxea_r_comp-lzg080wk');
-    if (!headerContainer) return;
-    var optionsContainer = headerContainer.querySelector('.language-dropdown__options');
-    if (!optionsContainer) return;
-    if (optionsContainer.children.length > 0) return;
-
-    var savedLang = localStorage.getItem('coffee_pie_lang') || localeToLang(DEFAULT_LOCALE);
-    var activeData = findLangData(savedLang);
-    optionsContainer.innerHTML = buildDropdownOptionsHTML(activeData.locale);
-
-    var toggle = headerContainer.querySelector('.language-dropdown__toggle');
-    if (toggle) {
-        toggle.innerHTML = buildDropdownToggleHTML(activeData.locale);
-        toggle.setAttribute('aria-label', activeData.locale);
-    }
-
-    setupLangDropdown(headerContainer);
-}
-
 function initSiteFixes() {
     console.log('[CoffeePie] Initializing site fixes...');
     setupHamburgerMenu();
-
-    document.addEventListener('click', handleLanguageClick, true);
     document.addEventListener('click', handleHamburgerClick, true);
-
     populateHeaderDropdown();
 
-    var savedLang = localStorage.getItem('coffee_pie_lang');
-    if (savedLang) {
-        setLanguage(savedLang);
+    var savedLang = getSavedLang();
+    if (savedLang && savedLang !== 'es') {
+        doLanguageSwitch(savedLang);
     }
 }
 

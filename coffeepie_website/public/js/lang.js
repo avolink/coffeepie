@@ -335,74 +335,6 @@
         }
     }
 
-    // ---- Wix LanguageSelector integration ----
-
-    function watchWixLanguageSelector() {
-        var debounceTimer;
-
-        function onLangChange() {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(function () {
-                var newLang = detectLocaleFromDOM();
-                if (newLang && newLang !== currentLang) {
-                    localStorage.setItem(STORAGE_KEY, newLang);
-                    applyLanguage(newLang);
-                }
-            }, 300);
-        }
-
-        var observer = new MutationObserver(function (mutations) {
-            for (var i = 0; i < mutations.length; i++) {
-                var m = mutations[i];
-                if (m.type === 'attributes' && m.attributeName === 'class') {
-                    onLangChange();
-                    break;
-                }
-            }
-        });
-
-        function attachObserver() {
-            var selectors = document.querySelectorAll('.WfZwmg button, [data-language-selector] button');
-            selectors.forEach(function (btn) {
-                observer.observe(btn, { attributes: true, attributeFilter: ['class'] });
-                btn.addEventListener('click', function () {
-                    setTimeout(onLangChange, 350);
-                });
-            });
-        }
-
-        attachObserver();
-
-        setTimeout(attachObserver, 1500);
-        setTimeout(attachObserver, 4000);
-    }
-
-    function detectLocaleFromDOM() {
-        var activeBtn = document.querySelector('.WfZwmg button.wbgQXa');
-        if (!activeBtn) {
-            activeBtn = document.querySelector('.WfZwmg button[aria-current="true"]');
-        }
-        if (activeBtn) {
-            var label = (activeBtn.textContent || '').trim().toLowerCase();
-            var langMap = {
-                'es': 'es', 'en': 'en', 'pt': 'pt', 'fr': 'fr', 'de': 'de',
-                'ja': 'ja', '日本語': 'ja',
-                'ko': 'ko', '한국어': 'ko',
-                'zh': 'zh', '中文': 'zh',
-                'ru': 'ru', 'Русский': 'ru',
-                'ar': 'ar', 'العربية': 'ar',
-                'hi': 'hi', 'हिन्दी': 'hi'
-            };
-            if (langMap[label]) return langMap[label];
-        }
-
-        if (document.documentElement.lang) {
-            var hnorm = normalizeLang(document.documentElement.lang);
-            if (hnorm) return hnorm;
-        }
-        return null;
-    }
-
     // ---- Public API ----
 
     function setLanguage(lang) {
@@ -429,8 +361,6 @@
             }
             document.documentElement.lang = currentLang;
             updateLanguageIndicator(currentLang);
-
-            watchWixLanguageSelector();
         });
     }
 

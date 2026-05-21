@@ -243,6 +243,7 @@ ANTI-PATTERNS (DO NOT DO)
 9. DO NOT add comments unless explicitly requested
 10. DO NOT generate emojis in code or commit messages unless asked
 11. DO NOT use web frameworks (React, Angular, Vue, Tailwind, etc.) or TypeScript for the website. Use only Vanilla JS, HTML, and CSS.
+12. DO NOT run automated translation tools (LibreTranslate, Google Translate API, etc.) on the entire `translations.json` file. Translations must be manually reviewed per-language. Automated translation tools do not understand context: they mistranslate proper nouns (e.g., "INICIO" became "INITIO" instead of "HOME"), corrupt HTML/special characters (e.g., `|||` paragraph separators became `h. 124;` fragments), and produce misleading output in non-Latin scripts (e.g., Japanese "ホーム" became "インティオ", Chinese "首页" became "印度"). If machine translation assistance is needed, translate one language at a time, review every entry, and never overwrite the entire file blindly.
 
 
 
@@ -287,5 +288,5 @@ TWEAKS AND OVERRIDES
 
 <!-- TWEAK: (add more as the project evolves) -->
 
-- Numeric Format: Both comma , and dot . will be taken as floating separators. e.g.: pi = 3.141592653589793 or e = 2,718281828459045 are both valid Floats. Always use apostrophe ' as thousands separators for better readability. eg.: 1'000'000 units | 7'837,50 | 25'500.43 | etc.
-- Dates Format: All dates have to be shown in YYYY-MM-DD international format, no other formats are allowed. If working with external databases these need to be parsed to match before any operation or calculation for better consistency and redeability.
+- Numeric Format: Both comma , and dot . will be taken as floating separators. e.g.: pi = 3.141592653589793 or e = 2,718281828459045 are both valid Floats. Always use apostrophe ' as thousands separators for better readability. eg.: int = 1'000'000 units | float = 7'837,50 | float = 25'500.43 | etc.
+- Dates Format: All dates must to be handled in YYYY-MM-DD international format, no other formats are allowed. If working with external databases these need to be parsed to match before any operation or calculation for better consistency and redeability.
