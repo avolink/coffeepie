@@ -2150,6 +2150,11 @@ div.c_pphB[data-prehydration] [data-hamburger-btn-label] {
     background: rgba(255, 255, 255, 0.12) !important;
 }
 
+.language-dropdown__option.cplang-active {
+    color: rgb(24, 24, 24) !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+}
+
 .language-flag {
     width: 24px;
     height: 18px;
