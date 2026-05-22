@@ -10,6 +10,7 @@ Project Status: Active<br>
 Current Version: v0.1.0-alpha<br>
 Development Phase: Alpha Testing (TRL7)<br>
 
+Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA SAS
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Open Standard with Protected Core (see LICENSE and CONSTITUTION files)<br>
 
@@ -51,7 +52,7 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived) |
 | IA | 3 TOPS | INT8 parallel processing capacity |
 
-> Anti-Abuse Guardrail: If an instance exceeds its power limit (e.g., unauthorized cryptomining, spamming, etc), warnings and automatic AI agent observation and recording will be triggered for human audit, if violating community rules, it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional law permits. We want to save the planet, not the bots!...<br>
+> Anti-Abuse Guardrail: AI training, inference, big data, servers, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, investigate, create, entertain are all legit and recommended uses, but if an instance exceeds its power limit warnings and automatic AI agent observation and recording will be triggered for human audit, if violating law or community rules (e.g., unauthorized cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional law permits. We want to save the planet, not the bots!...<br>
 
  🏗 System Architecture:<br>
  1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used (Proxmox Recommended).<br>
