@@ -6166,6 +6166,7 @@
                 max: parseInt(card.dataset.max),
                 price: parseFloat(card.dataset.price)
             };
+            document.getElementById('licenseQuantity').value = selectedTier.min;
             document.getElementById('licensePricePerUnit').value = '$' + selectedTier.price.toFixed(2).replace('.', ',');
             updateLicenseTotal();
         }
@@ -6173,10 +6174,18 @@
         // Licencias: update total price based on quantity and period
         function updateLicenseTotal() {
             var qty = parseInt(document.getElementById('licenseQuantity').value) || 1;
+
+            // Clamp to valid range (no negative, no zero)
+            if (qty < 1) {
+                qty = 1;
+                document.getElementById('licenseQuantity').value = 1;
+            }
+
             var period = document.getElementById('licensePeriod').value;
 
             // Determine price per unit based on qty matching a tier
             var pricePerUnit = 1.00;
+            var matchedTierIndex = 0;
             var tiers = [
                 { min: 1, max: 999, price: 1.00 },
                 { min: 1000, max: 9999, price: 0.90 },
@@ -6187,8 +6196,21 @@
             for (var i = 0; i < tiers.length; i++) {
                 if (qty >= tiers[i].min && qty <= tiers[i].max) {
                     pricePerUnit = tiers[i].price;
+                    matchedTierIndex = i;
                     break;
                 }
+            }
+
+            // Auto-select the matching tier card
+            var cards = document.querySelectorAll('.pricing-tier-card');
+            cards.forEach(function (c) { c.classList.remove('selected'); });
+            if (cards[matchedTierIndex]) {
+                cards[matchedTierIndex].classList.add('selected');
+                selectedTier = {
+                    min: tiers[matchedTierIndex].min,
+                    max: tiers[matchedTierIndex].max,
+                    price: tiers[matchedTierIndex].price
+                };
             }
 
             document.getElementById('licensePricePerUnit').value = '$' + pricePerUnit.toFixed(2).replace('.', ',');
