@@ -3645,6 +3645,10 @@
             align-items: end;
         }
 
+        .license-purchase-form .form-group {
+            margin-bottom: 0;
+        }
+
         .license-purchase-total {
             display: flex;
             flex-direction: column;
@@ -5535,12 +5539,15 @@
                                                                     <div class="license-total-amount" id="licenseTotalAmount">$1.00</div>
                                                                     <div class="license-total-per-terminal" id="licenseTotalPerTerminal">$1.00 / terminal</div>
                                                                 </div>
-                                                                <button class="btn btn-primary" onclick="purchaseLicense()" style="align-self:end;justify-content:center;">
-                                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-                                                                    </svg>
-                                                                    Adquirir Licencias
-                                                                </button>
+                                                                <div style="display:flex;flex-direction:column;">
+                                                                    <label class="form-label" style="visibility:hidden;margin-bottom:6px;">&nbsp;</label>
+                                                                    <button class="btn btn-primary" onclick="purchaseLicense()" style="width:100%;justify-content:center;">
+                                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                                                                        </svg>
+                                                                        Adquirir Licencias
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
