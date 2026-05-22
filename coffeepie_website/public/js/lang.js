@@ -245,6 +245,12 @@
         if (el.tagName === 'CODE' || el.tagName === 'PRE') return;
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return;
 
+        // Skip wrapper spans that already track their own original (inline-fragment fix)
+        if (el.hasAttribute && el.hasAttribute(ORIGINAL_ATTR) && el.childNodes.length === 1 && el.firstChild && el.firstChild.nodeType === Node.TEXT_NODE) {
+            translateTextNode(el.firstChild, toLang);
+            return;
+        }
+
         // Try group-level translation for rich text components
         if (el.hasAttribute && el.getAttribute('data-testid') === 'richTextElement') {
             if (tryGroupTranslate(el, toLang)) {
@@ -267,25 +273,54 @@
         }
     }
 
+    function countTextSiblings(textNode) {
+        var siblings = textNode.parentElement.childNodes;
+        var count = 0;
+        for (var s = 0; s < siblings.length; s++) {
+            if (siblings[s] !== textNode && siblings[s].nodeType === Node.TEXT_NODE && siblings[s].textContent.trim().length > 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     function translateTextNode(textNode, toLang) {
-        var original = textNode.parentElement.getAttribute(ORIGINAL_ATTR);
-        var workingText = original || textNode.textContent;
+        var parent = textNode.parentElement;
+        var parentOriginal = parent.getAttribute(ORIGINAL_ATTR);
+        var parentHasMultiple = countTextSiblings(textNode) > 0;
+
+        // If parent has multiple text children and already stores an original,
+        // that original belongs to a DIFFERENT text node. Use this node's own content.
+        var workingText;
+        if (parentOriginal && parentHasMultiple) {
+            workingText = textNode.textContent;
+        } else {
+            workingText = parentOriginal || textNode.textContent;
+        }
 
         var trimmed = workingText.trim();
         if (trimmed.length < 2) return;
         if (/^[\d\s.,'%$€£¥+#*\-–—]+$/.test(trimmed)) return;
 
-        // If parent has a stored original but this text node is just whitespace,
-        // skip it — it was never the node that got translated
-        if (original && textNode.textContent.trim().length === 0) return;
+        if (parentOriginal && textNode.textContent.trim().length === 0) return;
 
         var translated = translateText(workingText, toLang);
         if (translated !== null && translated !== workingText) {
-            if (!original) {
-                textNode.parentElement.setAttribute(ORIGINAL_ATTR, workingText);
+            if (parentHasMultiple) {
+                // Wrap this fragment in a span so each fragment tracks its own original
+                var wrapper = document.createElement('span');
+                wrapper.setAttribute(ORIGINAL_ATTR, workingText);
+                wrapper.textContent = translated;
+                wrapper.setAttribute(TRANSLATED_ATTR, toLang);
+                parent.replaceChild(wrapper, textNode);
+            } else {
+                // Single text child: store original on parent (existing behavior)
+                if (!parentOriginal) {
+                    parent.setAttribute(ORIGINAL_ATTR, workingText);
+                }
+                textNode.textContent = translated;
+                parent.setAttribute(TRANSLATED_ATTR, toLang);
             }
-            textNode.textContent = translated;
-            textNode.parentElement.setAttribute(TRANSLATED_ATTR, toLang);
         }
     }
 
@@ -295,12 +330,26 @@
         for (var i = 0; i < els.length; i++) {
             var el = els[i];
             var original = el.getAttribute(ORIGINAL_ATTR);
-            // Restore text node if element has only one text node child
+
+            // Check if any child element has its own data-cp-original
+            // (wrapper spans from inline-fragment translation)
+            var hasIndependentChildren = false;
+            for (var k = 0; k < el.children.length; k++) {
+                if (el.children[k].hasAttribute(ORIGINAL_ATTR)) {
+                    hasIndependentChildren = true;
+                    break;
+                }
+            }
+
+            if (hasIndependentChildren) {
+                // Children track their own originals — only clean up this element's markers
+                el.removeAttribute(TRANSLATED_ATTR);
+                continue;
+            }
+
             if (el.childNodes.length === 1 && el.firstChild && el.firstChild.nodeType === Node.TEXT_NODE) {
                 el.firstChild.textContent = original;
             } else {
-                // Find and restore only the meaningful text node (skip whitespace/
-                // indentation nodes) to preserve sibling elements like SVG icons
                 var children = el.childNodes;
                 var restored = false;
                 for (var j = 0; j < children.length; j++) {
