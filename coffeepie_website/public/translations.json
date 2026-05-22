@@ -16522,18 +16522,18 @@
         "ko": "볼륨 할인 — USD 가격",
         "ar": "خصومات الحجم — الأسعار بالدولار"
     },
-    "Adquirir Nueva Licencia": {
-        "en": "Purchase New License",
-        "es": "Adquirir Nueva Licencia",
-        "pt": "Adquirir Nova Licença",
-        "fr": "Acheter une nouvelle licence",
-        "de": "Neue Lizenz erwerben",
-        "ru": "Приобрести новую лицензию",
+    "Adquirir Nuevas Licencias": {
+        "en": "Purchase New Licenses",
+        "es": "Adquirir Nuevas Licencias",
+        "pt": "Adquirir Novas Licenças",
+        "fr": "Acheter de nouvelles licences",
+        "de": "Neue Lizenzen erwerben",
+        "ru": "Приобрести новые лицензии",
         "hi": "नई लाइसेंस खरीदें",
         "ja": "新しいライセンスを購入",
         "zh": "购买新许可证",
         "ko": "새 라이선스 구매",
-        "ar": "شراء ترخيص جديد"
+        "ar": "شراء تراخيص جديدة"
     },
     "Cantidad de Terminales": {
         "en": "Number of Terminals",
@@ -16600,18 +16600,18 @@
         "ko": "총 결제 금액",
         "ar": "المجموع للدفع"
     },
-    "Adquirir Licencia": {
-        "en": "Purchase License",
-        "es": "Adquirir Licencia",
-        "pt": "Adquirir Licença",
-        "fr": "Acheter une licence",
-        "de": "Lizenz erwerben",
-        "ru": "Приобрести лицензию",
+    "Adquirir Licencias": {
+        "en": "Purchase Licenses",
+        "es": "Adquirir Licencias",
+        "pt": "Adquirir Licenças",
+        "fr": "Acheter des licences",
+        "de": "Lizenzen erwerben",
+        "ru": "Приобрести лицензии",
         "hi": "लाइसेंस खरीदें",
         "ja": "ライセンスを購入",
         "zh": "购买许可证",
         "ko": "라이선스 구매",
-        "ar": "شراء الترخيص"
+        "ar": "شراء التراخيص"
     },
     "Tus Licencias Activas": {
         "en": "Your Active Licenses",

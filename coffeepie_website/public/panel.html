@@ -5512,7 +5512,7 @@
                                                     <div class="content-grid" style="margin-bottom:24px;">
                                                         <div class="section-card" style="grid-column:1/-1;">
                                                             <div class="section-card-header">
-                                                                <span class="section-card-title">Adquirir Nueva Licencia</span>
+                                                                <span class="section-card-title">Adquirir Nuevas Licencias</span>
                                                             </div>
                                                             <div class="license-purchase-form" style="padding:16px 0;">
                                                                 <div class="form-group">
@@ -5535,11 +5535,11 @@
                                                                     <div class="license-total-amount" id="licenseTotalAmount">$1.00</div>
                                                                     <div class="license-total-per-terminal" id="licenseTotalPerTerminal">$1.00 / terminal</div>
                                                                 </div>
-                                                                <button class="btn btn-primary" onclick="purchaseLicense()" style="align-self:end;">
+                                                                <button class="btn btn-primary" onclick="purchaseLicense()" style="align-self:end;justify-content:center;">
                                                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                                         <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
                                                                     </svg>
-                                                                    Adquirir Licencia
+                                                                    Adquirir Licencias
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -6275,7 +6275,7 @@
 
             copyLicenseKey(newKey, null);
             updateLicenseCount();
-            showToast('Licencia generada: ' + newKey + ' (' + qty.toLocaleString('de-DE').replace(/\./g, "'") + ' terminales, ' + periodLabel.toLowerCase() + ')');
+            showToast('Licencias generadas: ' + newKey + ' (' + qty.toLocaleString('de-DE').replace(/\./g, "'") + ' terminales, ' + periodLabel.toLowerCase() + ')');
         }
 
         // Licencias: copy key to clipboard
