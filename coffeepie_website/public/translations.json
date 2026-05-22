@@ -489,8 +489,8 @@
         "ru": "Coffee Pie® Сервис",
         "hi": "Coffee Pie®",
         "ja": "Coffee Pie®サービス",
-        "zh": "Coffee Pie® 服务",
-        "ko": "Coffee Pie® 서비스",
+        "zh": "Coffee Pie®服务",
+        "ko": "Coffee Pie®서비스",
         "ar": "Coffee Pie® Service"
     },
     "Política de Privacidad": {
@@ -637,17 +637,17 @@
         "ar": "الأجهزة المصدق عليها"
     },
     "Servicio de Cómputo": {
-        "en": "Computing Service",
-        "es": "Servicio de Cómputo",
-        "pt": "Serviço de Cómputo",
-        "fr": "Services généraux",
-        "de": "Rechendienst",
-        "ru": "Компьютерный сервис",
-        "hi": "समग्र सेवा",
-        "ja": "有料サービス",
-        "zh": "编译服务",
-        "ko": "컴퓨터 서비스",
-        "ar": "الخدمة التكميلية"
+        "en": "Computing Service ",
+        "es": "Servicio de Cómputo ",
+        "pt": "Serviço de Cómputo ",
+        "fr": "Services généraux ",
+        "de": "Rechendienst ",
+        "ru": "Компьютерный сервис ",
+        "hi": "समग्र सेवा ",
+        "ja": "有料サービス ",
+        "zh": "编译服务 ",
+        "ko": "컴퓨터 서비스 ",
+        "ar": "الخدمة التكميلية "
     },
     "Close": {
         "en": "Close",
@@ -1023,7 +1023,7 @@
         "hi": "2) Announcers - Coffee Pie® विज्ञापन (B2B):",
         "ja": "2)アナウンサー - Coffee Pie®広告(B2B):",
         "zh": "2) 宣布者 - Coffee Pie® \\ ads(B2B):",
-        "ko": "2) 발표자 - Coffee Pie® 광고 (B2B) :",
+        "ko": "2) 발표자 - Coffee Pie®광고 (B2B) :",
         "ar": "2) Announcers - coffee Pie® Ads (B2B):"
     },
     "Aquellos clientes corporativos con alto poder adquisitivo que quieren ahorrar dinero en su infraestructura de cómputo, a la vez que promoviendo sus productos y/o servicios, pagando por espacios publicitarios digitales altamente segmentados,": {
@@ -1334,7 +1334,7 @@
         "ru": "Q: Coffee Pie® производит свою продукцию?",
         "hi": "प्रश्न: Coffee Pie® अपने उत्पादों का निर्माण करता है?",
         "ja": "Q:Coffee Pie®は自社製品を製造していますか?",
-        "zh": "问:Coffee Pie® 生产自己的产品?",
+        "zh": "问:Coffee Pie®生产自己的产品?",
         "ko": "Q: Coffee Pie®는 그것의 자신의 제품을 제조합니까?",
         "ar": "Q: Coffee Pie® R يصنع منتجاته الخاصة؟?"
     },
@@ -1346,7 +1346,7 @@
         "de": "A: Nein, Coffee Pie® ist ein Unternehmen \"",
         "ru": "A: Нет, Coffee Pie® - это компания",
         "hi": "A: No, Coffee Pie® एक कंपनी है \"",
-        "ja": "A: No, Coffee Pie® は「会社」です",
+        "ja": "A: No, Coffee Pie®は「会社」です",
         "zh": "答: 不,Coffee Pie®是一家公司。 \"",
         "ko": "A: 아니, Coffee Pie®는 회사 \"",
         "ar": "ج: لا، Coffee Pie® هي شركة"
@@ -1632,7 +1632,7 @@
         "de": "F: Wie kann ich auf ein mit Coffee Pie® kompatibeles Codec-Terminal zugreifen?",
         "ru": "В: Как получить доступ к терминалу кодека, совместимому с Coffee Pie®?",
         "hi": "प्रश्न: मैं Coffee Pie® के साथ संगत एक कोडेक टर्मिनल कैसे एक्सेस कर सकता हूं?",
-        "ja": "Q: Coffee Pie® と互換性のあるコーデックターミナルにアクセスするにはどうすればよいですか?",
+        "ja": "Q: Coffee Pie®と互換性のあるコーデックターミナルにアクセスするにはどうすればよいですか?",
         "zh": "问:我怎样才能访问一个与Coffee Pie®相容的编码终端?",
         "ko": "Q: Coffee Pie®와 호환되는 코덱 터미널에 액세스할 수 있나요?",
         "ar": "س: كيف يمكنني الدخول إلى محطة \"كودك\" متوافقة مع \"Coffee Pie®\"؟?"
@@ -1736,7 +1736,7 @@
         "de": "F: Welches Betriebssystem verwendet Coffee Pie®?",
         "ru": "В: Какую операционную систему использует Coffee Pie®?",
         "hi": "प्रश्न: क्या ऑपरेटिंग सिस्टम Coffee Pie® का उपयोग करता है?",
-        "ja": "Q:Coffee Pie® はどのようなオペレーティングシステムを使用しますか?",
+        "ja": "Q:Coffee Pie®はどのようなオペレーティングシステムを使用しますか?",
         "zh": "问:Coffee Pie®使用什么操作系统?",
         "ko": "Q: Coffee Pie®는 어떤 운영 체제입니까?",
         "ar": "س: ما هو نظام التشغيل الذي يستخدمه (كوبي) ؟?"
@@ -1762,7 +1762,7 @@
         "de": "F: Was unterscheidet sich Coffee Pie® von anderen Cloud-Diensten?",
         "ru": "В: Чем Coffee Pie® отличается от других облачных сервисов?",
         "hi": "प्रश्न: Coffee Pie® क्या करता है?",
-        "ja": "Q:Coffee Pie® は他のクラウドサービスとは異なりますか?",
+        "ja": "Q:Coffee Pie®は他のクラウドサービスとは異なりますか?",
         "zh": "问:Coffee Pie®与其他云服务有什么不同?",
         "ko": "Q: Coffee Pie®는 다른 클라우드 서비스와 다릅니다?",
         "ar": "Q: What does coffee Pie  differ from other cloud services?"
@@ -1788,7 +1788,7 @@
         "de": "F: Wie trägt Coffee Pie® zu Nachhaltigkeit bei?",
         "ru": "Q: Как Coffee Pie® способствует устойчивому развитию?",
         "hi": "प्रश्न: Coffee Pie® कैसे करता है?",
-        "ja": "Q: Coffee Pie® が持続可能性に貢献する方法?",
+        "ja": "Q: Coffee Pie®が持続可能性に貢献する方法?",
         "zh": "问:Coffee Pie®如何促进可持续性?",
         "ko": "Q: Coffee Pie®가 지속 가능성에 어떻게 기여합니까?",
         "ar": "Q: How does coffee Pie SR contribute to sustainability?"
@@ -1801,7 +1801,7 @@
         "de": "A: Coffee Pie® fördert die Kreislaufwirtschaft durch sein patentiertes QFDM-System, das die Nutzung der in Auftrag gegebenen Computerressourcen (Datenzentren) optimiert, zusätzlich zur Verwendung von hochmodulierten, reparierbaren und recycelbaren Geräten, so dass die Abfallerzeugung vermieden und die Lebensdauer aller unserer Geräte maximiert wird, wodurch elektronische Abfälle auf praktisch Null reduziert werden. Unter keinen Umständen werden wir",
         "ru": "Ответ: Coffee Pie® способствует круговой экономике благодаря запатентованной системе QFDM, которая оптимизирует использование введенных в эксплуатацию компьютерных ресурсов (дата-центров), в дополнение к использованию высоко модульных, репарируемых и перерабатываемых устройств, тем самым избегая образования отходов и максимизируя срок службы всех наших устройств, минимизируя электронные отходы практически до нуля. Ни при каких обстоятельствах мы не потерпим",
         "hi": "A: Coffee Pie® अपने पेटेंट QFDM प्रणाली के माध्यम से परिपत्र अर्थव्यवस्था को बढ़ावा देता है, जो अत्यधिक मॉड्यूलर, पुन: प्रयोज्य और पुन: प्रयोज्य उपकरणों के उपयोग के अलावा कमीशन किए गए कंप्यूटर संसाधनों (डेटासेंटर) के उपयोग को अनुकूलित करता है, इस प्रकार अपशिष्ट पीढ़ी से बचने और हमारे सभी उपकरणों के जीवन को अधिकतम करने, व्यावहारिक रूप से शून्य करने के लिए इलेक्ट्रॉनिक अपशिष्ट को कम करने के लिए। किसी भी परिस्थिति में हम बर्दाश्त नहीं करेंगे",
-        "ja": "A: Coffee Pie® は、特許取得済みの QFDM システムを通じて循環経済を促進し、委託されたコンピューター リソース(データセンター)の使用を最適化し、高度にモジュラー、交換可能、リサイクル可能なデバイスの使用に加えて、廃棄物発生を回避し、すべてのデバイスの生活を最大限に活用し、電子廃棄物を実用的にゼロに最小化します。 いかなる状況においても、我々は許容する",
+        "ja": "A: Coffee Pie®は、特許取得済みの QFDM システムを通じて循環経済を促進し、委託されたコンピューター リソース(データセンター)の使用を最適化し、高度にモジュラー、交換可能、リサイクル可能なデバイスの使用に加えて、廃棄物発生を回避し、すべてのデバイスの生活を最大限に活用し、電子廃棄物を実用的にゼロに最小化します。 いかなる状況においても、我々は許容する",
         "zh": "A: Coffee Pie®通过专利QFDM系统来推动循环经济,除了使用高度模块化,可修复和可回收的设备外,还优化了委托计算机资源的使用(数据中心),从而避免了废物的产生并最大限度地延长了我们所有设备的寿命,将电子废物降到了实际零. 我们绝不容忍",
         "ko": "A : Coffee Pie®는 특허받은 QFDM 시스템을 통해 원형 경제를 촉진하며, 이는 높은 모듈, 재사용 및 재활용 장치의 사용뿐만 아니라 모든 장치의 수명을 극대화하고, 전자 폐기물을 실질적으로 제로 최소화합니다. 어떤 상황에서 우리는",
         "ar": "ألف: تروج شركة \" Coffee Pie® بي \" للاقتصاد الدائري من خلال نظام \" QFDM \" الرخيص، الذي يحقق الاستخدام الأمثل للموارد الحاسوبية المكلَّفة (مراكز البيانات)، بالإضافة إلى استخدام أجهزة مناظرة جداً وقابلة لإعادة التدارك، وبالتالي تجنب توليد النفايات وتحقيق أقصى قدر من حياة جميع أجهزةنا، وتقليل النفايات الإلكترونية إلى الصفر عملياً. لن نتحمل تحت أي ظرف من الظروف"
@@ -1840,9 +1840,9 @@
         "de": "F: Welche Materialien werden in Coffee Pie® kompatiblen Geräten verwendet?",
         "ru": "Вопрос: Какие материалы используются в устройствах, совместимых с Coffee Pie®?",
         "hi": "प्रश्न: Coffee Pie® संगत उपकरणों में किस सामग्री का उपयोग किया जाता है?",
-        "ja": "Q: Coffee Pie® 互換デバイスで使用されている材料は?",
-        "zh": "问:Coffee Pie® 兼容设备中使用了哪些材料?",
-        "ko": "Q: Coffee Pie® 호환 기기에서 어떤 재료가 사용됩니까?",
+        "ja": "Q: Coffee Pie®互換デバイスで使用されている材料は?",
+        "zh": "问:Coffee Pie®兼容设备中使用了哪些材料?",
+        "ko": "Q: Coffee Pie®호환 기기에서 어떤 재료가 사용됩니까?",
         "ar": "Q: What materials are used in coffee Pie SR compatible devices?"
     },
     "R: Se prioriza el uso de materiales reciclados y reciclables como Aluminio, Cobre, PET, PC, etc, así como componentes de bajo impacto ambiental como Resinas Recicladas Post-Consumo (PCR) para alinearse con los principios de sostenibilidad.": {
@@ -1866,8 +1866,8 @@
         "de": "F: Coffee Pie® verwendet Recyclingprozesse für Ihre End-of-Life-Geräte?",
         "ru": "Q: Coffee Pie® использует процессы переработки для устройств с истекшим сроком службы?",
         "hi": "प्रश्न: Coffee Pie® आपके जीवन के अंत उपकरणों के लिए रीसाइक्लिंग प्रक्रियाओं का उपयोग करता है?",
-        "ja": "Q:Coffee Pie® は、エンド・オブ・ライフ機器のリサイクルプロセスを使用していますか?",
-        "zh": "Q:Coffee Pie® 使用回收工艺来做你的报废设备?",
+        "ja": "Q:Coffee Pie®は、エンド・オブ・ライフ機器のリサイクルプロセスを使用していますか?",
+        "zh": "Q:Coffee Pie®使用回收工艺来做你的报废设备?",
         "ko": "Q: Coffee Pie®는 당신의 end-of-life 장치를 위한 재생 과정을 이용합니다?",
         "ar": "Q: Coffee Pie® R يستخدم عمليات إعادة تدوير لأجهزة نهاية الحياة الخاصة بك؟?"
     },
@@ -1879,7 +1879,7 @@
         "de": "A: Ja, Coffee Pie® implementiert kreisförmige Systeme auf seinen zertifizierten Geräten für Rückgabe, Bewertung, vorbeugende und korrigierende Wartung, Entwicklung, Reparatur, Remanufacture oder schließlich Recycling, was stark zur Reduzierung von elektronischen Abfällen beiträgt.",
         "ru": "A: Да, Coffee Pie® реализует круглые системы на своих сертифицированных устройствах для возврата, оценки, профилактического и корректирующего обслуживания, разработки, ремонта, восстановления или, в конечном итоге, переработки, что в значительной степени способствует сокращению электронных отходов.",
         "hi": "A: हाँ, Coffee Pie® रिटर्न, मूल्यांकन, निवारक और सुधारात्मक रखरखाव, विकास, मरम्मत, पुनर्निर्माण या अंततः रीसाइक्लिंग के लिए अपने प्रमाणित उपकरणों पर परिपत्र प्रणालियों को लागू करता है, जो इलेक्ट्रॉनिक कचरे की कमी में काफी योगदान देता है।.",
-        "ja": "A: はい、Coffee Pie® は、電子廃棄物の低減に大きく貢献し、返品、評価、予防および是正メンテナンス、開発、修理、再製造、または究極的にリサイクルのために、認証されたデバイス上の循環システムを実装しています.",
+        "ja": "A: はい、Coffee Pie®は、電子廃棄物の低減に大きく貢献し、返品、評価、予防および是正メンテナンス、開発、修理、再製造、または究極的にリサイクルのために、認証されたデバイス上の循環システムを実装しています.",
         "zh": "答复:是的, \" Coffee Pie® \" 在其认证装置上实施循环系统,用于返回、评估、预防和矫正保养、开发、修理、再制造或最终回收,为减少电子废物作出重大贡献.",
         "ko": "A: 예, Coffee Pie®는 반품, 평가, 예방 및 교정 유지 보수, 개발, 수리, 재제조 또는 궁극적으로 재활용, 전자 폐기물의 감소에 크게 기여하는 인증된 장치에 원형 시스템을 구현합니다.",
         "ar": "A: Yes, coffee Pie  implements circular systems on its certification devices for return, evaluation, preventive and corrective maintenance, development, repair, remanufacture or ultimately recycling, contributing greatly to the reduction of electronic waste."
@@ -1894,7 +1894,7 @@
         "hi": "प्रश्न: क्या मैं कहीं भी Coffee Pie® टर्मिनल का उपयोग कर सकता हूँ?",
         "ja": "Q:Coffee Pie®端末はどこでも使えますか?",
         "zh": "问:我能在任何地方使用Coffee Pie®吗?",
-        "ko": "Q: 나는 어디에서 Coffee Pie® 맨끝을 이용할 수 있습니까?",
+        "ko": "Q: 나는 어디에서 Coffee Pie®맨끝을 이용할 수 있습니까?",
         "ar": "س: هل يمكنني استخدام محطة Coffee Pie® في أي مكان؟?"
     },
     "R: Sí, siempre que tengas acceso a una conexión estable a internet puedes utilizar un terminal Coffee Pie® en cualquier ubicación, sin embargo, ten en cuenta que la alta latencia puede afectar la experiencia, entre más te alejes geográficamente del datacenter, mayor será la latencia. Consulta con tu proveedor de internet (ISP) la latencia de su servicio, idealmente fibra óptica con respuestas por debajo de 10ms.": {
@@ -1905,9 +1905,9 @@
         "de": "A: Ja, solange Sie Zugang zu einer stabilen Internetverbindung haben, können Sie ein Coffee Pie® -Terminal an jedem Ort verwenden, jedoch beachten Sie, dass hohe Latenz Erfahrung beeinflussen kann, je mehr Sie sich geographisch vom Dataenter weg bewegen, desto größer die Latenz. Überprüfen Sie mit Ihrem Internet-Provider (ISP) die Latenz Ihres Dienstes, idealerweise Glasfaser mit Antworten unter 10ms.",
         "ru": "Ответ: Да, если у вас есть доступ к стабильному интернет-соединению, вы можете использовать терминал Coffee Pie® в любом месте, однако имейте в виду, что высокая задержка может повлиять на опыт, чем больше вы географически удаляетесь от дата-центра, тем больше задержка. Проверьте с вашим интернет-провайдером (ISP) задержку вашего сервиса, в идеале оптоволоконного с откликами ниже 10 мс.",
         "hi": "A: हाँ, जब तक आपके पास एक स्थिर इंटरनेट कनेक्शन तक पहुंच होती है तब तक आप किसी भी स्थान पर Coffee Pie® टर्मिनल का उपयोग कर सकते हैं, हालांकि, यह पता लगाया जा सकता है कि उच्च विलंबता अनुभव को प्रभावित कर सकती है, जितना अधिक आप डेटाेंटर से भौगोलिक रूप से दूर जाते हैं, उतना ही अधिक विलंबता। अपने इंटरनेट प्रदाता (ISP) के साथ अपनी सेवा की विलंबता, आदर्श रूप से 10ms से नीचे की प्रतिक्रियाओं के साथ फाइबर ऑप्टिक की जाँच करें।.",
-        "ja": "A: はい、安定したインターネット接続にアクセスできる限り、Coffee Pie® ターミナルを任意の場所に使用できますが、高レイテンシが経験に影響を与える可能性があることに注意して、データ入力者から地理的に移動するほど、レイテンシが大きい。 お使いのインターネットプロバイダ(ISP)にあなたのサービスの遅延をチェックしてください。, 理想的には10ms以下の応答で光ファイバ.",
+        "ja": "A: はい、安定したインターネット接続にアクセスできる限り、Coffee Pie®ターミナルを任意の場所に使用できますが、高レイテンシが経験に影響を与える可能性があることに注意して、データ入力者から地理的に移動するほど、レイテンシが大きい。 お使いのインターネットプロバイダ(ISP)にあなたのサービスの遅延をチェックしてください。, 理想的には10ms以下の応答で光ファイバ.",
         "zh": "答: 是的,只要您能够使用稳定的互联网连接,您就可以在任何地点使用一个\"Coffee Pie®\"(Coffee Pie® QQ)终端,然而,要意识到高延迟会影响经验,越远离数据输入器的地理范围,时间越长. 与您的互联网提供商(ISP)检查您服务的耐久性.",
-        "ko": "A: 그렇습니다, 당신이 어떤 위치에 있는 Coffee Pie® 맨끝을 사용할 수 있는 안정되어 있는 인터넷 연결에 접근이 있는 것과 같이, 그러나, 높은 대기권이 경험에 영향을 미칠 수 있다는 것을 알고 있습니다, 당신이 dataenter에서 지리적으로 멀리 이동, 더 중대한 대기권. 인터넷 공급자 (ISP)로 검사하십시오 당신의 서비스의 대기권, 10ms의 밑에 응답을 가진 이상적으로 광섬유.",
+        "ko": "A: 그렇습니다, 당신이 어떤 위치에 있는 Coffee Pie®맨끝을 사용할 수 있는 안정되어 있는 인터넷 연결에 접근이 있는 것과 같이, 그러나, 높은 대기권이 경험에 영향을 미칠 수 있다는 것을 알고 있습니다, 당신이 dataenter에서 지리적으로 멀리 이동, 더 중대한 대기권. 인터넷 공급자 (ISP)로 검사하십시오 당신의 서비스의 대기권, 10ms의 밑에 응답을 가진 이상적으로 광섬유.",
         "ar": "A: نعم، طالما لديك الوصول إلى وصلة مستقرة على شبكة الإنترنت يمكنك استخدام محطة Coffee Pie® SR في أي موقع، على الرغم من ذلك، أن يكون على علم بأن ارتفاع مستوى الرطوبة يمكن أن يؤثر على التجربة، كلما انتقلت جغرافيا بعيدا عن البيانات، كلما زاد الرطوبة. تحقق مع مزود الإنترنت الخاص بك (ISP) تساهل خدمتك، مثاليا الألياف الضوئية مع ردود أقل من 10 أمتار."
     },
     "P: Cuáles son los rangos de latencia aceptables y recomendables para el servicio de internet?": {
@@ -2037,7 +2037,7 @@
         "hi": "A: विफलता के मामले में, आप सहायता के लिए Coffee Pie® तकनीकी सहायता, या मार्गदर्शन के लिए संपर्क कर सकते हैं यदि आपको परिवर्तन की आवश्यकता है। इसके अलावा, असफलता के स्रोत के आधार पर मॉड्यूलर उपकरणों के रूप में, आपको किसी अन्य टर्मिनल की आवश्यकता के बिना विशिष्ट घटकों को प्रतिस्थापित करने की संभावना है।.",
         "ja": "A: 障害が発生した場合は、変更が必要な場合は、Coffee Pie®のテクニカルサポートに連絡するか、またはガイダンスに連絡することができます。 また、故障のソースに応じてモジュラーデバイスとして、別の端末を必要としない特定のコンポーネントを交換する可能性があります.",
         "zh": "答: 如果失败,您可联系Coffee Pie®(Coffee Pie®)寻求援助或指导,如果您需要改变。 此外,作为模块化设备,根据故障源的不同,您有可能替换特定组件而无需再安装一个终端.",
-        "ko": "A: 실패의 경우, 당신은 당신이 변화를 요구하는 경우에 지원, 또는 지도를 위한 Coffee Pie® 기술지원에 연락할 수 있습니다. 또한, 모듈 장치로 실패의 소스에 따라 다른 터미널의 필요 없이 특정 구성 요소를 대체할 수 있습니다.",
+        "ko": "A: 실패의 경우, 당신은 당신이 변화를 요구하는 경우에 지원, 또는 지도를 위한 Coffee Pie®기술지원에 연락할 수 있습니다. 또한, 모듈 장치로 실패의 소스에 따라 다른 터미널의 필요 없이 특정 구성 요소를 대체할 수 있습니다.",
         "ar": "A: In case of failure, you can contact the coffee Pie SR technical support for assistance, or guidance if you require change. وبالإضافة إلى ذلك، كأجهزة نموذجية، حسب مصدر الفشل، من المرجح أن تحلوا محل عناصر محددة دون الحاجة إلى محطة طرفية أخرى."
     },
     "P: Qué pasa si ya no quiero usar el servicio?": {
@@ -2114,7 +2114,7 @@
         "ru": "О: Вы можете поверхностно изменить все модули, аксессуары, переключатели и ключи по своему вкусу, на самом деле мы призываем наших пользователей сделать это, но модифицировать внутреннюю часть и электронику устройств PELIGROSO, чтобы это могло привести к прерыванию обслуживания, повредить вам острыми краями, частями, которые вылетают, электрическим током или даже вызвать пожар, поэтому единственное, что вы не должны модифицировать, это электроника и внутренняя часть устройств, если вы не являетесь техническим сертифицированным Coffee Pie® для этой задачи или производителем устройств. Coffee Pie не несет ответственности за любой ущерб из-за безответственного или ненадлежащего использования сервиса и его устройств.",
         "hi": "A: आप अपने पसंद के लिए सभी मॉड्यूल, सहायक उपकरण, स्विच और कुंजी को सुपरफ़िश रूप से बदल सकते हैं, वास्तव में हम अपने उपयोगकर्ताओं को ऐसा करने के लिए प्रोत्साहित करते हैं, लेकिन अंदर और उपकरणों के इलेक्ट्रॉनिक्स को संशोधित करने के लिए PELIGROSO है, ताकि यह सेवा में एक रुकावट उत्पन्न कर सके, ताकि आपको तेज किनारों से चोट पहुंचाया जा सके, ऐसे हिस्से जो बाहर उड़ते हैं, बिजली के झटके या यहां तक कि आग का कारण बन जाते हैं, इसलिए केवल वही चीज जिसे आपको संशोधित नहीं करना चाहिए वह इलेक्ट्रॉनिक्स और उपकरणों के अंदर का हिस्सा है, जब तक कि आप उस कार्य या उपकरणों के निर्माता के लिए Coffee Pie® द्वारा प्रमाणित तकनीकी हैं। Coffee Pie® को किसी भी क्षति के लिए जिम्मेदार नहीं ठहराया जाएगा क्योंकि यह सेवा और उसके उपकरणों के अपरिवर्तनीय या अनुचित उपयोग के कारण होता है।.",
         "ja": "A:すべてのモジュール、アクセサリ、スイッチ、キーをあなたの好みに超えて変更することができます。実際には、ユーザーがそれを行うことを奨励しますが、デバイスの内部と電子機器を変更するには、PELIGROSOです。これにより、サービスの中断を発生させ、鋭いエッジ、電気ショック、または火災を引き起こす部分を傷つける可能性があるため、変更するべき唯一のことは、電子機器の内側と内部の一部であり、あなたがその技術が認定されていない限り、PELIGROSOは、コーヒーメーカーまたはチップメーカーの作業者に認定されるかどうかです。 Coffee Pie®は、サービスおよびそのデバイスの不適切または不適切な使用によるいかなる損害についても責任を負いません.",
-        "zh": "答: 你可以表面改变你喜欢的所有模块,配件,开关和密钥,事实上我们鼓励我们的用户这样做,但修改设备的内置和电子是PELIGROSO,这样做可能会造成服务中断,会因为尖锐的边缘,飞出部件而伤害你,电击甚至会起火,所以你不应该修改的唯一的东西是设备的电子和内置部分,除非你得到Coffee Pie® 的技术认证来完成这项任务或设备制造商. Coffee Pie®不会因不负责任或不适当地使用服务及其装置而造成任何损害.",
+        "zh": "答: 你可以表面改变你喜欢的所有模块,配件,开关和密钥,事实上我们鼓励我们的用户这样做,但修改设备的内置和电子是PELIGROSO,这样做可能会造成服务中断,会因为尖锐的边缘,飞出部件而伤害你,电击甚至会起火,所以你不应该修改的唯一的东西是设备的电子和内置部分,除非你得到Coffee Pie®的技术认证来完成这项任务或设备制造商. Coffee Pie®不会因不负责任或不适当地使用服务及其装置而造成任何损害.",
         "ko": "A: 당사는 모든 모듈, 액세서리, 스위치 및 키를 리킹으로 교체할 수 있지만, 내부 및 장치의 전자를 수정하는 것은 PELIGROSO이므로 서비스 중단을 생성 할 수 있으므로 날카로운 가장자리로 상처를 입을 수 있습니다. 전기 충격 또는 화재를 발생시키는 부품은 전자 장치 및 장치 내부 부분입니다. 파이® 또는 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이® 파이®의 기술이 인증되지 않습니다. Coffee Pie®는 서비스 및 기기의 부적절한 사용으로 인해 손상에 대한 책임을 지지 않습니다.",
         "ar": "ألف: يمكن أن تغير على نحو سطحي جميع الوحدات، والوصلات، والمفاتيح ومفاتيح لحبك، في الواقع نشجع مستخدمينا على القيام بذلك، ولكن لتعديل الداخل والإلكترونيات للأجهزة هو PELIGROSO، للقيام بذلك يمكن أن يولد انقطاعا في الخدمة، لإيذائك بواسطة الحواف الحادة، الأجزاء التي تطير، الصدمة الكهربائية أو حتى تسبب حريقا، ولن تتحمل شركة Coffee Pie® SR أي ضرر بسبب الاستخدام غير المسؤول أو غير الملائم للخدمة وأجهزةها."
     },
@@ -2568,9 +2568,9 @@
         "de": "F: Was ist ein Coffee Pie® Teil?",
         "ru": "Q: Что такое Coffee Pie®?",
         "hi": "प्रश्न: Coffee Pie® क्या है?",
-        "ja": "Q: Coffee Pie® の部分は何ですか?",
+        "ja": "Q: Coffee Pie®の部分は何ですか?",
         "zh": "问:Coffee Pie®是什么?",
-        "ko": "Q: Coffee Pie® 부분은 무엇입니까?",
+        "ko": "Q: Coffee Pie®부분은 무엇입니까?",
         "ar": "س: ما هو جزء من Coffee Pie®؟?"
     },
     "R: Es la unidad mínima estandarizada de capacidad informática en nuestra plataforma, las cuales se pueden ir sumando o combinando como contenedores marítimos o ladrillos de lego, para formar máquinas más potentes y capaces, operando de forma similar al \"tarifario del taximetro\". Una porción está compuesta por:": {
@@ -2973,7 +2973,7 @@
         "hi": "प्रश्न: Coffee Pie® पारिस्थितिकी तंत्र में क्या भूमिकाएं हैं?",
         "ja": "Q:Coffee Pie®エコシステムにはどのような役割がありますか?",
         "zh": "问:在\"Coffee Pie®\"的生态系统里有什么角色?",
-        "ko": "Q: Coffee Pie® 생태계에 어떤 역할을 하나요?",
+        "ko": "Q: Coffee Pie®생태계에 어떤 역할을 하나요?",
         "ar": "Q: What roles are there in the coffee Pie SR ecosystem?"
     },
     "R: Hay roles a nivel marco o corporativo (B2B) y roles a nivel micro o de servicio (B2C):": {
@@ -3024,8 +3024,8 @@
         "ru": "Это тот, который имеет 51% или более акций акций и, следовательно, контроль и принятие решений набора интеллектуальной собственности экосистемы Coffee Pie® (пример потенциальных владельцев и / или акционеров: epm™, Alphabet™, Berkshire Hathaway™, Microsoft™, Framework™, Valve™, Platzi™, Oracle™, IBM™, Apple™, AMD™, Intel™, Nvidia™, ARM™, Starlink™, Millicom™, Mobile America™, Huawei™ и Space™).",
         "hi": "यह वह है जिसमें स्टॉक शेयर शेयरों का 51% या उससे अधिक है और इसलिए Coffee Pie® इकोसिस्टम के बौद्धिक संपदा सेट का नियंत्रण और निर्णय लेने (संभाव्य मालिकों और / या शेयरधारकों का उदाहरण: epm™, अल्फाबेट™, बर्कशायर हैथवे™, माइक्रोसॉफ्ट टीएम, फ्रेमवर्क टीएम, वाल्व टीएम, प्लैटज़ी टीएम, ओरेकल टीएम, आईबीएम टीएम, एप्पल टीएम, एएमडी टीएम, इंटेल टीएम, एनवीडिया टीएम, एआरएम टीएम, स्टारलिंक टीएम, मिलिकॉम टीएम, मोबाइल अमेरिका टीएम, Huawei टीएम, और स्पेस टीएम।.",
         "ja": "これは、株式の株式の51%以上を持っているので、Coffee Pie®エコシステム(潜在的な所有者と/または株主の例:epm™、Alphabet™、Berkshire Hathaway™、Microsoft™、フレームワーク™、Valve™、Platzi™、IBM™、Apple™、AMD™、Intel™、Navid™、Navid™、ARM™、ARM™、Huawei社™、Huawei社™、Huawei社™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari™、Hafari、Hu、Hafari™、Hu、Hu、Hafari™、Hu、Hu、Hu、Hafari、Hafari、M、Hu、Hu、Hu、Hu、Hu、Hu、Hu、.",
-        "zh": "它拥有51%或以上的股票股份,因此可以控制并决策Coffee Pie® 生态系统的知识产权(潜在所有人和/或股东的例子:epm™、Alphabet™、Berkshire Hathaway™、Microsoft™、Framewa™、Valve™、Platzi™、Oracle™、IBM™、苹果™、AMD™、Intel™、Nvidia™、ARM™、Starlink™、Millicom™、Mobile America™、Huawei™和Space™.",
-        "ko": "그것은 주식 주식 주식 주식의 51% 또는 더 많은 것을 가지고 있고 그러므로 Coffee Pie® 생태계의 지적 재산 세트의 통제 그리고 결정하 ( 잠재적인 소유자 및/또는 주주의 예: epm™, Alphabet™, Berkshire Hathaway™, Microsoft™, Framework™, 벨브™, Platzi™, Oracle™, IBM™, Apple™, AMD™,™ 인텔, Nvidia™, ARM™, Starlink™, Millicom, Mobile Space 및 Space.",
+        "zh": "它拥有51%或以上的股票股份,因此可以控制并决策Coffee Pie®生态系统的知识产权(潜在所有人和/或股东的例子:epm™、Alphabet™、Berkshire Hathaway™、Microsoft™、Framewa™、Valve™、Platzi™、Oracle™、IBM™、苹果™、AMD™、Intel™、Nvidia™、ARM™、Starlink™、Millicom™、Mobile America™、Huawei™和Space™.",
+        "ko": "그것은 주식 주식 주식 주식의 51% 또는 더 많은 것을 가지고 있고 그러므로 Coffee Pie®생태계의 지적 재산 세트의 통제 그리고 결정하 ( 잠재적인 소유자 및/또는 주주의 예: epm™, Alphabet™, Berkshire Hathaway™, Microsoft™, Framework™, 벨브™, Platzi™, Oracle™, IBM™, Apple™, AMD™,™ 인텔, Nvidia™, ARM™, Starlink™, Millicom, Mobile Space 및 Space.",
         "ar": "It is the one that has 51% or more of the stock shares and therefore the control and decision-making of the intellectual property set of the coffee Pie  Ecosystem (example of potential owners and / or shareholders: epm™, Alphabet™, Berkshire Hathaway™, Microsoft™, Framework™, Valve™, Platzi™."
     },
     "• Empresa Operadora:": {
@@ -3088,7 +3088,7 @@
         "de": "Sie sind Organisationen und Unternehmen mit einer beträchtlichen Kapazität von strukturierten Hardware (Server-Raum / Dataenter) und untergenutzt, die bereit sind, konservative Gewinne auf den nationalen Durchschnittskosten zu erhalten plus eine Marge nach dem Tier und die Nutzung von erneuerbaren und / oder alternativen Energien (Tier I: + 8%. tier II: + 10%. Tier III: + 12%. Tier IV: + 15%. Tier V mit SAN + 90% Erneuerbare oder Alternative Energie: + 18%) je nach Kapazität / Zeit, nach der Standarddefinition der \"Quanto\" oder Coffee Pie® Portion. Sie müssen strenge physikalische und digitale Sicherheitsprotokolle erfüllen, mit robusten Kühlsystemen, wie Flüssigkeitskühlung, die mit HVAC verbunden sind. Wenn Sie einen Auftrag haben oder im Prozess der Konstruktion, kontaktieren Sie uns direkt, um Sie im Prozess des Lieferanten zu führen, können Sie jetzt die untergenutzte Infrastruktur mieten.",
         "ru": "Это организации и компании со значительной емкостью структурированного оборудования (сервер-комната / дата-центр) и недостаточно используемые, которые готовы получать консервативную прибыль по средней национальной стоимости плюс маржу в соответствии с Tier и использованием возобновляемых и / или альтернативных источников энергии (Tier I: + 8%. tier II: + 10%). Уровень III: + 12%. Уровень IV: + 15%. Tier V с SAN + 90% возобновляемой или альтернативной энергии: + 18%) в зависимости от предоставленной мощности / времени, следуя стандартному определению «Quanto» или Coffee Pie® Portion. Они должны соответствовать строгим физическим и цифровым протоколам безопасности, с надежными системами охлаждения, такими как жидкостное охлаждение, подключенное к HVAC. Если у вас есть заказ или в процессе строительства, свяжитесь с нами напрямую, чтобы помочь вам в процессе становления поставщиком, теперь вы можете арендовать неиспользуемую инфраструктуру.",
         "hi": "वे संगठन और कंपनियां हैं जो संरचित हार्डवेयर (सर्वर-रूम / डाटाेंटर) की काफी क्षमता रखते हैं और underutilized हैं, जो राष्ट्रीय औसत लागत पर रूढ़िवादी लाभ प्राप्त करने के लिए तैयार हैं, साथ ही टियर के अनुसार मार्जिन और अक्षय और / या वैकल्पिक ऊर्जा (Tier I: + 8%) का उपयोग करते हैं। टियर II: + 10%। टीयर III: + 12%। टीयर IV: + 15%। SAN + 90% अक्षय या वैकल्पिक ऊर्जा के साथ टायर V: + 18%) क्षमता / समय के आधार पर प्रदान की गई, \"Quanto\" या Coffee Pie® पोर्टियन की मानक परिभाषा के बाद। उन्हें सख्त भौतिक और डिजिटल सुरक्षा प्रोटोकॉल का पालन करना चाहिए, जिसमें मजबूत शीतलन प्रणाली, जैसे कि एचवीएसी से जुड़े तरल शीतलन। यदि आपके पास एक कमीशन है या निर्माण की प्रक्रिया में है, तो हमसे संपर्क करें सीधे आपको आपूर्तिकर्ता बनने की प्रक्रिया में मार्गदर्शन करने के लिए, आप अब underutilized बुनियादी ढांचे को किराए पर ले सकते हैं।.",
-        "ja": "彼らは、構造化されたハードウェア(サーバールーム/データセンタ)と過小評価のかなりの能力を持つ組織と企業であり、国家平均コストで保守的な利益を得るために喜んでいると、ティアと再生可能エネルギーおよび/または代替エネルギーの使用に応じてマージンと、(Tier I: + 8%。 層II: + 10%。 層III:+ 12%。 層 IV: + 15%. サン + 90% 再生可能エネルギーまたは代替エネルギー: + 18%) 提供される容量/時間に応じて、\"Quanto\" または Coffee Pie® ポーションの標準的な定義に従います。 それらはHVACに接続される液体の冷却のような堅牢な冷却装置と厳密な物理的およびデジタル安全プロトコルに、従わなければなりません。 委託または建設の過程で、サプライヤーになるプロセスで直接お問い合わせください.",
+        "ja": "彼らは、構造化されたハードウェア(サーバールーム/データセンタ)と過小評価のかなりの能力を持つ組織と企業であり、国家平均コストで保守的な利益を得るために喜んでいると、ティアと再生可能エネルギーおよび/または代替エネルギーの使用に応じてマージンと、(Tier I: + 8%。 層II: + 10%。 層III:+ 12%。 層 IV: + 15%. サン + 90% 再生可能エネルギーまたは代替エネルギー: + 18%) 提供される容量/時間に応じて、\"Quanto\" または Coffee Pie®ポーションの標準的な定義に従います。 それらはHVACに接続される液体の冷却のような堅牢な冷却装置と厳密な物理的およびデジタル安全プロトコルに、従わなければなりません。 委託または建設の過程で、サプライヤーになるプロセスで直接お問い合わせください.",
         "zh": "它们是具有相当结构化硬件能力的组织和公司(服务器室/数据输入),而且利用不足,它们愿意以国家平均成本获得保守的利润,并按国家平均成本和可再生能源和/或替代能源的利用(第一级:+8%。 二级:+10%)。 第三级:+12%。 第四级:+15%。 根据“Quanto”或“Coffee Pie® Portion”的标准定义,视所提供容量/时间而定,具有SAN+90%可再生能源或替代能源的V级:+18%。 它们必须遵守严格的物理和数字安全协议,拥有强大的冷却系统,例如与HVAC相接的液体冷却. 如果您有委托或正在建设中,请直接联系我们,指导您成为供应商,您现在可以租用利用不足的基础设施.",
         "ko": "그들은 구조 하드웨어 (서버 룸 / 데이터 센터)의 상당한 용량과 조직 및 회사이며, 국가 평균 비용에 대한 보수적 이익을 얻을 것이다, Tier 및 재생 가능 및 / 또는 대안 에너지의 사용에 따라 마진과 / 또는 대체 에너지 (Tier I : + 8%. 계층 II : + 10 %. 단계 III: + 12%. 단계 IV: + 15%. SAN + 90 % Renewable 또는 Alternative Energy가있는 Tier V : + 18 % 용량 / 시간에 따라 \"Quanto\" 또는 Coffee Pie® Portion의 표준 정의를 따르십시오. 그들은 HVAC에 연결된 액체 냉각과 같은 강력한 냉각 시스템과 엄격한 물리적 및 디지털 안전 프로토콜을 준수해야합니다. 계약 또는 건설 과정에서 직접 연락하여 공급 업체가되는 과정에서 직접 연락 할 수 있습니다. 이제 아래의 인프라를 임대 할 수 있습니다.",
         "ar": "وهي منظمات وشركات ذات قدرة كبيرة من المعدات المهيكلة (غرفة التخزين/مركز البيانات) وغير مستغلة استخداماً كافياً، وهي على استعداد للحصول على أرباح محافظة في المتوسط الوطني للتكاليف بالإضافة إلى هامش وفقاً للإطار واستخدام الطاقات المتجددة و/أو البديلة (المستوى الأول: + 8 في المائة، المستوى الثاني: + 10 في المائة). المستوى الثالث: + 12٪. المستوى الرابع: + 15٪. Tier V with SAN + 90% Renewable or Alternative Energy: + 18%) depending on the capacity / time provided, following the standard definition of the \"Quanto\" or coffee Pie SR Portion. They must comply with strict physical and digital safety protocols, with robust cooling systems, such as liquid cooling connected to HVAC. إذا كان لديك تفويض أو في عملية البناء، الاتصال بنا مباشرة لتوجيهك في عملية أن تصبح موردا، يمكنك الآن استئجار البنية التحتية غير المستخدمة."
@@ -3335,7 +3335,7 @@
         "de": "F: Woher kommt der Name Coffee Pie®?",
         "ru": "Q: Откуда взялось название Coffee Pie®?",
         "hi": "प्रश्न: Coffee Pie® का नाम कहां से आता है?",
-        "ja": "Q: Coffee Pie® の名前が由来する場所は?",
+        "ja": "Q: Coffee Pie®の名前が由来する場所は?",
         "zh": "问:Coffee Pie®从哪里来?",
         "ko": "Q: Coffee Pie®라는 이름은 어디에서 왔습니까?",
         "ar": "س: من أين يأتي اسم (Coffee Pie® بي دي)؟?"
@@ -6704,7 +6704,7 @@
         "hi": "Мы являемся открытым сообществом, любой, кто хочет, может предлагать, разрабатывать и арендовать свои собственные модули, аксессуары, периферийные устройства, карты расширения, устройства отображения, батареи, сюиты, ключи и программное обеспечение вокруг нашего беспошлинного сервиса, мы просто предоставляем «стандартизированную, оптимизированную рабочую структуру с минимальными отходами, в дополнение к бэкэнду, чтобы пользователи могли потреблять компьютерную мощность по требованию». Хотя если вы хотите арендовать совместимые продукты через наш магазин и каналы дистрибуции, вы должны знать, что для каждой транзакции добавляется отметка 15%, в дополнение к расходам, связанным с методами оплаты и доставки. Если вы являетесь производителем, вы также можете сделать терминалы Codec сами, но с небольшим процентом роялти на стоимость аренды третьим лицам, таким как интернет-поставщики, государственные организации или прямые потребители, 7% под брендом производителя / клиента (OEM / белая отметка) или 3% под брендом Coffee Pie® всего от 0.30 долларов США / месяц за лицензию",
         "ja": "私たちはオープンなコミュニティであり、自社のモジュール、アクセサリー、周辺機器、拡張カード、ディスプレイ機器、バッテリー、スイッチ、キー、ソフトウェアを、当社のデューティーフリーサービスの周りに提案し、開発し、レンタルできる人は、単に「標準化、最適化された作業フレームワーク、最小限の廃棄物、バックエンドに加えて、ユーザーが要求に応じてコンピュータの電力を消費できるように」を提供します。 当店や流通チャネルを通じて、互換性のある製品をレンタルしたい場合には、各取引に15%のマークが加算され、決済方法や配送方法に関連したコストに加えて、知っておく必要があります。 あなたがメーカーである場合、コーデックターミナル自体を作ることもできますが、インターネットサプライヤー、州のエンティティティティ、またはメーカー/顧客ブランド(OEM /ホワイトマーク)または7%未満のCoffee Pie®ブランドでのみ3 USD /月/ライセンス(ライセンスあたり)から0.30%未満の第三者にレンタルの割合が小さくなります",
         "zh": "我们是一个开放的社区,任何想要它的人都可以提出,开发并租赁自己的模块,配件,外围设备,扩展卡,显示设备,电池,监视器,钥匙和软件,围绕我们的免税服务,我们只是提供一个\"标准化的,优化的工作框架,除了后端外,最少的浪费,这样用户可以按需消耗计算机电能\". 虽然您想通过我们的商店和销售渠道租赁相容产品,但您必须知道,除了支付和交付方法的相关费用外,每次交易都要加15%的马克。 如果你是制造商,你也可以自己制作\"密码终端\",但是在出租给互联网供应商、国家实体或直通消费者等第三方的租金价值方面,只有一小部分的特许权使用费,在制造商/客户品牌(OEM/白马克)下为7%,在Coffee Pie®品牌下为3%,每张许可证仅0.30美元/月(",
-        "ko": "우리는 개방적인 공동체입니다, 당신이 우리의 의무 자유로운 서비스의 주위에 추진하고, 개발하고 그들의 자신의 단위, 부속품, 주변 장치, 확장 카드, 전시 장치, 건전지, suiches, 열쇠 및 소프트웨어를, 우리 단순히 제공합니다 “표준화하고, 최적화한 일 기구를, 백엔드 이외에, 사용자가 수요에 컴퓨터 힘을 소비할 수 있다 그래야, 설치합니다. 우리의 상점 및 유통 채널을 통해 호환 제품을 임대하려는 경우, 각 거래에 15 % 마크가 추가된다는 것을 알고 있어야합니다, 지불 및 배달 방법과 관련된 비용 외에도. 당신은 또한 코덱 터미널을 만들 수 있는 제조업체 인 경우, 그러나 인터넷 공급 업체, 국가 엔티티티 또는 직접 소비자와 같은 세 번째 당사자의 가치에 대한 로열티의 작은 비율, 제조 업체 / 고객 브랜드 (OEM / 화이트 마크)의 7% 또는 라이센스 당 3 USD / 월의 Coffee Pie® 브랜드의 0.30% (",
+        "ko": "우리는 개방적인 공동체입니다, 당신이 우리의 의무 자유로운 서비스의 주위에 추진하고, 개발하고 그들의 자신의 단위, 부속품, 주변 장치, 확장 카드, 전시 장치, 건전지, suiches, 열쇠 및 소프트웨어를, 우리 단순히 제공합니다 “표준화하고, 최적화한 일 기구를, 백엔드 이외에, 사용자가 수요에 컴퓨터 힘을 소비할 수 있다 그래야, 설치합니다. 우리의 상점 및 유통 채널을 통해 호환 제품을 임대하려는 경우, 각 거래에 15 % 마크가 추가된다는 것을 알고 있어야합니다, 지불 및 배달 방법과 관련된 비용 외에도. 당신은 또한 코덱 터미널을 만들 수 있는 제조업체 인 경우, 그러나 인터넷 공급 업체, 국가 엔티티티 또는 직접 소비자와 같은 세 번째 당사자의 가치에 대한 로열티의 작은 비율, 제조 업체 / 고객 브랜드 (OEM / 화이트 마크)의 7% 또는 라이센스 당 3 USD / 월의 Coffee Pie®브랜드의 0.30% (",
         "ar": "نحن مجتمع مفتوح، أي شخص يريده أن يقترح، ويطور ويستأجر وحداته الخاصة، وأجهزة الدخول، والزهور، وبطاقات التوسع، وأجهزة العرض، والبطاريات، والشرائح، والمفاتيح والبرامجيات حول خدمتنا الخالية من الرسوم الجمركية، نحن ببساطة نوفر \" إطار عمل موحد وذو أفضليات، مع الحد الأدنى من النفايات، بالإضافة إلى المساندة، حتى يتمكن المستخدمون من استهلاك الطاقة الحاسوبية عند الطلب \" . على الرغم من أنك إذا أردت أن تستأجر منتجاتك المتوافقة من خلال قنواتنا للتسوق والتوزيع يجب أن تعلم أن 15% علامة مضافة لكل صفقة بالإضافة إلى التكاليف المرتبطة بطرائق الدفع والتسليم إذا كنت صانعاً، يمكنك أيضاً أن تجعل مصطلحات المدونة نفسها، ولكن مع نسبة ضئيلة من الإتاوات على قيمة الإيجار لأطراف ثالثة مثل موردي الإنترنت أو كيانات الدولة أو المستهلكين المباشرين، 7 في المائة تحت العلامة التجارية للمصنع/الزبائن (OEM/العلامة البيضاء) أو 3 في المائة تحت العلامة التجارية للبن Pie SR من 0.30 دولار/شهر فقط للترخيص"
     },
     "a 2025, indexado a la inflación": {
@@ -7605,15 +7605,15 @@
         "ar": "وتتاح المنتجات الخاصة والطرف الثالث للإيجار في القسم"
     },
     ". Como parte de nuestro programa de incentivos para fomentar la durabilidad, modularidad, reparabilidad y reciclabilidad, Coffee Pie® ofrece un sistema de recompensas que consiste en la devolución de un porcentaje del 1% mensual del valor del activo alquilado a través de nuestra tienda, en forma de créditos no reembolsables dentro de nuestra plataforma. Si eres fabricante y alquilas dispositivos compatibles a través de nuestra tienda, además del alquiler base del producto, recibirás incentivos periódicos en forma de créditos por cada dispositivo que esté en servicio activo. Este incentivo se calcula en función de la cantidad y el tiempo en servicio de los dispositivos, por ejemplo, si tienes 10'000 dispositivos en circulación, pero 3'000 de estos están dañados o son devueltos por el usuario, sólo recibirás créditos por los 7'000 que estén realmente en servicio activo. Estos créditos sólo pueden ser utilizados para consumir nuestro servicio o promover tus productos a un público masivo y altamente segmentado dentro de nuestra API/MCP, lo que aumentará significativamente la exposición de tus productos. De este modo, no sólo se verá recompensado el diseño sostenible de tus dispositivos, sino que también optimizarás tus estrategias comerciales, reduciendo significativamente los costos en publicidad y mercadeo.": {
-        "en": ". As part of our incentive program to promote durability, modularity, reparability and recyclability, Coffee Pie® offers a reward system that consists of the return of a 1% per month of the value of the asset rented through our store, in the form of non-refundable credits within our platform. If you are a manufacturer and rent compatible devices through our store, in addition to the basic product rental, you will receive regular credit incentives for each device in active service. This incentive is calculated according to the amount and time in service of the devices, for example, if you have 10'000 '3'000 devices in circulation, but  7'000 of these are damaged or returned by the user, you will only receive credits for the  '1 that are actually in active service. These credits can only be used to consume our service or promote your products to a massive and highly segmented audience within our API/MCP, which will significantly increase the exposure of your products. In this way, not only will the sustainable design of your devices be rewarded, but you will also optimize your business strategies, significantly reducing the costs of advertising and marketing.",
+        "en": ". As part of our incentive program to promote durability, modularity, reparability and recyclability, Coffee Pie® offers a reward system that consists of the return of a 1% per month of the value of the asset rented through our store, in the form of non-refundable credits within our platform. If you are a manufacturer and rent compatible devices through our store, in addition to the basic product rental, you will receive regular credit incentives for each device in active service. This incentive is calculated according to the amount and time in service of the devices, for example, if you have 10'000 '3'000 devices in circulation, but 7'000 of these are damaged or returned by the user, you will only receive credits for the '1 that are actually in active service. These credits can only be used to consume our service or promote your products to a massive and highly segmented audience within our API/MCP, which will significantly increase the exposure of your products. In this way, not only will the sustainable design of your devices be rewarded, but you will also optimize your business strategies, significantly reducing the costs of advertising and marketing.",
         "es": ". Como parte de nuestro programa de incentivos para fomentar la durabilidad, modularidad, reparabilidad y reciclabilidad, Coffee Pie® ofrece un sistema de recompensas que consiste en la devolución de un porcentaje del 1% mensual del valor del activo alquilado a través de nuestra tienda, en forma de créditos no reembolsables dentro de nuestra plataforma. Si eres fabricante y alquilas dispositivos compatibles a través de nuestra tienda, además del alquiler base del producto, recibirás incentivos periódicos en forma de créditos por cada dispositivo que esté en servicio activo. Este incentivo se calcula en función de la cantidad y el tiempo en servicio de los dispositivos, por ejemplo, si tienes 10'000 dispositivos en circulación, pero 3'000 de estos están dañados o son devueltos por el usuario, sólo recibirás créditos por los 7'000 que estén realmente en servicio activo. Estos créditos sólo pueden ser utilizados para consumir nuestro servicio o promover tus productos a un público masivo y altamente segmentado dentro de nuestra API/MCP, lo que aumentará significativamente la exposición de tus productos. De este modo, no sólo se verá recompensado el diseño sostenible de tus dispositivos, sino que también optimizarás tus estrategias comerciales, reduciendo significativamente los costos en publicidad y mercadeo.",
         "pt": ". Como parte do nosso programa de incentivos para promover a durabilidade, modularidade, reparabilidade e reciclabilidade, o Coffee Pie® oferece um sistema de recompensas que consiste na devolução de uma porcentagem de 1% mensal do valor do ativo alugado através de nossa loja, em forma de créditos não reembolsáveis dentro da nossa plataforma. Se você é fabricante e alugar dispositivos compatíveis através da nossa loja, além do aluguel de base do produto, você receberá incentivos periódicos sob a forma de créditos por cada dispositivo que esteja em serviço ativo. Este incentivo é calculado em função da quantidade e do tempo em serviço dos dispositivos, por exemplo, se você tiver 10'000 dispositivos em circulação, mas 3'000 destes estão danificados ou são devolvidos pelo usuário, só receberá créditos pelos 7'000 que estão realmente em serviço ativo. Esses créditos só podem ser utilizados para consumir nosso serviço ou promover seus produtos a um público massivo e altamente segmentado dentro da nossa API/MCP, o que aumentará significativamente a exposição de seus produtos. Deste modo, não só será recompensado o design sustentável dos seus dispositivos, mas também otimizará suas estratégias comerciais, reduzindo significativamente os custos em publicidade e marketing.",
-        "fr": ". Dans le cadre de notre programme incitatif pour promouvoir la durabilité, la modularité, la réparation et la recyclabilité, Coffee Pie® offre un système de récompense qui consiste en le retour d'un 1% par mois de la valeur de l'actif loué par notre magasin, sous forme de crédits non remboursables au sein de notre plateforme. Si vous êtes un fabricant et louez des appareils compatibles dans notre magasin, en plus de la location de produits de base, vous recevrez régulièrement des incitatifs de crédit pour chaque appareil en service actif. Cette incitation est calculée en fonction du montant et du temps de service des appareils, par exemple, si vous avez 10'000 '3'000 appareils en circulation, mais 7'000 de ceux-ci sont endommagés ou retournés par l'utilisateur, vous ne recevrez que des crédits pour les  '000 qui sont effectivement en service actif. Ces crédits ne peuvent être utilisés que pour consommer notre service ou promouvoir vos produits à un public massif et segmenté au sein de notre API/MCP, ce qui augmentera considérablement l'exposition de vos produits. Ainsi, non seulement la conception durable de vos appareils sera récompensée, mais vous optimiserez également vos stratégies d'affaires, réduisant considérablement les coûts de publicité et de marketing.",
-        "de": "Im Rahmen unseres Anreizprogramms zur Förderung von Haltbarkeit, Modularität, Reparabilität und Wiederverwertbarkeit bietet Coffee Pie® ein Belohnungssystem, das aus der Rückgabe von 1 % pro Monat des Wertes des über unseren Speicher gemieteten Vermögens in Form von nicht erstattbaren Krediten innerhalb unserer Plattform besteht. Wenn Sie ein Hersteller sind und kompatible Geräte über unseren Speicher mieten, erhalten Sie neben der grundlegenden Produktmiete regelmäßige Kreditanreize für jedes Gerät im aktiven Service. Dieser Anreiz wird nach dem Betrag und der Zeit im Dienst der Geräte berechnet, zum Beispiel, wenn Sie 10'000 '3'000 Geräte im Umlauf haben, aber  7'000 davon werden vom Benutzer beschädigt oder zurückgegeben, Sie erhalten nur Kredite für die  '000, die tatsächlich im aktiven Dienst sind. Diese Kredite können nur verwendet werden, um unseren Service zu konsumieren oder Ihre Produkte zu einem massiven und hoch segmentierten Publikum innerhalb unserer API/MCP zu fördern, die die Exposition Ihrer Produkte deutlich erhöhen wird. Auf diese Weise wird nicht nur die nachhaltige Gestaltung Ihrer Geräte belohnt, sondern Sie werden auch Ihre Geschäftsstrategien optimieren und die Kosten für Werbung und Marketing deutlich senken.",
+        "fr": ". Dans le cadre de notre programme incitatif pour promouvoir la durabilité, la modularité, la réparation et la recyclabilité, Coffee Pie® offre un système de récompense qui consiste en le retour d'un 1% par mois de la valeur de l'actif loué par notre magasin, sous forme de crédits non remboursables au sein de notre plateforme. Si vous êtes un fabricant et louez des appareils compatibles dans notre magasin, en plus de la location de produits de base, vous recevrez régulièrement des incitatifs de crédit pour chaque appareil en service actif. Cette incitation est calculée en fonction du montant et du temps de service des appareils, par exemple, si vous avez 10'000 '3'000 appareils en circulation, mais 7'000 de ceux-ci sont endommagés ou retournés par l'utilisateur, vous ne recevrez que des crédits pour les '000 qui sont effectivement en service actif. Ces crédits ne peuvent être utilisés que pour consommer notre service ou promouvoir vos produits à un public massif et segmenté au sein de notre API/MCP, ce qui augmentera considérablement l'exposition de vos produits. Ainsi, non seulement la conception durable de vos appareils sera récompensée, mais vous optimiserez également vos stratégies d'affaires, réduisant considérablement les coûts de publicité et de marketing.",
+        "de": "Im Rahmen unseres Anreizprogramms zur Förderung von Haltbarkeit, Modularität, Reparabilität und Wiederverwertbarkeit bietet Coffee Pie® ein Belohnungssystem, das aus der Rückgabe von 1 % pro Monat des Wertes des über unseren Speicher gemieteten Vermögens in Form von nicht erstattbaren Krediten innerhalb unserer Plattform besteht. Wenn Sie ein Hersteller sind und kompatible Geräte über unseren Speicher mieten, erhalten Sie neben der grundlegenden Produktmiete regelmäßige Kreditanreize für jedes Gerät im aktiven Service. Dieser Anreiz wird nach dem Betrag und der Zeit im Dienst der Geräte berechnet, zum Beispiel, wenn Sie 10'000 '3'000 Geräte im Umlauf haben, aber 7'000 davon werden vom Benutzer beschädigt oder zurückgegeben, Sie erhalten nur Kredite für die '000, die tatsächlich im aktiven Dienst sind. Diese Kredite können nur verwendet werden, um unseren Service zu konsumieren oder Ihre Produkte zu einem massiven und hoch segmentierten Publikum innerhalb unserer API/MCP zu fördern, die die Exposition Ihrer Produkte deutlich erhöhen wird. Auf diese Weise wird nicht nur die nachhaltige Gestaltung Ihrer Geräte belohnt, sondern Sie werden auch Ihre Geschäftsstrategien optimieren und die Kosten für Werbung und Marketing deutlich senken.",
         "ru": "В рамках нашей программы стимулирования для повышения долговечности, модульности, репарабельности и рециклируемости Coffee Pie® предлагает систему вознаграждения, которая состоит из возврата 1% в месяц стоимости актива, арендованного через наш магазин, в виде невозмещаемых кредитов в рамках нашей платформы. Если вы являетесь производителем и арендуете совместимые устройства через наш магазин, помимо базовой аренды продукта, вы будете получать регулярные кредитные стимулы для каждого устройства в активном обслуживании. Этот стимул рассчитывается в соответствии с количеством и временем в обслуживании устройств, например, если у вас есть 10'000 3'000 устройств в обращении, но 7'000  из них повреждены или возвращены пользователем, вы получите только кредиты на   которые фактически находятся в активном обслуживании. Эти кредиты могут быть использованы только для того, чтобы потреблять наши услуги или продвигать ваши продукты широкой и высоко сегментированной аудитории в рамках нашего API/MCP, что значительно увеличит экспозицию ваших продуктов. Таким образом, не только будет вознагражден устойчивый дизайн ваших устройств, но вы также оптимизируете свои бизнес-стратегии, значительно снижая затраты на рекламу и маркетинг.",
         "hi": "हमारे प्रोत्साहन कार्यक्रम के हिस्से के रूप में स्थायित्व, मॉड्यूलरता, पुन: प्रयोज्यता और पुन: प्रयोज्यता को बढ़ावा देने के लिए, Coffee Pie® एक इनाम प्रणाली प्रदान करता है जिसमें हमारे स्टोर के माध्यम से किराए पर संपत्ति के मूल्य के 1% प्रति माह की वापसी होती है। यदि आप एक निर्माता हैं और हमारे स्टोर के माध्यम से संगत उपकरणों को किराए पर लेते हैं, तो बुनियादी उत्पाद किराए पर लेने के अलावा, आपको सक्रिय सेवा में प्रत्येक डिवाइस के लिए नियमित क्रेडिट प्रोत्साहन प्राप्त होगा। इस प्रोत्साहन की गणना उपकरणों की सेवा में राशि और समय के अनुसार की जाती है, उदाहरण के लिए, यदि आपके पास परिसंचरण में  '10'000 डिवाइस हैं, लेकिन इनमें से  3'000 क्षतिग्रस्त हैं या उपयोगकर्ता द्वारा वापस आ गए हैं, तो आपको केवल  '7'000 के लिए क्रेडिट प्राप्त होंगे जो वास्तव में सक्रिय सेवा में हैं। इन क्रेडिटों का उपयोग केवल हमारी सेवा का उपभोग करने या अपने उत्पादों को हमारे एपीआई / MCP के भीतर बड़े पैमाने पर और अत्यधिक खंडित दर्शकों को बढ़ावा देने के लिए किया जा सकता है, जो आपके उत्पादों के संपर्क में काफी वृद्धि करेगा। इस तरह, न केवल आपके उपकरणों के स्थायी डिजाइन को पुरस्कृत किया जाएगा, बल्कि आप अपनी व्यावसायिक रणनीतियों को भी अनुकूलित करेंगे, विज्ञापन और विपणन की लागत को काफी कम करेंगे।.",
         "ja": ".当社のインセンティブプログラムの一環として、耐久性、モジュール性、信頼性、再生性を促進し、Coffee Pie®は、当社の店舗を通じて借りた資産の価値の1%のリターンで構成された報酬システムを提供しています。当社のプラットフォーム内で返金不可のクレジットの形で。 弊社店舗を通じてメーカー様、対応機器をレンタルする場合は、基本商品レンタルに加え、各デバイスごとに定期的なクレジットインセンティブをアクティブサービスで受けられます。 このインセンティブは、例えば、循環中の10'000 '3'000デバイスを持っている場合、例えば、デバイスのサービスの量と時間に応じて計算されますが、そのうちの7'000' 1は、ユーザーが破損しているか、または戻り、実際にアクティブサービスで3'000 '000のクレジットのみを受け取ることになります。 これらのクレジットは、当社のサービスを消費したり、当社の製品を当社のAPI/MCP内で大規模かつ高度にセグメント化されたオーディエンスに宣伝したりするためにのみ使用できます。これにより、製品の露出が大幅に増加します。 このようにして、デバイスの持続可能な設計が報われているだけでなく、ビジネス戦略を最適化し、広告やマーケティングのコストを大幅に削減します.",
-        "zh": "作为我们促进耐久性、模块性、可补偿性和可回收性奖励方案的一部分,Coffee Pie® 提供一种奖励制度,包括每月退还通过我们商店租用的资产价值的1%,其形式是在我们的平台内不退还信贷。 若您是制造商,通过我们商店租用相容设备,除了基本产品租赁外,您还将定期获得每台在役设备的信贷奖励。 这种奖励是根据设备的使用量和时间来计算的,例如,如果有10'000\"3'000个设备在流通中,但其中7'000\"1个设备被用户损坏或退回,那么你只能为实际在役的7'000\"000个设备获得积分. 这些信用只能用于消费我们的服务或将你的产品推广到我们API/MCP中大量且高度分化的受众,这将大大增加你产品的曝光. 这样,不仅可以奖励你设备的可持续设计,还可以优化你的商业策略,大幅降低广告和营销成本.",
+        "zh": "作为我们促进耐久性、模块性、可补偿性和可回收性奖励方案的一部分,Coffee Pie®提供一种奖励制度,包括每月退还通过我们商店租用的资产价值的1%,其形式是在我们的平台内不退还信贷。 若您是制造商,通过我们商店租用相容设备,除了基本产品租赁外,您还将定期获得每台在役设备的信贷奖励。 这种奖励是根据设备的使用量和时间来计算的,例如,如果有10'000\"3'000个设备在流通中,但其中7'000\"1个设备被用户损坏或退回,那么你只能为实际在役的7'000\"000个设备获得积分. 这些信用只能用于消费我们的服务或将你的产品推广到我们API/MCP中大量且高度分化的受众,这将大大增加你产品的曝光. 这样,不仅可以奖励你设备的可持续设计,还可以优化你的商业策略,大幅降低广告和营销成本.",
         "ko": ". 내구성, 모듈성, 재현성 및 재활용성 향상을 위한 우리의 인센티브 프로그램의 일환으로 Coffee Pie®는 우리의 상점을 통해 빌린 자산의 한 달에  %의 수익으로 구성 된 보상 시스템을 제공합니다. 우리의 플랫폼 내에서 비 수익 크레딧의 형태로. 저희 매장을 통해 제조업체 및 임대 호환 장치인 경우, 기본 제품 대여 외에도 각 기기의 정기적인 신용 인센티브를 받으실 수 있습니다. 이 인센티브는 예를 들어, 기기의 수량 및 시간에 따라 계산되지만, 순환의 10'000 '3'000 장치가있는 경우, 7'000 ' 1'이 사용자에 의해 손상되거나 반환됩니다. 활성 서비스에서 실제로  '000의 크레딧을 받게됩니다. 이 크레딧은 우리의 서비스를 소비하거나 제품을 우리의 API/MCP 내에서 대규모 및 고도로 구분 된 잠재 고객에게 홍보하기 위해 만 사용할 수 있습니다. 이는 제품의 노출을 크게 증가시킵니다. 이 방법에서는, 뿐만 아니라 당신의 장치의 지속 가능한 디자인은 보상될 것입니다, 그러나 당신은 또한 당신의 사업 전략을 낙관할 것입니다, 두드러지게 광고와 매매의 비용을 감소시킬 것입니다.",
         "ar": "- وكجزء من برنامجنا الحافز لتعزيز القابلية للدوافع، والنموذج، والقابلية للجبر، وإعادة التدوير، تقدم الشركة نظاما للمكافأة يتألف من إعادة 1 في المائة في الشهر من قيمة الأصول المستأجرة من خلال مخزننا، في شكل ائتمانات غير قابلة للاسترداد في إطار منابرنا. إذا كنت صانعا وتستأجر أجهزة متوافقة من خلال متجرنا، بالإضافة إلى الإيجار الأساسي للمنتجات، سوف تحصل على حوافز ائتمانية منتظمة لكل جهاز في الخدمة النشطة. هذا الحافز يُحسب وفقاً للمبلغ والوقت في خدمة الأجهزة، على سبيل المثال، إذا كان لديك 10'000 جهاز متداول، لكن 3'000 من هذه تُضرّر أو تُعيد من قبل المستعمل، ولا يمكن استخدام هذه الائتمانات إلا لاستهلاك خدماتنا أو الترويج لمنتجاتكم إلى جمهور واسع النطاق ومجزأ للغاية في إطار برنامجنا المشترك بين الوكالات المعني ببروميد الميثيل، مما سيزيد كثيرا من تعرض منتجاتكم. وبهذه الطريقة، لن يُكافأ التصميم المستدام لأجهزتكم فحسب، بل ستؤدي أيضاً إلى تحسين استراتيجيات أعمالكم، مما يقلل كثيراً من تكاليف الإعلان والتسويق."
     },
@@ -8522,9 +8522,9 @@
         "de": "Mit Coffee Pie® jetzt ist alles möglich!",
         "ru": "С Coffee Pie® теперь все это возможно!",
         "hi": "साथ Coffee Pie® अब यह सब संभव है!",
-        "ja": "と Coffee Pie® できる限り!",
-        "zh": "与 Coffee Pie® 现在一切都有可能了!",
-        "ko": "지원하다 Coffee Pie® 현재 가능한 모든 것!",
+        "ja": "と Coffee Pie®できる限り!",
+        "zh": "与 Coffee Pie®现在一切都有可能了!",
+        "ko": "지원하다 Coffee Pie®현재 가능한 모든 것!",
         "ar": "مع Coffee Pie® الآن كل هذا ممكن!"
     },
     "Modularidad": {
@@ -8541,7 +8541,7 @@
         "ar": "الوحدات"
     },
     "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con": {
-        "en": "With our exclusive Modular Codec Terminals, better known as Commanders™, Sentinels™ and Rangers™, forget once and for all about replacing the processor, memory, storage, graphics card, power supply, etc. Now you can use all that hardware dynamically and flexibly, whether you are a student, technician, engineer, architect, editor, designer, programmer, video game developer, content creator, accountant, 3D modeler, entrepreneur, or you do practically any activity that requires computing, you will no longer need to buy a \"NASA computer\" to make all your projects come true, because with",
+        "en": "With our exclusive Modular Codec Terminals, better known as Commanders™, Sentinels™ and Rangers™, forget once and for all about replacing the processor, memory, storage, graphics card, power supply, etc. Now you can use all that hardware dynamically and flexibly, whether you are a student, technician, engineer, architect, editor, designer, programmer, video game developer, content creator, accountant, 3D modeler, entrepreneur, or you do practically any activity that requires computing, you will no longer need to buy a \"NASA computer\" to make all your projects come true, because with ",
         "es": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
         "pt": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
         "fr": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
@@ -8554,17 +8554,17 @@
         "ar": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con"
     },
     "tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesites, sin gastar de más (*": {
-        "en": "you have one or multiple machines available from a compact and capable terminal, like, when and where you need, without overspending (*",
-        "es": "tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesites, sin gastar de más (*",
-        "pt": "você tem ao alcance uma ou várias máquinas de um terminal compacto e capaz, como, quando e onde você precisa, sem gastar mais (*",
-        "fr": "vous avez une ou plusieurs machines disponibles à partir d'un terminal compact et capable, comme, quand et où vous avez besoin, sans dépassement (*",
-        "de": "sie haben eine oder mehrere maschinen von einem kompakten und leistungsfähigen terminal, wie, wann und wo sie brauchen, ohne überlastung (*",
-        "ru": "у вас есть одна или несколько машин, доступных из компактного и способного терминала, например, когда и где вам нужно, без перерасхода",
-        "hi": "आपके पास एक कॉम्पैक्ट और सक्षम टर्मिनल से उपलब्ध एक या एकाधिक मशीनें हैं, जैसे कि, जब और आपको आवश्यकता होती है, ओवरस्पेंडिंग के बिना (*",
-        "ja": "コンパクトで、可能なターミナルから1つまたは複数の機械が利用できます。例えば、いつ、どこで必要とすれば、過小評価なし(*)",
-        "zh": "您有一台或多台机器可用于一个紧凑而有能力的终端,例如,您需要何时何地,没有超支(*)",
-        "ko": "당신은 당신이 overspending 없이 당신이 필요로 할 때 소형과 가능한 맨끝에서 유효한 1개 또는 다수 기계가 있습니다 (*",
-        "ar": "لديك آلة واحدة أو متعددة متاحة من محطة مدمجة وقادرة، مثل، متى وأينما تحتاج، دون الإفراط في الإنفاق (*)"
+        "en": " you have one or multiple machines available from a compact and capable terminal, like, when and where you need, without overspending (*",
+        "es": " tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesites, sin gastar de más (*",
+        "pt": " você tem ao alcance uma ou várias máquinas de um terminal compacto e capaz, como, quando e onde você precisa, sem gastar mais (*",
+        "fr": " vous avez une ou plusieurs machines disponibles à partir d'un terminal compact et capable, comme, quand et où vous avez besoin, sans dépassement (*",
+        "de": " sie haben eine oder mehrere maschinen von einem kompakten und leistungsfähigen terminal, wie, wann und wo sie brauchen, ohne überlastung (*",
+        "ru": " у вас есть одна или несколько машин, доступных из компактного и способного терминала, например, когда и где вам нужно, без перерасхода",
+        "hi": " आपके पास एक कॉम्पैक्ट और सक्षम टर्मिनल से उपलब्ध एक या एकाधिक मशीनें हैं, जैसे कि, जब और आपको आवश्यकता होती है, ओवरस्पेंडिंग के बिना (*",
+        "ja": " コンパクトで、可能なターミナルから1つまたは複数の機械が利用できます。例えば、いつ、どこで必要とすれば、過小評価なし(*)",
+        "zh": " 您有一台或多台机器可用于一个紧凑而有能力的终端,例如,您需要何时何地,没有超支(*)",
+        "ko": " 당신은 당신이 overspending 없이 당신이 필요로 할 때 소형과 가능한 맨끝에서 유효한 1개 또는 다수 기계가 있습니다 (*",
+        "ar": " لديك آلة واحدة أو متعددة متاحة من محطة مدمجة وقادرة، مثل، متى وأينما تحتاج، دون الإفراط في الإنفاق (*)"
     },
     "requiere conexión estable a internet": {
         "en": "requires stable internet connection",
@@ -8619,17 +8619,17 @@
         "ar": "الاستدامة"
     },
     "Todos nuestros dispositivos, servidores, terminales, módulos, accesorios y periféricos están diseñados desde cero con circularidad en mente, utilizando materias primas hasta 97% recicladas y 97% reciclables, adicionalmente, nuestro Modelo de Negocio está basado en el consumo del servicio": {
-        "en": "All our devices, servers, terminals, modules, accessories and peripherals are designed from scratch with circularity in mind, using raw materials up to 97% recycled and 97% recyclable, in addition, our Business Model is based on service consumption",
-        "es": "Todos nuestros dispositivos, servidores, terminales, módulos, accesorios y periféricos están diseñados desde cero con circularidad en mente, utilizando materias primas hasta 97% recicladas y 97% reciclables, adicionalmente, nuestro Modelo de Negocio está basado en el consumo del servicio",
-        "pt": "Todos os nossos dispositivos, servidores, terminais, módulos, acessórios e periféricos são projetados de zero com circularidade em mente, utilizando matérias-primas até 97% recicláveis e 97% recicláveis, adicionalmente, nosso Modelo de Negócio é baseado no consumo do serviço",
-        "fr": "Tous nos appareils, serveurs, terminaux, modules, accessoires et périphériques sont conçus à partir de zéro en fonction de la circularité, en utilisant des matières premières jusqu'à 97 % recyclées et 97 % recyclables, en outre, notre Business Model est basé sur la consommation de service",
-        "de": "Alle unsere Geräte, Server, Terminals, Module, Zubehör und Peripherie sind von Grund auf mit Rundheit im Verstand entworfen, mit Rohstoffen bis zu 97% recycelt und 97% recycelbar, zusätzlich basiert unser Business Model auf Service-Verbrauch",
-        "ru": "Все наши устройства, серверы, терминалы, модули, аксессуары и периферийные устройства разработаны с нуля с учетом цикличности, с использованием сырья до 97% переработанного и 97% перерабатываемого, кроме того, наша бизнес-модель основана на потреблении услуг",
-        "hi": "हमारे सभी उपकरणों, सर्वर, टर्मिनलों, मॉड्यूल, सहायक उपकरण और परिधीयों को ध्यान में परिपत्रता के साथ खरोंच से डिजाइन किया गया है, कच्चे सामग्रियों का उपयोग 97% तक पुनर्नवीनीकरण और 97% पुन: प्रयोज्य, इसके अलावा, हमारा व्यवसाय मॉडल सेवा खपत पर आधारित है।",
-        "ja": "当社の機器、サーバー、ターミナル、モジュール、アクセサリ、周辺機器はすべて、原材料を最大97%リサイクルし、97%リサイクル可能で、さらに、当社のビジネスモデルは、サービス消費に基づいて設計されています",
-        "zh": "我们所有设备、服务器、终端、模块、附件和外围设备的设计都是从零开始的,考虑到循环性,使用原料的回收率高达97%,可回收率达97%,此外,我们的商业模式是基于服务消耗",
-        "ko": "우리의 모든 장치, 서버, 맨끝, 단위, 부속품 및 주변 장치는 97%까지 재생된 원료 및 97% 재생할 수 있는 97%, 더하여, 우리의 사업 모형에 근거를 둡니다",
-        "ar": "جميع أجهزةنا، والخواديم، والمحطات الطرفية، والنماذج، والوصلات، والضواحي مصممة من الخدش مع التعميم في الاعتبار، باستخدام المواد الخام حتى 97 في المائة المعاد تدويرها، و 97 في المائة قابلة لإعادة التدوير، بالإضافة إلى أن نموذج أعمالنا يستند إلى استهلاك الخدمات"
+        "en": "All our devices, servers, terminals, modules, accessories and peripherals are designed from scratch with circularity in mind, using raw materials up to 97% recycled and 97% recyclable, in addition, our Business Model is based on service consumption ",
+        "es": "Todos nuestros dispositivos, servidores, terminales, módulos, accesorios y periféricos están diseñados desde cero con circularidad en mente, utilizando materias primas hasta 97% recicladas y 97% reciclables, adicionalmente, nuestro Modelo de Negocio está basado en el consumo del servicio ",
+        "pt": "Todos os nossos dispositivos, servidores, terminais, módulos, acessórios e periféricos são projetados de zero com circularidade em mente, utilizando matérias-primas até 97% recicláveis e 97% recicláveis, adicionalmente, nosso Modelo de Negócio é baseado no consumo do serviço ",
+        "fr": "Tous nos appareils, serveurs, terminaux, modules, accessoires et périphériques sont conçus à partir de zéro en fonction de la circularité, en utilisant des matières premières jusqu'à 97 % recyclées et 97 % recyclables, en outre, notre Business Model est basé sur la consommation de service ",
+        "de": "Alle unsere Geräte, Server, Terminals, Module, Zubehör und Peripherie sind von Grund auf mit Rundheit im Verstand entworfen, mit Rohstoffen bis zu 97% recycelt und 97% recycelbar, zusätzlich basiert unser Business Model auf Service-Verbrauch ",
+        "ru": "Все наши устройства, серверы, терминалы, модули, аксессуары и периферийные устройства разработаны с нуля с учетом цикличности, с использованием сырья до 97% переработанного и 97% перерабатываемого, кроме того, наша бизнес-модель основана на потреблении услуг ",
+        "hi": "हमारे सभी उपकरणों, सर्वर, टर्मिनलों, मॉड्यूल, सहायक उपकरण और परिधीयों को ध्यान में परिपत्रता के साथ खरोंच से डिजाइन किया गया है, कच्चे सामग्रियों का उपयोग 97% तक पुनर्नवीनीकरण और 97% पुन: प्रयोज्य, इसके अलावा, हमारा व्यवसाय मॉडल सेवा खपत पर आधारित है। ",
+        "ja": "当社の機器、サーバー、ターミナル、モジュール、アクセサリ、周辺機器はすべて、原材料を最大97%リサイクルし、97%リサイクル可能で、さらに、当社のビジネスモデルは、サービス消費に基づいて設計されています ",
+        "zh": "我们所有设备、服务器、终端、模块、附件和外围设备的设计都是从零开始的,考虑到循环性,使用原料的回收率高达97%,可回收率达97%,此外,我们的商业模式是基于服务消耗 ",
+        "ko": "우리의 모든 장치, 서버, 맨끝, 단위, 부속품 및 주변 장치는 97%까지 재생된 원료 및 97% 재생할 수 있는 97%, 더하여, 우리의 사업 모형에 근거를 둡니다 ",
+        "ar": "جميع أجهزةنا، والخواديم، والمحطات الطرفية، والنماذج، والوصلات، والضواحي مصممة من الخدش مع التعميم في الاعتبار، باستخدام المواد الخام حتى 97 في المائة المعاد تدويرها، و 97 في المائة قابلة لإعادة التدوير، بالإضافة إلى أن نموذج أعمالنا يستند إلى استهلاك الخدمات "
     },
     ", por lo que no existe la": {
         "en": ", so there is no",
@@ -8908,8 +8908,8 @@
         "en": "\"As an audiovisual producer specializing in film and animation, my main concern was always to have enough power when I need it to be able to edit and export the music videos, short and feature, with Coffee Pie® no longer worry to be buying the most expensive equipment on the market every year, as I have the power and capacity I need, like, when and where I need it! ^ _ ^\"",
         "es": "\"Como productora audiovisual especialista en cinematografía y animación, mi principal preocupación siempre fue tener la potencia suficiente cuando la necesito para poder editar y exportar los videos musicales, corto y largometrajes, con Coffee Pie® ya no me preocupa tener que estar comprando el equipo más costoso del mercado cada año, pues tengo la potencia y capacidad que necesito, como, cuando y donde la necesito! ^_^ \"",
         "pt": "\"Como produtora audiovisual especialista em cinematografia e animação, minha principal preocupação sempre foi ter a potência suficiente quando preciso para poder editar e exportar vídeos musicais, curto e longametragens, com Coffee Pie® já não me preocupa ter que estar comprando a equipe mais caro do mercado todos os anos, pois tenho a potência e capacidade que preciso, como, quando e onde preciso! ^ ^ \"",
-        "fr": "\"En tant que producteur audiovisuel spécialisé dans le cinéma et l'animation, ma principale préoccupation était d'avoir toujours assez de puissance quand j'en ai besoin pour pouvoir éditer et exporter les vidéos musicales, courtes et fonctionnelles, avec Coffee Pie® ne se soucie plus d'acheter l'équipement le plus cher sur le marché chaque année, car j'ai la puissance et la capacité dont j'ai besoin, quand et où j'en ai besoin! ^   ^\"",
-        "de": "\"Als audiovisueller Produzent, der sich auf Film und Animation spezialisiert hat, hatte ich immer genug Macht, wenn ich es brauche, um die Musikvideos, kurz und funktionsfähig zu bearbeiten und zu exportieren, mit Coffee Pie® keine Sorge mehr, die teuerste Ausrüstung auf dem Markt jedes Jahr zu kaufen, da ich die Macht und Kapazität habe, die ich brauche, wie, wann und wo ich es brauche! ^   ^",
+        "fr": "\"En tant que producteur audiovisuel spécialisé dans le cinéma et l'animation, ma principale préoccupation était d'avoir toujours assez de puissance quand j'en ai besoin pour pouvoir éditer et exporter les vidéos musicales, courtes et fonctionnelles, avec Coffee Pie® ne se soucie plus d'acheter l'équipement le plus cher sur le marché chaque année, car j'ai la puissance et la capacité dont j'ai besoin, quand et où j'en ai besoin! ^ ^\"",
+        "de": "\"Als audiovisueller Produzent, der sich auf Film und Animation spezialisiert hat, hatte ich immer genug Macht, wenn ich es brauche, um die Musikvideos, kurz und funktionsfähig zu bearbeiten und zu exportieren, mit Coffee Pie® keine Sorge mehr, die teuerste Ausrüstung auf dem Markt jedes Jahr zu kaufen, da ich die Macht und Kapazität habe, die ich brauche, wie, wann und wo ich es brauche! ^ ^",
         "ru": "Как аудиовизуальный продюсер, специализирующийся на кино и анимации, моя главная забота всегда заключалась в том, чтобы иметь достаточно мощности, когда мне это нужно, чтобы иметь возможность редактировать и экспортировать музыкальные видео, короткие и функциональные, с Coffee Pie® больше не беспокоиться о покупке самого дорогого оборудования на рынке каждый год, так как у меня есть мощность и емкость, которые мне нужны, например, когда и где мне это нужно! ↑ ↑",
         "hi": "\"फिल्म और एनिमेशन में विशेषज्ञता वाले एक ऑडियोविज़ुअल निर्माता के रूप में, मेरी मुख्य चिंता हमेशा पर्याप्त शक्ति थी जब मुझे संगीत वीडियो, लघु और सुविधा को संपादित करने और निर्यात करने में सक्षम होना चाहिए, Coffee Pie® के साथ अब हर साल बाजार पर सबसे महंगे उपकरण खरीदने की चिंता नहीं है, जैसा कि मेरे पास बिजली और क्षमता है, जैसे कि, जब और मुझे इसकी आवश्यकता है! ^   ^",
         "ja": "「映画やアニメーションを専門にする視聴覚プロデューサーとして、音楽ビデオを編集し、短時間で機能をエクスポートできるようにする必要があるときに、私の主な関心事は常に十分な力を持っていました。Coffee Pie®は、私が必要とする力と能力を持っているので、毎年市場で最も高価な機器を購入することを心配しなくなりました。 お問い合わせ",
@@ -8977,9 +8977,9 @@
         "de": "Die Angebotsunterlagen enthalten nicht implizit die Versandpreise, es sei denn, die Parteien haben etwas anderes vereinbart, ist der Kunde für die Beseitigung der Produkte aus den Coffee Pie® Einrichtungen verantwortlich, außer wenn der Transport der Ware auf das Blatt des Dokuments vereinbart wurde, wobei die Verpackungsmethode und die Versand der Produkte im Ermessen von Coffee Pie® liegen. Unter keinen Umständen kann der Kunde von Coffee Pie® verlangen, Produkte zu versenden oder andere Dienstleistungen als die Berechnung während der restlichen gesetzlich festgelegten Fristen und in Bezug auf die internen Arbeitsvorschriften von Coffee Pie® auszuführen.",
         "ru": "Документы оферты не подразумевают цены доставки, если иное не согласовано сторонами, Клиент несет ответственность за удаление продуктов с объектов Coffee Pie®, за исключением случаев, когда перевозка товаров была согласована на лицевой стороне документа, и в этом случае способ упаковки и отправки Продуктов будет на усмотрение Coffee Pie®. Ни при каких обстоятельствах Клиент не может требовать от Кофейного пирога® отправки Продуктов или запуска Услуг, кроме вычисления в течение остальных периодов, установленных законом и в отношении внутренних правил работы Кофейного пирога®.",
         "hi": "प्रस्ताव दस्तावेजों में स्पष्ट रूप से शिपिंग की कीमतों को शामिल नहीं किया जाता है, जब तक अन्यथा पार्टियों द्वारा सहमति नहीं दी जाती है, ग्राहक Coffee Pie® सुविधाओं से उत्पादों को हटाने के लिए जिम्मेदार है, सिवाय अगर सामान का परिवहन दस्तावेज़ के चेहरे पर सहमत हो गया था, जिसके मामले में पैकेजिंग और उत्पाद भेजने की विधि Coffee Pie® के विवेक पर होगी। किसी भी परिस्थिति में ग्राहक को Coffee Pie® की आवश्यकता नहीं हो सकती है ताकि उत्पाद भेजने के लिए या कानून द्वारा स्थापित बाकी हिस्सों के दौरान क्षतिपूर्ति के अलावा अन्य सेवाओं को चलाने के लिए और Coffee Pie® के आंतरिक कार्य नियमों के संबंध में।.",
-        "ja": "オファー文書は、当事者が同意しない限り、配送価格を暗黙的に含まないでください。顧客は、商品の輸送が文書の面で合意された場合を除き、Coffee Pie®施設から製品を取り外す責任を負います。この場合、製品を包装および送信する方法は、Coffee Pie®の裁量で行われます。 いかなる状況においても、Coffee Pie® が製品をディスパッチしたり、法律で定められた休止中や、Coffee Pie® の内部作業規則に関連して、サービスを実行したりする必要がない場合があります.",
-        "zh": "除非双方另有协议,否则要约文件并不含意地包括发货价格,客户负责将产品从Coffee Pie® 设施中移出,除非在单证正文上商定货物的运输,在这种情况下,包装和发送产品的方法将由Coffee Pie® 自行决定。 在任何情况下,客户都不得要求Coffee Pie®来发送产品或经营服务,除非在法律规定的剩余时间和与Coffee Pie®有关的内部工作条例中进行计算.",
-        "ko": "이 문서는 해당 당사자에 동의하지 않는 한, 배송 가격을 포함하지 않습니다, 고객은 Coffee Pie® 시설에서 제품을 제거 할 책임, 상품의 운송이 문서의 얼굴에 동의 한 경우, 제품의 포장 방법 및 전송은 Coffee Pie®의 재량에있을 것입니다. 어떠한 상황에서도 고객은 Coffee Pie®가 제품을 파견하거나 나머지는 법에 의해 설립되어 Coffee Pie®의 내부 업무 규정에 관한 법률에 따라 다른 서비스를 실행할 수 있습니다.",
+        "ja": "オファー文書は、当事者が同意しない限り、配送価格を暗黙的に含まないでください。顧客は、商品の輸送が文書の面で合意された場合を除き、Coffee Pie®施設から製品を取り外す責任を負います。この場合、製品を包装および送信する方法は、Coffee Pie®の裁量で行われます。 いかなる状況においても、Coffee Pie®が製品をディスパッチしたり、法律で定められた休止中や、Coffee Pie®の内部作業規則に関連して、サービスを実行したりする必要がない場合があります.",
+        "zh": "除非双方另有协议,否则要约文件并不含意地包括发货价格,客户负责将产品从Coffee Pie®设施中移出,除非在单证正文上商定货物的运输,在这种情况下,包装和发送产品的方法将由Coffee Pie®自行决定。 在任何情况下,客户都不得要求Coffee Pie®来发送产品或经营服务,除非在法律规定的剩余时间和与Coffee Pie®有关的内部工作条例中进行计算.",
+        "ko": "이 문서는 해당 당사자에 동의하지 않는 한, 배송 가격을 포함하지 않습니다, 고객은 Coffee Pie®시설에서 제품을 제거 할 책임, 상품의 운송이 문서의 얼굴에 동의 한 경우, 제품의 포장 방법 및 전송은 Coffee Pie®의 재량에있을 것입니다. 어떠한 상황에서도 고객은 Coffee Pie®가 제품을 파견하거나 나머지는 법에 의해 설립되어 Coffee Pie®의 내부 업무 규정에 관한 법률에 따라 다른 서비스를 실행할 수 있습니다.",
         "ar": "ولا تشمل وثائق العرض ضمناً أسعار الشحن، ما لم يتفق الطرفان على خلاف ذلك، فإن الزبون مسؤول عن إزالة المنتجات من مرافق شركة Coffee Pie® SR، إلا إذا تم الاتفاق على نقل البضائع على وجه الوثيقة، وفي هذه الحالة تكون طريقة التغليف وإرسال المنتجات في تقدير شركة Coffee Pie® بي. ولا يجوز للزبائن، في أي ظرف من الظروف، أن يطلبوا من شركة Coffee Pie® أن ترسل منتجات أو أن تدير خدمات غير حسابية خلال فترات الراحة التي ينص عليها القانون، وفيما يتعلق بقواعد العمل الداخلية للبن Pie SR."
     },
     "1. Métodos de Envío": {
@@ -9863,7 +9863,7 @@
         "hi": "Coffee Pie® द्वारा प्रमाणित नहीं",
         "ja": "Coffee Pie®認定",
         "zh": "未经Coffee Pie®认证",
-        "ko": "Coffee Pie® 인증",
+        "ko": "Coffee Pie®인증",
         "ar": "غير مصدق عليه من قِبَل (Coffee Pie®)"
     },
     "✓ Ejecutivo de Cuenta": {
@@ -10186,9 +10186,9 @@
         "de": "Wenn Sie auf Coffee Pie® oder eine Ihrer zertifizierten Geräte zugreifen und verwenden, erklären Sie sich damit einverstanden, diese Bedingungen zu erfüllen. Wenn Sie nicht einverstanden sind, müssen Sie davon abhalten, unsere Dienste zu nutzen und uns zu kontaktieren, um festzustellen, ob es möglich ist, eine diplomatische Lösung zu finden.",
         "ru": "Когда вы получаете доступ и используете Coffee Pie® или любое из ваших сертифицированных устройств, вы соглашаетесь соблюдать эти условия. Если вы не согласны, вы должны воздержаться от использования наших услуг и связаться с нами, чтобы определить, возможно ли найти дипломатическое решение.",
         "hi": "जब आप Coffee Pie® या अपने प्रमाणित उपकरणों में से किसी का उपयोग करते हैं, तो आप इन नियमों और शर्तों को पूरा करने के लिए सहमत होते हैं। यदि आप सहमत नहीं हैं, तो आपको हमारी सेवाओं का उपयोग करने से बचना होगा और यह निर्धारित करने के लिए हमसे संपर्क करें कि क्या यह एक राजनयिक समाधान ढूंढना संभव है।.",
-        "ja": "Coffee Pie® または認定デバイスのいずれかにアクセスして使用する場合は、これらの条件を満たすことに同意します。 同意しない場合は、当社のサービスの使用を控え、ディプロムソリューションを見つけることができるかどうかを判断するために私達に連絡する必要があります.",
-        "zh": "当您获取并使用 Coffee Pie® 或任何认证设备时, 您同意满足这些条件 。 如果你不同意,你必须避免利用我们的服务并联系我们,以确定是否有可能找到外交解决办法.",
-        "ko": "Coffee Pie® 또는 인증된 기기에 액세스 및 사용 시 해당 이용 약관에 동의하게 됩니다. 귀하는 동의하지 않는 경우, 귀하는 당사의 서비스를 사용하여 하수구를 제거해야 하며, 외교적 솔루션을 찾을 수 있는지 결정하기 위해 저희에게 연락하십시오.",
+        "ja": "Coffee Pie®または認定デバイスのいずれかにアクセスして使用する場合は、これらの条件を満たすことに同意します。 同意しない場合は、当社のサービスの使用を控え、ディプロムソリューションを見つけることができるかどうかを判断するために私達に連絡する必要があります.",
+        "zh": "当您获取并使用 Coffee Pie®或任何认证设备时, 您同意满足这些条件 。 如果你不同意,你必须避免利用我们的服务并联系我们,以确定是否有可能找到外交解决办法.",
+        "ko": "Coffee Pie®또는 인증된 기기에 액세스 및 사용 시 해당 이용 약관에 동의하게 됩니다. 귀하는 동의하지 않는 경우, 귀하는 당사의 서비스를 사용하여 하수구를 제거해야 하며, 외교적 솔루션을 찾을 수 있는지 결정하기 위해 저희에게 연락하십시오.",
         "ar": "عندما تَصِلُ وتَستعملُ Coffee Pie®َ Pie / أَو أيّ مِنْ أجهزةِكَ المُعتمدةِ، تُوافقُ على إستِمْاء هذه الشروطِ. وإذا لم توافقوا، فعليكم أن تمتنعوا عن استخدام خدماتنا وأن تتصلوا بنا لتحديد ما إذا كان من الممكن إيجاد حل دبلوماسي."
     },
     "2. Descripción del Servicio": {
@@ -10876,7 +10876,7 @@
         "ru": "Гибкий оптомеханический набор пакетов (TPE) от Coffee Pie®",
         "hi": "Coffee Pie® द्वारा लचीले ओप्टोमेकैनिकल सुचेस सेट (TPE)",
         "ja": "コーヒーピースによるフレキシブルなオプトメカニカルスイッチセット(TPE)",
-        "zh": "由 Coffee Pie® 所制作的灵活自制套接字",
+        "zh": "由 Coffee Pie®所制作的灵活自制套接字",
         "ko": "가동 가능한 Optomechanical Suiches 세트 (TPE) Coffee Pie®에 의하여",
         "ar": "Flexible Optomechanical Suiches Set (TPE) by coffee Pie"
     },
@@ -11505,16 +11505,16 @@
         "ar": "السلف"
     },
     "Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), pero altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos.": {
-        "en": "Codec Terminals are patented but open-standard (CERN License), modular, compact, low-cost, some similar to keyboards, tablets and smartphones (Command™, Sentinel™, Ranger™), but highly customizable, reparable, up to 97% up to 97%, which allow you to access our new Coffee Pie® service. Ask your ISP if you can include the terminal with the Internet subscription, or leave just one small deposit for every device you require and return them when you no longer need them!... We will reintegrate you between 10% and 90% of the deposit based on the condition and wear.",
+        "en": "Codec Terminals are patented but open-standard (CERN License), modular, compact, low-cost, some similar to keyboards, tablets and smartphones (Command™, Sentinel™, Ranger™), but highly customizable, reparable, up to 97%, which allow you to access our new Coffee Pie® service. Ask your ISP if you can include the terminal with the Internet subscription, or leave just one small deposit for every device you require and return them when you no longer need them!... We will reintegrate you between 10% and 90% of the deposit based on the condition and wear.",
         "es": "Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), pero altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos.",
         "pt": "Os Terminals Codec são dispositivos de núcleo patentado, mas de padrão aberto (Licência CERN), modulares, compactos, de baixo custo, alguns semelhantes a teclados, tablets e smartphones (Líneas Commander™, Sentinel™, Ranger™), mas altamente personalizáveis, consertáveis, atualizar e recicláveis até 97%, os quais lhe permitem acessar nosso novo serviço Coffee Pie®. Pergunte ao seu ISP se você pode incluir o terminal com a assinatura na internet, ou deixa apenas um pequeno depósito por cada dispositivo que você exija e regrésalos quando você já não precisar!... Nós te reintegremos entre 10% e 90% do depósito com base no estado e desgaste dos mesmos.",
-        "fr": "Les terminaux Codec sont brevetés mais ouverts (Licence CERN), modulaires, compacts, peu coûteux, certains similaires aux claviers, tablettes et smartphones (Command™, Sentinel™, Ranger™), mais hautement personnalisables, reparables, jusqu'à 97 % jusqu'à  %, ce qui vous permet d'accéder à notre nouveau service Coffee Pie®. Demandez à votre FAI si vous pouvez inclure le terminal avec l'abonnement Internet, ou laissez juste un petit dépôt pour chaque appareil que vous avez besoin et les retourner lorsque vous n'en avez plus besoin!... Nous vous réinsérerons entre 90% et 10% du dépôt selon l'état et l'usure.",
-        "de": "Codec-Terminals sind patentiert, aber offen (CERN-Lizenz), modular, kompakt, kostengünstig, einige ähnlich wie Tastaturen, Tablets und Smartphones (Command™, Sentinel™, Ranger™), aber hoch anpassbar, reparabel, bis zu 97% bis zu 97%, die Ihnen erlauben, auf unseren neuen Coffee Pie® Service zugreifen. Fragen Sie Ihren ISP, wenn Sie das Terminal mit dem Internet-Abonnement einschließen können, oder lassen Sie nur eine kleine Anzahlung für jedes Gerät, das Sie benötigen und zurück, wenn Sie sie nicht mehr benötigen!... Wir integrieren Sie zwischen 10% und 90% der Lagerstätte auf Basis des Zustands und des Verschleißes.",
+        "fr": "Les terminaux Codec sont brevetés mais ouverts (Licence CERN), modulaires, compacts, peu coûteux, certains similaires aux claviers, tablettes et smartphones (Command™, Sentinel™, Ranger™), mais hautement personnalisables, reparables, jusqu'à 97%, ce qui vous permet d'accéder à notre nouveau service Coffee Pie®. Demandez à votre FAI si vous pouvez inclure le terminal avec l'abonnement Internet, ou laissez juste un petit dépôt pour chaque appareil que vous avez besoin et les retourner lorsque vous n'en avez plus besoin!... Nous vous réinsérerons entre 90% et 10% du dépôt selon l'état et l'usure.",
+        "de": "Codec-Terminals sind patentiert, aber offen (CERN-Lizenz), modular, kompakt, kostengünstig, einige ähnlich wie Tastaturen, Tablets und Smartphones (Command™, Sentinel™, Ranger™), aber hoch anpassbar, reparabel, bis zu 97%, die Ihnen erlauben, auf unseren neuen Coffee Pie® Service zugreifen. Fragen Sie Ihren ISP, wenn Sie das Terminal mit dem Internet-Abonnement einschließen können, oder lassen Sie nur eine kleine Anzahlung für jedes Gerät, das Sie benötigen und zurück, wenn Sie sie nicht mehr benötigen!... Wir integrieren Sie zwischen 10% und 90% der Lagerstätte auf Basis des Zustands und des Verschleißes.",
         "ru": "Терминалы Codec запатентованы, но имеют открытый стандарт (лицензия CERN), модульные, компактные, недорогие, некоторые похожие на клавиатуры, планшеты и смартфоны (Command™, Sentinel™, Ranger™), но очень настраиваемые, репарируемые, до 97% до 97%, что позволяет вам получить доступ к нашему новому сервису Coffee Pie®. Спросите своего интернет-провайдера, можете ли вы включить терминал с подпиской на Интернет или оставить только один небольшой депозит для каждого устройства, которое вам нужно, и вернуть их, когда они вам больше не нужны! Мы реинтегрируем от 90% до 10% депозита в зависимости от состояния и износа.",
         "hi": "कोडेक टर्मिनल पेटेंट लेकिन ओपन-स्टैंडर्ड (CERN लाइसेंस), मॉड्यूलर, कॉम्पैक्ट, लो-कॉस्ट, कीबोर्ड, टैबलेट और स्मार्टफोन (Command™, Sentinel™, Ranger™) के समान हैं, लेकिन अत्यधिक अनुकूलन योग्य, पुन: प्रयोज्य, 97% तक 97% तक, जो आपको हमारी नई Coffee Pie® सेवा तक पहुंचने की अनुमति देता है। यदि आप इंटरनेट सदस्यता के साथ टर्मिनल को शामिल कर सकते हैं, तो अपने आईएसपी से पूछें, या हर डिवाइस के लिए केवल एक छोटी जमा छोड़ दें, जिसकी आपको आवश्यकता होती है और उन्हें वापस लौटा जब आपको उनकी जरूरत नहीं है!... हम आपको इस शर्त और पहनने के आधार पर जमा राशि के 90% और 10% के बीच फिर से एकीकृत करेंगे।.",
-        "ja": "コーデックターミナルは、特許取得済みのオープンスタンダード(CERNライセンス)、モジュラー、コンパクト、ローコスト、キーボード、タブレット、スマートフォン(Command™、Sentinel™、レンジャー™)と似ていますが、高度にカスタマイズ可能で、最大97%まで、新しいCoffee Pie®サービスにアクセスすることができます。 インターネットのサブスクリプションでターミナルを含めることができるか、必要なすべてのデバイスに10つの小さなデポジットを90つだけ残して、必要なくない場合は、ISPを尋ねてください!... 条件や摩耗に基づいて、デポジットの97%〜90%の間で再統合します.",
-        "zh": "代码终端有专利但开放标准(CERN License),模块化,紧凑,低成本,有些类似于键盘,平板和智能手机(Command™, Sentinel™, Ranger™),但高度定制,可修复,最高可达97%至97%,这使得您可以访问我们新的\"Coffee Pie®\"服务. 询问您的ISP是否可以包含终端与互联网订阅, 或者为您需要的每个设备只留下一个小存款, 并在您不再需要时返回! 根据病情和磨损情况,我们会将90%至10%的押金重新纳入你的生活.",
-        "ko": "Codec Terminal은 특허를 받았지만 개방형(CERN License), 모듈형, 소형, 저비용, 키보드, 태블릿 및 스마트폰과 유사한 일부 (Command™, Sentinel™, Ranger™), 매우 customizable, reparable, 97 %까지 새로운 Coffee Pie® 서비스에 액세스 할 수 있습니다. 인터넷 가입으로 터미널을 포함 할 수 있다면 ISP를 요청하거나, 더 이상 필요로 할 때 모든 장치에 대한 하나의 작은 보증금을 남겨주세요!... 우리는 조건과 착용에 근거를 둔 예금의 10% 그리고 90% 사이에서 당신을 재연할 것입니다.",
+        "ja": "コーデックターミナルは、特許取得済みのオープンスタンダード(CERNライセンス)、モジュラー、コンパクト、ローコスト、キーボード、タブレット、スマートフォン(Command™、Sentinel™、レンジャー™)と似ていますが、高度にカスタマイズ可能で、最大97%まで、新しい Coffee Pie® サービスにアクセスすることができます。 インターネットのサブスクリプションでターミナルを含めることができるか、必要なすべてのデバイスに10つの小さなデポジットを90つだけ残して、必要なくない場合は、ISPを尋ねてください!... 条件や摩耗に基づいて、デポジットの97%〜90%の間で再統合します.",
+        "zh": "代码终端有专利但开放标准(CERN License),模块化,紧凑,低成本,有些类似于键盘,平板和智能手机(Command™, Sentinel™, Ranger™),但高度定制,可修复,最高可达至97%,这使得您可以访问我们新的\"Coffee Pie®\"服务. 询问您的ISP是否可以包含终端与互联网订阅, 或者为您需要的每个设备只留下一个小存款, 并在您不再需要时返回! 根据病情和磨损情况,我们会将90%至10%的押金重新纳入你的生活.",
+        "ko": "Codec Terminal은 특허를 받았지만 개방형(CERN License), 모듈형, 소형, 저비용, 키보드, 태블릿 및 스마트폰과 유사한 일부 (Command™, Sentinel™, Ranger™), 매우 customizable, reparable, 97 %까지 새로운 Coffee Pie®서비스에 액세스 할 수 있습니다. 인터넷 가입으로 터미널을 포함 할 수 있다면 ISP를 요청하거나, 더 이상 필요로 할 때 모든 장치에 대한 하나의 작은 보증금을 남겨주세요!... 우리는 조건과 착용에 근거를 둔 예금의 10% 그리고 90% 사이에서 당신을 재연할 것입니다.",
         "ar": "(ج) مصطلحات الكوديينات مُبرَأة، لكنها مفتوحة المستوى (رخصة CERN)، ونموذجية، ومضغوطة، منخفضة التكلفة، وبعضها متشابه مع لوحات المفاتيح، والأقراص، والهواتف الذكية (الكاميرات المحمولة، وسينتيل تيم، رانجر™)، ولكن يمكن إصلاحها، بدرجة عالية، تصل إلى 97 في المائة، مما يسمح لك بالوصول إلى خدماتنا الجديدة للبن Pie. إسألي برنامجكِ إن أمكنكِ أن تُضمّنِ المحطة باشتراكِ الإنترنت، أو أن تتركي إيداعاً صغيراً واحداً لكل جهاز تُريدينه وتُعيديه عندما لا تكونين بحاجة إليهم... سنعيد دمجك بين 10% و 90% من الودائع بناءً على الحالة والملابس."
     },
     "Resérvalo": {
@@ -11544,17 +11544,17 @@
         "ar": "الثورة التالية في الحساب والاستدامة"
     },
     "tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesitas, sin gastar de más (*": {
-        "en": "you have one or multiple machines available from a compact and capable terminal, like, when and where you need, without overspending (*",
-        "es": "tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesitas, sin gastar de más (*",
-        "pt": "você tem ao alcance uma ou várias máquinas de um terminal compacto e capaz, como, quando e onde você precisa, sem gastar mais (*",
-        "fr": "vous avez une ou plusieurs machines disponibles à partir d'un terminal compact et capable, comme, quand et où vous avez besoin, sans dépassement (*",
-        "de": "sie haben eine oder mehrere maschinen von einem kompakten und leistungsfähigen terminal, wie, wann und wo sie brauchen, ohne überlastung (*",
-        "ru": "у вас есть одна или несколько машин, доступных из компактного и способного терминала, например, когда и где вам нужно, без перерасхода",
-        "hi": "आपके पास एक कॉम्पैक्ट और सक्षम टर्मिनल से उपलब्ध एक या एकाधिक मशीनें हैं, जैसे कि, जब और आपको आवश्यकता होती है, ओवरस्पेंडिंग के बिना (*",
-        "ja": "コンパクトで、可能なターミナルから1つまたは複数の機械が利用できます。例えば、いつ、どこで必要とすれば、過小評価なし(*)",
-        "zh": "您有一台或多台机器可用于一个紧凑而有能力的终端,例如,您需要何时何地,没有超支(*)",
-        "ko": "당신은 당신이 overspending 없이 당신이 필요로 할 때 소형과 가능한 맨끝에서 유효한 1개 또는 다수 기계가 있습니다 (*",
-        "ar": "لديك آلة واحدة أو متعددة متاحة من محطة مدمجة وقادرة، مثل، متى وأينما تحتاج، دون الإفراط في الإنفاق (*)"
+        "en": " you have one or multiple machines available from a compact and capable terminal, like, when and where you need, without overspending (*",
+        "es": " tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesitas, sin gastar de más (*",
+        "pt": " você tem ao alcance uma ou várias máquinas de um terminal compacto e capaz, como, quando e onde você precisa, sem gastar mais (*",
+        "fr": " vous avez une ou plusieurs machines disponibles à partir d'un terminal compact et capable, comme, quand et où vous avez besoin, sans dépassement (*",
+        "de": " sie haben eine oder mehrere maschinen von einem kompakten und leistungsfähigen terminal, wie, wann und wo sie brauchen, ohne überlastung (*",
+        "ru": " у вас есть одна или несколько машин, доступных из компактного и способного терминала, например, когда и где вам нужно, без перерасхода",
+        "hi": " आपके पास एक कॉम्पैक्ट और सक्षम टर्मिनल से उपलब्ध एक या एकाधिक मशीनें हैं, जैसे कि, जब और आपको आवश्यकता होती है, ओवरस्पेंडिंग के बिना (*",
+        "ja": " コンパクトで、可能なターミナルから1つまたは複数の機械が利用できます。例えば、いつ、どこで必要とすれば、過小評価なし(*)",
+        "zh": " 您有一台或多台机器可用于一个紧凑而有能力的终端,例如,您需要何时何地,没有超支(*)",
+        "ko": " 당신은 당신이 overspending 없이 당신이 필요로 할 때 소형과 가능한 맨끝에서 유효한 1개 또는 다수 기계가 있습니다 (*",
+        "ar": " لديك آلة واحدة أو متعددة متاحة من محطة مدمجة وقادرة، مثل، متى وأينما تحتاج، دون الإفراط في الإنفاق (*)"
     },
     "No hay nada aquí. Parece que ingresaste mal la URL o ya no existe. Pero puedes seguir navegando por las pestañas de la barra superior...": {
         "en": "There's nothing here. It seems you misentered the URL or no longer exists. But you can keep browsing the top bar tabs...",

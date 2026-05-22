@@ -383,10 +383,12 @@
         if (lang === 'es') {
             document.documentElement.lang = 'es';
             updateLanguageIndicator('es');
+            fixBrandSpacing(document.body);
             return;
         }
 
         translateElement(document.body, lang);
+        fixBrandSpacing(document.body);
 
         document.documentElement.lang = lang;
         updateLanguageIndicator(lang);
@@ -398,6 +400,65 @@
         var indicator = document.getElementById('cp-lang-indicator');
         if (indicator) {
             indicator.textContent = lang.toUpperCase();
+        }
+    }
+
+    // ---- Brand spacing fix ----
+    // After translation, text nodes adjacent to brand-name <span> elements
+    // may lose spacing because the original DOM whitespace gets trimmed.
+    // This ensures proper spacing around Coffee Pie®, Commanders™, etc.
+
+    var BRAND_NAMES = ['Coffee Pie®', 'Commanders™', 'Sentinels™', 'Rangers™'];
+
+    function fixBrandSpacing(root) {
+        if (!root) return;
+
+        // Walk all text-bearing leaf elements looking for brand names
+        var walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, null, false);
+        var el;
+        while ((el = walker.nextNode())) {
+            // Only process simple text-bearing elements (leaves)
+            if (el.children.length > 0) continue;
+            if (el.getAttribute && el.getAttribute(ORIGINAL_ATTR)) {
+                // Skip wrapper spans with their own original — handle in second pass
+                continue;
+            }
+            if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') continue;
+
+            var text = (el.textContent || '').trim();
+            if (!text) continue;
+
+            // Check if this element's text is a brand name
+            var isBrand = false;
+            for (var b = 0; b < BRAND_NAMES.length; b++) {
+                if (text === BRAND_NAMES[b]) {
+                    isBrand = true;
+                    break;
+                }
+            }
+            if (!isBrand) continue;
+
+            // Fix previous sibling text node: ensure it ends with a space
+            var prev = el.previousSibling;
+            while (prev && prev.nodeType !== Node.TEXT_NODE) {
+                prev = prev.previousSibling;
+            }
+            if (prev && prev.nodeType === Node.TEXT_NODE && prev.textContent.length > 0) {
+                if (!prev.textContent.endsWith(' ') && !prev.textContent.endsWith('\u00A0')) {
+                    prev.textContent = prev.textContent + ' ';
+                }
+            }
+
+            // Fix next sibling text node: ensure it starts with a space
+            var next = el.nextSibling;
+            while (next && next.nodeType !== Node.TEXT_NODE) {
+                next = next.nextSibling;
+            }
+            if (next && next.nodeType === Node.TEXT_NODE && next.textContent.length > 0) {
+                if (!next.textContent.startsWith(' ') && !next.textContent.startsWith('\u00A0')) {
+                    next.textContent = ' ' + next.textContent;
+                }
+            }
         }
     }
 
@@ -425,6 +486,7 @@
             if (currentLang !== 'es') {
                 translateElement(document.body, currentLang);
             }
+            fixBrandSpacing(document.body);
             document.documentElement.lang = currentLang;
             updateLanguageIndicator(currentLang);
         });
