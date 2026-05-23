@@ -465,7 +465,7 @@
         "ja": "Cr 46 # 56-11、La Candelaria、Medellín、Antioquia.",
         "zh": "Cr 46#56-11,拉坎德拉里亚,麦德林,安蒂奥基亚.",
         "ko": "크롬 46 # 56-11, La Candelaria, 메딜린, 안티오키아.",
-        "ar": "Cr 46 # 56-11, La Candelaria, Medellín, Antioquia."
+        "ar": "Cr 46 #56-11, La Candelaria, Medellín, Antioquia."
     },
     "Términos y Condiciones": {
         "en": "Terms and Conditions",
@@ -764,7 +764,7 @@
         "ja": "Coffee Pie® \"Tecnología Circular a tu Alcance\"",
         "zh": "Coffee Pie® \"Tecnología Circular a tu Alcance\"",
         "ko": "Coffee Pie® \"Tecnología Circular a tu Alcance\"",
-        "ar": "Coffee Pie® \"Tecnología Circular a tu Alcance\""
+        "ar": "Coffee Pie® \"التكنولوجيا الدائرية في متناول يدك\""
     },
     "Somos una startup tecnológica colombiana en proceso de convertirse en empresa BIC (Beneficio e Interés Colectivo) con la misión de democratizar el poder de cómputo y erradicar la basura electrónica global. Gracias a nuestro innovador modelo de \"Electrónica como Servicio\" (EaaS), y al sistema patentado QFDM, simplificamos la tecnología para gran beneficio del usuario y el planeta. Ofrecemos un ecosistema abierto donde fabricantes y desarrolladores pueden integrar sus productos y aplicaciones libremente, siempre que se alineen con nuestras políticas de economía circular y cero desperdicios.": {
         "en": "We are a Colombian technological startup in the process of becoming a BIC (Benefit and Collective Interest) company with the mission of democratizing the power of computation and eradicating global electronic waste. Thanks to our innovative model of \"Electronic as Service\" (EaaS), and the patented QFDM system, we simplify the technology for the great benefit of the user and the planet. We offer an open ecosystem where manufacturers and developers can integrate their products and applications freely, provided they align with our circular economy and zero waste policies.",
@@ -1024,7 +1024,7 @@
         "ja": "2) Anunciantes - Coffee Pie® Ads (B2B):",
         "zh": "2) Anunciantes - Coffee Pie® Ads (B2B):",
         "ko": "2) Anunciantes - Coffee Pie® Ads (B2B):",
-        "ar": "2) Anunciantes - Coffee Pie® Ads (B2B):"
+        "ar": "2) المعلنون - Coffee Pie® Ads (B2B):"
     },
     "Aquellos clientes corporativos con alto poder adquisitivo que quieren ahorrar dinero en su infraestructura de cómputo, a la vez que promoviendo sus productos y/o servicios, pagando por espacios publicitarios digitales altamente segmentados,": {
         "en": "Those corporate customers with high purchasing power who want to save money on their computing infrastructure, while promoting their products and / or services, paying for highly segmented digital advertising spaces,",
@@ -1089,7 +1089,7 @@
         "ja": "主に教育機関、公共図書館、一部のNGOなど、州の団体、助成対象者.",
         "zh": "国家实体、有补贴的用户,主要是教育机构、公共图书馆和一些非政府组织.",
         "ko": "국가 entities, 하위 사용자, 주로 교육 기관, 공공 도서관 및 일부 NGO.",
-        "ar": "State entities, subsidized users, mainly educational institutions, public Library and some NGOs."
+        "ar": "كيانات الدولة، والمستخدمون المدعومون، وخاصة المؤسسات التعليمية، والمكتبات العامة وبعض المنظمات غير الحكومية."
     },
     "4) Fabricantes (B2B):": {
         "en": "4 Manufacturers (B2B):",
@@ -1271,7 +1271,7 @@
         "ja": "A: Coffee Pie®は、インターネットコーヒーやCybercoffeeなどの一般的な目的の計算サービスを提供するオープンな技術エコシステムです。しかし、あなたの家、オフィス、またはインターネットアクセスを備えた公共スペースの快適さから、柔軟な機能、高いコストなしで、メンテナンスなしで、重要な騒音なしで、電子廃棄物を発生させることなく、.",
         "zh": "A: Coffee Pie® QQ是一个开放的技术生态系统,提供通用的计算服务,如\"互联网咖啡\"或\"Cybercoffee\"等,但从舒适的家中,办公室或公共空间可以上网,具有灵活的能力,没有高成本,没有关系,没有维护,没有热量,没有显著的噪音,也没有产生电子垃圾.",
         "ko": "A: Coffee Pie®는 “Internet Coffee” 또는 “Cybercoffee,”와 같은 일반적인 목적 계산 서비스를 제공하는 개방적인 기술 생태계이지만 가정의 편안함, 사무실 또는 인터넷 액세스와 공공 공간, 유연한 기능, 높은 비용없이, 유지 보수없이, 열없이, 중요한 소음없이, 전자 폐기물을 생성하지 않고.",
-        "ar": "A: Coffee Pie® SR is an open technological ecosystem that provides a general purpose computation service, such as an \"Internet coffee\" or \"Cybercoffee,\" but from the comfort of your home, office or public space with Internet access, with flexible capabilities, without high costs, without ties, without maintenance, without heat, without significant noise, and without generating electronic waste."
+        "ar": "ج: Coffee Pie® هو نظام بيئي تكنولوجي مفتوح يوفر خدمة حوسبة للأغراض العامة، مثل \"مقهى الإنترنت\" أو \"مقهى إلكتروني\"، ولكن من راحة منزلك أو مكتبك أو أي مكان عام به إنترنت، بقدرات مرنة، بدون تكاليف عالية، بدون قيود، بدون صيانة، بدون حرارة، بدون ضوضاء كبيرة، وبدون توليد نفايات إلكترونية."
     },
     "P: El ecosistema es completamente gratuito y de código abierto?": {
         "en": "Q: The ecosystem is completely free and open source?",
@@ -1284,7 +1284,7 @@
         "ja": "Q:エコシステムは完全に無料でオープンソースですか?",
         "zh": "问:生态系统完全自由开源?",
         "ko": "Q : 생태계는 완전 무료이며 오픈 소스입니까?",
-        "ar": "Q: The ecosystem is completely free and open source?"
+        "ar": "س: هل النظام البيئي مجاني تمامًا ومفتوح المصدر؟"
     },
     "R: Somos una comunidad abierta, cualquiera que lo desee puede participar en el desarrollo del ecosistema desde su conocimiento y posibilidades, sin embargo, para poder mantener las operaciones, seguir mejorando el servicio y ampliando la cobertura, es necesario monetizar el servicio de alguna forma, por lo que decidimos iniciar el proceso de convertirnos en BIC, es decir, una empresa de capital privado con consciencia social-ambiental, y darle la elección al usuario entre ver anuncios bajo demanda, donde los anunciantes son quienes costean el servicio, o pagar directamente por paquetes de créditos, lo cuál es mucho más barato y conveniente que comprar un PC tradicional. Si eres fabricante puedes integrar libremente tus módulos y accesorios alrededor de nuestro servicio, sin embargo, si deseas fabricar los terminales codec en sí mismos, tendrás que pagar un pequeño porcentaje de regalías mediante licencias para que estos puedan conectarse a nuestro backend.": {
         "en": "A: We are an open community, anyone who wants it can participate in the development of the ecosystem from its knowledge and possibilities, however, in order to maintain operations, continue to improve the service and expand the coverage, it is necessary to monetize the service in some way, so we decide to start the process of becoming BIC, that is, a private capital company with social-environmental consciousness, and give the user the choice between seeing ads on demand, where advertisers are the ones who cost the service, or pay directly for credit packages, which is much cheaper and more convenient than buying a traditional PC. If you are a manufacturer you can freely integrate your modules and accessories around our service, however, if you want to make the codec terminals themselves, you will have to pay a small percentage of royalties by licensing them to connect to our backend.",
@@ -1336,7 +1336,7 @@
         "ja": "P: Coffee Pie® fabrica sus propios productos?",
         "zh": "P: Coffee Pie® fabrica sus propios productos?",
         "ko": "P: Coffee Pie® fabrica sus propios productos?",
-        "ar": "P: Coffee Pie® fabrica sus propios productos?"
+        "ar": "س: هل تصنع Coffee Pie® منتجاتها الخاصة؟"
     },
     "R: No, Coffee Pie® es una empresa \"": {
         "en": "R: No, Coffee Pie® es una empresa \"",
@@ -1349,7 +1349,7 @@
         "ja": "R: No, Coffee Pie® es una empresa \"",
         "zh": "R: No, Coffee Pie® es una empresa \"",
         "ko": "R: No, Coffee Pie® es una empresa \"",
-        "ar": "R: No, Coffee Pie® es una empresa \""
+        "ar": "ج: لا، Coffee Pie® هي شركة \""
     },
     "fabless": {
         "en": "weakness",
@@ -1596,7 +1596,7 @@
         "ja": "A: 優れた質問、同社のエントリーの主なソースは、メーカーのコーデックターミナルのレンタルのためのライセンスとロイヤリティによるものです 2) 広告主への高度にセグメント化された大量広告スペースの販売 3) 公共部門とのアライアンス, 教育機関, ライブラリ, NGOなど 4) 開発などのメーカーにサービス, メンテナンス, 修理, リサイクルし、最終提供 5) 広告を見たり、コンピューティングリソースの高い必要性を持っているしたくない人, しかし、私たちのコンピュータに便利なサービスを好む \"ASANASA\".",
         "zh": "A:好问题,公司进入的主要来源是1) 将制造商的密码终端出租给第三方的许可证和特许权使用费 2) 向广告商出售高度分化的大众广告空间 3) 与公共部门,教育实体,图书馆,非政府组织等联盟 4) 向制造商提供的服务,如开发,维护,维修,回收和最后提供 5) 向不愿看到广告或非常需要计算资源的消费者提供直接服务,但更喜欢我们服务的便利,只能购买\"NASA计算机\".",
         "ko": "A: 우수한 질문, 회사의 입장의 주요 근원은 1) 제조자의 코덱 맨끝의 임대를 위한 면허 그리고 왕성 때문에 제2자에 ) 광고주에 고도로 세분화된 대량 광고 공간의 판매 3) 공공 분야, 교육 entities, 도서관, NGO, 등과의 동맹 4) 발달과 같은 제조자에 서비스, 정비, 수선, 최종 지급 5) 광고가 보고하고 싶지 않는 직접 소비자는, 우리의 컴퓨터를 사고 싶은 우리의 서비스에는 “SAA”가 있습니다.",
-        "ar": "A: excellent question, the main sources of entry of the company are due to 1) licenses andties for the rental of the codec terminals of the manufacturers to third parties 2) sale of highly segmented mass advertising spaces to advertisers 3) alliances with the public sector, educational entities, Library, NGOs, etc. 4) services to manufacturers such as development, maintenance, repair, recycling and final provision 5) direct consumers do not want to see."
+        "ar": "ج: سؤال ممتاز، مصادر الدخل الرئيسية للشركة تعود إلى 1) التراخيص والرسوم من تأجير محطات الترميز الخاصة بالشركات المصنعة لأطراف ثالثة 2) بيع مساحات إعلانية ضخمة ومستهدفة للمعلنين 3) التحالفات مع القطاع العام والجهات التعليمية والمكتبات والمنظمات غير الحكومية 4) خدمات للمصنعين مثل الإعداد والصيانة والإصلاح وإعادة التدوير والتخلص النهائي 5) المستهلكين المباشرين الذين لا يرغبون في مشاهدة الإعلانات أو لديهم حاجة كبيرة لموارد الحوسبة ويفضلون خدمة أكثر راحة من شراء \"كمبيوتر ناسا\"."
     },
     "P: Cuál es la diferencia entre el terminal básico y el terminal pro?": {
         "en": "Q: What is the difference between the basic terminal and the pro terminal?",
@@ -1609,7 +1609,7 @@
         "ja": "Q:ベーシックターミナルとプロターミナルの違いは何ですか?",
         "zh": "问:基本航站楼与专业航站楼有何区别??",
         "ko": "Q: 기본 맨끝과 직업적인 맨끝 사이 다름은 무엇입니까?",
-        "ar": "Q: What is the difference between the basic terminal and the pro terminal?"
+        "ar": "س: ما هو الفرق بين المحطة الأساسية والمحطة الاحترافية (Pro)؟"
     },
     "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de almientación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.": {
         "en": "A: The Basic terminal supports a single full HD display device (1080p), ethernet RJ45 connection with PoE (does not require current adapter or external elevation source, only the ethernet cable), while the Pro supports a direct fiber optic input through a SFP module without the need for external adapters (lower latency), supports a 4K or up to 3 simultaneous 2K (1440p) display device, but requires an external current adapter and its rental is significantly more expensive.",
@@ -1661,7 +1661,7 @@
         "ja": "Q: より適切ですか、沈殿物を残して下さいまたはコーヒー多用性がある装置を借りて下さいか?",
         "zh": "问:留下押金或租用与咖啡相配的设备更合适吗?",
         "ko": "Q: 더 적합하, 예금을 떠나거나 커피 호환성 장비를 임대합니까?",
-        "ar": "Q: What is more appropriate, leave a deposit or rent the coffee-compatible equipment?"
+        "ar": "س: أيهما أفضل، ترك وديعة أم استئجار الأجهزة المتوافقة مع Coffee Pie®؟"
     },
     "R: Si tú ISP no puede prestarte los equipos y necesitas el servicio por menos de 2 años de corrido, puede ser más conveniente alquilar los equipos, aunque si necesitas el servicio indefinidamente, suele ser mejor dejar un depósito reembolsable, pues sólo se deprecia a razón del 7% E.M. y te devolveremos entre el 10% y el 90% del depósito con base su estado y desgaste. Si tienes una tarjeta de crédito que te cobra bajos intereses podrías pagar el depósito con ella y una vez devueltos los dispositivos saldar la deuda con el reembolso más depreciación e intereses, por lo que en la práctica, el costo de nuestro hardware es muy bajo, esto se debe a que nuestro \"núcleo de negocio\" no consiste en vender hardware, sino en prestar servicios.": {
         "en": "A: If your ISP cannot provide the equipment and you need the service for less than 2 years of running, it may be more convenient to rent the equipment, although if you need the service indefinitely, it is usually better to leave a refundable deposit, as it is only depreciated at 7% E.M. and we will return you between 10% and 90% of the deposit based on its status and wear. If you have a credit card that charges you low interest you could pay the deposit with it and once the devices have returned the debt with the most depreciation and interest refund, so in practice, the cost of our hardware is very low, this is because our \"business core\" is not to sell hardware, but to provide services.",
@@ -1700,7 +1700,7 @@
         "ja": "A: いいえ、サービスは完全にプリペイドされ、オンデマンド(オンデマンド)で、定期的なサブスクリプションはありません、より少ないクレジットとサイズに応じて有効なフレキシブルパッケージのみ、プラットフォームでどのように、いつ、どこで必要なのか、またはあなたがサービスを事実上無料で使用し、滞在句なしで低デマンド広告を見ることができます.",
         "zh": "答:  不,服务是完全预付的并按需(按需),没有经常性的订阅,只有多多少少的入分且根据大小有效的灵活包,供您在平台上使用如何,何时,何地需要,或者可以看到低需求广告几乎免费使用服务而无需停留条款.",
         "ko": "A: 아니오, 서비스는 완전하게 선불되고 수요에 (주문을 받아서), 거기 있습니다 반복 구독이 없습니다, 또는 더 적은 신용을 가진 유연한 포장 및 크기에 따라 유효한, 플랫폼 방법, 언제 및 당신이 그(것)들을 필요로 하는 경우에, 또는 당신은 체재 절 없이 서비스를 실제로 자유롭게 이용하기 위하여 낮은 지불한 광고를 볼 수 있습니다.",
-        "ar": "A: No, the service is completely prepaid and on demand (on-demand), there are no recurring subscriptions, only flexible packages with more or less credits and valid according to size, for you to use on the platform how, when and where you need them, or you can see low-demand ads to use the service virtually free and without stay clauses."
+        "ar": "ج: لا، الخدمة مدفوعة مسبقًا بالكامل وعند الطلب، لا توجد اشتراكات متكررة، فقط باقات مرنة بأرصدة وصلاحيات تتناسب مع الحجم، لتستخدمها على المنصة كيفما ومتى وأينما تحتاج، أو يمكنك مشاهدة الإعلانات عند الطلب لاستخدام الخدمة مجانًا تقريبًا وبدون أي شروط للالتزام."
     },
     "P: Puedo cambiar la capacidad de mis máquinas?": {
         "en": "Q: Can I change the capacity of my machines?",
@@ -1765,7 +1765,7 @@
         "ja": "Q:Coffee Pie®は他のクラウドサービスとは異なりますか?",
         "zh": "问:Coffee Pie®与其他云服务有什么不同?",
         "ko": "Q: Coffee Pie®는 다른 클라우드 서비스와 다릅니다?",
-        "ar": "Q: What does Coffee Pie®  differ from other cloud services?"
+        "ar": "س: كيف يختلف Coffee Pie® عن الخدمات السحابية الأخرى؟"
     },
     "R: Las principales diferencias radican en que los proveedores en la nube tradicionalmente sólo te ofrecen espacio para almacenar tus archivos, y si te ofrecen más que eso necesitas conocimientos técnicos avanzados y gran habilidad en programación para poder usarlos, además de que con ellos estás atado a una capacidad especifica, con subscripciones anuales o mensuales clausulas de permanecía, necesitas adquirir un computador clásico o dispositivo, de por sí ya costoso y fácilmente obsoleto, sólo para poder acceder a su servicio. Mientras que nuestro servicio en cambio, te ofrece una solución integral, un computador completo de capacidad variable (procesador, memoria, almacenamiento, tarjeta gráfica, fuente de poder, etc), al que puedes acceder desde un terminal codec prestado, con enfoque circular, modular, reparable, reciclable, con una interfaz gráfica sencilla, sin necesidad de conocimientos técnicos, ni de comprar un equipo costoso, pagando sólo por lo que realmente necesitas, sin suscripciones, ni ataduras, pues nuestro servicio es completamente flexible, prepagado y bajo demanda, incluso gratis si estás dispuesto a ver anuncios publicitarios de vez en cuando (capa de servicio gratuito).": {
         "en": "A: The main differences are that cloud suppliers traditionally only offer you space to store your files, and if they offer you more than that you need advanced technical knowledge and great programming ability to use them, as well as that with them you are bound to a specific capacity, with annual or monthly remaining subscriptions, you need to acquire a classic computer or device, already expensive and easily obsolete, just to be able to access their service. While our service on the other hand offers you a comprehensive solution, a complete computer of variable capacity (processor, memory, storage, graphic card, power source, etc.), to which you can access from a codec terminal provided, with a circular, modular, reparable, recyclable approach, with a simple graphic interface, without the need for technical knowledge, or to buy an expensive equipment, paying only for what you really need, without subscriptions, or ties, as our service is fully flexible, prepaid and on demand, even free if you are willing to see advertising from time to time to time (free service layer).",
@@ -1791,7 +1791,7 @@
         "ja": "Q: Coffee Pie®が持続可能性に貢献する方法?",
         "zh": "问:Coffee Pie®如何促进可持续性?",
         "ko": "Q: Coffee Pie®가 지속 가능성에 어떻게 기여합니까?",
-        "ar": "Q: How does Coffee Pie® SR contribute to sustainability?"
+        "ar": "س: كيف تساهم Coffee Pie® في الاستدامة؟"
     },
     "R: Coffee Pie® promueve la economía circular mediante su sistema patentado QFDM, que optimiza el uso de los recursos informáticos comisionados (datacenters), además del uso de dispositivos altamente modulares, reparables y reciclables, evitando así la generación de residuos y prolongando al máximo la vida útil de todos nuestros dispositivos, minimizando los desperdicios electrónicos a practicamente cero. Bajo ninguna circunstancia toleraremos la": {
         "en": "A: Coffee Pie® promotes the circular economy through its patented QFDM system, which optimizes the use of the commissioned computer resources (datacenters), in addition to the use of highly modular, reparable and recyclable devices, thus avoiding waste generation and maximizing the life of all our devices, minimizing electronic waste to practically zero. Under no circumstances will we tolerate the",
@@ -1843,7 +1843,7 @@
         "ja": "Q: Coffee Pie®互換デバイスで使用されている材料は?",
         "zh": "问:Coffee Pie®兼容设备中使用了哪些材料?",
         "ko": "Q: Coffee Pie®호환 기기에서 어떤 재료가 사용됩니까?",
-        "ar": "Q: What materials are used in Coffee Pie® SR compatible devices?"
+        "ar": "س: ما هي المواد المستخدمة في الأجهزة المتوافقة مع Coffee Pie®؟"
     },
     "R: Se prioriza el uso de materiales reciclados y reciclables como Aluminio, Cobre, PET, PC, etc, así como componentes de bajo impacto ambiental como Resinas Recicladas Post-Consumo (PCR) para alinearse con los principios de sostenibilidad.": {
         "en": "A: The use of recycled and recyclable materials such as Aluminium, Copper, PET, PC, etc, as well as low environmental impact components such as Post-Consumption Recycled Resins (PCR) is prioritized to align with sustainability principles.",
@@ -1856,7 +1856,7 @@
         "ja": "A:アルミニウム、銅、ペット、PCなどのリサイクルおよび再生可能な材料の使用、ならびにポスト消費リサイクル樹脂(PCR)などの低環境負荷成分は、持続可能性の原則と整列するために優先されます.",
         "zh": "答: 将铝,铜,PET,PC等再生再生和可回收材料以及消耗后再生还物等低环境影响成分的使用列为优先,以与可持续性原则相适应.",
         "ko": "A: 알루미늄 구리, 애완 동물, PC, 등과 같은 재생하고 재생할 수 있는 물자의 사용은, 뿐 아니라 포스트 소비 재생한 수지 (PCR)와 같은 낮은 환경 충격 성분은 지속 가능성 원리와 일치하기 위하여 전진됩니다.",
-        "ar": "A: The use of recycled and recyclable materials such as Aluminium, Copper, PET, PC, etc, as well as low environmental impact components such as post-Consumption Recycled Recycled Resins (PCR) is prioritized to align with sustainability principles."
+        "ar": "ج: تُعطى الأولوية لاستخدام المواد المعاد تدويرها والقابلة لإعادة التدوير مثل الألومنيوم، والنحاس، وPET، وPC، وما إلى ذلك، بالإضافة إلى المكونات ذات التأثير البيئي المنخفض مثل الراتنجات المعاد تدويرها بعد الاستهلاك (PCR) للتماشي مع مبادئ الاستدامة."
     },
     "P: Coffee Pie® usa procesos de reciclaje para sus dispositivos al final de su vida útil?": {
         "en": "Q: Coffee Pie® uses recycling processes for your end-of-life devices?",
@@ -1882,7 +1882,7 @@
         "ja": "A: はい、Coffee Pie®は、電子廃棄物の低減に大きく貢献し、返品、評価、予防および是正メンテナンス、開発、修理、再製造、または究極的にリサイクルのために、認証されたデバイス上の循環システムを実装しています.",
         "zh": "答复:是的, \" Coffee Pie® \" 在其认证装置上实施循环系统,用于返回、评估、预防和矫正保养、开发、修理、再制造或最终回收,为减少电子废物作出重大贡献.",
         "ko": "A: 예, Coffee Pie®는 반품, 평가, 예방 및 교정 유지 보수, 개발, 수리, 재제조 또는 궁극적으로 재활용, 전자 폐기물의 감소에 크게 기여하는 인증된 장치에 원형 시스템을 구현합니다.",
-        "ar": "A: Yes, Coffee Pie®  implements circular systems on its certification devices for return, evaluation, preventive and corrective maintenance, development, repair, remanufacture or ultimately recycling, contributing greatly to the reduction of electronic waste."
+        "ar": "ج: نعم، تطبق Coffee Pie® أنظمة دائرية على أجهزتها المعتمدة لاستعادتها، وتقييمها، وصيانتها الوقائية والتصحيحية، وتجهيزها، وإصلاحها، وإعادة تصنيعها، أو إعادة تدويرها في النهاية، مما يساهم بشكل كبير في الحد من النفايات الإلكترونية."
     },
     "P: Puedo utilizar un terminal Coffee Pie® en cualquier lugar?": {
         "en": "P: Puedo utilizar un terminal Coffee Pie® en cualquier lugar?",
@@ -1895,7 +1895,7 @@
         "ja": "P: Puedo utilizar un terminal Coffee Pie® en cualquier lugar?",
         "zh": "P: Puedo utilizar un terminal Coffee Pie® en cualquier lugar?",
         "ko": "P: Puedo utilizar un terminal Coffee Pie® en cualquier lugar?",
-        "ar": "P: Puedo utilizar un terminal Coffee Pie® en cualquier lugar?"
+        "ar": "س: هل يمكنني استخدام محطة Coffee Pie® في أي مكان؟"
     },
     "R: Sí, siempre que tengas acceso a una conexión estable a internet puedes utilizar un terminal Coffee Pie® en cualquier ubicación, sin embargo, ten en cuenta que la alta latencia puede afectar la experiencia, entre más te alejes geográficamente del datacenter, mayor será la latencia. Consulta con tu proveedor de internet (ISP) la latencia de su servicio, idealmente fibra óptica con respuestas por debajo de 10ms.": {
         "en": "A: Yes, as long as you have access to a stable Internet connection you can use a Coffee Pie® terminal in any location, however, be aware that high latency can affect experience, the more you move geographically away from the dataenter, the greater the latency. Check with your Internet provider (ISP) the latency of your service, ideally fiber optic with responses below 10ms.",
@@ -1921,7 +1921,7 @@
         "ja": "Q:インターネットサービスの許容範囲と推奨待ち範囲は何ですか?",
         "zh": "问:互联网服务可接受和建议的延迟范围是什么?",
         "ko": "Q: 인터넷 서비스를 위한 수락가능한 그리고 권익 범위는 무엇입니까?",
-        "ar": "Q: What are the acceptable and recommended latency ranges for the Internet service?"
+        "ar": "س: ما هي نطاقات الكمون المقبولة والموصى بها لخدمة الإنترنت؟"
     },
     "R: Latencia Total Incluyendo Input Lag de la Electrónica (ping):": {
         "en": "A: Total Latency Including Electronic Input Lag (ping):",
@@ -1934,7 +1934,7 @@
         "ja": "A: 電子入力ラグ(ping)を含む総 Latency:",
         "zh": "A: 总延迟,包括电子输入拉格(平):",
         "ko": "A: 전자 입력 Lag (ping)를 포함하여 총 소요기간:",
-        "ar": "A: Total Latency including Electronic Input Lag (ping):"
+        "ar": "ج: الكمون الإجمالي بما في ذلك تأخر الإدخال للإلكترونيات (بينغ):"
     },
     "Excelente: 1 a 30 ms": {
         "en": "Excellent: 1 to 30 ms",
@@ -2415,7 +2415,7 @@
         "ja": "特許NC2025/0012723:",
         "zh": "专利NC2025 / 0012723:",
         "ko": "특허 NC2025 / 0012723 :",
-        "ar": "Patent NC2025 / 0012723:"
+        "ar": "براءة اختراع NC2025/0012723:"
     },
     "Recursos Isodinámicos": {
         "en": "Isodynamic resources",
@@ -2519,7 +2519,7 @@
         "ja": "Q:静電計算リソースとは?",
         "zh": "问:什么是同位素计算资源?",
         "ko": "Q: isostatic 계산 자원은 무엇입니까?",
-        "ar": "Q: What are isostatic computation resources?"
+        "ar": "س: ما هي موارد الحوسبة متساوية الاستاتيكية؟"
     },
     "R: Son recursos privados asignados y aislados en el momento de la instanciación, principalmente la memoria persistente (SSD/HDD) en un Área de Almacenamiento en Red (SAN), y sólo su propietario puede acceder a estos en condiciones normales, como un apartamento en una propiedad horizontal. Estos crecen linealmente conforme a la demanda de los usuarios por espacio digital privado para archivos (incluyendo mirroring, snapshots y respaldos).": {
         "en": "A: They are private resources assigned and isolated at the time of installation, mainly the persistent memory (SSD / HDD) in a Network Storage Area (SAN), and only its owner can access them under normal conditions, such as an apartment on a horizontal property. These grow linearly according to users' demand for private digital space for files (including mirroring, snapshots and backups).",
@@ -2545,7 +2545,7 @@
         "ja": "Q:イソダイナミックコンピューティングリソースとは?",
         "zh": "问:异能计算资源是什么?",
         "ko": "Q: isodynamic 컴퓨팅 리소스는 무엇입니까?",
-        "ar": "Q: What are isodynamic computing resources?"
+        "ar": "س: ما هي موارد الحوسبة متساوية الديناميكية؟"
     },
     "R: Son recursos públicos compartidos entre todos los usuarios activos en el Nodo (piso/nivel) y usados bajo-demanda, como las zonas comunes en una propiedad horizontal, dando prelación a los usuarios con paquetes de créditos grandes, medianos, pequeños y por último espectadores (usuarios que ven anuncios bajo-demanda en la capa gratuita del servicio). Estos crecen linealmente conforme al máximo pico de demanda en un momento dado (hora pico).": {
         "en": "A: They are public resources shared among all users active in the Node (floor / level) and used low-demand, such as common areas on a horizontal property, giving priority to users with large, medium, small and finally spectators (users who see low-demand ads in the free layer of the service). These grow linearly according to the peak demand at a given time (peak time).",
@@ -2974,7 +2974,7 @@
         "ja": "Q:Coffee Pie®エコシステムにはどのような役割がありますか?",
         "zh": "问:在\"Coffee Pie®\"的生态系统里有什么角色?",
         "ko": "Q: Coffee Pie®생태계에 어떤 역할을 하나요?",
-        "ar": "Q: What roles are there in the Coffee Pie® SR ecosystem?"
+        "ar": "س: ما هي الأدوار الموجودة في نظام Coffee Pie® البيئي؟"
     },
     "R: Hay roles a nivel marco o corporativo (B2B) y roles a nivel micro o de servicio (B2C):": {
         "en": "A: There are roles at the framework or corporate level (B2B) and roles at the micro or service level (B2C):",
@@ -3013,7 +3013,7 @@
         "ja": "•所有者:",
         "zh": "• 拥有者:",
         "ko": "• 소유자:",
-        "ar": "• Owner:"
+        "ar": "• الشركة المالكة:"
     },
     "Es aquella que posee el 51% o más de las acciones bursátiles y por ende el control y toma de decisiones del conjunto de propiedad intelectual del Ecosistema Coffee Pie® (ejemplo de potenciales propietarios y/o accionistas: epm™, Alphabet™, Berkshire Hathaway™, Microsoft™, Framework™, Valve™, Platzi™, Oracle™, IBM™, Apple™, AMD™, Intel™, Nvidia™, ARM™, Starlink™, Millicom™, América Móvil™, Huawei™, Dell™, Lenovo™, HPE™, Supermicro™, Gigabyte™, AsRock™, AST Space Mobile™, etc).": {
         "es": "Es aquella que posee el 51% o más de las acciones bursátiles y por ende el control y toma de decisiones del conjunto de propiedad intelectual del Ecosistema Coffee Pie® (ejemplo de potenciales propietarios y/o accionistas: epm™, Alphabet™, Berkshire Hathaway™, Microsoft™, Framework™, Valve™, Platzi™, Oracle™, IBM™, Apple™, AMD™, Intel™, Nvidia™, ARM™, Starlink™, Millicom™, América Móvil™, Huawei™, Dell™, Lenovo™, HPE™, Supermicro™, Gigabyte™, AsRock™, AST Space Mobile™, etc).",
@@ -3078,7 +3078,7 @@
         "ja": "•同僚/同盟国(提供者):",
         "zh": "• 同事/盟友(服务提供者):",
         "ko": "• 동료 / 동맹 (Providers) :",
-        "ar": "• Colleagues / Allies (Providers):"
+        "ar": "• الزملاء/الحلفاء (الموردين):"
     },
     "Son organizaciones y empresas con una capacidad considerable de hardware estructurado (server-room/datacenter) y subutilizado, que estén dispuestas a obtener utilidades conservadoras sobre el costo promedio nacional más un margen según el Tier y el uso de energías renovables y/o alternativas (Tier I: +8%. Tier II: +10%. Tier III: +12%. Tier IV: +15%. Tier V con SAN + 90% Energías Renovables o Alternativas: +18%) en función de la capacidad/tiempo suministrados, siguiendo la definición estandarizada del \"Quanto\" o Porción Coffee Pie®. Estos deben cumplir estrictos protocolos de seguridad física y digital, con sistemas de refrigeración robustos, como refrigeración líquida conectada a HVAC. Si tienes un datacenter comisionado o en proceso de construcción, contáctanos directamente para orientarte en el proceso de convertirte en proveedor, ahora puedes rentabilizar la infraestructura subutilizada.": {
         "en": "They are organizations and companies with a considerable capacity of structured hardware (server-room / dataenter) and underutilized, that are willing to obtain conservative profits on the national average cost plus a margin according to the Tier and the use of renewable and / or alternative energies (Tier I: + 8%. tier II: + 10%. Tier III: + 12%. Tier IV: + 15%. Tier V with SAN + 90% Renewable or Alternative Energy: + 18%) depending on the capacity / time provided, following the standard definition of the \"Quanto\" or Coffee Pie® Portion. They must comply with strict physical and digital safety protocols, with robust cooling systems, such as liquid cooling connected to HVAC. If you have a commissioned or in the process of construction, contact us directly to guide you in the process of becoming a supplier, you can now rent the underutilized infrastructure.",
@@ -3130,7 +3130,7 @@
         "ja": "•発表者:",
         "zh": "• 宣布者:",
         "ko": "• 발표자:",
-        "ar": "• Announcers:"
+        "ar": "• المعلنون:"
     },
     "Son aquellas organizaciones/empresas que desean pautar directamente sin pasar por los publishers, es decir, pagar para mostrar su producto, servicio o mensaje a un público altamente segmentado, pero sin las optimizaciones propias de segmentación especializada que suelen ofrecer los Publishers (se requieren conocimientos avanzados en programación, mercadeo digital y segmentación de mercado).": {
         "en": "They are those organizations / companies that want to start directly without going through the publicers, that is, pay to show their product, service or message to a highly segmented audience, but without the own optimization of specialized segmentation that the Publishers often offer (advanced knowledge in programming, digital marketing and market segmentation are required).",
@@ -3169,7 +3169,7 @@
         "ja": "•極度の管理者:",
         "zh": "• 超级行政人员:",
         "ko": "• 최고 관리:",
-        "ar": "• Super Admin:"
+        "ar": "• المسؤول المتميز:"
     },
     "Son aquellos líderes expertos de soporte técnico pertenecientes a la empresa operadora con un amplio conocimiento del ecosistema, capaces de detectar y solucionar problemas graves en poco tiempo para su correcta operación y óptimo funcionamiento, generalmente ingenieros de sistemas, tecnólogos o técnicos con amplia experiencia en sistemas, capaces de dar charlas en seguridad informática y hacer pruebas concensuadas y anónimas de pentesting (ethical white hat hackers).": {
         "en": "They are the expert leaders of technical support belonging to the operating company with a wide knowledge of the ecosystem, able to detect and solve serious problems in a short time for its proper operation and optimal operation, usually system engineers, technologists or technicians with extensive experience in systems, able to give talks in computer security and to do mixed and anonymous testing of pentesting (ethical white hat hackers).",
@@ -3247,7 +3247,7 @@
         "ja": "• IT管理者:",
         "zh": "• 信息技术管理员:",
         "ko": "• IT 관리자:",
-        "ar": "• IT Admin:"
+        "ar": "• مسؤول تكنولوجيا المعلومات:"
     },
     "Es aquel individuo en la organización del cliente final con los conocimientos técnicos para la gestión y asignación de recursos de hardware, cuentas de usuario, redes informáticas y respaldos de la información.": {
         "en": "It is that individual in the organization of the final client with the technical knowledge for the management and allocation of hardware resources, user accounts, computer networks and information backups.",
@@ -3273,7 +3273,7 @@
         "ja": "• ユーザー(指定子):",
         "zh": "• 用户(主持人):",
         "ko": "• 사용자 (Spector):",
-        "ar": "• User (Spector):"
+        "ar": "• المستخدم (المشاهد):"
     },
     "Es aquel que hace uso directo del servicio desde un terminal codec ⌨️": {
         "en": "It is the one who makes direct use of the service from a codec-terminal",
@@ -3338,7 +3338,7 @@
         "ja": "P: De dónde proviene el nombre Coffee Pie®?",
         "zh": "P: De dónde proviene el nombre Coffee Pie®?",
         "ko": "P: De dónde proviene el nombre Coffee Pie®?",
-        "ar": "P: De dónde proviene el nombre Coffee Pie®?"
+        "ar": "س: من أين جاء اسم Coffee Pie®؟"
     },
     "R: El nombre está inspirado principalmente en dos cosas, por un lado, el café, símbolo y principal producto de exportación de Colombia, representando su cultura trabajadora, pujante y resiliente, pero está en inglés porque es el lenguaje de la globalización, y esperamos poder prestar el servicio a nivel mundial. Por otro lado, la porción de pastel, por el sistema QFDM patentado, que representa la distribución fraccional cuantizada del poder de cómputo, es decir, en \"rebanadas\" o \"porciones\" homogéneas, indivisibles y agrupables, que optimiza el uso de los recursos informáticos y minimiza la cantidad de desperdicios electrónicos (política zero e-waste).": {
         "en": "A: The name is mainly inspired by two things, on the one hand, the coffee, symbol and main export product of Colombia, representing its working, vibrant and resilient culture, but it is in English because it is the language of globalization, and we hope to be able to provide the service worldwide. On the other hand, the portion of cake, by the patented QFDM system, which represents the quantified fractional distribution of the computation power, that is, in \"slices\" or \"portions\" homogeneous, indivisible and grouped, that optimizes the use of computer resources and minimizes the amount of electronic waste (zero e- waste policy).",
@@ -3364,7 +3364,7 @@
         "ja": "Q: QFDMシステムを発明するインスピレーションは",
         "zh": "问:发明QFDM系统的灵感是什么",
         "ko": "Q: QFDM 체계를 발명하는 영감은 무엇입니까?:",
-        "ar": "Q: What was the inspiration to invent the QFDM system"
+        "ar": "س: ما هو مصدر الإلهام لاختراع نظام QFDM؟:"
     },
     "Q: En realidad, fue una idea del fundador mientras estudiaba física cuantica, específicamente la Catástrofe Ultravioleta solucionada por Max Planck al sugerir el salto de los electrones entre las órbitas del átomo en paquetes discretos e indivisibles, llamados quantos (": {
         "en": "Q: Actually, it was an idea of the founder as he studied quantum physics, specifically the Ultraviolet Disaster solved by Max Planck by suggesting the jump of electrons between the orbits of the atom in discreet and indivisible packages, called quantos (",
@@ -7979,7 +7979,7 @@
         "ja": "南 77 ストリート # 47C-65、3P1 グループオフィス、サバネタ、アンティオキア",
         "zh": "南77街47C-65号,3P1小组办公室,安蒂奥基亚,萨巴内塔",
         "ko": "사우스 77 스트리트 # 47C-65, 3P1 그룹 사무실, Sabaneta, Antioquia",
-        "ar": "South 77 Street # 47C-65, 3P1 Group Office, Sabaneta, Antioquia"
+        "ar": "Calle 77 Sur #47C-65, Oficina Grupo 3P1, Sabaneta, Antioquia"
     },
     "Ventajas": {
         "en": "Advantages",
@@ -9435,7 +9435,7 @@
         "ja": "電子ゴミ箱: EPM 水博物館、メデリン",
         "zh": "电子垃圾场:EMM水博物馆,麦德林",
         "ko": "전자 쓰레기: EPM 물 박물관, Medellín",
-        "ar": "Environmental Trash: EPM Water Museum, Medellín"
+        "ar": "النفايات الإلكترونية: متحف المياه EPM، ميديلين"
     },
     "Resultados Operacionales": {
         "en": "Operational results",
@@ -9487,7 +9487,7 @@
         "ja": "ダイダカレンダー",
         "zh": "Divida 日历",
         "ko": "Divida 캘린더",
-        "ar": "Divida Calendar"
+        "ar": "تقويم توزيعات الأرباح"
     },
     "Aún seguimos en etapa de crecimiento, por lo que el 100% de las utilidades son reinvertidas. Una vez alcanzada la cuota de mercado esperada, o saturado el mercado, se comenzarán a repartir dividendos a los inversionistas.": {
         "en": "We are still growing, so 100% of the profits are reinvested. Once the expected market share has been reached, or the market has been saturated, dividends will begin to be distributed to investors.",
@@ -9630,7 +9630,7 @@
         "ja": "✓ Vigencia: 1 hora",
         "zh": "✓ Vigencia: 1 hora",
         "ko": "✓ Vigencia: 1 hora",
-        "ar": "✓ Vigencia: 1 hora"
+        "ar": "✓ الصلاحية: 1 ساعة"
     },
     "Anuncios Bajo Demanda": {
         "en": "Ads under demand",
@@ -9734,7 +9734,7 @@
         "ja": "10'000 Créditos",
         "zh": "10'000 Créditos",
         "ko": "10'000 Créditos",
-        "ar": "10'000 Créditos"
+        "ar": "10'000 اعتمادات"
     },
     "Paquete Mediano": {
         "en": "Medium Package",
@@ -9786,7 +9786,7 @@
         "ja": "♪ 雲に戻って♪",
         "zh": "后入云门",
         "ko": "♪ 구름 뒤로 ♪",
-        "ar": "♪ ♪"
+        "ar": "✓ النسخ الاحتياطي في السحابة"
     },
     "✓ Soporte: Asistente IA Avanzado": {
         "en": "▪ Support: Advanced IA Assistant",
@@ -9825,7 +9825,7 @@
         "ja": "500'000 Créditos",
         "zh": "500'000 Créditos",
         "ko": "500'000 Créditos",
-        "ar": "500'000 Créditos"
+        "ar": "500'000 اعتمادات"
     },
     "$300'000 COP": {
         "en": "$300'000 COP",
@@ -9903,7 +9903,7 @@
         "ja": "6'000'000 Créditos",
         "zh": "6'000'000 Créditos",
         "ko": "6'000'000 Créditos",
-        "ar": "6'000'000 Créditos"
+        "ar": "6'000'000 اعتمادات"
     },
     "*Ten en cuenta que el Servicio de Cómputo Coffee Pie® requiere de una conexión estable a internet para poder funcionar adecuadamente. Consulta la latencia del servicio con tu ISP, idealmente con tiempos de respuesta inferiores a 10ms.": {
         "en": "* Note that the Coffee Pie® Compass Service requires a stable Internet connection to be able to function properly. See the latency of the service with your ISP, ideally with response times less than 10ms.",
@@ -9955,7 +9955,7 @@
         "ja": "Lenovo ThinkSystem SD665-N V3 Neptune DWC Server with EPYC / Xeon、4 GB VRAM以上の620 AMD Radeon PRO V32 (DirectX、Vulkan、SR-IOVと互換性のある*ファクトリー)",
         "zh": "Lenovo ThinkSystem SD665-N V3 海王星 DWC 服务器,配有 EPYC / Xeon, 4 GB VRAM 或以上的 620 AMD Radeon PRO V32 (* 工厂兼容 DirectX, Vulkan和SR-IOV)",
         "ko": "Lenovo ThinkSystem SD665-N V3 EPYC / Xeon, 4 AMD Radeon PRO V620 32 GB VRAM 이상 (* DirectX, Vulkan 및 SR-IOV와 호환되는 공장)",
-        "ar": "Lenovo ThinkSystem SD665-N V3 Neptune DWC Server with EPYC / Xeon, 4 AMD Radeon PRO V620 of 32 GB VRAM or higher (* factory compatible with DirectX, Vulkan and SR-IOV)"
+        "ar": "Lenovo ThinkSystem SD665-N V3 Neptune DWC Server مع EPYC/Xeon، و4 وحدات AMD Radeon PRO V620 بسعة 32 جيجابايت VRAM أو أعلى (*متوافق في المصنع مع DirectX وVulkan وSR-IOV)"
     },
     "| Chasis: ThinkSystem DW612S x6 Nodos), contáctanos directamente para indicarte cómo puedes ser partner/proveedor. Ahora puedes rentabilizar el poder de cómputo subutilizado con base en el costo promedio nacional más un márgen según el Tier y el uso de energías renovables y alternativas (Tier I: +8%. Tier II: +10%. Tier III: +12%. Tier IV: +15%. Tier V con SAN dedicado, ≥90% Energías Renovables y/o Alternativas, como nuclear, geotérmica, solar, eólica: +18%).": {
         "en": "- 612; Chassis: ThinkSystem DW6S x6 Nodes), contact us directly to indicate how you can be a partner / supplier. Now you can rent the power of underutilized computation based on the national average cost plus a Margen according to the Tier and the use of renewable and alternative energies (Tier I: + 8%. tier II: + 10%. Tier III: + 12%. Tier IV: + 15%. Tier V with dedicated SAN, ≥ 90% Renewable and / or Alternative Energies, such as nuclear, geothermal, solar, wind: + 18%).",
@@ -10527,7 +10527,7 @@
         "ja": "Precio (46.000 COP - 1.200.000 COP)",
         "zh": "Precio (46.000 COP - 1.200.000 COP)",
         "ko": "Precio (46.000 COP - 1.200.000 COP)",
-        "ar": "Precio (46.000 COP - 1.200.000 COP)"
+        "ar": "السعر (46.000 COP - 1.200.000 COP)"
     },
     "46.000 COP": {
         "en": "46.000 COP",
@@ -10878,7 +10878,7 @@
         "ja": "コーヒーピースによるフレキシブルなオプトメカニカルスイッチセット(TPE)",
         "zh": "由 Coffee Pie®所制作的灵活自制套接字",
         "ko": "가동 가능한 Optomechanical Suiches 세트 (TPE) Coffee Pie®에 의하여",
-        "ar": "Flexible Optomechanical Suiches Set (TPE) by coffee Pie"
+        "ar": "مجموعة مفاتيح بصرية ميكانيكية مرنة (TPE) بواسطة Coffee Pie"
     },
     "$75.000,00": {
         "en": "$75.000,00",
@@ -10995,7 +10995,7 @@
         "ja": "フレームワークによるUSB-C拡張カード",
         "zh": "USB-C 按框架的扩展卡",
         "ko": "USB-C 확장 카드",
-        "ar": "USB-C Expansion Card by Framework"
+        "ar": "بطاقة توسعة USB-C بواسطة Framework"
     },
     "$46.000,00": {
         "en": "$46.000,00",
@@ -11021,7 +11021,7 @@
         "ja": "フレームワークによるUSB-A拡張カード",
         "zh": "USB-A 按框架的扩展卡",
         "ko": "USB-A 확장 카드",
-        "ar": "USB-A Expansion Card by Framework"
+        "ar": "بطاقة توسعة USB-A بواسطة Framework"
     },
     "Tarjeta de Expansión DisplayPort by Framework": {
         "en": "Expansion Card DisplayPort by Framework",
@@ -11047,7 +11047,7 @@
         "ja": "フレームワークによるHDMI拡張カード",
         "zh": "HDMI 按框架的扩展卡",
         "ko": "Framework의 HDMI 확장 카드",
-        "ar": "HDMI Expansion Card by Framework"
+        "ar": "بطاقة توسعة HDMI بواسطة Framework"
     },
     "Tarjeta de Expansión Micro SD by Framework": {
         "en": "Micro SD Expansion Card by Framework",
@@ -11060,7 +11060,7 @@
         "ja": "フレームワークによるマイクロSD拡張カード",
         "zh": "按框架分列的微型自毁扩展卡",
         "ko": "Micro SD 확장 카드",
-        "ar": "Micro SD Expansion Card by Framework"
+        "ar": "بطاقة توسعة Micro SD بواسطة Framework"
     },
     "Tarjeta de Expansión SD by Framework": {
         "en": "SD Expansion Card by Framework",
@@ -11073,7 +11073,7 @@
         "ja": "フレームワークによるSD拡張カード",
         "zh": "SD 按框架的扩展卡",
         "ko": "SD 확장 카드 Framework",
-        "ar": "SD Expansion Card by Framework"
+        "ar": "بطاقة توسعة SD بواسطة Framework"
     },
     "Tarjeta de Expansión Almacenamiento 250GB by Framework": {
         "en": "Expansion Card Storage 250GB by Framework",
@@ -11138,7 +11138,7 @@
         "ja": "光ファイバー SFP のアダプター",
         "zh": "光纤SFP适配器",
         "ko": "광섬유 SFP 어댑터",
-        "ar": "Optical Fiber SFP adapter"
+        "ar": "محول SFP للألياف البصرية"
     },
     "Adaptador Ethernet RJ45 by TP-Link": {
         "en": "Ethernet RJ45 Adapter by TP-Link",
@@ -11151,7 +11151,7 @@
         "ja": "TP-LinkによるイーサネットRJ45アダプター",
         "zh": "以太网 RJ45 由 TP-Link 改编",
         "ko": "TP-Link의 이더넷 RJ45 어댑터",
-        "ar": "Ethernet RJ45 Adapter by TP-Link"
+        "ar": "محول Ethernet RJ45 بواسطة TP-Link"
     },
     "$80.000,00": {
         "en": "$80.000,00",
@@ -11177,7 +11177,7 @@
         "ja": "UGREENによるWiFiとBluetoothアダプタ",
         "zh": "WiFi和蓝牙适配器, 由 UGREEN",
         "ko": "UGREEN의 WiFi 및 Bluetooth 어댑터",
-        "ar": "WiFi and Bluetooth adapter by UGREEN"
+        "ar": "محول WiFi وبلوتوث بواسطة UGREEN"
     },
     "Adapdator WiFi by TP-Link": {
         "en": "Adaptor WiFi by TP-Link",
@@ -11255,7 +11255,7 @@
         "ja": "司令官のキーボード カバー",
         "zh": "指挥键盘封面",
         "ko": "사령관 키보드 덮개",
-        "ar": "Commander Keyboard Cover"
+        "ar": "غطاء لوحة المفاتيح Commander"
     },
     "$79.000,00": {
         "en": "$79.000,00",
@@ -11294,7 +11294,7 @@
         "ja": "パネルIO Posterior Commander",
         "zh": "小组",
         "ko": "패널 IO 앞 사령관",
-        "ar": "Panel IO Posterior Commander"
+        "ar": "لوحة IO الخلفية Commander"
     },
     "$59.000,00": {
         "en": "$59.000,00",
@@ -11346,7 +11346,7 @@
         "ja": "司令官V1.0のキーボードのためのPCBの光学パネル(マイクロなしで)",
         "zh": "用于指挥官V1.0键盘的PCB光学面板(不含微)",
         "ko": "Commander V1.0 키보드용 PCB 광학 패널 (Micro 없이)",
-        "ar": "PCB Optical Panel for Commander V1.0 Keyboard (Without Micro)"
+        "ar": "PCB اللوحة البصرية للوحة مفاتيح Commander V1.0 (بدون ميكرو)"
     },
     "$129.000,00": {
         "en": "$129.000,00",
@@ -11619,7 +11619,7 @@
         "ja": "クリップボードにコピーしたURLのリスト",
         "zh": "复制到剪贴板的 URL 列表",
         "ko": "클립보드에 복사된 URL 목록",
-        "ar": "List of URLs copied to the clipboard"
+        "ar": "تم نسخ قائمة عناوين URL إلى الحافظة"
     },
     "Deposito reembolsable": {
         "en": "Reimbursable deposit",
@@ -11697,7 +11697,7 @@
         "ja": "ライブマイグレーション",
         "zh": "和活地移徙",
         "ko": "및 라이브 마이그레이션",
-        "ar": "and Live Migration"
+        "ar": "والهجرة المباشرة"
     },
     "Migración en Vivo": {
         "en": "Live migration",
@@ -11723,7 +11723,7 @@
         "ja": "高可用性(HA)",
         "zh": "高可用性(HA)",
         "ko": "높은 가용성 (HA)",
-        "ar": "(HA)"
+        "ar": "توفر عالي (HA)"
     },
     "Alta Disponibilidad (HA)<br>y Migración en Vivo": {
         "en": "High Availability (HA) < br > and Live Migration",
@@ -11788,7 +11788,7 @@
         "ja": "クラウドのリア(スナップショット)",
         "zh": "后入云(指取取出取出取出",
         "ko": "클라우드의 후방 (Snapshots)",
-        "ar": "Rear in the Cloud (Snapshots)"
+        "ar": "✓ النسخ الاحتياطية في السحابة (Snapshots)"
     },
     "Respaldos en la Nube (Snapshots)": {
         "en": "Backups in the Cloud (Snapshots)",
