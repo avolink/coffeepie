@@ -388,6 +388,13 @@
         if (!dict || !fastLookup) return;
         currentLang = lang;
 
+        injectRTLCSS();
+        if (lang === 'ar') {
+            document.body.classList.add('lang-ar');
+        } else {
+            document.body.classList.remove('lang-ar');
+        }
+
         restoreAllOriginals();
 
         if (lang === 'es') {
@@ -411,6 +418,22 @@
         if (indicator) {
             indicator.textContent = lang.toUpperCase();
         }
+    }
+
+    // ---- RTL Arabic Support ----
+    
+    function injectRTLCSS() {
+        if (document.getElementById('cp-rtl-style')) return;
+        var style = document.createElement('style');
+        style.id = 'cp-rtl-style';
+        style.type = 'text/css';
+        style.innerHTML = `
+            .lang-ar p, .lang-ar h1, .lang-ar h2, .lang-ar h3, .lang-ar h4, .lang-ar h5, .lang-ar h6, .lang-ar li, .lang-ar a, .lang-ar span {
+                text-align: right !important;
+                direction: rtl !important;
+            }
+        `;
+        document.head.appendChild(style);
     }
 
     // ---- Brand spacing fix ----
