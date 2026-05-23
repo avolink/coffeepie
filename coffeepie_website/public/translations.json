@@ -6796,7 +6796,7 @@
         "ja": "2)フレームワーク標準と互換性がある9つの拡張カードのためのスペース.",
         "zh": "2) 为9张扩展卡提供空间,与\"框架\"标准相兼容.",
         "ko": "2) 프레임 워크 표준과 호환되는 9 확장 카드 공간.",
-        "ar": "2) Space for 9 expansion cards, compatible with the Framework standard."
+        "ar": "2) مساحة لـ 9 بطاقات توسعة، متوافقة مع معيار Framework."
     },
     "3) Compatibilidad con 2 modulos planos del estándar Framework (Laptop 16).": {
         "en": "3) Compatibility with 2 flat modules of the Framework standard (Laptop 16).",
@@ -6822,7 +6822,7 @@
         "ja": "4) 84 x 14 x 14 x 1.2 mm プロファイルの下の 2.5 の光学式溝との互換性(長 x 幅 x キャスト厚 x Vastago ツアー).",
         "zh": "4)相容性与4×84×14×14毫米轮廓下14个选取机械自制自制自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自取自.",
         "ko": "4) 84 x 14 x 14 x 1.2 mm 단면도 (긴 x 폭 x 던지기 간격 x Vastago 투어)의 밑에 2.5 optomechanical suiches를 가진 겸용성.",
-        "ar": "4) Compatibility with 84 optomechanical suiches under 14 x 14 x 1.2 x 2.5 mm profile (Long x Width x Cast fishness x Vastago tour)."
+        "ar": "4) التوافق مع 84 مفتاحًا بصريًا ميكانيكيًا منخفض الارتفاع 14x14x1.2x2.5mm (الطول x العرض x سمك القلعة x مسار العمود)."
     },
     "5) Placa de circuito (idealmente núcleo de aluminio, cobre u otros materiales reciclables) con un puerto USB4 ó superior y dos puertos USB-C 3.2 ó superior para comunicación interna con panel I/O, teclado y bandeja deslizante.": {
         "en": "5) Circuit plate (ideally aluminium core, copper or other recyclable materials) with a USB4 or higher port and two USB-C 3.2 or higher ports for internal communication with I / O panel, keyboard and sliding tray.",
@@ -6861,7 +6861,7 @@
         "ja": "7) 専用のデコーダーAV1 4K @ 60 Hz以上(ハードウェアアクセラレーション).",
         "zh": "7) 专用解码器 AV1 4K @ 60 Hz 或更高(硬件加速).",
         "ko": "7) 헌신적인 암호해독기 AV1 4K @ 60 Hz 또는 높이 (hardware 가속).",
-        "ar": "7) dedicated decoder AV1 4K @ 60 Hz or higher (hardware acceleration)."
+        "ar": "7) وحدة فك ترميز مخصصة AV1 4K@60Hz أو أعلى (تسريع الأجهزة)."
     },
     "8) Basic: Interfaz de red compatible con PoE (RJ45) / Pro: receptáculo para SFP fibra óptica.": {
         "en": "8) Basic: PoE-compatible network interface (RJ45) / Pro: Receptacle for fiber optic SFP.",
@@ -6874,7 +6874,7 @@
         "ja": "8) 基本:PoE互換のネットワーク インターフェイス(RJ45)/プロ:繊維光学SFPのための容器.",
         "zh": "8) Basic: PoE相容的网络接口 (RJ45) / Pro: 为光纤所接受 SFP.",
         "ko": "8) 기초: PoE 양립한 네트워크 공용영역 (RJ45)/Pro: 광섬유 SFP를 위한 저장소.",
-        "ar": "8) Basic: PoE-compatible network interface (RJ45) / Pro: Receptacle for fiber optic SFP."
+        "ar": "8) Basic: واجهة شبكة متوافقة مع PoE (RJ45) / Pro: وعاء لكابلات الألياف البصرية SFP."
     },
     "9) Puerto HDMI/DisplayPort tamaño completo o receptáculo USB-C compatible con DP.": {
         "en": "9) Full size HDMI / DisplayPort port or USB-C receiver compatible with DP.",
@@ -7355,7 +7355,7 @@
         "ja": "2)商品が在庫にあり、利用者がクォータを持っている場合、顧客の施設への出荷はすぐにスケジュールされ、「アクティブサービス」としてマークされます.",
         "zh": "2)如果产品在库存中,且用户有配额,将货物运到客户设施立即排期并标注为\"主动服务\".",
         "ko": "2) 제품이 재고가 있는 경우, 사용자는 할당량이 있는 경우, 고객의 시설에 선적은 즉시 예정되고 “Active Service”로 표시됩니다.",
-        "ar": "2) If the products are in inventory and the user has a quota, the shipment to the Customer's immediately scheduled and marked as \"Active Service.\"."
+        "ar": "2) إذا كانت المنتجات متوفرة في المخزون وكان لدى المستخدم حصة متاحة، تتم جدولة الشحن فورًا إلى مرافق العميل ويتم وضع علامة عليها كـ \"Active Service\" (في الخدمة النشطة)."
     },
     "3) Si los productos no están en inventario, se solicita al respectivo fabricante el envío del producto a la Central para posterior envío a las instalaciones del Cliente, y entonces se marca como \"Active Service\" (en servicio activo).": {
         "en": "3) If the products are not in inventory, the respective manufacturer is requested to send the product to the Central for subsequent shipment to the Customer's facilities, and then it is marked \"Active Service\" (in active service).",
@@ -7368,7 +7368,7 @@
         "ja": "3) 商品が在庫がない場合、各メーカーは、お客様の施設に続く出荷のために、中央に製品を送るように要求され、「アクティブサービス」がマークされます.",
         "zh": "3)如果产品不在库存中,则要求相关制造商将产品发往中央,随后运至客户设施,再标为\"主动服务\"(现役).",
         "ko": "3) 제품이 재고가 없는 경우에, 각 제조자는 고객의 기능에 후속 선적을 위한 중앙에 제품을 보내기 위하여 요구되고, 그 후에 “Active 서비스” (활동적인 서비스에서) 표를 합니다.",
-        "ar": "3) If the products are not in inventory, the respective manufacturer is requested to send the product to the Central for subsequent shipment to the Customer's facilities, and then it is marked \"Active Service\" (in active service)."
+        "ar": "3) إذا لم تكن المنتجات متوفرة في المخزون، يُطلب من الشركة المصنعة المعنية إرسال المنتج إلى المركز المركزي لشحنه لاحقًا إلى مرافق العميل، ثم يتم وضع علامة عليها كـ \"Active Service\" (في الخدمة النشطة)."
     },
     "4) Al final del ciclo de uso o vida útil el Cliente debe solicitar la devolución de los productos, empacarlos en su caja original o una caja adecuada, con etiqueta impresa en láser según indicaciones en": {
         "en": "4) At the end of the use or life cycle the Customer must request the return of the products, pack them in its original box or an appropriate box, with a laser label as indicated in",
@@ -7420,7 +7420,7 @@
         "ja": "7) ユーザーが残高なしで残っている場合、サービスの使用を継続するために需要の広告を見ることができますが、残高なしで残っている場合、3 年連続で広告が表示されない場合は、アカウントがサスペンションに入り、すべてのアセットが返されるまで、またはユーザー コンタクト技術サポートをブロックし、再活性化プロセスを実行します。 お客様が資産を最適な状態に戻すのに失敗した場合、彼は修理費用を負担するか、または資産の損失の場合、家賃の36か月分の相当を支払う必要があります.",
         "zh": "7)如果用户没有余额,您可以按要求看到广告继续使用该服务,但如果它没有余额,连续3个月没有看到广告,您的账户将进入暂停,产品将根据其序列号被封存,直到所有资产被退回或用户联系技术支持并进行再激活过程. 如果客户未能在最佳条件下返还资产,他或她必须承担修理费用或支付相当于资产损失36个月的租金.",
         "ko": "7) 사용자가 잔액없이 남아있는 경우 서비스를 계속하기 위해 수요에 광고를 볼 수 있지만 잔액없이 남아있는 경우 3 연속 개월 동안 광고를 볼 수 없습니다, 귀하의 계정은 중단으로 입력됩니다, 제품은 모든 자산이 반환되거나 사용자 연락처 기술 지원 및 Reactivation 프로세스를 수행 할 때까지, 일련 번호에 따라 차단됩니다. 고객은 최적의 조건에서 자산을 반환하지 않으면, 그는 또는 그녀는 수리 비용을 부담하거나 자산의 손실의 경우 36 개월의 임대와 동일해야합니다.",
-        "ar": "7) If the user is left without balance you can see ads on demand to continue using the service, but if it is left without balance and does not see ads for 3 consecutive months, your account will enter into Suspension, the products will be blocked according to their series number, until all assets are returned or the user contact technical support and perform the Reactivation process. وإذا لم يقم الزبون بإرجاع الأصول في حالة مثلى، فعليه أن يتحمل تكاليف الإصلاح أو أن يدفع ما يعادل 36 شهرا من الإيجار في حالة فقدان الأصول."
+        "ar": "7) إذا نفد رصيد المستخدم، يمكنه مشاهدة الإعلانات عند الطلب لمواصلة استخدام الخدمة، ولكن إذا نفد رصيده ولم يشاهد إعلانات لمدة 3 أشهر متتالية، فسيتم تعليق حسابه، وسيتم حظر المنتجات بناءً على رقمها التسلسلي، حتى يتم إرجاع جميع الأصول أو يتصل المستخدم بالدعم الفني لإجراء عملية إعادة التنشيط. إذا فشل العميل في إرجاع الأصول في حالة مثالية، فسيتعين عليه تحمل تكاليف الإصلاح أو دفع ما يعادل 36 شهرًا من الإيجار في حالة فقدان الأصل."
     },
     "Términos": {
         "en": "Terms",
@@ -7472,7 +7472,7 @@
         "ja": "認定または非認証デバイスを含む、あなたはこれらの条件を満たすことに同意します。 同意しない場合は、「コーヒー・パイ・ターミナルと互換性のある」、「コーデック・ターミナルと互換性のある」、「コーデック・ターミナル用」、「コーデナー用」、「センティネル用」、「レンジャー用」、「レンジャー用」などのラベルの使用を控え、ディプロマティック・ソリューションを見つけることができるかどうかを判断するためにお問い合わせください。 私たちは、そのような実用的な状況下で許容しません",
         "zh": ",包括经认证或无认证的装置,你同意满足这些条款和条件。 不同意的,必须避免使用\"与Coffee Pie®终端相兼容\",\"与可编码终端相兼容\",\"为指挥官\",\"哨兵\",\"游侠\"等标签或类似的标签,并与我们联系,以确定能否找到外交解决方案. 我们不容忍在任何实际情况下,例如",
         "ko": "인증 또는 비 인증 장치를 포함한, 이러한 조건과 조건을 충족하는 것에 동의합니다. 동의하지 않는 경우, \" Coffee Pie® Terminal과 호환\" \"Codec Terminal과 호환\" \"Corc Terminal과 호환\" \"Center를 위해,\" \"S Sentinel,\"\"\" \" Ranger,\"또는 이와 유사한 등 라벨을 사용하여 refrain하고 외교적 솔루션을 찾을 수 있는지 결정하십시오. 우리는 어떤 실용적인 상황에서도 허용하지 않습니다",
-        "ar": "بما في ذلك أجهزة مصدقة أو غير مصدق عليها، توافق على الوفاء بهذه الشروط والأحكام. إذا كنت لا توافق، يجب أن تمتنع عن استخدام بطاقات مثل \"مطابقة مع محطات Coffee Pie®\"، \"متوافق مع مصطلحات الكوديك\"، \"للقائد\"، \"لـ\"سينتينيل\" أو \"للغضب\" أو ما شابه، وتتصل بنا لتحديد ما إذا كان من الممكن إيجاد حل دبلوماسي. نحن لا نتسامح في ظل أي ظروف عملية مثل"
+        "ar": "، بما في ذلك الأجهزة المعتمدة أو غير المعتمدة، فإنك توافق على الامتثال لهذه الشروط والأحكام. إذا كنت لا توافق، يجب عليك الامتناع عن استخدام علامات مثل \"متوافق مع محطات Coffee Pie®\"، \"متوافق مع محطات الكوديك\"، \"لـ Commander™\"، \"لـ Sentinel™\"، \"لـ Ranger™\"، أو ما شابه ذلك، والاتصال بنا لتحديد ما إذا كان من الممكن إيجاد حل دبلوماسي. نحن لا نتسامح تحت أي ظرف من الظروف مع ممارسات مثل "
     },
     "Obsolesencia Programada": {
         "en": "Scheduled obsolescence",
