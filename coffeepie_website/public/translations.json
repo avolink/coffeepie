@@ -8327,7 +8327,8 @@
         "de": "Flexibler On-Demand-Computerdienst, erschwinglich für jeden Geldbeutel. Vergessen Sie hohe Kosten, Wartung, Hitze und Lärm – all das bei minimaler Umweltbelastung...",
         "ru": "Гибкий вычислительный сервис по запросу, доступный каждому. Забудьте о высоких затратах, обслуживании, жаре и шуме — и все это с минимальным воздействием на окружающую среду...",
         "hi": "लचीली, ऑन-डिमांड कंप्यूटिंग सेवा, हर किसी की पहुँच में। भारी लागत, रखरखाव, गर्मी, शोर के बारे में भूल जाइए, और वह भी न्यूनतम पर्यावरणीय प्रभाव के साथ...",
-        "ja": "誰でも手の届く柔軟なオンデマンド・コンピューティング・サービス。高額なコスト、メンテナンス、熱、騒音を忘れ、これらすべてを最小限の環境負荷で実現します..."
+        "ja": "誰でも手の届く柔軟なオンデマンド・コンピューティング・サービス。高額なコスト、メンテナンス、熱、騒音を忘れ、これらすべてを最小限の環境負荷で実現します...",
+        "zh": "灵活、按需计算服务，适合所有人的预算。忘掉高昂的成本、维护、发热、噪音，这一切都伴随着最低的环境影响..."
     },
     "Economía Circular = Rechazar, Repensar, Reducir, Reusar, Reparar, Restaurar, Remanufacturar, Reutilizar, Reciclar, Recuperar": {
         "en": "Circular Economy = Reject, Rethink, Reduce, Reuse, Repair, Restore, Removing, Reuse, Recycling, Recover",
@@ -8546,7 +8547,7 @@
         "ru": "С нашими эксклюзивными модульными терминалами-кодеками, более известными как Commanders™, Sentinels™ и Rangers™, забудьте раз и навсегда о замене процессора, памяти, хранилища, видеокарты, блока питания и т. д. Теперь вы можете использовать все это оборудование динамично и гибко. Неважно, являетесь ли вы студентом, техником, инженером, архитектором, редактором, дизайнером, программистом, разработчиком видеоигр, создателем контента, бухгалтером, моделлером, предпринимателем или занимаетесь практически любой деятельностью, требующей вычислений, вам больше не придется покупать «компьютер НАСА», чтобы воплотить в жизнь все свои проекты, потому что с",
         "hi": "हमारे विशेष मॉड्यूलर कोडेक टर्मिनलों के साथ, जिन्हें Commanders™, Sentinels™ और Rangers™ के रूप में बेहतर जाना जाता है, प्रोसेसर, मेमोरी, स्टोरेज, ग्राफ़िक्स कार्ड, पावर सप्लाई आदि को बार-बार बदलने की झंझट को भूल जाइए। अब आप उस सभी हार्डवेयर का गतिशील और लचीले ढंग से उपयोग कर सकते हैं, चाहे आप छात्र हों, तकनीशियन हों, इंजीनियर हों, वास्तुकार हों, संपादक हों, डिज़ाइनर हों, प्रोग्रामर हों, वीडियो गेम डेवलपर हों, सामग्री निर्माता हों, अकाउंटेंट हों, मॉडलर हों, उद्यमी हों या कोई ऐसी गतिविधि करते हों जिसमें कंप्यूटिंग की आवश्यकता हो, आपको अपने सभी प्रोजेक्ट्स को साकार करने के लिए \"NASA का कंप्यूटर\" खरीदने की ज़रूरत नहीं होगी, क्योंकि",
         "ja": "Commanders™、Sentinels™、Rangers™として知られる独自のモジュラーコーデックターミナルを使用すれば、プロセッサ、メモリ、ストレージ、グラフィックカード、電源などの交換をきっぱりと忘れることができます。これからは、すべてのハードウェアをダイナミックかつ柔軟に使用できます。学生、技術者、エンジニア、建築家、編集者、デザイナー、プログラマー、ゲーム開発者、コンテンツクリエイター、会計士、モデラー、起業家など、コンピューティングを必要とするあらゆる活動を行っていても、プロジェクトを実現するために「NASAのコンピュータ」を購入する必要はもうありません。なぜなら、",
-        "zh": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
+        "zh": "有了我们独有的模块化编解码器终端（更广为人知的名称是 Commanders™、Sentinels™ 和 Rangers™），您将永远不再需要更换处理器、内存、存储、显卡、电源等。现在，您可以动态且灵活地使用所有这些硬件。无论您是学生、技术人员、工程师、建筑师、编辑、设计师、程序员、视频游戏开发者、内容创作者、会计师、建模师、企业家，还是从事几乎任何需要计算的活动，您都无需再购买“NASA 计算机”来实现您的所有项目，因为有了",
         "ko": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
         "ar": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con"
     },
@@ -16761,7 +16762,8 @@
         "de": "*Preise an die Inflation gekoppelt",
         "ru": "*цены индексируются с учетом инфляции",
         "hi": "*मुद्रास्फीति से जुड़ी कीमतें",
-        "ja": "*インフレ連動価格"
+        "ja": "*インフレ連動価格",
+        "zh": "*价格与通货膨胀挂钩"
     },
     ", obteniendo nuestra certificación que autorice su producción y uso limitado de marca, siempre y cuando estos cumplan con nuestros lineamientos generales y comerciales, especificaciones técnicas, un mínimo de calidad en materiales, modularidad, reparabilidad ≥9/10 (": {
         "es": ", obteniendo nuestra certificación que autorice su producción y uso limitado de marca, siempre y cuando estos cumplan con nuestros lineamientos generales y comerciales, especificaciones técnicas, un mínimo de calidad en materiales, modularidad, reparabilidad ≥9/10 (",
@@ -16771,7 +16773,8 @@
         "de": ", indem Sie unsere Zertifizierung erhalten, die deren Produktion und eingeschränkte Markennutzung autorisiert, vorausgesetzt, diese entsprechen unseren allgemeinen und kommerziellen Richtlinien, technischen Spezifikationen, einer Mindestqualität bei Materialien, Modularität und Reparierbarkeit ≥9/10 (",
         "ru": ", получив наш сертификат, разрешающий их производство и ограниченное использование бренда, при условии, что они соответствуют нашим общим и коммерческим рекомендациям, техническим спецификациям, минимальному качеству материалов, модульности, ремонтопригодности ≥9/10 (",
         "hi": ", हमारा प्रमाणन प्राप्त करके जो उनके उत्पादन और सीमित ब्रांड उपयोग को अधिकृत करता है, बशर्ते वे हमारे सामान्य और व्यावसायिक दिशानिर्देशों, तकनीकी विशिष्टताओं, सामग्री में न्यूनतम गुणवत्ता, मॉड्यूलरिटी, मरम्मत क्षमता ≥9/10 ( का पालन करते हों",
-        "ja": "、当社の一般的および商業的ガイドライン、技術仕様、材料の最低品質、モジュール性、修理のしやすさ ≥9/10 を満たしていることを条件に、その生産およびブランドの限定的な使用を承認する当社の認定を取得することによって ("
+        "ja": "、当社の一般的および商業的ガイドライン、技術仕様、材料の最低品質、モジュール性、修理のしやすさ ≥9/10 を満たしていることを条件に、その生産およびブランドの限定的な使用を承認する当社の認定を取得することによって (",
+        "zh": "，通过获得我们授权其生产和有限品牌使用的认证，只要它们符合我们的通用和商业指南、技术规格、材料的最低质量、模块化、可修复性 ≥9/10（"
     },
     "atencionalcliente@coffeepie.co": {
         "es": "atencionalcliente@coffeepie.co",
@@ -16781,7 +16784,8 @@
         "de": "atencionalcliente@coffeepie.co",
         "ru": "atencionalcliente@coffeepie.co",
         "hi": "atencionalcliente@coffeepie.co",
-        "ja": "atencionalcliente@coffeepie.co"
+        "ja": "atencionalcliente@coffeepie.co",
+        "zh": "atencionalcliente@coffeepie.co"
     },
     "Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos.": {
         "en": "Codec Terminals are patented-core but open-standard devices (CERN License): modular, compact, low-cost, some similar to keyboards, tablets, and smartphones (Commander™, Sentinel™, and Ranger™ lines), highly customizable, repairable, upgradable, and up to 97% recyclable, which allow you to access our novel Coffee Pie® service. Ask your ISP if they can include the terminal with your internet subscription, or just leave a small deposit for each device you require and return them when you no longer need them! We will refund between 10% and 90% of the deposit based on their condition and wear.",
@@ -16804,7 +16808,8 @@
         "de": "\"Authorization\": \"Bearer {{API_KEY}}\",",
         "ru": "\"Authorization\": \"Bearer {{API_KEY}}\",",
         "hi": "\"Authorization\": \"Bearer {{API_KEY}}\",",
-        "ja": "\"Authorization\": \"Bearer {{API_KEY}}\","
+        "ja": "\"Authorization\": \"Bearer {{API_KEY}}\",",
+        "zh": "\"Authorization\": \"Bearer {{API_KEY}}\","
     },
     "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },": {
         "es": "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },",
@@ -16814,7 +16819,8 @@
         "de": "\"age_range\": { \"type\": \"string\", \"description\": \"Altersgruppe (z. B. '18-24')\" },",
         "ru": "\"age_range\": { \"type\": \"string\", \"description\": \"Возрастной диапазон (напр., '18-24')\" },",
         "hi": "\"age_range\": { \"type\": \"string\", \"description\": \"आयु सीमा (उदा: '18-24')\" },",
-        "ja": "\"age_range\": { \"type\": \"string\", \"description\": \"年齢層（例：'18-24'）\" },"
+        "ja": "\"age_range\": { \"type\": \"string\", \"description\": \"年齢層（例：'18-24'）\" },",
+        "zh": "\"age_range\": { \"type\": \"string\", \"description\": \"年龄范围 (例如：'18-24')\" },"
     },
     "\"conversion_score\": { \"type\": \"number\" }": {
         "es": "\"conversion_score\": { \"type\": \"number\" }",
@@ -16824,7 +16830,8 @@
         "de": "\"conversion_score\": { \"type\": \"number\" }",
         "ru": "\"conversion_score\": { \"type\": \"number\" }",
         "hi": "\"conversion_score\": { \"type\": \"number\" }",
-        "ja": "\"conversion_score\": { \"type\": \"number\" }"
+        "ja": "\"conversion_score\": { \"type\": \"number\" }",
+        "zh": "\"conversion_score\": { \"type\": \"number\" }"
     },
     "\"estimated_users\": { \"type\": \"number\" },": {
         "es": "\"estimated_users\": { \"type\": \"number\" },",
@@ -16834,7 +16841,8 @@
         "de": "\"estimated_users\": { \"type\": \"number\" },",
         "ru": "\"estimated_users\": { \"type\": \"number\" },",
         "hi": "\"estimated_users\": { \"type\": \"number\" },",
-        "ja": "\"estimated_users\": { \"type\": \"number\" },"
+        "ja": "\"estimated_users\": { \"type\": \"number\" },",
+        "zh": "\"estimated_users\": { \"type\": \"number\" },"
     },
     "\"handler\": {": {
         "es": "\"handler\": {",
@@ -16844,7 +16852,8 @@
         "de": "\"handler\": {",
         "ru": "\"handler\": {",
         "hi": "\"handler\": {",
-        "ja": "\"handler\": {"
+        "ja": "\"handler\": {",
+        "zh": "\"handler\": {"
     },
     "\"headers\": {": {
         "es": "\"headers\": {",
@@ -16854,7 +16863,8 @@
         "de": "\"headers\": {",
         "ru": "\"headers\": {",
         "hi": "\"headers\": {",
-        "ja": "\"headers\": {"
+        "ja": "\"headers\": {",
+        "zh": "\"headers\": {"
     },
     "\"input_schema\": {": {
         "es": "\"input_schema\": {",
@@ -16864,7 +16874,8 @@
         "de": "\"input_schema\": {",
         "ru": "\"input_schema\": {",
         "hi": "\"input_schema\": {",
-        "ja": "\"input_schema\": {"
+        "ja": "\"input_schema\": {",
+        "zh": "\"input_schema\": {"
     },
     "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },": {
         "es": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },",
@@ -16874,7 +16885,8 @@
         "de": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Liste von Interessen\" },",
         "ru": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Список интересов\" },",
         "hi": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"रुचियों की सूची\" },",
-        "ja": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"興味のリスト\" },"
+        "ja": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"興味のリスト\" },",
+        "zh": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"兴趣列表\" },"
     },
     "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }": {
         "es": "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }",
@@ -16884,7 +16896,8 @@
         "de": "\"location\": { \"type\": \"string\", \"description\": \"Geografischer Standort\" }",
         "ru": "\"location\": { \"type\": \"string\", \"description\": \"Географическое положение\" }",
         "hi": "\"location\": { \"type\": \"string\", \"description\": \"भौगोलिक स्थान\" }",
-        "ja": "\"location\": { \"type\": \"string\", \"description\": \"地理的な場所\" }"
+        "ja": "\"location\": { \"type\": \"string\", \"description\": \"地理的な場所\" }",
+        "zh": "\"location\": { \"type\": \"string\", \"description\": \"地理位置\" }"
     },
     "\"output_schema\": {": {
         "es": "\"output_schema\": {",
@@ -16894,7 +16907,8 @@
         "de": "\"output_schema\": {",
         "ru": "\"output_schema\": {",
         "hi": "\"output_schema\": {",
-        "ja": "\"output_schema\": {"
+        "ja": "\"output_schema\": {",
+        "zh": "\"output_schema\": {"
     },
     "\"properties\": {": {
         "es": "\"properties\": {",
@@ -16904,7 +16918,8 @@
         "de": "\"properties\": {",
         "ru": "\"properties\": {",
         "hi": "\"properties\": {",
-        "ja": "\"properties\": {"
+        "ja": "\"properties\": {",
+        "zh": "\"properties\": {"
     },
     "\"segment_id\": { \"type\": \"string\" },": {
         "es": "\"segment_id\": { \"type\": \"string\" },",
@@ -16914,7 +16929,8 @@
         "de": "\"segment_id\": { \"type\": \"string\" },",
         "ru": "\"segment_id\": { \"type\": \"string\" },",
         "hi": "\"segment_id\": { \"type\": \"string\" },",
-        "ja": "\"segment_id\": { \"type\": \"string\" },"
+        "ja": "\"segment_id\": { \"type\": \"string\" },",
+        "zh": "\"segment_id\": { \"type\": \"string\" },"
     },
     "$1.00 / terminal": {
         "es": "$1.00 / terminal",
@@ -16924,7 +16940,8 @@
         "de": "$1.00 / Terminal",
         "ru": "$1.00 / терминал",
         "hi": "$1.00 / टर्मिनल",
-        "ja": "$1.00 / ターミナル"
+        "ja": "$1.00 / ターミナル",
+        "zh": "$1.00 / 终端"
     },
     "+2 nuevos": {
         "es": "+2 nuevos",
@@ -16934,7 +16951,8 @@
         "de": "+2 neue",
         "ru": "+2 новых",
         "hi": "+2 नए",
-        "ja": "+2 新規"
+        "ja": "+2 新規",
+        "zh": "+2 新增"
     },
     "+3 esta semana": {
         "es": "+3 esta semana",
@@ -16944,7 +16962,8 @@
         "de": "+3 diese Woche",
         "ru": "+3 на этой неделе",
         "hi": "इस सप्ताह +3",
-        "ja": "今週 +3"
+        "ja": "今週 +3",
+        "zh": "本周 +3"
     },
     "0 licencias": {
         "es": "0 licencias",
@@ -16954,7 +16973,8 @@
         "de": "0 Lizenzen",
         "ru": "0 лицензий",
         "hi": "0 लाइसेंस",
-        "ja": "0 ライセンス"
+        "ja": "0 ライセンス",
+        "zh": "0 许可证"
     },
     "1 a 999": {
         "es": "1 a 999",
@@ -16964,7 +16984,8 @@
         "de": "1 bis 999",
         "ru": "от 1 до 999",
         "hi": "1 से 999",
-        "ja": "1 から 999"
+        "ja": "1 から 999",
+        "zh": "1 到 999"
     },
     "1'000 a 9'999": {
         "es": "1'000 a 9'999",
@@ -16974,7 +16995,8 @@
         "de": "1'000 bis 9'999",
         "ru": "от 1'000 до 9'999",
         "hi": "1'000 से 9'999",
-        "ja": "1'000 から 9'999"
+        "ja": "1'000 から 9'999",
+        "zh": "1'000 到 9'999"
     },
     "1. Abre la app": {
         "es": "1. Abre la app",
@@ -16984,7 +17006,8 @@
         "de": "1. App öffnen",
         "ru": "1. Откройте приложение",
         "hi": "1. ऐप खोलें",
-        "ja": "1. アプリを開く"
+        "ja": "1. アプリを開く",
+        "zh": "1. 打开应用程序"
     },
     "1.8K": {
         "es": "1.8K",
@@ -16994,7 +17017,8 @@
         "de": "1.8K",
         "ru": "1.8K",
         "hi": "1.8K",
-        "ja": "1.8K"
+        "ja": "1.8K",
+        "zh": "1.8K"
     },
     "10'000 a 99'999": {
         "es": "10'000 a 99'999",
@@ -17004,7 +17028,8 @@
         "de": "10'000 bis 99'999",
         "ru": "от 10'000 до 99'999",
         "hi": "10'000 से 99'999",
-        "ja": "10'000 から 99'999"
+        "ja": "10'000 から 99'999",
+        "zh": "10'000 到 99'999"
     },
     "100'000 a 999'999": {
         "es": "100'000 a 999'999",
@@ -17014,7 +17039,8 @@
         "de": "100'000 bis 999'999",
         "ru": "от 100'000 до 999'999",
         "hi": "100'000 से 999'999",
-        "ja": "100'000 から 999'999"
+        "ja": "100'000 から 999'999",
+        "zh": "100'000 到 999'999"
     },
     "12.4K": {
         "es": "12.4K",
@@ -17024,7 +17050,8 @@
         "de": "12.4K",
         "ru": "12.4K",
         "hi": "12.4K",
-        "ja": "12.4K"
+        "ja": "12.4K",
+        "zh": "12.4K"
     },
     "1200x800": {
         "es": "1200x800",
@@ -17034,7 +17061,8 @@
         "de": "1200x800",
         "ru": "1200x800",
         "hi": "1200x800",
-        "ja": "1200x800"
+        "ja": "1200x800",
+        "zh": "1200x800"
     },
     "1920x1080": {
         "es": "1920x1080",
@@ -17044,7 +17072,8 @@
         "de": "1920x1080",
         "ru": "1920x1080",
         "hi": "1920x1080",
-        "ja": "1920x1080"
+        "ja": "1920x1080",
+        "zh": "1920x1080"
     },
     "2. Toca \"Pagar con QR\" y escanea el código": {
         "es": "2. Toca \"Pagar con QR\" y escanea el código",
@@ -17054,7 +17083,8 @@
         "de": "2. Tippen Sie auf \"Mit QR bezahlen\" und scannen Sie den Code",
         "ru": "2. Нажмите «Оплатить по QR» и отсканируйте код",
         "hi": "2. \"QR से भुगतान करें\" पर टैप करें और कोड स्कैन करें",
-        "ja": "2.「QRで支払う」をタップしてコードをスキャンします"
+        "ja": "2.「QRで支払う」をタップしてコードをスキャンします",
+        "zh": "2. 点击“扫描二维码付款”并扫描代码"
     },
     "2.4K": {
         "es": "2.4K",
@@ -17064,7 +17094,8 @@
         "de": "2.4K",
         "ru": "2.4K",
         "hi": "2.4K",
-        "ja": "2.4K"
+        "ja": "2.4K",
+        "zh": "2.4K"
     },
     "3. Verifica que el total coincida con el de tu carrito": {
         "es": "3. Verifica que el total coincida con el de tu carrito",
@@ -17074,7 +17105,8 @@
         "de": "3. Stellen Sie sicher, dass die Gesamtsumme mit Ihrem Warenkorb übereinstimmt",
         "ru": "3. Убедитесь, что сумма совпадает с вашей корзиной",
         "hi": "3. सत्यापित करें कि कुल राशि आपके कार्ट से मेल खाती है",
-        "ja": "3. 合計がカートの内容と一致しているか確認します"
+        "ja": "3. 合計がカートの内容と一致しているか確認します",
+        "zh": "3. 验证总计是否与您的购物车一致"
     },
     "3.1K": {
         "es": "3.1K",
@@ -17084,7 +17116,8 @@
         "de": "3.1K",
         "ru": "3.1K",
         "hi": "3.1K",
-        "ja": "3.1K"
+        "ja": "3.1K",
+        "zh": "3.1K"
     },
     "3.2K": {
         "es": "3.2K",
@@ -17094,7 +17127,8 @@
         "de": "3.2K",
         "ru": "3.2K",
         "hi": "3.2K",
-        "ja": "3.2K"
+        "ja": "3.2K",
+        "zh": "3.2K"
     },
     "4. Confirma el pago desde la app": {
         "es": "4. Confirma el pago desde la app",
@@ -17104,7 +17138,8 @@
         "de": "4. Bestätigen Sie die Zahlung über die App",
         "ru": "4. Подтвердите оплату в приложении",
         "hi": "4. ऐप से भुगतान की पुष्टि करें",
-        "ja": "4. アプリから支払いを確定します"
+        "ja": "4. アプリから支払いを確定します",
+        "zh": "4. 在应用程序中确认付款"
     },
     "48.2K": {
         "es": "48.2K",
@@ -17114,7 +17149,8 @@
         "de": "48.2K",
         "ru": "48.2K",
         "hi": "48.2K",
-        "ja": "48.2K"
+        "ja": "48.2K",
+        "zh": "48.2K"
     },
     "5. Incluye el número de referencia en el campo \"Concepto\"": {
         "es": "5. Incluye el número de referencia en el campo \"Concepto\"",
@@ -17124,7 +17160,8 @@
         "de": "5. Fügen Sie die Referenznummer im Feld \"Verwendungszweck\" ein",
         "ru": "5. Укажите номер ссылки в поле «Назначение платежа»",
         "hi": "5. \"विवरण\" फ़ील्ड में संदर्भ संख्या शामिल करें",
-        "ja": "5.「概要」フィールドに参照番号を含めます"
+        "ja": "5.「概要」フィールドに参照番号を含めます",
+        "zh": "5. 在“备注”字段中填写参考编号"
     },
     "5.1K": {
         "es": "5.1K",
@@ -17134,7 +17171,8 @@
         "de": "5.1K",
         "ru": "5.1K",
         "hi": "5.1K",
-        "ja": "5.1K"
+        "ja": "5.1K",
+        "zh": "5.1K"
     },
     "6. Tus productos se activarán automáticamente en 5-10 minutos": {
         "es": "6. Tus productos se activarán automáticamente en 5-10 minutos",
@@ -17144,7 +17182,8 @@
         "de": "6. Ihre Produkte werden in 5-10 Minuten automatisch aktiviert",
         "ru": "6. Ваши продукты активируются автоматически через 5-10 минут",
         "hi": "6. आपके उत्पाद 5-10 मिनट में स्वचालित रूप से सक्रिय हो जाएंगे",
-        "ja": "6. 製品は5〜10分で自動的にアクティベートされます"
+        "ja": "6. 製品は5〜10分で自動的にアクティベートされます",
+        "zh": "6. 您的产品将在 5-10 分钟内自动激活"
     },
     "8.7K": {
         "es": "8.7K",
@@ -17154,7 +17193,8 @@
         "de": "8.7K",
         "ru": "8.7K",
         "hi": "8.7K",
-        "ja": "8.7K"
+        "ja": "8.7K",
+        "zh": "8.7K"
     },
     "API Keys": {
         "es": "API Keys",
@@ -17164,7 +17204,8 @@
         "de": "API-Schlüssel",
         "ru": "Ключи API",
         "hi": "API कुंजियाँ",
-        "ja": "APIキー"
+        "ja": "APIキー",
+        "zh": "API 密钥"
     },
     "API Keys Table": {
         "es": "API Keys Table",
@@ -17174,7 +17215,8 @@
         "de": "Tabelle der API-Schlüssel",
         "ru": "Таблица ключей API",
         "hi": "API कुंजियाँ तालिका",
-        "ja": "APIキーステーブル"
+        "ja": "APIキーステーブル",
+        "zh": "API 密钥表"
     },
     "Activos Recientes": {
         "es": "Activos Recientes",
@@ -17184,7 +17226,8 @@
         "de": "Letzte Assets",
         "ru": "Недавние активы",
         "hi": "हाल के एसेट्स",
-        "ja": "最近のアセット"
+        "ja": "最近のアセット",
+        "zh": "最近的资产"
     },
     "Activos Subidos": {
         "es": "Activos Subidos",
@@ -17194,7 +17237,8 @@
         "de": "Hochgeladene Assets",
         "ru": "Загруженные активы",
         "hi": "अपलोड किए गए एसेट्स",
-        "ja": "アップロードされたアセット"
+        "ja": "アップロードされたアセット",
+        "zh": "已上传的资产"
     },
     "Ad-PreRoll": {
         "es": "Ad-PreRoll",
@@ -17204,7 +17248,8 @@
         "de": "Ad-PreRoll",
         "ru": "Ad-PreRoll",
         "hi": "Ad-PreRoll",
-        "ja": "Ad-PreRoll"
+        "ja": "Ad-PreRoll",
+        "zh": "Ad-PreRoll"
     },
     "Agregar Tarjeta": {
         "es": "Agregar Tarjeta",
@@ -17214,7 +17259,8 @@
         "de": "Karte hinzufügen",
         "ru": "Добавить карту",
         "hi": "कार्ड जोड़ें",
-        "ja": "カードを追加"
+        "ja": "カードを追加",
+        "zh": "添加卡片"
     },
     "Anade una capa extra de seguridad a tu cuenta": {
         "es": "Anade una capa extra de seguridad a tu cuenta",
@@ -17224,7 +17270,8 @@
         "de": "Fügen Sie Ihrem Konto eine zusätzliche Sicherheitsebene hinzu",
         "ru": "Добавьте дополнительный уровень безопасности к вашей учетной записи",
         "hi": "अपने खाते में सुरक्षा की एक अतिरिक्त परत जोड़ें",
-        "ja": "アカウントにセキュリティ層を追加します"
+        "ja": "アカウントにセキュリティ層を追加します",
+        "zh": "为您的帐户添加额外的安全保护层"
     },
     "Analiticas y metricas de rendimiento": {
         "es": "Analiticas y metricas de rendimiento",
@@ -17234,7 +17281,8 @@
         "de": "Analysen und Leistungskennzahlen",
         "ru": "Аналитика и показатели эффективности",
         "hi": "एनालिटिक्स और प्रदर्शन मेट्रिक्स",
-        "ja": "分析とパフォーマンス指標"
+        "ja": "分析とパフォーマンス指標",
+        "zh": "分析和性能指标"
     },
     "Apariencia": {
         "es": "Apariencia",
@@ -17244,7 +17292,8 @@
         "de": "Aussehen",
         "ru": "Внешний вид",
         "hi": "दिखावट",
-        "ja": "外観"
+        "ja": "外観",
+        "zh": "外观"
     },
     "Avisos antes del cobro automatico mensual": {
         "es": "Avisos antes del cobro automatico mensual",
@@ -17254,7 +17303,8 @@
         "de": "Benachrichtigungen vor der monatlichen automatischen Abrechnung",
         "ru": "Уведомления перед ежемесячным автоматическим списанием",
         "hi": "मासिक स्वचालित बिलिंग से पहले सूचनाएं",
-        "ja": "毎月の自動課金前の通知"
+        "ja": "毎月の自動課金前の通知",
+        "zh": "每月自动计费前的通知"
     },
     "Back to School 2026": {
         "es": "Back to School 2026",
@@ -17264,7 +17314,8 @@
         "de": "Back to School 2026",
         "ru": "Снова в школу 2026",
         "hi": "Back to School 2026",
-        "ja": "Back to School 2026"
+        "ja": "Back to School 2026",
+        "zh": "Back to School 2026"
     },
     "Balance:": {
         "es": "Balance:",
@@ -17274,7 +17325,8 @@
         "de": "Guthaben:",
         "ru": "Баланс:",
         "hi": "बैलेंस:",
-        "ja": "残高:"
+        "ja": "残高:",
+        "zh": "余额:"
     },
     "Banco": {
         "es": "Banco",
@@ -17284,7 +17336,8 @@
         "de": "Bank",
         "ru": "Банк",
         "hi": "बैंक",
-        "ja": "銀行"
+        "ja": "銀行",
+        "zh": "银行"
     },
     "CSV (.csv)": {
         "es": "CSV (.csv)",
@@ -17294,7 +17347,8 @@
         "de": "CSV (.csv)",
         "ru": "CSV (.csv)",
         "hi": "CSV (.csv)",
-        "ja": "CSV (.csv)"
+        "ja": "CSV (.csv)",
+        "zh": "CSV (.csv)"
     },
     "CTR Promedio": {
         "es": "CTR Promedio",
@@ -17304,7 +17358,8 @@
         "de": "Durchschnittliche CTR",
         "ru": "Средний CTR",
         "hi": "औसत CTR",
-        "ja": "平均CTR"
+        "ja": "平均CTR",
+        "zh": "平均点击率"
     },
     "Cambiar Contrasena": {
         "es": "Cambiar Contrasena",
@@ -17314,7 +17369,8 @@
         "de": "Passwort ändern",
         "ru": "Изменить пароль",
         "hi": "पासवर्ड बदलें",
-        "ja": "パスワードを変更"
+        "ja": "パスワードを変更",
+        "zh": "更改密码"
     },
     "Campañas": {
         "es": "Campañas",
@@ -17324,7 +17380,8 @@
         "de": "Kampagnen",
         "ru": "Кампании",
         "hi": "अभियान",
-        "ja": "キャンペーン"
+        "ja": "キャンペーン",
+        "zh": "广告系列"
     },
     "Campañas Activas": {
         "es": "Campañas Activas",
@@ -17334,7 +17391,8 @@
         "de": "Aktive Kampagnen",
         "ru": "Активные кампании",
         "hi": "सक्रिय अभियान",
-        "ja": "アクティブなキャンペーン"
+        "ja": "アクティブなキャンペーン",
+        "zh": "有效广告系列"
     },
     "Campañas Recientes": {
         "es": "Campañas Recientes",
@@ -17344,7 +17402,8 @@
         "de": "Neueste Kampagnen",
         "ru": "Недавние кампании",
         "hi": "हाल के अभियान",
-        "ja": "最近のキャンペーン"
+        "ja": "最近のキャンペーン",
+        "zh": "最近的广告系列"
     },
     "Cargar Activos": {
         "es": "Cargar Activos",
@@ -17354,7 +17413,8 @@
         "de": "Assets hochladen",
         "ru": "Загрузить активы",
         "hi": "एसेट्स अपलोड करें",
-        "ja": "アセットをアップロード"
+        "ja": "アセットをアップロード",
+        "zh": "上传资产"
     },
     "Cargar mas": {
         "es": "Cargar mas",
@@ -17364,7 +17424,8 @@
         "de": "Mehr laden",
         "ru": "Загрузить еще",
         "hi": "और लोड करें",
-        "ja": "さらに読み込む"
+        "ja": "さらに読み込む",
+        "zh": "加载更多"
     },
     "Coffee Pie Ads": {
         "es": "Coffee Pie Ads",
@@ -17374,7 +17435,8 @@
         "de": "Coffee Pie Ads",
         "ru": "Coffee Pie Ads",
         "hi": "Coffee Pie Ads",
-        "ja": "Coffee Pie Ads"
+        "ja": "Coffee Pie Ads",
+        "zh": "Coffee Pie Ads"
     },
     "Coffee Pie® Ads": {
         "es": "Coffee Pie® Ads",
@@ -17384,7 +17446,8 @@
         "de": "Coffee Pie® Ads",
         "ru": "Coffee Pie® Ads",
         "hi": "Coffee Pie® Ads",
-        "ja": "Coffee Pie® Ads"
+        "ja": "Coffee Pie® Ads",
+        "zh": "Coffee Pie® Ads"
     },
     "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.": {
         "es": "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.",
@@ -17394,7 +17457,8 @@
         "de": "Verbinden Sie X (Twitter)-Kampagnen für erweiterte Werbung und Segmentierung.",
         "ru": "Подключите кампании X (Twitter) для расширенного продвижения и сегментации.",
         "hi": "उन्नत प्रचार और विभाजन के लिए X (Twitter) अभियानों को कनेक्ट करें।",
-        "ja": "X（Twitter）キャンペーンを接続して、プロモーションと高度なセグメンテーションを行います。"
+        "ja": "X（Twitter）キャンペーンを接続して、プロモーションと高度なセグメンテーションを行います。",
+        "zh": "连接 X (Twitter) 广告系列以进行高级促销和细分。"
     },
     "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.": {
         "es": "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.",
@@ -17404,7 +17468,8 @@
         "de": "Verbinden Sie Ihr Google Analytics- oder Meta Ads-Konto, um Echtzeitdaten anzuzeigen.",
         "ru": "Подключите свою учетную запись Google Analytics или Meta Ads для просмотра данных в реальном времени.",
         "hi": "रीयल-टाइम डेटा देखने के लिए अपने Google Analytics या Meta Ads खाते को कनेक्ट करें।",
-        "ja": "GoogleアナリティクスまたはMeta Adsアカウントを接続して、リアルタイムのデータを表示します。"
+        "ja": "GoogleアナリティクスまたはMeta Adsアカウントを接続して、リアルタイムのデータを表示します。",
+        "zh": "连接您的 Google Analytics 或 Meta Ads 帐户以查看实时数据。"
     },
     "Conecta tus herramientas de marketing y automatizacion": {
         "es": "Conecta tus herramientas de marketing y automatizacion",
@@ -17414,7 +17479,8 @@
         "de": "Verbinden Sie Ihre Marketing- und Automatisierungstools",
         "ru": "Подключите свои инструменты маркетинга и автоматизации",
         "hi": "अपने मार्केटिंग और ऑटोमेशन टूल कनेक्ट करें",
-        "ja": "マーケティングと自動化ツールを接続する"
+        "ja": "マーケティングと自動化ツールを接続する",
+        "zh": "连接您的营销和自动化工具"
     },
     "Conectar": {
         "es": "Conectar",
@@ -17424,7 +17490,8 @@
         "de": "Verbinden",
         "ru": "Подключить",
         "hi": "कनेक्ट करें",
-        "ja": "接続する"
+        "ja": "接続する",
+        "zh": "连接"
     },
     "Configuración": {
         "es": "Configuración",
@@ -17434,7 +17501,8 @@
         "de": "Konfiguration",
         "ru": "Конфигурация",
         "hi": "कॉन्फ़िगरेशन",
-        "ja": "構成"
+        "ja": "構成",
+        "zh": "配置"
     },
     "Crea y gestiona tus campañas publicitarias": {
         "es": "Crea y gestiona tus campañas publicitarias",
@@ -17444,7 +17512,8 @@
         "de": "Erstellen und verwalten Sie Ihre Werbekampagnen",
         "ru": "Создавайте и управляйте своими рекламными кампаниями",
         "hi": "अपने विज्ञापन अभियान बनाएं और प्रबंधित करें",
-        "ja": "広告キャンペーンを作成および管理する"
+        "ja": "広告キャンペーンを作成および管理する",
+        "zh": "创建和管理您的广告系列"
     },
     "Crear Campaña": {
         "es": "Crear Campaña",
@@ -17454,7 +17523,8 @@
         "de": "Kampagne erstellen",
         "ru": "Создать кампанию",
         "hi": "अभियान बनाएं",
-        "ja": "キャンペーンを作成"
+        "ja": "キャンペーンを作成",
+        "zh": "创建广告系列"
     },
     "Crear Nueva Campaña": {
         "es": "Crear Nueva Campaña",
@@ -17464,7 +17534,8 @@
         "de": "Neue Kampagne erstellen",
         "ru": "Создать новую кампанию",
         "hi": "नया अभियान बनाएं",
-        "ja": "新しいキャンペーンを作成"
+        "ja": "新しいキャンペーンを作成",
+        "zh": "创建新广告系列"
     },
     "Crear Segmento": {
         "es": "Crear Segmento",
@@ -17474,7 +17545,8 @@
         "de": "Segment erstellen",
         "ru": "Создать сегмент",
         "hi": "सेगमेंट बनाएं",
-        "ja": "セグメントを作成"
+        "ja": "セグメントを作成",
+        "zh": "创建细分"
     },
     "Dashboard": {
         "es": "Dashboard",
@@ -17484,7 +17556,8 @@
         "de": "Dashboard",
         "ru": "Панель управления",
         "hi": "डैशबोर्ड",
-        "ja": "ダッシュボード"
+        "ja": "ダッシュボード",
+        "zh": "仪表板"
     },
     "Datos de Transferencia": {
         "es": "Datos de Transferencia",
@@ -17494,7 +17567,8 @@
         "de": "Transferdaten",
         "ru": "Данные о передаче",
         "hi": "ट्रांसफ़र डेटा",
-        "ja": "転送データ"
+        "ja": "転送データ",
+        "zh": "传输数据"
     },
     "Define segmentos demograficos para tus campañas": {
         "es": "Define segmentos demograficos para tus campañas",
@@ -17504,7 +17578,8 @@
         "de": "Definieren Sie demografische Segmente für Ihre Kampagnen",
         "ru": "Определите демографические сегменты для ваших кампаний",
         "hi": "अपने अभियानों के लिए जनसांख्यिकीय सेगमेंट परिभाषित करें",
-        "ja": "キャンペーンの人口統計セグメントを定義する"
+        "ja": "キャンペーンの人口統計セグメントを定義する",
+        "zh": "为您的广告系列定义人口统计细分"
     },
     "Desarrollo": {
         "es": "Desarrollo",
@@ -17514,7 +17589,8 @@
         "de": "Entwicklung",
         "ru": "Разработка",
         "hi": "विकास",
-        "ja": "開発"
+        "ja": "開発",
+        "zh": "开发"
     },
     "Directores, Admins | 35-60 | LATAM": {
         "es": "Directores, Admins | 35-60 | LATAM",
@@ -17524,7 +17600,8 @@
         "de": "Direktoren, Admins | 35-60 | LATAM",
         "ru": "Директора, Админы | 35-60 | LATAM",
         "hi": "निदेशक, एडमिन | 35-60 | LATAM",
-        "ja": "ディレクター、管理者 | 35-60 | LATAM"
+        "ja": "ディレクター、管理者 | 35-60 | LATAM",
+        "zh": "主管，管理员 | 35-60 | LATAM"
     },
     "Documentacion API": {
         "es": "Documentacion API",
@@ -17534,7 +17611,8 @@
         "de": "API-Dokumentation",
         "ru": "Документация API",
         "hi": "API दस्तावेज़",
-        "ja": "APIドキュメント"
+        "ja": "APIドキュメント",
+        "zh": "API 文档"
     },
     "Documentation": {
         "es": "Documentation",
@@ -17544,7 +17622,8 @@
         "de": "Documentation",
         "ru": "Документация",
         "hi": "दस्तावेज़ीकरण",
-        "ja": "ドキュメンテーション"
+        "ja": "ドキュメンテーション",
+        "zh": "文档"
     },
     "Duenos de negocio, 30-60 años": {
         "es": "Duenos de negocio, 30-60 años",
@@ -17554,7 +17633,8 @@
         "de": "Geschäftsinhaber, 30-60 Jahre",
         "ru": "Владельцы бизнеса, 30-60 лет",
         "hi": "व्यवसाय के मालिक, 30-60 वर्ष",
-        "ja": "事業主、30〜60歳"
+        "ja": "事業主、30〜60歳",
+        "zh": "企业主，30-60 岁"
     },
     "Duenos, Gerentes | 30-60 | LATAM": {
         "es": "Duenos, Gerentes | 30-60 | LATAM",
@@ -17564,7 +17644,8 @@
         "de": "Inhaber, Manager | 30-60 | LATAM",
         "ru": "Владельцы, Менеджеры | 30-60 | LATAM",
         "hi": "मालिक, प्रबंधक | 30-60 | LATAM",
-        "ja": "オーナー、マネージャー | 30-60 | LATAM"
+        "ja": "オーナー、マネージャー | 30-60 | LATAM",
+        "zh": "所有者，经理 | 30-60 | LATAM"
     },
     "Earth Day Promo": {
         "es": "Earth Day Promo",
@@ -17574,7 +17655,8 @@
         "de": "Earth Day Promo",
         "ru": "Earth Day Promo",
         "hi": "Earth Day Promo",
-        "ja": "Earth Day Promo"
+        "ja": "Earth Day Promo",
+        "zh": "Earth Day Promo"
     },
     "Eco-Impact": {
         "es": "Eco-Impact",
@@ -17584,7 +17666,8 @@
         "de": "Eco-Impact",
         "ru": "Эко-Влияние",
         "hi": "ईको-इम्पैक्ट",
-        "ja": "エコインパクト"
+        "ja": "エコインパクト",
+        "zh": "生态影响"
     },
     "Eliminar": {
         "es": "Eliminar",
@@ -17594,7 +17677,8 @@
         "de": "Löschen",
         "ru": "Удалить",
         "hi": "हटाएं",
-        "ja": "削除"
+        "ja": "削除",
+        "zh": "删除"
     },
     "Empresas Tecnologicas": {
         "es": "Empresas Tecnologicas",
@@ -17604,7 +17688,8 @@
         "de": "Technologieunternehmen",
         "ru": "Технологические компании",
         "hi": "प्रौद्योगिकी कंपनियां",
-        "ja": "テクノロジー企業"
+        "ja": "テクノロジー企業",
+        "zh": "科技公司"
     },
     "En Mantenimiento": {
         "es": "En Mantenimiento",
@@ -17614,7 +17699,8 @@
         "de": "In Wartung",
         "ru": "На техническом обслуживании",
         "hi": "रखरखाव में",
-        "ja": "メンテナンス中"
+        "ja": "メンテナンス中",
+        "zh": "维护中"
     },
     "Engagement - $75/dia - Pausada": {
         "es": "Engagement - $75/dia - Pausada",
@@ -17624,7 +17710,8 @@
         "de": "Engagement - 75$/Tag - Pausiert",
         "ru": "Вовлеченность - 75$/день - Приостановлена",
         "hi": "Engagement - $75/दिन - रोकी गई",
-        "ja": "エンゲージメント - $75/日 - 一時停止"
+        "ja": "エンゲージメント - $75/日 - 一時停止",
+        "zh": "互动率 - $75/天 - 已暂停"
     },
     "Escanea el código QR con tu app Bancolombia para pagar tu carrito": {
         "es": "Escanea el código QR con tu app Bancolombia para pagar tu carrito",
@@ -17634,7 +17721,8 @@
         "de": "Scannen Sie den QR-Code mit Ihrer Bancolombia-App, um Ihren Warenkorb zu bezahlen",
         "ru": "Отсканируйте QR-код в приложении Bancolombia, чтобы оплатить корзину",
         "hi": "अपने कार्ट का भुगतान करने के लिए अपने Bancolombia ऐप से QR कोड को स्कैन करें",
-        "ja": "BancolombiaアプリでQRコードをスキャンしてカートの支払いをします"
+        "ja": "BancolombiaアプリでQRコードをスキャンしてカートの支払いをします",
+        "zh": "使用 Bancolombia 应用程序扫描二维码支付购物车中的商品"
     },
     "Estudiantes, 16-30 años": {
         "es": "Estudiantes, 16-30 años",
@@ -17644,7 +17732,8 @@
         "de": "Studenten, 16-30 Jahre",
         "ru": "Студенты, 16-30 лет",
         "hi": "छात्र, 16-30 वर्ष",
-        "ja": "学生、16〜30歳"
+        "ja": "学生、16〜30歳",
+        "zh": "学生，16-30 岁"
     },
     "Estudiantes, Freelancers | 16-30 | Global": {
         "es": "Estudiantes, Freelancers | 16-30 | Global",
@@ -17654,7 +17743,8 @@
         "de": "Studenten, Freiberufler | 16-30 | Global",
         "ru": "Студенты, Фрилансеры | 16-30 | Global",
         "hi": "छात्र, फ्रीलांसर | 16-30 | Global",
-        "ja": "学生、フリーランサー | 16-30 | Global"
+        "ja": "学生、フリーランサー | 16-30 | Global",
+        "zh": "学生，自由职业者 | 16-30 | Global"
     },
     "Excel (.xlsx)": {
         "es": "Excel (.xlsx)",
@@ -17664,7 +17754,8 @@
         "de": "Excel (.xlsx)",
         "ru": "Excel (.xlsx)",
         "hi": "Excel (.xlsx)",
-        "ja": "Excel (.xlsx)"
+        "ja": "Excel (.xlsx)",
+        "zh": "Excel (.xlsx)"
     },
     "Exportar CSV": {
         "es": "Exportar CSV",
@@ -17674,7 +17765,8 @@
         "de": "CSV exportieren",
         "ru": "Экспорт CSV",
         "hi": "CSV निर्यात करें",
-        "ja": "CSVをエクスポート"
+        "ja": "CSVをエクスポート",
+        "zh": "导出 CSV"
     },
     "Exportar Configuracion": {
         "es": "Exportar Configuracion",
@@ -17684,7 +17776,8 @@
         "de": "Konfiguration exportieren",
         "ru": "Экспорт конфигурации",
         "hi": "कॉन्फ़िगरेशन निर्यात करें",
-        "ja": "構成をエクスポート"
+        "ja": "構成をエクスポート",
+        "zh": "导出配置"
     },
     "Exportar Todo": {
         "es": "Exportar Todo",
@@ -17694,7 +17787,8 @@
         "de": "Alles exportieren",
         "ru": "Экспортировать все",
         "hi": "सब कुछ निर्यात करें",
-        "ja": "すべてエクスポート"
+        "ja": "すべてエクスポート",
+        "zh": "全部导出"
     },
     "Facturación": {
         "es": "Facturación",
@@ -17704,7 +17798,8 @@
         "de": "Abrechnung",
         "ru": "Счета",
         "hi": "बिलिंग",
-        "ja": "請求"
+        "ja": "請求",
+        "zh": "账单"
     },
     "Generar Nueva Clave": {
         "es": "Generar Nueva Clave",
@@ -17714,7 +17809,8 @@
         "de": "Neuen Schlüssel generieren",
         "ru": "Сгенерировать новый ключ",
         "hi": "नई कुंजी जनरेट करें",
-        "ja": "新しいキーを生成"
+        "ja": "新しいキーを生成",
+        "zh": "生成新密钥"
     },
     "Gestiona tu informacion personal y metodos de pago": {
         "es": "Gestiona tu informacion personal y metodos de pago",
@@ -17724,7 +17820,8 @@
         "de": "Verwalten Sie Ihre persönlichen Daten und Zahlungsmethoden",
         "ru": "Управляйте своей личной информацией и способами оплаты",
         "hi": "अपनी व्यक्तिगत जानकारी और भुगतान विधियों का प्रबंधन करें",
-        "ja": "個人情報とお支払い方法を管理する"
+        "ja": "個人情報とお支払い方法を管理する",
+        "zh": "管理您的个人信息和付款方式"
     },
     "Gestionar": {
         "es": "Gestionar",
@@ -17734,7 +17831,8 @@
         "de": "Verwalten",
         "ru": "Управлять",
         "hi": "प्रबंधित करें",
-        "ja": "管理する"
+        "ja": "管理する",
+        "zh": "管理"
     },
     "Google Ads": {
         "es": "Google Ads",
@@ -17744,7 +17842,8 @@
         "de": "Google Ads",
         "ru": "Google Ads",
         "hi": "Google Ads",
-        "ja": "Google Ads"
+        "ja": "Google Ads",
+        "zh": "Google Ads"
     },
     "Guardar Cambios": {
         "es": "Guardar Cambios",
@@ -17754,7 +17853,8 @@
         "de": "Änderungen speichern",
         "ru": "Сохранить изменения",
         "hi": "परिवर्तन सहेजें",
-        "ja": "変更を保存"
+        "ja": "変更を保存",
+        "zh": "保存更改"
     },
     "Guardar Configuracion Avanzada": {
         "es": "Guardar Configuracion Avanzada",
@@ -17764,7 +17864,8 @@
         "de": "Erweiterte Konfiguration speichern",
         "ru": "Сохранить расширенные настройки",
         "hi": "उन्नत कॉन्फ़िगरेशन सहेजें",
-        "ja": "詳細設定を保存"
+        "ja": "詳細設定を保存",
+        "zh": "保存高级配置"
     },
     "Guardar Preferencias": {
         "es": "Guardar Preferencias",
@@ -17774,7 +17875,8 @@
         "de": "Einstellungen speichern",
         "ru": "Сохранить настройки",
         "hi": "प्राथमिकताएं सहेजें",
-        "ja": "設定を保存"
+        "ja": "設定を保存",
+        "zh": "保存首选项"
     },
     "Historial de Facturas": {
         "es": "Historial de Facturas",
@@ -17784,7 +17886,8 @@
         "de": "Rechnungsverlauf",
         "ru": "История счетов",
         "hi": "बिलिंग इतिहास",
-        "ja": "請求履歴"
+        "ja": "請求履歴",
+        "zh": "发票历史"
     },
     "Historial de facturas y documentos fiscales": {
         "es": "Historial de facturas y documentos fiscales",
@@ -17794,7 +17897,8 @@
         "de": "Verlauf von Rechnungen und Steuerdokumenten",
         "ru": "История счетов и налоговых документов",
         "hi": "चालान और कर दस्तावेजों का इतिहास",
-        "ja": "請求書と税務書類の履歴"
+        "ja": "請求書と税務書類の履歴",
+        "zh": "发票和税务文件历史"
     },
     "IT Managers, CTOs - 25-55 años": {
         "es": "IT Managers, CTOs - 25-55 años",
@@ -17804,7 +17908,8 @@
         "de": "IT-Manager, CTOs - 25-55 Jahre",
         "ru": "IT-менеджеры, Технические директора - 25-55 лет",
         "hi": "IT प्रबंधक, CTO - 25-55 वर्ष",
-        "ja": "ITマネージャー、CTO - 25-55歳"
+        "ja": "ITマネージャー、CTO - 25-55歳",
+        "zh": "IT 经理，CTO - 25-55 岁"
     },
     "IT Managers, CTOs | 25-55 | LATAM, NA": {
         "es": "IT Managers, CTOs | 25-55 | LATAM, NA",
@@ -17814,7 +17919,8 @@
         "de": "IT-Manager, CTOs | 25-55 | LATAM, NA",
         "ru": "IT-менеджеры, Технические директора | 25-55 | LATAM, NA",
         "hi": "IT प्रबंधक, CTO | 25-55 | LATAM, NA",
-        "ja": "ITマネージャー、CTO | 25-55 | LATAM, NA"
+        "ja": "ITマネージャー、CTO | 25-55 | LATAM, NA",
+        "zh": "IT 经理，CTO | 25-55 | LATAM, NA"
     },
     "Impresiones Hoy": {
         "es": "Impresiones Hoy",
@@ -17824,7 +17930,8 @@
         "de": "Impressionen Heute",
         "ru": "Показов за сегодня",
         "hi": "आज के इंप्रेशन",
-        "ja": "今日のインプレッション"
+        "ja": "今日のインプレッション",
+        "zh": "今日展示次数"
     },
     "Informacion de Contacto": {
         "es": "Informacion de Contacto",
@@ -17834,7 +17941,8 @@
         "de": "Kontaktinformationen",
         "ru": "Контактная информация",
         "hi": "संपर्क जानकारी",
-        "ja": "連絡先情報"
+        "ja": "連絡先情報",
+        "zh": "联系信息"
     },
     "Inicio: 01/04/2026 - 4 assets": {
         "es": "Inicio: 01/04/2026 - 4 assets",
@@ -17844,7 +17952,8 @@
         "de": "Start: 01/04/2026 - 4 assets",
         "ru": "Начало: 01/04/2026 - 4 assets",
         "hi": "प्रारंभ: 01/04/2026 - 4 assets",
-        "ja": "開始: 2026/04/01 - 4 assets"
+        "ja": "開始: 2026/04/01 - 4 assets",
+        "zh": "开始: 2026/04/01 - 4 assets"
     },
     "Inicio: 15/03/2026 - 7 assets": {
         "es": "Inicio: 15/03/2026 - 7 assets",
@@ -17854,7 +17963,8 @@
         "de": "Start: 15/03/2026 - 7 assets",
         "ru": "Начало: 15/03/2026 - 7 assets",
         "hi": "प्रारंभ: 15/03/2026 - 7 assets",
-        "ja": "開始: 2026/03/15 - 7 assets"
+        "ja": "開始: 2026/03/15 - 7 assets",
+        "zh": "开始: 2026/03/15 - 7 assets"
     },
     "Instituciones Educativas": {
         "es": "Instituciones Educativas",
@@ -17864,7 +17974,8 @@
         "de": "Bildungseinrichtungen",
         "ru": "Образовательные учреждения",
         "hi": "शैक्षणिक संस्थान",
-        "ja": "教育機関"
+        "ja": "教育機関",
+        "zh": "教育机构"
     },
     "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.": {
         "es": "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.",
@@ -17874,7 +17985,8 @@
         "de": "Integrieren Sie Facebook, Instagram und Messenger Ads in Ihr Werbekonto.",
         "ru": "Интегрируйте рекламу в Facebook, Instagram и Messenger со своим рекламным аккаунтом.",
         "hi": "अपने विज्ञापन खाते के साथ Facebook, Instagram और Messenger विज्ञापनों को एकीकृत करें।",
-        "ja": "Facebook、Instagram、Messengerの広告を広告アカウントと統合します。"
+        "ja": "Facebook、Instagram、Messengerの広告を広告アカウントと統合します。",
+        "zh": "将 Facebook、Instagram 和 Messenger 广告与您的广告帐户集成。"
     },
     "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.": {
         "es": "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.",
@@ -17884,7 +17996,8 @@
         "de": "Integrieren Sie den TikTok Ads Manager für virale Kampagnen und junge Zielgruppen.",
         "ru": "Интегрируйте TikTok Ads Manager для вирусных кампаний и молодой аудитории.",
         "hi": "वायरल अभियानों और युवा दर्शकों के लिए TikTok Ads Manager को एकीकृत करें।",
-        "ja": "バイラルキャンペーンと若いオーディエンスのためにTikTok Ads Managerを統合します。"
+        "ja": "バイラルキャンペーンと若いオーディエンスのためにTikTok Ads Managerを統合します。",
+        "zh": "集成 TikTok 广告管理器，用于病毒式营销活动和年轻受众。"
     },
     "Integraciones API": {
         "es": "Integraciones API",
@@ -17894,7 +18007,8 @@
         "de": "API-Integrationen",
         "ru": "Интеграции API",
         "hi": "API एकीकरण",
-        "ja": "API統合"
+        "ja": "API統合",
+        "zh": "API 集成"
     },
     "JSON (.json)": {
         "es": "JSON (.json)",
@@ -17904,7 +18018,8 @@
         "de": "JSON (.json)",
         "ru": "JSON (.json)",
         "hi": "JSON (.json)",
-        "ja": "JSON (.json)"
+        "ja": "JSON (.json)",
+        "zh": "JSON (.json)"
     },
     "Jovenes Gamers": {
         "es": "Jovenes Gamers",
@@ -17914,7 +18029,8 @@
         "de": "Junge Gamer",
         "ru": "Молодые геймеры",
         "hi": "युवा गेमर्स",
-        "ja": "若いゲーマー"
+        "ja": "若いゲーマー",
+        "zh": "年轻游戏玩家"
     },
     "Lanzamiento Q2 - Terminal Pro": {
         "es": "Lanzamiento Q2 - Terminal Pro",
@@ -17924,7 +18040,8 @@
         "de": "Q2 Start - Terminal Pro",
         "ru": "Запуск Q2 - Terminal Pro",
         "hi": "Q2 लॉन्च - Terminal Pro",
-        "ja": "第2四半期リリース - Terminal Pro"
+        "ja": "第2四半期リリース - Terminal Pro",
+        "zh": "第二季度发布 - Terminal Pro"
     },
     "Los graficos detallados de rendimiento estaran disponibles aqui.": {
         "es": "Los graficos detallados de rendimiento estaran disponibles aqui.",
@@ -17934,7 +18051,8 @@
         "de": "Detaillierte Leistungsdiagramme werden hier verfügbar sein.",
         "ru": "Подробные графики производительности будут доступны здесь.",
         "hi": "विस्तृत प्रदर्शन चार्ट यहाँ उपलब्ध होंगे।",
-        "ja": "詳細なパフォーマンスグラフがここに表示されます。"
+        "ja": "詳細なパフォーマンスグラフがここに表示されます。",
+        "zh": "详细的性能图表将在此处提供。"
     },
     "MP4 0:15": {
         "es": "MP4 0:15",
@@ -17944,7 +18062,8 @@
         "de": "MP4 0:15",
         "ru": "MP4 0:15",
         "hi": "MP4 0:15",
-        "ja": "MP4 0:15"
+        "ja": "MP4 0:15",
+        "zh": "MP4 0:15"
     },
     "MP4 2:30": {
         "es": "MP4 2:30",
@@ -17954,7 +18073,8 @@
         "de": "MP4 2:30",
         "ru": "MP4 2:30",
         "hi": "MP4 2:30",
-        "ja": "MP4 2:30"
+        "ja": "MP4 2:30",
+        "zh": "MP4 2:30"
     },
     "Mastercard | Expira 06/27": {
         "es": "Mastercard | Expira 06/27",
@@ -17964,7 +18084,8 @@
         "de": "Mastercard | Läuft ab 06/27",
         "ru": "Mastercard | Срок действия до 06/27",
         "hi": "Mastercard | 06/27 को समाप्त",
-        "ja": "Mastercard | 有効期限 06/27"
+        "ja": "Mastercard | 有効期限 06/27",
+        "zh": "Mastercard | 到期 06/27"
     },
     "Meta Ads": {
         "es": "Meta Ads",
@@ -17974,7 +18095,8 @@
         "de": "Meta Ads",
         "ru": "Meta Ads",
         "hi": "Meta Ads",
-        "ja": "Meta Ads"
+        "ja": "Meta Ads",
+        "zh": "Meta Ads"
     },
     "Metodos de Pago": {
         "es": "Metodos de Pago",
@@ -17984,7 +18106,8 @@
         "de": "Zahlungsmethoden",
         "ru": "Способы оплаты",
         "hi": "भुगतान की विधि",
-        "ja": "お支払い方法"
+        "ja": "お支払い方法",
+        "zh": "付款方式"
     },
     "Mi cuenta": {
         "es": "Mi cuenta",
@@ -17994,7 +18117,8 @@
         "de": "Mein Konto",
         "ru": "Мой аккаунт",
         "hi": "मेरा खाता",
-        "ja": "マイアカウント"
+        "ja": "マイアカウント",
+        "zh": "我的帐户"
     },
     "Notificaciones": {
         "es": "Notificaciones",
@@ -18004,7 +18128,8 @@
         "de": "Benachrichtigungen",
         "ru": "Уведомления",
         "hi": "सूचनाएं",
-        "ja": "通知"
+        "ja": "通知",
+        "zh": "通知"
     },
     "Nueva Campaña": {
         "es": "Nueva Campaña",
@@ -18014,7 +18139,8 @@
         "de": "Neue Kampagne",
         "ru": "Новая кампания",
         "hi": "नया अभियान",
-        "ja": "新しいキャンペーン"
+        "ja": "新しいキャンペーン",
+        "zh": "新广告系列"
     },
     "Nuevas funcionalidades y mejoras del servicio": {
         "es": "Nuevas funcionalidades y mejoras del servicio",
@@ -18024,7 +18150,8 @@
         "de": "Neue Funktionen und Serviceverbesserungen",
         "ru": "Новые функции и улучшения сервиса",
         "hi": "नई सुविधाएँ और सेवा सुधार",
-        "ja": "新機能とサービスの改善"
+        "ja": "新機能とサービスの改善",
+        "zh": "新功能和服务改进"
     },
     "Nuevo Segmento": {
         "es": "Nuevo Segmento",
@@ -18034,7 +18161,8 @@
         "de": "Neues Segment",
         "ru": "Новый сегмент",
         "hi": "नया सेगमेंट",
-        "ja": "新しいセグメント"
+        "ja": "新しいセグメント",
+        "zh": "新细分"
     },
     "PDF (.pdf)": {
         "es": "PDF (.pdf)",
@@ -18044,7 +18172,8 @@
         "de": "PDF (.pdf)",
         "ru": "PDF (.pdf)",
         "hi": "PDF (.pdf)",
-        "ja": "PDF (.pdf)"
+        "ja": "PDF (.pdf)",
+        "zh": "PDF (.pdf)"
     },
     "PNG 800x600": {
         "es": "PNG 800x600",
@@ -18054,7 +18183,8 @@
         "de": "PNG 800x600",
         "ru": "PNG 800x600",
         "hi": "PNG 800x600",
-        "ja": "PNG 800x600"
+        "ja": "PNG 800x600",
+        "zh": "PNG 800x600"
     },
     "PNG, JPG, MP4, WebM, PDF (max 250MB)": {
         "es": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
@@ -18064,7 +18194,8 @@
         "de": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
         "ru": "PNG, JPG, MP4, WebM, PDF (макс. 250MB)",
         "hi": "PNG, JPG, MP4, WebM, PDF (अधिकतम 250MB)",
-        "ja": "PNG, JPG, MP4, WebM, PDF (最大 250MB)"
+        "ja": "PNG, JPG, MP4, WebM, PDF (最大 250MB)",
+        "zh": "PNG, JPG, MP4, WebM, PDF (最大 250MB)"
     },
     "Pagada": {
         "es": "Pagada",
@@ -18074,7 +18205,8 @@
         "de": "Bezahlt",
         "ru": "Оплачено",
         "hi": "भुगतान किया गया",
-        "ja": "支払い済み"
+        "ja": "支払い済み",
+        "zh": "已付款"
     },
     "Pago Rechazado": {
         "es": "Pago Rechazado",
@@ -18084,7 +18216,8 @@
         "de": "Zahlung abgelehnt",
         "ru": "Платеж отклонен",
         "hi": "भुगतान अस्वीकृत",
-        "ja": "支払いが拒否されました"
+        "ja": "支払いが拒否されました",
+        "zh": "付款被拒绝"
     },
     "Panel de Gestion para Agencias y Departamentos de Marketing": {
         "es": "Panel de Gestion para Agencias y Departamentos de Marketing",
@@ -18094,7 +18227,8 @@
         "de": "Verwaltungspanel für Agenturen und Marketingabteilungen",
         "ru": "Панель управления для агентств и отделов маркетинга",
         "hi": "एजेंसियों और मार्केटिंग विभागों के लिए प्रबंधन पैनल",
-        "ja": "代理店およびマーケティング部門向けの管理パネル"
+        "ja": "代理店およびマーケティング部門向けの管理パネル",
+        "zh": "针对代理商和营销部门的管理面板"
     },
     "Pausada - 3 assets": {
         "es": "Pausada - 3 assets",
@@ -18104,7 +18238,8 @@
         "de": "Pausiert - 3 assets",
         "ru": "Приостановлена - 3 актива",
         "hi": "रोकी गई - 3 assets",
-        "ja": "一時停止 - 3 assets"
+        "ja": "一時停止 - 3 assets",
+        "zh": "已暂停 - 3 assets"
     },
     "Personaliza tu experiencia y ajustes de integracion": {
         "es": "Personaliza tu experiencia y ajustes de integracion",
@@ -18114,7 +18249,8 @@
         "de": "Personalisieren Sie Ihre Erfahrung und Integrationseinstellungen",
         "ru": "Персонализируйте свой опыт и настройки интеграции",
         "hi": "अपने अनुभव और एकीकरण सेटिंग्स को कस्टमाइज़ करें",
-        "ja": "エクスペリエンスと統合設定をカスタマイズする"
+        "ja": "エクスペリエンスと統合設定をカスタマイズする",
+        "zh": "自定义您的体验和集成设置"
     },
     "Personalizacion Avanzada": {
         "es": "Personalizacion Avanzada",
@@ -18124,7 +18260,8 @@
         "de": "Erweiterte Anpassung",
         "ru": "Расширенная настройка",
         "hi": "उन्नत अनुकूलन",
-        "ja": "高度なカスタマイズ"
+        "ja": "高度なカスタマイズ",
+        "zh": "高级自定义"
     },
     "Predeterminada": {
         "es": "Predeterminada",
@@ -18134,7 +18271,8 @@
         "de": "Standard",
         "ru": "По умолчанию",
         "hi": "डिफ़ॉल्ट",
-        "ja": "デフォルト"
+        "ja": "デフォルト",
+        "zh": "默认"
     },
     "Preferencias Generales": {
         "es": "Preferencias Generales",
@@ -18144,7 +18282,8 @@
         "de": "Allgemeine Einstellungen",
         "ru": "Общие настройки",
         "hi": "सामान्य प्राथमिकताएं",
-        "ja": "一般設定"
+        "ja": "一般設定",
+        "zh": "常规首选项"
     },
     "Pricing-Slide": {
         "es": "Pricing-Slide",
@@ -18154,7 +18293,8 @@
         "de": "Pricing-Slide",
         "ru": "Pricing-Slide",
         "hi": "Pricing-Slide",
-        "ja": "Pricing-Slide"
+        "ja": "Pricing-Slide",
+        "zh": "Pricing-Slide"
     },
     "Produccion": {
         "es": "Produccion",
@@ -18164,7 +18304,8 @@
         "de": "Produktion",
         "ru": "Производство",
         "hi": "उत्पादन",
-        "ja": "本番環境"
+        "ja": "本番環境",
+        "zh": "生产"
     },
     "PyMEs LATAM": {
         "es": "PyMEs LATAM",
@@ -18174,7 +18315,8 @@
         "de": "KMU LATAM",
         "ru": "МСБ LATAM",
         "hi": "SME LATAM",
-        "ja": "中小企業 LATAM"
+        "ja": "中小企業 LATAM",
+        "zh": "中小企业 LATAM"
     },
     "QFDM-Explainer": {
         "es": "QFDM-Explainer",
@@ -18184,7 +18326,8 @@
         "de": "QFDM-Explainer",
         "ru": "QFDM-Explainer",
         "hi": "QFDM-Explainer",
-        "ja": "QFDM-Explainer"
+        "ja": "QFDM-Explainer",
+        "zh": "QFDM-Explainer"
     },
     "QR de pago — referencia única": {
         "es": "QR de pago — referencia única",
@@ -18194,7 +18337,8 @@
         "de": "Zahlungs-QR — eindeutige Referenz",
         "ru": "QR-код для оплаты — уникальный идентификатор",
         "hi": "भुगतान QR — अद्वितीय संदर्भ",
-        "ja": "支払いQR — 一意の参照"
+        "ja": "支払いQR — 一意の参照",
+        "zh": "付款二维码 — 唯一参考"
     },
     "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.": {
         "es": "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.",
@@ -18204,7 +18348,8 @@
         "de": "A: Im Fehlerfall können Sie sich an den technischen Support von Coffee Pie® wenden, um Hilfe oder Beratung zu erhalten. Da es sich um modulare Geräte handelt, ist es außerdem je nach Fehlerursache sehr wahrscheinlich, dass Sie bestimmte Komponenten austauschen können, ohne ein weiteres Terminal anfordern zu müssen.",
         "ru": "О: В случае возникновения неполадок вы можете обратиться в службу технической поддержки Coffee Pie® за помощью или консультацией. Кроме того, поскольку это модульные устройства, в зависимости от причины неисправности вполне вероятно, что вы сможете заменить отдельные компоненты без необходимости запрашивать другой терминал.",
         "hi": "उत्तर: खराबी के मामले में, आप सहायता या मार्गदर्शन के लिए Coffee Pie® तकनीकी सहायता से संपर्क कर सकते हैं। इसके अतिरिक्त, मॉड्यूलर उपकरण होने के कारण, खराबी की उत्पत्ति के आधार पर, यह बहुत संभव है कि आप किसी अन्य टर्मिनल का अनुरोध किए बिना विशिष्ट घटकों को बदल सकें।",
-        "ja": "A：故障の場合は、Coffee Pie® テクニカルサポートに連絡して、サポートやガイダンスを受けることができます。さらに、モジュール式デバイスであるため、故障の原因によっては、別のターミナルをリクエストすることなく、特定のコンポーネントを交換できる可能性が高くなります。"
+        "ja": "A：故障の場合は、Coffee Pie® テクニカルサポートに連絡して、サポートやガイダンスを受けることができます。さらに、モジュール式デバイスであるため、故障の原因によっては、別のターミナルをリクエストすることなく、特定のコンポーネントを交換できる可能性が高くなります。",
+        "zh": "答：如遇故障，您可以联系 Coffee Pie® 技术支持寻求帮助或指导。此外，由于它是模块化设备，根据故障原因，您很可能可以直接更换特定组件，而无需申请更换整个终端。"
     },
     "Recibe notificaciones cuando una campaña alcance su presupuesto": {
         "es": "Recibe notificaciones cuando una campaña alcance su presupuesto",
@@ -18214,7 +18359,8 @@
         "de": "Erhalten Sie Benachrichtigungen, wenn eine Kampagne ihr Budget erreicht",
         "ru": "Получайте уведомления, когда кампания достигает своего бюджета",
         "hi": "जब कोई अभियान अपने बजट तक पहुँच जाए तो सूचनाएं प्राप्त करें",
-        "ja": "キャンペーンが予算に達したときに通知を受け取る"
+        "ja": "キャンペーンが予算に達したときに通知を受け取る",
+        "zh": "当广告系列达到预算时接收通知"
     },
     "Recibe un resumen de rendimiento cada lunes": {
         "es": "Recibe un resumen de rendimiento cada lunes",
@@ -18224,7 +18370,8 @@
         "de": "Erhalten Sie jeden Montag eine Leistungszusammenfassung",
         "ru": "Получайте сводку эффективности каждый понедельник",
         "hi": "हर सोमवार को एक प्रदर्शन सारांश प्राप्त करें",
-        "ja": "毎週月曜日にパフォーマンスの概要を受け取る"
+        "ja": "毎週月曜日にパフォーマンスの概要を受け取る",
+        "zh": "每周一接收性能摘要"
     },
     "Reconocimiento - $50/dia - Desde 01/04": {
         "es": "Reconocimiento - $50/dia - Desde 01/04",
@@ -18234,7 +18381,8 @@
         "de": "Bekanntheit - 50$/Tag - Seit 01/04",
         "ru": "Осведомленность - 50$/день - С 01/04",
         "hi": "जागरूकता - $50/दिन - 01/04 से",
-        "ja": "認知度 - $50/日 - 01/04から"
+        "ja": "認知度 - $50/日 - 01/04から",
+        "zh": "品牌知名度 - $50/天 - 从 01/04 开始"
     },
     "Reconocimiento - Borrador": {
         "es": "Reconocimiento - Borrador",
@@ -18244,7 +18392,8 @@
         "de": "Bekanntheit - Entwurf",
         "ru": "Осведомленность - Черновик",
         "hi": "जागरूकता - ड्राफ्ट",
-        "ja": "認知度 - 下書き"
+        "ja": "認知度 - 下書き",
+        "zh": "品牌知名度 - 草稿"
     },
     "Referencia": {
         "es": "Referencia",
@@ -18254,7 +18403,8 @@
         "de": "Referenz",
         "ru": "Ссылка",
         "hi": "संदर्भ",
-        "ja": "参照"
+        "ja": "参照",
+        "zh": "参考"
     },
     "Reportes": {
         "es": "Reportes",
@@ -18264,7 +18414,8 @@
         "de": "Berichte",
         "ru": "Отчеты",
         "hi": "रिपोर्ट",
-        "ja": "レポート"
+        "ja": "レポート",
+        "zh": "报告"
     },
     "Resumen de Rendimiento": {
         "es": "Resumen de Rendimiento",
@@ -18274,7 +18425,8 @@
         "de": "Leistungszusammenfassung",
         "ru": "Сводка эффективности",
         "hi": "प्रदर्शन सारांश",
-        "ja": "パフォーマンスの概要"
+        "ja": "パフォーマンスの概要",
+        "zh": "性能摘要"
     },
     "Segmentacion": {
         "es": "Segmentacion",
@@ -18284,7 +18436,8 @@
         "de": "Segmentierung",
         "ru": "Сегментация",
         "hi": "विभाजन",
-        "ja": "セグメンテーション"
+        "ja": "セグメンテーション",
+        "zh": "细分"
     },
     "Segmentacion de Audiencias": {
         "es": "Segmentacion de Audiencias",
@@ -18294,7 +18447,8 @@
         "de": "Zielgruppensegmentierung",
         "ru": "Сегментация аудитории",
         "hi": "दर्शक विभाजन",
-        "ja": "オーディエンスのセグメンテーション"
+        "ja": "オーディエンスのセグメンテーション",
+        "zh": "受众细分"
     },
     "Segmentos Activos": {
         "es": "Segmentos Activos",
@@ -18304,7 +18458,8 @@
         "de": "Aktive Segmente",
         "ru": "Активные сегменты",
         "hi": "सक्रिय सेगमेंट",
-        "ja": "アクティブなセグメント"
+        "ja": "アクティブなセグメント",
+        "zh": "有效细分"
     },
     "Segmentos Definidos": {
         "es": "Segmentos Definidos",
@@ -18314,7 +18469,8 @@
         "de": "Definierte Segmente",
         "ru": "Определенные сегменты",
         "hi": "परिभाषित सेगमेंट",
-        "ja": "定義されたセグメント"
+        "ja": "定義されたセグメント",
+        "zh": "已定义的细分"
     },
     "Seguridad": {
         "es": "Seguridad",
@@ -18324,7 +18480,8 @@
         "de": "Sicherheit",
         "ru": "Безопасность",
         "hi": "सुरक्षा",
-        "ja": "セキュリティ"
+        "ja": "セキュリティ",
+        "zh": "安全"
     },
     "Simple": {
         "es": "Simple",
@@ -18334,7 +18491,8 @@
         "de": "Einfach",
         "ru": "Простой",
         "hi": "सरल",
-        "ja": "シンプル"
+        "ja": "シンプル",
+        "zh": "简单"
     },
     "Sincroniza campanas, conversiones y remarketing via Conversion API.": {
         "es": "Sincroniza campanas, conversiones y remarketing via Conversion API.",
@@ -18344,7 +18502,8 @@
         "de": "Synchronisieren Sie Kampagnen, Conversions und Remarketing über die Conversion-API.",
         "ru": "Синхронизируйте кампании, конверсии и ремаркетинг через API конверсий.",
         "hi": "रूपांतरण API के माध्यम से अभियानों, रूपांतरणों और रीमार्केटिंग को सिंक्रनाइज़ करें।",
-        "ja": "Conversion APIを介してキャンペーン、コンバージョン、リマーケティングを同期します。"
+        "ja": "Conversion APIを介してキャンペーン、コンバージョン、リマーケティングを同期します。",
+        "zh": "通过转化 API 同步广告系列、转化和再营销。"
     },
     "Sube imagenes, videos y documentos para tus campañas": {
         "es": "Sube imagenes, videos y documentos para tus campañas",
@@ -18354,7 +18513,8 @@
         "de": "Laden Sie Bilder, Videos und Dokumente für Ihre Kampagnen hoch",
         "ru": "Загружайте изображения, видео и документы для своих кампаний",
         "hi": "अपने अभियानों के लिए चित्र, वीडियो और दस्तावेज़ अपलोड करें",
-        "ja": "キャンペーン用の画像、動画、ドキュメントをアップロードする"
+        "ja": "キャンペーン用の画像、動画、ドキュメントをアップロードする",
+        "zh": "为您的广告系列上传图片、视频和文档"
     },
     "Subir": {
         "es": "Subir",
@@ -18364,7 +18524,8 @@
         "de": "Hochladen",
         "ru": "Загрузить",
         "hi": "अपलोड करें",
-        "ja": "アップロード"
+        "ja": "アップロード",
+        "zh": "上传"
     },
     "Subir Activo": {
         "es": "Subir Activo",
@@ -18374,7 +18535,8 @@
         "de": "Asset hochladen",
         "ru": "Загрузить актив",
         "hi": "एसेट अपलोड करें",
-        "ja": "アセットをアップロード"
+        "ja": "アセットをアップロード",
+        "zh": "上传资产"
     },
     "Subir Nuevo Activo": {
         "es": "Subir Nuevo Activo",
@@ -18384,7 +18546,8 @@
         "de": "Neues Asset hochladen",
         "ru": "Загрузить новый актив",
         "hi": "नया एसेट अपलोड करें",
-        "ja": "新しいアセットをアップロード"
+        "ja": "新しいアセットをアップロード",
+        "zh": "上传新资产"
     },
     "Tech Summit Sponsorship": {
         "es": "Tech Summit Sponsorship",
@@ -18394,7 +18557,8 @@
         "de": "Tech Summit Sponsorship",
         "ru": "Tech Summit Sponsorship",
         "hi": "Tech Summit Sponsorship",
-        "ja": "Tech Summit Sponsorship"
+        "ja": "Tech Summit Sponsorship",
+        "zh": "Tech Summit Sponsorship"
     },
     "Terminal-Pro-Banner": {
         "es": "Terminal-Pro-Banner",
@@ -18404,7 +18568,8 @@
         "de": "Terminal-Pro-Banner",
         "ru": "Terminal-Pro-Banner",
         "hi": "Terminal-Pro-Banner",
-        "ja": "Terminal-Pro-Banner"
+        "ja": "Terminal-Pro-Banner",
+        "zh": "Terminal-Pro-Banner"
     },
     "TikTok Ads": {
         "es": "TikTok Ads",
@@ -18414,7 +18579,8 @@
         "de": "TikTok Ads",
         "ru": "TikTok Ads",
         "hi": "TikTok Ads",
-        "ja": "TikTok Ads"
+        "ja": "TikTok Ads",
+        "zh": "TikTok Ads"
     },
     "Tipo de Cuenta": {
         "es": "Tipo de Cuenta",
@@ -18424,7 +18590,8 @@
         "de": "Kontotyp",
         "ru": "Тип аккаунта",
         "hi": "खाता प्रकार",
-        "ja": "アカウントタイプ"
+        "ja": "アカウントタイプ",
+        "zh": "帐户类型"
     },
     "Titular": {
         "es": "Titular",
@@ -18434,7 +18601,8 @@
         "de": "Inhaber",
         "ru": "Владелец",
         "hi": "कार्डधारक",
-        "ja": "名義人"
+        "ja": "名義人",
+        "zh": "持卡人"
     },
     "Total del carrito": {
         "es": "Total del carrito",
@@ -18444,7 +18612,8 @@
         "de": "Gesamtsumme des Warenkorbs",
         "ru": "Итого в корзине",
         "hi": "कार्ट का कुल योग",
-        "ja": "カートの合計"
+        "ja": "カートの合計",
+        "zh": "购物车总计"
     },
     "Trafico - $120/dia - Desde 15/03": {
         "es": "Trafico - $120/dia - Desde 15/03",
@@ -18454,7 +18623,8 @@
         "de": "Traffic - 120$/Tag - Seit 15/03",
         "ru": "Трафик - 120$/день - С 15/03",
         "hi": "ट्रैफ़िक - $120/दिन - 15/03 से",
-        "ja": "トラフィック - $120/日 - 15/03から"
+        "ja": "トラフィック - $120/日 - 15/03から",
+        "zh": "流量 - $120/天 - 从 15/03 开始"
     },
     "Tus Claves API": {
         "es": "Tus Claves API",
@@ -18464,7 +18634,8 @@
         "de": "Ihre API-Schlüssel",
         "ru": "Ваши ключи API",
         "hi": "आपकी API कुंजियाँ",
-        "ja": "あなたのAPIキー"
+        "ja": "あなたのAPIキー",
+        "zh": "您的 API 密钥"
     },
     "Ver todas": {
         "es": "Ver todas",
@@ -18474,7 +18645,8 @@
         "de": "Alle anzeigen",
         "ru": "Смотреть все",
         "hi": "सभी देखें",
-        "ja": "すべて見る"
+        "ja": "すべて見る",
+        "zh": "查看全部"
     },
     "Visa | Expira 12/28": {
         "es": "Visa | Expira 12/28",
@@ -18484,7 +18656,8 @@
         "de": "Visa | Läuft ab 12/28",
         "ru": "Visa | Истекает 12/28",
         "hi": "Visa | 12/28 को समाप्त",
-        "ja": "Visa | 有効期限 12/28"
+        "ja": "Visa | 有効期限 12/28",
+        "zh": "Visa | 到期 12/28"
     },
     "Volver al carrito": {
         "es": "Volver al carrito",
@@ -18494,7 +18667,8 @@
         "de": "Zurück zum Warenkorb",
         "ru": "Вернуться в корзину",
         "hi": "कार्ट पर वापस जाएँ",
-        "ja": "カートに戻る"
+        "ja": "カートに戻る",
+        "zh": "返回购物车"
     },
     "Webhooks y Automatizacion": {
         "es": "Webhooks y Automatizacion",
@@ -18504,7 +18678,8 @@
         "de": "Webhooks und Automatisierung",
         "ru": "Webhooks и автоматизация",
         "hi": "Webhooks और ऑटोमेशन",
-        "ja": "Webhookと自動化"
+        "ja": "Webhookと自動化",
+        "zh": "Webhooks 和自动化"
     },
     "Word (.docx)": {
         "es": "Word (.docx)",
@@ -18514,7 +18689,8 @@
         "de": "Word (.docx)",
         "ru": "Word (.docx)",
         "hi": "Word (.docx)",
-        "ja": "Word (.docx)"
+        "ja": "Word (.docx)",
+        "zh": "Word (.docx)"
     },
     "X Ads": {
         "es": "X Ads",
@@ -18524,7 +18700,8 @@
         "de": "X Ads",
         "ru": "X Ads",
         "hi": "X Ads",
-        "ja": "X Ads"
+        "ja": "X Ads",
+        "zh": "X Ads"
     },
     "ahora todo eso es posible!": {
         "es": "ahora todo eso es posible!",
@@ -18534,7 +18711,8 @@
         "de": "jetzt ist all das möglich!",
         "ru": "теперь все это возможно!",
         "hi": "अब वह सब संभव है!",
-        "ja": "今ではそれがすべて可能です！"
+        "ja": "今ではそれがすべて可能です！",
+        "zh": "现在所有这一切都成为可能！"
     },
     "audiencia": {
         "es": "audiencia",
@@ -18544,7 +18722,8 @@
         "de": "publikum",
         "ru": "аудитория",
         "hi": "दर्शक",
-        "ja": "オーディエンス"
+        "ja": "オーディエンス",
+        "zh": "受众"
     },
     "campañas": {
         "es": "campañas",
@@ -18554,7 +18733,8 @@
         "de": "kampagnen",
         "ru": "кампании",
         "hi": "अभियान",
-        "ja": "キャンペーン"
+        "ja": "キャンペーン",
+        "zh": "广告系列"
     },
     "education": {
         "es": "education",
@@ -18564,7 +18744,8 @@
         "de": "education",
         "ru": "education",
         "hi": "education",
-        "ja": "education"
+        "ja": "education",
+        "zh": "education"
     },
     "en tu celular": {
         "es": "en tu celular",
@@ -18574,7 +18755,8 @@
         "de": "auf deinem handy",
         "ru": "на вашем мобильном",
         "hi": "आपके फोन पर",
-        "ja": "携帯電話で"
+        "ja": "携帯電話で",
+        "zh": "在您的手机上"
     },
     "facturas": {
         "es": "facturas",
@@ -18584,7 +18766,8 @@
         "de": "rechnungen",
         "ru": "счета",
         "hi": "चालान",
-        "ja": "請求書"
+        "ja": "請求書",
+        "zh": "发票"
     },
     "gaming": {
         "es": "gaming",
@@ -18594,7 +18777,8 @@
         "de": "gaming",
         "ru": "gaming",
         "hi": "gaming",
-        "ja": "gaming"
+        "ja": "gaming",
+        "zh": "gaming"
     },
     "impresiones": {
         "es": "impresiones",
@@ -18604,7 +18788,8 @@
         "de": "impressionen",
         "ru": "показы",
         "hi": "इंप्रेशन",
-        "ja": "インプレッション"
+        "ja": "インプレッション",
+        "zh": "展示次数"
     },
     "no lanzada": {
         "es": "no lanzada",
@@ -18614,7 +18799,8 @@
         "de": "nicht veröffentlicht",
         "ru": "не запущена",
         "hi": "लॉन्च नहीं हुआ",
-        "ja": "未リリース"
+        "ja": "未リリース",
+        "zh": "未发布"
     },
     "o arrastra tus archivos aqui": {
         "es": "o arrastra tus archivos aqui",
@@ -18624,7 +18810,8 @@
         "de": "oder ziehen Sie Ihre Dateien hierher",
         "ru": "или перетащите ваши файлы сюда",
         "hi": "या अपनी फाइलें यहां ड्रैग करें",
-        "ja": "またはファイルをここにドラッグします"
+        "ja": "またはファイルをここにドラッグします",
+        "zh": "或者将您的文件拖到此处"
     },
     "para desarrollo | Base URL:": {
         "es": "para desarrollo | Base URL:",
@@ -18634,7 +18821,8 @@
         "de": "für entwicklung | Base URL:",
         "ru": "для разработки | Base URL:",
         "hi": "विकास के लिए | Base URL:",
-        "ja": "開発用 | Base URL:"
+        "ja": "開発用 | Base URL:",
+        "zh": "用于开发 | Base URL:"
     },
     "para produccion |": {
         "es": "para produccion |",
@@ -18644,7 +18832,8 @@
         "de": "für produktion |",
         "ru": "для продакшена |",
         "hi": "उत्पादन के लिए |",
-        "ja": "本番用 |"
+        "ja": "本番用 |",
+        "zh": "用于生产 |"
     },
     "pyme": {
         "es": "pyme",
@@ -18654,7 +18843,8 @@
         "de": "kmu",
         "ru": "мсб",
         "hi": "sme",
-        "ja": "中小企業"
+        "ja": "中小企業",
+        "zh": "中小企业"
     },
     "retail": {
         "es": "retail",
@@ -18664,7 +18854,8 @@
         "de": "retail",
         "ru": "retail",
         "hi": "retail",
-        "ja": "retail"
+        "ja": "retail",
+        "zh": "retail"
     },
     "segmentos": {
         "es": "segmentos",
@@ -18674,7 +18865,8 @@
         "de": "segmente",
         "ru": "сегменты",
         "hi": "सेगमेंट",
-        "ja": "セグメント"
+        "ja": "セグメント",
+        "zh": "细分"
     },
     "tech": {
         "es": "tech",
@@ -18684,6 +18876,7 @@
         "de": "tech",
         "ru": "tech",
         "hi": "tech",
-        "ja": "tech"
+        "ja": "tech",
+        "zh": "tech"
     }
 }
