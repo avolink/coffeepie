@@ -338,7 +338,7 @@ C. CIRCULAR ECONOMY OBLIGATIONS
 
    The Coffee Pie® hardware ecosystem is founded on the principle that not a
    single gram of raw material should be wasted. Every device must return to
-   the production lines at the end of its useful life. By manufacturing,
+   the production lines at the end of its life cycle. By manufacturing,
    distributing, or renting any Product under this Licence, You irrevocably
    commit to ALL of the following:
 
@@ -357,7 +357,7 @@ C. CIRCULAR ECONOMY OBLIGATIONS
 
    C.3  END-OF-LIFE COMMITMENT
         You must accept the return of any Product You have placed in service,
-        at no cost to the end user or operator, at the end of its useful life.
+        at no cost to the end user or operator, at the end of its life cycle.
         Returned Products must be directed exclusively to:
           a) remanufacturing (restoration to original or improved specification);
           b) component harvesting for reuse in new Products; or
@@ -451,9 +451,78 @@ G. GOVERNING PHILOSOPHY
    This is not an aspiration. It is a binding condition of participation.
 
 
+H. NORMATIVE REFERENCES
+
+   The terms and obligations in this Licence, particularly in Part II Section C
+   (Circular Economy Obligations), are interpreted in accordance with the
+   following internationally recognized standards and directives. Compliance with
+   these standards is strongly recommended and, where cited in Section C,
+   constitutes part of the binding obligations of this Licence.
+
+   H.1  ISO 14040:2006 — Environmental Management: Life Cycle Assessment —
+        Principles and Framework.
+        Defines the methodology and vocabulary for Life Cycle Assessment (LCA),
+        including the term 'life cycle' as used throughout this Addendum.
+        https://www.iso.org/standard/37456.html
+
+   H.2  ISO 14044:2006 — Environmental Management: Life Cycle Assessment —
+        Requirements and Guidelines.
+        Specifies requirements and provides guidelines for LCA, including goal
+        definition, inventory analysis, impact assessment, and interpretation.
+        https://www.iso.org/standard/38498.html
+
+   H.3  ISO 14001:2015 — Environmental Management Systems — Requirements with
+        Guidance for Use.
+        Provides the framework for an effective environmental management system
+        that manufacturers operating under this Licence are encouraged to adopt.
+        https://www.iso.org/standard/60857.html
+
+   H.4  IEC 62635:2012 — Guidelines for End-of-Life Information on
+        Electrotechnical Products and for End-of-Life Assessment of
+        Electrotechnical Products.
+        Establishes guidelines for the disclosure of end-of-life information and
+        for the assessment of end-of-life treatment of electrotechnical products,
+        directly informing Section C.3 (End-of-Life Commitment) and C.5
+        (Material Traceability).
+        https://www.iec.ch/standards/iec-62635
+
+   H.5  EN 45554:2020 — General Methods for the Assessment of the Ability to
+        Repair, Reuse and Upgrade Energy-Related Products.
+        Defines the repairability scoring methodology referenced in Section C.1
+        (Design for Durability and Repairability). The 9/10 repairability score
+        threshold is interpreted under this standard and the iFixit Repairability
+        Score methodology (https://www.ifixit.com/repairability).
+
+   H.6  EU Directive 2011/65/EU (RoHS) — Restriction of the Use of Certain
+        Hazardous Substances in Electrical and Electronic Equipment, and its
+        amendment EU 2015/863.
+        All Products manufactured under this Licence must comply with RoHS
+        restrictions on hazardous substances. This is a minimum baseline; more
+        stringent material restrictions may apply under national law.
+        https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32011L0065
+
+   H.7  EU Directive 2012/19/EU (WEEE) — Waste Electrical and Electronic
+        Equipment.
+        Establishes producer responsibility for the collection, treatment,
+        recovery, and environmentally sound disposal of electrical and electronic
+        equipment. Section C.3 (End-of-Life Commitment) and C.4 (Service
+        Provider Obligation) are designed to meet and exceed the minimum
+        requirements of this Directive.
+        https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32012L0019
+
+   H.8  EU Circular Economy Action Plan (2020) — A New Circular Economy Action
+        Plan for a Cleaner and More Competitive Europe.
+        The policy framework that informed the design of this Addendum as a
+        whole. The Coffee Pie® ecosystem is designed to be a practical
+        implementation of circular economy principles as defined therein.
+        https://environment.ec.europa.eu/strategy/circular-economy-action-plan_en
+
+
 ===============================================================================
 For licensing inquiries:   https://www.coffeepie.co/panel (Licensing Tab)
 For manufacturer program:  https://www.coffeepie.co/fabricantes
 For CERN-OHL-S v2 text:    https://ohwr.org/cern_ohl_s_v2.txt
+Normative references:      ISO 14040 | ISO 14044 | ISO 14001 | IEC 62635 |
+                           EN 45554 | RoHS 2011/65/EU | WEEE 2012/19/EU
 Copyright (C) 2025  Grupo 3P1 Colombia. Patent NC2025/0012723.
 ===============================================================================
