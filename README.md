@@ -4,11 +4,11 @@
 
 🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.
 
-"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves."
+"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves." - Anonymous
 
 Project Status: Active<br>
 Current Version: v0.1.0-alpha<br>
-Concluded Phase: Lab Testing (TRL6)
+Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 
 Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA SAS
@@ -94,10 +94,10 @@ Contributing: We welcome anyone to contribute, but by contributing, you agree to
 ❌ Cryptocurrency Mining: Mining any kind of cryptocurrency is strictly prohibited, but cryptocurrency and cryptoassets related transactions are allowed only if the Law allows it (consult your local jurisdiction's regulations).<br>
 
  🎯 The Goals:
-2030: Becoming an open, reliable, global standard and the Backbone of computing<br>
+2030: Becoming an Open, Reliable, Global Standard and the Backbone of Computing.<br>
 2035: Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
 2040: 1'000'000'000 active users in the QFDM Network.<br>
-2050: Guaranteed global access to a codec terminal.<br>
+2050: Guaranteed Global Access to a Codec Terminal.<br>
 
 BIC Status: A private capital company with socio-environmental consciousness.<br>
 
