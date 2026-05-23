@@ -640,7 +640,7 @@
         "en": "Computing Service ",
         "es": "Servicio de Cómputo ",
         "pt": "Serviço de Cómputo ",
-        "fr": "Services généraux ",
+        "fr": "Service Informatique ",
         "de": "Rechendienst ",
         "ru": "Компьютерный сервис ",
         "hi": "समग्र सेवा ",
@@ -8324,7 +8324,8 @@
         "en": "Flexible, on-demand computing service, within reach of any pocket. Forget about high costs, maintenance, heat, noise, all with minimal environmental impact...",
         "pt": "Serviço de computação flexível, sob demanda, ao alcance de qualquer bolso. Esqueça os altos custos, manutenção, calor, ruído, tudo isso com mínimo impacto ambiental...",
         "fr": "Service informatique flexible, à la demande, à la portée de toutes les bourses. Oubliez les coûts élevés, la maintenance, la chaleur, le bruit, tout cela avec un impact environnemental minimal...",
-        "de": "Flexibler On-Demand-Computerdienst, erschwinglich für jeden Geldbeutel. Vergessen Sie hohe Kosten, Wartung, Hitze und Lärm – all das bei minimaler Umweltbelastung..."
+        "de": "Flexibler On-Demand-Computerdienst, erschwinglich für jeden Geldbeutel. Vergessen Sie hohe Kosten, Wartung, Hitze und Lärm – all das bei minimaler Umweltbelastung...",
+        "ru": "Гибкий вычислительный сервис по запросу, доступный каждому. Забудьте о высоких затратах, обслуживании, жаре и шуме — и все это с минимальным воздействием на окружающую среду..."
     },
     "Economía Circular = Rechazar, Repensar, Reducir, Reusar, Reparar, Restaurar, Remanufacturar, Reutilizar, Reciclar, Recuperar": {
         "en": "Circular Economy = Reject, Rethink, Reduce, Reuse, Repair, Restore, Removing, Reuse, Recycling, Recover",
@@ -8540,7 +8541,7 @@
         "pt": "Com nossos exclusivos Terminais Codec Modulares, mais conhecidos como Commanders™, Sentinels™ e Rangers™, esqueça de uma vez por todas de ficar substituindo o processador, a memória, o armazenamento, a placa de vídeo, a fonte, etc. Agora você pode usar todo esse hardware de forma dinâmica e flexível, não importa se você é estudante, técnico, engenheiro, arquiteto, editor, designer, programador, desenvolvedor de videogames, criador de conteúdo, contador, modelador, empresário, ou desenvolve praticamente qualquer atividade que exija computação, você não precisará mais comprar um \"computador da NASA\" para tornar realidade todos os seus projetos, pois com",
         "fr": "Avec nos exclusifs Terminaux Codec Modulaires, mieux connus sous les noms de Commanders™, Sentinels™ et Rangers™, oubliez une fois pour toutes de remplacer le processeur, la mémoire, le stockage, la carte graphique, l'alimentation, etc. Vous pouvez désormais utiliser tout ce matériel de manière dynamique et flexible. Peu importe si vous êtes étudiant, technicien, ingénieur, architecte, éditeur, designer, programmeur, développeur de jeux vidéo, créateur de contenu, comptable, modélisateur, entrepreneur, ou si vous exercez pratiquement n'importe quelle activité nécessitant de l'informatique, vous n'aurez plus besoin d'acheter un \"ordinateur de la NASA\" pour réaliser tous vos projets, car avec",
         "de": "Mit unseren exklusiven modularen Codec-Terminals, besser bekannt als Commanders™, Sentinels™ und Rangers™, können Sie das Ersetzen von Prozessor, Speicher, Grafikkarte, Netzteil usw. ein für alle Mal vergessen. Jetzt können Sie all diese Hardware dynamisch und flexibel nutzen. Egal, ob Sie Student, Techniker, Ingenieur, Architekt, Redakteur, Designer, Programmierer, Spieleentwickler, Content-Ersteller, Buchhalter, Modellierer, Unternehmer sind oder praktisch jede rechenintensive Tätigkeit ausüben, Sie müssen keinen \"NASA-Computer\" mehr kaufen, um all Ihre Projekte zu verwirklichen, denn mit",
-        "ru": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
+        "ru": "С нашими эксклюзивными модульными терминалами-кодеками, более известными как Commanders™, Sentinels™ и Rangers™, забудьте раз и навсегда о замене процессора, памяти, хранилища, видеокарты, блока питания и т. д. Теперь вы можете использовать все это оборудование динамично и гибко. Неважно, являетесь ли вы студентом, техником, инженером, архитектором, редактором, дизайнером, программистом, разработчиком видеоигр, создателем контента, бухгалтером, моделлером, предпринимателем или занимаетесь практически любой деятельностью, требующей вычислений, вам больше не придется покупать «компьютер НАСА», чтобы воплотить в жизнь все свои проекты, потому что с",
         "hi": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
         "ja": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
         "zh": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
@@ -16755,21 +16756,24 @@
         "en": "*prices indexed to inflation",
         "pt": "*preços indexados à inflação",
         "fr": "*prix indexés sur l'inflation",
-        "de": "*Preise an die Inflation gekoppelt"
+        "de": "*Preise an die Inflation gekoppelt",
+        "ru": "*цены индексируются с учетом инфляции"
     },
     ", obteniendo nuestra certificación que autorice su producción y uso limitado de marca, siempre y cuando estos cumplan con nuestros lineamientos generales y comerciales, especificaciones técnicas, un mínimo de calidad en materiales, modularidad, reparabilidad ≥9/10 (": {
         "es": ", obteniendo nuestra certificación que autorice su producción y uso limitado de marca, siempre y cuando estos cumplan con nuestros lineamientos generales y comerciales, especificaciones técnicas, un mínimo de calidad en materiales, modularidad, reparabilidad ≥9/10 (",
         "en": ", obtaining our certification authorizing their production and limited brand use, provided that they comply with our general and commercial guidelines, technical specifications, a minimum quality of materials, modularity, repairability ≥9/10 (",
         "pt": ", obtendo nossa certificação que autorize sua produção e uso limitado da marca, desde que estes cumpram com nossas diretrizes gerais e comerciais, especificações técnicas, um mínimo de qualidade em materiais, modularidade, reparabilidade ≥9/10 (",
         "fr": ", en obtenant notre certification qui autorise sa production et l'utilisation limitée de la marque, à condition que ceux-ci respectent nos directives générales et commerciales, nos spécifications techniques, une qualité minimale des matériaux, la modularité, et une réparabilité ≥9/10 (",
-        "de": ", indem Sie unsere Zertifizierung erhalten, die deren Produktion und eingeschränkte Markennutzung autorisiert, vorausgesetzt, diese entsprechen unseren allgemeinen und kommerziellen Richtlinien, technischen Spezifikationen, einer Mindestqualität bei Materialien, Modularität und Reparierbarkeit ≥9/10 ("
+        "de": ", indem Sie unsere Zertifizierung erhalten, die deren Produktion und eingeschränkte Markennutzung autorisiert, vorausgesetzt, diese entsprechen unseren allgemeinen und kommerziellen Richtlinien, technischen Spezifikationen, einer Mindestqualität bei Materialien, Modularität und Reparierbarkeit ≥9/10 (",
+        "ru": ", получив наш сертификат, разрешающий их производство и ограниченное использование бренда, при условии, что они соответствуют нашим общим и коммерческим рекомендациям, техническим спецификациям, минимальному качеству материалов, модульности, ремонтопригодности ≥9/10 ("
     },
     "atencionalcliente@coffeepie.co": {
         "es": "atencionalcliente@coffeepie.co",
         "en": "atencionalcliente@coffeepie.co",
         "pt": "atencionalcliente@coffeepie.co",
         "fr": "atencionalcliente@coffeepie.co",
-        "de": "atencionalcliente@coffeepie.co"
+        "de": "atencionalcliente@coffeepie.co",
+        "ru": "atencionalcliente@coffeepie.co"
     },
     "Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos.": {
         "en": "Codec Terminals are patented-core but open-standard devices (CERN License): modular, compact, low-cost, some similar to keyboards, tablets, and smartphones (Commander™, Sentinel™, and Ranger™ lines), highly customizable, repairable, upgradable, and up to 97% recyclable, which allow you to access our novel Coffee Pie® service. Ask your ISP if they can include the terminal with your internet subscription, or just leave a small deposit for each device you require and return them when you no longer need them! We will refund between 10% and 90% of the deposit based on their condition and wear.",
@@ -16789,1322 +16793,1511 @@
         "en": "\"Authorization\": \"Bearer {{API_KEY}}\",",
         "pt": "\"Authorization\": \"Bearer {{API_KEY}}\",",
         "fr": "\"Authorization\": \"Bearer {{API_KEY}}\",",
-        "de": "\"Authorization\": \"Bearer {{API_KEY}}\","
+        "de": "\"Authorization\": \"Bearer {{API_KEY}}\",",
+        "ru": "\"Authorization\": \"Bearer {{API_KEY}}\","
     },
     "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },": {
         "es": "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },",
         "en": "\"age_range\": { \"type\": \"string\", \"description\": \"Age range (e.g., '18-24')\" },",
         "pt": "\"age_range\": { \"type\": \"string\", \"description\": \"Faixa etária (ex: '18-24')\" },",
         "fr": "\"age_range\": { \"type\": \"string\", \"description\": \"Tranche d'âge (ex: '18-24')\" },",
-        "de": "\"age_range\": { \"type\": \"string\", \"description\": \"Altersgruppe (z. B. '18-24')\" },"
+        "de": "\"age_range\": { \"type\": \"string\", \"description\": \"Altersgruppe (z. B. '18-24')\" },",
+        "ru": "\"age_range\": { \"type\": \"string\", \"description\": \"Возрастной диапазон (напр., '18-24')\" },"
     },
     "\"conversion_score\": { \"type\": \"number\" }": {
         "es": "\"conversion_score\": { \"type\": \"number\" }",
         "en": "\"conversion_score\": { \"type\": \"number\" }",
         "pt": "\"conversion_score\": { \"type\": \"number\" }",
         "fr": "\"conversion_score\": { \"type\": \"number\" }",
-        "de": "\"conversion_score\": { \"type\": \"number\" }"
+        "de": "\"conversion_score\": { \"type\": \"number\" }",
+        "ru": "\"conversion_score\": { \"type\": \"number\" }"
     },
     "\"estimated_users\": { \"type\": \"number\" },": {
         "es": "\"estimated_users\": { \"type\": \"number\" },",
         "en": "\"estimated_users\": { \"type\": \"number\" },",
         "pt": "\"estimated_users\": { \"type\": \"number\" },",
         "fr": "\"estimated_users\": { \"type\": \"number\" },",
-        "de": "\"estimated_users\": { \"type\": \"number\" },"
+        "de": "\"estimated_users\": { \"type\": \"number\" },",
+        "ru": "\"estimated_users\": { \"type\": \"number\" },"
     },
     "\"handler\": {": {
         "es": "\"handler\": {",
         "en": "\"handler\": {",
         "pt": "\"handler\": {",
         "fr": "\"handler\": {",
-        "de": "\"handler\": {"
+        "de": "\"handler\": {",
+        "ru": "\"handler\": {"
     },
     "\"headers\": {": {
         "es": "\"headers\": {",
         "en": "\"headers\": {",
         "pt": "\"headers\": {",
         "fr": "\"headers\": {",
-        "de": "\"headers\": {"
+        "de": "\"headers\": {",
+        "ru": "\"headers\": {"
     },
     "\"input_schema\": {": {
         "es": "\"input_schema\": {",
         "en": "\"input_schema\": {",
         "pt": "\"input_schema\": {",
         "fr": "\"input_schema\": {",
-        "de": "\"input_schema\": {"
+        "de": "\"input_schema\": {",
+        "ru": "\"input_schema\": {"
     },
     "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },": {
         "es": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },",
         "en": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"List of interests\" },",
         "pt": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de interesses\" },",
         "fr": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Liste des intérêts\" },",
-        "de": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Liste von Interessen\" },"
+        "de": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Liste von Interessen\" },",
+        "ru": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Список интересов\" },"
     },
     "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }": {
         "es": "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }",
         "en": "\"location\": { \"type\": \"string\", \"description\": \"Geographic location\" }",
         "pt": "\"location\": { \"type\": \"string\", \"description\": \"Localização geográfica\" }",
         "fr": "\"location\": { \"type\": \"string\", \"description\": \"Emplacement géographique\" }",
-        "de": "\"location\": { \"type\": \"string\", \"description\": \"Geografischer Standort\" }"
+        "de": "\"location\": { \"type\": \"string\", \"description\": \"Geografischer Standort\" }",
+        "ru": "\"location\": { \"type\": \"string\", \"description\": \"Географическое положение\" }"
     },
     "\"output_schema\": {": {
         "es": "\"output_schema\": {",
         "en": "\"output_schema\": {",
         "pt": "\"output_schema\": {",
         "fr": "\"output_schema\": {",
-        "de": "\"output_schema\": {"
+        "de": "\"output_schema\": {",
+        "ru": "\"output_schema\": {"
     },
     "\"properties\": {": {
         "es": "\"properties\": {",
         "en": "\"properties\": {",
         "pt": "\"properties\": {",
         "fr": "\"properties\": {",
-        "de": "\"properties\": {"
+        "de": "\"properties\": {",
+        "ru": "\"properties\": {"
     },
     "\"segment_id\": { \"type\": \"string\" },": {
         "es": "\"segment_id\": { \"type\": \"string\" },",
         "en": "\"segment_id\": { \"type\": \"string\" },",
         "pt": "\"segment_id\": { \"type\": \"string\" },",
         "fr": "\"segment_id\": { \"type\": \"string\" },",
-        "de": "\"segment_id\": { \"type\": \"string\" },"
+        "de": "\"segment_id\": { \"type\": \"string\" },",
+        "ru": "\"segment_id\": { \"type\": \"string\" },"
     },
     "$1.00 / terminal": {
         "es": "$1.00 / terminal",
         "en": "$1.00 / terminal",
         "pt": "$1.00 / terminal",
         "fr": "$1.00 / terminal",
-        "de": "$1.00 / Terminal"
+        "de": "$1.00 / Terminal",
+        "ru": "$1.00 / терминал"
     },
     "+2 nuevos": {
         "es": "+2 nuevos",
         "en": "+2 new",
         "pt": "+2 novos",
         "fr": "+2 nouveaux",
-        "de": "+2 neue"
+        "de": "+2 neue",
+        "ru": "+2 новых"
     },
     "+3 esta semana": {
         "es": "+3 esta semana",
         "en": "+3 this week",
         "pt": "+3 esta semana",
         "fr": "+3 cette semaine",
-        "de": "+3 diese Woche"
+        "de": "+3 diese Woche",
+        "ru": "+3 на этой неделе"
     },
     "0 licencias": {
         "es": "0 licencias",
         "en": "0 licenses",
         "pt": "0 licenças",
         "fr": "0 licences",
-        "de": "0 Lizenzen"
+        "de": "0 Lizenzen",
+        "ru": "0 лицензий"
     },
     "1 a 999": {
         "es": "1 a 999",
         "en": "1 to 999",
         "pt": "1 a 999",
         "fr": "1 à 999",
-        "de": "1 bis 999"
+        "de": "1 bis 999",
+        "ru": "от 1 до 999"
     },
     "1'000 a 9'999": {
         "es": "1'000 a 9'999",
         "en": "1'000 to 9'999",
         "pt": "1'000 a 9'999",
         "fr": "1'000 à 9'999",
-        "de": "1'000 bis 9'999"
+        "de": "1'000 bis 9'999",
+        "ru": "от 1'000 до 9'999"
     },
     "1. Abre la app": {
         "es": "1. Abre la app",
         "en": "1. Open the app",
         "pt": "1. Abra o app",
         "fr": "1. Ouvrez l'application",
-        "de": "1. App öffnen"
+        "de": "1. App öffnen",
+        "ru": "1. Откройте приложение"
     },
     "1.8K": {
         "es": "1.8K",
         "en": "1.8K",
         "pt": "1.8K",
         "fr": "1.8K",
-        "de": "1.8K"
+        "de": "1.8K",
+        "ru": "1.8K"
     },
     "10'000 a 99'999": {
         "es": "10'000 a 99'999",
         "en": "10'000 to 99'999",
         "pt": "10'000 a 99'999",
         "fr": "10'000 à 99'999",
-        "de": "10'000 bis 99'999"
+        "de": "10'000 bis 99'999",
+        "ru": "от 10'000 до 99'999"
     },
     "100'000 a 999'999": {
         "es": "100'000 a 999'999",
         "en": "100'000 to 999'999",
         "pt": "100'000 a 999'999",
         "fr": "100'000 à 999'999",
-        "de": "100'000 bis 999'999"
+        "de": "100'000 bis 999'999",
+        "ru": "от 100'000 до 999'999"
     },
     "12.4K": {
         "es": "12.4K",
         "en": "12.4K",
         "pt": "12.4K",
         "fr": "12.4K",
-        "de": "12.4K"
+        "de": "12.4K",
+        "ru": "12.4K"
     },
     "1200x800": {
         "es": "1200x800",
         "en": "1200x800",
         "pt": "1200x800",
         "fr": "1200x800",
-        "de": "1200x800"
+        "de": "1200x800",
+        "ru": "1200x800"
     },
     "1920x1080": {
         "es": "1920x1080",
         "en": "1920x1080",
         "pt": "1920x1080",
         "fr": "1920x1080",
-        "de": "1920x1080"
+        "de": "1920x1080",
+        "ru": "1920x1080"
     },
     "2. Toca \"Pagar con QR\" y escanea el código": {
         "es": "2. Toca \"Pagar con QR\" y escanea el código",
         "en": "2. Tap \"Pay with QR\" and scan the code",
         "pt": "2. Toque em \"Pagar com QR\" e escaneie o código",
         "fr": "2. Appuyez sur \"Payer avec QR\" et scannez le code",
-        "de": "2. Tippen Sie auf \"Mit QR bezahlen\" und scannen Sie den Code"
+        "de": "2. Tippen Sie auf \"Mit QR bezahlen\" und scannen Sie den Code",
+        "ru": "2. Нажмите «Оплатить по QR» и отсканируйте код"
     },
     "2.4K": {
         "es": "2.4K",
         "en": "2.4K",
         "pt": "2.4K",
         "fr": "2.4K",
-        "de": "2.4K"
+        "de": "2.4K",
+        "ru": "2.4K"
     },
     "3. Verifica que el total coincida con el de tu carrito": {
         "es": "3. Verifica que el total coincida con el de tu carrito",
         "en": "3. Verify that the total matches your cart",
         "pt": "3. Verifique se o total coincide com o do seu carrinho",
         "fr": "3. Vérifiez que le total correspond à celui de votre panier",
-        "de": "3. Stellen Sie sicher, dass die Gesamtsumme mit Ihrem Warenkorb übereinstimmt"
+        "de": "3. Stellen Sie sicher, dass die Gesamtsumme mit Ihrem Warenkorb übereinstimmt",
+        "ru": "3. Убедитесь, что сумма совпадает с вашей корзиной"
     },
     "3.1K": {
         "es": "3.1K",
         "en": "3.1K",
         "pt": "3.1K",
         "fr": "3.1K",
-        "de": "3.1K"
+        "de": "3.1K",
+        "ru": "3.1K"
     },
     "3.2K": {
         "es": "3.2K",
         "en": "3.2K",
         "pt": "3.2K",
         "fr": "3.2K",
-        "de": "3.2K"
+        "de": "3.2K",
+        "ru": "3.2K"
     },
     "4. Confirma el pago desde la app": {
         "es": "4. Confirma el pago desde la app",
         "en": "4. Confirm the payment from the app",
         "pt": "4. Confirme o pagamento pelo app",
         "fr": "4. Confirmez le paiement depuis l'application",
-        "de": "4. Bestätigen Sie die Zahlung über die App"
+        "de": "4. Bestätigen Sie die Zahlung über die App",
+        "ru": "4. Подтвердите оплату в приложении"
     },
     "48.2K": {
         "es": "48.2K",
         "en": "48.2K",
         "pt": "48.2K",
         "fr": "48.2K",
-        "de": "48.2K"
+        "de": "48.2K",
+        "ru": "48.2K"
     },
     "5. Incluye el número de referencia en el campo \"Concepto\"": {
         "es": "5. Incluye el número de referencia en el campo \"Concepto\"",
         "en": "5. Include the reference number in the \"Concept\" field",
         "pt": "5. Inclua o número de referência no campo \"Conceito\"",
         "fr": "5. Incluez le numéro de référence dans le champ \"Concept\"",
-        "de": "5. Fügen Sie die Referenznummer im Feld \"Verwendungszweck\" ein"
+        "de": "5. Fügen Sie die Referenznummer im Feld \"Verwendungszweck\" ein",
+        "ru": "5. Укажите номер ссылки в поле «Назначение платежа»"
     },
     "5.1K": {
         "es": "5.1K",
         "en": "5.1K",
         "pt": "5.1K",
         "fr": "5.1K",
-        "de": "5.1K"
+        "de": "5.1K",
+        "ru": "5.1K"
     },
     "6. Tus productos se activarán automáticamente en 5-10 minutos": {
         "es": "6. Tus productos se activarán automáticamente en 5-10 minutos",
         "en": "6. Your products will activate automatically in 5-10 minutes",
         "pt": "6. Seus produtos serão ativados automaticamente em 5-10 minutos",
         "fr": "6. Vos produits seront activés automatiquement dans 5 à 10 minutes",
-        "de": "6. Ihre Produkte werden in 5-10 Minuten automatisch aktiviert"
+        "de": "6. Ihre Produkte werden in 5-10 Minuten automatisch aktiviert",
+        "ru": "6. Ваши продукты активируются автоматически через 5-10 минут"
     },
     "8.7K": {
         "es": "8.7K",
         "en": "8.7K",
         "pt": "8.7K",
         "fr": "8.7K",
-        "de": "8.7K"
+        "de": "8.7K",
+        "ru": "8.7K"
     },
     "API Keys": {
         "es": "API Keys",
         "en": "API Keys",
         "pt": "API Keys",
         "fr": "API Keys",
-        "de": "API-Schlüssel"
+        "de": "API-Schlüssel",
+        "ru": "Ключи API"
     },
     "API Keys Table": {
         "es": "API Keys Table",
         "en": "API Keys Table",
         "pt": "API Keys Table",
         "fr": "API Keys Table",
-        "de": "Tabelle der API-Schlüssel"
+        "de": "Tabelle der API-Schlüssel",
+        "ru": "Таблица ключей API"
     },
     "Activos Recientes": {
         "es": "Activos Recientes",
         "en": "Recent Assets",
         "pt": "Ativos Recentes",
         "fr": "Actifs récents",
-        "de": "Letzte Assets"
+        "de": "Letzte Assets",
+        "ru": "Недавние активы"
     },
     "Activos Subidos": {
         "es": "Activos Subidos",
         "en": "Uploaded Assets",
         "pt": "Ativos Enviados",
         "fr": "Actifs téléchargés",
-        "de": "Hochgeladene Assets"
+        "de": "Hochgeladene Assets",
+        "ru": "Загруженные активы"
     },
     "Ad-PreRoll": {
         "es": "Ad-PreRoll",
         "en": "Ad-PreRoll",
         "pt": "Ad-PreRoll",
         "fr": "Ad-PreRoll",
-        "de": "Ad-PreRoll"
+        "de": "Ad-PreRoll",
+        "ru": "Ad-PreRoll"
     },
     "Agregar Tarjeta": {
         "es": "Agregar Tarjeta",
         "en": "Add Card",
         "pt": "Adicionar Cartão",
         "fr": "Ajouter une carte",
-        "de": "Karte hinzufügen"
+        "de": "Karte hinzufügen",
+        "ru": "Добавить карту"
     },
     "Anade una capa extra de seguridad a tu cuenta": {
         "es": "Anade una capa extra de seguridad a tu cuenta",
         "en": "Add an extra layer of security to your account",
         "pt": "Adicione uma camada extra de segurança à sua conta",
         "fr": "Ajoutez une couche de sécurité supplémentaire à votre compte",
-        "de": "Fügen Sie Ihrem Konto eine zusätzliche Sicherheitsebene hinzu"
+        "de": "Fügen Sie Ihrem Konto eine zusätzliche Sicherheitsebene hinzu",
+        "ru": "Добавьте дополнительный уровень безопасности к вашей учетной записи"
     },
     "Analiticas y metricas de rendimiento": {
         "es": "Analiticas y metricas de rendimiento",
         "en": "Analytics and performance metrics",
         "pt": "Análises e métricas de desempenho",
         "fr": "Analytiques et métriques de performance",
-        "de": "Analysen und Leistungskennzahlen"
+        "de": "Analysen und Leistungskennzahlen",
+        "ru": "Аналитика и показатели эффективности"
     },
     "Apariencia": {
         "es": "Apariencia",
         "en": "Appearance",
         "pt": "Aparência",
         "fr": "Apparence",
-        "de": "Aussehen"
+        "de": "Aussehen",
+        "ru": "Внешний вид"
     },
     "Avisos antes del cobro automatico mensual": {
         "es": "Avisos antes del cobro automatico mensual",
         "en": "Notices before automatic monthly billing",
         "pt": "Avisos antes da cobrança automática mensal",
         "fr": "Avis avant prélèvement automatique mensuel",
-        "de": "Benachrichtigungen vor der monatlichen automatischen Abrechnung"
+        "de": "Benachrichtigungen vor der monatlichen automatischen Abrechnung",
+        "ru": "Уведомления перед ежемесячным автоматическим списанием"
     },
     "Back to School 2026": {
         "es": "Back to School 2026",
         "en": "Back to School 2026",
         "pt": "Back to School 2026",
         "fr": "Back to School 2026",
-        "de": "Back to School 2026"
+        "de": "Back to School 2026",
+        "ru": "Снова в школу 2026"
     },
     "Balance:": {
         "es": "Balance:",
         "en": "Balance:",
         "pt": "Saldo:",
         "fr": "Solde :",
-        "de": "Guthaben:"
+        "de": "Guthaben:",
+        "ru": "Баланс:"
     },
     "Banco": {
         "es": "Banco",
         "en": "Bank",
         "pt": "Banco",
         "fr": "Banque",
-        "de": "Bank"
+        "de": "Bank",
+        "ru": "Банк"
     },
     "CSV (.csv)": {
         "es": "CSV (.csv)",
         "en": "CSV (.csv)",
         "pt": "CSV (.csv)",
         "fr": "CSV (.csv)",
-        "de": "CSV (.csv)"
+        "de": "CSV (.csv)",
+        "ru": "CSV (.csv)"
     },
     "CTR Promedio": {
         "es": "CTR Promedio",
         "en": "Average CTR",
         "pt": "CTR Médio",
         "fr": "CTR Moyen",
-        "de": "Durchschnittliche CTR"
+        "de": "Durchschnittliche CTR",
+        "ru": "Средний CTR"
     },
     "Cambiar Contrasena": {
         "es": "Cambiar Contrasena",
         "en": "Change Password",
         "pt": "Mudar Senha",
         "fr": "Changer le mot de passe",
-        "de": "Passwort ändern"
+        "de": "Passwort ändern",
+        "ru": "Изменить пароль"
     },
     "Campañas": {
         "es": "Campañas",
         "en": "Campaigns",
         "pt": "Campanhas",
         "fr": "Campagnes",
-        "de": "Kampagnen"
+        "de": "Kampagnen",
+        "ru": "Кампании"
     },
     "Campañas Activas": {
         "es": "Campañas Activas",
         "en": "Active Campaigns",
         "pt": "Campanhas Ativas",
         "fr": "Campagnes actives",
-        "de": "Aktive Kampagnen"
+        "de": "Aktive Kampagnen",
+        "ru": "Активные кампании"
     },
     "Campañas Recientes": {
         "es": "Campañas Recientes",
         "en": "Recent Campaigns",
         "pt": "Campanhas Recentes",
         "fr": "Campagnes récentes",
-        "de": "Neueste Kampagnen"
+        "de": "Neueste Kampagnen",
+        "ru": "Недавние кампании"
     },
     "Cargar Activos": {
         "es": "Cargar Activos",
         "en": "Upload Assets",
         "pt": "Carregar Ativos",
         "fr": "Charger des actifs",
-        "de": "Assets hochladen"
+        "de": "Assets hochladen",
+        "ru": "Загрузить активы"
     },
     "Cargar mas": {
         "es": "Cargar mas",
         "en": "Load more",
         "pt": "Carregar mais",
         "fr": "Charger plus",
-        "de": "Mehr laden"
+        "de": "Mehr laden",
+        "ru": "Загрузить еще"
     },
     "Coffee Pie Ads": {
         "es": "Coffee Pie Ads",
         "en": "Coffee Pie Ads",
         "pt": "Coffee Pie Ads",
         "fr": "Coffee Pie Ads",
-        "de": "Coffee Pie Ads"
+        "de": "Coffee Pie Ads",
+        "ru": "Coffee Pie Ads"
     },
     "Coffee Pie® Ads": {
         "es": "Coffee Pie® Ads",
         "en": "Coffee Pie® Ads",
         "pt": "Coffee Pie® Ads",
         "fr": "Coffee Pie® Ads",
-        "de": "Coffee Pie® Ads"
+        "de": "Coffee Pie® Ads",
+        "ru": "Coffee Pie® Ads"
     },
     "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.": {
         "es": "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.",
         "en": "Connect X (Twitter) campaigns for advanced promotion and segmentation.",
         "pt": "Conecte campanhas do X (Twitter) para promoção e segmentação avançada.",
         "fr": "Connectez vos campagnes X (Twitter) pour la promotion et la segmentation avancée.",
-        "de": "Verbinden Sie X (Twitter)-Kampagnen für erweiterte Werbung und Segmentierung."
+        "de": "Verbinden Sie X (Twitter)-Kampagnen für erweiterte Werbung und Segmentierung.",
+        "ru": "Подключите кампании X (Twitter) для расширенного продвижения и сегментации."
     },
     "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.": {
         "es": "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.",
         "en": "Connect your Google Analytics or Meta Ads account to see real-time data.",
         "pt": "Conecte sua conta do Google Analytics ou Meta Ads para ver dados em tempo real.",
         "fr": "Connectez votre compte Google Analytics ou Meta Ads pour voir les données en temps réel.",
-        "de": "Verbinden Sie Ihr Google Analytics- oder Meta Ads-Konto, um Echtzeitdaten anzuzeigen."
+        "de": "Verbinden Sie Ihr Google Analytics- oder Meta Ads-Konto, um Echtzeitdaten anzuzeigen.",
+        "ru": "Подключите свою учетную запись Google Analytics или Meta Ads для просмотра данных в реальном времени."
     },
     "Conecta tus herramientas de marketing y automatizacion": {
         "es": "Conecta tus herramientas de marketing y automatizacion",
         "en": "Connect your marketing and automation tools",
         "pt": "Conecte suas ferramentas de marketing e automação",
         "fr": "Connectez vos outils de marketing et d'automatisation",
-        "de": "Verbinden Sie Ihre Marketing- und Automatisierungstools"
+        "de": "Verbinden Sie Ihre Marketing- und Automatisierungstools",
+        "ru": "Подключите свои инструменты маркетинга и автоматизации"
     },
     "Conectar": {
         "es": "Conectar",
         "en": "Connect",
         "pt": "Conectar",
         "fr": "Connecter",
-        "de": "Verbinden"
+        "de": "Verbinden",
+        "ru": "Подключить"
     },
     "Configuración": {
         "es": "Configuración",
         "en": "Configuration",
         "pt": "Configuração",
         "fr": "Configuration",
-        "de": "Konfiguration"
+        "de": "Konfiguration",
+        "ru": "Конфигурация"
     },
     "Crea y gestiona tus campañas publicitarias": {
         "es": "Crea y gestiona tus campañas publicitarias",
         "en": "Create and manage your advertising campaigns",
         "pt": "Crie e gerencie suas campanhas publicitárias",
         "fr": "Créez et gérez vos campagnes publicitaires",
-        "de": "Erstellen und verwalten Sie Ihre Werbekampagnen"
+        "de": "Erstellen und verwalten Sie Ihre Werbekampagnen",
+        "ru": "Создавайте и управляйте своими рекламными кампаниями"
     },
     "Crear Campaña": {
         "es": "Crear Campaña",
         "en": "Create Campaign",
         "pt": "Criar Campanha",
         "fr": "Créer une campagne",
-        "de": "Kampagne erstellen"
+        "de": "Kampagne erstellen",
+        "ru": "Создать кампанию"
     },
     "Crear Nueva Campaña": {
         "es": "Crear Nueva Campaña",
         "en": "Create New Campaign",
         "pt": "Criar Nova Campanha",
         "fr": "Créer une nouvelle campagne",
-        "de": "Neue Kampagne erstellen"
+        "de": "Neue Kampagne erstellen",
+        "ru": "Создать новую кампанию"
     },
     "Crear Segmento": {
         "es": "Crear Segmento",
         "en": "Create Segment",
         "pt": "Criar Segmento",
         "fr": "Créer un segment",
-        "de": "Segment erstellen"
+        "de": "Segment erstellen",
+        "ru": "Создать сегмент"
     },
     "Dashboard": {
         "es": "Dashboard",
         "en": "Dashboard",
         "pt": "Painel",
         "fr": "Tableau de bord",
-        "de": "Dashboard"
+        "de": "Dashboard",
+        "ru": "Панель управления"
     },
     "Datos de Transferencia": {
         "es": "Datos de Transferencia",
         "en": "Transfer Data",
         "pt": "Dados de Transferência",
         "fr": "Données de transfert",
-        "de": "Transferdaten"
+        "de": "Transferdaten",
+        "ru": "Данные о передаче"
     },
     "Define segmentos demograficos para tus campañas": {
         "es": "Define segmentos demograficos para tus campañas",
         "en": "Define demographic segments for your campaigns",
         "pt": "Defina segmentos demográficos para suas campanhas",
         "fr": "Définissez des segments démographiques pour vos campagnes",
-        "de": "Definieren Sie demografische Segmente für Ihre Kampagnen"
+        "de": "Definieren Sie demografische Segmente für Ihre Kampagnen",
+        "ru": "Определите демографические сегменты для ваших кампаний"
     },
     "Desarrollo": {
         "es": "Desarrollo",
         "en": "Development",
         "pt": "Desenvolvimento",
         "fr": "Développement",
-        "de": "Entwicklung"
+        "de": "Entwicklung",
+        "ru": "Разработка"
     },
     "Directores, Admins | 35-60 | LATAM": {
         "es": "Directores, Admins | 35-60 | LATAM",
         "en": "Directors, Admins | 35-60 | LATAM",
         "pt": "Diretores, Admins | 35-60 | LATAM",
         "fr": "Directeurs, Admins | 35-60 | LATAM",
-        "de": "Direktoren, Admins | 35-60 | LATAM"
+        "de": "Direktoren, Admins | 35-60 | LATAM",
+        "ru": "Директора, Админы | 35-60 | LATAM"
     },
     "Documentacion API": {
         "es": "Documentacion API",
         "en": "API Documentation",
         "pt": "Documentação da API",
         "fr": "Documentation API",
-        "de": "API-Dokumentation"
+        "de": "API-Dokumentation",
+        "ru": "Документация API"
     },
     "Documentation": {
         "es": "Documentation",
         "en": "Documentation",
         "pt": "Documentation",
         "fr": "Documentation",
-        "de": "Documentation"
+        "de": "Documentation",
+        "ru": "Документация"
     },
     "Duenos de negocio, 30-60 años": {
         "es": "Duenos de negocio, 30-60 años",
         "en": "Business owners, 30-60 years old",
         "pt": "Donos de negócios, 30-60 anos",
         "fr": "Propriétaires d'entreprise, 30-60 ans",
-        "de": "Geschäftsinhaber, 30-60 Jahre"
+        "de": "Geschäftsinhaber, 30-60 Jahre",
+        "ru": "Владельцы бизнеса, 30-60 лет"
     },
     "Duenos, Gerentes | 30-60 | LATAM": {
         "es": "Duenos, Gerentes | 30-60 | LATAM",
         "en": "Owners, Managers | 30-60 | LATAM",
         "pt": "Donos, Gerentes | 30-60 | LATAM",
         "fr": "Propriétaires, Gérants | 30-60 | LATAM",
-        "de": "Inhaber, Manager | 30-60 | LATAM"
+        "de": "Inhaber, Manager | 30-60 | LATAM",
+        "ru": "Владельцы, Менеджеры | 30-60 | LATAM"
     },
     "Earth Day Promo": {
         "es": "Earth Day Promo",
         "en": "Earth Day Promo",
         "pt": "Earth Day Promo",
         "fr": "Earth Day Promo",
-        "de": "Earth Day Promo"
+        "de": "Earth Day Promo",
+        "ru": "Earth Day Promo"
     },
     "Eco-Impact": {
         "es": "Eco-Impact",
         "en": "Eco-Impact",
         "pt": "Eco-Impact",
         "fr": "Eco-Impact",
-        "de": "Eco-Impact"
+        "de": "Eco-Impact",
+        "ru": "Эко-Влияние"
     },
     "Eliminar": {
         "es": "Eliminar",
         "en": "Delete",
         "pt": "Excluir",
         "fr": "Supprimer",
-        "de": "Löschen"
+        "de": "Löschen",
+        "ru": "Удалить"
     },
     "Empresas Tecnologicas": {
         "es": "Empresas Tecnologicas",
         "en": "Technology Companies",
         "pt": "Empresas de Tecnologia",
         "fr": "Entreprises technologiques",
-        "de": "Technologieunternehmen"
+        "de": "Technologieunternehmen",
+        "ru": "Технологические компании"
     },
     "En Mantenimiento": {
         "es": "En Mantenimiento",
         "en": "Under Maintenance",
         "pt": "Em Manutenção",
         "fr": "En maintenance",
-        "de": "In Wartung"
+        "de": "In Wartung",
+        "ru": "На техническом обслуживании"
     },
     "Engagement - $75/dia - Pausada": {
         "es": "Engagement - $75/dia - Pausada",
         "en": "Engagement - $75/day - Paused",
         "pt": "Engagement - $75/dia - Pausada",
         "fr": "Engagement - 75$/jour - En pause",
-        "de": "Engagement - 75$/Tag - Pausiert"
+        "de": "Engagement - 75$/Tag - Pausiert",
+        "ru": "Вовлеченность - 75$/день - Приостановлена"
     },
     "Escanea el código QR con tu app Bancolombia para pagar tu carrito": {
         "es": "Escanea el código QR con tu app Bancolombia para pagar tu carrito",
         "en": "Scan the QR code with your Bancolombia app to pay for your cart",
         "pt": "Escaneie o código QR com seu app Bancolombia para pagar seu carrinho",
         "fr": "Scannez le code QR avec votre application Bancolombia pour payer votre panier",
-        "de": "Scannen Sie den QR-Code mit Ihrer Bancolombia-App, um Ihren Warenkorb zu bezahlen"
+        "de": "Scannen Sie den QR-Code mit Ihrer Bancolombia-App, um Ihren Warenkorb zu bezahlen",
+        "ru": "Отсканируйте QR-код в приложении Bancolombia, чтобы оплатить корзину"
     },
     "Estudiantes, 16-30 años": {
         "es": "Estudiantes, 16-30 años",
         "en": "Students, 16-30 years old",
         "pt": "Estudantes, 16-30 anos",
         "fr": "Étudiants, 16-30 ans",
-        "de": "Studenten, 16-30 Jahre"
+        "de": "Studenten, 16-30 Jahre",
+        "ru": "Студенты, 16-30 лет"
     },
     "Estudiantes, Freelancers | 16-30 | Global": {
         "es": "Estudiantes, Freelancers | 16-30 | Global",
         "en": "Students, Freelancers | 16-30 | Global",
         "pt": "Estudantes, Freelancers | 16-30 | Global",
         "fr": "Étudiants, Freelancers | 16-30 | Global",
-        "de": "Studenten, Freiberufler | 16-30 | Global"
+        "de": "Studenten, Freiberufler | 16-30 | Global",
+        "ru": "Студенты, Фрилансеры | 16-30 | Global"
     },
     "Excel (.xlsx)": {
         "es": "Excel (.xlsx)",
         "en": "Excel (.xlsx)",
         "pt": "Excel (.xlsx)",
         "fr": "Excel (.xlsx)",
-        "de": "Excel (.xlsx)"
+        "de": "Excel (.xlsx)",
+        "ru": "Excel (.xlsx)"
     },
     "Exportar CSV": {
         "es": "Exportar CSV",
         "en": "Export CSV",
         "pt": "Exportar CSV",
         "fr": "Exporter CSV",
-        "de": "CSV exportieren"
+        "de": "CSV exportieren",
+        "ru": "Экспорт CSV"
     },
     "Exportar Configuracion": {
         "es": "Exportar Configuracion",
         "en": "Export Configuration",
         "pt": "Exportar Configuração",
         "fr": "Exporter la configuration",
-        "de": "Konfiguration exportieren"
+        "de": "Konfiguration exportieren",
+        "ru": "Экспорт конфигурации"
     },
     "Exportar Todo": {
         "es": "Exportar Todo",
         "en": "Export All",
         "pt": "Exportar Tudo",
         "fr": "Tout exporter",
-        "de": "Alles exportieren"
+        "de": "Alles exportieren",
+        "ru": "Экспортировать все"
     },
     "Facturación": {
         "es": "Facturación",
         "en": "Billing",
         "pt": "Faturamento",
         "fr": "Facturation",
-        "de": "Abrechnung"
+        "de": "Abrechnung",
+        "ru": "Счета"
     },
     "Generar Nueva Clave": {
         "es": "Generar Nueva Clave",
         "en": "Generate New Key",
         "pt": "Gerar Nova Chave",
         "fr": "Générer une nouvelle clé",
-        "de": "Neuen Schlüssel generieren"
+        "de": "Neuen Schlüssel generieren",
+        "ru": "Сгенерировать новый ключ"
     },
     "Gestiona tu informacion personal y metodos de pago": {
         "es": "Gestiona tu informacion personal y metodos de pago",
         "en": "Manage your personal information and payment methods",
         "pt": "Gerencie suas informações pessoais e métodos de pagamento",
         "fr": "Gérez vos informations personnelles et vos modes de paiement",
-        "de": "Verwalten Sie Ihre persönlichen Daten und Zahlungsmethoden"
+        "de": "Verwalten Sie Ihre persönlichen Daten und Zahlungsmethoden",
+        "ru": "Управляйте своей личной информацией и способами оплаты"
     },
     "Gestionar": {
         "es": "Gestionar",
         "en": "Manage",
         "pt": "Gerenciar",
         "fr": "Gérer",
-        "de": "Verwalten"
+        "de": "Verwalten",
+        "ru": "Управлять"
     },
     "Google Ads": {
         "es": "Google Ads",
         "en": "Google Ads",
         "pt": "Google Ads",
         "fr": "Google Ads",
-        "de": "Google Ads"
+        "de": "Google Ads",
+        "ru": "Google Ads"
     },
     "Guardar Cambios": {
         "es": "Guardar Cambios",
         "en": "Save Changes",
         "pt": "Salvar Alterações",
         "fr": "Enregistrer les modifications",
-        "de": "Änderungen speichern"
+        "de": "Änderungen speichern",
+        "ru": "Сохранить изменения"
     },
     "Guardar Configuracion Avanzada": {
         "es": "Guardar Configuracion Avanzada",
         "en": "Save Advanced Configuration",
         "pt": "Salvar Configuração Avançada",
         "fr": "Enregistrer la configuration avancée",
-        "de": "Erweiterte Konfiguration speichern"
+        "de": "Erweiterte Konfiguration speichern",
+        "ru": "Сохранить расширенные настройки"
     },
     "Guardar Preferencias": {
         "es": "Guardar Preferencias",
         "en": "Save Preferences",
         "pt": "Salvar Preferências",
         "fr": "Enregistrer les préférences",
-        "de": "Einstellungen speichern"
+        "de": "Einstellungen speichern",
+        "ru": "Сохранить настройки"
     },
     "Historial de Facturas": {
         "es": "Historial de Facturas",
         "en": "Billing History",
         "pt": "Histórico de Faturas",
         "fr": "Historique des factures",
-        "de": "Rechnungsverlauf"
+        "de": "Rechnungsverlauf",
+        "ru": "История счетов"
     },
     "Historial de facturas y documentos fiscales": {
         "es": "Historial de facturas y documentos fiscales",
         "en": "History of invoices and tax documents",
         "pt": "Histórico de faturas e documentos fiscais",
         "fr": "Historique des factures et documents fiscaux",
-        "de": "Verlauf von Rechnungen und Steuerdokumenten"
+        "de": "Verlauf von Rechnungen und Steuerdokumenten",
+        "ru": "История счетов и налоговых документов"
     },
     "IT Managers, CTOs - 25-55 años": {
         "es": "IT Managers, CTOs - 25-55 años",
         "en": "IT Managers, CTOs - 25-55 years old",
         "pt": "Gerentes de TI, CTOs - 25-55 anos",
         "fr": "Responsables informatiques, CTOs - 25-55 ans",
-        "de": "IT-Manager, CTOs - 25-55 Jahre"
+        "de": "IT-Manager, CTOs - 25-55 Jahre",
+        "ru": "IT-менеджеры, Технические директора - 25-55 лет"
     },
     "IT Managers, CTOs | 25-55 | LATAM, NA": {
         "es": "IT Managers, CTOs | 25-55 | LATAM, NA",
         "en": "IT Managers, CTOs | 25-55 | LATAM, NA",
         "pt": "Gerentes de TI, CTOs | 25-55 | LATAM, NA",
         "fr": "Responsables informatiques, CTOs | 25-55 | LATAM, NA",
-        "de": "IT-Manager, CTOs | 25-55 | LATAM, NA"
+        "de": "IT-Manager, CTOs | 25-55 | LATAM, NA",
+        "ru": "IT-менеджеры, Технические директора | 25-55 | LATAM, NA"
     },
     "Impresiones Hoy": {
         "es": "Impresiones Hoy",
         "en": "Impressions Today",
         "pt": "Impressões Hoje",
         "fr": "Impressions Aujourd'hui",
-        "de": "Impressionen Heute"
+        "de": "Impressionen Heute",
+        "ru": "Показов за сегодня"
     },
     "Informacion de Contacto": {
         "es": "Informacion de Contacto",
         "en": "Contact Information",
         "pt": "Informações de Contato",
         "fr": "Coordonnées",
-        "de": "Kontaktinformationen"
+        "de": "Kontaktinformationen",
+        "ru": "Контактная информация"
     },
     "Inicio: 01/04/2026 - 4 assets": {
         "es": "Inicio: 01/04/2026 - 4 assets",
         "en": "Start: 04/01/2026 - 4 assets",
         "pt": "Início: 01/04/2026 - 4 assets",
         "fr": "Début : 01/04/2026 - 4 assets",
-        "de": "Start: 01/04/2026 - 4 assets"
+        "de": "Start: 01/04/2026 - 4 assets",
+        "ru": "Начало: 01/04/2026 - 4 assets"
     },
     "Inicio: 15/03/2026 - 7 assets": {
         "es": "Inicio: 15/03/2026 - 7 assets",
         "en": "Start: 03/15/2026 - 7 assets",
         "pt": "Início: 15/03/2026 - 7 assets",
         "fr": "Début : 15/03/2026 - 7 assets",
-        "de": "Start: 15/03/2026 - 7 assets"
+        "de": "Start: 15/03/2026 - 7 assets",
+        "ru": "Начало: 15/03/2026 - 7 assets"
     },
     "Instituciones Educativas": {
         "es": "Instituciones Educativas",
         "en": "Educational Institutions",
         "pt": "Instituições de Ensino",
         "fr": "Établissements d'enseignement",
-        "de": "Bildungseinrichtungen"
+        "de": "Bildungseinrichtungen",
+        "ru": "Образовательные учреждения"
     },
     "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.": {
         "es": "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.",
         "en": "Integrate Facebook, Instagram, and Messenger Ads with your Ad Account.",
         "pt": "Integre o Facebook, Instagram e Messenger Ads à sua Conta de Anúncios.",
         "fr": "Intégrez Facebook, Instagram et Messenger Ads à votre compte publicitaire.",
-        "de": "Integrieren Sie Facebook, Instagram und Messenger Ads in Ihr Werbekonto."
+        "de": "Integrieren Sie Facebook, Instagram und Messenger Ads in Ihr Werbekonto.",
+        "ru": "Интегрируйте рекламу в Facebook, Instagram и Messenger со своим рекламным аккаунтом."
     },
     "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.": {
         "es": "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.",
         "en": "Integrate TikTok Ads Manager for viral campaigns and young audiences.",
         "pt": "Integre o TikTok Ads Manager para campanhas virais e públicos jovens.",
         "fr": "Intégrez TikTok Ads Manager pour les campagnes virales et les jeunes audiences.",
-        "de": "Integrieren Sie den TikTok Ads Manager für virale Kampagnen und junge Zielgruppen."
+        "de": "Integrieren Sie den TikTok Ads Manager für virale Kampagnen und junge Zielgruppen.",
+        "ru": "Интегрируйте TikTok Ads Manager для вирусных кампаний и молодой аудитории."
     },
     "Integraciones API": {
         "es": "Integraciones API",
         "en": "API Integrations",
         "pt": "Integrações de API",
         "fr": "Intégrations API",
-        "de": "API-Integrationen"
+        "de": "API-Integrationen",
+        "ru": "Интеграции API"
     },
     "JSON (.json)": {
         "es": "JSON (.json)",
         "en": "JSON (.json)",
         "pt": "JSON (.json)",
         "fr": "JSON (.json)",
-        "de": "JSON (.json)"
+        "de": "JSON (.json)",
+        "ru": "JSON (.json)"
     },
     "Jovenes Gamers": {
         "es": "Jovenes Gamers",
         "en": "Young Gamers",
         "pt": "Jovens Gamers",
         "fr": "Jeunes Gamers",
-        "de": "Junge Gamer"
+        "de": "Junge Gamer",
+        "ru": "Молодые геймеры"
     },
     "Lanzamiento Q2 - Terminal Pro": {
         "es": "Lanzamiento Q2 - Terminal Pro",
         "en": "Q2 Launch - Terminal Pro",
         "pt": "Lançamento Q2 - Terminal Pro",
         "fr": "Lancement Q2 - Terminal Pro",
-        "de": "Q2 Start - Terminal Pro"
+        "de": "Q2 Start - Terminal Pro",
+        "ru": "Запуск Q2 - Terminal Pro"
     },
     "Los graficos detallados de rendimiento estaran disponibles aqui.": {
         "es": "Los graficos detallados de rendimiento estaran disponibles aqui.",
         "en": "Detailed performance charts will be available here.",
         "pt": "Os gráficos de desempenho detalhados estarão disponíveis aqui.",
         "fr": "Les graphiques détaillés de performance seront disponibles ici.",
-        "de": "Detaillierte Leistungsdiagramme werden hier verfügbar sein."
+        "de": "Detaillierte Leistungsdiagramme werden hier verfügbar sein.",
+        "ru": "Подробные графики производительности будут доступны здесь."
     },
     "MP4 0:15": {
         "es": "MP4 0:15",
         "en": "MP4 0:15",
         "pt": "MP4 0:15",
         "fr": "MP4 0:15",
-        "de": "MP4 0:15"
+        "de": "MP4 0:15",
+        "ru": "MP4 0:15"
     },
     "MP4 2:30": {
         "es": "MP4 2:30",
         "en": "MP4 2:30",
         "pt": "MP4 2:30",
         "fr": "MP4 2:30",
-        "de": "MP4 2:30"
+        "de": "MP4 2:30",
+        "ru": "MP4 2:30"
     },
     "Mastercard | Expira 06/27": {
         "es": "Mastercard | Expira 06/27",
         "en": "Mastercard | Expires 06/27",
         "pt": "Mastercard | Expira em 06/27",
         "fr": "Mastercard | Expire 06/27",
-        "de": "Mastercard | Läuft ab 06/27"
+        "de": "Mastercard | Läuft ab 06/27",
+        "ru": "Mastercard | Срок действия до 06/27"
     },
     "Meta Ads": {
         "es": "Meta Ads",
         "en": "Meta Ads",
         "pt": "Meta Ads",
         "fr": "Meta Ads",
-        "de": "Meta Ads"
+        "de": "Meta Ads",
+        "ru": "Meta Ads"
     },
     "Metodos de Pago": {
         "es": "Metodos de Pago",
         "en": "Payment Methods",
         "pt": "Métodos de Pagamento",
         "fr": "Modes de paiement",
-        "de": "Zahlungsmethoden"
+        "de": "Zahlungsmethoden",
+        "ru": "Способы оплаты"
     },
     "Mi cuenta": {
         "es": "Mi cuenta",
         "en": "My account",
         "pt": "Minha conta",
         "fr": "Mon compte",
-        "de": "Mein Konto"
+        "de": "Mein Konto",
+        "ru": "Мой аккаунт"
     },
     "Notificaciones": {
         "es": "Notificaciones",
         "en": "Notifications",
         "pt": "Notificações",
         "fr": "Notifications",
-        "de": "Benachrichtigungen"
+        "de": "Benachrichtigungen",
+        "ru": "Уведомления"
     },
     "Nueva Campaña": {
         "es": "Nueva Campaña",
         "en": "New Campaign",
         "pt": "Nova Campanha",
         "fr": "Nouvelle campagne",
-        "de": "Neue Kampagne"
+        "de": "Neue Kampagne",
+        "ru": "Новая кампания"
     },
     "Nuevas funcionalidades y mejoras del servicio": {
         "es": "Nuevas funcionalidades y mejoras del servicio",
         "en": "New features and service improvements",
         "pt": "Novos recursos e melhorias no serviço",
         "fr": "Nouvelles fonctionnalités et améliorations du service",
-        "de": "Neue Funktionen und Serviceverbesserungen"
+        "de": "Neue Funktionen und Serviceverbesserungen",
+        "ru": "Новые функции и улучшения сервиса"
     },
     "Nuevo Segmento": {
         "es": "Nuevo Segmento",
         "en": "New Segment",
         "pt": "Novo Segmento",
         "fr": "Nouveau segment",
-        "de": "Neues Segment"
+        "de": "Neues Segment",
+        "ru": "Новый сегмент"
     },
     "PDF (.pdf)": {
         "es": "PDF (.pdf)",
         "en": "PDF (.pdf)",
         "pt": "PDF (.pdf)",
         "fr": "PDF (.pdf)",
-        "de": "PDF (.pdf)"
+        "de": "PDF (.pdf)",
+        "ru": "PDF (.pdf)"
     },
     "PNG 800x600": {
         "es": "PNG 800x600",
         "en": "PNG 800x600",
         "pt": "PNG 800x600",
         "fr": "PNG 800x600",
-        "de": "PNG 800x600"
+        "de": "PNG 800x600",
+        "ru": "PNG 800x600"
     },
     "PNG, JPG, MP4, WebM, PDF (max 250MB)": {
         "es": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
         "en": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
         "pt": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
         "fr": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
-        "de": "PNG, JPG, MP4, WebM, PDF (max 250MB)"
+        "de": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
+        "ru": "PNG, JPG, MP4, WebM, PDF (макс. 250MB)"
     },
     "Pagada": {
         "es": "Pagada",
         "en": "Paid",
         "pt": "Paga",
         "fr": "Payée",
-        "de": "Bezahlt"
+        "de": "Bezahlt",
+        "ru": "Оплачено"
     },
     "Pago Rechazado": {
         "es": "Pago Rechazado",
         "en": "Payment Rejected",
         "pt": "Pagamento Rejeitado",
         "fr": "Paiement rejeté",
-        "de": "Zahlung abgelehnt"
+        "de": "Zahlung abgelehnt",
+        "ru": "Платеж отклонен"
     },
     "Panel de Gestion para Agencias y Departamentos de Marketing": {
         "es": "Panel de Gestion para Agencias y Departamentos de Marketing",
         "en": "Management Panel for Agencies and Marketing Departments",
         "pt": "Painel de Gestão para Agências e Departamentos de Marketing",
         "fr": "Panneau de gestion pour agences et départements marketing",
-        "de": "Verwaltungspanel für Agenturen und Marketingabteilungen"
+        "de": "Verwaltungspanel für Agenturen und Marketingabteilungen",
+        "ru": "Панель управления для агентств и отделов маркетинга"
     },
     "Pausada - 3 assets": {
         "es": "Pausada - 3 assets",
         "en": "Paused - 3 assets",
         "pt": "Pausada - 3 assets",
         "fr": "En pause - 3 assets",
-        "de": "Pausiert - 3 assets"
+        "de": "Pausiert - 3 assets",
+        "ru": "Приостановлена - 3 актива"
     },
     "Personaliza tu experiencia y ajustes de integracion": {
         "es": "Personaliza tu experiencia y ajustes de integracion",
         "en": "Customize your experience and integration settings",
         "pt": "Personalize sua experiência e configurações de integração",
         "fr": "Personnalisez votre expérience et vos paramètres d'intégration",
-        "de": "Personalisieren Sie Ihre Erfahrung und Integrationseinstellungen"
+        "de": "Personalisieren Sie Ihre Erfahrung und Integrationseinstellungen",
+        "ru": "Персонализируйте свой опыт и настройки интеграции"
     },
     "Personalizacion Avanzada": {
         "es": "Personalizacion Avanzada",
         "en": "Advanced Customization",
         "pt": "Personalização Avançada",
         "fr": "Personnalisation avancée",
-        "de": "Erweiterte Anpassung"
+        "de": "Erweiterte Anpassung",
+        "ru": "Расширенная настройка"
     },
     "Predeterminada": {
         "es": "Predeterminada",
         "en": "Default",
         "pt": "Padrão",
         "fr": "Par défaut",
-        "de": "Standard"
+        "de": "Standard",
+        "ru": "По умолчанию"
     },
     "Preferencias Generales": {
         "es": "Preferencias Generales",
         "en": "General Preferences",
         "pt": "Preferências Gerais",
         "fr": "Préférences générales",
-        "de": "Allgemeine Einstellungen"
+        "de": "Allgemeine Einstellungen",
+        "ru": "Общие настройки"
     },
     "Pricing-Slide": {
         "es": "Pricing-Slide",
         "en": "Pricing-Slide",
         "pt": "Pricing-Slide",
         "fr": "Pricing-Slide",
-        "de": "Pricing-Slide"
+        "de": "Pricing-Slide",
+        "ru": "Pricing-Slide"
     },
     "Produccion": {
         "es": "Produccion",
         "en": "Production",
         "pt": "Produção",
         "fr": "Production",
-        "de": "Produktion"
+        "de": "Produktion",
+        "ru": "Производство"
     },
     "PyMEs LATAM": {
         "es": "PyMEs LATAM",
         "en": "SMEs LATAM",
         "pt": "PMEs LATAM",
         "fr": "PME LATAM",
-        "de": "KMU LATAM"
+        "de": "KMU LATAM",
+        "ru": "МСБ LATAM"
     },
     "QFDM-Explainer": {
         "es": "QFDM-Explainer",
         "en": "QFDM-Explainer",
         "pt": "QFDM-Explainer",
         "fr": "QFDM-Explainer",
-        "de": "QFDM-Explainer"
+        "de": "QFDM-Explainer",
+        "ru": "QFDM-Explainer"
     },
     "QR de pago — referencia única": {
         "es": "QR de pago — referencia única",
         "en": "Payment QR — unique reference",
         "pt": "QR de pagamento — referência única",
         "fr": "QR de paiement — référence unique",
-        "de": "Zahlungs-QR — eindeutige Referenz"
+        "de": "Zahlungs-QR — eindeutige Referenz",
+        "ru": "QR-код для оплаты — уникальный идентификатор"
     },
     "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.": {
         "es": "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.",
         "en": "A: In case of failure, you can contact Coffee Pie® technical support for assistance or guidance. Additionally, being modular devices, depending on the origin of the fault, it is very likely that you can replace specific components without needing to request another terminal.",
         "pt": "R: Em caso de falhas, você pode contatar o suporte técnico da Coffee Pie® para receber assistência ou orientação. Além disso, por serem dispositivos modulares, dependendo da origem da falha, é muito provável que você possa substituir componentes específicos sem a necessidade de solicitar outro terminal.",
         "fr": "R: En cas de panne, vous pouvez contacter le support technique de Coffee Pie® pour obtenir de l'aide ou des conseils. De plus, s'agissant d'appareils modulaires, selon l'origine de la panne, il est très probable que vous puissiez remplacer des composants spécifiques sans avoir besoin de demander un autre terminal.",
-        "de": "A: Im Fehlerfall können Sie sich an den technischen Support von Coffee Pie® wenden, um Hilfe oder Beratung zu erhalten. Da es sich um modulare Geräte handelt, ist es außerdem je nach Fehlerursache sehr wahrscheinlich, dass Sie bestimmte Komponenten austauschen können, ohne ein weiteres Terminal anfordern zu müssen."
+        "de": "A: Im Fehlerfall können Sie sich an den technischen Support von Coffee Pie® wenden, um Hilfe oder Beratung zu erhalten. Da es sich um modulare Geräte handelt, ist es außerdem je nach Fehlerursache sehr wahrscheinlich, dass Sie bestimmte Komponenten austauschen können, ohne ein weiteres Terminal anfordern zu müssen.",
+        "ru": "О: В случае возникновения неполадок вы можете обратиться в службу технической поддержки Coffee Pie® за помощью или консультацией. Кроме того, поскольку это модульные устройства, в зависимости от причины неисправности вполне вероятно, что вы сможете заменить отдельные компоненты без необходимости запрашивать другой терминал."
     },
     "Recibe notificaciones cuando una campaña alcance su presupuesto": {
         "es": "Recibe notificaciones cuando una campaña alcance su presupuesto",
         "en": "Receive notifications when a campaign reaches its budget",
         "pt": "Receba notificações quando uma campanha atingir seu orçamento",
         "fr": "Recevez des notifications lorsqu'une campagne atteint son budget",
-        "de": "Erhalten Sie Benachrichtigungen, wenn eine Kampagne ihr Budget erreicht"
+        "de": "Erhalten Sie Benachrichtigungen, wenn eine Kampagne ihr Budget erreicht",
+        "ru": "Получайте уведомления, когда кампания достигает своего бюджета"
     },
     "Recibe un resumen de rendimiento cada lunes": {
         "es": "Recibe un resumen de rendimiento cada lunes",
         "en": "Receive a performance summary every Monday",
         "pt": "Receba um resumo de desempenho toda segunda-feira",
         "fr": "Recevez un résumé de performance chaque lundi",
-        "de": "Erhalten Sie jeden Montag eine Leistungszusammenfassung"
+        "de": "Erhalten Sie jeden Montag eine Leistungszusammenfassung",
+        "ru": "Получайте сводку эффективности каждый понедельник"
     },
     "Reconocimiento - $50/dia - Desde 01/04": {
         "es": "Reconocimiento - $50/dia - Desde 01/04",
         "en": "Awareness - $50/day - Since 04/01",
         "pt": "Reconhecimento - $50/dia - Desde 01/04",
         "fr": "Notoriété - 50$/jour - Depuis le 01/04",
-        "de": "Bekanntheit - 50$/Tag - Seit 01/04"
+        "de": "Bekanntheit - 50$/Tag - Seit 01/04",
+        "ru": "Осведомленность - 50$/день - С 01/04"
     },
     "Reconocimiento - Borrador": {
         "es": "Reconocimiento - Borrador",
         "en": "Awareness - Draft",
         "pt": "Reconhecimento - Rascunho",
         "fr": "Notoriété - Brouillon",
-        "de": "Bekanntheit - Entwurf"
+        "de": "Bekanntheit - Entwurf",
+        "ru": "Осведомленность - Черновик"
     },
     "Referencia": {
         "es": "Referencia",
         "en": "Reference",
         "pt": "Referência",
         "fr": "Référence",
-        "de": "Referenz"
+        "de": "Referenz",
+        "ru": "Ссылка"
     },
     "Reportes": {
         "es": "Reportes",
         "en": "Reports",
         "pt": "Relatórios",
         "fr": "Rapports",
-        "de": "Berichte"
+        "de": "Berichte",
+        "ru": "Отчеты"
     },
     "Resumen de Rendimiento": {
         "es": "Resumen de Rendimiento",
         "en": "Performance Summary",
         "pt": "Resumo de Desempenho",
         "fr": "Résumé des performances",
-        "de": "Leistungszusammenfassung"
+        "de": "Leistungszusammenfassung",
+        "ru": "Сводка эффективности"
     },
     "Segmentacion": {
         "es": "Segmentacion",
         "en": "Segmentation",
         "pt": "Segmentação",
         "fr": "Segmentation",
-        "de": "Segmentierung"
+        "de": "Segmentierung",
+        "ru": "Сегментация"
     },
     "Segmentacion de Audiencias": {
         "es": "Segmentacion de Audiencias",
         "en": "Audience Segmentation",
         "pt": "Segmentação de Público",
         "fr": "Segmentation d'audience",
-        "de": "Zielgruppensegmentierung"
+        "de": "Zielgruppensegmentierung",
+        "ru": "Сегментация аудитории"
     },
     "Segmentos Activos": {
         "es": "Segmentos Activos",
         "en": "Active Segments",
         "pt": "Segmentos Ativos",
         "fr": "Segments actifs",
-        "de": "Aktive Segmente"
+        "de": "Aktive Segmente",
+        "ru": "Активные сегменты"
     },
     "Segmentos Definidos": {
         "es": "Segmentos Definidos",
         "en": "Defined Segments",
         "pt": "Segmentos Definidos",
         "fr": "Segments définis",
-        "de": "Definierte Segmente"
+        "de": "Definierte Segmente",
+        "ru": "Определенные сегменты"
     },
     "Seguridad": {
         "es": "Seguridad",
         "en": "Security",
         "pt": "Segurança",
         "fr": "Sécurité",
-        "de": "Sicherheit"
+        "de": "Sicherheit",
+        "ru": "Безопасность"
     },
     "Simple": {
         "es": "Simple",
         "en": "Simple",
         "pt": "Simples",
         "fr": "Simple",
-        "de": "Einfach"
+        "de": "Einfach",
+        "ru": "Простой"
     },
     "Sincroniza campanas, conversiones y remarketing via Conversion API.": {
         "es": "Sincroniza campanas, conversiones y remarketing via Conversion API.",
         "en": "Synchronize campaigns, conversions, and remarketing via Conversion API.",
         "pt": "Sincronize campanhas, conversões e remarketing via Conversion API.",
         "fr": "Synchronisez les campagnes, les conversions et le remarketing via l'API Conversions.",
-        "de": "Synchronisieren Sie Kampagnen, Conversions und Remarketing über die Conversion-API."
+        "de": "Synchronisieren Sie Kampagnen, Conversions und Remarketing über die Conversion-API.",
+        "ru": "Синхронизируйте кампании, конверсии и ремаркетинг через API конверсий."
     },
     "Sube imagenes, videos y documentos para tus campañas": {
         "es": "Sube imagenes, videos y documentos para tus campañas",
         "en": "Upload images, videos, and documents for your campaigns",
         "pt": "Envie imagens, vídeos e documentos para suas campanhas",
         "fr": "Téléchargez des images, des vidéos et des documents pour vos campagnes",
-        "de": "Laden Sie Bilder, Videos und Dokumente für Ihre Kampagnen hoch"
+        "de": "Laden Sie Bilder, Videos und Dokumente für Ihre Kampagnen hoch",
+        "ru": "Загружайте изображения, видео и документы для своих кампаний"
     },
     "Subir": {
         "es": "Subir",
         "en": "Upload",
         "pt": "Enviar",
         "fr": "Télécharger",
-        "de": "Hochladen"
+        "de": "Hochladen",
+        "ru": "Загрузить"
     },
     "Subir Activo": {
         "es": "Subir Activo",
         "en": "Upload Asset",
         "pt": "Enviar Ativo",
         "fr": "Télécharger un actif",
-        "de": "Asset hochladen"
+        "de": "Asset hochladen",
+        "ru": "Загрузить актив"
     },
     "Subir Nuevo Activo": {
         "es": "Subir Nuevo Activo",
         "en": "Upload New Asset",
         "pt": "Enviar Novo Ativo",
         "fr": "Télécharger un nouvel actif",
-        "de": "Neues Asset hochladen"
+        "de": "Neues Asset hochladen",
+        "ru": "Загрузить новый актив"
     },
     "Tech Summit Sponsorship": {
         "es": "Tech Summit Sponsorship",
         "en": "Tech Summit Sponsorship",
         "pt": "Tech Summit Sponsorship",
         "fr": "Tech Summit Sponsorship",
-        "de": "Tech Summit Sponsorship"
+        "de": "Tech Summit Sponsorship",
+        "ru": "Tech Summit Sponsorship"
     },
     "Terminal-Pro-Banner": {
         "es": "Terminal-Pro-Banner",
         "en": "Terminal-Pro-Banner",
         "pt": "Terminal-Pro-Banner",
         "fr": "Terminal-Pro-Banner",
-        "de": "Terminal-Pro-Banner"
+        "de": "Terminal-Pro-Banner",
+        "ru": "Terminal-Pro-Banner"
     },
     "TikTok Ads": {
         "es": "TikTok Ads",
         "en": "TikTok Ads",
         "pt": "TikTok Ads",
         "fr": "TikTok Ads",
-        "de": "TikTok Ads"
+        "de": "TikTok Ads",
+        "ru": "TikTok Ads"
     },
     "Tipo de Cuenta": {
         "es": "Tipo de Cuenta",
         "en": "Account Type",
         "pt": "Tipo de Conta",
         "fr": "Type de compte",
-        "de": "Kontotyp"
+        "de": "Kontotyp",
+        "ru": "Тип аккаунта"
     },
     "Titular": {
         "es": "Titular",
         "en": "Cardholder",
         "pt": "Titular",
         "fr": "Titulaire",
-        "de": "Inhaber"
+        "de": "Inhaber",
+        "ru": "Владелец"
     },
     "Total del carrito": {
         "es": "Total del carrito",
         "en": "Cart total",
         "pt": "Total do carrinho",
         "fr": "Total du panier",
-        "de": "Gesamtsumme des Warenkorbs"
+        "de": "Gesamtsumme des Warenkorbs",
+        "ru": "Итого в корзине"
     },
     "Trafico - $120/dia - Desde 15/03": {
         "es": "Trafico - $120/dia - Desde 15/03",
         "en": "Traffic - $120/day - Since 03/15",
         "pt": "Tráfego - $120/dia - Desde 15/03",
         "fr": "Trafic - 120$/jour - Depuis le 15/03",
-        "de": "Traffic - 120$/Tag - Seit 15/03"
+        "de": "Traffic - 120$/Tag - Seit 15/03",
+        "ru": "Трафик - 120$/день - С 15/03"
     },
     "Tus Claves API": {
         "es": "Tus Claves API",
         "en": "Your API Keys",
         "pt": "Suas Chaves da API",
         "fr": "Vos clés API",
-        "de": "Ihre API-Schlüssel"
+        "de": "Ihre API-Schlüssel",
+        "ru": "Ваши ключи API"
     },
     "Ver todas": {
         "es": "Ver todas",
         "en": "View all",
         "pt": "Ver todas",
         "fr": "Voir tout",
-        "de": "Alle anzeigen"
+        "de": "Alle anzeigen",
+        "ru": "Смотреть все"
     },
     "Visa | Expira 12/28": {
         "es": "Visa | Expira 12/28",
         "en": "Visa | Expires 12/28",
         "pt": "Visa | Expira em 12/28",
         "fr": "Visa | Expire 12/28",
-        "de": "Visa | Läuft ab 12/28"
+        "de": "Visa | Läuft ab 12/28",
+        "ru": "Visa | Истекает 12/28"
     },
     "Volver al carrito": {
         "es": "Volver al carrito",
         "en": "Return to cart",
         "pt": "Voltar ao carrinho",
         "fr": "Retourner au panier",
-        "de": "Zurück zum Warenkorb"
+        "de": "Zurück zum Warenkorb",
+        "ru": "Вернуться в корзину"
     },
     "Webhooks y Automatizacion": {
         "es": "Webhooks y Automatizacion",
         "en": "Webhooks and Automation",
         "pt": "Webhooks e Automação",
         "fr": "Webhooks et automatisation",
-        "de": "Webhooks und Automatisierung"
+        "de": "Webhooks und Automatisierung",
+        "ru": "Webhooks и автоматизация"
     },
     "Word (.docx)": {
         "es": "Word (.docx)",
         "en": "Word (.docx)",
         "pt": "Word (.docx)",
         "fr": "Word (.docx)",
-        "de": "Word (.docx)"
+        "de": "Word (.docx)",
+        "ru": "Word (.docx)"
     },
     "X Ads": {
         "es": "X Ads",
         "en": "X Ads",
         "pt": "X Ads",
         "fr": "X Ads",
-        "de": "X Ads"
+        "de": "X Ads",
+        "ru": "X Ads"
     },
     "ahora todo eso es posible!": {
         "es": "ahora todo eso es posible!",
         "en": "now all that is possible!",
         "pt": "agora tudo isso é possível!",
         "fr": "maintenant tout cela est possible !",
-        "de": "jetzt ist all das möglich!"
+        "de": "jetzt ist all das möglich!",
+        "ru": "теперь все это возможно!"
     },
     "audiencia": {
         "es": "audiencia",
         "en": "audience",
         "pt": "público",
         "fr": "audience",
-        "de": "publikum"
+        "de": "publikum",
+        "ru": "аудитория"
     },
     "campañas": {
         "es": "campañas",
         "en": "campaigns",
         "pt": "campanhas",
         "fr": "campagnes",
-        "de": "kampagnen"
+        "de": "kampagnen",
+        "ru": "кампании"
     },
     "education": {
         "es": "education",
         "en": "education",
         "pt": "education",
         "fr": "education",
-        "de": "education"
+        "de": "education",
+        "ru": "education"
     },
     "en tu celular": {
         "es": "en tu celular",
         "en": "on your phone",
         "pt": "no seu celular",
         "fr": "sur votre téléphone",
-        "de": "auf deinem handy"
+        "de": "auf deinem handy",
+        "ru": "на вашем мобильном"
     },
     "facturas": {
         "es": "facturas",
         "en": "invoices",
         "pt": "faturas",
         "fr": "factures",
-        "de": "rechnungen"
+        "de": "rechnungen",
+        "ru": "счета"
     },
     "gaming": {
         "es": "gaming",
         "en": "gaming",
         "pt": "gaming",
         "fr": "gaming",
-        "de": "gaming"
+        "de": "gaming",
+        "ru": "gaming"
     },
     "impresiones": {
         "es": "impresiones",
         "en": "impressions",
         "pt": "impressões",
         "fr": "impressions",
-        "de": "impressionen"
+        "de": "impressionen",
+        "ru": "показы"
     },
     "no lanzada": {
         "es": "no lanzada",
         "en": "unreleased",
         "pt": "não lançada",
         "fr": "non lancée",
-        "de": "nicht veröffentlicht"
+        "de": "nicht veröffentlicht",
+        "ru": "не запущена"
     },
     "o arrastra tus archivos aqui": {
         "es": "o arrastra tus archivos aqui",
         "en": "or drag your files here",
         "pt": "ou arraste seus arquivos aqui",
         "fr": "ou glissez vos fichiers ici",
-        "de": "oder ziehen Sie Ihre Dateien hierher"
+        "de": "oder ziehen Sie Ihre Dateien hierher",
+        "ru": "или перетащите ваши файлы сюда"
     },
     "para desarrollo | Base URL:": {
         "es": "para desarrollo | Base URL:",
         "en": "for development | Base URL:",
         "pt": "para desenvolvimento | Base URL:",
         "fr": "pour le développement | Base URL:",
-        "de": "für entwicklung | Base URL:"
+        "de": "für entwicklung | Base URL:",
+        "ru": "для разработки | Base URL:"
     },
     "para produccion |": {
         "es": "para produccion |",
         "en": "for production |",
         "pt": "para produção |",
         "fr": "pour la production |",
-        "de": "für produktion |"
+        "de": "für produktion |",
+        "ru": "для продакшена |"
     },
     "pyme": {
         "es": "pyme",
         "en": "sme",
         "pt": "pme",
         "fr": "pme",
-        "de": "kmu"
+        "de": "kmu",
+        "ru": "мсб"
     },
     "retail": {
         "es": "retail",
         "en": "retail",
         "pt": "retail",
         "fr": "retail",
-        "de": "retail"
+        "de": "retail",
+        "ru": "retail"
     },
     "segmentos": {
         "es": "segmentos",
         "en": "segments",
         "pt": "segmentos",
         "fr": "segments",
-        "de": "segmente"
+        "de": "segmente",
+        "ru": "сегменты"
     },
     "tech": {
         "es": "tech",
         "en": "tech",
         "pt": "tech",
         "fr": "tech",
-        "de": "tech"
+        "de": "tech",
+        "ru": "tech"
     }
 }
