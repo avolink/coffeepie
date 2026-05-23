@@ -4,11 +4,12 @@
 
 🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.
 
-"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can"
+"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves."
 
 Project Status: Active<br>
 Current Version: v0.1.0-alpha<br>
-Development Phase: Alpha Testing (TRL7)<br>
+Concluded Phase: Lab Testing (TRL6)
+Current Phase: Alpha Testing (TRL7)<br>
 
 Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA SAS
 Patent: NC2025/0012723 (expiring by 2045).<br>
@@ -52,7 +53,9 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived) |
 | IA | 3 TOPS | INT8 parallel processing capacity |
 
-> Anti-Abuse Guardrail: AI training, AI inference, Big Data, server deployment, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, research, create, entertain, even casual videogames are all legit and recommended uses, but if an instance exceeds its power limit warnings an automatic AI agent observation and recording will be triggered for human audit, if violating law or community rules (e.g., unauthorized cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional law permits. We want to save the planet, not the bots!...<br>
+Legit and recommended uses, but not limited to: AI training, AI inference, Big Data, server deployment, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, research, create, entertain, casual gaming, etc.
+
+> Anti-Abuse Guardrail: But if an instance exceeds its power limit warnings an automatic AI Agent observation and recording will be triggered for human audit, if violating Law or community rules (e.g., unauthorized pentesting, cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional Law permits. We want to save the planet, not the bots!...<br>
 
  🏗 System Architecture:<br>
  1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used (Proxmox Recommended).<br>
@@ -90,13 +93,16 @@ Contributing: We welcome anyone to contribute, but by contributing, you agree to
 ❌ Deceptive Practices: Scams, malware, phishing or fraudulent financial promises.<br>
 ❌ Cryptocurrency Mining: Mining any kind of cryptocurrency is strictly prohibited, but cryptocurrency and cryptoassets related transactions are allowed only if the Law allows it (consult your local jurisdiction's regulations).<br>
 
- 🎯 The 2035 Goal:
-Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
+ 🎯 The Goals:
+2030: Becoming an open, reliable, global standard and the Backbone of computing<br>
+2035: Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
+2040: 1'000'000'000 active users in the QFDM Network.<br>
+2050: Guaranteed global access to a codec terminal.<br>
 
 BIC Status: A private capital company with socio-environmental consciousness.<br>
 
 No Controlling Stakes: No single entity will own the majority. Coffee Pie belongs to the community and the conscious investors prioritizing humanity and environment over profits. Maximum private ownership is limited to 10% aside the founder.<br>
 
-"We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves"<br>
+"Competition is the law of the jungle, cooperation the law of civilization."<br>
 
 🌍 Ready to slice the future? Check the Wiki | Join the Dev Discord | Invest in the Planet 🌳
