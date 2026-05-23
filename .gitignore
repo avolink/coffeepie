@@ -13,12 +13,13 @@
 build*/
 Build*/
 
-# IDE
+# IDE / AI Agents
 .vscode/
 .idea/
 *.swp
 .qtc_clangd/
 .qt/
+.antigravitycli/
 
 # OS
 .DS_Store
