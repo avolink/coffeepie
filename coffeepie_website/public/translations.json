@@ -8320,17 +8320,8 @@
         "ar": "8.2-82/82"
     },
     "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...": {
-        "en": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
         "es": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "pt": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "fr": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "de": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "ru": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "hi": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "ja": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "zh": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "ko": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental...",
-        "ar": "Servicio de cómputo flexible, bajo demanda, al alcance de cualquier bolsillo. Olvídate de los altos costos, del mantenimiento, del calor, del ruido, todo esto con mínimo impacto ambiental..."
+        "en": "Flexible, on-demand computing service, within reach of any pocket. Forget about high costs, maintenance, heat, noise, all with minimal environmental impact..."
     },
     "Economía Circular = Rechazar, Repensar, Reducir, Reusar, Reparar, Restaurar, Remanufacturar, Reutilizar, Reciclar, Recuperar": {
         "en": "Circular Economy = Reject, Rethink, Reduce, Reuse, Repair, Restore, Removing, Reuse, Recycling, Recover",
@@ -16780,5 +16771,761 @@
         "zh": "代码终端有专利但开放标准(CERN License),模块化,紧凑,低成本,有些类似于键盘,平板和智能手机(Command™, Sentinel™, Ranger™),但高度定制,可修复,最高可达至97%,这使得您可以访问我们新的\"Coffee Pie®\"服务. 询问您的ISP是否可以包含终端与互联网订阅, 或者为您需要的每个设备只留下一个小存款, 并在您不再需要时返回! 根据病情和磨损情况,我们会将90%至10%的押金重新纳入你的生活.",
         "ko": "Codec Terminal은 특허를 받았지만 개방형(CERN License), 모듈형, 소형, 저비용, 키보드, 태블릿 및 스마트폰과 유사한 일부 (Command™, Sentinel™, Ranger™), 매우 customizable, reparable, 97 %까지 새로운 Coffee Pie®서비스에 액세스 할 수 있습니다. 인터넷 가입으로 터미널을 포함 할 수 있다면 ISP를 요청하거나, 더 이상 필요로 할 때 모든 장치에 대한 하나의 작은 보증금을 남겨주세요!... 우리는 조건과 착용에 근거를 둔 예금의 10% 그리고 90% 사이에서 당신을 재연할 것입니다.",
         "ar": "(ج) مصطلحات الكوديينات مُبرَأة، لكنها مفتوحة المستوى (رخصة CERN)، ونموذجية، ومضغوطة، منخفضة التكلفة، وبعضها متشابه مع لوحات المفاتيح، والأقراص، والهواتف الذكية (الكاميرات المحمولة، وسينتيل تيم، رانجر™)، ولكن يمكن إصلاحها، بدرجة عالية، تصل إلى 97 في المائة، مما يسمح لك بالوصول إلى خدماتنا الجديدة للبن Pie. إسألي برنامجكِ إن أمكنكِ أن تُضمّنِ المحطة باشتراكِ الإنترنت، أو أن تتركي إيداعاً صغيراً واحداً لكل جهاز تُريدينه وتُعيديه عندما لا تكونين بحاجة إليهم... سنعيد دمجك بين 10% و 90% من الودائع بناءً على الحالة والملابس."
+    },
+    "\"Authorization\": \"Bearer {{API_KEY}}\",": {
+        "es": "\"Authorization\": \"Bearer {{API_KEY}}\",",
+        "en": "\"Authorization\": \"Bearer {{API_KEY}}\","
+    },
+    "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },": {
+        "es": "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },",
+        "en": "\"age_range\": { \"type\": \"string\", \"description\": \"Age range (e.g., '18-24')\" },"
+    },
+    "\"conversion_score\": { \"type\": \"number\" }": {
+        "es": "\"conversion_score\": { \"type\": \"number\" }",
+        "en": "\"conversion_score\": { \"type\": \"number\" }"
+    },
+    "\"estimated_users\": { \"type\": \"number\" },": {
+        "es": "\"estimated_users\": { \"type\": \"number\" },",
+        "en": "\"estimated_users\": { \"type\": \"number\" },"
+    },
+    "\"handler\": {": {
+        "es": "\"handler\": {",
+        "en": "\"handler\": {"
+    },
+    "\"headers\": {": {
+        "es": "\"headers\": {",
+        "en": "\"headers\": {"
+    },
+    "\"input_schema\": {": {
+        "es": "\"input_schema\": {",
+        "en": "\"input_schema\": {"
+    },
+    "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },": {
+        "es": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },",
+        "en": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"List of interests\" },"
+    },
+    "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }": {
+        "es": "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }",
+        "en": "\"location\": { \"type\": \"string\", \"description\": \"Geographic location\" }"
+    },
+    "\"output_schema\": {": {
+        "es": "\"output_schema\": {",
+        "en": "\"output_schema\": {"
+    },
+    "\"properties\": {": {
+        "es": "\"properties\": {",
+        "en": "\"properties\": {"
+    },
+    "\"segment_id\": { \"type\": \"string\" },": {
+        "es": "\"segment_id\": { \"type\": \"string\" },",
+        "en": "\"segment_id\": { \"type\": \"string\" },"
+    },
+    "$1.00 / terminal": {
+        "es": "$1.00 / terminal",
+        "en": "$1.00 / terminal"
+    },
+    "+2 nuevos": {
+        "es": "+2 nuevos",
+        "en": "+2 new"
+    },
+    "+3 esta semana": {
+        "es": "+3 esta semana",
+        "en": "+3 this week"
+    },
+    "0 licencias": {
+        "es": "0 licencias",
+        "en": "0 licenses"
+    },
+    "1 a 999": {
+        "es": "1 a 999",
+        "en": "1 to 999"
+    },
+    "1'000 a 9'999": {
+        "es": "1'000 a 9'999",
+        "en": "1'000 to 9'999"
+    },
+    "1. Abre la app": {
+        "es": "1. Abre la app",
+        "en": "1. Open the app"
+    },
+    "1.8K": {
+        "es": "1.8K",
+        "en": "1.8K"
+    },
+    "10'000 a 99'999": {
+        "es": "10'000 a 99'999",
+        "en": "10'000 to 99'999"
+    },
+    "100'000 a 999'999": {
+        "es": "100'000 a 999'999",
+        "en": "100'000 to 999'999"
+    },
+    "12.4K": {
+        "es": "12.4K",
+        "en": "12.4K"
+    },
+    "1200x800": {
+        "es": "1200x800",
+        "en": "1200x800"
+    },
+    "1920x1080": {
+        "es": "1920x1080",
+        "en": "1920x1080"
+    },
+    "2. Toca \"Pagar con QR\" y escanea el código": {
+        "es": "2. Toca \"Pagar con QR\" y escanea el código",
+        "en": "2. Tap \"Pay with QR\" and scan the code"
+    },
+    "2.4K": {
+        "es": "2.4K",
+        "en": "2.4K"
+    },
+    "3. Verifica que el total coincida con el de tu carrito": {
+        "es": "3. Verifica que el total coincida con el de tu carrito",
+        "en": "3. Verify that the total matches your cart"
+    },
+    "3.1K": {
+        "es": "3.1K",
+        "en": "3.1K"
+    },
+    "3.2K": {
+        "es": "3.2K",
+        "en": "3.2K"
+    },
+    "4. Confirma el pago desde la app": {
+        "es": "4. Confirma el pago desde la app",
+        "en": "4. Confirm the payment from the app"
+    },
+    "48.2K": {
+        "es": "48.2K",
+        "en": "48.2K"
+    },
+    "5. Incluye el número de referencia en el campo \"Concepto\"": {
+        "es": "5. Incluye el número de referencia en el campo \"Concepto\"",
+        "en": "5. Include the reference number in the \"Concept\" field"
+    },
+    "5.1K": {
+        "es": "5.1K",
+        "en": "5.1K"
+    },
+    "6. Tus productos se activarán automáticamente en 5-10 minutos": {
+        "es": "6. Tus productos se activarán automáticamente en 5-10 minutos",
+        "en": "6. Your products will activate automatically in 5-10 minutes"
+    },
+    "8.7K": {
+        "es": "8.7K",
+        "en": "8.7K"
+    },
+    "API Keys": {
+        "es": "API Keys",
+        "en": "API Keys"
+    },
+    "API Keys Table": {
+        "es": "API Keys Table",
+        "en": "API Keys Table"
+    },
+    "Activos Recientes": {
+        "es": "Activos Recientes",
+        "en": "Recent Assets"
+    },
+    "Activos Subidos": {
+        "es": "Activos Subidos",
+        "en": "Uploaded Assets"
+    },
+    "Ad-PreRoll": {
+        "es": "Ad-PreRoll",
+        "en": "Ad-PreRoll"
+    },
+    "Agregar Tarjeta": {
+        "es": "Agregar Tarjeta",
+        "en": "Add Card"
+    },
+    "Anade una capa extra de seguridad a tu cuenta": {
+        "es": "Anade una capa extra de seguridad a tu cuenta",
+        "en": "Add an extra layer of security to your account"
+    },
+    "Analiticas y metricas de rendimiento": {
+        "es": "Analiticas y metricas de rendimiento",
+        "en": "Analytics and performance metrics"
+    },
+    "Apariencia": {
+        "es": "Apariencia",
+        "en": "Appearance"
+    },
+    "Avisos antes del cobro automatico mensual": {
+        "es": "Avisos antes del cobro automatico mensual",
+        "en": "Notices before automatic monthly billing"
+    },
+    "Back to School 2026": {
+        "es": "Back to School 2026",
+        "en": "Back to School 2026"
+    },
+    "Balance:": {
+        "es": "Balance:",
+        "en": "Balance:"
+    },
+    "Banco": {
+        "es": "Banco",
+        "en": "Bank"
+    },
+    "CSV (.csv)": {
+        "es": "CSV (.csv)",
+        "en": "CSV (.csv)"
+    },
+    "CTR Promedio": {
+        "es": "CTR Promedio",
+        "en": "Average CTR"
+    },
+    "Cambiar Contrasena": {
+        "es": "Cambiar Contrasena",
+        "en": "Change Password"
+    },
+    "Campañas": {
+        "es": "Campañas",
+        "en": "Campaigns"
+    },
+    "Campañas Activas": {
+        "es": "Campañas Activas",
+        "en": "Active Campaigns"
+    },
+    "Campañas Recientes": {
+        "es": "Campañas Recientes",
+        "en": "Recent Campaigns"
+    },
+    "Cargar Activos": {
+        "es": "Cargar Activos",
+        "en": "Upload Assets"
+    },
+    "Cargar mas": {
+        "es": "Cargar mas",
+        "en": "Load more"
+    },
+    "Coffee Pie Ads": {
+        "es": "Coffee Pie Ads",
+        "en": "Coffee Pie Ads"
+    },
+    "Coffee Pie® Ads": {
+        "es": "Coffee Pie® Ads",
+        "en": "Coffee Pie® Ads"
+    },
+    "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.": {
+        "es": "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.",
+        "en": "Connect X (Twitter) campaigns for advanced promotion and segmentation."
+    },
+    "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.": {
+        "es": "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.",
+        "en": "Connect your Google Analytics or Meta Ads account to see real-time data."
+    },
+    "Conecta tus herramientas de marketing y automatizacion": {
+        "es": "Conecta tus herramientas de marketing y automatizacion",
+        "en": "Connect your marketing and automation tools"
+    },
+    "Conectar": {
+        "es": "Conectar",
+        "en": "Connect"
+    },
+    "Configuración": {
+        "es": "Configuración",
+        "en": "Configuration"
+    },
+    "Crea y gestiona tus campañas publicitarias": {
+        "es": "Crea y gestiona tus campañas publicitarias",
+        "en": "Create and manage your advertising campaigns"
+    },
+    "Crear Campaña": {
+        "es": "Crear Campaña",
+        "en": "Create Campaign"
+    },
+    "Crear Nueva Campaña": {
+        "es": "Crear Nueva Campaña",
+        "en": "Create New Campaign"
+    },
+    "Crear Segmento": {
+        "es": "Crear Segmento",
+        "en": "Create Segment"
+    },
+    "Dashboard": {
+        "es": "Dashboard",
+        "en": "Dashboard"
+    },
+    "Datos de Transferencia": {
+        "es": "Datos de Transferencia",
+        "en": "Transfer Data"
+    },
+    "Define segmentos demograficos para tus campañas": {
+        "es": "Define segmentos demograficos para tus campañas",
+        "en": "Define demographic segments for your campaigns"
+    },
+    "Desarrollo": {
+        "es": "Desarrollo",
+        "en": "Development"
+    },
+    "Directores, Admins | 35-60 | LATAM": {
+        "es": "Directores, Admins | 35-60 | LATAM",
+        "en": "Directors, Admins | 35-60 | LATAM"
+    },
+    "Documentacion API": {
+        "es": "Documentacion API",
+        "en": "API Documentation"
+    },
+    "Documentation": {
+        "es": "Documentation",
+        "en": "Documentation"
+    },
+    "Duenos de negocio, 30-60 años": {
+        "es": "Duenos de negocio, 30-60 años",
+        "en": "Business owners, 30-60 years old"
+    },
+    "Duenos, Gerentes | 30-60 | LATAM": {
+        "es": "Duenos, Gerentes | 30-60 | LATAM",
+        "en": "Owners, Managers | 30-60 | LATAM"
+    },
+    "Earth Day Promo": {
+        "es": "Earth Day Promo",
+        "en": "Earth Day Promo"
+    },
+    "Eco-Impact": {
+        "es": "Eco-Impact",
+        "en": "Eco-Impact"
+    },
+    "Eliminar": {
+        "es": "Eliminar",
+        "en": "Delete"
+    },
+    "Empresas Tecnologicas": {
+        "es": "Empresas Tecnologicas",
+        "en": "Technology Companies"
+    },
+    "En Mantenimiento": {
+        "es": "En Mantenimiento",
+        "en": "Under Maintenance"
+    },
+    "Engagement - $75/dia - Pausada": {
+        "es": "Engagement - $75/dia - Pausada",
+        "en": "Engagement - $75/day - Paused"
+    },
+    "Escanea el código QR con tu app Bancolombia para pagar tu carrito": {
+        "es": "Escanea el código QR con tu app Bancolombia para pagar tu carrito",
+        "en": "Scan the QR code with your Bancolombia app to pay for your cart"
+    },
+    "Estudiantes, 16-30 años": {
+        "es": "Estudiantes, 16-30 años",
+        "en": "Students, 16-30 years old"
+    },
+    "Estudiantes, Freelancers | 16-30 | Global": {
+        "es": "Estudiantes, Freelancers | 16-30 | Global",
+        "en": "Students, Freelancers | 16-30 | Global"
+    },
+    "Excel (.xlsx)": {
+        "es": "Excel (.xlsx)",
+        "en": "Excel (.xlsx)"
+    },
+    "Exportar CSV": {
+        "es": "Exportar CSV",
+        "en": "Export CSV"
+    },
+    "Exportar Configuracion": {
+        "es": "Exportar Configuracion",
+        "en": "Export Configuration"
+    },
+    "Exportar Todo": {
+        "es": "Exportar Todo",
+        "en": "Export All"
+    },
+    "Facturación": {
+        "es": "Facturación",
+        "en": "Billing"
+    },
+    "Generar Nueva Clave": {
+        "es": "Generar Nueva Clave",
+        "en": "Generate New Key"
+    },
+    "Gestiona tu informacion personal y metodos de pago": {
+        "es": "Gestiona tu informacion personal y metodos de pago",
+        "en": "Manage your personal information and payment methods"
+    },
+    "Gestionar": {
+        "es": "Gestionar",
+        "en": "Manage"
+    },
+    "Google Ads": {
+        "es": "Google Ads",
+        "en": "Google Ads"
+    },
+    "Guardar Cambios": {
+        "es": "Guardar Cambios",
+        "en": "Save Changes"
+    },
+    "Guardar Configuracion Avanzada": {
+        "es": "Guardar Configuracion Avanzada",
+        "en": "Save Advanced Configuration"
+    },
+    "Guardar Preferencias": {
+        "es": "Guardar Preferencias",
+        "en": "Save Preferences"
+    },
+    "Historial de Facturas": {
+        "es": "Historial de Facturas",
+        "en": "Billing History"
+    },
+    "Historial de facturas y documentos fiscales": {
+        "es": "Historial de facturas y documentos fiscales",
+        "en": "History of invoices and tax documents"
+    },
+    "IT Managers, CTOs - 25-55 años": {
+        "es": "IT Managers, CTOs - 25-55 años",
+        "en": "IT Managers, CTOs - 25-55 years old"
+    },
+    "IT Managers, CTOs | 25-55 | LATAM, NA": {
+        "es": "IT Managers, CTOs | 25-55 | LATAM, NA",
+        "en": "IT Managers, CTOs | 25-55 | LATAM, NA"
+    },
+    "Impresiones Hoy": {
+        "es": "Impresiones Hoy",
+        "en": "Impressions Today"
+    },
+    "Informacion de Contacto": {
+        "es": "Informacion de Contacto",
+        "en": "Contact Information"
+    },
+    "Inicio: 01/04/2026 - 4 assets": {
+        "es": "Inicio: 01/04/2026 - 4 assets",
+        "en": "Start: 04/01/2026 - 4 assets"
+    },
+    "Inicio: 15/03/2026 - 7 assets": {
+        "es": "Inicio: 15/03/2026 - 7 assets",
+        "en": "Start: 03/15/2026 - 7 assets"
+    },
+    "Instituciones Educativas": {
+        "es": "Instituciones Educativas",
+        "en": "Educational Institutions"
+    },
+    "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.": {
+        "es": "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.",
+        "en": "Integrate Facebook, Instagram, and Messenger Ads with your Ad Account."
+    },
+    "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.": {
+        "es": "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.",
+        "en": "Integrate TikTok Ads Manager for viral campaigns and young audiences."
+    },
+    "Integraciones API": {
+        "es": "Integraciones API",
+        "en": "API Integrations"
+    },
+    "JSON (.json)": {
+        "es": "JSON (.json)",
+        "en": "JSON (.json)"
+    },
+    "Jovenes Gamers": {
+        "es": "Jovenes Gamers",
+        "en": "Young Gamers"
+    },
+    "Lanzamiento Q2 - Terminal Pro": {
+        "es": "Lanzamiento Q2 - Terminal Pro",
+        "en": "Q2 Launch - Terminal Pro"
+    },
+    "Los graficos detallados de rendimiento estaran disponibles aqui.": {
+        "es": "Los graficos detallados de rendimiento estaran disponibles aqui.",
+        "en": "Detailed performance charts will be available here."
+    },
+    "MP4 0:15": {
+        "es": "MP4 0:15",
+        "en": "MP4 0:15"
+    },
+    "MP4 2:30": {
+        "es": "MP4 2:30",
+        "en": "MP4 2:30"
+    },
+    "Mastercard | Expira 06/27": {
+        "es": "Mastercard | Expira 06/27",
+        "en": "Mastercard | Expires 06/27"
+    },
+    "Meta Ads": {
+        "es": "Meta Ads",
+        "en": "Meta Ads"
+    },
+    "Metodos de Pago": {
+        "es": "Metodos de Pago",
+        "en": "Payment Methods"
+    },
+    "Mi cuenta": {
+        "es": "Mi cuenta",
+        "en": "My account"
+    },
+    "Notificaciones": {
+        "es": "Notificaciones",
+        "en": "Notifications"
+    },
+    "Nueva Campaña": {
+        "es": "Nueva Campaña",
+        "en": "New Campaign"
+    },
+    "Nuevas funcionalidades y mejoras del servicio": {
+        "es": "Nuevas funcionalidades y mejoras del servicio",
+        "en": "New features and service improvements"
+    },
+    "Nuevo Segmento": {
+        "es": "Nuevo Segmento",
+        "en": "New Segment"
+    },
+    "PDF (.pdf)": {
+        "es": "PDF (.pdf)",
+        "en": "PDF (.pdf)"
+    },
+    "PNG 800x600": {
+        "es": "PNG 800x600",
+        "en": "PNG 800x600"
+    },
+    "PNG, JPG, MP4, WebM, PDF (max 250MB)": {
+        "es": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
+        "en": "PNG, JPG, MP4, WebM, PDF (max 250MB)"
+    },
+    "Pagada": {
+        "es": "Pagada",
+        "en": "Paid"
+    },
+    "Pago Rechazado": {
+        "es": "Pago Rechazado",
+        "en": "Payment Rejected"
+    },
+    "Panel de Gestion para Agencias y Departamentos de Marketing": {
+        "es": "Panel de Gestion para Agencias y Departamentos de Marketing",
+        "en": "Management Panel for Agencies and Marketing Departments"
+    },
+    "Pausada - 3 assets": {
+        "es": "Pausada - 3 assets",
+        "en": "Paused - 3 assets"
+    },
+    "Personaliza tu experiencia y ajustes de integracion": {
+        "es": "Personaliza tu experiencia y ajustes de integracion",
+        "en": "Customize your experience and integration settings"
+    },
+    "Personalizacion Avanzada": {
+        "es": "Personalizacion Avanzada",
+        "en": "Advanced Customization"
+    },
+    "Predeterminada": {
+        "es": "Predeterminada",
+        "en": "Default"
+    },
+    "Preferencias Generales": {
+        "es": "Preferencias Generales",
+        "en": "General Preferences"
+    },
+    "Pricing-Slide": {
+        "es": "Pricing-Slide",
+        "en": "Pricing-Slide"
+    },
+    "Produccion": {
+        "es": "Produccion",
+        "en": "Production"
+    },
+    "PyMEs LATAM": {
+        "es": "PyMEs LATAM",
+        "en": "SMEs LATAM"
+    },
+    "QFDM-Explainer": {
+        "es": "QFDM-Explainer",
+        "en": "QFDM-Explainer"
+    },
+    "QR de pago — referencia única": {
+        "es": "QR de pago — referencia única",
+        "en": "Payment QR — unique reference"
+    },
+    "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.": {
+        "es": "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.",
+        "en": "A: In case of failure, you can contact Coffee Pie® technical support for assistance or guidance. Additionally, being modular devices, depending on the origin of the fault, it is very likely that you can replace specific components without needing to request another terminal."
+    },
+    "Recibe notificaciones cuando una campaña alcance su presupuesto": {
+        "es": "Recibe notificaciones cuando una campaña alcance su presupuesto",
+        "en": "Receive notifications when a campaign reaches its budget"
+    },
+    "Recibe un resumen de rendimiento cada lunes": {
+        "es": "Recibe un resumen de rendimiento cada lunes",
+        "en": "Receive a performance summary every Monday"
+    },
+    "Reconocimiento - $50/dia - Desde 01/04": {
+        "es": "Reconocimiento - $50/dia - Desde 01/04",
+        "en": "Awareness - $50/day - Since 04/01"
+    },
+    "Reconocimiento - Borrador": {
+        "es": "Reconocimiento - Borrador",
+        "en": "Awareness - Draft"
+    },
+    "Referencia": {
+        "es": "Referencia",
+        "en": "Reference"
+    },
+    "Reportes": {
+        "es": "Reportes",
+        "en": "Reports"
+    },
+    "Resumen de Rendimiento": {
+        "es": "Resumen de Rendimiento",
+        "en": "Performance Summary"
+    },
+    "Segmentacion": {
+        "es": "Segmentacion",
+        "en": "Segmentation"
+    },
+    "Segmentacion de Audiencias": {
+        "es": "Segmentacion de Audiencias",
+        "en": "Audience Segmentation"
+    },
+    "Segmentos Activos": {
+        "es": "Segmentos Activos",
+        "en": "Active Segments"
+    },
+    "Segmentos Definidos": {
+        "es": "Segmentos Definidos",
+        "en": "Defined Segments"
+    },
+    "Seguridad": {
+        "es": "Seguridad",
+        "en": "Security"
+    },
+    "Simple": {
+        "es": "Simple",
+        "en": "Simple"
+    },
+    "Sincroniza campanas, conversiones y remarketing via Conversion API.": {
+        "es": "Sincroniza campanas, conversiones y remarketing via Conversion API.",
+        "en": "Synchronize campaigns, conversions, and remarketing via Conversion API."
+    },
+    "Sube imagenes, videos y documentos para tus campañas": {
+        "es": "Sube imagenes, videos y documentos para tus campañas",
+        "en": "Upload images, videos, and documents for your campaigns"
+    },
+    "Subir": {
+        "es": "Subir",
+        "en": "Upload"
+    },
+    "Subir Activo": {
+        "es": "Subir Activo",
+        "en": "Upload Asset"
+    },
+    "Subir Nuevo Activo": {
+        "es": "Subir Nuevo Activo",
+        "en": "Upload New Asset"
+    },
+    "Tech Summit Sponsorship": {
+        "es": "Tech Summit Sponsorship",
+        "en": "Tech Summit Sponsorship"
+    },
+    "Terminal-Pro-Banner": {
+        "es": "Terminal-Pro-Banner",
+        "en": "Terminal-Pro-Banner"
+    },
+    "TikTok Ads": {
+        "es": "TikTok Ads",
+        "en": "TikTok Ads"
+    },
+    "Tipo de Cuenta": {
+        "es": "Tipo de Cuenta",
+        "en": "Account Type"
+    },
+    "Titular": {
+        "es": "Titular",
+        "en": "Cardholder"
+    },
+    "Total del carrito": {
+        "es": "Total del carrito",
+        "en": "Cart total"
+    },
+    "Trafico - $120/dia - Desde 15/03": {
+        "es": "Trafico - $120/dia - Desde 15/03",
+        "en": "Traffic - $120/day - Since 03/15"
+    },
+    "Tus Claves API": {
+        "es": "Tus Claves API",
+        "en": "Your API Keys"
+    },
+    "Ver todas": {
+        "es": "Ver todas",
+        "en": "View all"
+    },
+    "Visa | Expira 12/28": {
+        "es": "Visa | Expira 12/28",
+        "en": "Visa | Expires 12/28"
+    },
+    "Volver al carrito": {
+        "es": "Volver al carrito",
+        "en": "Return to cart"
+    },
+    "Webhooks y Automatizacion": {
+        "es": "Webhooks y Automatizacion",
+        "en": "Webhooks and Automation"
+    },
+    "Word (.docx)": {
+        "es": "Word (.docx)",
+        "en": "Word (.docx)"
+    },
+    "X Ads": {
+        "es": "X Ads",
+        "en": "X Ads"
+    },
+    "ahora todo eso es posible!": {
+        "es": "ahora todo eso es posible!",
+        "en": "now all that is possible!"
+    },
+    "audiencia": {
+        "es": "audiencia",
+        "en": "audience"
+    },
+    "campañas": {
+        "es": "campañas",
+        "en": "campaigns"
+    },
+    "education": {
+        "es": "education",
+        "en": "education"
+    },
+    "en tu celular": {
+        "es": "en tu celular",
+        "en": "on your phone"
+    },
+    "facturas": {
+        "es": "facturas",
+        "en": "invoices"
+    },
+    "gaming": {
+        "es": "gaming",
+        "en": "gaming"
+    },
+    "impresiones": {
+        "es": "impresiones",
+        "en": "impressions"
+    },
+    "no lanzada": {
+        "es": "no lanzada",
+        "en": "unreleased"
+    },
+    "o arrastra tus archivos aqui": {
+        "es": "o arrastra tus archivos aqui",
+        "en": "or drag your files here"
+    },
+    "para desarrollo | Base URL:": {
+        "es": "para desarrollo | Base URL:",
+        "en": "for development | Base URL:"
+    },
+    "para produccion |": {
+        "es": "para produccion |",
+        "en": "for production |"
+    },
+    "pyme": {
+        "es": "pyme",
+        "en": "sme"
+    },
+    "retail": {
+        "es": "retail",
+        "en": "retail"
+    },
+    "segmentos": {
+        "es": "segmentos",
+        "en": "segments"
+    },
+    "tech": {
+        "es": "tech",
+        "en": "tech"
     }
 }
