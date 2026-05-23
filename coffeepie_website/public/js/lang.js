@@ -306,6 +306,16 @@
 
         var translated = translateText(workingText, toLang);
         if (translated !== null && translated !== workingText) {
+            // Preserve original leading and trailing whitespace to prevent string concatenation issues
+            var matchLeading = workingText.match(/^[\s\u00A0\n\t]+/);
+            var matchTrailing = workingText.match(/[\s\u00A0\n\t]+$/);
+            if (matchLeading && !translated.startsWith(matchLeading[0])) {
+                translated = matchLeading[0] + translated;
+            }
+            if (matchTrailing && !translated.endsWith(matchTrailing[0])) {
+                translated = translated + matchTrailing[0];
+            }
+
             if (parentHasMultiple) {
                 // Wrap this fragment in a span so each fragment tracks its own original
                 var wrapper = document.createElement('span');
@@ -438,24 +448,24 @@
             }
             if (!isBrand) continue;
 
-            // Fix previous sibling text node: ensure it ends with a space
+            // Fix previous sibling text node (or translated wrapper): ensure it ends with a space
             var prev = el.previousSibling;
-            while (prev && prev.nodeType !== Node.TEXT_NODE) {
+            while (prev && prev.nodeType !== Node.TEXT_NODE && !(prev.nodeType === Node.ELEMENT_NODE && prev.hasAttribute(ORIGINAL_ATTR))) {
                 prev = prev.previousSibling;
             }
-            if (prev && prev.nodeType === Node.TEXT_NODE && prev.textContent.length > 0) {
-                if (!prev.textContent.endsWith(' ') && !prev.textContent.endsWith('\u00A0')) {
+            if (prev && prev.textContent.length > 0) {
+                if (!prev.textContent.endsWith(' ') && !prev.textContent.endsWith('\u00A0') && !prev.textContent.endsWith('\n')) {
                     prev.textContent = prev.textContent + ' ';
                 }
             }
 
-            // Fix next sibling text node: ensure it starts with a space
+            // Fix next sibling text node (or translated wrapper): ensure it starts with a space
             var next = el.nextSibling;
-            while (next && next.nodeType !== Node.TEXT_NODE) {
+            while (next && next.nodeType !== Node.TEXT_NODE && !(next.nodeType === Node.ELEMENT_NODE && next.hasAttribute(ORIGINAL_ATTR))) {
                 next = next.nextSibling;
             }
-            if (next && next.nodeType === Node.TEXT_NODE && next.textContent.length > 0) {
-                if (!next.textContent.startsWith(' ') && !next.textContent.startsWith('\u00A0')) {
+            if (next && next.textContent.length > 0) {
+                if (!next.textContent.startsWith(' ') && !next.textContent.startsWith('\u00A0') && !next.textContent.startsWith('\n')) {
                     next.textContent = ' ' + next.textContent;
                 }
             }
