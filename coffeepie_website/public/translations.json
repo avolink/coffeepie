@@ -8329,7 +8329,8 @@
         "hi": "लचीली, ऑन-डिमांड कंप्यूटिंग सेवा, हर किसी की पहुँच में। भारी लागत, रखरखाव, गर्मी, शोर के बारे में भूल जाइए, और वह भी न्यूनतम पर्यावरणीय प्रभाव के साथ...",
         "ja": "誰でも手の届く柔軟なオンデマンド・コンピューティング・サービス。高額なコスト、メンテナンス、熱、騒音を忘れ、これらすべてを最小限の環境負荷で実現します...",
         "zh": "灵活、按需计算服务，适合所有人的预算。忘掉高昂的成本、维护、发热、噪音，这一切都伴随着最低的环境影响...",
-        "ko": "누구나 이용할 수 있는 유연한 온디맨드 컴퓨팅 서비스. 높은 비용, 유지보수, 발열, 소음을 잊으십시오. 이 모든 것이 환경에 미치는 영향을 최소화하면서 제공됩니다..."
+        "ko": "누구나 이용할 수 있는 유연한 온디맨드 컴퓨팅 서비스. 높은 비용, 유지보수, 발열, 소음을 잊으십시오. 이 모든 것이 환경에 미치는 영향을 최소화하면서 제공됩니다...",
+        "ar": "خدمة حوسبة مرنة حسب الطلب، وفي متناول أي ميزانية. انسَ التكاليف الباهظة والصيانة والحرارة والضوضاء، كل هذا بأقل تأثير على البيئة..."
     },
     "Economía Circular = Rechazar, Repensar, Reducir, Reusar, Reparar, Restaurar, Remanufacturar, Reutilizar, Reciclar, Recuperar": {
         "en": "Circular Economy = Reject, Rethink, Reduce, Reuse, Repair, Restore, Removing, Reuse, Recycling, Recover",
@@ -8550,7 +8551,7 @@
         "ja": "Commanders™、Sentinels™、Rangers™として知られる独自のモジュラーコーデックターミナルを使用すれば、プロセッサ、メモリ、ストレージ、グラフィックカード、電源などの交換をきっぱりと忘れることができます。これからは、すべてのハードウェアをダイナミックかつ柔軟に使用できます。学生、技術者、エンジニア、建築家、編集者、デザイナー、プログラマー、ゲーム開発者、コンテンツクリエイター、会計士、モデラー、起業家など、コンピューティングを必要とするあらゆる活動を行っていても、プロジェクトを実現するために「NASAのコンピュータ」を購入する必要はもうありません。なぜなら、",
         "zh": "有了我们独有的模块化编解码器终端（更广为人知的名称是 Commanders™、Sentinels™ 和 Rangers™），您将永远不再需要更换处理器、内存、存储、显卡、电源等。现在，您可以动态且灵活地使用所有这些硬件。无论您是学生、技术人员、工程师、建筑师、编辑、设计师、程序员、视频游戏开发者、内容创作者、会计师、建模师、企业家，还是从事几乎任何需要计算的活动，您都无需再购买“NASA 计算机”来实现您的所有项目，因为有了",
         "ko": "Commanders™, Sentinels™, Rangers™로 더 잘 알려진 독점적인 모듈식 코덱 터미널을 사용하면 프로세서, 메모리, 스토리지, 그래픽 카드, 전원 공급 장치 등을 교체하는 번거로움을 완전히 잊을 수 있습니다. 이제 이 모든 하드웨어를 역동적이고 유연하게 사용할 수 있습니다. 학생, 기술자, 엔지니어, 건축가, 편집자, 디자이너, 프로그래머, 비디오 게임 개발자, 콘텐츠 제작자, 회계사, 모델러, 기업가이든 컴퓨팅이 필요한 거의 모든 활동을 하든 관계없이, 모든 프로젝트를 실현하기 위해 \"NASA 컴퓨터\"를 구입할 필요가 없습니다. 왜냐하면",
-        "ar": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con"
+        "ar": "مع محطات الترميز المعيارية الحصرية لدينا، والمعروفة باسم Commanders™ و Sentinels™ و Rangers™، انسَ إلى الأبد استبدال المعالج والذاكرة والتخزين وبطاقة الرسومات ومصدر الطاقة وما إلى ذلك. يمكنك الآن استخدام كل هذه الأجهزة بشكل ديناميكي ومرن. بغض النظر عما إذا كنت طالبًا أو فنيًا أو مهندسًا أو مهندسًا معماريًا أو محررًا أو مصممًا أو مبرمجًا أو مطور ألعاب فيديو أو صانع محتوى أو محاسبًا أو مصمم نماذج ثلاثية الأبعاد أو رائد أعمال أو تقوم بأي نشاط يتطلب الحوسبة تقريبًا، فلن تضطر بعد الآن إلى شراء \"كمبيوتر ناسا\" لتحقيق جميع مشاريعك، لأنه مع"
     },
     "tienes al alcance una o múltiples máquinas desde un terminal compacto y capaz, como, cuando y donde necesites, sin gastar de más (*": {
         "en": " you have one or multiple machines available from a compact and capable terminal, like, when and where you need, without overspending (*",
@@ -16765,7 +16766,8 @@
         "hi": "*मुद्रास्फीति से जुड़ी कीमतें",
         "ja": "*インフレ連動価格",
         "zh": "*价格与通货膨胀挂钩",
-        "ko": "*물가상승률에 연동된 가격"
+        "ko": "*물가상승률에 연동된 가격",
+        "ar": "*أسعار مرتبطة بالتضخم"
     },
     ", obteniendo nuestra certificación que autorice su producción y uso limitado de marca, siempre y cuando estos cumplan con nuestros lineamientos generales y comerciales, especificaciones técnicas, un mínimo de calidad en materiales, modularidad, reparabilidad ≥9/10 (": {
         "es": ", obteniendo nuestra certificación que autorice su producción y uso limitado de marca, siempre y cuando estos cumplan con nuestros lineamientos generales y comerciales, especificaciones técnicas, un mínimo de calidad en materiales, modularidad, reparabilidad ≥9/10 (",
@@ -16777,7 +16779,8 @@
         "hi": ", हमारा प्रमाणन प्राप्त करके जो उनके उत्पादन और सीमित ब्रांड उपयोग को अधिकृत करता है, बशर्ते वे हमारे सामान्य और व्यावसायिक दिशानिर्देशों, तकनीकी विशिष्टताओं, सामग्री में न्यूनतम गुणवत्ता, मॉड्यूलरिटी, मरम्मत क्षमता ≥9/10 ( का पालन करते हों",
         "ja": "、当社の一般的および商業的ガイドライン、技術仕様、材料の最低品質、モジュール性、修理のしやすさ ≥9/10 を満たしていることを条件に、その生産およびブランドの限定的な使用を承認する当社の認定を取得することによって (",
         "zh": "，通过获得我们授权其生产和有限品牌使用的认证，只要它们符合我们的通用和商业指南、技术规格、材料的最低质量、模块化、可修复性 ≥9/10（",
-        "ko": ", 일반 및 상업적 지침, 기술 사양, 재료의 최소 품질, 모듈성, 수리 용이성 ≥9/10을 준수하는 조건으로 생산 및 제한적 브랜드 사용을 승인하는 인증을 획득함으로써 ("
+        "ko": ", 일반 및 상업적 지침, 기술 사양, 재료의 최소 품질, 모듈성, 수리 용이성 ≥9/10을 준수하는 조건으로 생산 및 제한적 브랜드 사용을 승인하는 인증을 획득함으로써 (",
+        "ar": "، من خلال الحصول على شهادتنا التي تصرح بإنتاجها واستخدامها المحدود للعلامة التجارية، طالما أنها تتوافق مع إرشاداتنا العامة والتجارية، والمواصفات الفنية، والحد الأدنى من جودة المواد، والنمطية، وقابلية الإصلاح ≥9/10 ("
     },
     "atencionalcliente@coffeepie.co": {
         "es": "atencionalcliente@coffeepie.co",
@@ -16789,7 +16792,8 @@
         "hi": "atencionalcliente@coffeepie.co",
         "ja": "atencionalcliente@coffeepie.co",
         "zh": "atencionalcliente@coffeepie.co",
-        "ko": "atencionalcliente@coffeepie.co"
+        "ko": "atencionalcliente@coffeepie.co",
+        "ar": "atencionalcliente@coffeepie.co"
     },
     "Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos.": {
         "en": "Codec Terminals are patented-core but open-standard devices (CERN License): modular, compact, low-cost, some similar to keyboards, tablets, and smartphones (Commander™, Sentinel™, and Ranger™ lines), highly customizable, repairable, upgradable, and up to 97% recyclable, which allow you to access our novel Coffee Pie® service. Ask your ISP if they can include the terminal with your internet subscription, or just leave a small deposit for each device you require and return them when you no longer need them! We will refund between 10% and 90% of the deposit based on their condition and wear.",
@@ -16814,7 +16818,8 @@
         "hi": "\"Authorization\": \"Bearer {{API_KEY}}\",",
         "ja": "\"Authorization\": \"Bearer {{API_KEY}}\",",
         "zh": "\"Authorization\": \"Bearer {{API_KEY}}\",",
-        "ko": "\"Authorization\": \"Bearer {{API_KEY}}\","
+        "ko": "\"Authorization\": \"Bearer {{API_KEY}}\",",
+        "ar": "\"Authorization\": \"Bearer {{API_KEY}}\","
     },
     "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },": {
         "es": "\"age_range\": { \"type\": \"string\", \"description\": \"Rango de edad (ej: '18-24')\" },",
@@ -16826,7 +16831,8 @@
         "hi": "\"age_range\": { \"type\": \"string\", \"description\": \"आयु सीमा (उदा: '18-24')\" },",
         "ja": "\"age_range\": { \"type\": \"string\", \"description\": \"年齢層（例：'18-24'）\" },",
         "zh": "\"age_range\": { \"type\": \"string\", \"description\": \"年龄范围 (例如：'18-24')\" },",
-        "ko": "\"age_range\": { \"type\": \"string\", \"description\": \"연령대 (예: '18-24')\" },"
+        "ko": "\"age_range\": { \"type\": \"string\", \"description\": \"연령대 (예: '18-24')\" },",
+        "ar": "\"age_range\": { \"type\": \"string\", \"description\": \"الفئة العمرية (مثل: '18-24')\" },"
     },
     "\"conversion_score\": { \"type\": \"number\" }": {
         "es": "\"conversion_score\": { \"type\": \"number\" }",
@@ -16838,7 +16844,8 @@
         "hi": "\"conversion_score\": { \"type\": \"number\" }",
         "ja": "\"conversion_score\": { \"type\": \"number\" }",
         "zh": "\"conversion_score\": { \"type\": \"number\" }",
-        "ko": "\"conversion_score\": { \"type\": \"number\" }"
+        "ko": "\"conversion_score\": { \"type\": \"number\" }",
+        "ar": "\"conversion_score\": { \"type\": \"number\" }"
     },
     "\"estimated_users\": { \"type\": \"number\" },": {
         "es": "\"estimated_users\": { \"type\": \"number\" },",
@@ -16850,7 +16857,8 @@
         "hi": "\"estimated_users\": { \"type\": \"number\" },",
         "ja": "\"estimated_users\": { \"type\": \"number\" },",
         "zh": "\"estimated_users\": { \"type\": \"number\" },",
-        "ko": "\"estimated_users\": { \"type\": \"number\" },"
+        "ko": "\"estimated_users\": { \"type\": \"number\" },",
+        "ar": "\"estimated_users\": { \"type\": \"number\" },"
     },
     "\"handler\": {": {
         "es": "\"handler\": {",
@@ -16862,7 +16870,8 @@
         "hi": "\"handler\": {",
         "ja": "\"handler\": {",
         "zh": "\"handler\": {",
-        "ko": "\"handler\": {"
+        "ko": "\"handler\": {",
+        "ar": "\"handler\": {"
     },
     "\"headers\": {": {
         "es": "\"headers\": {",
@@ -16874,7 +16883,8 @@
         "hi": "\"headers\": {",
         "ja": "\"headers\": {",
         "zh": "\"headers\": {",
-        "ko": "\"headers\": {"
+        "ko": "\"headers\": {",
+        "ar": "\"headers\": {"
     },
     "\"input_schema\": {": {
         "es": "\"input_schema\": {",
@@ -16886,7 +16896,8 @@
         "hi": "\"input_schema\": {",
         "ja": "\"input_schema\": {",
         "zh": "\"input_schema\": {",
-        "ko": "\"input_schema\": {"
+        "ko": "\"input_schema\": {",
+        "ar": "\"input_schema\": {"
     },
     "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },": {
         "es": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"Lista de intereses\" },",
@@ -16898,7 +16909,8 @@
         "hi": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"रुचियों की सूची\" },",
         "ja": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"興味のリスト\" },",
         "zh": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"兴趣列表\" },",
-        "ko": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"관심사 목록\" },"
+        "ko": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"관심사 목록\" },",
+        "ar": "\"interests\": { \"type\": \"array\", \"items\": { \"type\": \"string\" }, \"description\": \"قائمة الاهتمامات\" },"
     },
     "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }": {
         "es": "\"location\": { \"type\": \"string\", \"description\": \"Ubicación geográfica\" }",
@@ -16910,7 +16922,8 @@
         "hi": "\"location\": { \"type\": \"string\", \"description\": \"भौगोलिक स्थान\" }",
         "ja": "\"location\": { \"type\": \"string\", \"description\": \"地理的な場所\" }",
         "zh": "\"location\": { \"type\": \"string\", \"description\": \"地理位置\" }",
-        "ko": "\"location\": { \"type\": \"string\", \"description\": \"지리적 위치\" }"
+        "ko": "\"location\": { \"type\": \"string\", \"description\": \"지리적 위치\" }",
+        "ar": "\"location\": { \"type\": \"string\", \"description\": \"الموقع الجغرافي\" }"
     },
     "\"output_schema\": {": {
         "es": "\"output_schema\": {",
@@ -16922,7 +16935,8 @@
         "hi": "\"output_schema\": {",
         "ja": "\"output_schema\": {",
         "zh": "\"output_schema\": {",
-        "ko": "\"output_schema\": {"
+        "ko": "\"output_schema\": {",
+        "ar": "\"output_schema\": {"
     },
     "\"properties\": {": {
         "es": "\"properties\": {",
@@ -16934,7 +16948,8 @@
         "hi": "\"properties\": {",
         "ja": "\"properties\": {",
         "zh": "\"properties\": {",
-        "ko": "\"properties\": {"
+        "ko": "\"properties\": {",
+        "ar": "\"properties\": {"
     },
     "\"segment_id\": { \"type\": \"string\" },": {
         "es": "\"segment_id\": { \"type\": \"string\" },",
@@ -16946,7 +16961,8 @@
         "hi": "\"segment_id\": { \"type\": \"string\" },",
         "ja": "\"segment_id\": { \"type\": \"string\" },",
         "zh": "\"segment_id\": { \"type\": \"string\" },",
-        "ko": "\"segment_id\": { \"type\": \"string\" },"
+        "ko": "\"segment_id\": { \"type\": \"string\" },",
+        "ar": "\"segment_id\": { \"type\": \"string\" },"
     },
     "$1.00 / terminal": {
         "es": "$1.00 / terminal",
@@ -16958,7 +16974,8 @@
         "hi": "$1.00 / टर्मिनल",
         "ja": "$1.00 / ターミナル",
         "zh": "$1.00 / 终端",
-        "ko": "$1.00 / 터미널"
+        "ko": "$1.00 / 터미널",
+        "ar": "$1.00 / محطة"
     },
     "+2 nuevos": {
         "es": "+2 nuevos",
@@ -16970,7 +16987,8 @@
         "hi": "+2 नए",
         "ja": "+2 新規",
         "zh": "+2 新增",
-        "ko": "+2 신규"
+        "ko": "+2 신규",
+        "ar": "+2 جديد"
     },
     "+3 esta semana": {
         "es": "+3 esta semana",
@@ -16982,7 +17000,8 @@
         "hi": "इस सप्ताह +3",
         "ja": "今週 +3",
         "zh": "本周 +3",
-        "ko": "이번 주 +3"
+        "ko": "이번 주 +3",
+        "ar": "+3 هذا الأسبوع"
     },
     "0 licencias": {
         "es": "0 licencias",
@@ -16994,7 +17013,8 @@
         "hi": "0 लाइसेंस",
         "ja": "0 ライセンス",
         "zh": "0 许可证",
-        "ko": "0 라이선스"
+        "ko": "0 라이선스",
+        "ar": "0 تراخيص"
     },
     "1 a 999": {
         "es": "1 a 999",
@@ -17006,7 +17026,8 @@
         "hi": "1 से 999",
         "ja": "1 から 999",
         "zh": "1 到 999",
-        "ko": "1 ~ 999"
+        "ko": "1 ~ 999",
+        "ar": "1 إلى 999"
     },
     "1'000 a 9'999": {
         "es": "1'000 a 9'999",
@@ -17018,7 +17039,8 @@
         "hi": "1'000 से 9'999",
         "ja": "1'000 から 9'999",
         "zh": "1'000 到 9'999",
-        "ko": "1'000 ~ 9'999"
+        "ko": "1'000 ~ 9'999",
+        "ar": "1'000 إلى 9'999"
     },
     "1. Abre la app": {
         "es": "1. Abre la app",
@@ -17030,7 +17052,8 @@
         "hi": "1. ऐप खोलें",
         "ja": "1. アプリを開く",
         "zh": "1. 打开应用程序",
-        "ko": "1. 앱 열기"
+        "ko": "1. 앱 열기",
+        "ar": "1. افتح التطبيق"
     },
     "1.8K": {
         "es": "1.8K",
@@ -17042,7 +17065,8 @@
         "hi": "1.8K",
         "ja": "1.8K",
         "zh": "1.8K",
-        "ko": "1.8K"
+        "ko": "1.8K",
+        "ar": "1.8K"
     },
     "10'000 a 99'999": {
         "es": "10'000 a 99'999",
@@ -17054,7 +17078,8 @@
         "hi": "10'000 से 99'999",
         "ja": "10'000 から 99'999",
         "zh": "10'000 到 99'999",
-        "ko": "10'000 ~ 99'999"
+        "ko": "10'000 ~ 99'999",
+        "ar": "10'000 إلى 99'999"
     },
     "100'000 a 999'999": {
         "es": "100'000 a 999'999",
@@ -17066,7 +17091,8 @@
         "hi": "100'000 से 999'999",
         "ja": "100'000 から 999'999",
         "zh": "100'000 到 999'999",
-        "ko": "100'000 ~ 999'999"
+        "ko": "100'000 ~ 999'999",
+        "ar": "100'000 إلى 999'999"
     },
     "12.4K": {
         "es": "12.4K",
@@ -17078,7 +17104,8 @@
         "hi": "12.4K",
         "ja": "12.4K",
         "zh": "12.4K",
-        "ko": "12.4K"
+        "ko": "12.4K",
+        "ar": "12.4K"
     },
     "1200x800": {
         "es": "1200x800",
@@ -17090,7 +17117,8 @@
         "hi": "1200x800",
         "ja": "1200x800",
         "zh": "1200x800",
-        "ko": "1200x800"
+        "ko": "1200x800",
+        "ar": "1200x800"
     },
     "1920x1080": {
         "es": "1920x1080",
@@ -17102,7 +17130,8 @@
         "hi": "1920x1080",
         "ja": "1920x1080",
         "zh": "1920x1080",
-        "ko": "1920x1080"
+        "ko": "1920x1080",
+        "ar": "1920x1080"
     },
     "2. Toca \"Pagar con QR\" y escanea el código": {
         "es": "2. Toca \"Pagar con QR\" y escanea el código",
@@ -17114,7 +17143,8 @@
         "hi": "2. \"QR से भुगतान करें\" पर टैप करें और कोड स्कैन करें",
         "ja": "2.「QRで支払う」をタップしてコードをスキャンします",
         "zh": "2. 点击“扫描二维码付款”并扫描代码",
-        "ko": "2. \"QR로 결제\"를 탭하고 코드를 스캔하세요"
+        "ko": "2. \"QR로 결제\"를 탭하고 코드를 스캔하세요",
+        "ar": "2. انقر على \"الدفع باستخدام QR\" وامسح الرمز"
     },
     "2.4K": {
         "es": "2.4K",
@@ -17126,7 +17156,8 @@
         "hi": "2.4K",
         "ja": "2.4K",
         "zh": "2.4K",
-        "ko": "2.4K"
+        "ko": "2.4K",
+        "ar": "2.4K"
     },
     "3. Verifica que el total coincida con el de tu carrito": {
         "es": "3. Verifica que el total coincida con el de tu carrito",
@@ -17138,7 +17169,8 @@
         "hi": "3. सत्यापित करें कि कुल राशि आपके कार्ट से मेल खाती है",
         "ja": "3. 合計がカートの内容と一致しているか確認します",
         "zh": "3. 验证总计是否与您的购物车一致",
-        "ko": "3. 총액이 장바구니와 일치하는지 확인하세요"
+        "ko": "3. 총액이 장바구니와 일치하는지 확인하세요",
+        "ar": "3. تحقق من أن المجموع يتطابق مع سلة التسوق الخاصة بك"
     },
     "3.1K": {
         "es": "3.1K",
@@ -17150,7 +17182,8 @@
         "hi": "3.1K",
         "ja": "3.1K",
         "zh": "3.1K",
-        "ko": "3.1K"
+        "ko": "3.1K",
+        "ar": "3.1K"
     },
     "3.2K": {
         "es": "3.2K",
@@ -17162,7 +17195,8 @@
         "hi": "3.2K",
         "ja": "3.2K",
         "zh": "3.2K",
-        "ko": "3.2K"
+        "ko": "3.2K",
+        "ar": "3.2K"
     },
     "4. Confirma el pago desde la app": {
         "es": "4. Confirma el pago desde la app",
@@ -17174,7 +17208,8 @@
         "hi": "4. ऐप से भुगतान की पुष्टि करें",
         "ja": "4. アプリから支払いを確定します",
         "zh": "4. 在应用程序中确认付款",
-        "ko": "4. 앱에서 결제를 확인하세요"
+        "ko": "4. 앱에서 결제를 확인하세요",
+        "ar": "4. قم بتأكيد الدفع من التطبيق"
     },
     "48.2K": {
         "es": "48.2K",
@@ -17186,7 +17221,8 @@
         "hi": "48.2K",
         "ja": "48.2K",
         "zh": "48.2K",
-        "ko": "48.2K"
+        "ko": "48.2K",
+        "ar": "48.2K"
     },
     "5. Incluye el número de referencia en el campo \"Concepto\"": {
         "es": "5. Incluye el número de referencia en el campo \"Concepto\"",
@@ -17198,7 +17234,8 @@
         "hi": "5. \"विवरण\" फ़ील्ड में संदर्भ संख्या शामिल करें",
         "ja": "5.「概要」フィールドに参照番号を含めます",
         "zh": "5. 在“备注”字段中填写参考编号",
-        "ko": "5. \"내역\" 필드에 참조 번호를 포함하세요"
+        "ko": "5. \"내역\" 필드에 참조 번호를 포함하세요",
+        "ar": "5. قم بتضمين الرقم المرجعي في حقل \"المفهوم\""
     },
     "5.1K": {
         "es": "5.1K",
@@ -17210,7 +17247,8 @@
         "hi": "5.1K",
         "ja": "5.1K",
         "zh": "5.1K",
-        "ko": "5.1K"
+        "ko": "5.1K",
+        "ar": "5.1K"
     },
     "6. Tus productos se activarán automáticamente en 5-10 minutos": {
         "es": "6. Tus productos se activarán automáticamente en 5-10 minutos",
@@ -17222,7 +17260,8 @@
         "hi": "6. आपके उत्पाद 5-10 मिनट में स्वचालित रूप से सक्रिय हो जाएंगे",
         "ja": "6. 製品は5〜10分で自動的にアクティベートされます",
         "zh": "6. 您的产品将在 5-10 分钟内自动激活",
-        "ko": "6. 제품은 5-10분 내에 자동으로 활성화됩니다"
+        "ko": "6. 제품은 5-10분 내에 자동으로 활성화됩니다",
+        "ar": "6. سيتم تنشيط منتجاتك تلقائيًا في غضون 5-10 دقائق"
     },
     "8.7K": {
         "es": "8.7K",
@@ -17234,7 +17273,8 @@
         "hi": "8.7K",
         "ja": "8.7K",
         "zh": "8.7K",
-        "ko": "8.7K"
+        "ko": "8.7K",
+        "ar": "8.7K"
     },
     "API Keys": {
         "es": "API Keys",
@@ -17246,7 +17286,8 @@
         "hi": "API कुंजियाँ",
         "ja": "APIキー",
         "zh": "API 密钥",
-        "ko": "API 키"
+        "ko": "API 키",
+        "ar": "مفاتيح API"
     },
     "API Keys Table": {
         "es": "API Keys Table",
@@ -17258,7 +17299,8 @@
         "hi": "API कुंजियाँ तालिका",
         "ja": "APIキーステーブル",
         "zh": "API 密钥表",
-        "ko": "API 키 테이블"
+        "ko": "API 키 테이블",
+        "ar": "جدول مفاتيح API"
     },
     "Activos Recientes": {
         "es": "Activos Recientes",
@@ -17270,7 +17312,8 @@
         "hi": "हाल के एसेट्स",
         "ja": "最近のアセット",
         "zh": "最近的资产",
-        "ko": "최근 자산"
+        "ko": "최근 자산",
+        "ar": "الأصول الأخيرة"
     },
     "Activos Subidos": {
         "es": "Activos Subidos",
@@ -17282,7 +17325,8 @@
         "hi": "अपलोड किए गए एसेट्स",
         "ja": "アップロードされたアセット",
         "zh": "已上传的资产",
-        "ko": "업로드된 자산"
+        "ko": "업로드된 자산",
+        "ar": "الأصول المحملة"
     },
     "Ad-PreRoll": {
         "es": "Ad-PreRoll",
@@ -17294,7 +17338,8 @@
         "hi": "Ad-PreRoll",
         "ja": "Ad-PreRoll",
         "zh": "Ad-PreRoll",
-        "ko": "Ad-PreRoll"
+        "ko": "Ad-PreRoll",
+        "ar": "Ad-PreRoll"
     },
     "Agregar Tarjeta": {
         "es": "Agregar Tarjeta",
@@ -17306,7 +17351,8 @@
         "hi": "कार्ड जोड़ें",
         "ja": "カードを追加",
         "zh": "添加卡片",
-        "ko": "카드 추가"
+        "ko": "카드 추가",
+        "ar": "إضافة بطاقة"
     },
     "Anade una capa extra de seguridad a tu cuenta": {
         "es": "Anade una capa extra de seguridad a tu cuenta",
@@ -17318,7 +17364,8 @@
         "hi": "अपने खाते में सुरक्षा की एक अतिरिक्त परत जोड़ें",
         "ja": "アカウントにセキュリティ層を追加します",
         "zh": "为您的帐户添加额外的安全保护层",
-        "ko": "계정에 추가 보안 계층을 추가하세요"
+        "ko": "계정에 추가 보안 계층을 추가하세요",
+        "ar": "أضف طبقة أمان إضافية إلى حسابك"
     },
     "Analiticas y metricas de rendimiento": {
         "es": "Analiticas y metricas de rendimiento",
@@ -17330,7 +17377,8 @@
         "hi": "एनालिटिक्स और प्रदर्शन मेट्रिक्स",
         "ja": "分析とパフォーマンス指標",
         "zh": "分析和性能指标",
-        "ko": "분석 및 성과 지표"
+        "ko": "분석 및 성과 지표",
+        "ar": "التحليلات ومقاييس الأداء"
     },
     "Apariencia": {
         "es": "Apariencia",
@@ -17342,7 +17390,8 @@
         "hi": "दिखावट",
         "ja": "外観",
         "zh": "外观",
-        "ko": "외관"
+        "ko": "외관",
+        "ar": "المظهر"
     },
     "Avisos antes del cobro automatico mensual": {
         "es": "Avisos antes del cobro automatico mensual",
@@ -17354,7 +17403,8 @@
         "hi": "मासिक स्वचालित बिलिंग से पहले सूचनाएं",
         "ja": "毎月の自動課金前の通知",
         "zh": "每月自动计费前的通知",
-        "ko": "월별 자동 결제 전 알림"
+        "ko": "월별 자동 결제 전 알림",
+        "ar": "إشعارات قبل الفوترة الشهرية التلقائية"
     },
     "Back to School 2026": {
         "es": "Back to School 2026",
@@ -17366,7 +17416,8 @@
         "hi": "Back to School 2026",
         "ja": "Back to School 2026",
         "zh": "Back to School 2026",
-        "ko": "Back to School 2026"
+        "ko": "Back to School 2026",
+        "ar": "Back to School 2026"
     },
     "Balance:": {
         "es": "Balance:",
@@ -17378,7 +17429,8 @@
         "hi": "बैलेंस:",
         "ja": "残高:",
         "zh": "余额:",
-        "ko": "잔액:"
+        "ko": "잔액:",
+        "ar": "الرصيد:"
     },
     "Banco": {
         "es": "Banco",
@@ -17390,7 +17442,8 @@
         "hi": "बैंक",
         "ja": "銀行",
         "zh": "银行",
-        "ko": "은행"
+        "ko": "은행",
+        "ar": "البنك"
     },
     "CSV (.csv)": {
         "es": "CSV (.csv)",
@@ -17402,7 +17455,8 @@
         "hi": "CSV (.csv)",
         "ja": "CSV (.csv)",
         "zh": "CSV (.csv)",
-        "ko": "CSV (.csv)"
+        "ko": "CSV (.csv)",
+        "ar": "CSV (.csv)"
     },
     "CTR Promedio": {
         "es": "CTR Promedio",
@@ -17414,7 +17468,8 @@
         "hi": "औसत CTR",
         "ja": "平均CTR",
         "zh": "平均点击率",
-        "ko": "평균 CTR"
+        "ko": "평균 CTR",
+        "ar": "متوسط نسبة النقر إلى الظهور"
     },
     "Cambiar Contrasena": {
         "es": "Cambiar Contrasena",
@@ -17426,7 +17481,8 @@
         "hi": "पासवर्ड बदलें",
         "ja": "パスワードを変更",
         "zh": "更改密码",
-        "ko": "비밀번호 변경"
+        "ko": "비밀번호 변경",
+        "ar": "تغيير كلمة المرور"
     },
     "Campañas": {
         "es": "Campañas",
@@ -17438,7 +17494,8 @@
         "hi": "अभियान",
         "ja": "キャンペーン",
         "zh": "广告系列",
-        "ko": "캠페인"
+        "ko": "캠페인",
+        "ar": "الحملات"
     },
     "Campañas Activas": {
         "es": "Campañas Activas",
@@ -17450,7 +17507,8 @@
         "hi": "सक्रिय अभियान",
         "ja": "アクティブなキャンペーン",
         "zh": "有效广告系列",
-        "ko": "활성 캠페인"
+        "ko": "활성 캠페인",
+        "ar": "الحملات النشطة"
     },
     "Campañas Recientes": {
         "es": "Campañas Recientes",
@@ -17462,7 +17520,8 @@
         "hi": "हाल के अभियान",
         "ja": "最近のキャンペーン",
         "zh": "最近的广告系列",
-        "ko": "최근 캠페인"
+        "ko": "최근 캠페인",
+        "ar": "الحملات الأخيرة"
     },
     "Cargar Activos": {
         "es": "Cargar Activos",
@@ -17474,7 +17533,8 @@
         "hi": "एसेट्स अपलोड करें",
         "ja": "アセットをアップロード",
         "zh": "上传资产",
-        "ko": "자산 업로드"
+        "ko": "자산 업로드",
+        "ar": "تحميل الأصول"
     },
     "Cargar mas": {
         "es": "Cargar mas",
@@ -17486,7 +17546,8 @@
         "hi": "और लोड करें",
         "ja": "さらに読み込む",
         "zh": "加载更多",
-        "ko": "더 불러오기"
+        "ko": "더 불러오기",
+        "ar": "تحميل المزيد"
     },
     "Coffee Pie Ads": {
         "es": "Coffee Pie Ads",
@@ -17498,7 +17559,8 @@
         "hi": "Coffee Pie Ads",
         "ja": "Coffee Pie Ads",
         "zh": "Coffee Pie Ads",
-        "ko": "Coffee Pie Ads"
+        "ko": "Coffee Pie Ads",
+        "ar": "Coffee Pie Ads"
     },
     "Coffee Pie® Ads": {
         "es": "Coffee Pie® Ads",
@@ -17510,7 +17572,8 @@
         "hi": "Coffee Pie® Ads",
         "ja": "Coffee Pie® Ads",
         "zh": "Coffee Pie® Ads",
-        "ko": "Coffee Pie® Ads"
+        "ko": "Coffee Pie® Ads",
+        "ar": "Coffee Pie® Ads"
     },
     "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.": {
         "es": "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.",
@@ -17522,7 +17585,8 @@
         "hi": "उन्नत प्रचार और विभाजन के लिए X (Twitter) अभियानों को कनेक्ट करें।",
         "ja": "X（Twitter）キャンペーンを接続して、プロモーションと高度なセグメンテーションを行います。",
         "zh": "连接 X (Twitter) 广告系列以进行高级促销和细分。",
-        "ko": "프로모션 및 고급 세분화를 위해 X (Twitter) 캠페인을 연결하세요."
+        "ko": "프로모션 및 고급 세분화를 위해 X (Twitter) 캠페인을 연결하세요.",
+        "ar": "قم بتوصيل حملات X (Twitter) للترويج والتقسيم المتقدم."
     },
     "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.": {
         "es": "Conecta tu cuenta de Google Analytics o Meta Ads para ver datos en tiempo real.",
@@ -17534,7 +17598,8 @@
         "hi": "रीयल-टाइम डेटा देखने के लिए अपने Google Analytics या Meta Ads खाते को कनेक्ट करें।",
         "ja": "GoogleアナリティクスまたはMeta Adsアカウントを接続して、リアルタイムのデータを表示します。",
         "zh": "连接您的 Google Analytics 或 Meta Ads 帐户以查看实时数据。",
-        "ko": "실시간 데이터를 보려면 Google 웹로그 분석 또는 Meta Ads 계정을 연결하세요."
+        "ko": "실시간 데이터를 보려면 Google 웹로그 분석 또는 Meta Ads 계정을 연결하세요.",
+        "ar": "قم بتوصيل حساب Google Analytics أو Meta Ads الخاص بك لرؤية البيانات في الوقت الفعلي."
     },
     "Conecta tus herramientas de marketing y automatizacion": {
         "es": "Conecta tus herramientas de marketing y automatizacion",
@@ -17546,7 +17611,8 @@
         "hi": "अपने मार्केटिंग और ऑटोमेशन टूल कनेक्ट करें",
         "ja": "マーケティングと自動化ツールを接続する",
         "zh": "连接您的营销和自动化工具",
-        "ko": "마케팅 및 자동화 도구 연결"
+        "ko": "마케팅 및 자동화 도구 연결",
+        "ar": "قم بتوصيل أدوات التسويق والأتمتة الخاصة بك"
     },
     "Conectar": {
         "es": "Conectar",
@@ -17558,7 +17624,8 @@
         "hi": "कनेक्ट करें",
         "ja": "接続する",
         "zh": "连接",
-        "ko": "연결하기"
+        "ko": "연결하기",
+        "ar": "توصيل"
     },
     "Configuración": {
         "es": "Configuración",
@@ -17570,7 +17637,8 @@
         "hi": "कॉन्फ़िगरेशन",
         "ja": "構成",
         "zh": "配置",
-        "ko": "설정"
+        "ko": "설정",
+        "ar": "الإعدادات"
     },
     "Crea y gestiona tus campañas publicitarias": {
         "es": "Crea y gestiona tus campañas publicitarias",
@@ -17582,7 +17650,8 @@
         "hi": "अपने विज्ञापन अभियान बनाएं और प्रबंधित करें",
         "ja": "広告キャンペーンを作成および管理する",
         "zh": "创建和管理您的广告系列",
-        "ko": "광고 캠페인 생성 및 관리"
+        "ko": "광고 캠페인 생성 및 관리",
+        "ar": "قم بإنشاء وإدارة حملاتك الإعلانية"
     },
     "Crear Campaña": {
         "es": "Crear Campaña",
@@ -17594,7 +17663,8 @@
         "hi": "अभियान बनाएं",
         "ja": "キャンペーンを作成",
         "zh": "创建广告系列",
-        "ko": "캠페인 만들기"
+        "ko": "캠페인 만들기",
+        "ar": "إنشاء حملة"
     },
     "Crear Nueva Campaña": {
         "es": "Crear Nueva Campaña",
@@ -17606,7 +17676,8 @@
         "hi": "नया अभियान बनाएं",
         "ja": "新しいキャンペーンを作成",
         "zh": "创建新广告系列",
-        "ko": "새 캠페인 만들기"
+        "ko": "새 캠페인 만들기",
+        "ar": "إنشاء حملة جديدة"
     },
     "Crear Segmento": {
         "es": "Crear Segmento",
@@ -17618,7 +17689,8 @@
         "hi": "सेगमेंट बनाएं",
         "ja": "セグメントを作成",
         "zh": "创建细分",
-        "ko": "세그먼트 만들기"
+        "ko": "세그먼트 만들기",
+        "ar": "إنشاء شريحة"
     },
     "Dashboard": {
         "es": "Dashboard",
@@ -17630,7 +17702,8 @@
         "hi": "डैशबोर्ड",
         "ja": "ダッシュボード",
         "zh": "仪表板",
-        "ko": "대시보드"
+        "ko": "대시보드",
+        "ar": "لوحة القيادة"
     },
     "Datos de Transferencia": {
         "es": "Datos de Transferencia",
@@ -17642,7 +17715,8 @@
         "hi": "ट्रांसफ़र डेटा",
         "ja": "転送データ",
         "zh": "传输数据",
-        "ko": "전송 데이터"
+        "ko": "전송 데이터",
+        "ar": "بيانات النقل"
     },
     "Define segmentos demograficos para tus campañas": {
         "es": "Define segmentos demograficos para tus campañas",
@@ -17654,7 +17728,8 @@
         "hi": "अपने अभियानों के लिए जनसांख्यिकीय सेगमेंट परिभाषित करें",
         "ja": "キャンペーンの人口統計セグメントを定義する",
         "zh": "为您的广告系列定义人口统计细分",
-        "ko": "캠페인의 인구 통계 세그먼트 정의"
+        "ko": "캠페인의 인구 통계 세그먼트 정의",
+        "ar": "تحديد الشرائح الديموغرافية لحملاتك"
     },
     "Desarrollo": {
         "es": "Desarrollo",
@@ -17666,7 +17741,8 @@
         "hi": "विकास",
         "ja": "開発",
         "zh": "开发",
-        "ko": "개발"
+        "ko": "개발",
+        "ar": "التطوير"
     },
     "Directores, Admins | 35-60 | LATAM": {
         "es": "Directores, Admins | 35-60 | LATAM",
@@ -17678,7 +17754,8 @@
         "hi": "निदेशक, एडमिन | 35-60 | LATAM",
         "ja": "ディレクター、管理者 | 35-60 | LATAM",
         "zh": "主管，管理员 | 35-60 | LATAM",
-        "ko": "디렉터, 관리자 | 35-60 | LATAM"
+        "ko": "디렉터, 관리자 | 35-60 | LATAM",
+        "ar": "مدراء، مسؤولون | 35-60 | LATAM"
     },
     "Documentacion API": {
         "es": "Documentacion API",
@@ -17690,7 +17767,8 @@
         "hi": "API दस्तावेज़",
         "ja": "APIドキュメント",
         "zh": "API 文档",
-        "ko": "API 문서"
+        "ko": "API 문서",
+        "ar": "وثائق API"
     },
     "Documentation": {
         "es": "Documentation",
@@ -17702,7 +17780,8 @@
         "hi": "दस्तावेज़ीकरण",
         "ja": "ドキュメンテーション",
         "zh": "文档",
-        "ko": "문서"
+        "ko": "문서",
+        "ar": "التوثيق"
     },
     "Duenos de negocio, 30-60 años": {
         "es": "Duenos de negocio, 30-60 años",
@@ -17714,7 +17793,8 @@
         "hi": "व्यवसाय के मालिक, 30-60 वर्ष",
         "ja": "事業主、30〜60歳",
         "zh": "企业主，30-60 岁",
-        "ko": "사업주, 30-60세"
+        "ko": "사업주, 30-60세",
+        "ar": "أصحاب الأعمال، 30-60 عامًا"
     },
     "Duenos, Gerentes | 30-60 | LATAM": {
         "es": "Duenos, Gerentes | 30-60 | LATAM",
@@ -17726,7 +17806,8 @@
         "hi": "मालिक, प्रबंधक | 30-60 | LATAM",
         "ja": "オーナー、マネージャー | 30-60 | LATAM",
         "zh": "所有者，经理 | 30-60 | LATAM",
-        "ko": "소유자, 관리자 | 30-60 | LATAM"
+        "ko": "소유자, 관리자 | 30-60 | LATAM",
+        "ar": "أصحاب، مدراء | 30-60 | LATAM"
     },
     "Earth Day Promo": {
         "es": "Earth Day Promo",
@@ -17738,7 +17819,8 @@
         "hi": "Earth Day Promo",
         "ja": "Earth Day Promo",
         "zh": "Earth Day Promo",
-        "ko": "Earth Day Promo"
+        "ko": "Earth Day Promo",
+        "ar": "Earth Day Promo"
     },
     "Eco-Impact": {
         "es": "Eco-Impact",
@@ -17750,7 +17832,8 @@
         "hi": "ईको-इम्पैक्ट",
         "ja": "エコインパクト",
         "zh": "生态影响",
-        "ko": "친환경 영향"
+        "ko": "친환경 영향",
+        "ar": "التأثير البيئي"
     },
     "Eliminar": {
         "es": "Eliminar",
@@ -17762,7 +17845,8 @@
         "hi": "हटाएं",
         "ja": "削除",
         "zh": "删除",
-        "ko": "삭제"
+        "ko": "삭제",
+        "ar": "حذف"
     },
     "Empresas Tecnologicas": {
         "es": "Empresas Tecnologicas",
@@ -17774,7 +17858,8 @@
         "hi": "प्रौद्योगिकी कंपनियां",
         "ja": "テクノロジー企業",
         "zh": "科技公司",
-        "ko": "기술 회사"
+        "ko": "기술 회사",
+        "ar": "شركات التكنولوجيا"
     },
     "En Mantenimiento": {
         "es": "En Mantenimiento",
@@ -17786,7 +17871,8 @@
         "hi": "रखरखाव में",
         "ja": "メンテナンス中",
         "zh": "维护中",
-        "ko": "유지보수 중"
+        "ko": "유지보수 중",
+        "ar": "في الصيانة"
     },
     "Engagement - $75/dia - Pausada": {
         "es": "Engagement - $75/dia - Pausada",
@@ -17798,7 +17884,8 @@
         "hi": "Engagement - $75/दिन - रोकी गई",
         "ja": "エンゲージメント - $75/日 - 一時停止",
         "zh": "互动率 - $75/天 - 已暂停",
-        "ko": "참여도 - $75/일 - 일시 중지됨"
+        "ko": "참여도 - $75/일 - 일시 중지됨",
+        "ar": "التفاعل - $75/يوم - متوقفة مؤقتا"
     },
     "Escanea el código QR con tu app Bancolombia para pagar tu carrito": {
         "es": "Escanea el código QR con tu app Bancolombia para pagar tu carrito",
@@ -17810,7 +17897,8 @@
         "hi": "अपने कार्ट का भुगतान करने के लिए अपने Bancolombia ऐप से QR कोड को स्कैन करें",
         "ja": "BancolombiaアプリでQRコードをスキャンしてカートの支払いをします",
         "zh": "使用 Bancolombia 应用程序扫描二维码支付购物车中的商品",
-        "ko": "Bancolombia 앱으로 QR 코드를 스캔하여 장바구니 결제"
+        "ko": "Bancolombia 앱으로 QR 코드를 스캔하여 장바구니 결제",
+        "ar": "امسح رمز الاستجابة السريعة ضوئيًا باستخدام تطبيق Bancolombia الخاص بك لدفع سلة التسوق الخاصة بك"
     },
     "Estudiantes, 16-30 años": {
         "es": "Estudiantes, 16-30 años",
@@ -17822,7 +17910,8 @@
         "hi": "छात्र, 16-30 वर्ष",
         "ja": "学生、16〜30歳",
         "zh": "学生，16-30 岁",
-        "ko": "학생, 16-30세"
+        "ko": "학생, 16-30세",
+        "ar": "الطلاب، 16-30 عامًا"
     },
     "Estudiantes, Freelancers | 16-30 | Global": {
         "es": "Estudiantes, Freelancers | 16-30 | Global",
@@ -17834,7 +17923,8 @@
         "hi": "छात्र, फ्रीलांसर | 16-30 | Global",
         "ja": "学生、フリーランサー | 16-30 | Global",
         "zh": "学生，自由职业者 | 16-30 | Global",
-        "ko": "학생, 프리랜서 | 16-30 | Global"
+        "ko": "학생, 프리랜서 | 16-30 | Global",
+        "ar": "الطلاب، المستقلون | 16-30 | Global"
     },
     "Excel (.xlsx)": {
         "es": "Excel (.xlsx)",
@@ -17846,7 +17936,8 @@
         "hi": "Excel (.xlsx)",
         "ja": "Excel (.xlsx)",
         "zh": "Excel (.xlsx)",
-        "ko": "Excel (.xlsx)"
+        "ko": "Excel (.xlsx)",
+        "ar": "Excel (.xlsx)"
     },
     "Exportar CSV": {
         "es": "Exportar CSV",
@@ -17858,7 +17949,8 @@
         "hi": "CSV निर्यात करें",
         "ja": "CSVをエクスポート",
         "zh": "导出 CSV",
-        "ko": "CSV 내보내기"
+        "ko": "CSV 내보내기",
+        "ar": "تصدير CSV"
     },
     "Exportar Configuracion": {
         "es": "Exportar Configuracion",
@@ -17870,7 +17962,8 @@
         "hi": "कॉन्फ़िगरेशन निर्यात करें",
         "ja": "構成をエクスポート",
         "zh": "导出配置",
-        "ko": "구성 내보내기"
+        "ko": "구성 내보내기",
+        "ar": "تصدير التكوين"
     },
     "Exportar Todo": {
         "es": "Exportar Todo",
@@ -17882,7 +17975,8 @@
         "hi": "सब कुछ निर्यात करें",
         "ja": "すべてエクスポート",
         "zh": "全部导出",
-        "ko": "모두 내보내기"
+        "ko": "모두 내보내기",
+        "ar": "تصدير الكل"
     },
     "Facturación": {
         "es": "Facturación",
@@ -17894,7 +17988,8 @@
         "hi": "बिलिंग",
         "ja": "請求",
         "zh": "账单",
-        "ko": "청구서"
+        "ko": "청구서",
+        "ar": "الفواتير"
     },
     "Generar Nueva Clave": {
         "es": "Generar Nueva Clave",
@@ -17906,7 +18001,8 @@
         "hi": "नई कुंजी जनरेट करें",
         "ja": "新しいキーを生成",
         "zh": "生成新密钥",
-        "ko": "새 키 생성"
+        "ko": "새 키 생성",
+        "ar": "إنشاء مفتاح جديد"
     },
     "Gestiona tu informacion personal y metodos de pago": {
         "es": "Gestiona tu informacion personal y metodos de pago",
@@ -17918,7 +18014,8 @@
         "hi": "अपनी व्यक्तिगत जानकारी और भुगतान विधियों का प्रबंधन करें",
         "ja": "個人情報とお支払い方法を管理する",
         "zh": "管理您的个人信息和付款方式",
-        "ko": "개인 정보 및 결제 방법 관리"
+        "ko": "개인 정보 및 결제 방법 관리",
+        "ar": "إدارة معلوماتك الشخصية وطرق الدفع"
     },
     "Gestionar": {
         "es": "Gestionar",
@@ -17930,7 +18027,8 @@
         "hi": "प्रबंधित करें",
         "ja": "管理する",
         "zh": "管理",
-        "ko": "관리하기"
+        "ko": "관리하기",
+        "ar": "إدارة"
     },
     "Google Ads": {
         "es": "Google Ads",
@@ -17942,7 +18040,8 @@
         "hi": "Google Ads",
         "ja": "Google Ads",
         "zh": "Google Ads",
-        "ko": "Google Ads"
+        "ko": "Google Ads",
+        "ar": "Google Ads"
     },
     "Guardar Cambios": {
         "es": "Guardar Cambios",
@@ -17954,7 +18053,8 @@
         "hi": "परिवर्तन सहेजें",
         "ja": "変更を保存",
         "zh": "保存更改",
-        "ko": "변경 사항 저장"
+        "ko": "변경 사항 저장",
+        "ar": "حفظ التغييرات"
     },
     "Guardar Configuracion Avanzada": {
         "es": "Guardar Configuracion Avanzada",
@@ -17966,7 +18066,8 @@
         "hi": "उन्नत कॉन्फ़िगरेशन सहेजें",
         "ja": "詳細設定を保存",
         "zh": "保存高级配置",
-        "ko": "고급 구성 저장"
+        "ko": "고급 구성 저장",
+        "ar": "حفظ التكوين المتقدم"
     },
     "Guardar Preferencias": {
         "es": "Guardar Preferencias",
@@ -17978,7 +18079,8 @@
         "hi": "प्राथमिकताएं सहेजें",
         "ja": "設定を保存",
         "zh": "保存首选项",
-        "ko": "환경 설정 저장"
+        "ko": "환경 설정 저장",
+        "ar": "حفظ التفضيلات"
     },
     "Historial de Facturas": {
         "es": "Historial de Facturas",
@@ -17990,7 +18092,8 @@
         "hi": "बिलिंग इतिहास",
         "ja": "請求履歴",
         "zh": "发票历史",
-        "ko": "인보이스 내역"
+        "ko": "인보이스 내역",
+        "ar": "سجل الفواتير"
     },
     "Historial de facturas y documentos fiscales": {
         "es": "Historial de facturas y documentos fiscales",
@@ -18002,7 +18105,8 @@
         "hi": "चालान और कर दस्तावेजों का इतिहास",
         "ja": "請求書と税務書類の履歴",
         "zh": "发票和税务文件历史",
-        "ko": "송장 및 세무 문서 내역"
+        "ko": "송장 및 세무 문서 내역",
+        "ar": "تاريخ الفواتير والوثائق الضريبية"
     },
     "IT Managers, CTOs - 25-55 años": {
         "es": "IT Managers, CTOs - 25-55 años",
@@ -18014,7 +18118,8 @@
         "hi": "IT प्रबंधक, CTO - 25-55 वर्ष",
         "ja": "ITマネージャー、CTO - 25-55歳",
         "zh": "IT 经理，CTO - 25-55 岁",
-        "ko": "IT 관리자, CTO - 25-55세"
+        "ko": "IT 관리자, CTO - 25-55세",
+        "ar": "مدراء تكنولوجيا المعلومات، رؤساء قسم التكنولوجيا - 25-55 عامًا"
     },
     "IT Managers, CTOs | 25-55 | LATAM, NA": {
         "es": "IT Managers, CTOs | 25-55 | LATAM, NA",
@@ -18026,7 +18131,8 @@
         "hi": "IT प्रबंधक, CTO | 25-55 | LATAM, NA",
         "ja": "ITマネージャー、CTO | 25-55 | LATAM, NA",
         "zh": "IT 经理，CTO | 25-55 | LATAM, NA",
-        "ko": "IT 관리자, CTO | 25-55 | LATAM, NA"
+        "ko": "IT 관리자, CTO | 25-55 | LATAM, NA",
+        "ar": "مدراء تكنولوجيا المعلومات، رؤساء قسم التكنولوجيا | 25-55 | LATAM, NA"
     },
     "Impresiones Hoy": {
         "es": "Impresiones Hoy",
@@ -18038,7 +18144,8 @@
         "hi": "आज के इंप्रेशन",
         "ja": "今日のインプレッション",
         "zh": "今日展示次数",
-        "ko": "오늘의 노출수"
+        "ko": "오늘의 노출수",
+        "ar": "الانطباعات اليوم"
     },
     "Informacion de Contacto": {
         "es": "Informacion de Contacto",
@@ -18050,7 +18157,8 @@
         "hi": "संपर्क जानकारी",
         "ja": "連絡先情報",
         "zh": "联系信息",
-        "ko": "연락처 정보"
+        "ko": "연락처 정보",
+        "ar": "معلومات الاتصال"
     },
     "Inicio: 01/04/2026 - 4 assets": {
         "es": "Inicio: 01/04/2026 - 4 assets",
@@ -18062,7 +18170,8 @@
         "hi": "प्रारंभ: 01/04/2026 - 4 assets",
         "ja": "開始: 2026/04/01 - 4 assets",
         "zh": "开始: 2026/04/01 - 4 assets",
-        "ko": "시작: 2026/04/01 - 4 assets"
+        "ko": "시작: 2026/04/01 - 4 assets",
+        "ar": "البداية: 01/04/2026 - 4 assets"
     },
     "Inicio: 15/03/2026 - 7 assets": {
         "es": "Inicio: 15/03/2026 - 7 assets",
@@ -18074,7 +18183,8 @@
         "hi": "प्रारंभ: 15/03/2026 - 7 assets",
         "ja": "開始: 2026/03/15 - 7 assets",
         "zh": "开始: 2026/03/15 - 7 assets",
-        "ko": "시작: 2026/03/15 - 7 assets"
+        "ko": "시작: 2026/03/15 - 7 assets",
+        "ar": "البداية: 15/03/2026 - 7 assets"
     },
     "Instituciones Educativas": {
         "es": "Instituciones Educativas",
@@ -18086,7 +18196,8 @@
         "hi": "शैक्षणिक संस्थान",
         "ja": "教育機関",
         "zh": "教育机构",
-        "ko": "교육 기관"
+        "ko": "교육 기관",
+        "ar": "المؤسسات التعليمية"
     },
     "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.": {
         "es": "Integra Facebook, Instagram y Messenger Ads con tu Cuenta Publicitaria.",
@@ -18098,7 +18209,8 @@
         "hi": "अपने विज्ञापन खाते के साथ Facebook, Instagram और Messenger विज्ञापनों को एकीकृत करें।",
         "ja": "Facebook、Instagram、Messengerの広告を広告アカウントと統合します。",
         "zh": "将 Facebook、Instagram 和 Messenger 广告与您的广告帐户集成。",
-        "ko": "Facebook, Instagram 및 Messenger 광고를 광고 계정과 통합하세요."
+        "ko": "Facebook, Instagram 및 Messenger 광고를 광고 계정과 통합하세요.",
+        "ar": "قم بدمج إعلانات Facebook و Instagram و Messenger مع حسابك الإعلاني."
     },
     "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.": {
         "es": "Integra TikTok Ads Manager para campanas virales y audiencias jovenes.",
@@ -18110,7 +18222,8 @@
         "hi": "वायरल अभियानों और युवा दर्शकों के लिए TikTok Ads Manager को एकीकृत करें।",
         "ja": "バイラルキャンペーンと若いオーディエンスのためにTikTok Ads Managerを統合します。",
         "zh": "集成 TikTok 广告管理器，用于病毒式营销活动和年轻受众。",
-        "ko": "바이럴 캠페인 및 젊은 잠재고객을 위해 TikTok Ads Manager를 통합하세요."
+        "ko": "바이럴 캠페인 및 젊은 잠재고객을 위해 TikTok Ads Manager를 통합하세요.",
+        "ar": "قم بدمج مدير إعلانات TikTok للحملات الفيروسية والجمهور الشاب."
     },
     "Integraciones API": {
         "es": "Integraciones API",
@@ -18122,7 +18235,8 @@
         "hi": "API एकीकरण",
         "ja": "API統合",
         "zh": "API 集成",
-        "ko": "API 통합"
+        "ko": "API 통합",
+        "ar": "تكامل API"
     },
     "JSON (.json)": {
         "es": "JSON (.json)",
@@ -18134,7 +18248,8 @@
         "hi": "JSON (.json)",
         "ja": "JSON (.json)",
         "zh": "JSON (.json)",
-        "ko": "JSON (.json)"
+        "ko": "JSON (.json)",
+        "ar": "JSON (.json)"
     },
     "Jovenes Gamers": {
         "es": "Jovenes Gamers",
@@ -18146,7 +18261,8 @@
         "hi": "युवा गेमर्स",
         "ja": "若いゲーマー",
         "zh": "年轻游戏玩家",
-        "ko": "젊은 게이머"
+        "ko": "젊은 게이머",
+        "ar": "اللاعبون الشباب"
     },
     "Lanzamiento Q2 - Terminal Pro": {
         "es": "Lanzamiento Q2 - Terminal Pro",
@@ -18158,7 +18274,8 @@
         "hi": "Q2 लॉन्च - Terminal Pro",
         "ja": "第2四半期リリース - Terminal Pro",
         "zh": "第二季度发布 - Terminal Pro",
-        "ko": "2분기 출시 - Terminal Pro"
+        "ko": "2분기 출시 - Terminal Pro",
+        "ar": "إطلاق الربع الثاني - Terminal Pro"
     },
     "Los graficos detallados de rendimiento estaran disponibles aqui.": {
         "es": "Los graficos detallados de rendimiento estaran disponibles aqui.",
@@ -18170,7 +18287,8 @@
         "hi": "विस्तृत प्रदर्शन चार्ट यहाँ उपलब्ध होंगे।",
         "ja": "詳細なパフォーマンスグラフがここに表示されます。",
         "zh": "详细的性能图表将在此处提供。",
-        "ko": "여기에 자세한 성능 차트가 제공됩니다."
+        "ko": "여기에 자세한 성능 차트가 제공됩니다.",
+        "ar": "ستكون الرسوم البيانية التفصيلية للأداء متاحة هنا."
     },
     "MP4 0:15": {
         "es": "MP4 0:15",
@@ -18182,7 +18300,8 @@
         "hi": "MP4 0:15",
         "ja": "MP4 0:15",
         "zh": "MP4 0:15",
-        "ko": "MP4 0:15"
+        "ko": "MP4 0:15",
+        "ar": "MP4 0:15"
     },
     "MP4 2:30": {
         "es": "MP4 2:30",
@@ -18194,7 +18313,8 @@
         "hi": "MP4 2:30",
         "ja": "MP4 2:30",
         "zh": "MP4 2:30",
-        "ko": "MP4 2:30"
+        "ko": "MP4 2:30",
+        "ar": "MP4 2:30"
     },
     "Mastercard | Expira 06/27": {
         "es": "Mastercard | Expira 06/27",
@@ -18206,7 +18326,8 @@
         "hi": "Mastercard | 06/27 को समाप्त",
         "ja": "Mastercard | 有効期限 06/27",
         "zh": "Mastercard | 到期 06/27",
-        "ko": "Mastercard | 만료 06/27"
+        "ko": "Mastercard | 만료 06/27",
+        "ar": "Mastercard | تنتهي 06/27"
     },
     "Meta Ads": {
         "es": "Meta Ads",
@@ -18218,7 +18339,8 @@
         "hi": "Meta Ads",
         "ja": "Meta Ads",
         "zh": "Meta Ads",
-        "ko": "Meta Ads"
+        "ko": "Meta Ads",
+        "ar": "Meta Ads"
     },
     "Metodos de Pago": {
         "es": "Metodos de Pago",
@@ -18230,7 +18352,8 @@
         "hi": "भुगतान की विधि",
         "ja": "お支払い方法",
         "zh": "付款方式",
-        "ko": "결제 방법"
+        "ko": "결제 방법",
+        "ar": "طرق الدفع"
     },
     "Mi cuenta": {
         "es": "Mi cuenta",
@@ -18242,7 +18365,8 @@
         "hi": "मेरा खाता",
         "ja": "マイアカウント",
         "zh": "我的帐户",
-        "ko": "내 계정"
+        "ko": "내 계정",
+        "ar": "حسابي"
     },
     "Notificaciones": {
         "es": "Notificaciones",
@@ -18254,7 +18378,8 @@
         "hi": "सूचनाएं",
         "ja": "通知",
         "zh": "通知",
-        "ko": "알림"
+        "ko": "알림",
+        "ar": "الإشعارات"
     },
     "Nueva Campaña": {
         "es": "Nueva Campaña",
@@ -18266,7 +18391,8 @@
         "hi": "नया अभियान",
         "ja": "新しいキャンペーン",
         "zh": "新广告系列",
-        "ko": "새 캠페인"
+        "ko": "새 캠페인",
+        "ar": "حملة جديدة"
     },
     "Nuevas funcionalidades y mejoras del servicio": {
         "es": "Nuevas funcionalidades y mejoras del servicio",
@@ -18278,7 +18404,8 @@
         "hi": "नई सुविधाएँ और सेवा सुधार",
         "ja": "新機能とサービスの改善",
         "zh": "新功能和服务改进",
-        "ko": "새로운 기능 및 서비스 개선"
+        "ko": "새로운 기능 및 서비스 개선",
+        "ar": "ميزات جديدة وتحسينات الخدمة"
     },
     "Nuevo Segmento": {
         "es": "Nuevo Segmento",
@@ -18290,7 +18417,8 @@
         "hi": "नया सेगमेंट",
         "ja": "新しいセグメント",
         "zh": "新细分",
-        "ko": "새 세그먼트"
+        "ko": "새 세그먼트",
+        "ar": "شريحة جديدة"
     },
     "PDF (.pdf)": {
         "es": "PDF (.pdf)",
@@ -18302,7 +18430,8 @@
         "hi": "PDF (.pdf)",
         "ja": "PDF (.pdf)",
         "zh": "PDF (.pdf)",
-        "ko": "PDF (.pdf)"
+        "ko": "PDF (.pdf)",
+        "ar": "PDF (.pdf)"
     },
     "PNG 800x600": {
         "es": "PNG 800x600",
@@ -18314,7 +18443,8 @@
         "hi": "PNG 800x600",
         "ja": "PNG 800x600",
         "zh": "PNG 800x600",
-        "ko": "PNG 800x600"
+        "ko": "PNG 800x600",
+        "ar": "PNG 800x600"
     },
     "PNG, JPG, MP4, WebM, PDF (max 250MB)": {
         "es": "PNG, JPG, MP4, WebM, PDF (max 250MB)",
@@ -18326,7 +18456,8 @@
         "hi": "PNG, JPG, MP4, WebM, PDF (अधिकतम 250MB)",
         "ja": "PNG, JPG, MP4, WebM, PDF (最大 250MB)",
         "zh": "PNG, JPG, MP4, WebM, PDF (最大 250MB)",
-        "ko": "PNG, JPG, MP4, WebM, PDF (최대 250MB)"
+        "ko": "PNG, JPG, MP4, WebM, PDF (최대 250MB)",
+        "ar": "PNG, JPG, MP4, WebM, PDF (كحد أقصى 250MB)"
     },
     "Pagada": {
         "es": "Pagada",
@@ -18338,7 +18469,8 @@
         "hi": "भुगतान किया गया",
         "ja": "支払い済み",
         "zh": "已付款",
-        "ko": "결제됨"
+        "ko": "결제됨",
+        "ar": "مدفوعة"
     },
     "Pago Rechazado": {
         "es": "Pago Rechazado",
@@ -18350,7 +18482,8 @@
         "hi": "भुगतान अस्वीकृत",
         "ja": "支払いが拒否されました",
         "zh": "付款被拒绝",
-        "ko": "결제 거부됨"
+        "ko": "결제 거부됨",
+        "ar": "تم رفض الدفع"
     },
     "Panel de Gestion para Agencias y Departamentos de Marketing": {
         "es": "Panel de Gestion para Agencias y Departamentos de Marketing",
@@ -18362,7 +18495,8 @@
         "hi": "एजेंसियों और मार्केटिंग विभागों के लिए प्रबंधन पैनल",
         "ja": "代理店およびマーケティング部門向けの管理パネル",
         "zh": "针对代理商和营销部门的管理面板",
-        "ko": "대행사 및 마케팅 부서를 위한 관리 패널"
+        "ko": "대행사 및 마케팅 부서를 위한 관리 패널",
+        "ar": "لوحة الإدارة للوكالات وإدارات التسويق"
     },
     "Pausada - 3 assets": {
         "es": "Pausada - 3 assets",
@@ -18374,7 +18508,8 @@
         "hi": "रोकी गई - 3 assets",
         "ja": "一時停止 - 3 assets",
         "zh": "已暂停 - 3 assets",
-        "ko": "일시 중지됨 - 3 assets"
+        "ko": "일시 중지됨 - 3 assets",
+        "ar": "متوقفة مؤقتا - 3 أصول"
     },
     "Personaliza tu experiencia y ajustes de integracion": {
         "es": "Personaliza tu experiencia y ajustes de integracion",
@@ -18386,7 +18521,8 @@
         "hi": "अपने अनुभव और एकीकरण सेटिंग्स को कस्टमाइज़ करें",
         "ja": "エクスペリエンスと統合設定をカスタマイズする",
         "zh": "自定义您的体验和集成设置",
-        "ko": "경험 및 통합 설정 맞춤설정"
+        "ko": "경험 및 통합 설정 맞춤설정",
+        "ar": "تخصيص تجربتك وإعدادات التكامل"
     },
     "Personalizacion Avanzada": {
         "es": "Personalizacion Avanzada",
@@ -18398,7 +18534,8 @@
         "hi": "उन्नत अनुकूलन",
         "ja": "高度なカスタマイズ",
         "zh": "高级自定义",
-        "ko": "고급 맞춤설정"
+        "ko": "고급 맞춤설정",
+        "ar": "تخصيص متقدم"
     },
     "Predeterminada": {
         "es": "Predeterminada",
@@ -18410,7 +18547,8 @@
         "hi": "डिफ़ॉल्ट",
         "ja": "デフォルト",
         "zh": "默认",
-        "ko": "기본값"
+        "ko": "기본값",
+        "ar": "افتراضي"
     },
     "Preferencias Generales": {
         "es": "Preferencias Generales",
@@ -18422,7 +18560,8 @@
         "hi": "सामान्य प्राथमिकताएं",
         "ja": "一般設定",
         "zh": "常规首选项",
-        "ko": "일반 설정"
+        "ko": "일반 설정",
+        "ar": "تفضيلات عامة"
     },
     "Pricing-Slide": {
         "es": "Pricing-Slide",
@@ -18434,7 +18573,8 @@
         "hi": "Pricing-Slide",
         "ja": "Pricing-Slide",
         "zh": "Pricing-Slide",
-        "ko": "Pricing-Slide"
+        "ko": "Pricing-Slide",
+        "ar": "Pricing-Slide"
     },
     "Produccion": {
         "es": "Produccion",
@@ -18446,7 +18586,8 @@
         "hi": "उत्पादन",
         "ja": "本番環境",
         "zh": "生产",
-        "ko": "생산"
+        "ko": "생산",
+        "ar": "إنتاج"
     },
     "PyMEs LATAM": {
         "es": "PyMEs LATAM",
@@ -18458,7 +18599,8 @@
         "hi": "SME LATAM",
         "ja": "中小企業 LATAM",
         "zh": "中小企业 LATAM",
-        "ko": "중소기업 LATAM"
+        "ko": "중소기업 LATAM",
+        "ar": "الشركات الصغيرة والمتوسطة LATAM"
     },
     "QFDM-Explainer": {
         "es": "QFDM-Explainer",
@@ -18470,7 +18612,8 @@
         "hi": "QFDM-Explainer",
         "ja": "QFDM-Explainer",
         "zh": "QFDM-Explainer",
-        "ko": "QFDM-Explainer"
+        "ko": "QFDM-Explainer",
+        "ar": "QFDM-Explainer"
     },
     "QR de pago — referencia única": {
         "es": "QR de pago — referencia única",
@@ -18482,7 +18625,8 @@
         "hi": "भुगतान QR — अद्वितीय संदर्भ",
         "ja": "支払いQR — 一意の参照",
         "zh": "付款二维码 — 唯一参考",
-        "ko": "결제 QR — 고유 식별자"
+        "ko": "결제 QR — 고유 식별자",
+        "ar": "رمز الاستجابة السريعة للدفع — مرجع فريد"
     },
     "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.": {
         "es": "R: En caso de fallas, puedes contactar al soporte técnico de Coffee Pie® para recibir asistencia, u orientación. Además, al ser dispositivos modulares, dependiendo del origen de la falla, es muy probable que puedas reemplazar componentes específicos sin necesidad de solicitar otro terminal.",
@@ -18494,7 +18638,8 @@
         "hi": "उत्तर: खराबी के मामले में, आप सहायता या मार्गदर्शन के लिए Coffee Pie® तकनीकी सहायता से संपर्क कर सकते हैं। इसके अतिरिक्त, मॉड्यूलर उपकरण होने के कारण, खराबी की उत्पत्ति के आधार पर, यह बहुत संभव है कि आप किसी अन्य टर्मिनल का अनुरोध किए बिना विशिष्ट घटकों को बदल सकें।",
         "ja": "A：故障の場合は、Coffee Pie® テクニカルサポートに連絡して、サポートやガイダンスを受けることができます。さらに、モジュール式デバイスであるため、故障の原因によっては、別のターミナルをリクエストすることなく、特定のコンポーネントを交換できる可能性が高くなります。",
         "zh": "答：如遇故障，您可以联系 Coffee Pie® 技术支持寻求帮助或指导。此外，由于它是模块化设备，根据故障原因，您很可能可以直接更换特定组件，而无需申请更换整个终端。",
-        "ko": "답변: 고장이 발생한 경우 Coffee Pie® 기술 지원 센터에 문의하여 지원이나 안내를 받을 수 있습니다. 또한 모듈식 기기이므로 고장 원인에 따라 다른 터미널을 요청할 필요 없이 특정 부품을 교체할 수 있을 가능성이 높습니다."
+        "ko": "답변: 고장이 발생한 경우 Coffee Pie® 기술 지원 센터에 문의하여 지원이나 안내를 받을 수 있습니다. 또한 모듈식 기기이므로 고장 원인에 따라 다른 터미널을 요청할 필요 없이 특정 부품을 교체할 수 있을 가능성이 높습니다.",
+        "ar": "ج: في حالة حدوث أعطال، يمكنك الاتصال بالدعم الفني لـ Coffee Pie® لتلقي المساعدة أو التوجيه. علاوة على ذلك، نظرًا لأنها أجهزة معيارية، واعتمادًا على أصل الفشل، فمن المحتمل جدًا أن تتمكن من استبدال مكونات معينة دون الحاجة إلى طلب محطة أخرى."
     },
     "Recibe notificaciones cuando una campaña alcance su presupuesto": {
         "es": "Recibe notificaciones cuando una campaña alcance su presupuesto",
@@ -18506,7 +18651,8 @@
         "hi": "जब कोई अभियान अपने बजट तक पहुँच जाए तो सूचनाएं प्राप्त करें",
         "ja": "キャンペーンが予算に達したときに通知を受け取る",
         "zh": "当广告系列达到预算时接收通知",
-        "ko": "캠페인이 예산에 도달하면 알림 받기"
+        "ko": "캠페인이 예산에 도달하면 알림 받기",
+        "ar": "تلقي إشعارات عندما تصل الحملة إلى ميزانيتها"
     },
     "Recibe un resumen de rendimiento cada lunes": {
         "es": "Recibe un resumen de rendimiento cada lunes",
@@ -18518,7 +18664,8 @@
         "hi": "हर सोमवार को एक प्रदर्शन सारांश प्राप्त करें",
         "ja": "毎週月曜日にパフォーマンスの概要を受け取る",
         "zh": "每周一接收性能摘要",
-        "ko": "매주 월요일 성과 요약 받기"
+        "ko": "매주 월요일 성과 요약 받기",
+        "ar": "تلقي ملخص أداء كل يوم اثنين"
     },
     "Reconocimiento - $50/dia - Desde 01/04": {
         "es": "Reconocimiento - $50/dia - Desde 01/04",
@@ -18530,7 +18677,8 @@
         "hi": "जागरूकता - $50/दिन - 01/04 से",
         "ja": "認知度 - $50/日 - 01/04から",
         "zh": "品牌知名度 - $50/天 - 从 01/04 开始",
-        "ko": "브랜드 인지도 - $50/일 - 01/04부터"
+        "ko": "브랜드 인지도 - $50/일 - 01/04부터",
+        "ar": "الوعي - $50/يوم - من 01/04"
     },
     "Reconocimiento - Borrador": {
         "es": "Reconocimiento - Borrador",
@@ -18542,7 +18690,8 @@
         "hi": "जागरूकता - ड्राफ्ट",
         "ja": "認知度 - 下書き",
         "zh": "品牌知名度 - 草稿",
-        "ko": "브랜드 인지도 - 초안"
+        "ko": "브랜드 인지도 - 초안",
+        "ar": "الوعي - مسودة"
     },
     "Referencia": {
         "es": "Referencia",
@@ -18554,7 +18703,8 @@
         "hi": "संदर्भ",
         "ja": "参照",
         "zh": "参考",
-        "ko": "참조"
+        "ko": "참조",
+        "ar": "مرجع"
     },
     "Reportes": {
         "es": "Reportes",
@@ -18566,7 +18716,8 @@
         "hi": "रिपोर्ट",
         "ja": "レポート",
         "zh": "报告",
-        "ko": "보고서"
+        "ko": "보고서",
+        "ar": "التقارير"
     },
     "Resumen de Rendimiento": {
         "es": "Resumen de Rendimiento",
@@ -18578,7 +18729,8 @@
         "hi": "प्रदर्शन सारांश",
         "ja": "パフォーマンスの概要",
         "zh": "性能摘要",
-        "ko": "성과 요약"
+        "ko": "성과 요약",
+        "ar": "ملخص الأداء"
     },
     "Segmentacion": {
         "es": "Segmentacion",
@@ -18590,7 +18742,8 @@
         "hi": "विभाजन",
         "ja": "セグメンテーション",
         "zh": "细分",
-        "ko": "세분화"
+        "ko": "세분화",
+        "ar": "التقسيم"
     },
     "Segmentacion de Audiencias": {
         "es": "Segmentacion de Audiencias",
@@ -18602,7 +18755,8 @@
         "hi": "दर्शक विभाजन",
         "ja": "オーディエンスのセグメンテーション",
         "zh": "受众细分",
-        "ko": "잠재고객 세분화"
+        "ko": "잠재고객 세분화",
+        "ar": "تقسيم الجمهور"
     },
     "Segmentos Activos": {
         "es": "Segmentos Activos",
@@ -18614,7 +18768,8 @@
         "hi": "सक्रिय सेगमेंट",
         "ja": "アクティブなセグメント",
         "zh": "有效细分",
-        "ko": "활성 세그먼트"
+        "ko": "활성 세그먼트",
+        "ar": "الشرائح النشطة"
     },
     "Segmentos Definidos": {
         "es": "Segmentos Definidos",
@@ -18626,7 +18781,8 @@
         "hi": "परिभाषित सेगमेंट",
         "ja": "定義されたセグメント",
         "zh": "已定义的细分",
-        "ko": "정의된 세그먼트"
+        "ko": "정의된 세그먼트",
+        "ar": "الشرائح المحددة"
     },
     "Seguridad": {
         "es": "Seguridad",
@@ -18638,7 +18794,8 @@
         "hi": "सुरक्षा",
         "ja": "セキュリティ",
         "zh": "安全",
-        "ko": "보안"
+        "ko": "보안",
+        "ar": "الأمان"
     },
     "Simple": {
         "es": "Simple",
@@ -18650,7 +18807,8 @@
         "hi": "सरल",
         "ja": "シンプル",
         "zh": "简单",
-        "ko": "간단함"
+        "ko": "간단함",
+        "ar": "بسيط"
     },
     "Sincroniza campanas, conversiones y remarketing via Conversion API.": {
         "es": "Sincroniza campanas, conversiones y remarketing via Conversion API.",
@@ -18662,7 +18820,8 @@
         "hi": "रूपांतरण API के माध्यम से अभियानों, रूपांतरणों और रीमार्केटिंग को सिंक्रनाइज़ करें।",
         "ja": "Conversion APIを介してキャンペーン、コンバージョン、リマーケティングを同期します。",
         "zh": "通过转化 API 同步广告系列、转化和再营销。",
-        "ko": "Conversion API를 통해 캠페인, 전환 및 리마케팅을 동기화합니다."
+        "ko": "Conversion API를 통해 캠페인, 전환 및 리마케팅을 동기화합니다.",
+        "ar": "مزامنة الحملات والتحويلات وتجديد النشاط التسويقي عبر واجهة برمجة تطبيقات التحويل."
     },
     "Sube imagenes, videos y documentos para tus campañas": {
         "es": "Sube imagenes, videos y documentos para tus campañas",
@@ -18674,7 +18833,8 @@
         "hi": "अपने अभियानों के लिए चित्र, वीडियो और दस्तावेज़ अपलोड करें",
         "ja": "キャンペーン用の画像、動画、ドキュメントをアップロードする",
         "zh": "为您的广告系列上传图片、视频和文档",
-        "ko": "캠페인용 이미지, 동영상, 문서 업로드"
+        "ko": "캠페인용 이미지, 동영상, 문서 업로드",
+        "ar": "قم بتحميل الصور ومقاطع الفيديو والمستندات لحملاتك"
     },
     "Subir": {
         "es": "Subir",
@@ -18686,7 +18846,8 @@
         "hi": "अपलोड करें",
         "ja": "アップロード",
         "zh": "上传",
-        "ko": "업로드"
+        "ko": "업로드",
+        "ar": "تحميل"
     },
     "Subir Activo": {
         "es": "Subir Activo",
@@ -18698,7 +18859,8 @@
         "hi": "एसेट अपलोड करें",
         "ja": "アセットをアップロード",
         "zh": "上传资产",
-        "ko": "자산 업로드"
+        "ko": "자산 업로드",
+        "ar": "تحميل أصل"
     },
     "Subir Nuevo Activo": {
         "es": "Subir Nuevo Activo",
@@ -18710,7 +18872,8 @@
         "hi": "नया एसेट अपलोड करें",
         "ja": "新しいアセットをアップロード",
         "zh": "上传新资产",
-        "ko": "새 자산 업로드"
+        "ko": "새 자산 업로드",
+        "ar": "تحميل أصل جديد"
     },
     "Tech Summit Sponsorship": {
         "es": "Tech Summit Sponsorship",
@@ -18722,7 +18885,8 @@
         "hi": "Tech Summit Sponsorship",
         "ja": "Tech Summit Sponsorship",
         "zh": "Tech Summit Sponsorship",
-        "ko": "Tech Summit Sponsorship"
+        "ko": "Tech Summit Sponsorship",
+        "ar": "Tech Summit Sponsorship"
     },
     "Terminal-Pro-Banner": {
         "es": "Terminal-Pro-Banner",
@@ -18734,7 +18898,8 @@
         "hi": "Terminal-Pro-Banner",
         "ja": "Terminal-Pro-Banner",
         "zh": "Terminal-Pro-Banner",
-        "ko": "Terminal-Pro-Banner"
+        "ko": "Terminal-Pro-Banner",
+        "ar": "Terminal-Pro-Banner"
     },
     "TikTok Ads": {
         "es": "TikTok Ads",
@@ -18746,7 +18911,8 @@
         "hi": "TikTok Ads",
         "ja": "TikTok Ads",
         "zh": "TikTok Ads",
-        "ko": "TikTok Ads"
+        "ko": "TikTok Ads",
+        "ar": "TikTok Ads"
     },
     "Tipo de Cuenta": {
         "es": "Tipo de Cuenta",
@@ -18758,7 +18924,8 @@
         "hi": "खाता प्रकार",
         "ja": "アカウントタイプ",
         "zh": "帐户类型",
-        "ko": "계정 유형"
+        "ko": "계정 유형",
+        "ar": "نوع الحساب"
     },
     "Titular": {
         "es": "Titular",
@@ -18770,7 +18937,8 @@
         "hi": "कार्डधारक",
         "ja": "名義人",
         "zh": "持卡人",
-        "ko": "카드 소유자"
+        "ko": "카드 소유자",
+        "ar": "صاحب البطاقة"
     },
     "Total del carrito": {
         "es": "Total del carrito",
@@ -18782,7 +18950,8 @@
         "hi": "कार्ट का कुल योग",
         "ja": "カートの合計",
         "zh": "购物车总计",
-        "ko": "장바구니 총액"
+        "ko": "장바구니 총액",
+        "ar": "إجمالي سلة التسوق"
     },
     "Trafico - $120/dia - Desde 15/03": {
         "es": "Trafico - $120/dia - Desde 15/03",
@@ -18794,7 +18963,8 @@
         "hi": "ट्रैफ़िक - $120/दिन - 15/03 से",
         "ja": "トラフィック - $120/日 - 15/03から",
         "zh": "流量 - $120/天 - 从 15/03 开始",
-        "ko": "트래픽 - $120/일 - 15/03부터"
+        "ko": "트래픽 - $120/일 - 15/03부터",
+        "ar": "المرور - $120/يوم - من 15/03"
     },
     "Tus Claves API": {
         "es": "Tus Claves API",
@@ -18806,7 +18976,8 @@
         "hi": "आपकी API कुंजियाँ",
         "ja": "あなたのAPIキー",
         "zh": "您的 API 密钥",
-        "ko": "귀하의 API 키"
+        "ko": "귀하의 API 키",
+        "ar": "مفاتيح API الخاصة بك"
     },
     "Ver todas": {
         "es": "Ver todas",
@@ -18818,7 +18989,8 @@
         "hi": "सभी देखें",
         "ja": "すべて見る",
         "zh": "查看全部",
-        "ko": "모두 보기"
+        "ko": "모두 보기",
+        "ar": "رؤية الكل"
     },
     "Visa | Expira 12/28": {
         "es": "Visa | Expira 12/28",
@@ -18830,7 +19002,8 @@
         "hi": "Visa | 12/28 को समाप्त",
         "ja": "Visa | 有効期限 12/28",
         "zh": "Visa | 到期 12/28",
-        "ko": "Visa | 만료 12/28"
+        "ko": "Visa | 만료 12/28",
+        "ar": "Visa | تنتهي 12/28"
     },
     "Volver al carrito": {
         "es": "Volver al carrito",
@@ -18842,7 +19015,8 @@
         "hi": "कार्ट पर वापस जाएँ",
         "ja": "カートに戻る",
         "zh": "返回购物车",
-        "ko": "장바구니로 돌아가기"
+        "ko": "장바구니로 돌아가기",
+        "ar": "العودة إلى سلة التسوق"
     },
     "Webhooks y Automatizacion": {
         "es": "Webhooks y Automatizacion",
@@ -18854,7 +19028,8 @@
         "hi": "Webhooks और ऑटोमेशन",
         "ja": "Webhookと自動化",
         "zh": "Webhooks 和自动化",
-        "ko": "Webhook 및 자동화"
+        "ko": "Webhook 및 자동화",
+        "ar": "Webhooks والأتمتة"
     },
     "Word (.docx)": {
         "es": "Word (.docx)",
@@ -18866,7 +19041,8 @@
         "hi": "Word (.docx)",
         "ja": "Word (.docx)",
         "zh": "Word (.docx)",
-        "ko": "Word (.docx)"
+        "ko": "Word (.docx)",
+        "ar": "Word (.docx)"
     },
     "X Ads": {
         "es": "X Ads",
@@ -18878,7 +19054,8 @@
         "hi": "X Ads",
         "ja": "X Ads",
         "zh": "X Ads",
-        "ko": "X Ads"
+        "ko": "X Ads",
+        "ar": "X Ads"
     },
     "ahora todo eso es posible!": {
         "es": "ahora todo eso es posible!",
@@ -18890,7 +19067,8 @@
         "hi": "अब वह सब संभव है!",
         "ja": "今ではそれがすべて可能です！",
         "zh": "现在所有这一切都成为可能！",
-        "ko": "이제 그 모든 것이 가능합니다!"
+        "ko": "이제 그 모든 것이 가능합니다!",
+        "ar": "الآن كل هذا ممكن!"
     },
     "audiencia": {
         "es": "audiencia",
@@ -18902,7 +19080,8 @@
         "hi": "दर्शक",
         "ja": "オーディエンス",
         "zh": "受众",
-        "ko": "잠재고객"
+        "ko": "잠재고객",
+        "ar": "جمهور"
     },
     "campañas": {
         "es": "campañas",
@@ -18914,7 +19093,8 @@
         "hi": "अभियान",
         "ja": "キャンペーン",
         "zh": "广告系列",
-        "ko": "캠페인"
+        "ko": "캠페인",
+        "ar": "حملات"
     },
     "education": {
         "es": "education",
@@ -18926,7 +19106,8 @@
         "hi": "education",
         "ja": "education",
         "zh": "education",
-        "ko": "education"
+        "ko": "education",
+        "ar": "education"
     },
     "en tu celular": {
         "es": "en tu celular",
@@ -18938,7 +19119,8 @@
         "hi": "आपके फोन पर",
         "ja": "携帯電話で",
         "zh": "在您的手机上",
-        "ko": "휴대전화에서"
+        "ko": "휴대전화에서",
+        "ar": "على هاتفك"
     },
     "facturas": {
         "es": "facturas",
@@ -18950,7 +19132,8 @@
         "hi": "चालान",
         "ja": "請求書",
         "zh": "发票",
-        "ko": "청구서"
+        "ko": "청구서",
+        "ar": "فواتير"
     },
     "gaming": {
         "es": "gaming",
@@ -18962,7 +19145,8 @@
         "hi": "gaming",
         "ja": "gaming",
         "zh": "gaming",
-        "ko": "gaming"
+        "ko": "gaming",
+        "ar": "gaming"
     },
     "impresiones": {
         "es": "impresiones",
@@ -18974,7 +19158,8 @@
         "hi": "इंप्रेशन",
         "ja": "インプレッション",
         "zh": "展示次数",
-        "ko": "노출수"
+        "ko": "노출수",
+        "ar": "انطباعات"
     },
     "no lanzada": {
         "es": "no lanzada",
@@ -18986,7 +19171,8 @@
         "hi": "लॉन्च नहीं हुआ",
         "ja": "未リリース",
         "zh": "未发布",
-        "ko": "출시 안 됨"
+        "ko": "출시 안 됨",
+        "ar": "غير مطلقة"
     },
     "o arrastra tus archivos aqui": {
         "es": "o arrastra tus archivos aqui",
@@ -18998,7 +19184,8 @@
         "hi": "या अपनी फाइलें यहां ड्रैग करें",
         "ja": "またはファイルをここにドラッグします",
         "zh": "或者将您的文件拖到此处",
-        "ko": "또는 파일을 여기로 드래그하세요"
+        "ko": "또는 파일을 여기로 드래그하세요",
+        "ar": "أو اسحب ملفاتك هنا"
     },
     "para desarrollo | Base URL:": {
         "es": "para desarrollo | Base URL:",
@@ -19010,7 +19197,8 @@
         "hi": "विकास के लिए | Base URL:",
         "ja": "開発用 | Base URL:",
         "zh": "用于开发 | Base URL:",
-        "ko": "개발용 | Base URL:"
+        "ko": "개발용 | Base URL:",
+        "ar": "للتطوير | Base URL:"
     },
     "para produccion |": {
         "es": "para produccion |",
@@ -19022,7 +19210,8 @@
         "hi": "उत्पादन के लिए |",
         "ja": "本番用 |",
         "zh": "用于生产 |",
-        "ko": "프로덕션용 |"
+        "ko": "프로덕션용 |",
+        "ar": "للإنتاج |"
     },
     "pyme": {
         "es": "pyme",
@@ -19034,7 +19223,8 @@
         "hi": "sme",
         "ja": "中小企業",
         "zh": "中小企业",
-        "ko": "중소기업"
+        "ko": "중소기업",
+        "ar": "الشركات الصغيرة والمتوسطة"
     },
     "retail": {
         "es": "retail",
@@ -19046,7 +19236,8 @@
         "hi": "retail",
         "ja": "retail",
         "zh": "retail",
-        "ko": "retail"
+        "ko": "retail",
+        "ar": "retail"
     },
     "segmentos": {
         "es": "segmentos",
@@ -19058,7 +19249,8 @@
         "hi": "सेगमेंट",
         "ja": "セグメント",
         "zh": "细分",
-        "ko": "세그먼트"
+        "ko": "세그먼트",
+        "ar": "شرائح"
     },
     "tech": {
         "es": "tech",
@@ -19070,6 +19262,7 @@
         "hi": "tech",
         "ja": "tech",
         "zh": "tech",
-        "ko": "tech"
+        "ko": "tech",
+        "ar": "tech"
     }
 }
