@@ -7,9 +7,9 @@
 "In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves." - Anonymous
 
 Project Status: Active<br>
-Current Version: v0.1.0-alpha<br>
 Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
+Current Version: v0.1.0-alpha<br>
 
 Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA SAS
 Patent: NC2025/0012723 (expiring by 2045).<br>
@@ -17,14 +17,7 @@ License: Open Standard with Protected Core (see LICENSE and CONSTITUTION files)<
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...
 
- 🚀 The Vision "The Airport of Computing":
-- Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
-- The Datacenters are the Airlines operating their Aircrafts (Servers).<br>
-- Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system (QFDM), abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
-
-- The Codec Terminal is your remote controller, the slices are the tickets (the seats): A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
-
- 🛠 Project Identity & Stack:<br>
+🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
  Main Contributors:<br>
  avolink (The Architect, Industrial Designer, Frontend Developer and Marketer)<br>
@@ -38,6 +31,15 @@ Coffee Pie® is an open technological ecosystem that provides a general-purpose 
     Frontend: Qt (QML), JavaScript, HTML, CSS.<br>
     Prototyping & Automation: Python.<br>
 
+ 🚀 The Vision "The Airport of Computing":
+- Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
+- The Datacenters are the Airlines operating their Aircrafts (Servers).<br>
+- Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system (QFDM), abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
+
+- The Codec Terminal is your remote controller: A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
+
+- The Slices are the tickets (the seats in the airplane)<br>
+ 
  📐 The Atomic Unit - Coffee Pie® Slice:
 We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful machines according to your needs:<br>
 
@@ -93,7 +95,7 @@ Contributing: We welcome anyone to contribute, but by contributing, you agree to
 ❌ Deceptive Practices: Scams, malware, phishing or fraudulent financial promises.<br>
 ❌ Cryptocurrency Mining: Mining any kind of cryptocurrency is strictly prohibited, but cryptocurrency and cryptoassets related transactions are allowed only if the Law allows it (consult your local jurisdiction's regulations).<br>
 
- 🎯 The Goals:
+ 🎯 The Goals:<br>
 2030: Becoming an Open, Reliable, Global Standard and the Backbone of Computing.<br>
 2035: Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
 2040: 1'000'000'000 active users in the QFDM Network.<br>
