@@ -27,9 +27,9 @@ Coffee Pie® is an open technological ecosystem that provides a general-purpose 
   Visionary Targets: Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
   
   Development Stack:<br>
-    Backend: Rust, C/C++, Shell/Bash Scripting.<br>
-    Frontend: Qt (QML), JavaScript, HTML, CSS.<br>
-    Prototyping & Automation: Python.<br>
+    - Backend: Rust, Shell/Bash Scripting, C/C++ (deprecated by 2030 Rust becoming canon).<br>
+    - Frontend: Qt (QML), JavaScript, HTML, CSS.<br>
+    - Prototyping & Automation: Python.<br>
 
  🚀 The Vision "The Airport of Computing":
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
@@ -48,7 +48,7 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | PWR | 1 Wh | Max electrical consumption per hour |
 | CPU | 1 vCore | Logical thread for serial processing |
 | RAM | 1 GB | Volatile memory |
-| SSD | 8 GB | High-speed OS & App storage |
+| SSD | 8 GB | High-speed for OS & App storage |
 | HDD | 125 GB | Low-speed bulk storage & backups |
 | NET | 8 Mbps | Guaranteed backend bandwidth |
 | GPU | 125 MB | VRAM for parallel processing (Vulkan, DirectX, SR-IOV) |
