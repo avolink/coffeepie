@@ -20,9 +20,9 @@ Coffee Pie® is an open technological ecosystem that provides a general-purpose 
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
  Main Contributors:<br>
- avolink (The Architect, Industrial Designer, Frontend Developer and Marketer)<br>
- juandaniel777 (The Engineer and Software Backend Developer)<br>
- Diego-M-PZ (The Electronics and Maintenace Manager).<br>
+ - avolink (The Architect, Industrial Designer, Frontend Developer and Marketer)<br>
+ - juandaniel777 (The Engineer and Software Backend Developer)<br>
+ - Diego-M-PZ (The Electronics and Maintenace Manager).<br>
 
   Visionary Targets: Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
   
