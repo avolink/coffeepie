@@ -34,7 +34,7 @@ Per-file counts:
   header.html                                   10 unique /     10 total
   index.html                                   118 unique /    123 total
   pago-seguro.html                              25 unique /     25 total
-  panel.html                                   358 unique /    456 total
+  panel.html                                   360 unique /    458 total
   politica-de-envios.html                       50 unique /     52 total
   politica-de-privacidad.html                  163 unique /    172 total
   politica-de-retornos.html                     51 unique /     57 total
@@ -47,7 +47,7 @@ Per-file counts:
 
 
 ==============================================================================
-REPORT A: HTML text MISSING from translations.json (87)
+REPORT A: HTML text MISSING from translations.json (89)
 ==============================================================================
   Norm: 'Con'
   Raw:  'Con\n                                                                                                            '
@@ -109,6 +109,10 @@ REPORT A: HTML text MISSING from translations.json (87)
   Raw:  'MM/DD/YYYY'
   Files: panel.html
 
+  Norm: "100'000 COP"
+  Raw:  "100'000 COP"
+  Files: panel.html
+
   Norm: "6'000'000 Cr"
   Raw:  "6'000'000 Cr"
   Files: panel.html
@@ -116,6 +120,10 @@ REPORT A: HTML text MISSING from translations.json (87)
   Norm: '3 TOPS (INT8)'
   Raw:  '\xa03\xa0TOPS\n                                                                    (INT8)\n                                                                '
   Files: acerca-de.html
+
+  Norm: "10'000'000 COP"
+  Raw:  "10'000'000 COP"
+  Files: panel.html
 
   Norm: 'INV-2025-00230'
   Raw:  'INV-2025-00230'
@@ -1413,7 +1421,7 @@ REPORT B: translations.json entries NOT in HTML (287)
 
 
 ==============================================================================
-REPORT C: Near-misses (15)
+REPORT C: Near-misses (16)
 ==============================================================================
   HTML: '"Anteriormente necesitabamos comprar decenas de equipos con las mejores prestaciones, cada unos de varios millones de pesos y con costos de mantenimiento exhorbitantes, para poder renderizar todos nuestros proyectos, con Coffee Pie eso es cosa del pasado, ahora sólo pagamos por la potencia que necesitamos, cuando la necesitamos. La convenienvcia, flexibilidad y ahorro para nuestra empresa es incalculable"'
   JSON: '"Anteriormente necesitabamos comprar decenas de equipos con las mejores prestaciones, cada unos de varios millones de pesos y con costos de mantenimiento exhorbitantes, para poder renderizar todos nuestros proyectos, con Coffee Pie® eso es cosa del pasado, ahora sólo pagamos por la potencia que necesitamos, cuando la necesitamos. La convenienvcia, flexibilidad y ahorro para nuestra empresa es incalculable"'
@@ -1456,6 +1464,12 @@ REPORT C: Near-misses (15)
   Distance: 1
   JSON Key: Set de Suiches Optomecánicos Flexibles (TPE) by Coffee Pie
   HTML files: tienda.html
+
+  HTML: "100'000 COP"
+  JSON: "$10'000 COP"
+  Distance: 2
+  JSON Key: $10'000 COP
+  HTML files: panel.html
 
   HTML: 'Con'
   JSON: 'Cr'

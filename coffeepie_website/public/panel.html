@@ -2926,7 +2926,7 @@
             font: var(--font_6);
             font-size: 14px;
             color: var(--cp-accent);
-            min-width: 48px;
+            min-width: 140px;
             text-align: right;
         }
 
@@ -4150,11 +4150,11 @@
                                                                     <option value="sales">Ventas / Conversiones</option>
                                                                 </select></div>
                                                             <div class="form-group"><label
-                                                                    class="form-label">Presupuesto Diario (USD)</label>
+                                                                    class="form-label">Presupuesto Diario (COP)</label>
                                                                 <div class="slider-group"><input type="range"
-                                                                        id="campaignBudget" min="10" max="5000"
-                                                                        value="100" step="10"><span class="slider-value"
-                                                                        id="budgetValue">$100</span></div>
+                                                                        id="campaignBudget" min="10000" max="100000000"
+                                                                        value="100000" step="10000"><span class="slider-value"
+                                                                        id="budgetValue">100'000 COP</span></div>
                                                             </div>
                                                             <div class="form-group"><label class="form-label">Fecha de
                                                                     Inicio</label><input class="form-input" type="date"
@@ -4873,10 +4873,10 @@
                                                                             style="min-height:120px;font-family:monospace;font-size:12px;"></textarea>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label class="form-label">Limite de Presupuesto Global (USD)</label>
+                                                                        <label class="form-label">Limite de Presupuesto Global (COP)</label>
                                                                         <div class="slider-group">
-                                                                            <input type="range" id="configGlobalBudget" min="100" max="100000" value="10000" step="100">
-                                                                            <span class="slider-value" id="globalBudgetValue">$10'000</span>
+                                                                            <input type="range" id="configGlobalBudget" min="100000" max="1000000000" value="10000000" step="100000">
+                                                                            <span class="slider-value" id="globalBudgetValue">10'000'000 COP</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -5714,7 +5714,8 @@
         var budgetValue = document.getElementById('budgetValue');
         if (budgetSlider && budgetValue) {
             budgetSlider.addEventListener('input', function () {
-                budgetValue.textContent = '$' + budgetSlider.value;
+                var val = parseInt(budgetSlider.value) || 0;
+                budgetValue.textContent = val.toLocaleString('en-US').replace(/,/g, "'") + ' COP';
             });
         }
 
@@ -5787,7 +5788,8 @@
             if (!objective) { showToast('Selecciona un objetivo'); return; }
             if (!segment) { showToast('Selecciona un segmento objetivo'); return; }
 
-            showToast('Campaña "' + name + '" creada exitosamente! Presupuesto: $' + budget + '/dia');
+            var fmtBudget = (parseInt(budget) || 0).toLocaleString('en-US').replace(/,/g, "'") + ' COP';
+            showToast('Campaña "' + name + '" creada exitosamente! Presupuesto: ' + fmtBudget + '/dia');
 
             document.getElementById('campaignName').value = '';
             document.getElementById('campaignObjective').value = '';
@@ -5846,8 +5848,8 @@
         var globalBudgetValue = document.getElementById('globalBudgetValue');
         if (globalBudgetSlider && globalBudgetValue) {
             globalBudgetSlider.addEventListener('input', function () {
-                var val = parseInt(globalBudgetSlider.value);
-                globalBudgetValue.textContent = '$' + val.toLocaleString('en-US').replace(/,/g, "'");
+                var val = parseInt(globalBudgetSlider.value) || 0;
+                globalBudgetValue.textContent = val.toLocaleString('en-US').replace(/,/g, "'") + ' COP';
             });
         }
 
