@@ -40,8 +40,8 @@ This document constitutes the Supreme Law of the Project. Its purpose is to ensu
 # Article V: Amendment & Governance
 1.  Anti-Populist Shield: This Constitution is protected against uninformed, populist, or short-term fluctuations. It is designed for eons stability.
 2.  The 9:10 Consensus Rule: To modify any Article of this Constitution, the following conditions must be met simultaneously:
-       Quorum: A minimum of 51% from the total verified and merit-weighted votes.
-       Super-Majority: A consensus of 90% (9:10) or more in favor.
+       Quorum: A minimum of 75% from the total verified and merit-weighted votes.
+       Super-Majority: A consensus of 75% (7.5:10) or more in favor.
 3.  Voting Weight: Voting power is not per-capita; it is weighted by the historical technical merit, verified code contributions, and the security record of the voter identity hash.
 
 # Article VI: Final Provisions
