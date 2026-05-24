@@ -28,10 +28,12 @@ This document constitutes the Supreme Law of the Project. Its purpose is to ensu
    - Anti-Plutocracy Voting: Governance follows a "Proof-of-Contribution" model. One vote is granted per token EARNED through verified labor. Tokens acquired via secondary markets (purchased) carry economic rights (dividends/valuation) but ZERO voting power.
    - Dividend Rights: Holding earned tokens grants the right to a proportional share of the distributed revenue, aligning long-term technical excellence with financial sustainability. Selling earned tokens is allowed, but new owner won't have voting rights.
 
-     30% Founders   (Grupo 3P1 Colombia)<br>
-     30% Investors  (Private Market Capital - BVC)<br>
-     30% Community  (Project Developers - Contributors)<br>
-     10% Education  (Access to Service Expansion)<br>
+       | Dividends | Category | Description |
+       |---|---|---|
+       | 30% | Founders | Grupo 3P1 Colombia |
+       | 30% | Community | Project Developers / Contributors |
+       | 30% | Investors | Private Market Capital / BVC |
+       | 10% | Education | Expanding Access to Service |
 
 # Article IV: Security & Formal Verification
 1.  Zero-Trust Contributions: No contributor is trusted by default. All code must pass Sandbox and Formal Verification layers.
