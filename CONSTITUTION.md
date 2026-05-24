@@ -44,6 +44,12 @@ This document constitutes the Supreme Law of the Project. Its purpose is to ensu
        Super-Majority: A consensus of 80% (0.8 x 0.8 = 64% of total possible votes) or more in favor.
 3.  Voting Weight: Voting power is not per-capita; it is weighted by the historical technical merit, verified code contributions, and the security record of the voter identity hash.
 
-# Article VI: Final Provisions
+# Article VI: Merit Decay & Voting Weight Revitalization
+1.  Inactivity Decay: To prevent governance lock, voter apathy, or lost cryptographic keys from paralyzing the project, merit-weighted voting power shall carry a half-life of 365 days. If a voter identity hash fails to submit verified contributions or participate in constitutional votes for 365 consecutive days, its voting weight shall automatically decay by 50% per year of continued inactivity.
+2.  Active Quorum Calculation: Turnout and Quorum requirements defined in Article V shall be calculated exclusively against the active, decayed weight pool of the voting period, completely neutralizing inactive or lost wallets.
+3.  The Revitalization Protocol: Historical voting weight is instantly revitalized and restored to its full capacity upon the registration of a new high-confidence, verified contribution audited by the AI Gatekeeper.
+4.  Preservation of Economic Rights: Economic rights (dividends, revenue distribution, and token valuation) are strictly decoupled from governance weights. Economic assets are immutable and shall never decay or diminish due to inactivity.
+
+# Article VII: Final Provisions
 1.  Algorithmic Impartiality: The AI Gatekeeper must remain objective. Its weights shall not be adjusted to favor specific entities, investors nor collaborators.
-2.  Immutability: This Article (VI) and Article V are immutable unless the project reaches total obsolescence.
+2.  Immutability: This Article (VII) and Articles V and VI are immutable unless the project reaches total obsolescence.
