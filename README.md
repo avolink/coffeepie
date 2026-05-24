@@ -11,7 +11,7 @@ Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie is a Benefit and Colletive Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
+Company: Coffee Pie Colombia is a Benefit and Colletive Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
@@ -71,14 +71,15 @@ ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
  3. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT administrators.<br>
 
  ⚖️ Licensing & Contribution (The Social Contract):<br>
-Coffee Pie® is mostly open hardware and mostly open software. To protect our path to a 2035 IPO and ensure the ecosystem remains standardized, we use a tiered licensing model:
-  QFDM Core & Orchestrator: Open Core. The core orchestration and QFDM Backend components are source-available under a proprietary Open Core license, granting free use for personal and small-scale deployments while requiring a commercial license for codec terminal manufacturers, large-scale deployments, enterprise use and potential competitors.
-  Frontend & Drivers: Apache 2.0. We want these everywhere.
-  Hardware Design: CERN Open Hardware License. Easily repairable and upgradeable.
-Contributing: We welcome anyone to contribute, but by contributing, you agree to our Contributor License Agreement (CLA) to keep the project commercially viable for its "BIC status" (Benefit and Collective Interest, in middle-ground between private company and NGO).<br>
+Coffee Pie® is full open hardware and mostly open software. To protect our path to a 2035 IPO and ensure the ecosystem remains standardized, we use a tiered licensing model:
+- QFDM Core & Orchestrator: Open Core. The core orchestration and QFDM Backend components are source-available under a proprietary Open Core license, granting free use for personal and small-scale deployments while requiring a commercial license for codec terminal manufacturers, large-scale deployments, enterprise use and potential competitors.<br>
+- Frontend & Drivers: Apache 2.0. We want these everywhere.<br>
+- Hardware Design: CERN Open Hardware License. Easily repairable and upgradeable.<br>
+- Contributing: We welcome anyone to contribute, but by contributing, you agree to our Contributor License Agreement (CLA) to keep the project commercially viable for its "BIC status" (Benefit and Collective Interest, in middle-ground between private company and NGO).<br>
 
 💰 Monetization & Ethics:<br>
  We are guided by stoic and ethical principles. Our success is measured mainly by social and environmental impact, not just ROI.<br>
+ 
  1. Free Tier: Advertisers pay for the computing power, ideal for casual users (Ads on-demand).<br>
  2. Credits Packages: No interruptions, high-performance and more resources for professionals and casual gamers.<br>
  3. B2B / ISP Licensing: Royalties from manufacturers and ISPs renting codec terminals to third parties.<br>
