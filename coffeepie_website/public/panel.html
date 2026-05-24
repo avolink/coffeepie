@@ -2732,6 +2732,11 @@
             border-color: var(--cp-accent);
         }
 
+        .form-input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
         .form-input::placeholder {
             color: #555;
         }
@@ -3011,6 +3016,17 @@
         @media (max-width: 768px) {
             .panel-layout {
                 flex-direction: column;
+            }
+
+            .slider-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .slider-value {
+                text-align: center;
+                min-width: 100%;
             }
 
             .panel-sidebar {
