@@ -11,7 +11,7 @@ Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA SAS
+Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S.
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Open Standard with Protected Core (see LICENSE and CONSTITUTION files)<br>
 
