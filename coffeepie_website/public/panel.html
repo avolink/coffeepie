@@ -2928,6 +2928,17 @@
             color: var(--cp-accent);
             min-width: 140px;
             text-align: right;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 4px 8px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .slider-value:focus {
+            border-color: var(--cp-accent);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 5px rgba(var(--cp-accent-rgb), 0.3);
         }
 
         .empty-state {
@@ -4153,8 +4164,8 @@
                                                                     class="form-label">Presupuesto Diario (COP)</label>
                                                                 <div class="slider-group"><input type="range"
                                                                         id="campaignBudget" min="10000" max="100000000"
-                                                                        value="100000" step="10000"><span class="slider-value"
-                                                                        id="budgetValue">100'000 COP</span></div>
+                                                                        value="100000" step="10000"><input type="text" class="slider-value"
+                                                                        id="budgetValue" value="100'000 COP"></div>
                                                             </div>
                                                             <div class="form-group"><label class="form-label">Fecha de
                                                                     Inicio</label><input class="form-input" type="date"
@@ -4876,7 +4887,7 @@
                                                                         <label class="form-label">Limite de Presupuesto Global (COP)</label>
                                                                         <div class="slider-group">
                                                                             <input type="range" id="configGlobalBudget" min="100000" max="1000000000" value="10000000" step="100000">
-                                                                            <span class="slider-value" id="globalBudgetValue">10'000'000 COP</span>
+                                                                            <input type="text" class="slider-value" id="globalBudgetValue" value="10'000'000 COP">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -5709,13 +5720,44 @@
             });
         }
 
-        // Budget slider
+        // Budget slider (Bidirectional sync)
         var budgetSlider = document.getElementById('campaignBudget');
         var budgetValue = document.getElementById('budgetValue');
         if (budgetSlider && budgetValue) {
+            var formatVal = function (num) {
+                return num.toLocaleString('en-US').replace(/,/g, "'") + ' COP';
+            };
+            var parseVal = function (str) {
+                var cleaned = str.replace(/[^0-9]/g, '');
+                return parseInt(cleaned) || 0;
+            };
+
+            // Slider to Input
             budgetSlider.addEventListener('input', function () {
                 var val = parseInt(budgetSlider.value) || 0;
-                budgetValue.textContent = val.toLocaleString('en-US').replace(/,/g, "'") + ' COP';
+                budgetValue.value = formatVal(val);
+            });
+
+            // Input to Slider (live validation & sync)
+            budgetValue.addEventListener('input', function () {
+                var val = parseVal(budgetValue.value);
+                var clamped = Math.max(10000, Math.min(100000000, val));
+                budgetSlider.value = clamped;
+            });
+
+            // Input format on Blur / Change
+            budgetValue.addEventListener('change', function () {
+                var val = parseVal(budgetValue.value);
+                var clamped = Math.max(10000, Math.min(100000000, val));
+                budgetSlider.value = clamped;
+                budgetValue.value = formatVal(clamped);
+            });
+
+            // Format on Enter key
+            budgetValue.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    budgetValue.blur();
+                }
             });
         }
 
@@ -5846,13 +5888,44 @@
             });
         });
 
-        // Global budget slider for advanced config
+        // Global budget slider for advanced config (Bidirectional sync)
         var globalBudgetSlider = document.getElementById('configGlobalBudget');
         var globalBudgetValue = document.getElementById('globalBudgetValue');
         if (globalBudgetSlider && globalBudgetValue) {
+            var formatVal = function (num) {
+                return num.toLocaleString('en-US').replace(/,/g, "'") + ' COP';
+            };
+            var parseVal = function (str) {
+                var cleaned = str.replace(/[^0-9]/g, '');
+                return parseInt(cleaned) || 0;
+            };
+
+            // Slider to Input
             globalBudgetSlider.addEventListener('input', function () {
                 var val = parseInt(globalBudgetSlider.value) || 0;
-                globalBudgetValue.textContent = val.toLocaleString('en-US').replace(/,/g, "'") + ' COP';
+                globalBudgetValue.value = formatVal(val);
+            });
+
+            // Input to Slider (live validation & sync)
+            globalBudgetValue.addEventListener('input', function () {
+                var val = parseVal(globalBudgetValue.value);
+                var clamped = Math.max(100000, Math.min(1000000000, val));
+                globalBudgetSlider.value = clamped;
+            });
+
+            // Input format on Blur / Change
+            globalBudgetValue.addEventListener('change', function () {
+                var val = parseVal(globalBudgetValue.value);
+                var clamped = Math.max(100000, Math.min(1000000000, val));
+                globalBudgetSlider.value = clamped;
+                globalBudgetValue.value = formatVal(clamped);
+            });
+
+            // Format on Enter key
+            globalBudgetValue.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    globalBudgetValue.blur();
+                }
             });
         }
 
