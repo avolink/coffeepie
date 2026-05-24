@@ -17,7 +17,7 @@ import re
 import os
 import sys
 from pathlib import Path
-from bs4 import BeautifulSoup, NavigableString, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag, Comment
 
 # ---------------------------------------------------------------------------
 # Config
@@ -62,29 +62,38 @@ def normalize_text(t):
 # ---------------------------------------------------------------------------
 # Levenshtein distance  (for near-miss detection)
 # ---------------------------------------------------------------------------
-def levenshtein(a, b):
+def levenshtein(a, b, max_dist=999999):
     if len(a) < len(b):
         a, b = b, a
     if len(b) == 0:
         return len(a)
+    if len(a) - len(b) > max_dist:
+        return max_dist + 1
     prev = list(range(len(b) + 1))
     for i, ca in enumerate(a):
         curr = [i + 1]
+        min_val = i + 1
         for j, cb in enumerate(b):
-            curr.append(min(
+            val = min(
                 prev[j + 1] + 1,
                 curr[j] + 1,
                 prev[j] + (0 if ca == cb else 1)
-            ))
+            )
+            curr.append(val)
+            if val < min_val:
+                min_val = val
+        if min_val > max_dist:
+            return max_dist + 1
         prev = curr
     return prev[-1]
 
 
 def is_near_miss(a, b):
-    dist = levenshtein(a, b)
     max_len = max(len(a), len(b))
     if max_len == 0:
         return False
+    max_dist = max(NEAR_MISS_MAX_DIST, int(max_len * NEAR_MISS_MAX_RATIO) + 1)
+    dist = levenshtein(a, b, max_dist)
     ratio = dist / max_len
     return dist <= NEAR_MISS_MAX_DIST or ratio <= NEAR_MISS_MAX_RATIO
 
@@ -123,7 +132,7 @@ def extract_translatable_texts(soup):
         if el.get("data-testid") == "richTextElement":
             text_parts = []
             for child in el.children:
-                if not isinstance(child, Tag) and not (isinstance(child, NavigableString) and child.strip()):
+                if not isinstance(child, Tag) and not (isinstance(child, NavigableString) and not isinstance(child, Comment) and child.strip()):
                     continue
                 text = (child.get_text(strip=False) or "").strip()
                 if len(text) < 2:
@@ -143,7 +152,7 @@ def extract_translatable_texts(soup):
         # ---- Process child nodes (mirrors translateElement) ----
         children = list(el.children)
         for node in children:
-            if isinstance(node, NavigableString):
+            if isinstance(node, NavigableString) and not isinstance(node, Comment):
                 # Direct text node child
                 text = str(node)
                 norm = normalize_text(text)
@@ -170,7 +179,7 @@ def extract_translatable_texts(soup):
                 # childNodes.length===1 && firstChild.nodeType===TEXT_NODE)
                 non_empty_text = [
                     c for c in node_children
-                    if isinstance(c, NavigableString) and str(c).strip()
+                    if isinstance(c, NavigableString) and not isinstance(c, Comment) and str(c).strip()
                 ]
                 if len(tag_children) == 0 and len(non_empty_text) == 1:
                     text = str(non_empty_text[0])

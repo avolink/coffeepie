@@ -9,9 +9,10 @@
     <link rel="apple-touch-icon" href="/assets/avo/media/557674_3c3a2d29a9434c33a754d6cac7b98b98.png" type="image/png">
     <title>Pago Seguro | Coffee Pie</title>
     <link rel="stylesheet" href="/assets/avo/css/main.68f9276d.min.css">
+    <link rel="stylesheet" href="/header.css">
     <style>
         body { background: #111; font-family: Arial, Helvetica, sans-serif; }
-        .page-wrap { max-width: 900px; margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; text-align: center; }
+        .page-wrap { position: relative; max-width: 900px; margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; text-align: center; }
         h1 { font-size: 2rem; margin-bottom: 10px; }
         h2 { font-size: 1.2rem; color: #666; font-weight: 400; margin-bottom: 30px; }
         .cart-summary { margin: 30px 0; }
@@ -119,7 +120,7 @@
 
         <div class="instructions">
             <strong>Instrucciones:</strong><br>
-            1. Abre la app <strong>Bancolombia</strong> en tu celular<br>
+            1. Abre la app <strong data-cp-no-translate>Bancolombia</strong> en tu celular<br>
             2. Toca "Pagar con QR" y escanea el código<br>
             3. Verifica que el total coincida con el de tu carrito<br>
             4. Confirma el pago desde la app<br>
@@ -129,11 +130,11 @@
 
         <div class="transfer-info">
             <h3>Datos de Transferencia</h3>
-            <div class="field"><span>Banco</span><strong>Bancolombia</strong></div>
+            <div class="field"><span>Banco</span><strong data-cp-no-translate>Bancolombia</strong></div>
             <div class="field"><span>Tipo de Cuenta</span><strong>Cuenta Corriente</strong></div>
-            <div class="field"><span>Titular</span><strong>GRUPO 3P1 COLOMBIA S.A.S.</strong></div>
-            <div class="field"><span>NIT</span><strong>901.xxx.xxx-x</strong></div>
-            <div class="field"><span>Referencia</span><strong>CP-{usuario}-{orden}</strong></div>
+            <div class="field"><span>Titular</span><strong data-cp-no-translate>GRUPO 3P1 COLOMBIA S.A.S.</strong></div>
+            <div class="field"><span data-cp-no-translate>NIT</span><strong data-cp-no-translate>901.xxx.xxx-x</strong></div>
+            <div class="field"><span>Referencia</span><strong data-cp-no-translate>CP-{usuario}-{orden}</strong></div>
         </div>
 
         <a href="/carrito" class="btn-back">Volver al carrito</a>
@@ -216,5 +217,7 @@
             renderCheckout();
         })();
     </script>
+    <script src="/js/lang.js"></script>
+    <script src="/translate.js"></script>
 </body>
 </html>

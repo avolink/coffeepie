@@ -24,46 +24,34 @@ Files audited: 20
   tutoriales.html
 
 Per-file counts:
-  404.html                                      73 unique /    103 total
-  accesibilidad.html                            86 unique /    124 total
-  acerca-de.html                               282 unique /    369 total
-  api.html                                     142 unique /    212 total
-  carrito.html                                  69 unique /    101 total
-  dispositivos-certificados.html                92 unique /    138 total
-  fabricantes.html                             224 unique /    380 total
-  header.html                                   12 unique /     12 total
-  index.html                                   150 unique /    169 total
-  pago-seguro.html                              30 unique /     31 total
-  panel.html                                   375 unique /    473 total
-  politica-de-envios.html                       82 unique /    133 total
-  politica-de-privacidad.html                  195 unique /    253 total
-  politica-de-retornos.html                     84 unique /    139 total
-  portal-de-inversionistas.html                 86 unique /    152 total
-  precios.html                                 111 unique /    198 total
-  proveedores-nube.html                         95 unique /    149 total
-  terminos-y-condiciones.html                  108 unique /    160 total
-  tienda.html                                  125 unique /    218 total
-  tutoriales.html                               85 unique /    166 total
+  404.html                                      41 unique /     42 total
+  accesibilidad.html                            54 unique /     55 total
+  acerca-de.html                               249 unique /    258 total
+  api.html                                     109 unique /    115 total
+  carrito.html                                  36 unique /     37 total
+  dispositivos-certificados.html                60 unique /     71 total
+  fabricantes.html                             192 unique /    208 total
+  header.html                                   10 unique /     10 total
+  index.html                                   118 unique /    123 total
+  pago-seguro.html                              25 unique /     25 total
+  panel.html                                   358 unique /    456 total
+  politica-de-envios.html                       50 unique /     52 total
+  politica-de-privacidad.html                  163 unique /    172 total
+  politica-de-retornos.html                     51 unique /     57 total
+  portal-de-inversionistas.html                 53 unique /     60 total
+  precios.html                                  78 unique /     95 total
+  proveedores-nube.html                         63 unique /     66 total
+  terminos-y-condiciones.html                   76 unique /     79 total
+  tienda.html                                   92 unique /    152 total
+  tutoriales.html                               51 unique /     68 total
 
 
 ==============================================================================
-REPORT A: HTML text MISSING from translations.json (148)
+REPORT A: HTML text MISSING from translations.json (87)
 ==============================================================================
-  Norm: '/$'
-  Raw:  '/$'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'bi'
-  Raw:  ' bi '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: 'Con'
   Raw:  'Con\n                                                                                                            '
   Files: index.html
-
-  Norm: 'NIT'
-  Raw:  'NIT'
-  Files: pago-seguro.html
 
   Norm: 'UTC'
   Raw:  'UTC'
@@ -73,17 +61,9 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  'Tipo'
   Files: panel.html
 
-  Norm: 'Cant.'
-  Raw:  'Cant.'
-  Files: pago-seguro.html
-
   Norm: 'ES-CO'
   Raw:  'ES-CO'
   Files: header.html
-
-  Norm: 'react'
-  Raw:  ' react '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
 
   Norm: '1 vCore'
   Raw:  ' 1\n                                                                    vCore'
@@ -92,10 +72,6 @@ REPORT A: HTML text MISSING from translations.json (148)
   Norm: 'COP /mes'
   Raw:  'COP /mes'
   Files: panel.html
-
-  Norm: 'Producto'
-  Raw:  'Producto'
-  Files: pago-seguro.html
 
   Norm: 'cp_live_'
   Raw:  'cp_live_'
@@ -117,10 +93,6 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  "3'000 COP"
   Files: panel.html
 
-  Norm: 'react-dom'
-  Raw:  ' react-dom '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: "500'000 Cr"
   Raw:  "500'000 Cr"
   Files: panel.html
@@ -137,41 +109,13 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  'MM/DD/YYYY'
   Files: panel.html
 
-  Norm: 'Bancolombia'
-  Raw:  'Bancolombia'
-  Files: pago-seguro.html
-
   Norm: "6'000'000 Cr"
   Raw:  "6'000'000 Cr"
   Files: panel.html
 
-  Norm: 'domStoreHtml'
-  Raw:  ' domStoreHtml '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: '3 TOPS (INT8)'
   Raw:  '\xa03\xa0TOPS\n                                                                    (INT8)\n                                                                '
   Files: acerca-de.html
-
-  Norm: '901.xxx.xxx-x'
-  Raw:  '901.xxx.xxx-x'
-  Files: pago-seguro.html
-
-  Norm: 'Purchase Form'
-  Raw:  ' Purchase Form '
-  Files: panel.html
-
-  Norm: 'lodash script'
-  Raw:  ' lodash script '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Assets Section'
-  Raw:  ' Assets Section '
-  Files: panel.html
-
-  Norm: 'Config Section'
-  Raw:  ' Config Section '
-  Files: panel.html
 
   Norm: 'INV-2025-00230'
   Raw:  'INV-2025-00230'
@@ -205,74 +149,6 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  'INV-2026-00128'
   Files: panel.html
 
-  Norm: 'Instrucciones:'
-  Raw:  'Instrucciones:'
-  Files: pago-seguro.html
-
-  Norm: 'Account Section'
-  Raw:  ' Account Section '
-  Files: panel.html
-
-  Norm: 'Billing Section'
-  Raw:  ' Billing Section '
-  Files: panel.html
-
-  Norm: 'Polyfills check'
-  Raw:  ' Polyfills check '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Reports Section'
-  Raw:  ' Reports Section '
-  Files: panel.html
-
-  Norm: 'initial scripts'
-  Raw:  ' initial scripts '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'renderIndicator'
-  Raw:  ' renderIndicator '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'warmup data end'
-  Raw:  ' warmup data end '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'API Keys Section'
-  Raw:  ' API Keys Section '
-  Files: panel.html
-
-  Norm: 'Business Manager'
-  Raw:  ' Business Manager '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Cuenta Corriente'
-  Raw:  'Cuenta Corriente'
-  Files: pago-seguro.html
-
-  Norm: 'Segments Section'
-  Raw:  ' Segments Section '
-  Files: panel.html
-
-  Norm: 'presets polyfill'
-  Raw:  ' presets polyfill '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'versionIndicator'
-  Raw:  ' versionIndicator '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Campaigns Section'
-  Raw:  ' Campaigns Section '
-  Files: panel.html
-
-  Norm: 'Dashboard Section'
-  Raw:  ' Dashboard Section '
-  Files: panel.html
-
-  Norm: 'warmup data start'
-  Raw:  ' warmup data start '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: 'Asia/Seoul (UTC+9)'
   Raw:  'Asia/Seoul (UTC+9)'
   Files: panel.html
@@ -281,36 +157,8 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  'Asia/Tokyo (UTC+9)'
   Files: panel.html
 
-  Norm: 'Bulk Pricing Tiers'
-  Raw:  ' Bulk Pricing Tiers '
-  Files: panel.html
-
-  Norm: 'detect browser zoom'
-  Raw:  ' detect browser zoom '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'scriptTagsToPreload'
-  Raw:  ' scriptTagsToPreload '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: "3'000 COP / terminal"
   Raw:  "3'000 COP / terminal"
-  Files: panel.html
-
-  Norm: 'CP-{usuario}-{orden}'
-  Raw:  'CP-{usuario}-{orden}'
-  Files: pago-seguro.html
-
-  Norm: 'SIMPLE CONFIGURATION'
-  Raw:  ' SIMPLE CONFIGURATION '
-  Files: panel.html
-
-  Norm: 'Sentry Loader Script'
-  Raw:  ' Sentry Loader Script '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Active Licenses Table'
-  Raw:  ' Active Licenses Table '
   Files: panel.html
 
   Norm: 'Asia/Shanghai (UTC+8)'
@@ -325,65 +173,17 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  'Europe/Madrid (UTC+1)'
   Files: panel.html
 
-  Norm: 'initCustomElements #2'
-  Raw:  ' initCustomElements #2 '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'ADVANCED CONFIGURATION'
-  Raw:  ' ADVANCED CONFIGURATION '
-  Files: panel.html
-
   Norm: 'America/Bogota (UTC-5)'
   Raw:  'America/Bogota (UTC-5)'
   Files: panel.html
-
-  Norm: 'Licencias QFDM Section'
-  Raw:  ' Licencias QFDM Section '
-  Files: panel.html
-
-  Norm: 'Platform Connect Cards'
-  Raw:  ' Platform Connect Cards '
-  Files: panel.html
-
-  Norm: 'initCustomElements # 1'
-  Raw:  ' initCustomElements # 1'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'preloading pre-scripts'
-  Raw:  ' preloading pre-scripts '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'used platform apis end'
-  Raw:  ' used platform apis end '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
 
   Norm: 'America/New York (UTC-5)'
   Raw:  'America/New York (UTC-5)'
   Files: panel.html
 
-  Norm: 'Old Browsers Deprecation'
-  Raw:  ' Old Browsers Deprecation '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'used platform apis start'
-  Raw:  ' used platform apis start '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: 'America/Sao Paulo (UTC-3)'
   Raw:  'America/Sao Paulo (UTC-3)'
   Files: panel.html
-
-  Norm: 'GRUPO 3P1 COLOMBIA S.A.S.'
-  Raw:  'GRUPO 3P1 COLOMBIA S.A.S.'
-  Files: pago-seguro.html
-
-  Norm: 'sentryOnLoad Setup Script'
-  Raw:  ' sentryOnLoad Setup Script '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'pageHtmlEmbeds.bodyEnd end'
-  Raw:  'pageHtmlEmbeds.bodyEnd end'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
 
   Norm: 'America/Los Angeles (UTC-8)'
   Raw:  'America/Los Angeles (UTC-8)'
@@ -397,53 +197,9 @@ REPORT A: HTML text MISSING from translations.json (148)
   Raw:  'America/Buenos Aires (UTC-3)'
   Files: panel.html
 
-  Norm: 'pageHtmlEmbeds.bodyEnd start'
-  Raw:  'pageHtmlEmbeds.bodyEnd start'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'pageHtmlEmbeds.bodyStart end'
-  Raw:  'pageHtmlEmbeds.bodyStart end'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'pageHtmlEmbeds.bodyStart start'
-  Raw:  'pageHtmlEmbeds.bodyStart start'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Add the rest of the ViewerModel'
-  Raw:  ' Add the rest of the ViewerModel '
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'CUSTOM VANILLA JS HAMBURGER MENU'
-  Raw:  ' CUSTOM VANILLA JS HAMBURGER MENU '
-  Files: acerca-de.html, api.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, tutoriales.html
-
-  Norm: "Sentry's makeMultiplexedTransport"
-  Raw:  " Sentry's makeMultiplexedTransport "
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: "Sentry's moduleMetadataIntegration"
-  Raw:  " Sentry's moduleMetadataIntegration "
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   Norm: 'Servicio de Cómputo ||| Coffee Pie®'
   Raw:  'Servicio de\n                                                                            Cómputo ||| Coffee\n                                                                            Pie®'
   Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'padding-bottom: 100% * height/width'
-  Raw:  ' padding-bottom: 100% * height/width '
-  Files: tutoriales.html
-
-  Norm: '?xml version="1.0" encoding="UTF-8"?'
-  Raw:  '?xml version="1.0" encoding="UTF-8"?'
-  Files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, header.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
-  Norm: 'Firebase Initialization with App Check'
-  Raw:  ' Firebase Initialization with App Check '
-  Files: carrito.html, index.html, tienda.html
-
-  Norm: 'Language selector: pure vanilla, Wix-free'
-  Raw:  ' Language selector: pure vanilla, Wix-free '
-  Files: header.html
 
   Norm: 'Terminal Codec (Commander™) ||| Patente NC2024/0013576'
   Raw:  'Terminal Codec\n                                                                (Commander™) ||| Patente\xa0NC2024/0013576'
@@ -643,7 +399,7 @@ REPORT A: HTML text MISSING from translations.json (148)
 
 
 ==============================================================================
-REPORT B: translations.json entries NOT in HTML (283)
+REPORT B: translations.json entries NOT in HTML (287)
 ==============================================================================
   Key: '('
   ES:  '('
@@ -1046,6 +802,9 @@ REPORT B: translations.json entries NOT in HTML (283)
   ES:  '"reloj rolex",'
   EN:  '"rolex watch,",'
 
+  Key: 'API Keys Table'
+  ES:  'API Keys Table'
+
   Key: 'panel_0068'
   ES:  'Conectando con '
   EN:  'Connecting to '
@@ -1078,6 +837,10 @@ REPORT B: translations.json entries NOT in HTML (283)
   Key: 'panel_0225'
   ES:  'Nueva Clave API '
   EN:  'New API Key '
+
+  Key: 'Sigue comprando'
+  ES:  'Sigue comprando'
+  EN:  'Keep shopping'
 
   Key: 'panel_0344'
   ES:  'para desarrollo'
@@ -1164,6 +927,10 @@ REPORT B: translations.json entries NOT in HTML (283)
   Key: 'Resumen del pedido'
   ES:  'Resumen del pedido'
   EN:  'Order summary'
+
+  Key: 'Selección estándar'
+  ES:  'Selección estándar'
+  EN:  'Standard selection'
 
   Key: 'Switches: Recycled'
   ES:  'Switches: Recycled'
@@ -1252,6 +1019,10 @@ REPORT B: translations.json entries NOT in HTML (283)
   Key: 'panel_0277'
   ES:  'Selecciona un objetivo'
   EN:  'Select an objective'
+
+  Key: 'Tu carrito está vacío.'
+  ES:  'Tu carrito está vacío.'
+  EN:  'Your cart is empty.'
 
   Key: '"country": "Colombia",'
   ES:  '"country": "Colombia,",'
@@ -1642,7 +1413,7 @@ REPORT B: translations.json entries NOT in HTML (283)
 
 
 ==============================================================================
-REPORT C: Near-misses (21)
+REPORT C: Near-misses (15)
 ==============================================================================
   HTML: '"Anteriormente necesitabamos comprar decenas de equipos con las mejores prestaciones, cada unos de varios millones de pesos y con costos de mantenimiento exhorbitantes, para poder renderizar todos nuestros proyectos, con Coffee Pie eso es cosa del pasado, ahora sólo pagamos por la potencia que necesitamos, cuando la necesitamos. La convenienvcia, flexibilidad y ahorro para nuestra empresa es incalculable"'
   JSON: '"Anteriormente necesitabamos comprar decenas de equipos con las mejores prestaciones, cada unos de varios millones de pesos y con costos de mantenimiento exhorbitantes, para poder renderizar todos nuestros proyectos, con Coffee Pie® eso es cosa del pasado, ahora sólo pagamos por la potencia que necesitamos, cuando la necesitamos. La convenienvcia, flexibilidad y ahorro para nuestra empresa es incalculable"'
@@ -1686,35 +1457,17 @@ REPORT C: Near-misses (21)
   JSON Key: Set de Suiches Optomecánicos Flexibles (TPE) by Coffee Pie
   HTML files: tienda.html
 
-  HTML: '/$'
-  JSON: '('
-  Distance: 2
-  JSON Key: (
-  HTML files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
-
   HTML: 'Con'
   JSON: 'Cr'
   Distance: 2
   JSON Key: panel_0079
   HTML files: index.html
 
-  HTML: 'NIT'
-  JSON: 'NET:'
-  Distance: 2
-  JSON Key: NET:
-  HTML files: pago-seguro.html
-
   HTML: 'UTC'
   JSON: 'AT:'
   Distance: 2
   JSON Key: AT:
   HTML files: panel.html
-
-  HTML: 'bi'
-  JSON: '('
-  Distance: 2
-  JSON Key: (
-  HTML files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
 
   HTML: "10'000 Cr"
   JSON: "$10'000 COP"
@@ -1734,35 +1487,17 @@ REPORT C: Near-misses (21)
   JSON Key: $10'000 COP
   HTML files: panel.html
 
-  HTML: 'Cant.'
-  JSON: 'Banco'
-  Distance: 3
-  JSON Key: Banco
-  HTML files: pago-seguro.html
-
   HTML: 'ES-CO'
   JSON: 'ES'
   Distance: 3
   JSON Key: ES
   HTML files: header.html
 
-  HTML: 'Producto'
-  JSON: 'Produccion'
-  Distance: 3
-  JSON Key: panel_0246
-  HTML files: pago-seguro.html
-
   HTML: 'Tipo'
   JSON: 'Live'
   Distance: 3
   JSON Key: Live
   HTML files: panel.html
-
-  HTML: 'react'
-  JSON: 'Creada'
-  Distance: 3
-  JSON Key: panel_0081
-  HTML files: 404.html, accesibilidad.html, acerca-de.html, api.html, carrito.html, dispositivos-certificados.html, fabricantes.html, index.html, politica-de-envios.html, politica-de-privacidad.html, politica-de-retornos.html, portal-de-inversionistas.html, precios.html, proveedores-nube.html, terminos-y-condiciones.html, tienda.html, tutoriales.html
 
   HTML: 'Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos. ||| *Requieren Conexión a Internet'
   JSON: 'Los Terminales Codec son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio Coffee Pie®. Pregúntale a tu ISP si puede incluirte el terminal con la suscripción a internet, o deja tan sólo un pequeño depósito por cada dispositivo que requieras y regrésalos cuando ya no los necesites!... Te reintegraremos entre el 10% y el 90% del depósito con base en el estado y desgaste de los mismos.'

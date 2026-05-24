@@ -87,6 +87,9 @@ function updateCartUI() {
         const badge = link.querySelector('span, text[data-hook="items-count"]');
         if (badge) badge.textContent = totalItems;
     });
+    if (window.CoffeePieLang && typeof window.CoffeePieLang.refresh === 'function') {
+        window.CoffeePieLang.refresh();
+    }
 }
 
 function initCartPage() {
@@ -529,6 +532,9 @@ function renderCartPage() {
     `;
 
     updateAvoTotals(total);
+    if (window.CoffeePieLang && typeof window.CoffeePieLang.refresh === 'function') {
+        window.CoffeePieLang.refresh();
+    }
 }
 
 function updateAvoTotals(total) {
