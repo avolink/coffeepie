@@ -29,9 +29,9 @@ This document constitutes the Supreme Law of the Project. Its purpose is to ensu
    - Dividend Rights: Holding earned tokens grants the right to a proportional share of the distributed revenue, aligning long-term technical excellence with financial sustainability. Selling earned tokens is allowed, but new owner won't have voting rights.
 
      30% Founders   (Grupo 3P1 Colombia)<br>
-     30% Investors  (Private Capital)<br>
-     30% Community  (Project Developers)<br>
-     10% Education  (Access Expansion)<br>
+     30% Investors  (Private Market Capital - BVC)<br>
+     30% Community  (Project Developers - Contributors)<br>
+     10% Education  (Access to Service Expansion)<br>
 
 # Article IV: Security & Formal Verification
 1.  Zero-Trust Contributions: No contributor is trusted by default. All code must pass Sandbox and Formal Verification layers.
@@ -39,7 +39,7 @@ This document constitutes the Supreme Law of the Project. Its purpose is to ensu
 
 # Article V: Amendment & Governance
 1.  Anti-Populist Shield: This Constitution is protected against uninformed, populist, or short-term fluctuations. It is designed for eons stability.
-2.  The 9:10 Consensus Rule: To modify any Article of this Constitution, the following conditions must be met simultaneously:
+2.  The 8:10 Consensus Rule: To modify any Article of this Constitution, the following conditions must be met simultaneously:
        Quorum: A minimum of 80% from the total verified and merit-weighted votes.
        Super-Majority: A consensus of 80% (0.8 x 0.8 = 64% of total possible votes) or more in favor.
 3.  Voting Weight: Voting power is not per-capita; it is weighted by the historical technical merit, verified code contributions, and the security record of the voter identity hash.
