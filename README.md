@@ -2,20 +2,20 @@
 ░█░░░█░█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀▀░░█░░█▀▀<br>
 ░▀▀▀░▀▀▀░▀░░░▀░░░▀▀▀░▀▀▀░░░▀░░░▀▀▀░▀▀▀<br>
 
-🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.
+🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.<br>
 
-"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves." - Anonymous
+"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, and travel light like a backpacker while you can. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves." - Anonymous<br>
 
 Project Status: Active<br>
 Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S.
+Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Open Standard with Protected Core (see LICENSE and CONSTITUTION files)<br>
 
-Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...
+Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
@@ -55,7 +55,7 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived) |
 | IA | 3 TOPS | INT8 parallel processing capacity |
 
-Legit and recommended uses, but not limited to: AI training, AI inference, Big Data, server deployment, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, research, create, entertain, casual gaming, etc.
+Legit and recommended uses, but not limited to: AI training, AI inference, Big Data, server deployment, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, research, create, entertain, casual gaming, etc.<br>
 
 > Anti-Abuse Guardrail: But if an instance exceeds its power limit warnings an automatic AI Agent observation and recording will be triggered for human audit, if violating Law or community rules (e.g., unauthorized pentesting, cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional Law permits. We want to save the planet, not the bots!...<br>
 
@@ -66,7 +66,7 @@ ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
   OS: Debian Minimal.<br>
   Window Manager: Sway (Kiosk Mode).<br>
   GUI: Coffee Pie Qt.<br>
-  Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).
+  Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
  3. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT administrators.<br>
 
  ⚖️ Licensing & Contribution (The Social Contract):<br>
@@ -74,7 +74,7 @@ Coffee Pie® is mostly open hardware and mostly open software. To protect our pa
   QFDM Core & Orchestrator: Open Core. The core orchestration and QFDM Backend components are source-available under a proprietary Open Core license, granting free use for personal and small-scale deployments while requiring a commercial license for codec terminal manufacturers, large-scale deployments, enterprise use and potential competitors.
   Frontend & Drivers: Apache 2.0. We want these everywhere.
   Hardware Design: CERN Open Hardware License. Easily repairable and upgradeable.
-Contributing: We welcome anyone to contribute, but by contributing, you agree to our Contributor License Agreement (CLA) to keep the project commercially viable for its "BIC status" (Benefit and Collective Interest, in middle-ground between private company and NGO).
+Contributing: We welcome anyone to contribute, but by contributing, you agree to our Contributor License Agreement (CLA) to keep the project commercially viable for its "BIC status" (Benefit and Collective Interest, in middle-ground between private company and NGO).<br>
 
 💰 Monetization & Ethics:<br>
  We are guided by stoic and ethical principles. Our success is measured mainly by social and environmental impact, not just ROI.<br>
