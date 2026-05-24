@@ -5742,6 +5742,9 @@
         // Toast
         function showToast(msg) {
             var toast = document.getElementById('toast');
+            if (window.CoffeePieLang && typeof window.CoffeePieLang.get === 'function' && window.CoffeePieLang.get() === 'ar' && typeof window.CoffeePieLang.enforceLTRNumbers === 'function') {
+                msg = window.CoffeePieLang.enforceLTRNumbers(msg);
+            }
             toast.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toast._timeout);

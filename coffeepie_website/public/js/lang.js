@@ -105,6 +105,20 @@
         return t.replace(/[\n\t]+/g, ' ').replace(/\s+/g, ' ').trim();
     }
 
+    function enforceLTRNumbers(text) {
+        if (!text) return text;
+        // Match sequences of ASCII alphanumeric characters, standard symbols, and spaces
+        // but only wrap them if they contain at least one digit.
+        var asciiSeqRegex = /[a-zA-Z\d\$€£¥\+‐\-®™#%*@()\[\]\/\\:;',.‘’“”'_]+(?:\s+[a-zA-Z\d\$€£¥\+‐\-®™#%*@()\[\]\/\\:;',.‘’“”'_]+)*(?:\s*[a-zA-Z\d\$€£¥\+‐\-®™#%*@()\[\]\/\\:;',.‘’“”'_]+)?/gi;
+        
+        return text.replace(asciiSeqRegex, function (match) {
+            if (/\d/.test(match)) {
+                return '\u200E' + match + '\u200E';
+            }
+            return match;
+        });
+    }
+
     // ---- Translation engine ----
 
     function translateText(text, toLang) {
@@ -113,14 +127,26 @@
         if (!norm) return null;
 
         var entries = fastLookup.get(norm);
-        if (!entries) return null;
+        if (!entries) {
+            if (toLang === 'ar') {
+                return enforceLTRNumbers(text);
+            }
+            return null;
+        }
 
         for (var i = 0; i < entries.length; i++) {
             if (entries[i][toLang] && entries[i][toLang] !== entries[i].es) {
                 if (normalizeText(entries[i].es) === norm) {
-                    return entries[i][toLang];
+                    var res = entries[i][toLang];
+                    if (toLang === 'ar') {
+                        res = enforceLTRNumbers(res);
+                    }
+                    return res;
                 }
             }
+        }
+        if (toLang === 'ar') {
+            return enforceLTRNumbers(text);
         }
         return null;
     }
@@ -158,6 +184,9 @@
         if (!groupEntry[toLang] || groupEntry[toLang] === groupEntry.es) return false;
 
         var translatedText = groupEntry[toLang];
+        if (toLang === 'ar') {
+            translatedText = enforceLTRNumbers(translatedText);
+        }
         var translatedParts = splitGroupTranslation(translatedText, textParts.length, concatText);
 
         if (translatedParts && translatedParts.length === textParts.length) {
@@ -300,7 +329,27 @@
 
         var trimmed = workingText.trim();
         if (trimmed.length < 2) return;
-        if (/^[\d\s.,'%$€£¥+#*\-–—]+$/.test(trimmed)) return;
+        if (/^[\d\s.,'%$€£¥+#*\-–—]+$/.test(trimmed)) {
+            if (toLang === 'ar' && /\d/.test(trimmed)) {
+                var enforced = '\u200E' + workingText + '\u200E';
+                if (textNode.textContent !== enforced) {
+                    if (parentHasMultiple) {
+                        var wrapper = document.createElement('span');
+                        wrapper.setAttribute(ORIGINAL_ATTR, workingText);
+                        wrapper.textContent = enforced;
+                        wrapper.setAttribute(TRANSLATED_ATTR, toLang);
+                        parent.replaceChild(wrapper, textNode);
+                    } else {
+                        if (!parentOriginal) {
+                            parent.setAttribute(ORIGINAL_ATTR, workingText);
+                        }
+                        textNode.textContent = enforced;
+                        parent.setAttribute(TRANSLATED_ATTR, toLang);
+                    }
+                }
+            }
+            return;
+        }
 
         if (parentOriginal && textNode.textContent.trim().length === 0) return;
 
@@ -441,6 +490,37 @@
                 text-align: left !important;
                 direction: ltr !important;
             }
+            .lang-ar .slider-value,
+            .lang-ar .cart-item-price,
+            .lang-ar .cart-item-unit-price,
+            .lang-ar .avo-cart-qty-input,
+            .lang-ar .license-key-code,
+            .lang-ar .invoice-amount,
+            .lang-ar code,
+            .lang-ar [id*="total"],
+            .lang-ar [id*="price"],
+            .lang-ar [id*="amount"],
+            .lang-ar [id*="value"],
+            .lang-ar [id*="balance"],
+            .lang-ar [class*="price"],
+            .lang-ar [class*="value"],
+            .lang-ar [class*="qty"],
+            .lang-ar [class*="total"],
+            .lang-ar [class*="amount"],
+            .lang-ar [data-hook*="total"],
+            .lang-ar [data-hook*="subtotal"],
+            .lang-ar td[data-label*="Fecha"],
+            .lang-ar td[data-label*="Inicio"],
+            .lang-ar td[data-label*="Expiracion"],
+            .lang-ar td[data-label*="Monto"],
+            .lang-ar td[data-label*="Creditos"],
+            .lang-ar td[data-label*="Terminal"],
+            .lang-ar td[data-label*="Factura"],
+            .lang-ar td[data-label*="Budget"],
+            .lang-ar td[data-label*="Presupuesto"] {
+                direction: ltr !important;
+                unicode-bidi: isolate !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -532,7 +612,8 @@
         set: setLanguage,
         get: getLanguage,
         refresh: function () { applyLanguage(currentLang); },
-        supported: SUPPORTED
+        supported: SUPPORTED,
+        enforceLTRNumbers: enforceLTRNumbers
     };
 
     if (document.readyState === 'loading') {
