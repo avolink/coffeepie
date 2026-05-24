@@ -11,7 +11,7 @@ Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
+Company: Coffee Pie is a Benefit and Colletive Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
@@ -27,18 +27,19 @@ Coffee Pie® is an open technological ecosystem that provides a general-purpose 
   Visionary Targets: Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
   
   Development Stack:<br>
-    - Backend: Rust, Shell/Bash Scripting, C/C++ (deprecated by 2030 Rust becoming canon).<br>
+    - Backend: Rust, Shell/Bash Scripting, C/C++ (deprecated by 2030, Rust becoming canon).<br>
     - Frontend: Qt (QML), JavaScript, HTML, CSS.<br>
     - Prototyping & Automation: Python.<br>
 
  🚀 The Vision "The Airport of Computing":
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
+
 - The Datacenters are the Airlines operating their Aircrafts (Servers).<br>
 - Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system (QFDM), abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
 
 - The Codec Terminal is your remote controller: A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
 
-- The Slices are the tickets (the seats in the airplane)<br>
+- The Slices are the "tickets" (the seats in the airplane)<br>
  
  📐 The Atomic Unit - Coffee Pie® Slice:
 We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful machines according to your needs:<br>
@@ -55,12 +56,12 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived) |
 | IA | 3 TOPS | INT8 parallel processing capacity |
 
-Legit and recommended uses, but not limited to: AI training, AI inference, Big Data, server deployment, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, research, create, entertain, casual gaming, etc.<br>
+Legit and recommended uses, but not limited to: AI training, AI inference, Big Data, servers, apps and databases deployment, study, work, write, develop, program, compile, design, compose, transform, edit, export, render, calculate, organize, communicate, collaborate, undertake, sell, analyse, research, create, entertain, casual gaming, etc.<br>
 
 > Anti-Abuse Guardrail: But if an instance exceeds its power limit warnings an automatic AI Agent observation and recording will be triggered for human audit, if violating Law or community rules (e.g., unauthorized pentesting, cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional Law permits. We want to save the planet, not the bots!...<br>
 
  🏗 System Architecture:<br>
- 1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used (Proxmox Recommended).<br>
+ 1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used by the Datacenters (Proxmox Recommended).<br>
  2. The Codec Terminal (The Remote Controller):<br>
 ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
   OS: Debian Minimal.<br>
@@ -93,7 +94,7 @@ Contributing: We welcome anyone to contribute, but by contributing, you agree to
 ❌ The service is NOT meant nor allowed for military or warlike purposes.<br>
 ❌ Weapons and Explosives: Promotion of the sale of firearms, ammunition or explosive material.<br>
 ❌ Deceptive Practices: Scams, malware, phishing or fraudulent financial promises.<br>
-❌ Cryptocurrency Mining: Mining any kind of cryptocurrency is strictly prohibited, but cryptocurrency and cryptoassets related transactions are allowed only if the Law allows it (consult your local jurisdiction's regulations).<br>
+❌ Cryptocurrency Mining: Mining any kind of cryptocurrency is strictly prohibited (you better get an ASIC for that), but cryptocurrencies and cryptoassets related transactions are allowed only if the Law allows it, consult your local jurisdiction's regulations.<br>
 
  🎯 The Goals:<br>
 2030: Becoming an Open, Reliable, Global Standard and the Backbone of Computing.<br>
