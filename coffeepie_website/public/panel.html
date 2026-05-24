@@ -2925,6 +2925,8 @@
         .slider-group input[type="range"] {
             flex: 1;
             accent-color: var(--cp-accent);
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .slider-value {
@@ -2939,6 +2941,8 @@
             padding: 4px 8px;
             outline: none;
             transition: all 0.2s ease;
+            box-sizing: border-box;
+            max-width: 100%;
         }
         .slider-value:focus {
             border-color: var(--cp-accent);
@@ -3022,11 +3026,15 @@
                 flex-direction: column;
                 align-items: stretch;
                 gap: 8px;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .slider-value {
                 text-align: center;
-                min-width: 100%;
+                width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
             }
 
             .panel-sidebar {
@@ -4179,7 +4187,7 @@
                                                             <div class="form-group"><label
                                                                     class="form-label">Presupuesto Diario (COP)</label>
                                                                 <div class="slider-group"><input type="range"
-                                                                        id="campaignBudget" min="10000" max="100000000"
+                                                                        id="campaignBudget" min="10000" max="30000000"
                                                                         value="100000" step="10000"><input type="text" class="slider-value"
                                                                         id="budgetValue" value="100'000 COP"></div>
                                                             </div>
@@ -5548,7 +5556,7 @@
                                                             <div class="license-purchase-form" style="padding:16px 0;">
                                                                 <div class="form-group">
                                                                     <label class="form-label">Cantidad de Terminales</label>
-                                                                    <input type="number" id="licenseQuantity" class="form-input" min="1" max="999999999" value="1" oninput="updateLicenseTotal()" placeholder="Ej: 50">
+                                                                    <input type="number" id="licenseQuantity" class="form-input" min="1" max="100000000" value="1" oninput="updateLicenseTotal()" placeholder="Ej: 50">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="form-label">Periodo de Facturacion</label>
@@ -5757,14 +5765,14 @@
             // Input to Slider (live validation & sync)
             budgetValue.addEventListener('input', function () {
                 var val = parseVal(budgetValue.value);
-                var clamped = Math.max(10000, Math.min(100000000, val));
+                var clamped = Math.max(10000, Math.min(30000000, val));
                 budgetSlider.value = clamped;
             });
 
             // Input format on Blur / Change
             budgetValue.addEventListener('change', function () {
                 var val = parseVal(budgetValue.value);
-                var clamped = Math.max(10000, Math.min(100000000, val));
+                var clamped = Math.max(10000, Math.min(30000000, val));
                 budgetSlider.value = clamped;
                 budgetValue.value = formatVal(clamped);
             });
@@ -6278,10 +6286,13 @@
         function updateLicenseTotal() {
             var qty = parseInt(document.getElementById('licenseQuantity').value) || 1;
 
-            // Clamp to valid range (no negative, no zero)
+            // Clamp to valid range (no negative, no zero, max 100'000'000)
             if (qty < 1) {
                 qty = 1;
                 document.getElementById('licenseQuantity').value = 1;
+            } else if (qty > 100000000) {
+                qty = 100000000;
+                document.getElementById('licenseQuantity').value = 100000000;
             }
 
             var period = document.getElementById('licensePeriod').value;
@@ -6330,49 +6341,33 @@
         function purchaseLicense() {
             var qty = parseInt(document.getElementById('licenseQuantity').value) || 1;
             var period = document.getElementById('licensePeriod').value;
-            var periodLabel = period === 'annual' ? 'Anual' : 'Mensual';
-            var newKey = generateLicenseKey();
-            var today = new Date();
-            var todayStr = today.toISOString().split('T')[0];
-
-            var expDate = new Date(today);
-            if (period === 'annual') {
-                expDate.setFullYear(expDate.getFullYear() + 1);
-            } else {
-                expDate.setMonth(expDate.getMonth() + 1);
+            
+            // Calculate total price in COP and get the tier name
+            var pricePerUnit = 3000;
+            var tierName = "Estandar";
+            var tiers = [
+                { min: 1, max: 999, price: 3000, name: "Estandar" },
+                { min: 1000, max: 9999, price: 2700, name: "Crecimiento" },
+                { min: 10000, max: 99999, price: 2100, name: "Empresarial" },
+                { min: 100000, max: 999999, price: 1500, name: "Corporativo" },
+                { min: 1000000, max: 999999999, price: 900, name: "Global" }
+            ];
+            for (var i = 0; i < tiers.length; i++) {
+                if (qty >= tiers[i].min && qty <= tiers[i].max) {
+                    pricePerUnit = tiers[i].price;
+                    tierName = tiers[i].name;
+                    break;
+                }
             }
-            var expStr = expDate.toISOString().split('T')[0];
+            var months = (period === 'annual') ? 10 : 1;
+            var total = qty * pricePerUnit * months;
+            var lang = (window.CoffeePieLang && typeof window.CoffeePieLang.get === 'function') ? window.CoffeePieLang.get() : 'es';
 
-            var tbody = document.getElementById('licensesTableBody');
-            var tr = document.createElement('tr');
-            tr.innerHTML =
-                '<td data-label="Clave de Licencia">' +
-                    '<code class="license-key-code">' + newKey + '</code>' +
-                    '<button class="license-copy-btn" onclick="copyLicenseKey(\'' + newKey + '\', this)" title="Copiar licencia">' +
-                        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-                            '<rect x="9" y="9" width="13" height="13" rx="2" />' +
-                            '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />' +
-                        '</svg>' +
-                    '</button>' +
-                '</td>' +
-                '<td data-label="Terminales">' + qty.toLocaleString('de-DE').replace(/\./g, "'") + '</td>' +
-                '<td data-label="Tipo">' + periodLabel + '</td>' +
-                '<td data-label="Inicio">' + todayStr + '</td>' +
-                '<td data-label="Expiracion">' + expStr + '</td>' +
-                '<td data-label="Estado"><span class="license-status-badge active">Activa</span></td>' +
-                '<td data-label="Acciones">' +
-                    '<button class="license-revoke-btn" onclick="revokeLicense(\'' + newKey + '\', this)" title="Revocar licencia">' +
-                        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-                            '<polyline points="3 6 5 6 21 6" />' +
-                            '<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />' +
-                        '</svg>' +
-                    '</button>' +
-                '</td>';
-            tbody.prepend(tr);
-
-            copyLicenseKey(newKey, null);
-            updateLicenseCount();
-            showToast('Licencias generadas: ' + newKey + ' (' + qty.toLocaleString('de-DE').replace(/\./g, "'") + ' terminales, ' + periodLabel.toLowerCase() + ')');
+            window.location.href = '/pago-seguro.html?lang=' + encodeURIComponent(lang) +
+                                   '&type=' + encodeURIComponent(tierName) +
+                                   '&qty=' + qty +
+                                   '&total=' + total +
+                                   '&period=' + encodeURIComponent(period);
         }
 
         // Licencias: copy key to clipboard

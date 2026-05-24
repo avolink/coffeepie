@@ -137,12 +137,24 @@
             <div class="field"><span>Referencia</span><strong data-cp-no-translate>CP-{usuario}-{orden}</strong></div>
         </div>
 
-        <a href="/carrito" class="btn-back">Volver al carrito</a>
+        <a href="/carrito" class="btn-back" onclick="if (window.history.length > 1) { window.history.back(); return false; }">Volver</a>
     </div>
 
     <script>
         (function() {
             var CART_KEY = 'coffee_pie_cart';
+
+            var params = new URLSearchParams(window.location.search);
+            var pType = params.get('type');
+            var pQty = parseInt(params.get('qty')) || 0;
+            var pTotal = parseInt(params.get('total')) || 0;
+            var pPeriod = params.get('period') || 'monthly';
+            var pLang = params.get('lang');
+
+            // If lang query parameter is present, persist it immediately
+            if (pLang) {
+                localStorage.setItem('cp_lang', pLang);
+            }
 
             function parsePrice(priceStr) {
                 if (!priceStr) return 0;
@@ -167,7 +179,13 @@
             }
 
             function fmtCOP(value) {
-                return '$ ' + Math.round(value).toLocaleString('es-CO');
+                // Formatting using apostrophe ' as thousands separators
+                var formatted = Math.round(value).toLocaleString('de-DE').replace(/\./g, "'");
+                // Arabic requires Left-To-Right character wrapping for numbers
+                if (pLang === 'ar' || localStorage.getItem('cp_lang') === 'ar') {
+                    formatted = '\u200E' + formatted + '\u200E';
+                }
+                return formatted + ' COP';
             }
 
             function getCart() {
@@ -180,18 +198,55 @@
             }
 
             function renderCheckout() {
-                var cart = getCart();
                 var tbody = document.getElementById('cart-items');
                 var totalCell = document.getElementById('cart-total-amount');
                 var qrTotal = document.getElementById('qr-total');
 
+                if (pType && pQty > 0 && pTotal > 0) {
+                    // --- Licensing Checkout Mode ---
+                    
+                    // Customize QR section title to say "Total a Pagar"
+                    var qrTitle = document.querySelector('.qr-box h3');
+                    if (qrTitle) {
+                        qrTitle.innerHTML = '<span>Total a Pagar</span>';
+                    }
+
+                    // Format back button to link to /panel.html and set text to "Volver"
+                    var backBtn = document.querySelector('.btn-back');
+                    if (backBtn) {
+                        backBtn.href = '/panel.html';
+                        backBtn.innerHTML = '<span>Volver</span>'; 
+                    }
+
+                    // Render license item with nested spans matching translation keys
+                    var periodLabel = pPeriod === 'annual' ? 'Anual' : 'Mensual';
+                    var rows = '<tr>' +
+                        '<td class="cart-item-name"><span>Licencias QFDM</span> (<span>' + pType + '</span>) — <span>' + periodLabel + '</span></td>' +
+                        '<td>' + pQty.toLocaleString('de-DE').replace(/\./g, "'") + '</td>' +
+                        '<td>' + fmtCOP(pTotal) + '</td>' +
+                        '</tr>';
+
+                    tbody.innerHTML = rows;
+                    totalCell.textContent = fmtCOP(pTotal);
+                    qrTotal.textContent = fmtCOP(pTotal);
+
+                    // Update transfer reference dynamically to reference the purchase
+                    var refField = document.querySelector('.transfer-info .field:last-child strong');
+                    if (refField) {
+                        refField.textContent = 'CP-LIC-' + pType.toUpperCase().slice(0, 3) + '-' + pQty;
+                    }
+                    return;
+                }
+
+                // --- Standard Cart Checkout Mode ---
+                var cart = getCart();
                 if (!cart.length) {
                     document.getElementById('cart-summary').innerHTML =
                         '<div style="text-align:center; padding:40px 20px;">' +
-                        '<p style="font-size:1.1rem; color:#666;">Tu carrito está vacío.</p>' +
-                        '<a href="/carrito" class="btn-back">Volver al carrito</a>' +
+                        '<p style="font-size:1.1rem; color:#666;"><span>Tu carrito está vacío.</span></p>' +
+                        '<a href="/carrito" class="btn-back" onclick="if (window.history.length > 1) { window.history.back(); return false; }"><span>Volver</span></a>' +
                         '</div>';
-                    qrTotal.textContent = '$ 0';
+                    qrTotal.textContent = '0 COP';
                     return;
                 }
 
@@ -204,7 +259,7 @@
                     total += lineTotal;
                     rows += '<tr>' +
                         '<td class="cart-item-name">' + item.name + '</td>' +
-                        '<td>' + item.quantity + '</td>' +
+                        '<td>' + item.quantity.toLocaleString('de-DE').replace(/\./g, "'") + '</td>' +
                         '<td>' + fmtCOP(lineTotal) + '</td>' +
                         '</tr>';
                 });

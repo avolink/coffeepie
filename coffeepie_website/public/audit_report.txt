@@ -399,7 +399,7 @@ REPORT A: HTML text MISSING from translations.json (87)
 
 
 ==============================================================================
-REPORT B: translations.json entries NOT in HTML (287)
+REPORT B: translations.json entries NOT in HTML (288)
 ==============================================================================
   Key: '('
   ES:  '('
@@ -905,6 +905,10 @@ REPORT B: translations.json entries NOT in HTML (287)
   ES:  'Tarjeta eliminada'
   EN:  'Card removed'
 
+  Key: 'Volver al carrito'
+  ES:  'Volver al carrito'
+  EN:  'Return to cart'
+
   Key: 'panel_0330'
   ES:  'ads.tuagencia.com'
   EN:  'ads.youragency.com'
@@ -994,11 +998,11 @@ REPORT B: translations.json entries NOT in HTML (287)
 
   Key: '✓ Respaldo en la Nube'
   ES:  '✓ Respaldo en la Nube'
-  EN:  '♪ Back in the Cloud ♪'
+  EN:  '✓ Cloud Backup'
 
   Key: '✓ y Migración en Vivo'
   ES:  '✓ y Migración en Vivo'
-  EN:  'Live migration and migration'
+  EN:  '✓ and Live Migration'
 
   Key: '"creditCardsBrand": ['
   ES:  '"creditCardsBrand \': ['
