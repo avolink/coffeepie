@@ -436,6 +436,11 @@
             .lang-ar [style*="text-align:center"] {
                 text-align: center !important;
             }
+            .lang-ar [id$="_r_comp-lzg0bwm6"] p,
+            .lang-ar [id$="_r_comp-lzg0bwm6"] span {
+                text-align: left !important;
+                direction: ltr !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -519,13 +524,7 @@
         localStorage.setItem(STORAGE_KEY, detected);
 
         loadDictionary(function () {
-            restoreAllOriginals();
-            if (currentLang !== 'es') {
-                translateElement(document.body, currentLang);
-            }
-            fixBrandSpacing(document.body);
-            document.documentElement.lang = currentLang;
-            updateLanguageIndicator(currentLang);
+            applyLanguage(currentLang);
         });
     }
 
