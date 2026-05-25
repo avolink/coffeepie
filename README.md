@@ -65,6 +65,7 @@ Legit and recommended uses, but not limited to: AI training, AI inferencing, Big
  2. The Codec Terminal (The Remote Controller):<br>
 ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
   - OS: Debian Minimal.<br>
+  - Display Server: Wayland
   - Window Manager: Sway (Kiosk Mode).<br>
   - GUI: Coffee Pie Qt.<br>
   - Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
