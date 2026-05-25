@@ -17,6 +17,9 @@ License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
+🖥️ Legit and recommended uses:<br>
+AI training, AI inferencing, Big Data, deploying servers, apps and databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
+
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
  Main Contributors:<br>
@@ -24,13 +27,13 @@ Coffee Pie® is an open technological ecosystem that provides a general-purpose 
  - juandaniel777 (The Engineer and Software Backend Developer)<br>
  - Diego-M-PZ (The Electronics and Maintenace Manager).<br>
 
-  Visionary Targets: Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
-  
-  Development Stack:<br>
+  ⌨️ Development Stack:<br>
     - Backend: Rust, Shell/Bash Scripting, C/C++ (deprecated by 2030, Rust becoming canon).<br>
     - Frontend: Qt (QML), JavaScript, HTML, CSS.<br>
     - Prototyping & Automation: Python.<br>
 
+ 🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
+ 
  🚀 The Vision "The Airport of Computing":
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
 
@@ -55,8 +58,6 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 | GPU | 125 MB | VRAM for parallel processing (Vulkan, DirectX, SR-IOV) |
 | RES | 15 vMPX/s | Max virtual pixels per second streaming (perceived) |
 | IA | 3 TOPS | INT8 parallel processing capacity |
-
-Legit and recommended uses, but not limited to: AI training, AI inferencing, Big Data, deploying servers, apps and databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
 
 > Anti-Abuse Guardrail: If an instance exceeds its power limit then warnings, automatic AI Agent observation and recording will be triggered for human audit, if violating Law or community rules (e.g., unauthorized pentesting, cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional Law permits. We want to save the planet, not the bots!...<br>
 
