@@ -139,7 +139,7 @@ The following must remain **identical** across all 11 languages in any translati
 
 | Category | Examples |
 |---|---|
-| Email addresses | `accesibilidad.coffeepie@grupo3p1.co` |
+| Email addresses | `accesibilidad@coffeepie.co` |
 | Physical addresses | `Cr 46 #56-11, La Candelaria, Medellín, Antioquia.` |
 | Brand names with registered trademarks | `Coffee Pie®`, `Commanders™`, `Sentinels™`, `Rangers™` |
 | Company/project names | `QFDM`, `OpenUDS`, `Sunshine`, `Moonlight`, `Proxmox` |
