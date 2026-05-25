@@ -293,3 +293,62 @@ TWEAKS AND OVERRIDES
 - Dates Format: All dates must to be handled in YYYY-MM-DD international format, no other formats are allowed. If working with external databases these need to be parsed to match before any operation or calculation for better consistency and redeability.
 - Translations Policy: Email addresses, physical addresses, brand names with registered brands ® Trademarks ™ human names, company/project names (QFDM, OpenUDS, Sunshine, Moonlight, Proxmox), URLs, API endpoints, technical specs/units, proper nouns, and social media handles must remain IDENTICAL across all languages in translations.json. These are language-independent identifiers and should never be translated.
 - If an Agent creates a single use script (.py, .js, .rs, etc), it should be deleted after executed for not taking extra space in the repository, unless explicitly told by the user to keep it.
+
+
+SECURITY POSTURE & HARDENING (2026-05-25 Audit)
+
+
+Decision: TLS verification bypass limited to internal L2/L3 private networks.
+  Reason: The `NoVerifySsl` certificate verifier and `danger_accept_invalid_certs` are 
+  explicitly restricted to internal connections where the network layer already provides 
+  encryption (stretched VLAN). External-facing connections MUST use full TLS verification.
+  Documented in: `actor/crates/shared/src/tls/noverify.rs`, `tunnel-server/.../broker/mod.rs:90`
+
+Decision: Post-Quantum KEM handled by Rust (libcrux), Python pqcrypto is deprecated.
+  Reason: The Python `pqcrypto` package (`orchestrator/server/requirements.txt:24`) is 
+  unmaintained and unavailable on Python 3.14+. The Rust components already use 
+  `libcrux-ml-kem` (0.0.7-0.0.8) for ML-KEM-768 key exchange. The Python orchestrator's 
+  `kem.py` module must be migrated to call the Rust libcrux implementation via a sidecar 
+  subprocess or PyO3 FFI binding. Until then, `pqcrypto` is pinned in requirements and 
+  marked as known technical debt.
+  Revisit: When libcrux reaches >= 1.0 or a maintained Python PQ crypto library emerges.
+
+Decision: FastAPI Proxmox backend requires Firebase Bearer token authentication.
+  Reason: The proxmox_backend FastAPI endpoints were previously unauthenticated, allowing 
+  any network-accessible caller to manage VMs. All `/nodes/` endpoints now require a valid 
+  Firebase ID token passed as `Authorization: Bearer <token>` header. Token validation uses 
+  `firebase_admin.auth.verify_id_token()`.
+  Implemented in: `proxmox_backend/app/dependencies.py:verify_bearer_token()`
+
+Decision: Content-Security-Policy header enforced on all website pages.
+  Reason: Defense-in-depth against XSS and data injection. Allows scripts from self, 
+  gstatic.com (Firebase), parastorage.com/avostatic.com (Wix/Avo platform). Styles, 
+  images, fonts, and connect-src are appropriately scoped. frame-ancestors 'self' 
+  prevents clickjacking.
+  Configured in: `coffeepie_website/public/.htaccess`
+
+Decision: Python dependencies pinned to exact versions.
+  Reason: Unpinned dependencies create non-reproducible builds and supply-chain risk.
+  All requirements.txt files now use exact version pins (==).
+  Revisit: On each dependency update, audit for CVEs using `pip-audit` or `safety`.
+
+Decision: Django production security flags must be enabled before deployment.
+  The settings.py.sample file contains DEBUG=True, ALLOWED_HOSTS=['*'], and hardcoded 
+  SECRET_KEY/RSA_KEY. Before any production deployment:
+  1. Set DEBUG=False
+  2. Set ALLOWED_HOSTS to the actual domain list
+  3. Generate new SECRET_KEY and RSA_KEY via environment variables
+  4. Set SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SECURE=True, CSRF_COOKIE_SECURE=True
+  5. Set SECURE_SSL_REDIRECT=True, SECURE_HSTS_SECONDS=31536000
+  6. Set SECURE_BROWSER_XSS_FILTER=True, SECURE_CONTENT_TYPE_NOSNIFF=True
+
+Known Technical Debt (from audit):
+  - `SessionRecoveryBuffer` uses UnsafeCell with unsafe Send+Sync (tunnel-server, client)
+  - `addin.rs` transmutes between incompatible function pointer types (RDP FFI)
+  - `process.rs` allows arbitrary command execution from JS context (needs sandboxing)
+  - 70+ unwrap/expect calls in network-facing Rust paths (DoS risk on lock poisoning)
+  - pickle.loads at 30+ locations in orchestrator (DB compromise = RCE)
+  - `chpasswd` stdin injection via newlines in user parameter
+  - 6 CSRF-exempt endpoints in orchestrator
+  - Unpinned git dependency `cannatag/ldap3.git` in orchestrator requirements
+  - `pqcrypto` Python package is unmaintained (migration to Rust libcrux pending)

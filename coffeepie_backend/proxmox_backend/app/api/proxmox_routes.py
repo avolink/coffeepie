@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
-from app.dependencies import get_auth_headers
+from fastapi import APIRouter, Depends, HTTPException, Security
+from app.dependencies import get_proxmox_auth_headers, verify_bearer_token
 from app.services.proxmox_service import get_nodes, clone_vm
 from fastapi import Body
 from app.services.sunshine_service import send_pin
@@ -24,15 +24,15 @@ from app.models.sunshine_request import SunshineRequest  # Import SunshineReques
 router = APIRouter()
 
 @router.get("/nodes")
-def fetch_nodes(auth=Depends(get_auth_headers)):
+def fetch_nodes(auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     return get_nodes(auth["headers"], auth["cookies"])
 from app.services.proxmox_service import get_nodes, get_vms_on_node
 
 @router.get("/nodes/{node}/vms")
-def fetch_vms(node: str, auth=Depends(get_auth_headers)):
+def fetch_vms(node: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     return {"vms": get_vms_on_node(node, auth["headers"], auth["cookies"])}
 @router.post("/clone-by-name")
-def clone_by_name(request: CloneByNameRequest, auth=Depends(get_auth_headers)):
+def clone_by_name(request: CloneByNameRequest, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         # Validaciones
         validate_clone_request(
@@ -66,7 +66,7 @@ def clone_by_name(request: CloneByNameRequest, auth=Depends(get_auth_headers)):
     except Exception as e:
         return {"error": f"Failed to clone VM: {str(e)}"}
 @router.get("/nodes/{node}/vms/{vm_name}/ip")
-def get_vm_ip(node: str, vm_name: str, auth=Depends(get_auth_headers)):
+def get_vm_ip(node: str, vm_name: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
         ip_list = get_vm_ip_address(node, vmid, auth["headers"], auth["cookies"])
@@ -76,7 +76,7 @@ def get_vm_ip(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     
     
 @router.delete("/nodes/{node}/vms/{vm_name}")
-def delete_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
+def delete_vm_by_name(node: str, vm_name: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
         status = get_vm_status(node, vmid, auth["headers"], auth["cookies"])
@@ -93,7 +93,7 @@ def delete_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     except Exception as e:
         return {"error": f"Failed to delete VM: {str(e)}"}
 @router.post("/nodes/{node}/vms/{vm_name}/stop")
-def stop_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
+def stop_vm_by_name(node: str, vm_name: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
         status = get_vm_status(node, vmid, auth["headers"], auth["cookies"])
@@ -111,7 +111,7 @@ def stop_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
         return {"error": f"Failed to stop VM: {str(e)}"}
 
 @router.post("/nodes/{node}/vms/{vm_name}/start")
-def start_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
+def start_vm_by_name(node: str, vm_name: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
         status = get_vm_status(node, vmid, auth["headers"], auth["cookies"])
@@ -128,7 +128,7 @@ def start_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     except Exception as e:
         return {"error": f"Failed to start VM: {str(e)}"}
 @router.get("/nodes/{node}/vms/{vm_name}/vnc")
-def get_vnc_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
+def get_vnc_console(node: str, vm_name: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         # Get the VMID from the VM name
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
@@ -147,7 +147,7 @@ def get_vnc_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
         return {"error": str(e)}
 
 @router.get("/nodes/{node}/vms/{vm_name}/spice")
-def get_spice_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
+def get_spice_console(node: str, vm_name: str, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     try:
         # Get the VMID from the VM name
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
@@ -167,7 +167,7 @@ def get_spice_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     
 
 @router.post("/sunshine/send-pin")
-def sunshine_send_pin(request: SunshineRequest, auth=Depends(get_auth_headers)):
+def sunshine_send_pin(request: SunshineRequest, auth=Depends(get_proxmox_auth_headers), token=Security(verify_bearer_token)):
     """
     Endpoint to send a PIN to the Sunshine API.
 
