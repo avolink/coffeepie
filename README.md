@@ -64,11 +64,11 @@ Legit and recommended uses, but not limited to: AI training, AI inference, Big D
  1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used by the Datacenters (Proxmox Recommended).<br>
  2. The Codec Terminal (The Remote Controller):<br>
 ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
-  OS: Debian Minimal.<br>
-  Window Manager: Sway (Kiosk Mode).<br>
-  GUI: Coffee Pie Qt.<br>
-  Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
- 3. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT administrators.<br>
+  - OS: Debian Minimal.<br>
+  - Window Manager: Sway (Kiosk Mode).<br>
+  - GUI: Coffee Pie Qt.<br>
+  - Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
+ 3. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT admins (Ctrl + Alt + T).<br>
 
  ⚖️ Licensing & Contribution (The Social Contract):<br>
 Coffee Pie® is full open hardware and mostly open software. To protect our path to a 2035 IPO and ensure the ecosystem remains standardized, we use a tiered licensing model:
