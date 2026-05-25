@@ -46,7 +46,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
  
  📐 The Atomic Unit - Coffee Pie® Slice:
 We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful  
-and capable machines according to your needs:<br>
+and capable machines (vertical scaling), according to your needs:<br>
 
 | Resource | Capacity | Description |
 |---|---|---|
