@@ -45,7 +45,8 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 - The Slices are the "tickets" (the seats in the airplane)<br>
  
  📐 The Atomic Unit - Coffee Pie® Slice:
-We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful machines according to your needs:<br>
+We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful  
+and capable machines according to your needs:<br>
 
 | Resource | Capacity | Description |
 |---|---|---|
@@ -92,7 +93,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 ❌ Strictly Prohibited in the Ecosystem:<br>
 ❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails (.gov), duly processed through the Coffee Pie Legal Department: legal@coffeepie.co.<br>
 ❌ Illegal Content: Including, but not limited to, illicit drugs, counterfeit products and services that violate the law.<br>
-❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability.<br>
+❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability. All software and hardware, free, open or propietary, is welcome to the community, as long as aligning with the Circular Economy Principles.<br>
 ❌ Violence and Disturbing Content: Incitement to violence, terrorism, animal cruelty or graphic images of damage.<br>
 ❌ The service is NOT meant nor allowed for military or warlike purposes.<br>
 ❌ Weapons and Explosives: Promotion of the sale of firearms, ammunition or explosive material.<br>
