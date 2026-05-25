@@ -40,7 +40,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 - The Datacenters are the Airlines operating their Aircrafts (Servers).<br>
 - Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system (QFDM), abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
 
-- The Codec Terminal is your remote controller: A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
+- The Codec Terminal is your remote controller: A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
 
 - The Slices are the "tickets" (the seats in the airplane)<br>
  
