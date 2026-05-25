@@ -2340,17 +2340,17 @@
         "ar": "الخدمات البسيطة والميسورة التكلفة والميسورة"
     },
     "para gran beneficio de los usuarios y del medio ambiente, ya que este reduce el costo de infraestructura y extracción de recursos naturales, pasando de ser un problema exponencial O(n²) y sin límites claros (": {
-        "en": "for the great benefit of users and the environment, as it reduces the cost of infrastructure and extraction of natural resources, going from being an exponential problem O (n ²) and without clear limits (",
+        "en": "for the great benefit of users and the environment, as it reduces the cost of infrastructure and extraction of natural resources, going from being an exponential problem O(n²) and without clear limits (",
         "es": "para gran beneficio de los usuarios y del medio ambiente, ya que este reduce el costo de infraestructura y extracción de recursos naturales, pasando de ser un problema exponencial O(n²) y sin límites claros (",
-        "pt": "para grande benefício dos utilizadores e do ambiente, pois este reduz o custo de infra-estruturas e extracção de recursos naturais, passando de ser um problema exponencial O(n2) e sem limites claros (",
-        "fr": "pour le grand bénéfice des utilisateurs et de l'environnement, car il réduit le coût des infrastructures et de l'extraction des ressources naturelles, en partant d'un problème exponentiel O (n 2) et sans limites claires (",
-        "de": "für den großen Nutzen der Nutzer und der Umwelt, da es die Kosten für die Infrastruktur und die Gewinnung von natürlichen Ressourcen reduziert, von einem exponentiellen Problem O (n 2) und ohne klare Grenzen (",
-        "ru": "в интересах пользователей и окружающей среды, поскольку это снижает стоимость инфраструктуры и добычи природных ресурсов, превращаясь в экспоненциальную проблему O (n 2) и без четких пределов",
-        "hi": "उपयोगकर्ताओं और पर्यावरण के महान लाभ के लिए, क्योंकि यह प्राकृतिक संसाधनों के बुनियादी ढांचे और निष्कर्षण की लागत को कम करता है, एक एक्सोनेंशियल समस्या ओ (एन 2) और बिना स्पष्ट सीमा के () होने से गुजरता है।",
-        "ja": "ユーザーと環境の大きな利益のために、自然資源のインフラと抽出のコストを削減するので、指数関数的な問題であることから行く O (n 2) そして明確な限界なしで()",
+        "pt": "para grande benefício dos utilizadores e do ambiente, pois este reduz o custo de infra-estruturas e extracção de recursos naturais, passando de ser um problema exponencial O(n²) e sem limites claros (",
+        "fr": "pour le grand bénéfice des utilisateurs et de l'environnement, car il réduit le coût des infrastructures et de l'extraction des ressources naturelles, en partant d'un problème exponentiel O(n²) et sans limites claires (",
+        "de": "für den großen Nutzen der Nutzer und der Umwelt, da es die Kosten für die Infrastruktur und die Gewinnung von natürlichen Ressourcen reduziert, von einem exponentiellen Problem O(n²) und ohne klare Grenzen (",
+        "ru": "в интересах пользователей и окружающей среды, поскольку это снижает стоимость инфраструктуры и добычи природных ресурсов, превращаясь в экспоненциальную проблему O(n²) и без четких пределов",
+        "hi": "उपयोगकर्ताओं और पर्यावरण के महान लाभ के लिए, क्योंकि यह प्राकृतिक संसाधनों के बुनियादी ढांचे और निष्कर्षण की लागत को कम करता है, एक एक्सोनेंशियल समस्या ओ O(n²) और बिना स्पष्ट सीमा के () होने से गुजरता है।",
+        "ja": "ユーザーと環境の大きな利益のために、自然資源のインフラと抽出のコストを削減するので、指数関数的な問題であることから行く O(n²) そして明確な限界なしで()",
         "zh": "为了用户和环境的巨大利益,因为它降低了基础设施和自然资源开采的成本,从指数问题O(n2)开始,没有明确的限制(",
-        "ko": "사용자와 환경의 큰 이점을 위해, 그것은 자연 자원의 인프라 및 추출의 비용을 감소로, exponential 문제 O (n 2) 및 명확한 제한없이 (n 2)로 이동",
-        "ar": "من أجل المنفعة الكبيرة للمستعملين والبيئة، حيث أنه يقلل من تكلفة الهياكل الأساسية واستخراج الموارد الطبيعية، ويتحول إلى مشكلة كبيرة هي \" سين \" (n 2) ودون حدود واضحة ()"
+        "ko": "사용자와 환경의 큰 이점을 위해, 그것은 자연 자원의 인프라 및 추출의 비용을 감소로, exponential 문제 O(n²) 및 명확한 제한없이 (n 2)로 이동",
+        "ar": "من أجل المنفعة الكبيرة للمستعملين والبيئة، حيث أنه يقلل من تكلفة الهياكل الأساسية واستخراج الموارد الطبيعية، ويتحول إلى مشكلة كبيرة هي \" سين \" O(n²) ودون حدود واضحة ()"
     },
     "extracción de recursos infinita y desechos infinitos": {
         "en": "extracting infinite resources and infinite waste",
@@ -2447,14 +2447,14 @@
         "en": "Classic O distribution (n ²)",
         "es": "Distribución Clásica O(n²)",
         "pt": "Distribuição Clássica O(n2)",
-        "fr": "Distribution classique O (n 2)",
+        "fr": "Distribution classique O(n²)",
         "de": "Classic O Verteilung (n 2)",
-        "ru": "Классическое распределение O (n 2)",
+        "ru": "Классическое распределение O(n²)",
         "hi": "क्लासिक ओ वितरण (n 2)",
         "ja": "古典的なOの配分(n 2)",
         "zh": "经典 O 分布(n2)",
         "ko": "클래식 O 배포 (n 2)",
-        "ar": "التوزيع الكلاسيكي O (n 2)"
+        "ar": "التوزيع الكلاسيكي O(n²)"
     },
     "Costo de Infraestructura y": {
         "en": "Cost of infrastructure and",
