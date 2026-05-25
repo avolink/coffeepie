@@ -28,8 +28,8 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
  - Diego-M-PZ (The Electronics and Maintenace Manager).<br>
 
   ⌨️ Development Stack:<br>
-    - Backend: Rust, Shell/Bash Scripting, C/C++ (deprecated by 2030, Rust becoming canon).<br>
-    - Frontend: Qt (QML), JavaScript, HTML, CSS.<br>
+    - Backend: Rust, Shell/Bash Scripting (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel).<br>
+    - Frontend: Qt (QML), JavaScript, HTML, CSS (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
 
  🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
