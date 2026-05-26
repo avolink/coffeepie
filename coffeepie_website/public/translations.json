@@ -21643,5 +21643,83 @@
         "zh": "待处理",
         "ko": "대기 중",
         "ar": "قيد الانتظار"
+    },
+    "24 a 72 horas": {
+        "en": "24 to 72 hours",
+        "es": "24 a 72 horas",
+        "pt": "24 a 72 horas",
+        "fr": "24 à 72 heures",
+        "de": "24 bis 72 Stunden",
+        "ru": "от 24 до 72 часов",
+        "hi": "24 से 72 घंटे",
+        "ja": "24〜72時間",
+        "zh": "24至72小时",
+        "ko": "24~72시간",
+        "ar": "24 إلى 72 ساعة"
+    },
+    "Fecha": {
+        "en": "Date",
+        "es": "Fecha",
+        "pt": "Data",
+        "fr": "Date",
+        "de": "Datum",
+        "ru": "Дата",
+        "hi": "तारीख",
+        "ja": "日付",
+        "zh": "日期",
+        "ko": "날짜",
+        "ar": "التاريخ"
+    },
+    "Mantenimiento": {
+        "en": "Maintenance",
+        "es": "Mantenimiento",
+        "pt": "Manutenção",
+        "fr": "Maintenance",
+        "de": "Wartung",
+        "ru": "Обслуживание",
+        "hi": "रखरखाव",
+        "ja": "メンテナンス",
+        "zh": "维护",
+        "ko": "유지보수",
+        "ar": "صيانة"
+    },
+    "Detalles adicionales del mantenimiento...": {
+        "en": "Additional maintenance details...",
+        "es": "Detalles adicionales del mantenimiento...",
+        "pt": "Detalhes adicionais da manutenção...",
+        "fr": "Détails supplémentaires de la maintenance...",
+        "de": "Zusätzliche Wartungsdetails...",
+        "ru": "Дополнительные сведения об обслуживании...",
+        "hi": "अतिरिक्त रखरखाव विवरण...",
+        "ja": "追加のメンテナンス詳細...",
+        "zh": "额外的维护详情...",
+        "ko": "추가 유지보수 세부사항...",
+        "ar": "تفاصيل الصيانة الإضافية..."
+    },
+    "Seleccionar nodo...": {
+        "en": "Select a node...",
+        "es": "Seleccionar nodo...",
+        "pt": "Selecionar nó...",
+        "fr": "Sélectionner un nœud...",
+        "de": "Knoten auswählen...",
+        "ru": "Выберите узел...",
+        "hi": "नोड चुनें...",
+        "ja": "ノードを選択...",
+        "zh": "选择节点...",
+        "ko": "노드 선택...",
+        "ar": "اختر عقدة..."
+    },
+    "Seleccionar motivo...": {
+        "en": "Select a reason...",
+        "es": "Seleccionar motivo...",
+        "pt": "Selecionar motivo...",
+        "fr": "Sélectionner un motif...",
+        "de": "Grund auswählen...",
+        "ru": "Выберите причину...",
+        "hi": "कारण चुनें...",
+        "ja": "理由を選択...",
+        "zh": "选择原因...",
+        "ko": "사유 선택...",
+        "ar": "اختر سببًا..."
     }
 }

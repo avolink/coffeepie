@@ -6423,7 +6423,7 @@
                                                             <div class="form-row">
                                                                 <div class="form-cell">
                                                                     <label class="form-label">Cantidad de Tokens a Retirar</label>
-                                                                    <input class="form-input" type="number" id="withdrawAmount" min="1" max="85000" value="1000" placeholder="PIE" oninput="updateWithdrawalPreview()">
+                                                                    <input class="form-input" type="number" id="withdrawAmount" min="1" value="1000" placeholder="PIE" oninput="updateWithdrawalPreview()" data-dynamic-max="true">
                                                                 </div>
                                                                 <div class="form-cell">
                                                                     <label class="form-label">Recibiras Aproximadamente</label>
@@ -6432,7 +6432,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Concepto</label>
-                                                                <input class="form-input" type="text" id="withdrawConcept" placeholder="Ej: Pago de electricidad mayo 2026">
+                                                                <input class="form-input" type="text" id="withdrawConcept" placeholder="e.g. Electricity bill May 2026">
                                                             </div>
                                                             <button class="btn btn-primary" onclick="requestWithdrawal()" style="width:100%;justify-content:center;">
                                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6516,11 +6516,11 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Nombre del Nodo</label>
-                                                                <input class="form-input" type="text" id="nodeName" placeholder="Ej: DC-Bogota-Rack3-Nodo01">
+                                                                <input class="form-input" type="text" id="nodeName" placeholder="e.g. DC-Bogota-Rack1-Node01">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">IP Publica</label>
-                                                                <input class="form-input" type="text" id="nodePublicIP" placeholder="Ej: 190.145.32.100">
+                                                                <input class="form-input" type="text" id="nodePublicIP" placeholder="e.g. 190.145.32.100">
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-cell">
@@ -6535,21 +6535,21 @@
                                                             <div class="form-row">
                                                                 <div class="form-cell">
                                                                     <label class="form-label">vCores Totales</label>
-                                                                    <input class="form-input" type="number" id="nodeCores" min="1" value="32" placeholder="Ej: 32">
+                                                                    <input class="form-input" type="number" id="nodeCores" min="1" value="32" placeholder="e.g. 32">
                                                                 </div>
                                                                 <div class="form-cell">
                                                                     <label class="form-label">RAM Total (GB)</label>
-                                                                    <input class="form-input" type="number" id="nodeRAM" min="1" value="128" placeholder="Ej: 128">
+                                                                    <input class="form-input" type="number" id="nodeRAM" min="1" value="128" placeholder="e.g. 128">
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-cell">
                                                                     <label class="form-label">SSD Total (GB)</label>
-                                                                    <input class="form-input" type="number" id="nodeSSD" min="1" value="2000" placeholder="Ej: 2000">
+                                                                    <input class="form-input" type="number" id="nodeSSD" min="1" value="2000" placeholder="e.g. 2000">
                                                                 </div>
                                                                 <div class="form-cell">
                                                                     <label class="form-label">GPU vRAM (MB)</label>
-                                                                    <input class="form-input" type="number" id="nodeGPUVRAM" min="0" value="16000" placeholder="Ej: 16000">
+                                                                    <input class="form-input" type="number" id="nodeGPUVRAM" min="0" value="16000" placeholder="e.g. 16000">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -6564,7 +6564,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Ubicacion del Datacenter</label>
-                                                                <input class="form-input" type="text" id="nodeLocation" placeholder="Ej: Bogota D.C., Colombia">
+                                                                <input class="form-input" type="text" id="nodeLocation" placeholder="e.g. Bogota D.C., Colombia">
                                                             </div>
                                                             <button class="btn btn-primary" onclick="registerNode()" style="width:100%;justify-content:center;">
                                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6609,7 +6609,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Notas</label>
-                                                                <textarea class="form-input" id="maintenanceNotes" rows="3" placeholder="Detalles adicionales del mantenimiento..."></textarea>
+                                                                <textarea class="form-input" id="maintenanceNotes" rows="3" placeholder="Additional maintenance details..."></textarea>
                                                             </div>
                                                             <button class="btn btn-primary" onclick="scheduleMaintenance()" style="width:100%;justify-content:center;">
                                                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -6766,11 +6766,11 @@
                                                             <input type="hidden" id="editNodeId" value="">
                                                             <div class="form-group">
                                                                 <label class="form-label">Nombre del Nodo</label>
-                                                                <input class="form-input" type="text" id="modalNodeName" placeholder="Ej: DC-Bogota-Rack3-Nodo01">
+                                                                <input class="form-input" type="text" id="modalNodeName" placeholder="e.g. DC-Bogota-Rack1-Node01">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">IP Publica</label>
-                                                                <input class="form-input" type="text" id="modalNodeIP" placeholder="Ej: 190.145.32.100">
+                                                                <input class="form-input" type="text" id="modalNodeIP" placeholder="e.g. 190.145.32.100">
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="form-cell"><label class="form-label">vCores</label><input class="form-input" type="number" id="modalNodeCores" value="32"></div>
@@ -6792,7 +6792,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Ubicacion</label>
-                                                                <input class="form-input" type="text" id="modalNodeLocation" placeholder="Ej: Bogota D.C., Colombia">
+                                                                <input class="form-input" type="text" id="modalNodeLocation" placeholder="e.g. Bogota D.C., Colombia">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -7858,10 +7858,21 @@
         function syncWithdrawMax() {
             var max = getPIEBalance();
             var input = document.getElementById('withdrawAmount');
-            if (input) input.max = max;
+            if (!input) return;
+            input.max = max;
+            clampWithdrawInput();
+        }
+
+        function clampWithdrawInput() {
+            var input = document.getElementById('withdrawAmount');
+            if (!input) return;
+            var max = parseInt(input.max) || 0;
+            var val = parseInt(input.value) || 0;
+            if (val > max) input.value = max;
         }
 
         function updateWithdrawalPreview() {
+            clampWithdrawInput();
             var amount = parseInt(document.getElementById('withdrawAmount').value) || 0;
             var fiat = (amount * 500).toLocaleString('en-US').replace(/,/g, "'");
             document.getElementById('withdrawFiatPreview').value = '\u2248 ' + fiat + ' COP';
