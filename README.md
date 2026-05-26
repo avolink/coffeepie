@@ -17,7 +17,7 @@ License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
-🖥️ Legit and recommended uses:<br>
+🖥️ Legit and Recommended Uses:<br>
 AI training, AI inferencing, Big Data, deploying servers, apps and databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
 
 🛠 Project Identity & Stack:<br>
@@ -105,7 +105,6 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
  2035: Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
  2040: 1'000'000'000 active users in the QFDM Network.<br>
  2050: Guaranteed Global Access to a Codec Terminal.<br>
- <br>
  
  💎 PIE Tokens: Contributors earn PIE tokens (TRC20) proportional to verified impact. Tokens carry economic rights (dividends, valuation) and governance votes (when earned through verified labor). Token holders may irreversibly convert their tokens into Coffee Pie Credits at any time via a burning mechanism — retiring both economic and voting rights in exchange for immediately spendable service credits, analogous to the company repurchasing shares with future compute capacity instead of cash. This provides immediate utility to contributors while accruing proportional value to remaining token holders.<br>
  <br>
