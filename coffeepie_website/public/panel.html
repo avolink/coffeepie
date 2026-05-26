@@ -2366,21 +2366,21 @@
                 white-space: nowrap;
             }
 
-            #panel-pie-balance-label-row {
+            #panel-coffee-balance-label-row {
                 font: var(--font_8);
                 color: #fff;
                 font-weight: bold;
                 white-space: nowrap;
             }
 
-            #panel-pie-balance-value-row {
+            #panel-coffee-balance-value-row {
                 font: var(--font_6);
                 color: var(--cp-accent);
                 font-weight: bold;
                 white-space: nowrap;
             }
 
-            #panel-pie-balance-currency-row {
+            #panel-coffee-balance-currency-row {
                 font: var(--font_8);
                 color: var(--cp-text-muted);
                 white-space: nowrap;
@@ -2431,13 +2431,13 @@
                 font-size: 12px !important;
             }
 
-            #panel-pie-balance-value-row {
+            #panel-coffee-balance-value-row {
                 font-size: 15px !important;
                 color: var(--cp-accent);
                 font-weight: bold;
             }
 
-            #panel-pie-balance-currency-row {
+            #panel-coffee-balance-currency-row {
                 font-size: 12px !important;
             }
 
@@ -4337,9 +4337,9 @@
                                                     </div>
                                                     <span style="color:#444;font-weight:200;white-space:nowrap;">|</span>
                                                     <div style="display:flex;align-items:center;gap:6px;">
-                                                        <span id="pie-balance-label" style="font:var(--font_8);color:#fff;font-weight:bold;white-space:nowrap;">PIE:</span>
-                                                        <span id="pie-balance-value" style="font:var(--font_6);color:var(--cp-accent);font-weight:bold;white-space:nowrap;">250'000</span>
-                                                        <span id="pie-balance-currency" style="font:13px;color:var(--cp-text-muted);white-space:nowrap;">PIE</span>
+                                                        <span id="coffee-balance-label" style="font:var(--font_8);color:#fff;font-weight:bold;white-space:nowrap;">TRC20:</span>
+                                                        <span id="coffee-balance-value" style="font:var(--font_6);color:var(--cp-accent);font-weight:bold;white-space:nowrap;">250'000</span>
+                                                        <span id="coffee-balance-currency" style="font:13px;color:var(--cp-text-muted);white-space:nowrap;">COFP</span>
                                                     </div>
                                                 </div>
                                                 <select id="panel-lang-select" data-cp-no-translate data-cp-lang-select onchange="if(window.CoffeePieLang)CoffeePieLang.set(this.value)" style="position:absolute;right:100px;top:50%;transform:translateY(-50%);z-index:10;padding:6px 10px;background:var(--cp-dark-card);border:1px solid var(--cp-border);border-radius:6px;color:var(--cp-text);font:var(--font_8);font-size:12px;cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23999%22 stroke-width=%222%22%3E%3Cpath d=%22M6 9l6 6 6-6%22%3E%3C/path%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 6px center;">
@@ -4380,9 +4380,9 @@
                                                 </div>
                                                 <span style="color:#444;font-weight:200;">|</span>
                                                 <div style="display:flex;align-items:center;gap:8px;">
-                                                    <span id="panel-pie-balance-label-row">PIE:</span>
-                                                    <span id="panel-pie-balance-value-row">250'000</span>
-                                                    <span id="panel-pie-balance-currency-row">PIE</span>
+                                                    <span id="panel-coffee-balance-label-row">TRC20:</span>
+                                                    <span id="panel-coffee-balance-value-row">250'000</span>
+                                                    <span id="panel-coffee-balance-currency-row">COFP</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -6305,7 +6305,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="stat-value" id="provTokensEarned">100'000</div>
-                                                            <div class="stat-change up">PIE &asymp; 50'000'000 COP</div>
+                                                            <div class="stat-change up">COFP &asymp; 50'000'000 COP</div>
                                                         </div>
                                                         <div class="stat-card">
                                                             <div class="stat-card-header">
@@ -6414,7 +6414,7 @@
                                                             </div>
                                                             <div style="padding:12px 16px;margin-bottom:16px;background:rgba(33,150,243,0.08);border:1px solid rgba(33,150,243,0.2);border-radius:8px;font:var(--font_8);font-size:13px;color:var(--cp-text-muted);line-height:1.5;">
                                                                 <strong style="color:var(--cp-info);">Quema de Tokens por Dinero Fiat</strong><br>
-                                                                Al solicitar un retiro, tus tokens PIE se queman (burning) y recibes el equivalente en tu moneda local via transferencia bancaria. Tiempo promedio: <strong style="color:var(--cp-text);">24 a 72 horas</strong>.
+                                                                Al solicitar un retiro, tus tokens COFP se queman (burning) y recibes el equivalente en tu moneda local via transferencia bancaria. Tiempo promedio: <strong style="color:var(--cp-text);">24 a 72 horas</strong>.
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Cuenta Bancaria Registrada</label>
@@ -6423,7 +6423,7 @@
                                                             <div class="form-row">
                                                                 <div class="form-cell">
                                                                     <label class="form-label">Cantidad de Tokens a Retirar</label>
-                                                                    <input class="form-input" type="number" id="withdrawAmount" min="1" value="1000" placeholder="PIE" oninput="updateWithdrawalPreview()" data-dynamic-max="true">
+                                                                    <input class="form-input" type="number" id="withdrawAmount" min="1" value="1000" placeholder="COFP" oninput="updateWithdrawalPreview()" data-dynamic-max="true">
                                                                 </div>
                                                                 <div class="form-cell">
                                                                     <label class="form-label">Recibiras Aproximadamente</label>
@@ -6466,7 +6466,7 @@
                                                                         <tr>
                                                                             <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00048</code></td>
                                                                             <td data-label="Fecha">2026-05-20</td>
-                                                                            <td data-label="Tokens Quemados" class="invoice-amount">50'000 PIE</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">50'000 COFP</td>
                                                                             <td data-label="Monto Recibido">25'000'000 COP</td>
                                                                             <td data-label="Concepto">Pago de electricidad Q2</td>
                                                                             <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
@@ -6474,7 +6474,7 @@
                                                                         <tr>
                                                                             <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00037</code></td>
                                                                             <td data-label="Fecha">2026-04-15</td>
-                                                                            <td data-label="Tokens Quemados" class="invoice-amount">30'000 PIE</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">30'000 COFP</td>
                                                                             <td data-label="Monto Recibido">15'000'000 COP</td>
                                                                             <td data-label="Concepto">Mantenimiento servidores</td>
                                                                             <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
@@ -6482,7 +6482,7 @@
                                                                         <tr>
                                                                             <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00025</code></td>
                                                                             <td data-label="Fecha">2026-03-01</td>
-                                                                            <td data-label="Tokens Quemados" class="invoice-amount">70'000 PIE</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">70'000 COFP</td>
                                                                             <td data-label="Monto Recibido">35'000'000 COP</td>
                                                                             <td data-label="Concepto">Compra de GPUs</td>
                                                                             <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
@@ -6490,7 +6490,7 @@
                                                                         <tr>
                                                                             <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00018</code></td>
                                                                             <td data-label="Fecha">2026-02-10</td>
-                                                                            <td data-label="Tokens Quemados" class="invoice-amount">60'000 PIE</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">60'000 COFP</td>
                                                                             <td data-label="Monto Recibido">30'000'000 COP</td>
                                                                             <td data-label="Concepto">Nomina Q1</td>
                                                                             <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
@@ -6498,7 +6498,7 @@
                                                                         <tr>
                                                                             <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00009</code></td>
                                                                             <td data-label="Fecha">2026-01-05</td>
-                                                                            <td data-label="Tokens Quemados" class="invoice-amount">40'000 PIE</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">40'000 COFP</td>
                                                                             <td data-label="Monto Recibido">20'000'000 COP</td>
                                                                             <td data-label="Concepto">Ampliación de almacenamiento</td>
                                                                             <td data-label="Estado"><span class="invoice-status pending">Pendiente</span></td>
@@ -6926,19 +6926,19 @@
             if (rowEl) rowEl.textContent = formatted;
         }
 
-        function setPIEBalanceLabel(text) {
-            var headerEl = document.getElementById('pie-balance-label');
-            var rowEl = document.getElementById('panel-pie-balance-label-row');
+        function setCOFFEEBalanceLabel(text) {
+            var headerEl = document.getElementById('coffee-balance-label');
+            var rowEl = document.getElementById('panel-coffee-balance-label-row');
             if (headerEl) headerEl.textContent = text;
             if (rowEl) rowEl.textContent = text;
         }
 
-        function updatePIEBalance(amount) {
+        function updateCOFFEEBalance(amount) {
             var parsed = typeof amount === 'string' ? parseInt(amount.replace(/[^0-9-]/g, ''), 10) : amount;
             if (isNaN(parsed)) return;
             var formatted = Math.abs(parsed).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-            var headerEl = document.getElementById('pie-balance-value');
-            var rowEl = document.getElementById('panel-pie-balance-value-row');
+            var headerEl = document.getElementById('coffee-balance-value');
+            var rowEl = document.getElementById('panel-coffee-balance-value-row');
             if (headerEl) headerEl.textContent = formatted;
             if (rowEl) rowEl.textContent = formatted;
         }
@@ -7275,7 +7275,7 @@
 
                 case 'pdf':
                 default:
-                    var textContent = 'FACTURACION COFFEE PIE\nExportado: ' + timestamp + '\n\n';
+                    var textContent = 'FACTURACION Coffee Pie\nExportado: ' + timestamp + '\n\n';
                     invoices.forEach(function (inv) {
                         textContent += inv.id + ' | ' + inv.date + ' | ' + inv.concept + ' | ' + inv.amountCop + ' | ' + inv.credits + ' | ' + inv.status + '\n';
                     });
@@ -7849,14 +7849,14 @@
 
         // ─── Withdrawal ──────────────────────────────────────────────────────
 
-        function getPIEBalance() {
-            var el = document.getElementById('pie-balance-value');
+        function getCOFFEEBalance() {
+            var el = document.getElementById('coffee-balance-value');
             if (!el) return 0;
             return parseInt((el.textContent || '0').replace(/[^0-9]/g, '')) || 0;
         }
 
         function syncWithdrawMax() {
-            var max = getPIEBalance();
+            var max = getCOFFEEBalance();
             var input = document.getElementById('withdrawAmount');
             if (!input) return;
             input.max = max;
@@ -7896,15 +7896,15 @@
             row.innerHTML =
                 '<td data-label="ID Retiro"><code style="font-size:11px;">' + id + '</code></td>' +
                 '<td data-label="Fecha">' + dateStr + '</td>' +
-                '<td data-label="Tokens Quemados" class="invoice-amount">' + amount.toLocaleString('en-US').replace(/,/g, "'") + ' PIE</td>' +
+                '<td data-label="Tokens Quemados" class="invoice-amount">' + amount.toLocaleString('en-US').replace(/,/g, "'") + ' COFP</td>' +
                 '<td data-label="Monto Recibido">' + fiat + ' COP</td>' +
                 '<td data-label="Concepto">' + concept + '</td>' +
                 '<td data-label="Estado"><span class="invoice-status pending">Pendiente</span></td>';
 
             document.getElementById('withdrawalsTableBody').prepend(row);
 
-            var newBalance = getPIEBalance() - amount;
-            updatePIEBalance(newBalance);
+            var newBalance = getCOFFEEBalance() - amount;
+            updateCOFFEEBalance(newBalance);
             syncWithdrawMax();
 
             var count = document.querySelectorAll('#withdrawalsTableBody tr').length;
