@@ -17,7 +17,7 @@ License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
-🖥️ Legit and recommended uses:<br>
+🖥️ Legit and Recommended Uses:<br>
 AI training, AI inferencing, Big Data, deploying servers, apps and databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
 
 🛠 Project Identity & Stack:<br>
