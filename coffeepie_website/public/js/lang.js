@@ -511,7 +511,7 @@
             .lang-ar [data-hook*="subtotal"],
             .lang-ar td[data-label*="Fecha"],
             .lang-ar td[data-label*="Inicio"],
-            .lang-ar td[data-label*="Expiracion"],
+            .lang-ar td[data-label*="Expiracion"], .lang-ar td[data-label*="Expiración"],
             .lang-ar td[data-label*="Monto"],
             .lang-ar td[data-label*="Creditos"],
             .lang-ar td[data-label*="Terminal"],

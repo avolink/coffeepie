@@ -301,7 +301,7 @@
     "Comprendemos que muchos de nuestros usuarios tienen una visión reducida, por lo que uno de nuestros compromisos con la comunidad es el desarrollo o adquisición de teclas con relieve tipo Braille para su comodidad, las cuales podrán ser adquiridas a través de nuestra tienda virtual y/o en tiendas de terceros que tengan compatibilidad.": {
         "en": "We understand that many of our users have a reduced vision, so one of our commitments to the community is the development or acquisition of Braille-type highlighted keys for your comfort, which can be acquired through our virtual store and / or in third party shops that have compatibility.",
         "es": "Comprendemos que muchos de nuestros usuarios tienen una visión reducida, por lo que uno de nuestros compromisos con la comunidad es el desarrollo o adquisición de teclas con relieve tipo Braille para su comodidad, las cuales podrán ser adquiridas a través de nuestra tienda virtual y/o en tiendas de terceros que tengan compatibilidad.",
-        "pt": "Compreendemos que muitos de nossos usuários têm uma visão reduzida, pelo que um de nossos compromissos com a comunidade é o desenvolvimento ou aquisição de teclas com relevo tipo Braille para seu conforto, as quais poderão ser adquiridas através de nossa loja virtual e/ou em lojas de terceiros que tenham compatibilidade.",
+        "pt": "Compreendemos que muitos de nossos usuários têm uma visão reduzida, pelo que um de nossos compromissos com a comunidade é o desenvolvimento ou aquísição de teclas com relevo tipo Braille para seu conforto, as quais poderão ser adquiridas através de nossa loja virtual e/ou em lojas de terceiros que tenham compatibilidade.",
         "fr": "Nous comprenons que beaucoup de nos utilisateurs ont une vision réduite, de sorte que l'un de nos engagements envers la communauté est le développement ou l'acquisition de clés surlignées de type braille pour votre confort, qui peut être acquis par notre magasin virtuel et / ou dans des magasins tiers qui ont la compatibilité.",
         "de": "Wir verstehen, dass viele unserer Nutzer eine reduzierte Vision haben, so dass eine unserer Verpflichtungen gegenüber der Community die Entwicklung oder Akquisition von Braille-Typ hervorgehoben Schlüssel für Ihren Komfort ist, die durch unseren virtuellen Speicher und / oder in Drittanbieter-Shops erworben werden kann, die Kompatibilität haben.",
         "ru": "Мы понимаем, что у многих наших пользователей снижено зрение, поэтому одним из наших обязательств перед сообществом является разработка или приобретение выделенных клавиш типа Брайля для вашего комфорта, которые можно приобрести через наш виртуальный магазин и / или в сторонних магазинах, которые имеют совместимость.",
@@ -1611,18 +1611,18 @@
         "ko": "Q: 기본 맨끝과 직업적인 맨끝 사이 다름은 무엇입니까?",
         "ar": "س: ما هو الفرق بين المحطة الأساسية والمحطة الاحترافية (Pro)؟"
     },
-    "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de almientación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.": {
-        "en": "A: The Basic terminal supports a single full HD display device (1080p), ethernet RJ45 connection with PoE (does not require current adapter or external elevation source, only the ethernet cable), while the Pro supports a direct fiber optic input through a SFP module without the need for external adapters (lower latency), supports a 4K or up to 3 simultaneous 2K (1440p) display device, but requires an external current adapter and its rental is significantly more expensive.",
-        "es": "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de almientación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.",
-        "pt": "R: O terminal Basic suporta um único dispositivo de visualização a Full HD (1080p), conexão ethernet RJ45 com PoE (não requer adaptador de corrente ou fonte de almientação externa, apenas o cabo ethernet), enquanto o Pro suporta uma entrada direta de fibra óptica através de um módulo SFP sem necessidade de adaptadores externos (menor latência), suporta um dispositivo de visualização 4K ou até 3 displays simultâneos a 2K (1440p), mas requer adaptador de corrente externo e seu aluguel é significativamente mais caro.",
-        "fr": "R: Le terminal Basic prend en charge un seul dispositif d'affichage plein HD (1080p), la connexion Ethernet RJ45 avec PoE (ne nécessite pas d'adaptateur courant ou de source d'élévation externe, seul le câble Ethernet), tandis que le Pro prend en charge une entrée fibre optique directe via un module SFP sans avoir besoin d'adaptateurs externes (latence inférieure), prend en charge un dispositif d'affichage 4K ou jusqu'à 3 simultanés 2K (1440p), mais nécessite un adaptateur courant externe et sa location est beaucoup plus chère.",
-        "de": "A: Das Basic-Terminal unterstützt eine einzige Full-HD-Anzeigevorrichtung (1080p), Ethernet RJ45-Verbindung mit PoE (benötigt keinen Stromadapter oder externe Elevationsquelle, nur das Ethernet-Kabel), während der Pro eine direkte Glasfaser-Eingabe über ein SFP-Modul ohne externe Adapter (niedrigere Latenz) unterstützt, unterstützt eine 4K oder bis zu 3 gleichzeitige 2K (1440p) Anzeigevorrichtung, erfordert jedoch einen externen Stromadapter und seine Vermietung ist teuerer.",
-        "ru": "A: Базовый терминал поддерживает одно устройство отображения Full HD (1080p), соединение Ethernet RJ45 с PoE (не требует адаптера тока или внешнего источника возвышения, только кабель Ethernet), в то время как Pro поддерживает прямой волоконно-оптический вход через модуль SFP без необходимости внешних адаптеров (нижняя задержка), поддерживает устройство отображения 4K или до 3 одновременных 2K (1440p), но требует адаптера внешнего тока и его прокат значительно дороже.",
+    "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de alimentación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.": {
+        "en": "A: The Basic terminal supports a single full HD display device (1080p), ethernet RJ45 connection with PoE (does not require current adapter or external power supply, only the ethernet cable), while the Pro supports a direct fiber optic input through a SFP module without external adapters (lower latency), supports a 4K or up to 3 simultaneous 2K (1440p) display device, but requires an external current adapter and its rental is significantly more expensive.",
+        "es": "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de alimentación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.",
+        "pt": "R: O terminal Basic suporta um único dispositivo de visualização a Full HD (1080p), conexão ethernet RJ45 com PoE (não requer adaptador de corrente ou fonte de alimentação externa, apenas o cabo ethernet), enquanto o Pro suporta uma entrada direta de fibra óptica através de um módulo SFP sem necessidade de adaptadores externos (menor latência), suporta um dispositivo de visualização 4K ou até 3 displays simultâneos a 2K (1440p), mas requer adaptador de corrente externo e seu aluguel é significativamente mais caro.",
+        "fr": "R: Le terminal Basic prend en charge un seul appareil plein HD (1080p), la connexion Ethernet RJ45 avec PoE (ne nécessite pas d'adaptateur courant ou d'alimentation externe, seul le câble Ethernet), tandis que le Pro prend en charge une entrée fibre optique directe à travers un module SFP sans adaptateurs externes (latence inférieure), prend en charge un dispositif d'affichage 4K ou jusqu'à 3 simultanés 2K (1440p), mais nécessite un adaptateur courant externe et sa location est nettement plus chère.",
+        "de": "A: Das Basic-Terminal unterstützt eine einzige Full-HD-Display-Einrichtung (1080p), Ethernet RJ45-Verbindung mit PoE (benötigt keinen Stromadapter oder externe Stromversorgung, nur das Ethernet-Kabel), während der Pro eine direkte Glasfaser-Eingabe über ein SFP-Modul ohne externe Adapter (untere Latenz) unterstützt, unterstützt eine 4K oder bis 3 gleichzeitige 2K (1440p)-Display-Gerät, erfordert aber einen externen Stromadapter und seine Miete ist deutlich teurer.",
+        "ru": "A: Базовый терминал поддерживает одно устройство отображения Full HD (1080p), соединение Ethernet RJ45 с PoE (не требует адаптера тока или внешнего источника питания, только кабеля Ethernet), в то время как Pro поддерживает прямой волоконно-оптический вход через модуль SFP без внешних адаптеров (нижняя задержка), поддерживает устройство отображения 4K или до 3 одновременных 2K (1440p), но требует адаптера внешнего тока и его аренда значительно дороже.",
         "hi": "उत्तर: बेसिक टर्मिनल केवल एक फुल एचडी (1080p) डिस्प्ले डिवाइस और PoE के साथ आरजे45 ईथरनेट कनेक्शन का समर्थन करता है (इसके लिए किसी पावर एडाप्टर या बाहरी बिजली स्रोत की आवश्यकता नहीं होती, केवल ईथरनेट केबल चाहिए), जबकि प्रो मॉडल बिना किसी बाहरी एडाप्टर के सीधे SFP मॉड्यूल के माध्यम से फाइबर ऑप्टिक इनपुट का समर्थन करता है (जिससे लेटेंसी कम होती है)। यह एक 4K डिस्प्ले या 2K (1440p) पर एक साथ 3 डिस्प्ले तक का समर्थन करता है, लेकिन इसके लिए बाहरी पावर एडाप्टर की आवश्यकता होती है और इसका किराया काफी अधिक है।",
-        "ja": "A: ベーシックターミナルは、単一のフルHDディスプレイデバイス(1080p)、エーテルネットRJ45接続PoE(現在のアダプターや外部の関連ソース、イーサネットケーブルのみを必要としません)をサポートし、Proは、外部アダプタ(低レイテンシー)を必要としないSFPモジュールを介して直接光ファイバ入力をサポートしている間、最大4Kまたは最大3同時2K(1440p)ディスプレイデバイスをサポートしているが、現在のアダプターを必要とし、その高価なレンタルが大幅に増加します.",
-        "zh": "A: Basic终端支持一个单一的全HD显示设备(1080p),eethnet RJ45与PoE的连接(不需要当前适配器或外部高程源,仅需要eethnet电缆),而Pro则支持通过一个SFP模块直接光纤输入而不需要外部适配器(低纬度),支持一个4K或最多3个同步的2K(1440p)显示设备,但需要外部的电流适配器,其租赁费用要高得多.",
-        "ko": "A: 기본적인 맨끝은 단 하나 가득 차있는 HD 전시 장치 (1080p)를, PoE (현재 접합기 또는 외부 고발 근원을 요구하지 않습니다, ethernet 케이블만)도 가진 이더네트 RJ45 연결을 지원하고, Pro는 외부 접합기 (낮은 잠복)를 위한 필요 없이 SFP 단위를 통해 직접적인 광섬유 입력을 지원하고, 4K 또는 3 동시 2K (1440p) 전시 장치까지 지원하고, 그러나 외부 현재 접합기 및 그것의 임대료는 더 비쌉니다.",
-        "ar": "ألف: تدعم المحطة الطرفية الأساسية جهازاً واحداً كاملاً للعرض (1080p)، وشبكة الإيثرنيت RJ45 وصلة بـ بو (لا تتطلب مكيفاً حالياً أو مصدراً خارجياً للارتفاع، فقط كابل الشبكة الإلكترونية)، في حين أن برو يدعم مدخلاً بصرياً مباشراً من الألياف الضوئية من خلال نموذج للبرمجيات الحرة دون الحاجة إلى مكيفين خارجيين (البطء أقل)، يدعمون 1440 كيلو مترات أو ما يصل إلى 1440 كيلو مترات خارجية متزامنة (2 كيلوغراماً)."
+        "ja": "A:ベーシックターミナルは、単一のフルHDディスプレイデバイス(1080p)、エーテルネットRJ45接続PoE(現在のアダプターや外部電源、イーサネットケーブルのみを必要としません)をサポートし、Proは、外部アダプタ(低レイテンシ)なしでSFPモジュールを介して直接光ファイバ入力をサポートし、最大4同時3K(2p)ディスプレイデバイスをサポートしているが、外部電流アダプターを必要とし、そのレンタルが大幅に高価です.",
+        "zh": "A: Basic 终端支持一个单一的全HD显示设备(1080p),eethnet RJ45与PoE的连接(不需要当前适配器或外部供电,仅需要eethnet电缆),而Pro支持通过没有外部适配器的SFP模块直接光纤输入(低纬度),支持一个4K或最多3个并发的2K (1440p)显示设备,但需要外部的电流适配器,其租赁费用要高得多.",
+        "ko": "A: 기본적인 맨끝은 단 하나 가득 차있는 HD 전시 장치 (1080p), PoE (현재 접합기 또는 외부 전력 공급, 단지 이더네트 케이블만 요구하지 않습니다)를 가진 이더네트 RJ45 연결을 지원하고, Pro는 외부 접합기 (낮은 대기권) 없이 SFP 단위를 통해 직접적인 광섬유 입력을 지원하고, 4K 또는 3 동시 2K (1440p) 전시 장치에 지원하고, 그러나 외부 현재 접합기 및 그것의 임대료는 더 비쌉니다.",
+        "ar": "ألف: تدعم المحطة الطرفية الأساسية جهازاً واحداً كاملاً للعرض (1080p)، وشبكة الإيثرنيت RJ45 وصلة بـ بو (لا تحتاج إلى مكيف حالي أو إمداد خارجي بالطاقة الكهربائية، فقط كابل الشبكة الإلكترونية)، في حين أن البروفو يدعم مدخلاً بصرياً مباشراً من الألياف الضوئية من خلال نموذج SFP بدون مكيفين خارجيين (البطء الأدنى)، يدعم جهازاً للعرض يبلغ 3 كيلو متراً أو ما يصل إلى 1440 كيلو متراً متزامناً (1440 كيلوغراماً)، ولكنه يتطلب جهازاً أكثر تكلفة."
     },
     "P: Cómo puedo tener acceso a un terminal codec compatible con Coffee Pie®?": {
         "en": "Q: How can I access a codec terminal compatible with Coffee Pie®?",
@@ -1767,9 +1767,9 @@
         "ko": "Q: Coffee Pie®는 다른 클라우드 서비스와 다릅니다?",
         "ar": "س: كيف يختلف Coffee Pie® عن الخدمات السحابية الأخرى؟"
     },
-    "R: Las principales diferencias radican en que los proveedores en la nube tradicionalmente sólo te ofrecen espacio para almacenar tus archivos, y si te ofrecen más que eso necesitas conocimientos técnicos avanzados y gran habilidad en programación para poder usarlos, además de que con ellos estás atado a una capacidad especifica, con subscripciones anuales o mensuales clausulas de permanecía, necesitas adquirir un computador clásico o dispositivo, de por sí ya costoso y fácilmente obsoleto, sólo para poder acceder a su servicio. Mientras que nuestro servicio en cambio, te ofrece una solución integral, un computador completo de capacidad variable (procesador, memoria, almacenamiento, tarjeta gráfica, fuente de poder, etc), al que puedes acceder desde un terminal codec prestado, con enfoque circular, modular, reparable, reciclable, con una interfaz gráfica sencilla, sin necesidad de conocimientos técnicos, ni de comprar un equipo costoso, pagando sólo por lo que realmente necesitas, sin suscripciones, ni ataduras, pues nuestro servicio es completamente flexible, prepagado y bajo demanda, incluso gratis si estás dispuesto a ver anuncios publicitarios de vez en cuando (capa de servicio gratuito).": {
+    "R: Las principales diferencias radican en que los proveedores en la nube tradicionalmente sólo te ofrecen espacio para almacenar tus archivos, y si te ofrecen más que eso necesitas conocimientos técnicos avanzados y gran habilidad en programación para poder usarlos, además de que con ellos estás atado a una capacidad especifica, con suscripciones anuales o mensuales clausulas de permanencia, necesitas adquirir un computador clásico o dispositivo, de por sí ya costoso y fácilmente obsoleto, sólo para poder acceder a su servicio. Mientras que nuestro servicio en cambio, te ofrece una solución integral, un computador completo de capacidad variable (procesador, memoria, almacenamiento, tarjeta gráfica, fuente de poder, etc), al que puedes acceder desde un terminal codec prestado, con enfoque circular, modular, reparable, reciclable, con una interfaz gráfica sencilla, sin necesidad de conocimientos técnicos, ni de comprar un equipo costoso, pagando sólo por lo que realmente necesitas, sin suscripciones, ni ataduras, pues nuestro servicio es completamente flexible, prepagado y bajo demanda, incluso gratis si estás dispuesto a ver anuncios publicitarios de vez en cuando (capa de servicio gratuito).": {
         "en": "A: The main differences are that cloud suppliers traditionally only offer you space to store your files, and if they offer you more than that you need advanced technical knowledge and great programming ability to use them, as well as that with them you are bound to a specific capacity, with annual or monthly remaining subscriptions, you need to acquire a classic computer or device, already expensive and easily obsolete, just to be able to access their service. While our service on the other hand offers you a comprehensive solution, a complete computer of variable capacity (processor, memory, storage, graphic card, power source, etc.), to which you can access from a codec terminal provided, with a circular, modular, reparable, recyclable approach, with a simple graphic interface, without the need for technical knowledge, or to buy an expensive equipment, paying only for what you really need, without subscriptions, or ties, as our service is fully flexible, prepaid and on demand, even free if you are willing to see advertising from time to time to time (free service layer).",
-        "es": "R: Las principales diferencias radican en que los proveedores en la nube tradicionalmente sólo te ofrecen espacio para almacenar tus archivos, y si te ofrecen más que eso necesitas conocimientos técnicos avanzados y gran habilidad en programación para poder usarlos, además de que con ellos estás atado a una capacidad especifica, con subscripciones anuales o mensuales clausulas de permanecía, necesitas adquirir un computador clásico o dispositivo, de por sí ya costoso y fácilmente obsoleto, sólo para poder acceder a su servicio. Mientras que nuestro servicio en cambio, te ofrece una solución integral, un computador completo de capacidad variable (procesador, memoria, almacenamiento, tarjeta gráfica, fuente de poder, etc), al que puedes acceder desde un terminal codec prestado, con enfoque circular, modular, reparable, reciclable, con una interfaz gráfica sencilla, sin necesidad de conocimientos técnicos, ni de comprar un equipo costoso, pagando sólo por lo que realmente necesitas, sin suscripciones, ni ataduras, pues nuestro servicio es completamente flexible, prepagado y bajo demanda, incluso gratis si estás dispuesto a ver anuncios publicitarios de vez en cuando (capa de servicio gratuito).",
+        "es": "R: Las principales diferencias radican en que los proveedores en la nube tradicionalmente sólo te ofrecen espacio para almacenar tus archivos, y si te ofrecen más que eso necesitas conocimientos técnicos avanzados y gran habilidad en programación para poder usarlos, además de que con ellos estás atado a una capacidad especifica, con suscripciones anuales o mensuales clausulas de permanencia, necesitas adquirir un computador clásico o dispositivo, de por sí ya costoso y fácilmente obsoleto, sólo para poder acceder a su servicio. Mientras que nuestro servicio en cambio, te ofrece una solución integral, un computador completo de capacidad variable (procesador, memoria, almacenamiento, tarjeta gráfica, fuente de poder, etc), al que puedes acceder desde un terminal codec prestado, con enfoque circular, modular, reparable, reciclable, con una interfaz gráfica sencilla, sin necesidad de conocimientos técnicos, ni de comprar un equipo costoso, pagando sólo por lo que realmente necesitas, sin suscripciones, ni ataduras, pues nuestro servicio es completamente flexible, prepagado y bajo demanda, incluso gratis si estás dispuesto a ver anuncios publicitarios de vez en cuando (capa de servicio gratuito).",
         "pt": "R: As principais diferenças residem em que os provedores de nuvem tradicionalmente só oferecem espaço para armazenar seus arquivos, e se você oferecer mais do que isso você precisa de conhecimentos técnicos avançados e grande habilidade em programação para poder usá-los, além de que com eles você está amarrado a uma capacidade específica, com subscrições anuais ou mensais clausulas de permanecia, você precisa adquirir um computador clássico ou dispositivo, de por si já caro e facilmente obsoleto, apenas para poder acessar seu serviço. Enquanto o nosso serviço em troca oferece uma solução integral, um computador completo de capacidade variável (processador, memória, armazenamento, cartão gráfico, fonte de poder, etc), ao qual você pode acessar de um terminal codec prestado, com enfoque circular, modular, reciclável, com uma interface gráfica simples, sem necessidade de conhecimentos técnicos, nem de comprar um equipamento caro, pagando apenas pelo que você realmente precisa, sem assinaturas, nem ataduras, pois nosso serviço é totalmente flexível, pré-pagado e sob demanda, mesmo grátis se você estiver disposto a ver anúncios publicitários de vez em quando (capa de serviço gratuito).",
         "fr": "R: Les principales différences sont que les fournisseurs de cloud ne vous offrent traditionnellement que de l'espace pour stocker vos fichiers, et s'ils vous offrent plus que ce que vous avez besoin de connaissances techniques avancées et une grande capacité de programmation pour les utiliser, ainsi que que que que avec eux vous êtes lié à une capacité spécifique, avec des abonnements annuels ou mensuels restants, vous devez acquérir un ordinateur ou un appareil classique, déjà coûteux et facilement obsolète, juste pour pouvoir accéder à leur service. Alors que notre service vous offre en revanche une solution complète, un ordinateur complet de capacité variable (processeur, mémoire, stockage, carte graphique, source d'énergie, etc.), auquel vous pouvez accéder à partir d'un terminal de codec fourni, avec une approche circulaire, modulaire, réparable, recyclable, avec une interface graphique simple, sans besoin de connaissances techniques, ou d'acheter un équipement coûteux, ne payant que pour ce dont vous avez vraiment besoin, sans abonnements, ou liens, car notre service est entièrement flexible, prépayé et sur demande, même gratuit si vous êtes prêt à voir de la publicité de temps en temps (couche de service gratuite).",
         "de": "A: Die Hauptunterschiede sind, dass Cloud-Lieferanten Ihnen traditionell nur Platz bieten, um Ihre Dateien zu speichern, und wenn sie Ihnen mehr bieten, als dass Sie fortschrittliche technische Kenntnisse und große Programmierfähigkeit benötigen, um sie zu verwenden, sowie dass mit ihnen Sie an eine bestimmte Kapazität gebunden sind, mit jährlichen oder monatlichen Rest-Abonnements, müssen Sie einen klassischen Computer oder Gerät erwerben, bereits teuer und leicht veraltet, nur um Zugang zu ihrem Service zu erhalten. Während unser Service auf der anderen Seite bietet Ihnen eine umfassende Lösung, ein kompletter Computer mit variabler Kapazität (Prozessor, Speicher, Speicher, Grafikkarte, Stromquelle, etc.), auf die Sie von einem Codec-Terminal zur Verfügung stehen, mit einem kreisförmigen, modularen, reparablen, recycelbaren Ansatz, mit einer einfachen grafischen Schnittstelle, ohne die Notwendigkeit von technischem Wissen, oder zu kaufen eine teure Ausrüstung, zahlen nur für das, was Sie wirklich brauchen, ohne Abo-Service, ist, ohne Abo-Service, um zu sehen, um zu sehen, um zu erhalten, um zu sehen, oder flexibel ist, als Vorwahl-Service, als Vorwahl-Service.",
@@ -1793,9 +1793,9 @@
         "ko": "Q: Coffee Pie®가 지속 가능성에 어떻게 기여합니까?",
         "ar": "س: كيف تساهم Coffee Pie® في الاستدامة؟"
     },
-    "R: Coffee Pie® promueve la economía circular mediante su sistema patentado QFDM, que optimiza el uso de los recursos informáticos comisionados (datacenters), además del uso de dispositivos altamente modulares, reparables y reciclables, evitando así la generación de residuos y prolongando al máximo la vida útil de todos nuestros dispositivos, minimizando los desperdicios electrónicos a practicamente cero. Bajo ninguna circunstancia toleraremos la": {
+    "R: Coffee Pie® promueve la economía circular mediante su sistema patentado QFDM, que optimiza el uso de los recursos informáticos comisionados (datacenters), además del uso de dispositivos altamente modulares, reparables y reciclables, evitando así la generación de residuos y prolongando al máximo la vida útil de todos nuestros dispositivos, minimizando los desperdicios electrónicos a prácticamente cero. Bajo ninguna circunstancia toleraremos la": {
         "en": "A: Coffee Pie® promotes the circular economy through its patented QFDM system, which optimizes the use of the commissioned computer resources (datacenters), in addition to the use of highly modular, reparable and recyclable devices, thus avoiding waste generation and maximizing the life of all our devices, minimizing electronic waste to practically zero. Under no circumstances will we tolerate the",
-        "es": "R: Coffee Pie® promueve la economía circular mediante su sistema patentado QFDM, que optimiza el uso de los recursos informáticos comisionados (datacenters), además del uso de dispositivos altamente modulares, reparables y reciclables, evitando así la generación de residuos y prolongando al máximo la vida útil de todos nuestros dispositivos, minimizando los desperdicios electrónicos a practicamente cero. Bajo ninguna circunstancia toleraremos la",
+        "es": "R: Coffee Pie® promueve la economía circular mediante su sistema patentado QFDM, que optimiza el uso de los recursos informáticos comisionados (datacenters), además del uso de dispositivos altamente modulares, reparables y reciclables, evitando así la generación de residuos y prolongando al máximo la vida útil de todos nuestros dispositivos, minimizando los desperdicios electrónicos a prácticamente cero. Bajo ninguna circunstancia toleraremos la",
         "pt": "R: Coffee Pie® promove a economia circular através do seu sistema patentado QFDM, que otimiza o uso dos recursos informáticos comissários (datacenters), além do uso de dispositivos altamente modulares, recicláveis e recicláveis, evitando assim a geração de resíduos e prolongando ao máximo a vida útil de todos os nossos dispositivos, minimizando os desperdícios eletrônicos em prática zero. Sob nenhuma circunstância toleraremos a",
         "fr": "A: Coffee Pie® promeut l'économie circulaire grâce à son système breveté QFDM, qui optimise l'utilisation des ressources informatiques commandées (datacenters), en plus de l'utilisation d'appareils hautement modulaires, réparables et recyclables, évitant ainsi la production de déchets et maximisant la durée de vie de tous nos appareils, minimisant les déchets électroniques à pratiquement zéro. En aucun cas nous ne tolérerons",
         "de": "A: Coffee Pie® fördert die Kreislaufwirtschaft durch sein patentiertes QFDM-System, das die Nutzung der in Auftrag gegebenen Computerressourcen (Datenzentren) optimiert, zusätzlich zur Verwendung von hochmodulierten, reparierbaren und recycelbaren Geräten, so dass die Abfallerzeugung vermieden und die Lebensdauer aller unserer Geräte maximiert wird, wodurch elektronische Abfälle auf praktisch Null reduziert werden. Unter keinen Umständen werden wir",
@@ -3314,19 +3314,6 @@
         "ko": "A: Codec 맨끝은 QFDM로 알려진 특허가 주어진 동적인 배급 체계의 부분인 평균 인간적인 눈 보다는 더 빠른 인코딩과 해독 신호를 전문화된 일련의 장치입니다. 이러한 클라우드 컴퓨팅 인프라의 네트워크에 연결됩니다, 즉, 커미션된 데이터멘터의 일련의 서버는 일반 경제, 유연하고 저렴한 컴퓨팅 서비스를 제공 할 수 있습니다, 높은 수직과 수평 확장성을 가진 컴퓨터 리소스의 사용을 최적화. 코덱 터미널은 \"human-machine interface\"이며, 이는 사용자가 간단한 방식으로 이러한 리소스를 사용할 수 있으며, 기술 지식이 필요없는 클래식 컴퓨터를 구입하지 않고 명령줄 (CLI)과 상호 작용할 필요가 없으며, Coffee Pie®의 무료 계정과 직관적 인 그래픽 인터페이스에서 클릭 한 쌍의 클릭을 만들 수 있습니다. 이전 성인 또는 어린이 (",
         "ar": "ألف: المحطات الطرفية للمدونة هي سلسلة من الأجهزة المتخصصة في التشفير والإشارات التزيينية أسرع من متوسط العين البشرية التي يمكن تصورها، التي تشكل جزءا من نظام توزيع دينامي مرخص به يعرف باسم QFDM. وترتبط هذه الشبكات بشبكة من الهياكل الأساسية الحاسوبية السحابية، أي سلسلة من الخواديم في أجهزة البيانات المكلَّفة بأن تكون قادرة على تزويد الجمهور بخدمة حسابية عامة اقتصادية ومرنة ومنخفضة الطلب، وتعظيم استخدام الموارد الحاسوبية ذات القدرة العالية على التصعيد الرأسي والأفقي. محطة الكود (C codec) هي \"الواجهة بين البشر والميناء\" التي يمكن من خلالها للمستعملين استخدام هذه الموارد بطريقة بسيطة، دون الحاجة إلى شراء حاسوب كلاسيكي، دون الحاجة إلى أي معرفة تقنية، وبدون الحاجة إلى التفاعل مع خط القيادة، يكفي إنشاء حساب مجاني للبن Pie SR وزوج من النقرات في واجهة بيانية غير ملائمة، حتى بالنسبة للبالغ الأكبر سنا أو الطفل (CLI)"
     },
-    "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de alimentación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.": {
-        "en": "A: The Basic terminal supports a single full HD display device (1080p), ethernet RJ45 connection with PoE (does not require current adapter or external power supply, only the ethernet cable), while the Pro supports a direct fiber optic input through a SFP module without external adapters (lower latency), supports a 4K or up to 3 simultaneous 2K (1440p) display device, but requires an external current adapter and its rental is significantly more expensive.",
-        "es": "R: El terminal Basic soporta un solo dispositivo de visualización a Full HD (1080p), conexión ethernet RJ45 con PoE (no requiere adaptador de corriente ni fuente de alimentación externa, sólo el cable ethernet), mientras que el Pro soporta una entrada directa de fibra óptica a través de un módulo SFP sin necesidad de adaptadores externos (menor latencia), soporta un dispositivo de visualización 4K ó hasta 3 displays simultáneos a 2K (1440p), pero requiere adaptador de corriente externo y su alquiler es significativamente más costoso.",
-        "pt": "R: O terminal Basic suporta um único dispositivo de visualização a Full HD (1080p), conexão ethernet RJ45 com PoE (não requer adaptador de corrente ou fonte de alimentação externa, apenas o cabo ethernet), enquanto o Pro suporta uma entrada direta de fibra óptica através de um módulo SFP sem necessidade de adaptadores externos (menor latência), suporta um dispositivo de visualização 4K ou até 3 displays simultâneos a 2K (1440p), mas requer adaptador de corrente externo e seu aluguel é significativamente mais caro.",
-        "fr": "R: Le terminal Basic prend en charge un seul appareil plein HD (1080p), la connexion Ethernet RJ45 avec PoE (ne nécessite pas d'adaptateur courant ou d'alimentation externe, seul le câble Ethernet), tandis que le Pro prend en charge une entrée fibre optique directe à travers un module SFP sans adaptateurs externes (latence inférieure), prend en charge un dispositif d'affichage 4K ou jusqu'à 3 simultanés 2K (1440p), mais nécessite un adaptateur courant externe et sa location est nettement plus chère.",
-        "de": "A: Das Basic-Terminal unterstützt eine einzige Full-HD-Display-Einrichtung (1080p), Ethernet RJ45-Verbindung mit PoE (benötigt keinen Stromadapter oder externe Stromversorgung, nur das Ethernet-Kabel), während der Pro eine direkte Glasfaser-Eingabe über ein SFP-Modul ohne externe Adapter (untere Latenz) unterstützt, unterstützt eine 4K oder bis 3 gleichzeitige 2K (1440p)-Display-Gerät, erfordert aber einen externen Stromadapter und seine Miete ist deutlich teurer.",
-        "ru": "A: Базовый терминал поддерживает одно устройство отображения Full HD (1080p), соединение Ethernet RJ45 с PoE (не требует адаптера тока или внешнего источника питания, только кабеля Ethernet), в то время как Pro поддерживает прямой волоконно-оптический вход через модуль SFP без внешних адаптеров (нижняя задержка), поддерживает устройство отображения 4K или до 3 одновременных 2K (1440p), но требует адаптера внешнего тока и его аренда значительно дороже.",
-        "hi": "उत्तर: बेसिक टर्मिनल केवल एक फुल एचडी (1080p) डिस्प्ले डिवाइस और PoE के साथ आरजे45 ईथरनेट कनेक्शन का समर्थन करता है (इसके लिए किसी पावर एडाप्टर या बाहरी बिजली स्रोत की आवश्यकता नहीं होती, केवल ईथरनेट केबल चाहिए), जबकि प्रो मॉडल बिना किसी बाहरी एडाप्टर के सीधे SFP मॉड्यूल के माध्यम से फाइबर ऑप्टिक इनपुट का समर्थन करता है (जिससे लेटेंसी कम होती है)। यह एक 4K डिस्प्ले या 2K (1440p) पर एक साथ 3 डिस्प्ले तक का समर्थन करता है, लेकिन इसके लिए बाहरी पावर एडाप्टर की आवश्यकता होती है और इसका किराया काफी अधिक है।",
-        "ja": "A:ベーシックターミナルは、単一のフルHDディスプレイデバイス(1080p)、エーテルネットRJ45接続PoE(現在のアダプターや外部電源、イーサネットケーブルのみを必要としません)をサポートし、Proは、外部アダプタ(低レイテンシ)なしでSFPモジュールを介して直接光ファイバ入力をサポートし、最大4同時3K(2p)ディスプレイデバイスをサポートしているが、外部電流アダプターを必要とし、そのレンタルが大幅に高価です.",
-        "zh": "A: Basic 终端支持一个单一的全HD显示设备(1080p),eethnet RJ45与PoE的连接(不需要当前适配器或外部供电,仅需要eethnet电缆),而Pro支持通过没有外部适配器的SFP模块直接光纤输入(低纬度),支持一个4K或最多3个并发的2K (1440p)显示设备,但需要外部的电流适配器,其租赁费用要高得多.",
-        "ko": "A: 기본적인 맨끝은 단 하나 가득 차있는 HD 전시 장치 (1080p), PoE (현재 접합기 또는 외부 전력 공급, 단지 이더네트 케이블만 요구하지 않습니다)를 가진 이더네트 RJ45 연결을 지원하고, Pro는 외부 접합기 (낮은 대기권) 없이 SFP 단위를 통해 직접적인 광섬유 입력을 지원하고, 4K 또는 3 동시 2K (1440p) 전시 장치에 지원하고, 그러나 외부 현재 접합기 및 그것의 임대료는 더 비쌉니다.",
-        "ar": "ألف: تدعم المحطة الطرفية الأساسية جهازاً واحداً كاملاً للعرض (1080p)، وشبكة الإيثرنيت RJ45 وصلة بـ بو (لا تحتاج إلى مكيف حالي أو إمداد خارجي بالطاقة الكهربائية، فقط كابل الشبكة الإلكترونية)، في حين أن البروفو يدعم مدخلاً بصرياً مباشراً من الألياف الضوئية من خلال نموذج SFP بدون مكيفين خارجيين (البطء الأدنى)، يدعم جهازاً للعرض يبلغ 3 كيلو متراً أو ما يصل إلى 1440 كيلو متراً متزامناً (1440 كيلوغراماً)، ولكنه يتطلب جهازاً أكثر تكلفة."
-    },
     "P: De dónde proviene el nombre Coffee Pie®?": {
         "en": "P: De dónde proviene el nombre Coffee Pie®?",
         "es": "P: De dónde proviene el nombre Coffee Pie®?",
@@ -3408,7 +3395,7 @@
     "Contáctanos": {
         "en": "Contact us",
         "es": "Contáctanos",
-        "pt": "Categoria: Contáctanos",
+        "pt": "Categoría: Contáctanos",
         "fr": "Contactez-nous",
         "de": "Kontaktieren Sie uns",
         "ru": "Свяжитесь с нами",
@@ -3418,9 +3405,9 @@
         "ko": "제품 정보",
         "ar": "اتصل بنا"
     },
-    "Suscríbete para novedades y promociones": {
+    "Suscríbete para novedades y promociónes": {
         "en": "Subscribe for news and promotions",
-        "es": "Suscríbete para novedades y promociones",
+        "es": "Suscríbete para novedades y promociónes",
         "pt": "Inscreva-se para novidades e promoções",
         "fr": "Abonnez-vous aux actualités et promotions",
         "de": "News und Aktionen abonnieren",
@@ -3655,7 +3642,7 @@
     "Las siguientes categorías están sujetas a revisión estricta y pueden requerir autorización previa, licencias o segmentación específica (geográfica y de edad):": {
         "en": "The following categories are subject to strict review and may require prior authorization, specific licences or segmentation (geographical and age):",
         "es": "Las siguientes categorías están sujetas a revisión estricta y pueden requerir autorización previa, licencias o segmentación específica (geográfica y de edad):",
-        "pt": "As seguintes categorias estão sujeitas a revisão rigorosa e podem requerer autorização prévia, licenças ou segmentação específica (geográfica e idade):",
+        "pt": "As seguintes categorías estão sujeitas a revisão rigorosa e podem requerer autorização prévia, licenças ou segmentação específica (geográfica e idade):",
         "fr": "Les catégories suivantes sont soumises à un examen rigoureux et peuvent exiger une autorisation préalable, des licences spécifiques ou une segmentation (géographique et âge) :",
         "de": "Die folgenden Kategorien unterliegen einer strengen Überprüfung und können eine vorherige Genehmigung, spezifische Lizenzen oder Segmentierung (geografisches und Alter) verlangen:",
         "ru": "Следующие категории подлежат строгому рассмотрению и могут потребовать предварительного разрешения, специальных лицензий или сегментации (географические и возрастные):",
@@ -3941,7 +3928,7 @@
     "Categorías y Específicos: Se incluyen categorías amplias (como \"tecnología\" o \"moda\") y específicos (\"Samsung Galaxy\", \"Zapatos Nike\", \"Tesla Model 3\", etc).": {
         "en": "Categories and Specifications: They include broad categories (such as \"technology\" or \"fashion\") and specific categories (\"Samsung Galaxy,\" \"Nike Shoes,\" \"Tesla Model 3,\" etc.).",
         "es": "Categorías y Específicos: Se incluyen categorías amplias (como \"tecnología\" o \"moda\") y específicos (\"Samsung Galaxy\", \"Zapatos Nike\", \"Tesla Model 3\", etc).",
-        "pt": "Categorias e específicos: São incluídas categorias amplas (como \"tecnologia\" ou \"moda\") e específicas (\"Samsung Galaxy\", \"Zapatos Nike\", \"Tesla Model 3\", etc).",
+        "pt": "Categorías e específicos: São incluídas categorías amplas (como \"tecnologia\" ou \"moda\") e específicas (\"Samsung Galaxy\", \"Zapatos Nike\", \"Tesla Model 3\", etc).",
         "fr": "Catégories et spécifications : Elles comprennent de grandes catégories (comme « technologie » ou « mode ») et des catégories spécifiques (« Samsung Galaxy », « Nike Shoes », « Tesla Model 3 », etc.).",
         "de": "Kategorien und Spezifikationen: Sie umfassen breite Kategorien (z.B. \"Technologie\" oder \"Fashion\") und spezifische Kategorien (\"Samsung Galaxy\", \"Nike Shoes\", \"Tesla Model 3,\" usw.).",
         "ru": "Категории и спецификации: К ним относятся широкие категории (такие как «технология» или «мода») и конкретные категории («Samsung Galaxy», «Nike Shoes», «Tesla Model 3» и др.).",
@@ -5589,9 +5576,9 @@
         "ko": "응답의 머리",
         "ar": "Head of the Response"
     },
-    "Suscríbete al boletín para novedades y promociones": {
+    "Suscríbete al boletín para novedades y promociónes": {
         "en": "Subscribe to the newsletter for news and promotions",
-        "es": "Suscríbete al boletín para novedades y promociones",
+        "es": "Suscríbete al boletín para novedades y promociónes",
         "pt": "Inscreva-se ao boletim para novidades e promoções",
         "fr": "Abonnez-vous à la newsletter pour recevoir des nouvelles et des promotions",
         "de": "Newsletter abonnieren für Nachrichten und Aktionen",
@@ -5654,10 +5641,10 @@
         "ko": "스위치: 재활용",
         "ar": "Switches: Recycled"
     },
-    "Ingresar código promocional": {
+    "Ingresar código promociónal": {
         "en": "Enter promotional code",
-        "es": "Ingresar código promocional",
-        "pt": "Inserir código promocional",
+        "es": "Ingresar código promociónal",
+        "pt": "Inserir código promociónal",
         "fr": "Entrez le code promotionnel",
         "de": "Aktionscode eingeben",
         "ru": "Введите промокод",
@@ -8309,7 +8296,7 @@
     "\"Tecnología circular a tu alcance\"": {
         "en": "\"Circular technology within your reach\"",
         "es": "\"Tecnología circular a tu alcance\"",
-        "pt": "\"Tecnologia circular ao seu alcance\"",
+        "pt": "\"Tecnología circular ao seu alcance\"",
         "fr": "\"Technologie circulaire à votre portée\"",
         "de": "\"Circular technology in your range\"",
         "ru": "Циркулярные технологии в пределах вашей досягаемости",
@@ -8579,9 +8566,9 @@
         "ko": "모듈",
         "ar": "الوحدات"
     },
-    "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con": {
+    "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas prácticamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con": {
         "en": "With our exclusive Modular Codec Terminals, better known as Commanders™, Sentinels™ and Rangers™, forget once and for all about replacing the processor, memory, storage, graphics card, power supply, etc. Now you can use all that hardware dynamically and flexibly, whether you are a student, technician, engineer, architect, editor, designer, programmer, video game developer, content creator, accountant, 3D modeler, entrepreneur, or you do practically any activity that requires computing, you will no longer need to buy a \"NASA computer\" to make all your projects come true, because with ",
-        "es": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas practicamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
+        "es": "Con nuestros exclusivos Terminales Codec Modulares, mejor conocidos como Commanders™, Sentinels™ y Rangers™, olvídate de una vez por todas de estar reemplazando el procesador, la memoria, el almacenamiento, la tarjeta gráfica, la fuente, etc. Ahora puedes usar todo ese hardware de forma dinámica y flexible, no importa si eres estudiante, técnico, ingeniero, arquitecto, editor, diseñador, programador, desarrollador de videojuegos, creador de contenido, contador, modelador, empresario, o desarrollas prácticamente cualquier actividad que requiera de cómputo, ya no tendrás que comprar un \"computador de la NASA\" para hacer realidad todos tus proyectos, pues con",
         "pt": "Com nossos exclusivos Terminais Codec Modulares, mais conhecidos como Commanders™, Sentinels™ e Rangers™, esqueça de uma vez por todas de ficar substituindo o processador, a memória, o armazenamento, a placa de vídeo, a fonte, etc. Agora você pode usar todo esse hardware de forma dinâmica e flexível, não importa se você é estudante, técnico, engenheiro, arquiteto, editor, designer, programador, desenvolvedor de videogames, criador de conteúdo, contador, modelador, empresário, ou desenvolve praticamente qualquer atividade que exija computação, você não precisará mais comprar um \"computador da NASA\" para tornar realidade todos os seus projetos, pois com",
         "fr": "Avec nos exclusifs Terminaux Codec Modulaires, mieux connus sous les noms de Commanders™, Sentinels™ et Rangers™, oubliez une fois pour toutes de remplacer le processeur, la mémoire, le stockage, la carte graphique, l'alimentation, etc. Vous pouvez désormais utiliser tout ce matériel de manière dynamique et flexible. Peu importe si vous êtes étudiant, technicien, ingénieur, architecte, éditeur, designer, programmeur, développeur de jeux vidéo, créateur de contenu, comptable, modélisateur, entrepreneur, ou si vous exercez pratiquement n'importe quelle activité nécessitant de l'informatique, vous n'aurez plus besoin d'acheter un \"ordinateur de la NASA\" pour réaliser tous vos projets, car avec",
         "de": "Mit unseren exklusiven modularen Codec-Terminals, besser bekannt als Commanders™, Sentinels™ und Rangers™, können Sie das Ersetzen von Prozessor, Speicher, Grafikkarte, Netzteil usw. ein für alle Mal vergessen. Jetzt können Sie all diese Hardware dynamisch und flexibel nutzen. Egal, ob Sie Student, Techniker, Ingenieur, Architekt, Redakteur, Designer, Programmierer, Spieleentwickler, Content-Ersteller, Buchhalter, Modellierer, Unternehmer sind oder praktisch jede rechenintensive Tätigkeit ausüben, Sie müssen keinen \"NASA-Computer\" mehr kaufen, um all Ihre Projekte zu verwirklichen, denn mit",
@@ -8738,7 +8725,7 @@
     "Resérvalo aquí": {
         "en": "Save it here",
         "es": "Resérvalo aquí",
-        "pt": "Resérvalo aqui",
+        "pt": "Resérvalo aquí",
         "fr": "Gardez-le ici",
         "de": "Rette es hier",
         "ru": "Оставь это здесь",
@@ -10064,7 +10051,7 @@
     "Cualquier ser humano alfabetizado, incluso niños en proceso de alfabetización supervisados en todo momento por un adulto responsable (sea consciente de partes pequeñas con riesgo de ahogamiento +5 años, los tomacorrientes eléctricos, del contenido explícito y violento, etc), pueden usar nuestro servicio, independientemente de su origen o poder adquisitivo, siempre y cuando cumplan con las normas básicas de convivencia de la comunidad y cuidado del medio ambiente, regresando todos los dispositivos y accesorios al final de su ciclo de uso o vida útil para ser puestos a punto, reparados, remanufacturados o en última instancia reciclados, evitando así que terminen contaminando el medio ambiente.": {
         "en": "Any literate human being, even children in the process of literacy who are monitored at all times by a responsible adult (be aware of small parts at risk of drowning + 5 years, the electric absorbers, of the explicit and violent content, etc.), can use our service, regardless of their origin or purchasing power, provided they comply with the basic standards of community coexistence and environmental care, by returning all devices and accessories at the end of their cycle of use or useful life to be put to the point, repaired, remanufactured or ultimately recycled, thus preventing them from being contaminated in the environment.",
         "es": "Cualquier ser humano alfabetizado, incluso niños en proceso de alfabetización supervisados en todo momento por un adulto responsable (sea consciente de partes pequeñas con riesgo de ahogamiento +5 años, los tomacorrientes eléctricos, del contenido explícito y violento, etc), pueden usar nuestro servicio, independientemente de su origen o poder adquisitivo, siempre y cuando cumplan con las normas básicas de convivencia de la comunidad y cuidado del medio ambiente, regresando todos los dispositivos y accesorios al final de su ciclo de uso o vida útil para ser puestos a punto, reparados, remanufacturados o en última instancia reciclados, evitando así que terminen contaminando el medio ambiente.",
-        "pt": "Qualquer ser humano alfabetizado, mesmo crianças em processo de alfabetização supervisionadas em qualquer momento por um adulto responsável (seja consciente de partes pequenas com risco de afogamento +5 anos, as tomadas correntes elétricas, do conteúdo explícito e violento etc), podem usar nosso serviço, independentemente de sua origem ou poder aquisitivo, desde que cumpram as normas básicas de convivência da comunidade e cuidado do meio ambiente, retornando todos os dispositivos e acessórios ao final de seu ciclo de uso ou vida útil para serem postos a ponto, reparados, remanufacturados ou em última instância reciclados, evitando assim que terminem contaminando o meio ambiente.",
+        "pt": "Qualquer ser humano alfabetizado, mesmo crianças em processo de alfabetização supervisionadas em qualquer momento por um adulto responsável (seja consciente de partes pequenas com risco de afogamento +5 anos, as tomadas correntes elétricas, do conteúdo explícito e violento etc), podem usar nosso serviço, independentemente de sua origem ou poder aquísitivo, desde que cumpram as normas básicas de convivência da comunidade e cuidado do meio ambiente, retornando todos os dispositivos e acessórios ao final de seu ciclo de uso ou vida útil para serem postos a ponto, reparados, remanufacturados ou em última instância reciclados, evitando assim que terminem contaminando o meio ambiente.",
         "fr": "Tout être humain alphabétisé, même les enfants en cours d'alphabétisation qui sont surveillés en tout temps par un adulte responsable (être conscient des petites parties à risque de noyade + 5 ans, les absorbeurs électriques, du contenu explicite et violent, etc.), peut utiliser notre service, indépendamment de leur origine ou de leur pouvoir d'achat, à condition qu'ils respectent les normes de base de coexistence communautaire et de protection de l'environnement, en retournant tous les appareils et accessoires à la fin de leur cycle d'utilisation ou de leur durée de vie utile pour être mis au point, réparés, reconstruits ou finalement recyclés, empêchant ainsi leur contamination dans l'environnement.",
         "de": "Jeder buchstäbliche Mensch, auch Kinder im Prozess der Alphabetisierung, die zu jeder Zeit von einem verantwortlichen Erwachsenen überwacht werden (die kleinen Teile, die Gefahr des Ertrinkens + 5 Jahre, die elektrischen Absorber, der expliziten und gewalttätigen Inhalte usw. bewusst sind), kann unsere Dienstleistung, unabhängig von ihrer Herkunft oder Kaufkraft, verwenden, sofern sie den Grundstandards der gemeinschaftlichen Koexistenz und Umweltversorgung entsprechen, indem sie alle Geräte und Zubehör am Ende ihres Lebenszyklus zurückgegeben werden.",
         "ru": "Любой грамотный человек, даже дети в процессе грамотности, которые постоянно контролируются ответственным взрослым (будьте осведомлены о небольших частях, подверженных риску утопления + 5 лет, электрических поглотителях, явном и насильственном содержании и т. д.), могут использовать наш сервис, независимо от их происхождения или покупательной способности, при условии, что они соответствуют основным стандартам сосуществования сообщества и заботы об окружающей среде, возвращая все устройства и аксессуары в конце их цикла использования или полезного использования, которые будут поставлены в точку, отремонтированы, восстановлены или в конечном итоге переработаны, тем самым предотвращая их загрязнение в окружающей среде.",
@@ -10311,7 +10298,7 @@
     "), pueden usar nuestro servicio, independientemente de su origen o poder adquisitivo, siempre y cuando cumplan con las normas básicas de convivencia de la comunidad y cuidado del medio ambiente, regresando todos los dispositivos y accesorios al final de su ciclo de uso o vida útil para ser puestos a punto, reparados, remanufacturados o en última instancia reciclados, evitando así que terminen contaminando el medio ambiente.": {
         "en": "), they can use our service, regardless of their origin or purchasing power, provided they comply with the basic standards of community coexistence and environmental care, returning all devices and accessories at the end of their use cycle or useful life to be put in place, repaired, remanufactured or ultimately recycled, thus preventing them from contaminating the environment.",
         "es": "), pueden usar nuestro servicio, independientemente de su origen o poder adquisitivo, siempre y cuando cumplan con las normas básicas de convivencia de la comunidad y cuidado del medio ambiente, regresando todos los dispositivos y accesorios al final de su ciclo de uso o vida útil para ser puestos a punto, reparados, remanufacturados o en última instancia reciclados, evitando así que terminen contaminando el medio ambiente.",
-        "pt": "), podem usar nosso serviço, independentemente de sua origem ou poder aquisitivo, desde que cumpram as normas básicas de convivência da comunidade e cuidado do meio ambiente, retornando todos os dispositivos e acessórios ao final de seu ciclo de uso ou vida útil para serem postos a ponto, reparados, remanufacturados ou em última instância reciclados, evitando assim que terminem contaminando o meio ambiente.",
+        "pt": "), podem usar nosso serviço, independentemente de sua origem ou poder aquísitivo, desde que cumpram as normas básicas de convivência da comunidade e cuidado do meio ambiente, retornando todos os dispositivos e acessórios ao final de seu ciclo de uso ou vida útil para serem postos a ponto, reparados, remanufacturados ou em última instância reciclados, evitando assim que terminem contaminando o meio ambiente.",
         "fr": "), ils peuvent utiliser notre service, indépendamment de leur origine ou de leur pouvoir d'achat, à condition de respecter les normes de base de coexistence communautaire et de protection de l'environnement, de renvoyer tous les appareils et accessoires à la fin de leur cycle d'utilisation ou de leur durée de vie utile pour être mis en place, réparés, reconstruits ou finalement recyclés, les empêchant ainsi de contaminer l'environnement.",
         "de": "), sie können unsere dienstleistung, unabhängig von ihrer herkunft oder kaufkraft, verwenden, sofern sie den grundlegenden standards der gemeinschaftskoexistenz und umweltpflege entsprechen, alle geräte und zubehör am ende ihres nutzungszyklus oder der nutzungsdauer zurückgeben, repariert, remanufacturiert oder schließlich recycelt werden, so dass sie verhindern, dass sie die umwelt kontaminieren.",
         "ru": "они могут использовать наши услуги, независимо от их происхождения или покупательной способности, при условии, что они соответствуют основным стандартам сосуществования сообщества и заботы об окружающей среде, возвращая все устройства и аксессуары в конце их цикла использования или срока полезного использования, которые будут установлены, отремонтированы, восстановлены или в конечном итоге переработаны, тем самым предотвращая их загрязнение окружающей среды.",
@@ -11533,7 +11520,7 @@
     "No hay nada aquí. Parece que ingresaste mal la URL o ya no existe. Pero puedes seguir navegando por las pestañas de la barra superior...": {
         "en": "There's nothing here. It seems you misentered the URL or no longer exists. But you can keep browsing the top bar tabs...",
         "es": "No hay nada aquí. Parece que ingresaste mal la URL o ya no existe. Pero puedes seguir navegando por las pestañas de la barra superior...",
-        "pt": "Não há nada aqui. Parece que você entrou mal o URL ou já não existe. Mas você pode continuar a navegar pelas páginas da barra superior...",
+        "pt": "Não há nada aquí. Parece que você entrou mal o URL ou já não existe. Mas você pode continuar a navegar pelas páginas da barra superior...",
         "fr": "Il n'y a rien ici. Il semble que vous ayez mal entré l'URL ou n'existe plus. Mais vous pouvez continuer à parcourir les onglets de la barre supérieure...",
         "de": "Hier ist nichts. Es scheint, dass Sie die URL falsch eingegeben haben oder nicht mehr existiert. Aber Sie können die Top-Bar-Tabs durchsuchen...",
         "ru": "Здесь ничего нет. Кажется, вы неправильно ввели URL или больше не существует. Но вы можете продолжать просматривать верхние вкладки бара ...",
@@ -11922,7 +11909,7 @@
     },
     "panel_0008": {
         "en": "... Redirecting to integration settings.",
-        "es": "... Redirigiendo a la configuracion de integracion.",
+        "es": "... Redirigiendo a la configuracion de integración.",
         "pt": "... Redirigindo à configuração de integração.",
         "fr": "... en redirigeant la configuration d'intégration.",
         "de": "... durch Umleitung der Integrationskonfiguration.",
@@ -12117,7 +12104,7 @@
     },
     "panel_0023": {
         "en": "Latin America",
-        "es": "America Latina",
+        "es": "América Latina",
         "pt": "América Latina",
         "fr": "Amérique latine",
         "de": "Lateinamerika",
@@ -12143,8 +12130,8 @@
     },
     "panel_0025": {
         "en": "Performance analytics and metrics",
-        "es": "Analiticas y metricas de rendimiento",
-        "pt": "Analiticas e metricas de desempenho",
+        "es": "Analíticas y métricas de rendimiento",
+        "pt": "Analíticas e métricas de desempenho",
         "fr": "Analyse et mesures des performances",
         "de": "Analyse und Leistungsmetrik",
         "ru": "Аналитика и показатели эффективности",
@@ -12208,7 +12195,7 @@
     },
     "panel_0030": {
         "en": "Asia-Pacific",
-        "es": "Asia-Pacifico",
+        "es": "Asia-Pacífico",
         "pt": "Ásia-Pacifico",
         "fr": "Asie-Pacifique",
         "de": "Asien-Pazifik",
@@ -12221,7 +12208,7 @@
     },
     "panel_0031": {
         "en": "Two-Factor Authentication (2FA)",
-        "es": "Autenticacion en Dos Pasos (2FA)",
+        "es": "Autenticación en Dos Pasos (2FA)",
         "pt": "Autenticação em Dois Passos (2FA)",
         "fr": "Authentification en deux étapes (2FA)",
         "de": "Authentifizierung in zwei Schritten (2FA)",
@@ -12442,16 +12429,16 @@
     },
     "panel_0048": {
         "en": "Change Password",
-        "es": "Cambiar Contrasena",
-        "pt": "Mudar o Contrasena",
+        "es": "Cambiar Contraseña",
+        "pt": "Mudar o Contraseña",
         "fr": "Changer de contrasène",
-        "de": "Verändern Sie Contrasena",
+        "de": "Verändern Sie Contraseña",
         "ru": "Смена контрастов",
-        "hi": "Contrasena",
+        "hi": "Contraseña",
         "ja": "変更コントラセナ",
-        "zh": "改变 Contrasena",
-        "ko": "Contrasena 변경",
-        "ar": "Change Contrasena"
+        "zh": "改变 Contraseña",
+        "ko": "Contraseña 변경",
+        "ar": "Change Contraseña"
     },
     "panel_0049": {
         "en": "Campaigns",
@@ -12520,8 +12507,8 @@
     },
     "panel_0054": {
         "en": "Category",
-        "es": "Categoria",
-        "pt": "Categoria: Condado de",
+        "es": "Categoría",
+        "pt": "Categoría: Condado de",
         "fr": "Catégorie",
         "de": "Kategorie",
         "ru": "Категория",
@@ -12663,7 +12650,7 @@
     },
     "panel_0065": {
         "en": "Connect X (Twitter) campaigns for promotion and advanced segmentation.",
-        "es": "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.",
+        "es": "Conecta campañas de X (Twitter) para promoción y segmentacion avanzada.",
         "pt": "Liga sinos de X (Twitter) para promoção e segmentação avançada.",
         "fr": "Connectez les cloches X (Twitter) pour une promotion et une segmentation avancées.",
         "de": "Schließen Sie X (Twitter) Glocken für Fortgeschrittene Promotion und Segmentierung an.",
@@ -12689,7 +12676,7 @@
     },
     "panel_0067": {
         "en": "Connect your marketing and automation tools",
-        "es": "Conecta tus herramientas de marketing y automatizacion",
+        "es": "Conecta tus herramientas de marketing y automatización",
         "pt": "Ligar as suas ferramentas de marketing e máquinas",
         "fr": "Connectez vos outils de marketing et d'automatisation",
         "de": "Verbinden Sie Ihre Marketing- und Automatisierungswerkzeuge",
@@ -12728,7 +12715,7 @@
     },
     "panel_0070": {
         "en": "Advanced configuration saved successfully!",
-        "es": "Configuracion avanzada guardada exitosamente!",
+        "es": "Configuración avanzada guardada exitosamente!",
         "pt": "Configuração Avançada Gravada com sucesso!",
         "fr": "Configuration avancée sauvegardée avec succès !",
         "de": "Erweiterte Konfiguration erfolgreich gespeichert!",
@@ -12741,7 +12728,7 @@
     },
     "panel_0071": {
         "en": "Configuration exported as JSON!",
-        "es": "Configuracion exportada como JSON!",
+        "es": "Configuración exportada como JSON!",
         "pt": "Configuração exportada como JSON!",
         "fr": "Configuration exportée comme JSON!",
         "de": "Konfiguration exportiert als JSON!",
@@ -12754,7 +12741,7 @@
     },
     "panel_0072": {
         "en": "Settings managed by the system administrator. Contact support for critical changes.",
-        "es": "Configuracion gestionada por el administrador del sistema. Contacta a soporte para cambios criticos.",
+        "es": "Configuración gestionada por el administrador del sistema. Contacta a soporte para cambios críticos.",
         "pt": "Configuração gerida pelo administrador do sistema. Contacte o suporte para alterações criticas.",
         "fr": "Configuration gérée par l'administrateur du système. Contactez le soutien pour les changements critiques.",
         "de": "Konfiguration durch Systemadministrator verwaltet. Ansprechpartner für kritische Änderungen.",
@@ -12780,7 +12767,7 @@
     },
     "panel_0074": {
         "en": "Confirm new password",
-        "es": "Confirmar nueva contrasena",
+        "es": "Confirmar nueva contraseña",
         "pt": "Confirmar uma nova contra-sena",
         "fr": "Confirmer le nouveau mot de passe",
         "de": "Neues Passwort bestätigen",
@@ -12793,8 +12780,8 @@
     },
     "panel_0075": {
         "en": "Current password",
-        "es": "Contrasena actual",
-        "pt": "Contrasena Actual",
+        "es": "Contraseña actual",
+        "pt": "Contraseña Actual",
         "fr": "Contexte actuel",
         "de": "Aktueller Hintergrund",
         "ru": "Текущая ситуация",
@@ -12806,8 +12793,8 @@
     },
     "panel_0076": {
         "en": "Password changed successfully!",
-        "es": "Contrasena cambiada exitosamente!",
-        "pt": "Contrasena mudada com sucesso!",
+        "es": "Contraseña cambiada exitosamente!",
+        "pt": "Contraseña mudada com sucesso!",
         "fr": "Mot de passe modifié avec succès !",
         "de": "Passwort erfolgreich geändert!",
         "ru": "Пароль успешно изменился!",
@@ -12923,8 +12910,8 @@
     },
     "panel_0085": {
         "en": "Credits",
-        "es": "Creditos",
-        "pt": "Creditos",
+        "es": "Créditos",
+        "pt": "Créditos",
         "fr": "Creeds",
         "de": "Kreide",
         "ru": "Криды",
@@ -12949,8 +12936,8 @@
     },
     "panel_0087": {
         "en": "Define demographic segments for your campaigns",
-        "es": "Define segmentos demograficos para tus campañas",
-        "pt": "Define segmentos demograficos para suas campanhas",
+        "es": "Define segmentos demográficos para tus campañas",
+        "pt": "Define segmentos demográficos para suas campanhas",
         "fr": "Définir des segments démographiques pour vos campagnes",
         "de": "Definieren Sie demografische Segmente für Ihre Kampagnen",
         "ru": "Определите демографические сегменты для ваших кампаний",
@@ -13040,8 +13027,8 @@
     },
     "panel_0094": {
         "en": "Briefly describe the campaign purpose...",
-        "es": "Describe brevemente el proposito de la campaña...",
-        "pt": "Descreve brevemente o proposito da campanha...",
+        "es": "Describe brevemente el propósito de la campaña...",
+        "pt": "Descreve brevemente o propósito da campanha...",
         "fr": "Il décrit brièvement le but de la campagne...",
         "de": "Er beschreibt kurz den Zweck der Kampagne...",
         "ru": "Он кратко описывает цель кампании...",
@@ -13053,7 +13040,7 @@
     },
     "panel_0095": {
         "en": "Description",
-        "es": "Descripcion",
+        "es": "Descripción",
         "pt": "Descriptação",
         "fr": "Désignation des marchandises",
         "de": "Warenbezeichnung",
@@ -13105,7 +13092,7 @@
     },
     "panel_0099": {
         "en": "Mailing Address",
-        "es": "Direccion Postal",
+        "es": "Dirección Postal",
         "pt": "Endereço Postal",
         "fr": "Adresse postale",
         "de": "Postanschrift",
@@ -13118,16 +13105,16 @@
     },
     "panel_0100": {
         "en": "Billing Address",
-        "es": "Direccion de Facturacion",
+        "es": "Dirección de Facturación",
         "pt": "Endereço de Faturação",
-        "fr": "Direction de Facturacion",
-        "de": "Anfahrt Facturacion",
-        "ru": "Направление de Facturacion",
-        "hi": "दिशा de Facturacion",
+        "fr": "Direction de Facturación",
+        "de": "Anfahrt Facturación",
+        "ru": "Направление de Facturación",
+        "hi": "दिशा de Facturación",
         "ja": "方向 de ファクチュラシオン",
         "zh": "事实调查局",
-        "ko": "방향 de Facturacion",
-        "ar": "Direction de Facturacion"
+        "ko": "방향 de Facturación",
+        "ar": "Direction de Facturación"
     },
     "panel_0101": {
         "en": "Directors, Admins | 35-60 | LATAM",
@@ -13157,8 +13144,8 @@
     },
     "panel_0103": {
         "en": "API Documentation",
-        "es": "Documentacion API",
-        "pt": "Documentacion API",
+        "es": "Documentación API",
+        "pt": "Documentación API",
         "fr": "Documentation API",
         "de": "API-Dokumentation",
         "ru": "API документация",
@@ -13196,8 +13183,8 @@
     },
     "panel_0106": {
         "en": "Business owners, 30-60 years",
-        "es": "Duenos de negocio, 30-60 años",
-        "pt": "Duenos de negócio, 30-60 anos",
+        "es": "Dueños de negocio, 30-60 años",
+        "pt": "Dueños de negócio, 30-60 anos",
         "fr": "Propriétaires d'entreprise, 30-60 ans",
         "de": "Betriebsinhaber, 30-60 Jahre alt",
         "ru": "Владельцы бизнеса, 30-60 лет",
@@ -13209,15 +13196,15 @@
     },
     "panel_0107": {
         "en": "Owners, Managers | 30-60 | LATAM",
-        "es": "Duenos, Gerentes | 30-60 | LATAM",
-        "pt": "Duenos, Gerentes | 30-60 | LATAM",
-        "fr": "Duenos, Managentes-124; 30-60-124; LATM",
-        "de": "Duenos, Managentes-124; 30-60-124; LATM",
-        "ru": "Duenos, Managentes-124; 30-60-124; LATM",
-        "hi": "Duenos, Managentes-124; 30-60-124; LATM",
+        "es": "Dueños, Gerentes | 30-60 | LATAM",
+        "pt": "Dueños, Gerentes | 30-60 | LATAM",
+        "fr": "Dueños, Managentes-124; 30-60-124; LATM",
+        "de": "Dueños, Managentes-124; 30-60-124; LATM",
+        "ru": "Dueños, Managentes-124; 30-60-124; LATM",
+        "hi": "Dueños, Managentes-124; 30-60-124; LATM",
         "ja": "デュノス、マナゼス-124; 30-60-124; LATM",
-        "zh": "Duenos,管理-124;30-60-124;LATM",
-        "ko": "Duenos, Managentes-124; 30-60-124; LATM",
+        "zh": "Dueños,管理-124;30-60-124;LATM",
+        "ko": "Dueños, Managentes-124; 30-60-124; LATM",
         "ar": "Dunos, Managentes-124; 30-60-124; LATM"
     },
     "panel_0108": {
@@ -13261,7 +13248,7 @@
     },
     "panel_0111": {
         "en": "Education",
-        "es": "Educacion",
+        "es": "Educación",
         "pt": "Educação",
         "fr": "Éducation",
         "de": "Bildung",
@@ -13365,8 +13352,8 @@
     },
     "panel_0119": {
         "en": "Tech Companies",
-        "es": "Empresas Tecnologicas",
-        "pt": "Empresas Tecnologicas",
+        "es": "Empresas Tecnológicas",
+        "pt": "Empresas Tecnológicas",
         "fr": "Entreprises technologiques",
         "de": "Technologieunternehmen",
         "ru": "Технологические компании",
@@ -13378,8 +13365,8 @@
     },
     "panel_0120": {
         "en": "Engagement - $75/day - Paused",
-        "es": "Engagement - $75/dia - Pausada",
-        "pt": "Engagement - $75/dia - Pausada",
+        "es": "Engagement - $75/día - Pausada",
+        "pt": "Engagement - $75/día - Pausada",
         "fr": "Engagement - 75 $ / jour - Pausada",
         "de": "Engagement - 75 $ / Tag - Pausada",
         "ru": "Помолвка - $75/сутки - Паусада",
@@ -13586,7 +13573,7 @@
     },
     "panel_0136": {
         "en": "Export Configuration",
-        "es": "Exportar Configuracion",
+        "es": "Exportar Configuración",
         "pt": "Exportar a Configuração",
         "fr": "Exporter la configuration",
         "de": "Export Konfiguration",
@@ -13703,7 +13690,7 @@
     },
     "panel_0145": {
         "en": "Sync Frequency",
-        "es": "Frecuencia de Sincronizacion",
+        "es": "Frecuencia de Sincronización",
         "pt": "Frequência de Sincronização",
         "fr": "Fréquence de synchronisation",
         "de": "Frequenz der Synchronisation",
@@ -13781,7 +13768,7 @@
     },
     "panel_0151": {
         "en": "Lead Generation",
-        "es": "Generacion de Leads",
+        "es": "Generación de Leads",
         "pt": "Gerador de Leads",
         "fr": "Production de plombs",
         "de": "Leads Generation",
@@ -13807,7 +13794,7 @@
     },
     "panel_0153": {
         "en": "Manage your personal information and payment methods",
-        "es": "Gestiona tu informacion personal y metodos de pago",
+        "es": "Gestióna tu información personal y metodos de pago",
         "pt": "Gera a sua informação pessoal e metodos de pagamento",
         "fr": "Gérer vos informations personnelles et méthodes de paiement",
         "de": "Verwalten Sie Ihre persönlichen Daten und Zahlungsmethoden",
@@ -13820,7 +13807,7 @@
     },
     "panel_0154": {
         "en": "Manage",
-        "es": "Gestionar",
+        "es": "Gestiónar",
         "pt": "Gerir",
         "fr": "Gérer",
         "de": "Verwalten",
@@ -13846,7 +13833,7 @@
     },
     "panel_0156": {
         "en": "Government / Public Sector",
-        "es": "Gobierno / Sector Publico",
+        "es": "Gobierno / Sector Público",
         "pt": "Governo / Sector Público",
         "fr": "Gouvernement / secteur public",
         "de": "Regierung / Öffentlicher Sektor",
@@ -13898,7 +13885,7 @@
     },
     "panel_0160": {
         "en": "Save Advanced Configuration",
-        "es": "Guardar Configuracion Avanzada",
+        "es": "Guardar Configuración Avanzada",
         "pt": "Gravar a Configuração Avançada",
         "fr": "Enregistrer les paramètres avancés",
         "de": "Erweiterte Einstellungen speichern",
@@ -14030,7 +14017,7 @@
         "en": "IT Managers, CTOs - 25-55 years",
         "es": "IT Managers, CTOs - 25-55 años",
         "pt": "IT Managers, CTOs - 25-55 anos",
-        "fr": "Gestionnaires de TI, CTUS - 25-55 ans",
+        "fr": "Gestiónnaires de TI, CTUS - 25-55 ans",
         "de": "IT-Manager, CTUS - 25-55 Jahre",
         "ru": "ИТ-менеджеры, CTUS - 25-55 лет",
         "hi": "आईटी प्रबंधक, सीटीयूएस - 25-55 वर्ष",
@@ -14043,7 +14030,7 @@
         "en": "IT Managers, CTOs | 25-55 | LATAM, NA",
         "es": "IT Managers, CTOs | 25-55 | LATAM, NA",
         "pt": "IT Managers, CTOs | 25-55 | LATAM, NA",
-        "fr": "Gestionnaires des TI, CTO-124; 25-55-124; LATAM, NA",
+        "fr": "Gestiónnaires des TI, CTO-124; 25-55-124; LATAM, NA",
         "de": "IT-Manager, CTO-124; 25-55-124; LATAM, NA",
         "ru": "ИТ-менеджеры, CTO-124; 25-55-124; LATAM, NA",
         "hi": "आईटी प्रबंधक, CTO-124; 25-55-124; LATAM, NA",
@@ -14093,7 +14080,7 @@
     },
     "panel_0175": {
         "en": "Contact Information",
-        "es": "Informacion de Contacto",
+        "es": "Información de Contacto",
         "pt": "Informações de Contacto",
         "fr": "Coordonnées",
         "de": "Kontakt Informationen",
@@ -14106,7 +14093,7 @@
     },
     "panel_0176": {
         "en": "Account information saved successfully!",
-        "es": "Informacion de cuenta guardada exitosamente!",
+        "es": "Información de cuenta guardada exitosamente!",
         "pt": "Informações de conta gravadas com sucesso!",
         "fr": "Informations de compte sauvegardées avec succès!",
         "de": "Kontoinformationen erfolgreich gespeichert!",
@@ -14119,7 +14106,7 @@
     },
     "panel_0177": {
         "en": "Enter your current password",
-        "es": "Ingresa tu contrasena actual",
+        "es": "Ingresa tu contraseña actual",
         "pt": "Introduza sua contra-sena actual",
         "fr": "Saisissez votre mot de passe actuel",
         "de": "Geben Sie Ihr aktuelles Passwort ein",
@@ -14132,7 +14119,7 @@
     },
     "panel_0178": {
         "en": "Enter an email address",
-        "es": "Ingresa un correo electronico",
+        "es": "Ingresa un correo electrónico",
         "pt": "Introduza um e-mail",
         "fr": "Entrez un courriel",
         "de": "Eine elektronische Post eingeben",
@@ -14184,7 +14171,7 @@
     },
     "panel_0182": {
         "en": "Enter a new password",
-        "es": "Ingresa una nueva contrasena",
+        "es": "Ingresa una nueva contraseña",
         "pt": "Introduza uma nova contra-sena",
         "fr": "Saisissez un nouveau mot de passe",
         "de": "Geben Sie ein neues Passwort ein",
@@ -14275,7 +14262,7 @@
     },
     "panel_0189": {
         "en": "Engagement",
-        "es": "Interaccion",
+        "es": "Interacción",
         "pt": "Interacção",
         "fr": "Interactions",
         "de": "Interaktion",
@@ -14314,7 +14301,7 @@
     },
     "panel_0192": {
         "en": "Young Gamers",
-        "es": "Jovenes Gamers",
+        "es": "Jóvenes Gamers",
         "pt": "Jovem Gamers",
         "fr": "Jeunes joueurs",
         "de": "Junge Gamer",
@@ -14340,8 +14327,8 @@
     },
     "panel_0194": {
         "en": "Password must be at least 8 characters",
-        "es": "La contrasena debe tener al menos 8 caracteres",
-        "pt": "A contrasena deve ter pelo menos 8 caracteres",
+        "es": "La contraseña debe tener al menos 8 caracteres",
+        "pt": "A contraseña deve ter pelo menos 8 caracteres",
         "fr": "Le mot de passe doit avoir au moins 8 caractères",
         "de": "Das Passwort muss mindestens 8 Zeichen haben",
         "ru": "Пароль должен иметь не менее 8 символов",
@@ -14366,7 +14353,7 @@
     },
     "panel_0196": {
         "en": "Passwords do not match",
-        "es": "Las contrasenas no coinciden",
+        "es": "Las contraseñas no coinciden",
         "pt": "As contra-senas não coincidem",
         "fr": "Les mots de passe ne correspondent pas",
         "de": "Passwörter passen nicht",
@@ -14379,9 +14366,9 @@
     },
     "panel_0197": {
         "en": "Global Budget Limit (COP)",
-        "es": "Limite de Presupuesto Global (COP)",
-        "pt": "Limite do Orçamento Global (COP)",
-        "fr": "Limite budgétaire globale (COP)",
+        "es": "Límite de Presupuesto Global (COP)",
+        "pt": "Límite do Orçamento Global (COP)",
+        "fr": "Límite budgétaire globale (COP)",
         "de": "Global Budget Limit (COP)",
         "ru": "Глобальный бюджетный лимит (COP)",
         "hi": "वैश्विक बजट सीमा (COP)",
@@ -14418,8 +14405,8 @@
     },
     "panel_0200": {
         "en": "Detailed performance charts will be available here.",
-        "es": "Los graficos detallados de rendimiento estaran disponibles aqui.",
-        "pt": "Os graficos detalhados de desempenho estão disponíveis aqui.",
+        "es": "Los gráficos detallados de rendimiento estarán disponibles aquí.",
+        "pt": "Os gráficos detalhados de desempenho estão disponíveis aquí.",
         "fr": "Des graphiques de performance détaillés seront disponibles ici.",
         "de": "Detaillierte Performance-Grafiken finden Sie hier.",
         "ru": "Подробная графика производительности будет доступна здесь.",
@@ -14535,8 +14522,8 @@
     },
     "panel_0209": {
         "en": "Payment Methods",
-        "es": "Metodos de Pago",
-        "pt": "Metodos de Pagamento",
+        "es": "Métodos de Pago",
+        "pt": "Métodos de Pagamento",
         "fr": "Modalités de paiement",
         "de": "Zahlungsmethoden",
         "ru": "Методы оплаты",
@@ -14587,7 +14574,7 @@
     },
     "panel_0213": {
         "en": "Newsletter / Updates",
-        "es": "Newsletter / Actualizaciones",
+        "es": "Newsletter / Actualizaciónes",
         "pt": "Newsletter / Actualizações",
         "fr": "Newsletter / Mises à jour",
         "de": "Newsletter / Updates",
@@ -14665,7 +14652,7 @@
     },
     "panel_0219": {
         "en": "North America",
-        "es": "Norte America",
+        "es": "Norte América",
         "pt": "Norte América",
         "fr": "Amérique du Nord",
         "de": "Nordamerika",
@@ -14756,7 +14743,7 @@
     },
     "panel_0226": {
         "en": "New password",
-        "es": "Nueva contrasena",
+        "es": "Nueva contraseña",
         "pt": "Nova Contra-sena",
         "fr": "Nouveau mot de passe",
         "de": "Neues Passwort",
@@ -14886,7 +14873,7 @@
     },
     "panel_0236": {
         "en": "Management Dashboard for Agencies and Marketing Departments",
-        "es": "Panel de Gestion para Agencias y Departamentos de Marketing",
+        "es": "Panel de Gestión para Agencias y Departamentos de Marketing",
         "pt": "Painel de Gestão para Agências e Departamentos de Marketing",
         "fr": "Groupe de gestion des agences de marketing et des ministères",
         "de": "Management Panel für Marketing Agenturen und Abteilungen",
@@ -14912,7 +14899,7 @@
     },
     "panel_0238": {
         "en": "Customize your experience and integration settings",
-        "es": "Personaliza tu experiencia y ajustes de integracion",
+        "es": "Personaliza tu experiencia y ajustes de integración",
         "pt": "Personaliza a sua experiência e ajustes de integração",
         "fr": "Personnalisez votre expérience et les paramètres d'intégration",
         "de": "Passen Sie Ihre Erfahrungen und Integrationseinstellungen an",
@@ -14925,7 +14912,7 @@
     },
     "panel_0239": {
         "en": "Advanced Customization",
-        "es": "Personalizacion Avanzada",
+        "es": "Personalización Avanzada",
         "pt": "Personalização Avançada",
         "fr": "Personnalisation avancée",
         "de": "Erweiterte Personalisierung",
@@ -15016,7 +15003,7 @@
     },
     "panel_0246": {
         "en": "Production",
-        "es": "Produccion",
+        "es": "Producción",
         "pt": "Producção",
         "fr": "Production",
         "de": "Produktion",
@@ -15081,8 +15068,8 @@
     },
     "panel_0251": {
         "en": "Credit Top-up - Large Package",
-        "es": "Recarga de Creditos - Paquete Grande",
-        "pt": "Recarregamento do Creditos - Pacote Grande",
+        "es": "Recarga de Créditos - Paquete Grande",
+        "pt": "Recarregamento do Créditos - Pacote Grande",
         "fr": "Recarga de Credito - Big Package",
         "de": "Recarga de Credito - Großes Paket",
         "ru": "Recarga de Credito - большой пакет",
@@ -15094,8 +15081,8 @@
     },
     "panel_0252": {
         "en": "Credit Top-up - Medium Package",
-        "es": "Recarga de Creditos - Paquete Mediano",
-        "pt": "Recarregamento do Creditos - Pacote Mediano",
+        "es": "Recarga de Créditos - Paquete Mediano",
+        "pt": "Recarregamento do Créditos - Pacote Mediano",
         "fr": "Recarga de Credito - Forfait moyen",
         "de": "Recarga de Credito - Medium Package",
         "ru": "Recarga de Credito - Средний пакет",
@@ -15107,8 +15094,8 @@
     },
     "panel_0253": {
         "en": "Credit Top-up - Small Package",
-        "es": "Recarga de Creditos - Paquete Pequeño",
-        "pt": "Recarregamento do Creditos - Pacote Pequeno",
+        "es": "Recarga de Créditos - Paquete Pequeño",
+        "pt": "Recarregamento do Créditos - Pacote Pequeno",
         "fr": "Recarga de Credito - Petit paquet",
         "de": "Recarga de Credito - Kleines Paket",
         "ru": "Recarga de Credito - небольшой пакет",
@@ -15146,8 +15133,8 @@
     },
     "panel_0256": {
         "en": "Awareness - $50/day - Since 01/04",
-        "es": "Reconocimiento - $50/dia - Desde 01/04",
-        "pt": "Reconhecimento - $50/dia - Desde 01/04",
+        "es": "Reconocimiento - $50/día - Desde 01/04",
+        "pt": "Reconhecimento - $50/día - Desde 01/04",
         "fr": "Reconnaissance - 50 $ / jour - À partir de 01 / 04",
         "de": "Anerkennung - $50 / Tag - Von 01 / 04",
         "ru": "Признание - $50/день - С 01/04",
@@ -15211,8 +15198,8 @@
     },
     "panel_0261": {
         "en": "Geographic Region",
-        "es": "Region Geografica",
-        "pt": "Geografica",
+        "es": "Region Geográfica",
+        "pt": "Geográfica",
         "fr": "Région géographique",
         "de": "Region Geographic",
         "ru": "Географический регион",
@@ -15328,7 +15315,7 @@
     },
     "panel_0270": {
         "en": "Public Sector / NGOs",
-        "es": "Sector Publico / ONGs",
+        "es": "Sector Público / ONGs",
         "pt": "Setor Público / ONGs",
         "fr": "Secteur public / ONG",
         "de": "Öffentlicher Sektor / NGOs",
@@ -15341,8 +15328,8 @@
     },
     "panel_0271": {
         "en": "Segmentation",
-        "es": "Segmentacion",
-        "pt": "Segmentacion",
+        "es": "Segmentación",
+        "pt": "Segmentación",
         "fr": "Segmentation",
         "de": "Segment",
         "ru": "Сегментация",
@@ -15354,7 +15341,7 @@
     },
     "panel_0272": {
         "en": "Audience Segmentation",
-        "es": "Segmentacion de Audiencias",
+        "es": "Segmentación de Audiencias",
         "pt": "Segmentação de Audiências",
         "fr": "Segmentation des audiences",
         "de": "Segmentierung von Anhörungen",
@@ -15445,8 +15432,8 @@
     },
     "panel_0279": {
         "en": "Select a category",
-        "es": "Selecciona una categoria",
-        "pt": "Selecciona uma categoria",
+        "es": "Selecciona una categoría",
+        "pt": "Selecciona uma categoría",
         "fr": "Sélectionner une catégorie",
         "de": "Wählen Sie eine Kategorie",
         "ru": "Выберите категорию",
@@ -15471,8 +15458,8 @@
     },
     "panel_0281": {
         "en": "Select category...",
-        "es": "Seleccionar categoria...",
-        "pt": "Seleccionar a categoria...",
+        "es": "Seleccionar categoría...",
+        "pt": "Seleccionar a categoría...",
         "fr": "Sélectionnez la catégorie...",
         "de": "Kategorie auswählen...",
         "ru": "Выберите категорию...",
@@ -15653,7 +15640,7 @@
     },
     "panel_0295": {
         "en": "Billing Only",
-        "es": "Solo Facturacion",
+        "es": "Solo Facturación",
         "pt": "Apenas Faturação",
         "fr": "Seulement",
         "de": "Nur Facting",
@@ -15666,7 +15653,7 @@
     },
     "panel_0296": {
         "en": "Upload images, videos and documents for your campaigns",
-        "es": "Sube imagenes, videos y documentos para tus campañas",
+        "es": "Sube imágenes, videos y documentos para tus campañas",
         "pt": "Sube imagens, vídeos e documentos para suas campanhas",
         "fr": "Télécharger des images, vidéos et documents pour vos campagnes",
         "de": "Bilder, Videos und Dokumente für Ihre Kampagnen hochladen",
@@ -15744,8 +15731,8 @@
     },
     "panel_0302": {
         "en": "Technology",
-        "es": "Tecnologia",
-        "pt": "Tecnologia",
+        "es": "Tecnología",
+        "pt": "Tecnología",
         "fr": "Technologie",
         "de": "Technologie",
         "ru": "Технология",
@@ -15835,8 +15822,8 @@
     },
     "panel_0309": {
         "en": "Traffic - $120/day - Since 15/03",
-        "es": "Trafico - $120/dia - Desde 15/03",
-        "pt": "Trafico - $120/dia - De 15/03",
+        "es": "Tráfico - $120/día - Desde 15/03",
+        "pt": "Tráfico - $120/día - De 15/03",
         "fr": "Traffic - 120 $ / jour - De 15 / 03",
         "de": "Traffico - $120 / Tag - Von 15 / 03",
         "ru": "Трафико - $120/сутки - С 15/03",
@@ -15848,8 +15835,8 @@
     },
     "panel_0310": {
         "en": "Website Traffic",
-        "es": "Trafico al Sitio Web",
-        "pt": "Trafico o Site",
+        "es": "Tráfico al Sitio Web",
+        "pt": "Tráfico o Site",
         "fr": "Je vends sur le site",
         "de": "Ich verkaufe an die Website",
         "ru": "Продаю на сайте",
@@ -15939,8 +15926,8 @@
     },
     "panel_0317": {
         "en": "Last Used",
-        "es": "Ultimo Uso",
-        "pt": "Ultimo Uso",
+        "es": "Último Uso",
+        "pt": "Último Uso",
         "fr": "Dernière utilisation",
         "de": "Letzte Verwendung",
         "ru": "Последнее использование",
@@ -15952,8 +15939,8 @@
     },
     "panel_0318": {
         "en": "Last 30 days",
-        "es": "Ultimos 30 dias",
-        "pt": "Ultimos 30 dias",
+        "es": "Últimos 30 días",
+        "pt": "Últimos 30 días",
         "fr": "30 derniers jours",
         "de": "Letzte 30 Tage",
         "ru": "Последние 30 дней",
@@ -15965,8 +15952,8 @@
     },
     "panel_0319": {
         "en": "Last 7 days",
-        "es": "Ultimos 7 dias",
-        "pt": "Ultimos 7 dias",
+        "es": "Últimos 7 días",
+        "pt": "Últimos 7 días",
         "fr": "7 derniers jours",
         "de": "Letzte 7 Tage",
         "ru": "Последние 7 дней",
@@ -16043,7 +16030,7 @@
     },
     "panel_0325": {
         "en": "Webhooks & Automation",
-        "es": "Webhooks y Automatizacion",
+        "es": "Webhooks y Automatización",
         "pt": "Webhooks e Automação",
         "fr": "Webhooks et l'automatisation",
         "de": "Webhooks und Automatisierung",
@@ -16329,8 +16316,8 @@
     },
     "panel_0343": {
         "en": "or drag your files here",
-        "es": "o arrastra tus archivos aqui",
-        "pt": "ou arraste os seus ficheiros aqui",
+        "es": "o arrastra tus archivos aquí",
+        "pt": "ou arraste os seus ficheiros aquí",
         "fr": "ou faites glisser vos fichiers ici",
         "de": "oder ziehen sie ihre dateien hier",
         "ru": "или перетащите файлы сюда",
@@ -16355,7 +16342,7 @@
     },
     "panel_0345": {
         "en": "for production",
-        "es": "para produccion",
+        "es": "para producción",
         "pt": "artigos",
         "fr": "pour la production",
         "de": "für die produktion",
@@ -16496,9 +16483,9 @@
         "ko": "QFDM 라이선싱",
         "ar": "ترخيص QFDM"
     },
-    "Gestiona las licencias de tus Terminales Codec para conectar al Backend QFDM": {
+    "Gestióna las licencias de tus Terminales Codec para conectar al Backend QFDM": {
         "en": "Manage your Codec Terminal licenses to connect to the QFDM Backend",
-        "es": "Gestiona las licencias de tus Terminales Codec para conectar al Backend QFDM",
+        "es": "Gestióna las licencias de tus Terminales Codec para conectar al Backend QFDM",
         "pt": "Gerencie as licenças dos seus Terminais Codec para conectar ao Backend QFDM",
         "fr": "Gérez les licences de vos Terminaux Codec pour vous connecter au Backend QFDM",
         "de": "Verwalten Sie Ihre Codec-Terminal-Lizenzen zur Verbindung mit dem QFDM-Backend",
@@ -16509,9 +16496,9 @@
         "ko": "QFDM 백엔드에 연결하기 위한 코덱 터미널 라이선스 관리",
         "ar": "إدارة تراخيص محطات الترميز الخاصة بك للاتصال بخلفية QFDM"
     },
-    "Terminos de Licencia": {
+    "Términos de Licencia": {
         "en": "License Terms",
-        "es": "Terminos de Licencia",
+        "es": "Términos de Licencia",
         "pt": "Termos de Licença",
         "fr": "Conditions de licence",
         "de": "Lizenzbedingungen",
@@ -16574,9 +16561,9 @@
         "ko": "터미널 수",
         "ar": "عدد المحطات"
     },
-    "Periodo de Facturacion": {
+    "Período de Facturación": {
         "en": "Billing Period",
-        "es": "Periodo de Facturacion",
+        "es": "Período de Facturación",
         "pt": "Período de Faturação",
         "fr": "Période de facturation",
         "de": "Abrechnungszeitraum",
@@ -16678,9 +16665,9 @@
         "ko": "터미널",
         "ar": "المحطات"
     },
-    "Expiracion": {
+    "Expiración": {
         "en": "Expiration",
-        "es": "Expiracion",
+        "es": "Expiración",
         "pt": "Expiração",
         "fr": "Expiration",
         "de": "Ablauf",
@@ -17393,8 +17380,8 @@
         "ko": "계정에 추가 보안 계층을 추가하세요",
         "ar": "أضف طبقة أمان إضافية إلى حسابك"
     },
-    "Analiticas y metricas de rendimiento": {
-        "es": "Analiticas y metricas de rendimiento",
+    "Analíticas y métricas de rendimiento": {
+        "es": "Analíticas y métricas de rendimiento",
         "en": "Analytics and performance metrics",
         "pt": "Análises e métricas de desempenho",
         "fr": "Analytiques et métriques de performance",
@@ -17497,8 +17484,8 @@
         "ko": "평균 CTR",
         "ar": "متوسط نسبة النقر إلى الظهور"
     },
-    "Cambiar Contrasena": {
-        "es": "Cambiar Contrasena",
+    "Cambiar Contraseña": {
+        "es": "Cambiar Contraseña",
         "en": "Change Password",
         "pt": "Mudar Senha",
         "fr": "Changer le mot de passe",
@@ -17601,8 +17588,8 @@
         "ko": "Coffee Pie® Ads",
         "ar": "Coffee Pie® Ads"
     },
-    "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.": {
-        "es": "Conecta campanas de X (Twitter) para promocion y segmentacion avanzada.",
+    "Conecta campañas de X (Twitter) para promoción y segmentacion avanzada.": {
+        "es": "Conecta campañas de X (Twitter) para promoción y segmentacion avanzada.",
         "en": "Connect X (Twitter) campaigns for advanced promotion and segmentation.",
         "pt": "Conecte campanhas do X (Twitter) para promoção e segmentação avançada.",
         "fr": "Connectez vos campagnes X (Twitter) pour la promotion et la segmentation avancée.",
@@ -17627,8 +17614,8 @@
         "ko": "실시간 데이터를 보려면 Google 웹로그 분석 또는 Meta Ads 계정을 연결하세요.",
         "ar": "قم بتوصيل حساب Google Analytics أو Meta Ads الخاص بك لرؤية البيانات في الوقت الفعلي."
     },
-    "Conecta tus herramientas de marketing y automatizacion": {
-        "es": "Conecta tus herramientas de marketing y automatizacion",
+    "Conecta tus herramientas de marketing y automatización": {
+        "es": "Conecta tus herramientas de marketing y automatización",
         "en": "Connect your marketing and automation tools",
         "pt": "Conecte suas ferramentas de marketing e automação",
         "fr": "Connectez vos outils de marketing et d'automatisation",
@@ -17744,8 +17731,8 @@
         "ko": "전송 데이터",
         "ar": "بيانات النقل"
     },
-    "Define segmentos demograficos para tus campañas": {
-        "es": "Define segmentos demograficos para tus campañas",
+    "Define segmentos demográficos para tus campañas": {
+        "es": "Define segmentos demográficos para tus campañas",
         "en": "Define demographic segments for your campaigns",
         "pt": "Defina segmentos demográficos para suas campanhas",
         "fr": "Définissez des segments démographiques pour vos campagnes",
@@ -17783,8 +17770,8 @@
         "ko": "디렉터, 관리자 | 35-60 | LATAM",
         "ar": "مدراء، مسؤولون | 35-60 | LATAM"
     },
-    "Documentacion API": {
-        "es": "Documentacion API",
+    "Documentación API": {
+        "es": "Documentación API",
         "en": "API Documentation",
         "pt": "Documentação da API",
         "fr": "Documentation API",
@@ -17809,8 +17796,8 @@
         "ko": "문서",
         "ar": "التوثيق"
     },
-    "Duenos de negocio, 30-60 años": {
-        "es": "Duenos de negocio, 30-60 años",
+    "Dueños de negocio, 30-60 años": {
+        "es": "Dueños de negocio, 30-60 años",
         "en": "Business owners, 30-60 years old",
         "pt": "Donos de negócios, 30-60 anos",
         "fr": "Propriétaires d'entreprise, 30-60 ans",
@@ -17822,8 +17809,8 @@
         "ko": "사업주, 30-60세",
         "ar": "أصحاب الأعمال، 30-60 عامًا"
     },
-    "Duenos, Gerentes | 30-60 | LATAM": {
-        "es": "Duenos, Gerentes | 30-60 | LATAM",
+    "Dueños, Gerentes | 30-60 | LATAM": {
+        "es": "Dueños, Gerentes | 30-60 | LATAM",
         "en": "Owners, Managers | 30-60 | LATAM",
         "pt": "Donos, Gerentes | 30-60 | LATAM",
         "fr": "Propriétaires, Gérants | 30-60 | LATAM",
@@ -17874,10 +17861,10 @@
         "ko": "삭제",
         "ar": "حذف"
     },
-    "Empresas Tecnologicas": {
-        "es": "Empresas Tecnologicas",
+    "Empresas Tecnológicas": {
+        "es": "Empresas Tecnológicas",
         "en": "Technology Companies",
-        "pt": "Empresas de Tecnologia",
+        "pt": "Empresas de Tecnología",
         "fr": "Entreprises technologiques",
         "de": "Technologieunternehmen",
         "ru": "Технологические компании",
@@ -17900,10 +17887,10 @@
         "ko": "유지보수 중",
         "ar": "في الصيانة"
     },
-    "Engagement - $75/dia - Pausada": {
-        "es": "Engagement - $75/dia - Pausada",
+    "Engagement - $75/día - Pausada": {
+        "es": "Engagement - $75/día - Pausada",
         "en": "Engagement - $75/day - Paused",
-        "pt": "Engagement - $75/dia - Pausada",
+        "pt": "Engagement - $75/día - Pausada",
         "fr": "Engagement - 75$/jour - En pause",
         "de": "Engagement - 75$/Tag - Pausiert",
         "ru": "Вовлеченность - 75$/день - Приостановлена",
@@ -17978,8 +17965,8 @@
         "ko": "CSV 내보내기",
         "ar": "تصدير CSV"
     },
-    "Exportar Configuracion": {
-        "es": "Exportar Configuracion",
+    "Exportar Configuración": {
+        "es": "Exportar Configuración",
         "en": "Export Configuration",
         "pt": "Exportar Configuração",
         "fr": "Exporter la configuration",
@@ -18030,8 +18017,8 @@
         "ko": "새 키 생성",
         "ar": "إنشاء مفتاح جديد"
     },
-    "Gestiona tu informacion personal y metodos de pago": {
-        "es": "Gestiona tu informacion personal y metodos de pago",
+    "Gestióna tu información personal y metodos de pago": {
+        "es": "Gestióna tu información personal y metodos de pago",
         "en": "Manage your personal information and payment methods",
         "pt": "Gerencie suas informações pessoais e métodos de pagamento",
         "fr": "Gérez vos informations personnelles et vos modes de paiement",
@@ -18043,8 +18030,8 @@
         "ko": "개인 정보 및 결제 방법 관리",
         "ar": "إدارة معلوماتك الشخصية وطرق الدفع"
     },
-    "Gestionar": {
-        "es": "Gestionar",
+    "Gestiónar": {
+        "es": "Gestiónar",
         "en": "Manage",
         "pt": "Gerenciar",
         "fr": "Gérer",
@@ -18082,8 +18069,8 @@
         "ko": "변경 사항 저장",
         "ar": "حفظ التغييرات"
     },
-    "Guardar Configuracion Avanzada": {
-        "es": "Guardar Configuracion Avanzada",
+    "Guardar Configuración Avanzada": {
+        "es": "Guardar Configuración Avanzada",
         "en": "Save Advanced Configuration",
         "pt": "Salvar Configuração Avançada",
         "fr": "Enregistrer la configuration avancée",
@@ -18173,8 +18160,8 @@
         "ko": "오늘의 노출수",
         "ar": "الانطباعات اليوم"
     },
-    "Informacion de Contacto": {
-        "es": "Informacion de Contacto",
+    "Información de Contacto": {
+        "es": "Información de Contacto",
         "en": "Contact Information",
         "pt": "Informações de Contato",
         "fr": "Coordonnées",
@@ -18277,8 +18264,8 @@
         "ko": "JSON (.json)",
         "ar": "JSON (.json)"
     },
-    "Jovenes Gamers": {
-        "es": "Jovenes Gamers",
+    "Jóvenes Gamers": {
+        "es": "Jóvenes Gamers",
         "en": "Young Gamers",
         "pt": "Jovens Gamers",
         "fr": "Jeunes Gamers",
@@ -18303,10 +18290,10 @@
         "ko": "2분기 출시 - Terminal Pro",
         "ar": "إطلاق الربع الثاني - Terminal Pro"
     },
-    "Los graficos detallados de rendimiento estaran disponibles aqui.": {
-        "es": "Los graficos detallados de rendimiento estaran disponibles aqui.",
+    "Los gráficos detallados de rendimiento estarán disponibles aquí.": {
+        "es": "Los gráficos detallados de rendimiento estarán disponibles aquí.",
         "en": "Detailed performance charts will be available here.",
-        "pt": "Os gráficos de desempenho detalhados estarão disponíveis aqui.",
+        "pt": "Os gráficos de desempenho detalhados estarão disponíveis aquí.",
         "fr": "Les graphiques détaillés de performance seront disponibles ici.",
         "de": "Detaillierte Leistungsdiagramme werden hier verfügbar sein.",
         "ru": "Подробные графики производительности будут доступны здесь.",
@@ -18368,8 +18355,8 @@
         "ko": "Meta Ads",
         "ar": "Meta Ads"
     },
-    "Metodos de Pago": {
-        "es": "Metodos de Pago",
+    "Métodos de Pago": {
+        "es": "Métodos de Pago",
         "en": "Payment Methods",
         "pt": "Métodos de Pagamento",
         "fr": "Modes de paiement",
@@ -18511,8 +18498,8 @@
         "ko": "결제 거부됨",
         "ar": "تم رفض الدفع"
     },
-    "Panel de Gestion para Agencias y Departamentos de Marketing": {
-        "es": "Panel de Gestion para Agencias y Departamentos de Marketing",
+    "Panel de Gestión para Agencias y Departamentos de Marketing": {
+        "es": "Panel de Gestión para Agencias y Departamentos de Marketing",
         "en": "Management Panel for Agencies and Marketing Departments",
         "pt": "Painel de Gestão para Agências e Departamentos de Marketing",
         "fr": "Panneau de gestion pour agences et départements marketing",
@@ -18537,8 +18524,8 @@
         "ko": "일시 중지됨 - 3 assets",
         "ar": "متوقفة مؤقتا - 3 أصول"
     },
-    "Personaliza tu experiencia y ajustes de integracion": {
-        "es": "Personaliza tu experiencia y ajustes de integracion",
+    "Personaliza tu experiencia y ajustes de integración": {
+        "es": "Personaliza tu experiencia y ajustes de integración",
         "en": "Customize your experience and integration settings",
         "pt": "Personalize sua experiência e configurações de integração",
         "fr": "Personnalisez votre expérience et vos paramètres d'intégration",
@@ -18550,8 +18537,8 @@
         "ko": "경험 및 통합 설정 맞춤설정",
         "ar": "تخصيص تجربتك وإعدادات التكامل"
     },
-    "Personalizacion Avanzada": {
-        "es": "Personalizacion Avanzada",
+    "Personalización Avanzada": {
+        "es": "Personalización Avanzada",
         "en": "Advanced Customization",
         "pt": "Personalização Avançada",
         "fr": "Personnalisation avancée",
@@ -18602,8 +18589,8 @@
         "ko": "Pricing-Slide",
         "ar": "Pricing-Slide"
     },
-    "Produccion": {
-        "es": "Produccion",
+    "Producción": {
+        "es": "Producción",
         "en": "Production",
         "pt": "Produção",
         "fr": "Production",
@@ -18693,10 +18680,10 @@
         "ko": "매주 월요일 성과 요약 받기",
         "ar": "تلقي ملخص أداء كل يوم اثنين"
     },
-    "Reconocimiento - $50/dia - Desde 01/04": {
-        "es": "Reconocimiento - $50/dia - Desde 01/04",
+    "Reconocimiento - $50/día - Desde 01/04": {
+        "es": "Reconocimiento - $50/día - Desde 01/04",
         "en": "Awareness - $50/day - Since 04/01",
-        "pt": "Reconhecimento - $50/dia - Desde 01/04",
+        "pt": "Reconhecimento - $50/día - Desde 01/04",
         "fr": "Notoriété - 50$/jour - Depuis le 01/04",
         "de": "Bekanntheit - 50$/Tag - Seit 01/04",
         "ru": "Осведомленность - 50$/день - С 01/04",
@@ -18758,8 +18745,8 @@
         "ko": "성과 요약",
         "ar": "ملخص الأداء"
     },
-    "Segmentacion": {
-        "es": "Segmentacion",
+    "Segmentación": {
+        "es": "Segmentación",
         "en": "Segmentation",
         "pt": "Segmentação",
         "fr": "Segmentation",
@@ -18771,8 +18758,8 @@
         "ko": "세분화",
         "ar": "التقسيم"
     },
-    "Segmentacion de Audiencias": {
-        "es": "Segmentacion de Audiencias",
+    "Segmentación de Audiencias": {
+        "es": "Segmentación de Audiencias",
         "en": "Audience Segmentation",
         "pt": "Segmentação de Público",
         "fr": "Segmentation d'audience",
@@ -18849,8 +18836,8 @@
         "ko": "Conversion API를 통해 캠페인, 전환 및 리마케팅을 동기화합니다.",
         "ar": "مزامنة الحملات والتحويلات وتجديد النشاط التسويقي عبر واجهة برمجة تطبيقات التحويل."
     },
-    "Sube imagenes, videos y documentos para tus campañas": {
-        "es": "Sube imagenes, videos y documentos para tus campañas",
+    "Sube imágenes, videos y documentos para tus campañas": {
+        "es": "Sube imágenes, videos y documentos para tus campañas",
         "en": "Upload images, videos, and documents for your campaigns",
         "pt": "Envie imagens, vídeos e documentos para suas campanhas",
         "fr": "Téléchargez des images, des vidéos et des documents pour vos campagnes",
@@ -18979,10 +18966,10 @@
         "ko": "장바구니 총액",
         "ar": "إجمالي سلة التسوق"
     },
-    "Trafico - $120/dia - Desde 15/03": {
-        "es": "Trafico - $120/dia - Desde 15/03",
+    "Tráfico - $120/día - Desde 15/03": {
+        "es": "Tráfico - $120/día - Desde 15/03",
         "en": "Traffic - $120/day - Since 03/15",
-        "pt": "Tráfego - $120/dia - Desde 15/03",
+        "pt": "Tráfego - $120/día - Desde 15/03",
         "fr": "Trafic - 120$/jour - Depuis le 15/03",
         "de": "Traffic - 120$/Tag - Seit 15/03",
         "ru": "Трафик - 120$/день - С 15/03",
@@ -19057,8 +19044,8 @@
         "ko": "장바구니로 돌아가기",
         "ar": "العودة إلى سلة التسوق"
     },
-    "Webhooks y Automatizacion": {
-        "es": "Webhooks y Automatizacion",
+    "Webhooks y Automatización": {
+        "es": "Webhooks y Automatización",
         "en": "Webhooks and Automation",
         "pt": "Webhooks e Automação",
         "fr": "Webhooks et automatisation",
@@ -19213,10 +19200,10 @@
         "ko": "출시 안 됨",
         "ar": "غير مطلقة"
     },
-    "o arrastra tus archivos aqui": {
-        "es": "o arrastra tus archivos aqui",
+    "o arrastra tus archivos aquí": {
+        "es": "o arrastra tus archivos aquí",
         "en": "or drag your files here",
-        "pt": "ou arraste seus arquivos aqui",
+        "pt": "ou arraste seus arquivos aquí",
         "fr": "ou glissez vos fichiers ici",
         "de": "oder ziehen Sie Ihre Dateien hierher",
         "ru": "или перетащите ваши файлы сюда",
@@ -19239,8 +19226,8 @@
         "ko": "개발용 | Base URL:",
         "ar": "للتطوير | Base URL:"
     },
-    "para produccion |": {
-        "es": "para produccion |",
+    "para producción |": {
+        "es": "para producción |",
         "en": "for production |",
         "pt": "para produção |",
         "fr": "pour la production |",
@@ -19330,8 +19317,8 @@
         "ar": "الإصدار: 1. تاريخ بدء النفاذ: أبريل 2019. آخر تحديث: فبراير 2019.",
         "hi": "संस्करण: 1. प्रभावी तिथि: अप्रैल 2019. अंतिम अपडेट: फरवरी 2019."
     },
-    "GENERALIDADES La presente política se define de conformidad con la entrada en vigencia de la Ley Estatutaria 1581 de 2012 la cual tiene por objeto dictar las disposiciones generales para la protección de datos personales y desarrollar el derecho constitucional que tienen todas las personas a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos o archivos así como el derecho a la información; por tanto, GRUPO 3P1 COLOMBIA S.A.S. teniendo en cuenta su condición de responsable del tratamiento de datos de carácter personal que le asiste, se permite formular el presente texto en aras de dar efectivo cumplimiento a dicha normatividad y en especial para la atención de consultas y reclamos acerca del tratamiento de los datos de carácter personal que recoja y maneje GRUPO 3P1 COLOMBIA S.A.S..": {
-        "es": "GENERALIDADES La presente política se define de conformidad con la entrada en vigencia de la Ley Estatutaria 1581 de 2012 la cual tiene por objeto dictar las disposiciones generales para la protección de datos personales y desarrollar el derecho constitucional que tienen todas las personas a conocer, actualizar y rectificar las informaciones que se hayan recogido sobre ellas en bases de datos o archivos así como el derecho a la información; por tanto, GRUPO 3P1 COLOMBIA S.A.S. teniendo en cuenta su condición de responsable del tratamiento de datos de carácter personal que le asiste, se permite formular el presente texto en aras de dar efectivo cumplimiento a dicha normatividad y en especial para la atención de consultas y reclamos acerca del tratamiento de los datos de carácter personal que recoja y maneje GRUPO 3P1 COLOMBIA S.A.S..",
+    "GENERALIDADES La presente política se define de conformidad con la entrada en vigencia de la Ley Estatutaria 1581 de 2012 la cual tiene por objeto dictar las disposiciones generales para la protección de datos personales y desarrollar el derecho constitucional que tienen todas las personas a conocer, actualizar y rectificar las informaciónes que se hayan recogido sobre ellas en bases de datos o archivos así como el derecho a la información; por tanto, GRUPO 3P1 COLOMBIA S.A.S. teniendo en cuenta su condición de responsable del tratamiento de datos de carácter personal que le asiste, se permite formular el presente texto en aras de dar efectivo cumplimiento a dicha normatividad y en especial para la atención de consultas y reclamos acerca del tratamiento de los datos de carácter personal que recoja y maneje GRUPO 3P1 COLOMBIA S.A.S..": {
+        "es": "GENERALIDADES La presente política se define de conformidad con la entrada en vigencia de la Ley Estatutaria 1581 de 2012 la cual tiene por objeto dictar las disposiciones generales para la protección de datos personales y desarrollar el derecho constitucional que tienen todas las personas a conocer, actualizar y rectificar las informaciónes que se hayan recogido sobre ellas en bases de datos o archivos así como el derecho a la información; por tanto, GRUPO 3P1 COLOMBIA S.A.S. teniendo en cuenta su condición de responsable del tratamiento de datos de carácter personal que le asiste, se permite formular el presente texto en aras de dar efectivo cumplimiento a dicha normatividad y en especial para la atención de consultas y reclamos acerca del tratamiento de los datos de carácter personal que recoja y maneje GRUPO 3P1 COLOMBIA S.A.S..",
         "en": "GENERALITIES This policy is defined in accordance with the entry into force of Statutory Law 1581 of 2012, which aims to adopt the general provisions for the protection of personal data and to develop the constitutional right of all persons to know, update, and rectify the information collected about them in databases or files, as well as the right to information; therefore, GRUPO 3P1 COLOMBIA S.A.S., taking into account its status as responsible for the processing of personal data that assists it, is allowed to formulate this text in order to give effective compliance with said regulations and especially for the attention of consultations and claims about the processing of personal data collected and handled by GRUPO 3P1 COLOMBIA S.A.S..",
         "pt": "GENERALIDADES A presente política é definida em conformidade com a entrada em vigor da Ley 1581 de 2012, que tem por objeto ditar as disposições gerais para a proteção de dados pessoais e desenvolver o direito constitucional que todas as pessoas têm de conhecer, atualizar e retificar as informações recolhidas sobre elas em bases de dados ou arquivos, bem como o direito à informação; portanto, a GRUPO 3P1 COLOMBIA S.A.S., tendo em conta a sua condição de responsável pelo tratamento de dados de caráter pessoal, formula o presente texto para dar cumprimento efetivo a essa regulamentação e, em especial, para o atendimento de consultas e reclamações sobre o tratamento dos dados de caráter pessoal recolhidos e gerenciados pela GRUPO 3P1 COLOMBIA S.A.S..",
         "fr": "GÉNÉRALITÉS La présente politique est définie conformément à l'entrée en vigueur de la Ley 1581 de 2012, qui a pour objet d'édicter les dispositions générales pour la protection des données personnelles et de développer le droit constitutionnel de toute personne à connaître, mettre à jour et rectifier les informations collectées à son sujet dans des bases de données ou des fichiers, ainsi que le droit à l'information ; par conséquent, GRUPO 3P1 COLOMBIA S.A.S., compte tenu de sa qualité de responsable du traitement des données à caractère personnel qui lui incombe, formule le présent texte afin de se conformer efficacement à ladite réglementation et en particulier pour le traitement des demandes et des réclamations concernant le traitement des données à caractère personnel collectées et gérées par GRUPO 3P1 COLOMBIA S.A.S..",
@@ -19980,10 +19967,10 @@
         "ar": "- تقييم جودة الخدمة؛",
         "hi": "- सेवा की गुणवत्ता का मूल्यांकन करना;"
     },
-    "- Desarrollar actividades de mercadeo o promocionales;": {
-        "es": "- Desarrollar actividades de mercadeo o promocionales;",
+    "- Desarrollar actividades de mercadeo o promociónales;": {
+        "es": "- Desarrollar actividades de mercadeo o promociónales;",
         "en": "- Develop marketing or promotional activities;",
-        "pt": "- Desenvolver atividades de marketing ou promocionais;",
+        "pt": "- Desenvolver atividades de marketing ou promociónais;",
         "fr": "- Développer des activités marketing ou promotionnelles ;",
         "de": "- Durchführung von Marketing- oder Werbeaktivitäten;",
         "ru": "- Развивать маркетинговую или рекламную деятельность;",
@@ -19993,10 +19980,10 @@
         "ar": "- تطوير الأنشطة التسويقية أو الترويجية؛",
         "hi": "- विपणन या प्रचार गतिविधियों का विकास करना;"
     },
-    "- Enviar al correo físico, electrónico, celular o dispositivo móvil, vía mensajes de texto (SMS y/o MMS) o a través de cualquier otro medio análogo y/o digital de comunicación creado o por crearse, información comercial, publicitaria o promocional sobre los productos y/o servicios, eventos y/o promociones de tipo comercial o no de estas, con el fin de impulsar, invitar, dirigir, ejecutar, informar y de manera general, llevar a cabo campañas, promociones o concursos de carácter comercial o publicitario, adelantados por GRUPO 3P1 COLOMBIA S.A.S. y/o por de terceras personas;": {
-        "es": "- Enviar al correo físico, electrónico, celular o dispositivo móvil, vía mensajes de texto (SMS y/o MMS) o a través de cualquier otro medio análogo y/o digital de comunicación creado o por crearse, información comercial, publicitaria o promocional sobre los productos y/o servicios, eventos y/o promociones de tipo comercial o no de estas, con el fin de impulsar, invitar, dirigir, ejecutar, informar y de manera general, llevar a cabo campañas, promociones o concursos de carácter comercial o publicitario, adelantados por GRUPO 3P1 COLOMBIA S.A.S. y/o por de terceras personas;",
+    "- Enviar al correo físico, electrónico, celular o dispositivo móvil, vía mensajes de texto (SMS y/o MMS) o a través de cualquier otro medio análogo y/o digital de comunicación creado o por crearse, información comercial, publicitaria o promociónal sobre los productos y/o servicios, eventos y/o promociónes de tipo comercial o no de estas, con el fin de impulsar, invitar, dirigir, ejecutar, informar y de manera general, llevar a cabo campañas, promociónes o concursos de carácter comercial o publicitario, adelantados por GRUPO 3P1 COLOMBIA S.A.S. y/o por de terceras personas;": {
+        "es": "- Enviar al correo físico, electrónico, celular o dispositivo móvil, vía mensajes de texto (SMS y/o MMS) o a través de cualquier otro medio análogo y/o digital de comunicación creado o por crearse, información comercial, publicitaria o promociónal sobre los productos y/o servicios, eventos y/o promociónes de tipo comercial o no de estas, con el fin de impulsar, invitar, dirigir, ejecutar, informar y de manera general, llevar a cabo campañas, promociónes o concursos de carácter comercial o publicitario, adelantados por GRUPO 3P1 COLOMBIA S.A.S. y/o por de terceras personas;",
         "en": "- Send to the physical or electronic mail, cellular or mobile device, via text messages (SMS and/or MMS) or through any other analogous and/or digital means of communication created or to be created, commercial, advertising or promotional information about the products and/or services, events and/or promotions of a commercial nature or otherwise, in order to promote, invite, direct, execute, inform and generally carry out campaigns, promotions or contests of a commercial or advertising nature, conducted by GRUPO 3P1 COLOMBIA S.A.S. and/or by third parties;",
-        "pt": "- Enviar para o correio físico, eletrônico, celular ou dispositivo móvel, via mensagens de texto (SMS e/ou MMS) ou através de qualquer outro meio de comunicação análogo e/ou digital criado ou a ser criado, informações comerciais, publicitárias ou promocionais sobre os produtos e/ou serviços, eventos e/ou promoções de tipo comercial ou não destas, com o fim de impulsionar, convidar, direcionar, executar, informar e, de maneira geral, realizar campanhas, promoções ou concursos de caráter comercial ou publicitário, realizados pela GRUPO 3P1 COLOMBIA S.A.S. e/ou por terceiros;",
+        "pt": "- Enviar para o correio físico, eletrônico, celular ou dispositivo móvel, via mensagens de texto (SMS e/ou MMS) ou através de qualquer outro meio de comunicação análogo e/ou digital criado ou a ser criado, informações comerciais, publicitárias ou promociónais sobre os produtos e/ou serviços, eventos e/ou promoções de tipo comercial ou não destas, com o fim de impulsionar, convidar, direcionar, executar, informar e, de maneira geral, realizar campanhas, promoções ou concursos de caráter comercial ou publicitário, realizados pela GRUPO 3P1 COLOMBIA S.A.S. e/ou por terceiros;",
         "fr": "- Envoyer par courrier physique, électronique, téléphone cellulaire ou appareil mobile, via des messages texte (SMS et/ou MMS) ou par tout autre moyen de communication analogue et/ou numérique existant ou à venir, des informations commerciales, publicitaires ou promotionnelles sur les produits et/ou services, événements et/ou promotions de nature commerciale ou non, afin de promouvoir, inviter, orienter, exécuter, informer et, de manière générale, mener des campagnes, promotions ou concours à caractère commercial ou publicitaire, portés par GRUPO 3P1 COLOMBIA S.A.S. et/ou par des tiers ;",
         "de": "- Versenden von kommerziellen, Werbe- oder Promotionsinformationen über die Produkte und/oder Dienstleistungen, Veranstaltungen und/oder Promotions kommerzieller oder sonstiger Art an die physische Post, E-Mail, das Mobiltelefon oder ein mobiles Gerät per Textnachricht (SMS und/oder MMS) oder über ein anderes analoges und/oder digitales Kommunikationsmittel, das bereits geschaffen wurde oder noch geschaffen wird, um Kampagnen, Promotions oder Wettbewerbe kommerzieller oder werblicher Art, die von der GRUPO 3P1 COLOMBIA S.A.S. und/oder von Dritten durchgeführt werden, voranzutreiben, einzuladen, zu steuern, auszuführen, zu informieren und allgemein durchzuführen;",
         "ru": "- Направлять на почтовый адрес, адрес электронной почты, мобильный телефон или мобильное устройство посредством текстовых сообщений (SMS и/или MMS) или с использованием любых других аналогичных и/или цифровых средств связи, существующих или тех, которые будут созданы в будущем, коммерческую, рекламную или промо-информацию о продуктах и/или услугах, мероприятиях и/или акциях коммерческого характера или иного рода в целях продвижения, приглашения, направления, выполнения, информирования и, в целом, проведения кампаний, акций или конкурсов коммерческого или рекламного характера, организуемых GRUPO 3P1 COLOMBIA S.A.S. и/или третьими лицами;",
@@ -20711,7 +20698,7 @@
     "- Igualmente, le informamos de la posibilidad de ejercitar los correspondientes derechos de acceso, rectificación, cancelación y oposición de conformidad con lo establecido en la Ley 1581 de 2012 ante GRUPO 3P1 COLOMBIA S.A.S. como responsables del manejo de los datos aquí suministrados. Los derechos mencionados los puede ejercitar a través del correo electrónico:": {
         "es": "- Igualmente, le informamos de la posibilidad de ejercitar los correspondientes derechos de acceso, rectificación, cancelación y oposición de conformidad con lo establecido en la Ley 1581 de 2012 ante GRUPO 3P1 COLOMBIA S.A.S. como responsables del manejo de los datos aquí suministrados. Los derechos mencionados los puede ejercitar a través del correo electrónico:",
         "en": "- Likewise, we inform you of the possibility of exercising the corresponding rights of access, rectification, cancellation, and opposition in accordance with the provisions of Ley 1581 de 2012 before GRUPO 3P1 COLOMBIA S.A.S. as responsible for the management of the data provided herein. You may exercise the mentioned rights through the email address:",
-        "pt": "- Da mesma forma, informamos sobre a possibilidade de exercer os direitos correspondentes de acesso, retificação, cancelamento e oposição, de acordo com o estabelecido na Ley 1581 de 2012, perante a GRUPO 3P1 COLOMBIA S.A.S. como responsável pela gestão dos dados aqui fornecidos. Os referidos direitos podem ser exercidos através do e-mail:",
+        "pt": "- Da mesma forma, informamos sobre a possibilidade de exercer os direitos correspondentes de acesso, retificação, cancelamento e oposição, de acordo com o estabelecido na Ley 1581 de 2012, perante a GRUPO 3P1 COLOMBIA S.A.S. como responsável pela gestão dos dados aquí fornecidos. Os referidos direitos podem ser exercidos através do e-mail:",
         "fr": "- De même, nous vous informons de la possibilité d'exercer les droits correspondants d'accès, de rectification, de suppression et d'opposition, conformément aux dispositions de la Ley 1581 de 2012, auprès de GRUPO 3P1 COLOMBIA S.A.S. en tant que responsable de la gestion des données fournies ici. Vous pouvez exercer les droits mentionnés à l'adresse e-mail suivante :",
         "de": "- Ebenso informieren wir Sie über die Möglichkeit, die entsprechenden Rechte auf Auskunft, Berichtigung, Löschung und Widerspruch gemäß den Bestimmungen der Ley 1581 de 2012 gegenüber GRUPO 3P1 COLOMBIA S.A.S. als Verantwortlichem für die Verwaltung der hier bereitgestellten Daten auszuüben. Die genannten Rechte können Sie über folgende E-Mail-Adresse ausüben:",
         "ru": "- Также сообщаем вам о возможности реализации соответствующих прав на доступ, исправление, аннулирование и возражение в соответствии с положениями Ley 1581 de 2012 перед GRUPO 3P1 COLOMBIA S.A.S. как лицом, ответственным за управление предоставленными здесь данными. Вы можете воспользоваться указанными правами по адресу электронной почты:",
@@ -20763,7 +20750,7 @@
     "- Asimismo, le informamos de la posibilidad de ejercitar los correspondientes derechos de acceso, rectificación, cancelación y oposición de conformidad con lo establecido en la Ley 1581 de 2012 ante GRUPO 3P1 COLOMBIA S.A.S. como responsables del manejo de los datos aquí suministrados. Los derechos mencionados los puede ejercitar a través del correo electrónico": {
         "es": "- Asimismo, le informamos de la posibilidad de ejercitar los correspondientes derechos de acceso, rectificación, cancelación y oposición de conformidad con lo establecido en la Ley 1581 de 2012 ante GRUPO 3P1 COLOMBIA S.A.S. como responsables del manejo de los datos aquí suministrados. Los derechos mencionados los puede ejercitar a través del correo electrónico",
         "en": "- Likewise, we inform you of the possibility of exercising the corresponding rights of access, rectification, cancellation, and opposition in accordance with the provisions of Ley 1581 de 2012 before GRUPO 3P1 COLOMBIA S.A.S. as responsible for the management of the data provided herein. You may exercise the mentioned rights through the email address",
-        "pt": "- Da mesma forma, informamos sobre a possibilidade de exercer os direitos correspondentes de acesso, retificação, cancelamento e oposição, de acordo com o estabelecido na Ley 1581 de 2012, perante a GRUPO 3P1 COLOMBIA S.A.S. como responsável pela gestão dos dados aqui fornecidos. Os referidos direitos podem ser exercidos através do e-mail",
+        "pt": "- Da mesma forma, informamos sobre a possibilidade de exercer os direitos correspondentes de acesso, retificação, cancelamento e oposição, de acordo com o estabelecido na Ley 1581 de 2012, perante a GRUPO 3P1 COLOMBIA S.A.S. como responsável pela gestão dos dados aquí fornecidos. Os referidos direitos podem ser exercidos através do e-mail",
         "fr": "- De même, nous vous informons de la possibilité d'exercer les droits correspondants d'accès, de rectification, de suppression et d'opposition, conformément aux dispositions de la Ley 1581 de 2012, auprès de GRUPO 3P1 COLOMBIA S.A.S. en tant que responsable de la gestion des données fournies ici. Vous pouvez exercer les droits mentionnés à l'adresse e-mail suivante",
         "de": "- Ebenso informieren wir Sie über die Möglichkeit, die entsprechenden Rechte auf Auskunft, Berichtigung, Löschung und Widerspruch gemäß den Bestimmungen der Ley 1581 de 2012 gegenüber GRUPO 3P1 COLOMBIA S.A.S. als Verantwortlichem für die Verwaltung der hier bereitgestellten Daten auszuüben. Die genannten Rechte können Sie über folgende E-Mail-Adresse ausüben",
         "ru": "- Также сообщаем вам о возможности реализации соответствующих прав на доступ, исправление, аннулирование и возражение в соответствии с положениями Ley 1581 de 2012 перед GRUPO 3P1 COLOMBIA S.A.S. как лицом, ответственным за управление предоставленными здесь данными. Вы можете воспользоваться указанными правами по адресу электронной почты",
@@ -20812,9 +20799,9 @@
         "ko": "제공자",
         "ar": "المزودون"
     },
-    "Gestiona los Nodos que aportan recursos a la Red QFDM": {
+    "Gestióna los Nodos que aportan recursos a la Red QFDM": {
         "en": "Manage the Nodes that contribute resources to the QFDM Network",
-        "es": "Gestiona los Nodos que aportan recursos a la Red QFDM",
+        "es": "Gestióna los Nodos que aportan recursos a la Red QFDM",
         "pt": "Gerencie os Nós que fornecem recursos à Rede QFDM",
         "fr": "Gérez les Nœuds qui fournissent des ressources au Réseau QFDM",
         "de": "Verwalten Sie die Knoten, die Ressourcen zum QFDM-Netzwerk beitragen",
@@ -20903,9 +20890,9 @@
         "ko": "노드 이름",
         "ar": "اسم العقدة"
     },
-    "IP Publica": {
+    "IP Pública": {
         "en": "Public IP",
-        "es": "IP Publica",
+        "es": "IP Pública",
         "pt": "IP Público",
         "fr": "IP Publique",
         "de": "Öffentliche IP",
@@ -21150,9 +21137,9 @@
         "ko": "활성",
         "ar": "نشط"
     },
-    "Actualizacion de SO": {
+    "Actualización de SO": {
         "en": "OS Update",
-        "es": "Actualizacion de SO",
+        "es": "Actualización de SO",
         "pt": "Atualização de SO",
         "fr": "Mise à jour du Système",
         "de": "Betriebssystem-Update",
@@ -21306,9 +21293,9 @@
         "ko": "등록된 노드",
         "ar": "العقد المسجلة"
     },
-    "Creditos Generados este Mes": {
+    "Créditos Generados este Mes": {
         "en": "Credits Earned This Month",
-        "es": "Creditos Generados este Mes",
+        "es": "Créditos Generados este Mes",
         "pt": "Créditos Gerados este Mês",
         "fr": "Crédits Générés ce Mois",
         "de": "Diesen Monat Verdiente Credits",
