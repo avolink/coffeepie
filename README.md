@@ -105,7 +105,6 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
  2035: Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
  2040: 1'000'000'000 active users in the QFDM Network.<br>
  2050: Guaranteed Global Access to a Codec Terminal.<br>
- <br>
  
  💎 PIE Tokens: Contributors earn PIE tokens (TRC20) proportional to verified impact. Tokens carry economic rights (dividends, valuation) and governance votes (when earned through verified labor). Token holders may irreversibly convert their tokens into Coffee Pie Credits at any time via a burning mechanism — retiring both economic and voting rights in exchange for immediately spendable service credits, analogous to the company repurchasing shares with future compute capacity instead of cash. This provides immediate utility to contributors while accruing proportional value to remaining token holders.<br>
  <br>
