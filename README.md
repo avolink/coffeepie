@@ -29,7 +29,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 
   ⌨️ Development Stack:<br>
     - Backend: Rust, Shell/Bash Scripting (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel).<br>
-    - Frontend: Qt (QML), JavaScript, HTML, CSS (No Frameworks).<br>
+    - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
 
  🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication.<br>
@@ -106,7 +106,16 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
  2040: 1'000'000'000 active users in the QFDM Network.<br>
  2050: Guaranteed Global Access to a Codec Terminal.<br>
  
- 💎 PIE Tokens: Contributors earn PIE tokens (TRC20) proportional to verified impact. Tokens carry economic rights (dividends, valuation) and governance votes (when earned through verified labor). Token holders may irreversibly convert their tokens into Coffee Pie Credits at any time via a burning mechanism — retiring both economic and voting rights in exchange for immediately spendable service credits, analogous to the company repurchasing shares with future compute capacity instead of cash. This provides immediate utility to contributors while accruing proportional value to remaining token holders.<br>
+ 💎 COFP Token: Coffee Pie's native utility token (TRC-20 on TRON) — symbol COFP. Deployed on TRON for ultra-low fees and fast settlement. Smart contract: `blockchain/COFP_Token.sol` — deployment guide at `blockchain/DEPLOY.md`. COFP tokens confer different rights depending on how they were acquired:
+
+  * Contributors (Community Developers): Earn COFP by contributing code, documentation, translations, or community support. Rights: vote on technical decisions (development stack, deprecation policies, implementation priorities); burn tokens for Platform Credits to consume computing power, capped at 100'000 COFP per wallet per month to prevent capacity abuse. **Important**: selling earned COFP on the open market is permitted, but the seller permanently loses all voting rights — the buyer receives an Investor-class token with economic rights only (dividends, valuation), no governance vote. These limits are enforced by the Coffee Pie backend, not the smart contract.
+
+  * Providers (Datacenter Operators): Earn COFP by supplying computing resources to the QFDM Network. Rights: vote on regional pricing (average slice cost, electricity rates, labor costs); burn tokens for fiat currency transferred to their registered bank accounts within 24-72 hours (no burning cap — providers are selling real resources). Provider settlement is an internal ledger operation — provider-earned COFP is not publicly tradeable. **Important**: if a provider transfers COFP to a secondary wallet and sells on the open market, those tokens lose all voting and burning-for-fiat rights — the buyer receives an Investor-class token.
+
+  * Investors (BVC Stock Exchange): Acquire COFP through public markets. Rights: proportional dividends and valuation appreciation. No voting rights in technical or operational decisions; their sole governance function is the binary choice of reinvesting profits versus distributing dividends.
+
+  COFP tokens are convertible into Platform Credits (Cr) via a one-way burning mechanism: holders may irreversibly retire their tokens (and all associated economic rights) in exchange for immediately spendable credits, analogous to a company repurchasing B shares with service obligations instead of cash. Monetary policy uses inflation-targeting: annual emission cap = totalSupply × targetRate (1–5% range), governed by community vote.
+ <br>
  <br>
  BIC Status: A private capital company with socio-environmental consciousness.<br>
 

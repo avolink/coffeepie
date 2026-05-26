@@ -2,6 +2,9 @@ use super::*;
 
 use base64::{Engine as _, engine::general_purpose};
 
+#[cfg(not(debug_assertions))]
+compile_error!("KEM debug keys must not be compiled in release/production builds. Remove any import of shared::crypt::kem::debug from production code.");
+
 // Pre checked base64 Kyber keys, ticket, etc.. for testing
 // Also used on other tests outside this module for consistency
 pub const PRIVATE_KEY_768_TESTING: &str = "TzpPr8sQk1BBjmEFpTqCqdhTNfGdTpK37GBFaQWnigW8AZqMzrlSxRa+grYDdjJ1JiaiuSkpptCtIKsf\

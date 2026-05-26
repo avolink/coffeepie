@@ -1,8 +1,116 @@
-# Coffee Pie Security Audit Report
+# Coffee Pie Security Audits
 
-**Date**: 2026-05-25  
-**Scope**: Full repository audit — secrets, Rust (346 files), Python/Django, website, git history, dependencies/supply chain  
-**Methodology**: White-hat adversarial review across 6 audit vectors, ~3,000 files analyzed  
+> **Latest**: 2026-05-26 — Smart contract + infrastructure black-hat audit (this section)
+> 
+> Archived: [2026-05-25 — Initial full repo audit](#2026-05-25-audit)
+
+---
+
+## 2026-05-26 Audit — Black-Hat Smart Contract & Infrastructure Review
+
+**Scope**: Smart contract (COFP Token), backend authentication, network/streaming, frontend, orchestrator  
+**Methodology**: Hostile actor simulation — find exploitable paths to steal COFP, hijack VMs, compromise infrastructure
+
+### Executive Summary
+
+**4 CRITICAL, 6 HIGH, 9 MEDIUM, 4 LOW** identified. Two CRITICAL issues (SSRF, pickle RCE) carried over unfixed from the 2026-05-25 audit. The new CRITICAL finding is the smart contract's centralized ownership model. Three issues were immediately fixable.
+
+---
+
+### Findings Fixed During Audit
+
+#### V-9 — HIGH: `.env` Not in Root `.gitignore`
+
+**Status**: ✅ FIXED  
+**Finding**: Root `.gitignore` did not include `.env` or `*.env` patterns, creating a recommit risk after the May 25 Firebase key rotation.  
+**Fix**: Added `.env` and `*.env` to `.gitignore`.
+
+#### V-3 — LOW: Precision Loss in Emission Cap (Integer Division)
+
+**Status**: ✅ FIXED  
+**Finding**: `totalSupply * targetInflationBasisPoints / 10000` truncates via integer division. At very low supplies, the cap could round to zero, blocking minting.  
+**Fix**: Added 1e6 scaling factor to preserve precision: `(totalSupply * targetInflationBasisPoints * 1e6) / 10000 / 1e6`.
+
+#### V-1 — CRITICAL: Centralized Owner (Documented Mitigation)
+
+**Status**: ✅ DOCUMENTED (multi-sig migration path in DEPLOY.md)  
+**Finding**: Single `owner` address controls `mint()`, `pause()`, `transferOwnership()`. No timelock, no multi-sig. Key compromise = infinite mint + permanent takeover.  
+**Fix**: DEPLOY.md now mandates Gnosis Safe 4/7 multi-sig with 48h timelock before BVC listing.
+
+---
+
+### Remaining Findings
+
+#### CRITICAL
+
+| ID | Finding | File | Fix |
+|---|---|---|---|
+| V-7 | SSRF via Sunshine PIN endpoint — attacker controls IP, reaches internal hosts | `proxmox_backend/app/api/proxmox_routes.py:182` | Validate IP against Proxmox VM whitelist, block private/reserved ranges |
+| V-22 | Django DEBUG=True, hardcoded SECRET_KEY/RSA_KEY in sample config | `orchestrator/server/src/server/settings.py.sample:16,51,186,191` | Replace with `os.environ.get()`, startup check to refuse known defaults |
+| V-24 | `pickle.loads()` at 30+ orchestrator locations — DB compromise = RCE | `uds/storage.py`, `serializer.py`, `ticket_store.py` | Replace pickle with JSON serialization |
+
+#### HIGH
+
+| ID | Finding | File | Fix |
+|---|---|---|---|
+| V-8 | Default Sunshine credentials (`coffeepie:coffeepie`) | `proxmox_backend/.env.example:19-20` | Generate random per-VM credentials, store in vault |
+| V-13 | TLS bypass (`danger_accept_invalid_certs`) with no network-bound enforcement | `tunnel-server/.../broker/mod.rs:90` | Add runtime check: refuse to start if verify_ssl=false AND URL is not private IP |
+| V-23 | `SESSION_COOKIE_HTTPONLY=False`, missing secure cookie flags | `orchestrator/server/src/server/settings.py.sample:260` | Set HTTPOnly=True, Secure=True, HSTS |
+| V-25 | 6 CSRF-exempt orchestrator endpoints | `uds/REST/dispatcher.py:70`, `auth.py:74,146`, `mfa.py:51` | Remove @csrf_exempt, implement token-based auth instead |
+| V-26 | Proxmox `root@pam` account for API access instead of limited user | `proxmox_backend/.env.example:2-4` | Create dedicated API user with VM power management permissions only |
+
+#### MEDIUM
+
+| ID | Finding | File | Fix |
+|---|---|---|---|
+| V-2 | Front-running of `setTargetInflation` — governance tx visible in mempool | `blockchain/COFP_Token.sol:142` | Commit-reveal or flashbots private mempool for governance transactions |
+| V-10 | No rate limiting on auth/API endpoints | `proxmox_backend/app/api/proxmox_routes.py` | Implement slowapi: 5 req/min for auth, 30 req/min for management |
+| V-16 | Debug KEM private key duplicated across 3 test files, no production guard | `tunnel-server/.../kem/debug.rs:7`, `client/.../tests.rs:8,38` | Add `#[cfg(not(debug_assertions))]` compile-time panic guard |
+| V-17 | Cart data in localStorage — client-side tampering with no server validation | `coffeepie_website/public/pago-seguro.html:262` | Server-side cart validation, fetch order summary from backend |
+| V-18 | XSS via `innerHTML` with unsanitized cart item names | `coffeepie_website/public/pago-seguro.html:262` | Use `textContent` or DOMPurify for cart item rendering |
+| V-19 | CSRF token missing on advertiser login POST | `coffeepie_website/public/js/ads-login.js:17-21` | Add CSRF token header, set SameSite=Strict on cookies |
+| V-20 | Wix/Avo platform code — ~50K lines of unauditable third-party JS | `assets/avo/js/` | Add SRI hashes, audit which Avo scripts are necessary |
+| V-21 | Firebase project ID exposed in committed config | `coffeepie_website/.firebaserc:4` | Use environment variables, ensure strictest Firestore security rules |
+| V-27 | Test KEM key duplicated in 3 files (single point of leak) | `tunnel-server/.../debug.rs`, `client/.../tests.rs` | Centralize in single `test_fixtures.rs` gated behind `#[cfg(test)]` |
+
+#### LOW
+
+| ID | Finding | File | Fix |
+|---|---|---|---|
+| V-4 | `block.timestamp` manipulation — 15s window in 365-day cycle, negligible | `blockchain/COFP_Token.sol:112` | No fix needed (0.000047% margin) |
+| V-12 | Proxmox ticket not cached (per-request re-auth), old tickets never invalidated | `proxmox_backend/app/dependencies.py:11` | Cache ticket for its TTL, call logout on refresh |
+| V-28 | Copr webhook token in upstream Sunshine CI | `sunshine/.github/workflows/ci-copr.yml:33` | Report upstream, unfixable in fork |
+| V-29 | `coffeepie.conf` Nginx config needs manual review | `coffeepie_website/coffeepie.conf` | Verify no hardcoded SSL keys, no exposed /api without auth |
+
+### Positive Findings (No Issues)
+
+- Solidity ^0.8.20 has built-in overflow checks — no integer overflow risk
+- No reentrancy vectors in burn/transfer/mint (all state changes before events)
+- `verify_bearer_token()` uses `firebase_admin.auth.verify_id_token()` — cryptographically sound
+- GameStream protocol encrypts video/audio with AES-128-GCM end-to-end
+- Tunnel server uses ML-KEM-768 post-quantum key exchange (libcrux)
+- No `eval()`, `new Function()`, or YAML load in any web-facing code
+- All CSP, HSTS, and security headers present on production website
+
+### Immediate Action Items (This Week)
+
+1. **SSRF fix** (V-7) — 5-line patch: IP whitelist + block private ranges
+2. **Rotate default Sunshine credentials** (V-8) — generate per-VM random passwords
+3. **Add `.env` to `.gitignore`** (V-9) — done in this audit
+4. **Ensure SESSION_COOKIE_HTTPONLY=True** (V-23) — one-line settings change
+
+### BVC Listing Prerequisites
+
+1. Migrate COFP contract ownership to Gnosis Safe multi-sig (V-1)
+2. Replace pickle serialization with JSON (V-24)
+3. Fix CSRF exemptions on all orchestrator endpoints (V-25)
+4. Complete privacy audit for streaming (GDPR/LGPD compliance
+
+---
+
+## 2026-05-25 Audit — Initial Full Repository Audit
+
+**Scope**: Full repository — secrets, Rust (346 files), Python/Django, website, git history, dependencies  
 
 ---
 
