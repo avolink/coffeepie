@@ -2326,6 +2326,47 @@
             z-index: 10;
         }
 
+        .panel-balance-row {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 10px 20px;
+            background: var(--cp-dark-card);
+            border: 1px solid var(--cp-border);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 1200px) {
+            #panel-balance {
+                display: none !important;
+            }
+
+            .panel-balance-row {
+                display: flex;
+            }
+
+            #panel-balance-label-row {
+                font: var(--font_8);
+                color: #fff;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            #panel-balance-value-row {
+                font: var(--font_6);
+                color: var(--cp-success);
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            #panel-balance-currency-row {
+                font: var(--font_8);
+                color: var(--cp-text-muted);
+                white-space: nowrap;
+            }
+        }
+
         @media (max-width: 1024px) {
             .panel-logout-wrapper {
                 right: 24px;
@@ -2357,21 +2398,17 @@
                 transform: translate(-50%, -50%) !important;
             }
 
-            #panel-balance {
-                right: 16px !important;
-                left: auto !important;
-                top: auto !important;
-                bottom: 6px !important;
-                transform: none !important;
+            .panel-balance-row {
+                margin-bottom: 16px;
+                padding: 8px 16px;
             }
 
-            #balance-value {
-                font-size: 13px !important;
+            #panel-balance-value-row {
+                font-size: 15px !important;
             }
 
-            #balance-currency {
+            #panel-balance-currency-row {
                 font-size: 12px !important;
-                color: #fff !important;
             }
 
             #comp-kbgakxea_r_comp-lzg0bwm6 {
@@ -2406,14 +2443,6 @@
                 left: 50% !important;
                 right: auto !important;
                 transform: translate(-50%, -50%) !important;
-            }
-
-            #panel-balance {
-                right: 16px !important;
-                left: auto !important;
-                top: auto !important;
-                bottom: 6px !important;
-                transform: none !important;
             }
         }
 
@@ -4030,6 +4059,12 @@
                                                 </div>
                                             </section>
                                         </header>
+
+                                        <div class="panel-balance-row">
+                                            <span id="panel-balance-label-row">Balance:</span>
+                                            <span id="panel-balance-value-row">6'000'000</span>
+                                            <span id="panel-balance-currency-row">Cr</span>
+                                        </div>
 
                                         <div class="panel-layout">
                                             <aside class="panel-sidebar">
@@ -6016,14 +6051,20 @@
 
         // Balance utility
         function setBalanceLabel(text) {
-            document.getElementById('balance-label').textContent = text;
+            var headerEl = document.getElementById('balance-label');
+            var rowEl = document.getElementById('panel-balance-label-row');
+            if (headerEl) headerEl.textContent = text;
+            if (rowEl) rowEl.textContent = text;
         }
 
         function updateBalance(amount) {
             var parsed = typeof amount === 'string' ? parseInt(amount.replace(/[^0-9-]/g, ''), 10) : amount;
             if (isNaN(parsed)) return;
             var formatted = Math.abs(parsed).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-            document.getElementById('balance-value').textContent = formatted;
+            var headerEl = document.getElementById('balance-value');
+            var rowEl = document.getElementById('panel-balance-value-row');
+            if (headerEl) headerEl.textContent = formatted;
+            if (rowEl) rowEl.textContent = formatted;
         }
 
         // Toast
