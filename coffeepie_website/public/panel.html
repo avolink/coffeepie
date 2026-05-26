@@ -2365,6 +2365,26 @@
                 color: var(--cp-text-muted);
                 white-space: nowrap;
             }
+
+            #panel-pie-balance-label-row {
+                font: var(--font_8);
+                color: #fff;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            #panel-pie-balance-value-row {
+                font: var(--font_6);
+                color: var(--cp-accent);
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            #panel-pie-balance-currency-row {
+                font: var(--font_8);
+                color: var(--cp-text-muted);
+                white-space: nowrap;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -2373,7 +2393,7 @@
             }
 
             #panel-balance {
-                right: 88px;
+                right: 140px;
             }
         }
 
@@ -2408,6 +2428,16 @@
             }
 
             #panel-balance-currency-row {
+                font-size: 12px !important;
+            }
+
+            #panel-pie-balance-value-row {
+                font-size: 15px !important;
+                color: var(--cp-accent);
+                font-weight: bold;
+            }
+
+            #panel-pie-balance-currency-row {
                 font-size: 12px !important;
             }
 
@@ -4299,10 +4329,18 @@
                                                         <span style="font-weight:bold;"
                                                             class="avoui-rich-text__text">Coffee Pie® Ads</span></p>
                                                 </div>
-                                                <div id="panel-balance" style="position:absolute;right:180px;top:50%;transform:translateY(-50%);z-index:10;display:flex;align-items:center;gap:8px;">
-                                                    <span id="balance-label" style="font:var(--font_8);color:#fff;font-weight:bold;white-space:nowrap;">Balance:</span>
-                                                    <span id="balance-value" style="font:var(--font_6);color:var(--cp-success);font-weight:bold;white-space:nowrap;">6'000'000</span>
-                                                    <span id="balance-currency" style="font:var(--font_8);color:var(--cp-text-muted);white-space:nowrap;">Cr</span>
+                                                <div id="panel-balance" style="position:absolute;right:180px;top:50%;transform:translateY(-50%);z-index:10;display:flex;align-items:center;gap:12px;">
+                                                    <div style="display:flex;align-items:center;gap:6px;">
+                                                        <span id="balance-label" style="font:var(--font_8);color:#fff;font-weight:bold;white-space:nowrap;">Balance:</span>
+                                                        <span id="balance-value" style="font:var(--font_6);color:var(--cp-success);font-weight:bold;white-space:nowrap;">6'000'000</span>
+                                                        <span id="balance-currency" style="font:13px;color:var(--cp-text-muted);white-space:nowrap;">Cr</span>
+                                                    </div>
+                                                    <span style="color:#444;font-weight:200;white-space:nowrap;">|</span>
+                                                    <div style="display:flex;align-items:center;gap:6px;">
+                                                        <span id="pie-balance-label" style="font:var(--font_8);color:#fff;font-weight:bold;white-space:nowrap;">PIE:</span>
+                                                        <span id="pie-balance-value" style="font:var(--font_6);color:var(--cp-accent);font-weight:bold;white-space:nowrap;">250'000</span>
+                                                        <span id="pie-balance-currency" style="font:13px;color:var(--cp-text-muted);white-space:nowrap;">PIE</span>
+                                                    </div>
                                                 </div>
                                                 <select id="panel-lang-select" data-cp-no-translate data-cp-lang-select onchange="if(window.CoffeePieLang)CoffeePieLang.set(this.value)" style="position:absolute;right:100px;top:50%;transform:translateY(-50%);z-index:10;padding:6px 10px;background:var(--cp-dark-card);border:1px solid var(--cp-border);border-radius:6px;color:var(--cp-text);font:var(--font_8);font-size:12px;cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23999%22 stroke-width=%222%22%3E%3Cpath d=%22M6 9l6 6 6-6%22%3E%3C/path%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 6px center;">
                                                     <option value="en">EN</option>
@@ -4334,9 +4372,19 @@
                                         </header>
 
                                         <div class="panel-balance-row">
-                                            <span id="panel-balance-label-row">Balance:</span>
-                                            <span id="panel-balance-value-row">6'000'000</span>
-                                            <span id="panel-balance-currency-row">Cr</span>
+                                            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                                                <div style="display:flex;align-items:center;gap:8px;">
+                                                    <span id="panel-balance-label-row">Balance:</span>
+                                                    <span id="panel-balance-value-row">6'000'000</span>
+                                                    <span id="panel-balance-currency-row">Cr</span>
+                                                </div>
+                                                <span style="color:#444;font-weight:200;">|</span>
+                                                <div style="display:flex;align-items:center;gap:8px;">
+                                                    <span id="panel-pie-balance-label-row">PIE:</span>
+                                                    <span id="panel-pie-balance-value-row">250'000</span>
+                                                    <span id="panel-pie-balance-currency-row">PIE</span>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="panel-layout">
@@ -6247,17 +6295,46 @@
                                                     <div class="stats-grid">
                                                         <div class="stat-card">
                                                             <div class="stat-card-header">
-                                                                <span class="stat-label">Creditos Generados este Mes</span>
+                                                                <span class="stat-label">Tokens Generados este Mes</span>
                                                                 <div class="stat-icon green">
                                                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                                         <circle cx="12" cy="12" r="10" />
-                                                                        <line x1="12" y1="8" x2="12" y2="16" />
-                                                                        <line x1="8" y1="12" x2="16" y2="12" />
+                                                                        <polyline points="12 6 12 12 16 14" />
+                                                                        <polyline points="6 12 12 6 20 8" />
                                                                     </svg>
                                                                 </div>
                                                             </div>
-                                                            <div class="stat-value" id="provCreditsEarned">1'250'000</div>
-                                                            <div class="stat-change up">Cr</div>
+                                                            <div class="stat-value" id="provTokensEarned">100'000</div>
+                                                            <div class="stat-change up">PIE &asymp; 50'000'000 COP</div>
+                                                        </div>
+                                                        <div class="stat-card">
+                                                            <div class="stat-card-header">
+                                                                <span class="stat-label">Disponible para Retiro</span>
+                                                                <div class="stat-icon blue">
+                                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                                                                        <line x1="12" y1="2" x2="12" y2="22" />
+                                                                        <line x1="6" y1="12" x2="18" y2="12" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                            <div class="stat-value" id="provWithdrawable">85'000</div>
+                                                            <div class="stat-change up">PIE &asymp; 42'500'000 COP</div>
+                                                        </div>
+                                                        <div class="stat-card">
+                                                            <div class="stat-card-header">
+                                                                <span class="stat-label">Total Retirado</span>
+                                                                <div class="stat-icon brown">
+                                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                        <polyline points="17 1 21 5 17 9" />
+                                                                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                                                                        <polyline points="7 23 3 19 7 15" />
+                                                                        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                            <div class="stat-value" id="provTotalWithdrawn">250'000</div>
+                                                            <div class="stat-change" style="color:var(--cp-text-muted);">PIE &asymp; 125'000'000 COP historico</div>
                                                         </div>
                                                         <div class="stat-card">
                                                             <div class="stat-card-header">
@@ -6356,6 +6433,108 @@
                                                             </div>
                                                             <div class="stat-value" id="provAvgUptime">99.87%</div>
                                                             <div class="stat-change up">+0.12%</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="content-grid">
+                                                        <div class="section-card">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Retirar Fondos</span>
+                                                            </div>
+                                                            <div style="padding:12px 16px;margin-bottom:16px;background:rgba(33,150,243,0.08);border:1px solid rgba(33,150,243,0.2);border-radius:8px;font:var(--font_8);font-size:13px;color:var(--cp-text-muted);line-height:1.5;">
+                                                                <strong style="color:var(--cp-info);">Quema de Tokens por Dinero Fiat</strong><br>
+                                                                Al solicitar un retiro, tus tokens PIE se queman (burning) y recibes el equivalente en tu moneda local via transferencia bancaria. Tiempo promedio: <strong style="color:var(--cp-text);">24 a 72 horas</strong>.
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Cuenta Bancaria Registrada</label>
+                                                                <input class="form-input" type="text" value="**** **** **** 8842 — Bancolombia" readonly style="background:rgba(255,255,255,0.03);color:var(--cp-text-muted);">
+                                                            </div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell">
+                                                                    <label class="form-label">Cantidad de Tokens a Retirar</label>
+                                                                    <input class="form-input" type="number" id="withdrawAmount" min="1" max="85000" value="1000" placeholder="PIE" oninput="updateWithdrawalPreview()">
+                                                                </div>
+                                                                <div class="form-cell">
+                                                                    <label class="form-label">Recibiras Aproximadamente</label>
+                                                                    <input class="form-input" type="text" id="withdrawFiatPreview" value="&asymp; 500'000 COP" readonly style="background:rgba(255,255,255,0.03);color:var(--cp-accent);font-weight:600;">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Concepto</label>
+                                                                <input class="form-input" type="text" id="withdrawConcept" placeholder="Ej: Pago de electricidad mayo 2026">
+                                                            </div>
+                                                            <button class="btn btn-primary" onclick="requestWithdrawal()" style="width:100%;justify-content:center;">
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                    <polyline points="17 1 21 5 17 9" />
+                                                                    <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                                                                    <polyline points="7 23 3 19 7 15" />
+                                                                    <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                                                                </svg>
+                                                                Solicitar Retiro
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="section-card">
+                                                            <div class="section-card-header">
+                                                                <span class="section-card-title">Historial de Retiros</span>
+                                                                <span style="font:var(--font_8);font-size:12px;color:var(--cp-text-muted);" id="withdrawalCountLabel">5 retiros</span>
+                                                            </div>
+                                                            <div class="invoice-table-wrapper">
+                                                                <table class="invoice-table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>ID Retiro</th>
+                                                                            <th>Fecha</th>
+                                                                            <th>Tokens Quemados</th>
+                                                                            <th>Monto Recibido</th>
+                                                                            <th>Concepto</th>
+                                                                            <th>Estado</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="withdrawalsTableBody">
+                                                                        <tr>
+                                                                            <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00048</code></td>
+                                                                            <td data-label="Fecha">2026-05-20</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">50'000 PIE</td>
+                                                                            <td data-label="Monto Recibido">25'000'000 COP</td>
+                                                                            <td data-label="Concepto">Pago de electricidad Q2</td>
+                                                                            <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00037</code></td>
+                                                                            <td data-label="Fecha">2026-04-15</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">30'000 PIE</td>
+                                                                            <td data-label="Monto Recibido">15'000'000 COP</td>
+                                                                            <td data-label="Concepto">Mantenimiento servidores</td>
+                                                                            <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00025</code></td>
+                                                                            <td data-label="Fecha">2026-03-01</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">70'000 PIE</td>
+                                                                            <td data-label="Monto Recibido">35'000'000 COP</td>
+                                                                            <td data-label="Concepto">Compra de GPUs</td>
+                                                                            <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00018</code></td>
+                                                                            <td data-label="Fecha">2026-02-10</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">60'000 PIE</td>
+                                                                            <td data-label="Monto Recibido">30'000'000 COP</td>
+                                                                            <td data-label="Concepto">Nomina Q1</td>
+                                                                            <td data-label="Estado"><span class="invoice-status paid">Completado</span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td data-label="ID Retiro"><code style="font-size:11px;">WD-2026-00009</code></td>
+                                                                            <td data-label="Fecha">2026-01-05</td>
+                                                                            <td data-label="Tokens Quemados" class="invoice-amount">40'000 PIE</td>
+                                                                            <td data-label="Monto Recibido">20'000'000 COP</td>
+                                                                            <td data-label="Concepto">Ampliacion de almacenamiento</td>
+                                                                            <td data-label="Estado"><span class="invoice-status pending">Pendiente</span></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -6772,6 +6951,23 @@
             var formatted = Math.abs(parsed).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
             var headerEl = document.getElementById('balance-value');
             var rowEl = document.getElementById('panel-balance-value-row');
+            if (headerEl) headerEl.textContent = formatted;
+            if (rowEl) rowEl.textContent = formatted;
+        }
+
+        function setPIEBalanceLabel(text) {
+            var headerEl = document.getElementById('pie-balance-label');
+            var rowEl = document.getElementById('panel-pie-balance-label-row');
+            if (headerEl) headerEl.textContent = text;
+            if (rowEl) rowEl.textContent = text;
+        }
+
+        function updatePIEBalance(amount) {
+            var parsed = typeof amount === 'string' ? parseInt(amount.replace(/[^0-9-]/g, ''), 10) : amount;
+            if (isNaN(parsed)) return;
+            var formatted = Math.abs(parsed).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+            var headerEl = document.getElementById('pie-balance-value');
+            var rowEl = document.getElementById('panel-pie-balance-value-row');
             if (headerEl) headerEl.textContent = formatted;
             if (rowEl) rowEl.textContent = formatted;
         }
@@ -7678,6 +7874,73 @@
 
         (function () {
             populateMaintenanceSelect();
+        })();
+
+        // ─── Withdrawal ──────────────────────────────────────────────────────
+
+        function getPIEBalance() {
+            var el = document.getElementById('pie-balance-value');
+            if (!el) return 0;
+            return parseInt((el.textContent || '0').replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function syncWithdrawMax() {
+            var max = getPIEBalance();
+            var input = document.getElementById('withdrawAmount');
+            if (input) input.max = max;
+        }
+
+        function updateWithdrawalPreview() {
+            var amount = parseInt(document.getElementById('withdrawAmount').value) || 0;
+            var fiat = (amount * 500).toLocaleString('en-US').replace(/,/g, "'");
+            document.getElementById('withdrawFiatPreview').value = '\u2248 ' + fiat + ' COP';
+        }
+
+        function requestWithdrawal() {
+            var amount = parseInt(document.getElementById('withdrawAmount').value) || 0;
+            var concept = document.getElementById('withdrawConcept').value.trim();
+            var max = parseInt(document.getElementById('withdrawAmount').max) || 0;
+
+            if (!amount || amount < 1) { showToast('Ingresa una cantidad valida de tokens'); return; }
+            if (amount > max) { showToast('No tienes suficientes tokens disponibles para retiro'); return; }
+            if (!concept) { showToast('Ingresa un concepto para el retiro'); return; }
+
+            var fiat = (amount * 500).toLocaleString('en-US').replace(/,/g, "'");
+            var now = new Date();
+            var dateStr = now.toISOString().split('T')[0];
+            var id = 'WD-' + now.getFullYear() + '-' + String(now.getTime() % 100000).padStart(5, '0');
+
+            var row = document.createElement('tr');
+            row.innerHTML =
+                '<td data-label="ID Retiro"><code style="font-size:11px;">' + id + '</code></td>' +
+                '<td data-label="Fecha">' + dateStr + '</td>' +
+                '<td data-label="Tokens Quemados" class="invoice-amount">' + amount.toLocaleString('en-US').replace(/,/g, "'") + ' PIE</td>' +
+                '<td data-label="Monto Recibido">' + fiat + ' COP</td>' +
+                '<td data-label="Concepto">' + concept + '</td>' +
+                '<td data-label="Estado"><span class="invoice-status pending">Pendiente</span></td>';
+
+            document.getElementById('withdrawalsTableBody').prepend(row);
+
+            var newBalance = getPIEBalance() - amount;
+            updatePIEBalance(newBalance);
+
+            var withdrawableEl = document.getElementById('provWithdrawable');
+            var currentWithdrawable = parseInt((withdrawableEl.textContent || '0').replace(/[^0-9]/g, '')) - amount;
+            withdrawableEl.textContent = currentWithdrawable.toLocaleString('en-US').replace(/,/g, "'");
+            syncWithdrawMax();
+
+            var count = document.querySelectorAll('#withdrawalsTableBody tr').length;
+            document.getElementById('withdrawalCountLabel').textContent = count + ' retiro' + (count !== 1 ? 's' : '');
+
+            document.getElementById('withdrawAmount').value = '1000';
+            document.getElementById('withdrawConcept').value = '';
+            updateWithdrawalPreview();
+
+            showToast('Retiro solicitado! ID: ' + id + '. Transferencia estimada en 24-72h.');
+        }
+
+        (function () {
+            syncWithdrawMax();
         })();
 
     </script>
