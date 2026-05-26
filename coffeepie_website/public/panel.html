@@ -2288,8 +2288,18 @@
             max-width: 100vw;
         }
 
-        .panel-layout, .panel-main, .panel-sidebar {
+        .panel-layout,
+        .panel-main,
+        .panel-sidebar {
+            overflow-x: hidden;
             max-width: 100vw;
+        }
+
+        .panel-layout *,
+        .panel-main *,
+        .panel-sidebar * {
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         header#comp-kbgakxea {
@@ -2447,6 +2457,10 @@
 
         .tg-checkbox:checked~.tg-knob {
             transform: translateX(22px);
+        }
+
+        label:has(.tg-checkbox) {
+            flex-shrink: 0;
         }
 
         :root {
@@ -3085,6 +3099,203 @@
         }
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
+            #SITE_CONTAINER {
+                padding-left: 5px;
+                padding-right: 5px;
+                box-sizing: border-box;
+            }
+
+            .MW5IWV {
+                left: -5px;
+                width: calc(100% + 10px);
+            }
+
+            .VgO9Yg {
+                left: -5px;
+                width: calc(100% + 10px);
+            }
+
+            .section-card {
+                padding: 12px;
+                min-width: 0;
+            }
+
+            .section-card-header {
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            .section-card-title {
+                font-size: 14px;
+            }
+
+            .content-grid {
+                gap: 10px;
+            }
+
+            .content-grid.three {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 5px 10px;
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            .form-input,
+            select.form-input,
+            textarea.form-input {
+                padding: 6px 8px;
+                font-size: 13px;
+            }
+
+            textarea.form-input {
+                min-height: 60px;
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+            }
+
+            .form-label {
+                font-size: 12px;
+            }
+
+            .stat-card {
+                padding: 10px;
+            }
+
+            .stat-card-header {
+                margin-bottom: 6px;
+            }
+
+            .stat-value {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+
+            .stats-grid {
+                gap: 10px;
+            }
+
+            .campaign-item {
+                padding: 6px 8px;
+                gap: 6px;
+            }
+
+            .campaign-name {
+                font-size: 12px;
+            }
+
+            .campaign-meta {
+                font-size: 10px;
+            }
+
+            .campaign-stat-value {
+                font-size: 14px;
+            }
+
+            .campaign-stat-label {
+                font-size: 10px;
+            }
+
+            .uploaded-assets {
+                gap: 5px;
+            }
+
+            .asset-thumb {
+                width: 100%;
+                min-width: 0;
+                padding: 5px;
+                font-size: 11px;
+            }
+
+            .asset-thumb span {
+                font-size: 10px;
+            }
+
+            .invoice-table-wrapper {
+                margin: 0 -12px;
+            }
+
+            .invoice-table th,
+            .invoice-table td {
+                padding: 6px 4px;
+                font-size: 10px;
+            }
+
+            .pricing-tier-card {
+                padding: 12px;
+            }
+
+            .pricing-tier-range {
+                font-size: 10px;
+            }
+
+            .pricing-tier-count {
+                font-size: 18px;
+            }
+
+            .panel-title {
+                font-size: 20px;
+            }
+
+            .panel-subtitle {
+                font-size: 12px;
+            }
+
+            .panel-header-row {
+                margin-bottom: 16px;
+            }
+
+            .billing-export-menu {
+                min-width: 140px;
+                right: auto;
+                left: 0;
+            }
+
+            .billing-export-menu button {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .billing-export-btn span {
+                font-size: 11px;
+            }
+
+            .toggle-row {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .toggle-label {
+                font-size: 12px;
+            }
+
+            .api-platform-card {
+                padding: 12px;
+            }
+
+            .api-platform-icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+            .api-platform-name {
+                font-size: 13px;
+            }
+
+            .api-platform-desc {
+                font-size: 10px;
+            }
+
             #comp-kbgakxea_r_comp-lz8xhm36 {
                 --l_display: none !important;
             }
