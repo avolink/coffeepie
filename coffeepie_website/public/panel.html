@@ -2787,6 +2787,29 @@
             cursor: pointer;
         }
 
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .form-cell {
+            min-width: 0;
+        }
+
+        .form-row .form-label {
+            margin-bottom: 6px;
+        }
+
+        .form-row .form-input {
+            width: 100%;
+        }
+
+        .modal-footer .btn {
+            min-width: 100px;
+        }
+
         .form-input::placeholder {
             color: #555;
         }
@@ -3135,6 +3158,44 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .modal-card {
+                max-width: calc(100vw - 32px);
+                margin: 16px;
+                border-radius: 12px;
+            }
+
+            .modal-header {
+                padding: 16px 18px;
+            }
+
+            .modal-body {
+                padding: 18px;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px 18px;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .prov-node-name strong {
+                font-size: 14px;
+            }
         }
 
         @media screen and (min-width: 320px) and (max-width: 750px) {
@@ -3350,6 +3411,42 @@
 
             #comp-kbgakxea_r_comp-lzg0bwm6 p.font_0 {
                 font: normal normal normal 13px/1.2em sora, sans-serif !important;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .modal-card {
+                max-width: calc(100vw - 24px);
+                margin: 12px;
+                border-radius: 12px;
+            }
+
+            .modal-body {
+                padding: 16px;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px 16px;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .node-status,
+            .node-maint {
+                font-size: 11px;
+            }
+
+            .node-action-btn {
+                width: 36px;
+                height: 36px;
             }
         }
 
@@ -3572,6 +3669,40 @@
                 max-width: none;
                 font-size: 11px;
                 word-break: break-all;
+            }
+
+            .invoice-table tbody td[data-label="Nodo"] {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .invoice-table tbody td[data-label="Nodo"]::before {
+                margin-right: 0;
+            }
+
+            .invoice-table tbody td[data-label="Recursos"] {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+
+            .invoice-table tbody td[data-label="Recursos"]::before {
+                margin-right: 0;
+            }
+
+            .invoice-table tbody td[data-label="Mantenimiento"] {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .invoice-table tbody td[data-label="Mantenimiento"]::before {
+                margin-right: 0;
+            }
+
+            .invoice-table tbody td[data-label="Acciones"] {
+                justify-content: flex-start;
             }
         }
 
@@ -6183,32 +6314,32 @@
                                                                 <label class="form-label">IP Publica</label>
                                                                 <input class="form-input" type="text" id="nodePublicIP" placeholder="Ej: 190.145.32.100">
                                                             </div>
-                                                            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                                                <div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell">
                                                                     <label class="form-label">Puerto OpenUDS</label>
                                                                     <input class="form-input" type="number" id="nodeOpenUDSPort" value="443" placeholder="443">
                                                                 </div>
-                                                                <div>
+                                                                <div class="form-cell">
                                                                     <label class="form-label">Puerto Sunshine</label>
                                                                     <input class="form-input" type="number" id="nodeSunshinePort" value="47984" placeholder="47984">
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                                                <div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell">
                                                                     <label class="form-label">vCores Totales</label>
                                                                     <input class="form-input" type="number" id="nodeCores" min="1" value="32" placeholder="Ej: 32">
                                                                 </div>
-                                                                <div>
+                                                                <div class="form-cell">
                                                                     <label class="form-label">RAM Total (GB)</label>
                                                                     <input class="form-input" type="number" id="nodeRAM" min="1" value="128" placeholder="Ej: 128">
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                                                <div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell">
                                                                     <label class="form-label">SSD Total (GB)</label>
                                                                     <input class="form-input" type="number" id="nodeSSD" min="1" value="2000" placeholder="Ej: 2000">
                                                                 </div>
-                                                                <div>
+                                                                <div class="form-cell">
                                                                     <label class="form-label">GPU vRAM (MB)</label>
                                                                     <input class="form-input" type="number" id="nodeGPUVRAM" min="0" value="16000" placeholder="Ej: 16000">
                                                                 </div>
@@ -6246,12 +6377,12 @@
                                                                     <option value="">Seleccionar nodo...</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                                                <div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell">
                                                                     <label class="form-label">Fecha Inicio</label>
                                                                     <input class="form-input" type="datetime-local" id="maintenanceStart">
                                                                 </div>
-                                                                <div>
+                                                                <div class="form-cell">
                                                                     <label class="form-label">Fecha Fin</label>
                                                                     <input class="form-input" type="datetime-local" id="maintenanceEnd">
                                                                 </div>
@@ -6433,13 +6564,13 @@
                                                                 <label class="form-label">IP Publica</label>
                                                                 <input class="form-input" type="text" id="modalNodeIP" placeholder="Ej: 190.145.32.100">
                                                             </div>
-                                                            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                                                <div><label class="form-label">vCores</label><input class="form-input" type="number" id="modalNodeCores" value="32"></div>
-                                                                <div><label class="form-label">RAM (GB)</label><input class="form-input" type="number" id="modalNodeRAM" value="128"></div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell"><label class="form-label">vCores</label><input class="form-input" type="number" id="modalNodeCores" value="32"></div>
+                                                                <div class="form-cell"><label class="form-label">RAM (GB)</label><input class="form-input" type="number" id="modalNodeRAM" value="128"></div>
                                                             </div>
-                                                            <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                                                <div><label class="form-label">SSD (GB)</label><input class="form-input" type="number" id="modalNodeSSD" value="2000"></div>
-                                                                <div><label class="form-label">GPU vRAM (MB)</label><input class="form-input" type="number" id="modalNodeGPU" value="16000"></div>
+                                                            <div class="form-row">
+                                                                <div class="form-cell"><label class="form-label">SSD (GB)</label><input class="form-input" type="number" id="modalNodeSSD" value="2000"></div>
+                                                                <div class="form-cell"><label class="form-label">GPU vRAM (MB)</label><input class="form-input" type="number" id="modalNodeGPU" value="16000"></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="form-label">Hipervisor</label>
