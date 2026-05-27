@@ -57,6 +57,9 @@ function doLanguageSwitch(lang) {
     if (window.CoffeePieLang && typeof window.CoffeePieLang.set === 'function') {
         window.CoffeePieLang.set(lang);
     }
+    document.querySelectorAll('iframe').forEach(function(iframe) {
+        try { iframe.contentWindow.postMessage({ type: 'cp-lang-change', lang: lang }, '*'); } catch(e) {}
+    });
 }
 
 function syncAllLanguageSelectors(lang) {

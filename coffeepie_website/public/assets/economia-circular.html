@@ -96,6 +96,7 @@
 <body>
 
     <div class="r-container" id="r-container"></div>
+    <script src="/js/lang.js"></script>
     <script>
         (function() {
             var data = [
@@ -112,23 +113,54 @@
             ];
 
             var container = document.getElementById('r-container');
-            data.forEach(function(item) {
-                var row = document.createElement('div');
-                row.className = 'r-row';
+            var langReady = false;
 
-                var left = document.createElement('div');
-                left.className = 'r-left';
-                left.style.backgroundColor = item.color;
-                left.innerHTML = '<span class="r-id">' + item.id + '</span>' + item.name;
+            function buildDOM() {
+                container.innerHTML = '';
+                data.forEach(function(item) {
+                    var row = document.createElement('div');
+                    row.className = 'r-row';
 
-                var right = document.createElement('div');
-                right.className = 'r-right';
-                right.style.backgroundColor = item.color;
-                right.textContent = item.desc;
+                    var left = document.createElement('div');
+                    left.className = 'r-left';
+                    left.style.backgroundColor = item.color;
+                    left.innerHTML = '<span class="r-id">' + item.id + '</span>' + item.name;
 
-                row.appendChild(left);
-                row.appendChild(right);
-                container.appendChild(row);
+                    var right = document.createElement('div');
+                    right.className = 'r-right';
+                    right.style.backgroundColor = item.color;
+                    right.textContent = item.desc;
+
+                    row.appendChild(left);
+                    row.appendChild(right);
+                    container.appendChild(row);
+                });
+            }
+
+            function applyTranslation(lang) {
+                if (!langReady || !window.CoffeePieLang) return;
+                buildDOM();
+                window.CoffeePieLang.set(lang || window.CoffeePieLang.get());
+            }
+
+            buildDOM();
+
+            // Wait for lang.js dictionary to load
+            var attempts = 0;
+            var retry = setInterval(function() {
+                if (window.CoffeePieLang && typeof window.CoffeePieLang.set === 'function') {
+                    langReady = true;
+                    window.CoffeePieLang.set(window.CoffeePieLang.get());
+                    clearInterval(retry);
+                }
+                if (++attempts > 20) clearInterval(retry);
+            }, 250);
+
+            // Listen for language change from parent page
+            window.addEventListener('message', function(e) {
+                if (e.data && e.data.type === 'cp-lang-change') {
+                    applyTranslation(e.data.lang);
+                }
             });
         })();
     </script>
