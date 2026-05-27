@@ -34261,40 +34261,9 @@
                                                     </div><!--/$-->
                                                 </div>
                                             </section><!--/$--><!--$-->
-                                            <section id="comp-mfq07i5y" tabindex="-1"
-                                                data-block-level-container="Section"
-                                                class="xuzjBY comp-mfq07i5y avoui-section Gzsk0j"
-                                                data-testid="section-container">
-                                                <div id="bgLayers_comp-mfq07i5y" data-hook="bgLayers"
-                                                    data-motion-part="BG_LAYER comp-mfq07i5y" class="MW5IWV">
-                                                    <div data-testid="colorUnderlay" class="LWbAav Kv1aVt"></div>
-                                                    <div id="bgMedia_comp-mfq07i5y"
-                                                        data-motion-part="BG_MEDIA comp-mfq07i5y" class="VgO9Yg"></div>
-                                                </div>
-                                                <div data-testid="responsive-container-content"
-                                                    class="comp-mfq07i5y-container max-width-container"><!--$-->
-                                                    <div id="comp-mfq07q75" data-testid="imageX"
-                                                        class="lyNaha comp-mfq07q75 JdNFxG avoui-image">
-                                                        <div class="h1DYhE" data-motion-part="BG_LAYER comp-mfq07q75">
-                                                            <div data-motion-part="BG_MEDIA comp-mfq07q75"><wow-image
-                                                                    id="img-comp-mfq07q75" data-is-responsive="true"
-                                                                    data-image-info="{&quot;containerId&quot;:&quot;comp-mfq07q75&quot;,&quot;alignType&quot;:&quot;center&quot;,&quot;parallaxSpeed&quot;:1.5,&quot;sourceSets&quot;:[{&quot;focalPoint&quot;:{&quot;x&quot;:50,&quot;y&quot;:50},&quot;crop&quot;:{&quot;x&quot;:3,&quot;y&quot;:0,&quot;width&quot;:249,&quot;height&quot;:556,&quot;svgId&quot;:&quot;&quot;,&quot;flip&quot;:&quot;none&quot;},&quot;displayMode&quot;:&quot;fill&quot;,&quot;scrollEffect&quot;:&quot;none&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 320px) and (max-width: 750px)&quot;}],&quot;imageData&quot;:{&quot;uri&quot;:&quot;557674_61ba392a0c56423faf277ecaf9e13656~mv2.jpg&quot;,&quot;width&quot;:1107,&quot;height&quot;:556,&quot;alt&quot;:&quot;Economia_Circular.jpg&quot;,&quot;name&quot;:&quot;Economia_Circular.jpg&quot;,&quot;displayMode&quot;:&quot;fill&quot;,&quot;scrollEffect&quot;:&quot;none&quot;,&quot;focalPoint&quot;:null},&quot;hasAnimation&quot;:false,&quot;encoding&quot;:&quot;AVIF&quot;,&quot;allowFullGIFTransformation&quot;:false}"
-                                                                    data-has-ssr-src="true"
-                                                                    data-motion-part="BG_IMG comp-mfq07q75"
-                                                                    class="Ux33nC">
-                                                                    <picture>
-                                                                        <source
-                                                                            media="(min-width: 320px) and (max-width: 750px)"
-                                                                            srcset="/assets/avo/downloads/fcadc0c6d3e70ac963193061f59d4d4f.jpg">
-                                                                        <img fetchpriority="high"
-                                                                            src="./acerca-de_files/Economia_Circular.jpg"
-                                                                            alt="Economia_Circular.jpg"
-                                                                            style="object-fit: cover; object-position: 50% 50%; width: 100%;"
-                                                                            data-ssr-src-done="true">
-                                                                    </picture>
-                                                                </wow-image></div>
-                                                        </div>
-                                                    </div><!--/$-->
+                                            <section class="xuzjBY avoui-section Gzsk0j" data-testid="section-container" style="overflow:visible;">
+                                                <div style="max-width:1100px;margin:0 auto;padding:24px 16px;">
+                                                    <iframe src="/assets/economia-circular.html" style="width:100%;height:400px;border:none;display:block;" scrolling="no" title="10 Rs de la Economia Circular" onload="var d=this.contentDocument||this.contentWindow.document;var h=Math.max(d.body.scrollHeight,d.documentElement.scrollHeight);this.style.height=h+'px';"></iframe>
                                                 </div>
                                             </section><!--/$--><!--$-->
                                             <section id="comp-mcgf5ypv" tabindex="-1"
@@ -36602,57 +36571,6 @@
     <script src="/translate.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/main.js"></script>
-    <script>
-        (function() {
-            function replaceImage(img) {
-                if (!img || img.dataset.cpReplaced) return;
-                var parent = img.closest('[class*="lyNaha"], [class*="QebvG3"], [class*="Ux33nC"], picture');
-                var container = parent || img.parentElement;
-                if (!container) return;
-
-                var wrapper = document.createElement('div');
-                wrapper.style.width = '100%';
-
-                var iframe = document.createElement('iframe');
-                iframe.src = '/assets/economia-circular.html';
-                iframe.style.width = '100%';
-                iframe.style.height = window.innerWidth <= 768 ? '440px' : '600px';
-                iframe.style.border = 'none';
-                iframe.style.overflow = 'hidden';
-                iframe.scrolling = 'no';
-                iframe.title = '10 Rs de la Economia Circular';
-                iframe.onload = function() {
-                    try {
-                        var doc = iframe.contentDocument || iframe.contentWindow.document;
-                        var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
-                        iframe.style.height = (h + 16) + 'px';
-                    } catch(e) {}
-                };
-
-                wrapper.appendChild(iframe);
-                container.parentNode.replaceChild(wrapper, container);
-                img.dataset.cpReplaced = '1';
-            }
-
-            function findAndReplace() {
-                document.querySelectorAll('img[src*="Economia_Circular"], picture img[src*="Economia_Circular"]').forEach(replaceImage);
-            }
-
-            // Immediate check (for already-rendered images)
-            findAndReplace();
-
-            // Observer for late-rendered images
-            var observer = new MutationObserver(function() { findAndReplace(); });
-            observer.observe(document.body, { childList: true, subtree: true });
-
-            // Retry a few times for Wix lazy loading
-            var attempts = 0;
-            var retry = setInterval(function() {
-                findAndReplace();
-                if (++attempts > 8) clearInterval(retry);
-            }, 500);
-        })();
-    </script>
 </body>
 
 </html>
