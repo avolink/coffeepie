@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Coffee Pie — COFP Token (TRC-20 on TRON)
-// Monetary Policy: Algorithmic emission with community-governed rate.
+// Monetary Policy: Fixed supply of 100'000'000 COFP. No inflation. No deflation.
+// Re-mint only to restore burned supply (supply <= MAX_SUPPLY).
 // Deployable via Remix IDE + TronLink wallet.
 // Target: TRON Mainnet (chain ID 728126428)
 
@@ -9,29 +10,20 @@ pragma solidity ^0.8.20;
 contract COFP_Token {
     string public name = "Coffee Pie";
     string public symbol = "COFP";
-    uint8 public decimals = 0;
+    uint8 public decimals = 18;
+    uint256 public constant MAX_SUPPLY = 100_000_000 * 10 ** 18;
     uint256 public totalSupply;
 
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
     address public owner;
-
-    // Monetary policy — inflation-targeting
-    // targetInflationBasisPoints: e.g. 200 = 2.00% annual inflation
-    // annualEmissionCap = totalSupply * targetInflationBasisPoints / 10000
-    // Minimum 100 (1%), maximum 500 (5%) enforced at contract level
-    uint256 public targetInflationBasisPoints;
-    uint256 public emittedThisYear;
-    uint256 public yearStart;
-
     bool public paused;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event Burn(address indexed burner, uint256 value);
-    event Mint(address indexed to, uint256 value);
-    event EmissionCapUpdated(uint256 oldCap, uint256 newCap);
+    event Remint(address indexed to, uint256 value);
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     event Paused(address account);
     event Unpaused(address account);
@@ -46,15 +38,11 @@ contract COFP_Token {
         _;
     }
 
-    constructor(uint256 _initialSupply, uint256 _targetInflationBasisPoints) {
-        require(_targetInflationBasisPoints >= 100, "COFP: inflation floor is 1%");
-        require(_targetInflationBasisPoints <= 500, "COFP: inflation ceiling is 5%");
+    constructor() {
         owner = msg.sender;
-        totalSupply = _initialSupply;
-        balanceOf[msg.sender] = _initialSupply;
-        targetInflationBasisPoints = _targetInflationBasisPoints;
-        yearStart = block.timestamp;
-        emit Transfer(address(0), msg.sender, _initialSupply);
+        totalSupply = MAX_SUPPLY;
+        balanceOf[msg.sender] = MAX_SUPPLY;
+        emit Transfer(address(0), msg.sender, MAX_SUPPLY);
     }
 
     // ── TRC-20 ────────────────────────────────────────────────────────
@@ -106,44 +94,16 @@ contract COFP_Token {
         return true;
     }
 
-    // ── Emission ──────────────────────────────────────────────────────
+    // ── Remint (only to restore burned supply) ────────────────────────
 
-    function _rotateYearIfNeeded() internal {
-        if (block.timestamp >= yearStart + 365 days) {
-            yearStart = block.timestamp;
-            emittedThisYear = 0;
-        }
-    }
-
-    function annualEmissionCap() public view returns (uint256) {
-        return totalSupply * targetInflationBasisPoints / 10000;
-    }
-
-    function remainingEmission() public view returns (uint256) {
-        if (block.timestamp >= yearStart + 365 days) return annualEmissionCap();
-        uint256 cap = annualEmissionCap();
-        return cap > emittedThisYear ? cap - emittedThisYear : 0;
-    }
-
-    function mint(address _to, uint256 _value) public onlyOwner returns (bool) {
-        require(_to != address(0), "COFP: mint to zero address");
-        _rotateYearIfNeeded();
-        require(emittedThisYear + _value <= annualEmissionCap(), "COFP: exceeds annual emission cap");
-
+    function remint(address _to, uint256 _value) public onlyOwner returns (bool) {
+        require(_to != address(0), "COFP: remint to zero address");
+        require(totalSupply + _value <= MAX_SUPPLY, "COFP: remint exceeds MAX_SUPPLY");
         totalSupply += _value;
         balanceOf[_to] += _value;
-        emittedThisYear += _value;
-        emit Mint(_to, _value);
+        emit Remint(_to, _value);
         emit Transfer(address(0), _to, _value);
         return true;
-    }
-
-    function setTargetInflation(uint256 _targetBasisPoints) public onlyOwner {
-        require(_targetBasisPoints >= 100, "COFP: inflation floor is 1%");
-        require(_targetBasisPoints <= 500, "COFP: inflation ceiling is 5%");
-        uint256 oldCap = annualEmissionCap();
-        targetInflationBasisPoints = _targetBasisPoints;
-        emit EmissionCapUpdated(oldCap, annualEmissionCap());
     }
 
     // ── Admin ─────────────────────────────────────────────────────────

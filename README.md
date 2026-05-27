@@ -22,7 +22,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
- Main Contributors:<br>
+ Main Contributors (and initial Moderators):<br>
  - avolink (The Architect, Industrial Designer, Frontend Developer and Marketer)<br>
  - juandaniel777 (The Engineer and Software Backend Developer)<br>
  - Diego-M-PZ (The Electronics and Maintenace Manager).<br>
@@ -114,7 +114,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 
   * Investors (BVC Stock Exchange): Acquire COFP through public markets. Rights: proportional dividends and valuation appreciation. No voting rights in technical or operational decisions; their sole governance function is the binary choice of reinvesting profits versus distributing dividends.
 
-  COFP tokens are convertible into Platform Credits (Cr) via a one-way burning mechanism: holders may irreversibly retire their tokens (and all associated economic rights) in exchange for immediately spendable credits, analogous to a company repurchasing B shares with service obligations instead of cash. Monetary policy uses inflation-targeting: annual emission cap = totalSupply × targetRate (1–5% range), governed by community vote.
+  COFP tokens are convertible into Platform Credits (Cr) via a one-way burning mechanism: holders may irreversibly burn or retire their tokens (and corresponding associated voting and economic rights) in exchange for immediately spendable credits, analogous to a company repurchasing B shares with service obligations instead of cash. Monetary policy: fixed supply of 100'000'000 COFP. No inflation, no deflation. Burned tokens can be restored via `remint()` (owner-only, up to the 100M cap). Coffee Pie is not a bank, COFP is not a coin — more like a score in a game representing the relevance of Providers and Contributors within the Ecosystem, and granting them vote weight accordingly. The more time and talent you invest, and the more capital you risk, the more voting power you have, but that power naturally dilutes as new contributors earn their stake, so no plutocrats nor populists can cheat the Ecosystem.
  <br>
  <br>
  BIC Status: A private capital company with socio-environmental consciousness.<br>

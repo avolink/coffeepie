@@ -19,13 +19,7 @@
 2. Create a new file `COFP_Token.sol` and paste the contract
 3. Compile: Solidity tab → compiler `0.8.20` → click **Compile**
 4. Deploy: Deploy tab → environment **Injected Provider (TronLink)**
-5. Constructor arguments:
-
-   | Arg | Value | Rationale |
-   |---|---|---|
-   | `_initialSupply` | `100'000'000` | 100M COFP initial supply |
-   | `_targetInflationBasisPoints` | `200` | 2.00% annual inflation target |
-
+5. The constructor takes **no arguments** — supply is fixed at deploy time
 6. Click **Transact**, confirm in TronLink
 
 ## Step 3 — Verify on Tronscan
@@ -38,96 +32,95 @@
 
 ## Step 4 — Monetary Policy
 
-COFP uses an **inflation-targeting** model. Instead of a fixed emission
-number, the annual emission cap is a percentage of current total supply.
-This auto-scales: growing supply → growing cap, shrinking supply → shrinking cap.
+COFP uses a **fixed-supply** model. The total supply is hard-capped at
+100'000'000 COFP (represented internally as 100'000'000 × 10^18 sub-units
+with 18 decimal places — the maximum TRC-20 precision).
 
-### Emission Formula
+### Why Fixed Supply?
 
-```
-annualEmissionCap = totalSupply × targetInflationBasisPoints ÷ 10000
-```
+Coffee Pie is a company, not a central bank. Its token represents equity
+and service value in the QFDM ecosystem, not a national currency.
 
-| Parameter | Value |
+**No inflation.** The supply never grows beyond 100M COFP. This preserves
+purchasing power for all token holders and eliminates the community-governed
+inflation debate — there is no "target rate" to argue over, no emission
+schedule to game, no dilution of early supporters.
+
+**No deflation.** Burning reduces supply (tokens irreversibly retired for
+fiat settlement, platform credits, or other utility), but the owner can
+restore supply via `remint()` up to the original 100M cap. This prevents
+a runaway deflationary spiral where all tokens eventually vanish.
+
+### Decimals: Maximum Precision (18 decimal places)
+
+| Property | Value |
 |---|---|
-| `targetInflationBasisPoints` | 200 (2.00% annual inflation) |
-| Allowed range | 100–500 (1%–5%), enforced at contract level |
-| Cap behavior | Auto-recalculates every `mint()` call based on current supply |
-| Year window | 365 days from deploy or last reset |
+| `decimals` | 18 |
+| 1 COFP (display) | 10^18 sub-units |
+| Minimum unit | 0.000000000000000001 COFP |
 
-### Example
+COFP uses the TRC-20 standard maximum of 18 decimal places — the same
+precision as ETH (1 ETH = 10^18 wei). Users think in whole tokens for
+everyday use (rewards, voting, settlement), while the sub-unit precision
+handles any fractional scenario at any scale:
 
-| Total Supply | 2% Cap | Max Mintable/Year |
-|---|---|---|
-| 1'000'000 | 20'000 | 20'000 COFP |
-| 10'000'000 | 200'000 | 200'000 COFP |
-| 100'000'000 | 2'000'000 | 2'000'000 COFP |
+- Micro-rewards for sub-second compute sessions (fraction of a vCPU-second)
+- Proportional dividend payouts across millions of micro-holders
+- AI inference micro-transactions (pay per token generated)
+- Dust-level precision for IoT sensor data streaming credits
 
-### Governance
+The 18-decimal architecture ensures the token remains viable at
+**planetary scale** — if one day COFP represents fractional ownership
+in individual compute cycles across billions of codec terminals, the
+sub-unit granularity will be there from day one.
 
-1. `setTargetInflation(150)` → lowers to 1.5% (deflationary stance)
-2. `setTargetInflation(300)` → raises to 3.0% (expansionary stance)
-3. Community votes on Coffee Pie platform → owner executes on-chain
-4. Contract enforces hard bounds: minimum 1%, maximum 5%
-
-### Why 2% and not 0%, 1%, or 3%?
-
-The 2% target follows the same reasoning adopted by the U.S. Federal Reserve,
-Bank of Canada, Eurozone, and Japan — the global standard for stable tokenomics:
-
-**Why not 0%?** A 0% supply cap would eventually kill the incentive loop.
-Providers burn COFP for fiat and contributors burn for credits. Without emission,
-the supply shrinks irreversibly — at some point no tokens remain to reward
-anyone. A deflationary spiral is mathematically guaranteed.
-
-**Why not 1%?** 1% sits dangerously close to deflation. CPI measurement
-error means the "true" inflation could be zero or negative. And at 1%,
-the emission cap is so small during the early growth phase that it can't
-meaningfully reward new providers joining the network. The network stagnates
-because the incentive to add capacity disappears.
-
-**Why not 3%?** At 3%, the compounding erosion of purchasing power halves
-value in 23 years (vs. 35 years at 2%). More critically, at 3% inflation
-becomes *noticeable* to holders — they feel poorer and demand higher rewards,
-triggering a self-fulfilling spiral where the community votes to raise the
-cap again ("just this once"). Credibility is lost and the target drifts
-toward 5%, 6%, and beyond.
-
-**Why 2% is the sweet spot:**
-- Low enough to preserve value (purchasing power halved in ~35 years)
-- High enough to provide meaningful emission rewards during growth
-- Provides a comfortable buffer against unexpected deflationary shocks
-- Aligned with global central bank consensus — familiar, credible, stable
-- Emissions are an integer-only token (0 decimals) so math stays simple
-
-The community can adjust between 1-5% via governance vote if economic
-conditions demand it, but 2% is the launch default for good reason.
-
-### Equilibrium Mechanism
+### Remint Mechanism
 
 ```
-Burning drives supply down → cap drops automatically → less new COFP
-→ COFP appreciates → burning slows → supply stabilizes
-
-Emission drives supply up → cap rises → more COFP available
-→ providers/contributors rewarded → network grows → burning increases
+remint(address _to, uint256 _value) — onlyOwner
+  └→ Only succeeds if totalSupply + _value <= MAX_SUPPLY
 ```
 
-### Central Bank Role
+| Scenario | Action |
+|---|---|
+| Tokens burned for fiat settlement | `remint()` restores supply for new rewards |
+| Tokens burned for platform credits | `remint()` keeps reward pool full |
+| Supply at 100M (no burns) | `remint()` reverts — nothing to restore |
+| Supply below 100M | `remint()` fills the gap to reward providers/contributors |
 
-- **Algorithmic**: base emission = supply × target rate (automatic)
-- **Community-governed**: target rate adjustable by vote within 1-5% band
-- **Emergency**: `pause()` freezes all transfers, `unpause()` restores
-- **Execution**: Coffee Pie backend mints to reward providers/contributors within cap
+The remint function is NOT inflation — it only replaces what was burned.
+The network can never exceed 100M COFP in circulation.
+
+### Supply Lifecycle
+
+```
+Deploy: 100M → owner wallet
+  ↓
+Distribute: owner → providers, contributors, early supporters
+  ↓
+Burn: providers burn for fiat, contributors burn for credits
+  ↓  (supply drops below 100M)
+Remint: owner restores burned supply → redistribute to new providers/contributors
+  ↓
+Repeat: supply oscillates between 100M and (100M - burned), never exceeds 100M
+```
+
+### Emergency
+
+- `pause()` freezes all transfers — emergency circuit breaker
+- `unpause()` restores transfers — community vote required before execution
+- `transferOwnership()` must go to Gnosis Safe multi-sig (see Step 6)
 
 | Parameter | Value |
 |---|---|
 | Name | Coffee Pie |
 | Symbol | COFP |
-| Decimals | 0 |
+| Decimals | 18 |
 | Standard | TRC-20 (TRON) |
-| Initial Supply | 100'000'000 COFP |
+| Max Supply | 100'000'000 COFP |
 | Burnable | Yes (by holder or approved spender) |
+| Remintable | Yes (owner only, up to MAX_SUPPLY) |
+| Inflation | 0% (fixed supply) |
 | Governance | Off-chain (Coffee Pie Platform) |
 | Trading | BVC Stock Exchange (planned) |
 
@@ -139,8 +132,9 @@ The Coffee Pie backend interacts with the contract for:
    burns tokens via `burnFrom()` when provider requests fiat withdrawal
 2. **Contributor credit burning** — burns tokens via `burn()` when
    contributor exchanges COFP for Platform Credits (Cr), capped per account
-3. **Distribution** — mints/distributes COFP to contributors and providers
-   via regular `transfer()` calls
+3. **Reward distribution** — transfers COFP to contributors and providers
+   via `transfer()` calls; remints via `remint()` when the owner supply
+   runs low and burned tokens need to be restored
 
 ### TRON RPC Endpoints (for backend)
 
@@ -156,6 +150,7 @@ balanceOf(address)         → read token balance
 transfer(address, uint256) → distribute tokens
 burn(uint256)              → contributor credit burning
 burnFrom(address, uint256) → provider fiat settlement
+remint(address, uint256)   → restore burned supply (owner only)
 transferOwnership(address) → admin rotation
 ```
 
@@ -164,10 +159,10 @@ transferOwnership(address) → admin rotation
 - [ ] Contract address recorded and backed up
 - [ ] Verified on Tronscan
 - [ ] TronLink wallet private key stored securely (cold storage recommended)
-- [ ] Test burn + test mint on Shasta testnet before mainnet
+- [ ] Test burn + test remint on Shasta testnet before mainnet
 - [ ] **Transfer ownership to Gnosis Safe multi-sig wallet** (MANDATORY before BVC listing — minimum 4/7 signers: Core Dev Lead, Legal Counsel, Community Representative, CFO, Cold Storage Key, External Auditor, Emergency Trustee)
 - [ ] **Enable 48-hour timelock on all `onlyOwner` functions** — prevents single-key compromise from instantly draining the contract
 - [ ] **Document signer succession plan** — each signer designates a successor who inherits their key on verified death/incapacity (notarized letter + 30-day waiting period). The 4/7 threshold tolerates up to 3 lost keys before the contract freezes, providing decades of operational safety
-- [ ] Deploy monitoring: alert on every `mint()`, `burn()`, `pause()`, `transferOwnership()` event
+- [ ] Deploy monitoring: alert on every `remint()`, `burn()`, `pause()`, `transferOwnership()` event
 - [ ] Add contract address to Coffee Pie backend `.env`
 - [ ] Publish token info on https://coffeepie.co/token
