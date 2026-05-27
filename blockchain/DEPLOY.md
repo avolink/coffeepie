@@ -23,7 +23,7 @@
 
    | Arg | Value | Rationale |
    |---|---|---|
-   | `_initialSupply` | `1'000'000` | 1M COFP seed liquidity |
+   | `_initialSupply` | `100'000'000` | 100M COFP initial supply |
    | `_targetInflationBasisPoints` | `200` | 2.00% annual inflation target |
 
 6. Click **Transact**, confirm in TronLink
@@ -70,6 +70,39 @@ annualEmissionCap = totalSupply × targetInflationBasisPoints ÷ 10000
 3. Community votes on Coffee Pie platform → owner executes on-chain
 4. Contract enforces hard bounds: minimum 1%, maximum 5%
 
+### Why 2% and not 0%, 1%, or 3%?
+
+The 2% target follows the same reasoning adopted by the U.S. Federal Reserve,
+Bank of Canada, Eurozone, and Japan — the global standard for stable tokenomics:
+
+**Why not 0%?** A 0% supply cap would eventually kill the incentive loop.
+Providers burn COFP for fiat and contributors burn for credits. Without emission,
+the supply shrinks irreversibly — at some point no tokens remain to reward
+anyone. A deflationary spiral is mathematically guaranteed.
+
+**Why not 1%?** 1% sits dangerously close to deflation. CPI measurement
+error means the "true" inflation could be zero or negative. And at 1%,
+the emission cap is so small during the early growth phase that it can't
+meaningfully reward new providers joining the network. The network stagnates
+because the incentive to add capacity disappears.
+
+**Why not 3%?** At 3%, the compounding erosion of purchasing power halves
+value in 23 years (vs. 35 years at 2%). More critically, at 3% inflation
+becomes *noticeable* to holders — they feel poorer and demand higher rewards,
+triggering a self-fulfilling spiral where the community votes to raise the
+cap again ("just this once"). Credibility is lost and the target drifts
+toward 5%, 6%, and beyond.
+
+**Why 2% is the sweet spot:**
+- Low enough to preserve value (purchasing power halved in ~35 years)
+- High enough to provide meaningful emission rewards during growth
+- Provides a comfortable buffer against unexpected deflationary shocks
+- Aligned with global central bank consensus — familiar, credible, stable
+- Emissions are an integer-only token (0 decimals) so math stays simple
+
+The community can adjust between 1-5% via governance vote if economic
+conditions demand it, but 2% is the launch default for good reason.
+
 ### Equilibrium Mechanism
 
 ```
@@ -91,9 +124,9 @@ Emission drives supply up → cap rises → more COFP available
 |---|---|
 | Name | Coffee Pie |
 | Symbol | COFP |
-| Decimals | 6 |
+| Decimals | 0 |
 | Standard | TRC-20 (TRON) |
-| Initial Supply | 21'000'000 COFP |
+| Initial Supply | 100'000'000 COFP |
 | Burnable | Yes (by holder or approved spender) |
 | Governance | Off-chain (Coffee Pie Platform) |
 | Trading | BVC Stock Exchange (planned) |

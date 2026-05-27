@@ -9,7 +9,7 @@ pragma solidity ^0.8.20;
 contract COFP_Token {
     string public name = "Coffee Pie";
     string public symbol = "COFP";
-    uint8 public decimals = 6;
+    uint8 public decimals = 0;
     uint256 public totalSupply;
 
     mapping(address => uint256) public balanceOf;
@@ -50,12 +50,11 @@ contract COFP_Token {
         require(_targetInflationBasisPoints >= 100, "COFP: inflation floor is 1%");
         require(_targetInflationBasisPoints <= 500, "COFP: inflation ceiling is 5%");
         owner = msg.sender;
-        uint256 scaled = _initialSupply * (10 ** uint256(decimals));
-        totalSupply = scaled;
-        balanceOf[msg.sender] = scaled;
+        totalSupply = _initialSupply;
+        balanceOf[msg.sender] = _initialSupply;
         targetInflationBasisPoints = _targetInflationBasisPoints;
         yearStart = block.timestamp;
-        emit Transfer(address(0), msg.sender, scaled);
+        emit Transfer(address(0), msg.sender, _initialSupply);
     }
 
     // ── TRC-20 ────────────────────────────────────────────────────────
@@ -117,7 +116,7 @@ contract COFP_Token {
     }
 
     function annualEmissionCap() public view returns (uint256) {
-        return (totalSupply * targetInflationBasisPoints * 1e6 / 10000) / 1e6;
+        return totalSupply * targetInflationBasisPoints / 10000;
     }
 
     function remainingEmission() public view returns (uint256) {
