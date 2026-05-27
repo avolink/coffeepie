@@ -32,7 +32,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
     - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
 
- 🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unsued infrastructure for profit (tokens earned are burnable for fiat money, or can be kept for dividends and valuation).<br>
+ 🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unsued infrastructure for profit (tokens earned are burnable for fiat money, altough right now the provider needs a bank account in Colombia, or can be kept for future dividends and valuation).<br>
  
  🚀 The Vision "The Airport of Computing":
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
