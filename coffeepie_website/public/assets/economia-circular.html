@@ -204,6 +204,15 @@
                     applyTranslation(e.data.lang);
                 }
             });
+
+            // Notify parent when content height changes (viewport resize, foldable transitions, etc.)
+            if (window.ResizeObserver) {
+                var ro = new ResizeObserver(function() {
+                    var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+                    parent.postMessage({ type: 'cp-iframe-resize', height: h }, '*');
+                });
+                ro.observe(document.body);
+            }
         })();
     </script>
 </body>
