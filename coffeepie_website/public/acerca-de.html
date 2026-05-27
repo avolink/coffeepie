@@ -36602,6 +36602,57 @@
     <script src="/translate.js"></script>
     <script src="/js/cart.js"></script>
     <script src="/js/main.js"></script>
+    <script>
+        (function() {
+            function replaceImage(img) {
+                if (!img || img.dataset.cpReplaced) return;
+                var parent = img.closest('[class*="lyNaha"], [class*="QebvG3"], [class*="Ux33nC"], picture');
+                var container = parent || img.parentElement;
+                if (!container) return;
+
+                var wrapper = document.createElement('div');
+                wrapper.style.width = '100%';
+
+                var iframe = document.createElement('iframe');
+                iframe.src = '/assets/economia-circular.html';
+                iframe.style.width = '100%';
+                iframe.style.height = window.innerWidth <= 768 ? '440px' : '600px';
+                iframe.style.border = 'none';
+                iframe.style.overflow = 'hidden';
+                iframe.scrolling = 'no';
+                iframe.title = '10 Rs de la Economia Circular';
+                iframe.onload = function() {
+                    try {
+                        var doc = iframe.contentDocument || iframe.contentWindow.document;
+                        var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+                        iframe.style.height = (h + 16) + 'px';
+                    } catch(e) {}
+                };
+
+                wrapper.appendChild(iframe);
+                container.parentNode.replaceChild(wrapper, container);
+                img.dataset.cpReplaced = '1';
+            }
+
+            function findAndReplace() {
+                document.querySelectorAll('img[src*="Economia_Circular"], picture img[src*="Economia_Circular"]').forEach(replaceImage);
+            }
+
+            // Immediate check (for already-rendered images)
+            findAndReplace();
+
+            // Observer for late-rendered images
+            var observer = new MutationObserver(function() { findAndReplace(); });
+            observer.observe(document.body, { childList: true, subtree: true });
+
+            // Retry a few times for Wix lazy loading
+            var attempts = 0;
+            var retry = setInterval(function() {
+                findAndReplace();
+                if (++attempts > 8) clearInterval(retry);
+            }, 500);
+        })();
+    </script>
 </body>
 
 </html>
