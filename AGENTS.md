@@ -159,6 +159,7 @@ GIT:
   - Keep GENERATED.txt and autogen/ files (Qt Design Studio artifacts)
   - Submodule changes must be committed in submodule first, then meta-repo
   - .gitignore should include *.rar, *.zip and other compression formats.
+  - Git LFS is configured for all binary/heavy files: 3D/CAD models, PCB/EDA, PDFs, images, video. Text files (README.md, LICENSE, .gitkeep, .sol, source code) are excluded from LFS. When adding new binary file types, update `.gitattributes` accordingly. Never commit large binaries directly — use `git lfs track`.
 
 
 ARCHITECTURAL DECISIONS

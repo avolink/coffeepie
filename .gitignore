@@ -24,6 +24,7 @@ Build*/
 # OS
 .DS_Store
 Thumbs.db
+*Zone.Identifier
 
 # Python
 *.pyc
