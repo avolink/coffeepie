@@ -48675,10 +48675,15 @@
             });
 
             // Handle Avo shadow-DOM-like list modal
-            var listboxes = document.querySelectorAll(
-                '[class*="combobox"][role="listbox"], ' +
-                '[role="listbox"]'
-            );
+            // Scope to Pack dropdown container only (avoid mixing with language menu)
+            var packDropdownEl = document.querySelector('.avoui-dropdown select[aria-label="Elegir"]');
+            if (!packDropdownEl) return;
+            var packDropdown = packDropdownEl.closest('.avoui-dropdown');
+            var listboxes = packDropdown.querySelectorAll('[role="listbox"]');
+            // Fallback: if listbox not inside container, try combobox role
+            if (listboxes.length === 0) {
+                listboxes = document.querySelectorAll('[class*="combobox"][role="listbox"]');
+            }
 
             var opt84ListItem = null;
 
@@ -48734,16 +48739,17 @@
                         newLi.addEventListener('mouseleave', function() { this.style.backgroundColor = 'transparent'; });
                         
                         newLi.addEventListener('click', function(e) {
-                            var dropdownBtn = document.querySelectorAll('[aria-label="Pack"], [data-hook="dropdown-button"], [class*="dropdown"] label, [class*="combobox"] label')[0];
+                            var dropdownBtn = packDropdown.querySelector('label');
                             if (dropdownBtn) {
                                 var s = dropdownBtn.querySelector('span') || dropdownBtn;
                                 s.textContent = newLi.textContent;
                                 s.setAttribute('data-value', p.key);
-                                var hidePanel = document.querySelector('[role="listbox"]').closest('[style*="visibility: visible"], [class*="panel"]');
+                                var listboxPanel = packDropdown.querySelector('[role="listbox"]');
+                                var hidePanel = listboxPanel ? listboxPanel.closest('[style*="visibility: visible"], [class*="panel"]') : null;
                                 if (hidePanel) hidePanel.style.visibility = 'hidden';
                             }
                             // Also update the hidden select to force Avo to recognize the value
-                            var nativeSel = document.querySelector('select');
+                            var nativeSel = packDropdown.querySelector('select');
                             if (nativeSel) {
                                 nativeSel.value = p.key;
                                 nativeSel.dispatchEvent(new Event('change', { bubbles: true }));
@@ -48755,8 +48761,8 @@
                 });
             });
 
-            if (isFirstRun && document.querySelectorAll('[role="option"]').length > 0) {
-                var dropdownButtons = document.querySelectorAll('[aria-label="Pack"], [data-hook="dropdown-button"], [class*="dropdown"] label, [class*="combobox"] label');
+            if (isFirstRun && packDropdown.querySelectorAll('[role="option"]').length > 0) {
+                var dropdownButtons = packDropdown.querySelectorAll('label');
                 var needsSelection = false;
                 dropdownButtons.forEach(function(btn) {
                     var text = btn.textContent || '';
