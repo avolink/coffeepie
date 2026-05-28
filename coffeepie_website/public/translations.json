@@ -14339,17 +14339,17 @@
         "ar": "كلمات السر لا تتطابق"
     },
     "panel_0197": {
-        "en": "Global Budget Limit (COP)",
-        "es": "Límite de Presupuesto Global (COP)",
-        "pt": "Límite do Orçamento Global (COP)",
-        "fr": "Límite budgétaire globale (COP)",
-        "de": "Global Budget Limit (COP)",
-        "ru": "Глобальный бюджетный лимит (COP)",
-        "hi": "वैश्विक बजट सीमा (COP)",
-        "ja": "グローバル予算制限(COP)",
-        "zh": "全球预算限制(COP)",
-        "ko": "글로벌 예산 한계 (COP)",
-        "ar": "حدود الميزانية العالمية (COP)"
+        "en": "Global Budget Limit (Cr)",
+        "es": "Límite de Presupuesto Global (Cr)",
+        "pt": "Límite do Orçamento Global (Cr)",
+        "fr": "Límite budgétaire globale (Cr)",
+        "de": "Global Budget Limit (Cr)",
+        "ru": "Глобальный бюджетный лимит (Cr)",
+        "hi": "वैश्विक बजट सीमा (Cr)",
+        "ja": "グローバル予算制限(Cr)",
+        "zh": "全球预算限制(Cr)",
+        "ko": "글로벌 예산 한계 (Cr)",
+        "ar": "حدود الميزانية العالمية (Cr)"
     },
     "panel_0198": {
         "en": "LinkedIn Insight Tag",
@@ -14950,17 +14950,17 @@
         "ar": "تم إنقاذ (ستينغز)"
     },
     "panel_0244": {
-        "en": "Daily Budget (COP)",
-        "es": "Presupuesto Diario (COP)",
-        "pt": "Orçamento Diário (COP)",
-        "fr": "Budget quotidien (COP)",
-        "de": "Tagesbudget (COP)",
-        "ru": "Ежедневный бюджет (COP)",
-        "hi": "डेली बजट (COP)",
-        "ja": "毎日の予算(COP)",
-        "zh": "每日预算(COP)",
-        "ko": "일일 예산 (COP)",
-        "ar": "الميزانية اليومية (COP)"
+        "en": "Daily Budget (Cr)",
+        "es": "Presupuesto Diario (Cr)",
+        "pt": "Orçamento Diário (Cr)",
+        "fr": "Budget quotidien (Cr)",
+        "de": "Tagesbudget (Cr)",
+        "ru": "Ежедневный бюджет (Cr)",
+        "hi": "डेली बजट (Cr)",
+        "ja": "毎日の予算(Cr)",
+        "zh": "每日预算(Cr)",
+        "ko": "일일 예산 (Cr)",
+        "ar": "الميزانية اليومية (Cr)"
     },
     "panel_0245": {
         "en": "Pricing-Slide",
@@ -21325,7 +21325,7 @@
         "pt": "Cr",
         "fr": "Cr",
         "de": "Cr",
-        "ru": "Кр",
+        "ru": "Cr",
         "hi": "Cr",
         "ja": "Cr",
         "zh": "Cr",
