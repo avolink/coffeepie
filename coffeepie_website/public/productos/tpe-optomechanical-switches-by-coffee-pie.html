@@ -48564,291 +48564,116 @@
     <script src="/translate.js"></script>
     <script src="/js/cart.js"></script>
 
-    <script>
-      console.log("Avo Warmup Data Check:");
-      try {
-        var avoData = document.getElementById('avo-warmup-data').textContent;
-        var parsed = JSON.parse(avoData);
-        var product = parsed.appsWarmupData['a0c68605-c2e7-4c8d-9ea1-767f9770e087']['tpe-optomechanical-switches-by-coffee-pie'].product;
-        var packOption = product.options.find(function(o) { return o.title === 'Pack'; });
-        console.log("Pack options in warmup:", packOption.selections);
-      } catch (e) {
-        console.error("Error reading warmup data:", e);
-      }
-      
-      console.log("Checking window globals...");
-      console.log("viewerModel:", typeof window.viewerModel !== 'undefined');
-      console.log("siteConstants:", typeof window.siteConstants !== 'undefined');
-      console.log("avoData:", typeof window.avoData !== 'undefined');
-    </script>
 
-    <!-- Dynamic Pack Price Updater -->
+
+    <!-- Vanilla Pack Price Updater -->
     <script>
     (function () {
-        // Pack price data: [units, deposito, anual(-40%), mensual(-95%)]
         var PACKS = [
-            { key: '84', label: '84 Unds', dep: "75'000", anual: "45'000", mensual: "3'750" },
-            { key: '30', label: '30 Unds', dep: "45'000", anual: "27'000", mensual: "2'250" },
-            { key: '10', label: '10 Unds', dep: "15'000", anual: "9'000",  mensual: "750"   },
-            { key: '5',  label: '5 Unds',  dep: "7'500",  anual: "4'500",  mensual: "375"   },
-            { key: '1',  label: '1 und',   dep: "1'500",  anual: "900",    mensual: "75"    }
+            { key: '84', label: '84 Pcs', dep: "75'000", anual: "45'000", mensual: "3'750" },
+            { key: '30', label: '30 Pcs', dep: "45'000", anual: "27'000", mensual: "2'250" },
+            { key: '10', label: '10 Pcs', dep: "15'000", anual: "9'000",  mensual: "750"   },
+            { key: '5',  label: '5 Pcs',  dep: "7'500",  anual: "4'500",  mensual: "375"   },
+            { key: '1',  label: '1 Pc',   dep: "1'500",  anual: "900",    mensual: "75"    }
         ];
 
-        // Detects which plan is currently selected
+        var packSelect = document.querySelector('select[aria-label="Elegir"]');
+        if (!packSelect) return;
+
+        // Map each PACK key to its <option> element (using original Wix options)
+        var packOptionEls = {};
+        var seenKeys = {};
+        var toRemove = [];
+
+        Array.from(packSelect.options).forEach(function(opt) {
+            if (!opt.value) return; // skip placeholder
+            var txt = (opt.text || '').trim();
+            var numMatch = txt.match(/^(\d+)/);
+            var optKey = numMatch ? numMatch[1] : null;
+            if (optKey && PACKS.some(function(p) { return p.key === optKey; })) {
+                if (seenKeys[optKey]) {
+                    toRemove.push(opt);
+                } else {
+                    seenKeys[optKey] = true;
+                    packOptionEls[optKey] = opt;
+                }
+            }
+        });
+        toRemove.forEach(function(opt) { opt.remove(); });
+
+        // Append missing pack options
+        PACKS.forEach(function(p) {
+            if (!packOptionEls[p.key]) {
+                var opt = document.createElement('option');
+                opt.value = p.key;
+                opt.className = 'R4tv1w';
+                packSelect.appendChild(opt);
+                packOptionEls[p.key] = opt;
+            }
+        });
+
         function getActivePlan() {
-            var allChecked = document.querySelectorAll('input[type="radio"]:checked');
-            for (var i = 0; i < allChecked.length; i++) {
-                var lbl = (allChecked[i].getAttribute('aria-label') || '').toLowerCase();
+            var radios = document.querySelectorAll('input[type="radio"]:checked');
+            for (var i = 0; i < radios.length; i++) {
+                var lbl = (radios[i].getAttribute('aria-label') || '').toLowerCase();
                 if (lbl.indexOf('anual') !== -1) return 'anual';
                 if (lbl.indexOf('mensual') !== -1) return 'mensual';
                 if (lbl.indexOf('deposito') !== -1 || lbl.indexOf('reembolsable') !== -1) return 'deposito';
             }
-            var containers = document.querySelectorAll('[aria-checked="true"]');
-            for (var j = 0; j < containers.length; j++) {
-                var txt = containers[j].innerText || containers[j].textContent || '';
-                txt = txt.toLowerCase();
+            var checked = document.querySelectorAll('[aria-checked="true"]');
+            for (var j = 0; j < checked.length; j++) {
+                var txt = (checked[j].textContent || '').toLowerCase();
                 if (txt.indexOf('anual') !== -1) return 'anual';
                 if (txt.indexOf('mensual') !== -1) return 'mensual';
                 if (txt.indexOf('deposito') !== -1 || txt.indexOf('reembolsable') !== -1) return 'deposito';
             }
-            return 'deposito'; // default
+            return 'deposito';
         }
 
-        function getPriceForPlan(pack, plan) {
+        function getPrice(pack, plan) {
             if (plan === 'anual')   return pack.anual;
             if (plan === 'mensual') return pack.mensual;
             return pack.dep;
         }
 
-        var isFirstRun = true;
-        var isUpdating = false;  // guard against MutationObserver re-entry
-
-        function updatePackOptions() {
-            if (isUpdating) return;  // prevent recursive calls
-            isUpdating = true;
-            try {
-            var plan = getActivePlan();
-            var selects = document.querySelectorAll('select');
-            
-            selects.forEach(function (sel) {
-                // Ensure all PACKS exist as options in native select
-                var existingValues = Array.from(sel.querySelectorAll('option')).map(o => o.value);
-                PACKS.forEach(function(p) {
-                    var exists = existingValues.some(v => v === p.key || v.indexOf(p.key) !== -1);
-                    if (!exists && sel.options.length > 0) { // Only append if it's the right select
-                        var opt = document.createElement('option');
-                        opt.value = p.key;
-                        opt.text = p.label + ' (' + getPriceForPlan(p, plan) + ' COP)';
-                        sel.appendChild(opt);
-                    }
-                });
-
-                var options = sel.querySelectorAll('option');
-                var seen84Opt = false;
-                options.forEach(function (opt) {
-                    var val = opt.value || '';
-                    var txt = opt.text || '';
-                    
-                    var is84 = val === '84' || txt.indexOf('84') !== -1;
-                    if (is84) {
-                        if (seen84Opt) {
-                            opt.remove();
-                            return;
-                        }
-                        seen84Opt = true;
-                    }
-
-                    var matched = PACKS.find(function (p) {
-                        return p.key === val || (p.key === '84' && txt.indexOf('84') !== -1) || txt.indexOf(p.key + ' Und') !== -1 || txt.indexOf(p.key + ' und') !== -1;
-                    });
-                    if (matched) {
-                        var newText = matched.label + ' (' + getPriceForPlan(matched, plan) + ' COP)';
-                        if (opt.text !== newText) {
-                            opt.text = newText;
-                        }
-                    }
-                });
-
-                if (isFirstRun) {
-                    var needsSelection = !sel.value || sel.value === '' || sel.value.toLowerCase().indexOf('seleccionar') !== -1 || sel.value.toLowerCase().indexOf('select') !== -1;
-                    if (needsSelection) {
-                        var opt84 = Array.from(options).find(o => o.value === '84' || o.text.indexOf('84') !== -1);
-                        if (opt84) {
-                            sel.value = opt84.value;
-                            sel.dispatchEvent(new Event('change', { bubbles: true }));
-                        }
-                    }
+        function updateLabels(plan) {
+            if (!plan) plan = getActivePlan();
+            PACKS.forEach(function(p) {
+                var opt = packOptionEls[p.key];
+                if (opt) {
+                    opt.text = p.label + ' (' + getPrice(p, plan) + ' COP)';
                 }
             });
+        }
 
-            // Handle Avo shadow-DOM-like list modal
-            // Scope to Pack dropdown container only (avoid mixing with language menu)
-            var packDropdownEl = document.querySelector('.avoui-dropdown select[aria-label="Elegir"]');
-            if (packDropdownEl) {
-            var packDropdown = packDropdownEl.closest('.avoui-dropdown');
-            var listboxes = packDropdown.querySelectorAll('[role="listbox"]');
-            // Fallback: if listbox not inside container, try combobox role
-            if (listboxes.length === 0) {
-                listboxes = document.querySelectorAll('[class*="combobox"][role="listbox"]');
-            }
-
-            var opt84ListItem = null;
-
-            listboxes.forEach(function(listbox) {
-                listbox.style.display = 'flex';
-                listbox.style.flexDirection = 'column';
-
-                var listItems = listbox.querySelectorAll('[role="option"], [data-option-value]');
-                var existingItemsData = [];
-                var seen84Li = false;
-                
-                Array.from(listItems).forEach(function(li) {
-                    var val = li.getAttribute('data-option-value') || li.getAttribute('data-value') || '';
-                    var txt = li.textContent || '';
-                    var is84 = val === '84' || txt.indexOf('84') !== -1;
-                    
-                    if (is84 && seen84Li) {
-                        li.remove();
-                    } else {
-                        if (is84) seen84Li = true;
-                        existingItemsData.push({
-                            el: li,
-                            val: val,
-                            txt: txt
-                        });
-                    }
-                });
-
-                // Append missing items visually
-                PACKS.forEach(function(p, index) {
-                    var existingNode = existingItemsData.find(function(item) {
-                        return item.val === p.key || (p.key === '84' && item.txt.indexOf('84') !== -1) || item.txt.indexOf(p.key + ' Und') !== -1 || item.txt.indexOf(p.key + ' und') !== -1;
-                    });
-                    
-                    if (existingNode) {
-                        var li = existingNode.el;
-                        li.style.order = index; // Apply sorting
-                        var span = li.querySelector('span') || li;
-                        var listText = p.label + ' (' + getPriceForPlan(p, plan) + ' COP)';
-                        if (span.textContent !== listText) {
-                            span.textContent = listText;
-                        }
-                        if (p.key === '84') opt84ListItem = li;
-                    } else if (listItems.length > 0) {
-                        var newLi = document.createElement('div');
-                        newLi.setAttribute('role', 'option');
-                        newLi.setAttribute('data-option-value', p.key);
-                        // Avo dropdown classes typically include some generic ones
-                        newLi.className = listItems[0].className;
-                        newLi.innerHTML = '<span style="pointer-events: none;">' + p.label + ' (' + getPriceForPlan(p, plan) + ' COP)</span>';
-                        newLi.style.cursor = 'pointer';
-                        newLi.style.padding = '8px 16px';
-                        newLi.style.order = index; // Apply sorting
-                        
-                        newLi.addEventListener('mouseenter', function() { this.style.backgroundColor = 'rgba(0,0,0,0.05)'; });
-                        newLi.addEventListener('mouseleave', function() { this.style.backgroundColor = 'transparent'; });
-                        
-                        newLi.addEventListener('click', function(e) {
-                            var dropdownBtn = packDropdown.querySelector('label');
-                            if (dropdownBtn) {
-                                var s = dropdownBtn.querySelector('span') || dropdownBtn;
-                                s.textContent = newLi.textContent;
-                                s.setAttribute('data-value', p.key);
-                                var listboxPanel = packDropdown.querySelector('[role="listbox"]');
-                                var hidePanel = listboxPanel ? listboxPanel.closest('[style*="visibility: visible"], [class*="panel"]') : null;
-                                if (hidePanel) hidePanel.style.visibility = 'hidden';
-                            }
-                            // Also update the hidden select to force Avo to recognize the value
-                            var nativeSel = packDropdown.querySelector('select');
-                            if (nativeSel) {
-                                nativeSel.value = p.key;
-                                nativeSel.dispatchEvent(new Event('change', { bubbles: true }));
-                            }
-                        });
-                        listbox.appendChild(newLi);
-                        if (p.key === '84') opt84ListItem = newLi;
-                    }
-                });
-            });
-
-            if (isFirstRun && packDropdown.querySelectorAll('[role="option"]').length > 0) {
-                var dropdownButtons = packDropdown.querySelectorAll('label');
-                var needsSelection = false;
-                dropdownButtons.forEach(function(btn) {
-                    var text = btn.textContent || '';
-                    if (text.toLowerCase().indexOf('seleccionar') !== -1 || text.toLowerCase().indexOf('select') !== -1 || text.trim() === 'Pack' || text === '') {
-                        needsSelection = true;
-                    }
-                });
-
-                if (needsSelection && opt84ListItem) {
-                    opt84ListItem.click();
-                    isFirstRun = false;
-                } else if (opt84ListItem) {
-                    isFirstRun = false; 
+        function selectDefault() {
+            if (!packSelect.value) {
+                var opt84 = packOptionEls['84'];
+                if (opt84) {
+                    packSelect.value = opt84.value;
+                    packSelect.dispatchEvent(new Event('change', { bubbles: true }));
                 }
             }
-            } // end if (packDropdownEl)
-            } finally { isUpdating = false; }
         }
 
-        // Debounce helper
-        function debounce(fn, ms) {
-            var t;
-            return function () { clearTimeout(t); t = setTimeout(fn, ms); };
-        }
+        var currentPlan = getActivePlan();
+        updateLabels(currentPlan);
+        selectDefault();
 
-        var debouncedUpdate = debounce(updatePackOptions, 120);
-
-        // Observe DOM changes (Avo loads components async)
-        var observer = new MutationObserver(function (mutations) {
-            var relevant = mutations.some(function (m) {
-                return m.addedNodes.length > 0 ||
-                       (m.type === 'attributes' &&
-                        (m.attributeName === 'aria-checked' ||
-                         m.attributeName === 'aria-selected' ||
-                         m.attributeName === 'class'));
-            });
-            if (relevant) debouncedUpdate();
+        document.addEventListener('change', function(e) {
+            var t = e.target;
+            if (t && t.type === 'radio') {
+                var lbl = (t.getAttribute('aria-label') || '').toLowerCase();
+                if (lbl.indexOf('anual') !== -1 || lbl.indexOf('mensual') !== -1 || lbl.indexOf('deposito') !== -1 || lbl.indexOf('reembolsable') !== -1) {
+                    var newPlan = getActivePlan();
+                    if (newPlan !== currentPlan) {
+                        currentPlan = newPlan;
+                        updateLabels(newPlan);
+                    }
+                }
+            }
         });
-
-        observer.observe(document.documentElement, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['aria-checked', 'aria-selected', 'class', 'data-selected']
-        });
-
-        // Also listen for clicks on the plan selector area
-        document.addEventListener('click', function (e) {
-            var el = e.target;
-            // Walk up to find a plan radio container
-            while (el && el !== document.body) {
-                var txt = (el.innerText || el.textContent || '').toLowerCase();
-                if (txt.indexOf('anual') !== -1 ||
-                    txt.indexOf('mensual') !== -1 ||
-                    txt.indexOf('deposito') !== -1 ||
-                    txt.indexOf('reembolsable') !== -1) {
-                    setTimeout(debouncedUpdate, 150);
-                    break;
-                }
-                el = el.parentElement;
-            }
-        }, true);
-
-        // Initial update after page is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function () {
-                setTimeout(updatePackOptions, 800);
-            });
-        } else {
-            setTimeout(updatePackOptions, 800);
-        }
     })();
     </script>
 </body>
-
 </html>
-
-
-
