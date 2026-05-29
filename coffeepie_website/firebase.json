@@ -138,6 +138,11 @@
                 "source": "/index.html",
                 "destination": "/",
                 "type": 301
+            },
+            {
+                "source": "/portal-de-inversionistas",
+                "destination": "/portal-inversionistas",
+                "type": 301
             }
         ],
         "rewrites": [
@@ -178,8 +183,8 @@
                 "destination": "/terminos-y-condiciones.html"
             },
             {
-                "source": "/portal-de-inversionistas",
-                "destination": "/portal-de-inversionistas.html"
+                "source": "/portal-inversionistas",
+                "destination": "/portal-inversionistas.html"
             },
             {
                 "source": "/accesibilidad",

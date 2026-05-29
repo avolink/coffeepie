@@ -16,6 +16,9 @@ ErrorDocument 404 /404.html
     RewriteCond %{HTTPS} !=on
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+    # Redirect /portal-de-inversionistas to /portal-inversionistas (SEO 301)
+    RewriteRule ^portal-de-inversionistas/?$ /portal-inversionistas [R=301,L]
+
     # Redirección permanente de princing a precios
     RewriteRule ^princing/?$ /precios [R=301,L]
 

@@ -48621,8 +48621,12 @@
         }
 
         var isFirstRun = true;
+        var isUpdating = false;  // guard against MutationObserver re-entry
 
         function updatePackOptions() {
+            if (isUpdating) return;  // prevent recursive calls
+            isUpdating = true;
+            try {
             var plan = getActivePlan();
             var selects = document.querySelectorAll('select');
             
@@ -48658,7 +48662,10 @@
                         return p.key === val || (p.key === '84' && txt.indexOf('84') !== -1) || txt.indexOf(p.key + ' Und') !== -1 || txt.indexOf(p.key + ' und') !== -1;
                     });
                     if (matched) {
-                        opt.text = matched.label + ' (' + getPriceForPlan(matched, plan) + ' COP)';
+                        var newText = matched.label + ' (' + getPriceForPlan(matched, plan) + ' COP)';
+                        if (opt.text !== newText) {
+                            opt.text = newText;
+                        }
                     }
                 });
 
@@ -48677,7 +48684,7 @@
             // Handle Avo shadow-DOM-like list modal
             // Scope to Pack dropdown container only (avoid mixing with language menu)
             var packDropdownEl = document.querySelector('.avoui-dropdown select[aria-label="Elegir"]');
-            if (!packDropdownEl) return;
+            if (packDropdownEl) {
             var packDropdown = packDropdownEl.closest('.avoui-dropdown');
             var listboxes = packDropdown.querySelectorAll('[role="listbox"]');
             // Fallback: if listbox not inside container, try combobox role
@@ -48722,7 +48729,10 @@
                         var li = existingNode.el;
                         li.style.order = index; // Apply sorting
                         var span = li.querySelector('span') || li;
-                        span.textContent = p.label + ' (' + getPriceForPlan(p, plan) + ' COP)';
+                        var listText = p.label + ' (' + getPriceForPlan(p, plan) + ' COP)';
+                        if (span.textContent !== listText) {
+                            span.textContent = listText;
+                        }
                         if (p.key === '84') opt84ListItem = li;
                     } else if (listItems.length > 0) {
                         var newLi = document.createElement('div');
@@ -48778,6 +48788,8 @@
                     isFirstRun = false; 
                 }
             }
+            } // end if (packDropdownEl)
+            } finally { isUpdating = false; }
         }
 
         // Debounce helper

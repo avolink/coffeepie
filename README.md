@@ -4,7 +4,7 @@
 
 🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.<br>
 
-"In the future you will own nothing, but you will have access to everything, and you will be happy. Life is way too short, so don't worry, enjoy your life peacefully with your beloved ones, eat healthy, meditate, train your mind, exercise your body, travel light like a backpacker while you can and find your balance. We came to life empty-handed, we will leave life empty-handed. All what remains is the lives we improved, the happiness we brought to others and ourselves." - Anonymous<br>
+"In the future, you won't own anything, but you'll have access to everything and you'll be happy. Life is too short, so don't worry. Enjoy life peacefully with your loved ones, eat healthily, meditate, train your mind, exercise your body, travel light like a backpacker while you can, and find your balance. We came into this world with nothing, and we'll leave with nothing. All that remains are the lives we improved, the happiness we brought to others and to ourselves." - Anonymous<br>
 
 Project Status: Active<br>
 Concluded Phase: Lab Testing (TRL6)<br>

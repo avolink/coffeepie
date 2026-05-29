@@ -1,8 +1,8 @@
 console.log('[CoffeePie] translate.js starting...');
 
 var LANGUAGES = [
-    { locale: 'EN-US', flag: '<svg class="language-flag" viewBox="0 0 24 18"><rect width="24" height="18" fill="#B22234"/><rect y="1.38" width="24" height="1.38" fill="#FFF"/><rect y="4.15" width="24" height="1.38" fill="#FFF"/><rect y="6.92" width="24" height="1.38" fill="#FFF"/><rect y="9.69" width="24" height="1.38" fill="#FFF"/><rect y="12.46" width="24" height="1.38" fill="#FFF"/><rect y="15.23" width="24" height="1.38" fill="#FFF"/><rect width="9.6" height="9.69" fill="#3C3B6E"/></svg>' },
     { locale: 'ES-CO', flag: '<svg class="language-flag" viewBox="0 0 24 18"><rect width="24" height="9" fill="#FCD116"/><rect y="9" width="24" height="4.5" fill="#003893"/><rect y="13.5" width="24" height="4.5" fill="#CE1126"/></svg>' },
+    { locale: 'EN-US', flag: '<svg class="language-flag" viewBox="0 0 24 18"><rect width="24" height="18" fill="#B22234"/><rect y="1.38" width="24" height="1.38" fill="#FFF"/><rect y="4.15" width="24" height="1.38" fill="#FFF"/><rect y="6.92" width="24" height="1.38" fill="#FFF"/><rect y="9.69" width="24" height="1.38" fill="#FFF"/><rect y="12.46" width="24" height="1.38" fill="#FFF"/><rect y="15.23" width="24" height="1.38" fill="#FFF"/><rect width="9.6" height="9.69" fill="#3C3B6E"/></svg>' },
     { locale: 'PT-BR', flag: '<svg class="language-flag" viewBox="0 0 24 18"><rect width="24" height="18" fill="#009B3A"/><polygon points="12,1.5 22.5,9 12,16.5 1.5,9" fill="#FEDF00"/><circle cx="12" cy="9" r="4.5" fill="#002776"/></svg>' },
     { locale: 'FR-CA', flag: '<svg class="language-flag" viewBox="0 0 24 18"><rect width="5" height="18" fill="#D52B1E"/><rect x="19" width="5" height="18" fill="#D52B1E"/><rect x="5" width="14" height="18" fill="#FFF"/></svg>' },
     { locale: 'DE-DE', flag: '<svg class="language-flag" viewBox="0 0 24 18"><rect width="24" height="6" fill="#000"/><rect y="6" width="24" height="6" fill="#DD0000"/><rect y="12" width="24" height="6" fill="#FFCE00"/></svg>' },
@@ -287,11 +287,69 @@ function initSiteFixes() {
     document.addEventListener('click', handleHamburgerClick, true);
     populateHeaderDropdown();
     populatePanelSelects();
+    reorderWixLanguageSelector();
+    watchForWixLanguageSelector();
 
     var savedLang = getSavedLang();
     if (savedLang && savedLang !== 'es') {
         doLanguageSwitch(savedLang);
     }
+}
+
+// Reorder Wix LanguageSelector options: ES-CO first, then EN-US
+function reorderWixLanguageSelector() {
+    // Wix LanguageSelector uses a list of buttons with classes SLABZ6/AgcguT
+    // inside a dropdown container with class wxjDyf or yaSWtc
+    var containers = document.querySelectorAll('[class*="wxjDyf"], [class*="yaSWtc"]');
+    var reordered = false;
+    containers.forEach(function(container) {
+        var items = container.querySelectorAll('[role="option"], [role="menuitem"]');
+        if (items.length < 2) return;
+
+        var esItem = null;
+        var enItem = null;
+        items.forEach(function(item) {
+            var txt = (item.textContent || '').toUpperCase().trim();
+            if (txt.indexOf('ES') !== -1 && txt.indexOf('CO') !== -1) esItem = item;
+            if (txt.indexOf('EN') !== -1 && txt.indexOf('US') !== -1 || txt === 'EN') enItem = item;
+        });
+
+        // If ES-CO isn't first, move it to the top
+        if (esItem && items[0] !== esItem) {
+            container.insertBefore(esItem, container.firstChild);
+            reordered = true;
+        }
+        // Then ensure EN-US comes second
+        if (enItem && esItem && items[1] !== enItem) {
+            if (container.children[1]) {
+                container.insertBefore(enItem, container.children[1]);
+                reordered = true;
+            }
+        }
+    });
+    return reordered;
+}
+
+// Watch for Wix LanguageSelector to render (it loads asynchronously via React)
+function watchForWixLanguageSelector() {
+    var attempts = 0;
+    var maxAttempts = 20;
+    var observer = new MutationObserver(function() {
+        if (reorderWixLanguageSelector()) {
+            observer.disconnect();
+            return;
+        }
+        attempts++;
+        if (attempts >= maxAttempts) observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    // Also try on a timer as fallback
+    var interval = setInterval(function() {
+        if (reorderWixLanguageSelector() || attempts >= maxAttempts) {
+            clearInterval(interval);
+        }
+        attempts++;
+    }, 500);
 }
 
 if (document.readyState === 'loading') {
