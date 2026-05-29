@@ -1,0 +1,150 @@
+/* Coffee Pie - Vanilla Product Gallery Styles */
+
+#coffeepie-vanilla-gallery {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    min-height: 60vh;
+}
+
+.vg-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #000;
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+.vg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.vg-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    background: #fff;
+}
+
+.vg-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.vg-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.vg-image-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f8f8f8;
+}
+
+.vg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    display: block;
+}
+
+.vg-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.vg-name {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+}
+
+.vg-price {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+}
+
+.vg-add-btn {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 14px 16px;
+    background: rgb(175, 178, 176);
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    font: normal normal normal 14px/1.4em helvetica, arial, sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.vg-add-btn:hover {
+    background: rgb(150, 153, 151);
+}
+
+.vg-add-btn.vg-added {
+    background: #4CAF50;
+}
+
+.vg-loading, .vg-empty, .vg-error {
+    text-align: center;
+    padding: 80px 20px;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.vg-error a {
+    color: #000;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    #coffeepie-vanilla-gallery {
+        padding: 20px 16px 40px;
+    }
+    .vg-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .vg-info {
+        padding: 10px;
+    }
+    .vg-name {
+        font-size: 0.85rem;
+    }
+    .vg-price {
+        font-size: 0.9rem;
+    }
+    .vg-add-btn {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+}
