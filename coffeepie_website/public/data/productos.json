@@ -2,204 +2,233 @@
   {
     "slug": "terminal-codec-commander-pro-by-coffee-pie",
     "name": "Terminal Codec Commander™ Pro 8K",
-    "image": "/tienda_files/557674_e21e6a5f66d24939b30fa6aa06046af6~mv2.png",
+    "image": "/assets/avo/downloads/26545b9b554453e2dd2152c4a5a56e8c.png",
     "price": "$1.200.000,00",
-    "url": "/productos/terminal-codec-commander-pro-by-coffee-pie"
+    "url": "/productos/terminal-codec-commander-pro-by-coffee-pie",
+    "category": "commanders"
   },
   {
     "slug": "terminal-codec-commander-basic-by-coffee-pie",
     "name": "Terminal Codec Commander™ Basic",
-    "image": "/tienda_files/557674_656d2e6350d4403cb45dce1eb9bb88fc~mv2.png",
+    "image": "/assets/avo/downloads/b8a9690ba063c7512ef064b81d28fcd0.png",
     "price": "$400.000,00",
-    "url": "/productos/terminal-codec-commander-basic-by-coffee-pie"
+    "url": "/productos/terminal-codec-commander-basic-by-coffee-pie",
+    "category": "commanders"
   },
   {
     "slug": "terminal-codec-commander-core-by-coffee-pie",
     "name": "Terminal Codec Commander™ Core (DIY: Sin Suiches, Sin Teclas, Sin Módulos, etc)",
-    "image": "/tienda_files/557674_56c3d39de4534b5ca37a5ffd65c46621~mv2.jpg",
+    "image": "/assets/avo/downloads/51da70f2db9e7fc0ded01e2d2222a2b0.jpg",
     "price": "$300.000,00",
-    "url": "/productos/terminal-codec-commander-core-by-coffee-pie"
+    "url": "/productos/terminal-codec-commander-core-by-coffee-pie",
+    "category": "commanders"
   },
   {
     "slug": "hot-swappable-battery-for-commander-by-powerowl",
     "name": "Batería Extraíble para Commander™ con 42 Celdas AAA (NiMH) 42'000mAh by Powerowl",
-    "image": "/tienda_files/557674_9d19b2effc5448a281301bb02385c8c4~mv2.png",
+    "image": "/assets/avo/downloads/9e223d3658b3cf3b02e6e3313b238b36.png",
     "price": "$400.000,00",
-    "url": "/productos/hot-swappable-battery-for-commander-by-powerowl"
+    "url": "/productos/hot-swappable-battery-for-commander-by-powerowl",
+    "category": "accesorios"
   },
   {
     "slug": "low-profile-keycaps-set-for-commander",
     "name": "Set de Teclas Institucionales Bajo Perfil para Commander™",
-    "image": "/tienda_files/557674_6669fe93a9194a8a85605375d9401afd~mv2.jpeg",
+    "image": "/assets/avo/downloads/fb733a5d55fcf83dd0ce1a06558eb31c.jpg",
     "price": "$90.000,00",
-    "url": "/productos/low-profile-keycaps-set-for-commander"
+    "url": "/productos/low-profile-keycaps-set-for-commander",
+    "category": "teclas-suiches"
   },
   {
     "slug": "custom-keycaps-set-for-commander-by-womier",
     "name": "Set de Teclas Personalizadas para Commander™ by Womier",
-    "image": "/tienda_files/557674_9352f05783dc41c69ad25bedfa902d41~mv2.webp",
+    "image": "/assets/avo/downloads/9c037ab3219aced7037b58e6e9195150.webp",
     "price": "$120.000,00",
-    "url": "/productos/custom-keycaps-set-for-commander-by-womier"
+    "url": "/productos/custom-keycaps-set-for-commander-by-womier",
+    "category": "teclas-suiches"
   },
   {
     "slug": "custom-keycaps-set-for-commander-by-lofree",
     "name": "Set de Teclas Personalizadas para Commander™ by Lofree",
-    "image": "/tienda_files/557674_b8da508d30cb43e49e0ec2491d7478ad~mv2.webp",
+    "image": "/assets/avo/downloads/f5dba0adba140be374363b0adbd589a8.webp",
     "price": "$270.000,00",
-    "url": "/productos/custom-keycaps-set-for-commander-by-lofree"
+    "url": "/productos/custom-keycaps-set-for-commander-by-lofree",
+    "category": "teclas-suiches"
   },
   {
     "slug": "tpe-optomechanical-switches-by-coffee-pie",
     "name": "Set de Suiches Optomecánicos Flexibles (TPE) by Coffee Pie",
     "image": "/assets/suiche-tpe-commander.png",
     "price": "$270.000,00",
-    "url": "/productos/tpe-optomechanical-switches-by-coffee-pie"
+    "url": "/productos/tpe-optomechanical-switches-by-coffee-pie",
+    "category": "teclas-suiches"
   },
   {
     "slug": "optomechanical-switches-for-commander-by-keychron",
     "name": "Set de Suiches Optomecánicos Hot-Swap by Keychron",
-    "image": "/tienda_files/557674_561f533412184566b07bbb081a033d5e~mv2.jpg",
+    "image": "/assets/avo/downloads/130602b84ae8dd170b99a130074126f7.jpg",
     "price": "$150.000,00",
-    "url": "/productos/optomechanical-switches-for-commander-by-keychron"
+    "url": "/productos/optomechanical-switches-for-commander-by-keychron",
+    "category": "teclas-suiches"
   },
   {
     "slug": "optomechanical-switches-for-commander-by-razer",
     "name": "Set de Suiches Optomecánicos Hot-Swap by Razer",
-    "image": "/tienda_files/557674_efb4827204324f01b94f7b1a0ba796ce~mv2.png",
+    "image": "/assets/avo/downloads/3e27357d4dc5e04fd68fd4b5eb2c913c.png",
     "price": "$300.000,00",
-    "url": "/productos/optomechanical-switches-for-commander-by-razer"
+    "url": "/productos/optomechanical-switches-for-commander-by-razer",
+    "category": "teclas-suiches"
   },
   {
     "slug": "low-profile-stabilizers-set-for-commander-by-cherry",
     "name": "Set de Estabilizadores Bajo Perfil para Commander by Cherry",
-    "image": "/tienda_files/557674_c6d034dae34f437e8c86200f729945c8~mv2.jpg",
+    "image": "/assets/avo/downloads/e53d9e0b867b8d10b477ad4fcb043c53.jpg",
     "price": "$50.000,00",
-    "url": "/productos/low-profile-stabilizers-set-for-commander-by-cherry"
+    "url": "/productos/low-profile-stabilizers-set-for-commander-by-cherry",
+    "category": "teclas-suiches"
   },
   {
     "slug": "audio-expansion-card-by-framework",
     "name": "Tarjeta de Expansión Audio Jack 3.5 by Framework",
-    "image": "/tienda_files/557674_63fa1af4eb4a46489575f4d13126098d~mv2.webp",
+    "image": "/assets/avo/downloads/6969ca4c173c18505264cbe58becddc9.webp",
     "price": "$94.000,00",
-    "url": "/productos/audio-expansion-card-by-framework"
+    "url": "/productos/audio-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "usb-c-expansion-card-by-framework",
     "name": "Tarjeta de Expansión USB-C by Framework",
-    "image": "/tienda_files/557674_525ba84a54b14a5dada84c37c8d952fa~mv2.png",
+    "image": "/assets/avo/downloads/44a8ebe2cb92d13cbea4be9a770bf783.png",
     "price": "$46.000,00",
-    "url": "/productos/usb-c-expansion-card-by-framework"
+    "url": "/productos/usb-c-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "usb-a-expansion-card-by-framework",
     "name": "Tarjeta de Expansión USB-A by Framework",
-    "image": "/tienda_files/557674_214963a59ab54f9ea860fa5a7d4376d3~mv2.webp",
+    "image": "/assets/avo/downloads/28f14622a71080d6bb125681515e3bf5.webp",
     "price": "$46.000,00",
-    "url": "/productos/usb-a-expansion-card-by-framework"
+    "url": "/productos/usb-a-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "displayport-expansion-card-by-framework",
     "name": "Tarjeta de Expansión DisplayPort by Framework",
-    "image": "/tienda_files/557674_6f6ab543fef8482ea90ee7aa91113b40~mv2.webp",
+    "image": "/assets/avo/downloads/8627574db5415ed499abc67cccc72c23.webp",
     "price": "$94.000,00",
-    "url": "/productos/displayport-expansion-card-by-framework"
+    "url": "/productos/displayport-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "hdmi-expansion-card-by-framework",
     "name": "Tarjeta de Expansión HDMI by Framework",
-    "image": "/tienda_files/557674_a2856745927047379f608c7f187d9129~mv2.webp",
+    "image": "/assets/avo/downloads/3ca0235cb3a2ff877b6bb1b363a69901.webp",
     "price": "$94.000,00",
-    "url": "/productos/hdmi-expansion-card-by-framework"
+    "url": "/productos/hdmi-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "micro-sd-expansion-card-by-framework",
     "name": "Tarjeta de Expansión Micro SD by Framework",
-    "image": "/tienda_files/557674_fc10e26e61834f1f9e70fdeb6fd59078~mv2.webp",
+    "image": "/assets/avo/downloads/dd0e2ced8aab68c81578941e3051e38b.webp",
     "price": "$46.000,00",
-    "url": "/productos/micro-sd-expansion-card-by-framework"
+    "url": "/productos/micro-sd-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "sd-expansion-card-by-framework",
     "name": "Tarjeta de Expansión SD by Framework",
-    "image": "/tienda_files/557674_d47dc70f742649cfa791edf759ddae1e~mv2.webp",
+    "image": "/assets/avo/downloads/9b3ced7d11c060bf53fa588d61aafdd2.webp",
     "price": "$46.000,00",
-    "url": "/productos/sd-expansion-card-by-framework"
+    "url": "/productos/sd-expansion-card-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "storage-expansion-card-250gb-by-framework",
     "name": "Tarjeta de Expansión Almacenamiento 250GB by Framework",
-    "image": "/tienda_files/557674_38f832fb688e4b3a8a2aeda8c1e397d9~mv2.webp",
+    "image": "/assets/avo/downloads/9b4cf284f54d8510b1c7774bd64e5e5c.webp",
     "price": "$220.000,00",
-    "url": "/productos/storage-expansion-card-250gb-by-framework"
+    "url": "/productos/storage-expansion-card-250gb-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "storage-expansion-card-1tb-by-framework",
     "name": "Tarjeta de Expansión Almacenamiento 1TB by Framework",
-    "image": "/tienda_files/557674_7feaad5625fc42e38b4b046232a782c6~mv2.jpg",
+    "image": "/assets/avo/downloads/9b4cf284f54d8510b1c7774bd64e5e5c.webp",
     "price": "$580.000,00",
-    "url": "/productos/storage-expansion-card-1tb-by-framework"
+    "url": "/productos/storage-expansion-card-1tb-by-framework",
+    "category": "expansion"
   },
   {
     "slug": "rj45-to-sfp-optical-fiber-converter-by-xicom",
     "name": "Adaptador SFP Fibra Optica",
-    "image": "/tienda_files/557674_e878f33bd39240208d906e4e31792282~mv2.jpg",
+    "image": "/assets/avo/downloads/9b8a3dd94abb737587410f8c523754a4.jpg",
     "price": "$150.000,00",
-    "url": "/productos/rj45-to-sfp-optical-fiber-converter-by-xicom"
+    "url": "/productos/rj45-to-sfp-optical-fiber-converter-by-xicom",
+    "category": "adaptadores"
   },
   {
     "slug": "ethernet-rj45-adapter-by-tp-link",
     "name": "Adaptador Ethernet RJ45 by TP-Link",
-    "image": "/tienda_files/557674_06813494215b40fa889c9f5f0b7f53c9~mv2.jpg",
+    "image": "/assets/avo/downloads/6ba6b40c3d7e8ec5dfa575214f196e0c.jpg",
     "price": "$80.000,00",
-    "url": "/productos/ethernet-rj45-adapter-by-tp-link"
+    "url": "/productos/ethernet-rj45-adapter-by-tp-link",
+    "category": "adaptadores"
   },
   {
     "slug": "wifi-and-bluetooth-adapter-by-ugreen",
     "name": "Adaptador WiFi y Bluetooth by UGREEN",
-    "image": "/tienda_files/557674_80c543eb320c448c94d3dd68fac7a887~mv2.jpg",
+    "image": "/assets/avo/downloads/519ea4959fbbdddafeaa4ab7927a7529.jpg",
     "price": "$150.000,00",
-    "url": "/productos/wifi-and-bluetooth-adapter-by-ugreen"
+    "url": "/productos/wifi-and-bluetooth-adapter-by-ugreen",
+    "category": "adaptadores"
   },
   {
     "slug": "wifi-adapter-by-tp-link",
     "name": "Adapdator WiFi by TP-Link",
-    "image": "/tienda_files/557674_68235340e7c841e68376be78b05c84b8~mv2.webp",
+    "image": "/assets/avo/downloads/b6266a606b0f139c71fc28008ac29a3e.jpg",
     "price": "$100.000,00",
-    "url": "/productos/wifi-adapter-by-tp-link"
+    "url": "/productos/wifi-adapter-by-tp-link",
+    "category": "adaptadores"
   },
   {
     "slug": "touchpad-module-by-framework",
     "name": "Módulo Pad Táctil by Framework",
-    "image": "/tienda_files/557674_3e23a2ea0161453bb5745744f06dc451~mv2.jpeg",
+    "image": "/assets/avo/downloads/0b5c15ad2402962b6f506478e4cd84f5.webp",
     "price": "$190.000,00",
-    "url": "/productos/touchpad-module-by-framework"
+    "url": "/productos/touchpad-module-by-framework",
+    "category": "modulos"
   },
   {
     "slug": "numpad-module-for-commander-by-framework",
     "name": "Módulo Pad Numérico by Framework",
-    "image": "/tienda_files/557674_698277731caa4bd482b083b374b34fa9~mv2.jpg",
+    "image": "/assets/avo/downloads/654761f71ab7a5f5ba0fa37d17622ada.jpg",
     "price": "$190.000,00",
-    "url": "/productos/numpad-module-for-commander-by-framework"
+    "url": "/productos/numpad-module-for-commander-by-framework",
+    "category": "modulos"
   },
   {
     "slug": "commander-keyboard-cover",
     "name": "Tapa Teclado Commander",
-    "image": "/tienda_files/557674_2c8129088b854b8b9293b716ccb28b7f~mv2.jpg",
+    "image": "/assets/avo/downloads/738041dabacc283bd121284cef826284.jpg",
     "price": "$79.000,00",
-    "url": "/productos/commander-keyboard-cover"
+    "url": "/productos/commander-keyboard-cover",
+    "category": "accesorios"
   },
   {
     "slug": "commander-base-heatsink",
     "name": "Disipador Base Commander",
-    "image": "/tienda_files/557674_575c416f47874ef0ae63cd21838e69ff~mv2.jpg",
+    "image": "/assets/avo/downloads/cf587110d199b5bf86d21a028cc49f51.jpg",
     "price": "$79.000,00",
-    "url": "/productos/commander-base-heatsink"
+    "url": "/productos/commander-base-heatsink",
+    "category": "accesorios"
   },
   {
     "slug": "commander-back-io-panel",
     "name": "Panel IO Posterior Commander",
-    "image": "/tienda_files/557674_2c8129088b854b8b9293b716ccb28b7f~mv2.jpg",
+    "image": "/assets/avo/downloads/a5cef58502d4fa160e6a37362e569795.jpg",
     "price": "$79.000,00",
-    "url": "/productos/commander-back-io-panel"
+    "url": "/productos/commander-back-io-panel",
+    "category": "accesorios"
   }
 ]
