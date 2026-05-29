@@ -31532,6 +31532,40 @@
     src="./tienda_files/rb_avoui.thunderbolt[MediaPlayer_videoBoxResponsive].72761fda.bundle.min.js.download"></script>
   <script src="./tienda_files/rb_avoui.thunderbolt[MediaOverlayControls].a330e4a1.bundle.min.js.download"></script>
   <script src="./tienda_files/rb_avoui.thunderbolt[MediaControls].252e383e.bundle.min.js.download"></script>
+<style>
+/* Center product cards content */
+.ETPbIy .KSFKAN, .ETPbIy .PgHPAM, .ETPbIy .vn2zm2 { justify-content: center !important; }
+.ETPbIy .t2u_rw { align-items: center !important; text-align: center !important; }
+.ETPbIy .EiRAO9 { justify-content: center !important; }
+.ETPbIy .EiRAO9 .FzO_a9 { text-align: center !important; }
+.ETPbIy .e3HCs3 { text-align: center !important; }
+.ETPbIy .AJctir { margin-left: auto !important; margin-right: auto !important; }
+/* Mobile: let product images scale with viewport */
+@media (max-width: 750px) {
+    .ETPbIy .AJctir, .ETPbIy .pLiK7U, .ETPbIy .mS0yET, .ETPbIy .Wo6AuW, .ETPbIy .sq3QTie { width: 100% !important; }
+    .ETPbIy .AJctir.bGFTjD { padding-left: 0 !important; padding-right: 0 !important; }
+    .ETPbIy .CZ0KIs { padding-left: 0 !important; padding-right: 0 !important; }
+}
+</style>
+<script>
+(function(){
+    if(window.innerWidth>750)return;
+    function fixImages(){
+        document.querySelectorAll('.ETPbIy .sq3QTie img, .ETPbIy .QHl0ZB img').forEach(function(img){
+            img.style.setProperty('width','100%','important');
+            img.style.removeProperty('height');
+            img.style.setProperty('max-width','100%','important');
+            img.style.setProperty('object-position','50% 50%','important');
+        });
+        document.querySelectorAll('.ETPbIy .AJctir').forEach(function(el){
+            el.style.setProperty('width','100%','important');
+        });
+    }
+    fixImages();
+    setTimeout(fixImages,1500);
+    setTimeout(fixImages,3500);
+})();
+</script>
 </head>
 
 <body class="device-mobile-responsive responsive">
