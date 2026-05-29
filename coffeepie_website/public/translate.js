@@ -287,8 +287,8 @@ function initSiteFixes() {
     document.addEventListener('click', handleHamburgerClick, true);
     populateHeaderDropdown();
     populatePanelSelects();
-    reorderWixLanguageSelector();
-    watchForWixLanguageSelector();
+    reorderAvoLanguageSelector();
+    watchForAvoLanguageSelector();
 
     var savedLang = getSavedLang();
     if (savedLang && savedLang !== 'es') {
@@ -296,9 +296,9 @@ function initSiteFixes() {
     }
 }
 
-// Reorder Wix LanguageSelector options: ES-CO first, then EN-US
-function reorderWixLanguageSelector() {
-    // Wix LanguageSelector uses a list of buttons with classes SLABZ6/AgcguT
+// Reorder Avo LanguageSelector options: ES-CO first, then EN-US
+function reorderAvoLanguageSelector() {
+    // Avo LanguageSelector uses a list of buttons with classes SLABZ6/AgcguT
     // inside a dropdown container with class wxjDyf or yaSWtc
     var containers = document.querySelectorAll('[class*="wxjDyf"], [class*="yaSWtc"]');
     var reordered = false;
@@ -330,12 +330,12 @@ function reorderWixLanguageSelector() {
     return reordered;
 }
 
-// Watch for Wix LanguageSelector to render (it loads asynchronously via React)
-function watchForWixLanguageSelector() {
+// Watch for Avo LanguageSelector to render (it loads asynchronously via React)
+function watchForAvoLanguageSelector() {
     var attempts = 0;
     var maxAttempts = 20;
     var observer = new MutationObserver(function() {
-        if (reorderWixLanguageSelector()) {
+        if (reorderAvoLanguageSelector()) {
             observer.disconnect();
             return;
         }
@@ -345,7 +345,7 @@ function watchForWixLanguageSelector() {
     observer.observe(document.body, { childList: true, subtree: true });
     // Also try on a timer as fallback
     var interval = setInterval(function() {
-        if (reorderWixLanguageSelector() || attempts >= maxAttempts) {
+        if (reorderAvoLanguageSelector() || attempts >= maxAttempts) {
             clearInterval(interval);
         }
         attempts++;

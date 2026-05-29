@@ -1,6 +1,6 @@
 /**
  * Coffee Pie - Vanilla JS Product Gallery
- * Replaces Wix Pro Gallery with clean vanilla rendering
+ * Replaces Avo Pro Gallery with clean vanilla rendering
  */
 (function() {
     'use strict';
@@ -38,13 +38,13 @@
 
     function init() {
         if (LOADED) return;
-        var wixGallery = document.querySelector('[data-hook="product-list"]');
-        if (!wixGallery) { setTimeout(init, 300); return; }
+        var avoGallery = document.querySelector('[data-hook="product-list"]');
+        if (!avoGallery) { setTimeout(init, 300); return; }
 
-        var wixSection = wixGallery.closest('section');
-        if (wixSection) wixSection.style.display = 'none';
+        var avoSection = avoGallery.closest('section');
+        if (avoSection) avoSection.style.display = 'none';
 
-        var parent = wixSection ? wixSection.parentElement : wixGallery.parentElement;
+        var parent = avoSection ? avoSection.parentElement : avoGallery.parentElement;
         if (!parent) return;
         if (document.getElementById(GALLERY_ID)) return;
         LOADED = true;
