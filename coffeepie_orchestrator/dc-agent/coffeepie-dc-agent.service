@@ -1,0 +1,30 @@
+[Unit]
+Description=Coffee Pie DC Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=coffeepie
+Group=coffeepie
+WorkingDirectory=/opt/coffeepie/dc-agent
+EnvironmentFile=/opt/coffeepie/dc-agent/.env
+ExecStart=/opt/coffeepie/dc-agent/coffeepie-dc-agent
+Restart=always
+RestartSec=5
+
+# Security hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/coffeepie/dc-agent
+PrivateTmp=yes
+PrivateDevices=yes
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=coffeepie-dc-agent
+
+[Install]
+WantedBy=multi-user.target
