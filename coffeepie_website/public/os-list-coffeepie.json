@@ -63,7 +63,7 @@
         "architecture": "ARM64, x86_64",
         "desktopEnvironment": "Aqua",
         "category": "Desktop, Creator",
-        "status": "Active"
+        "status": "Inactive"
     },
     {
         "vmTempId": 999000004,
