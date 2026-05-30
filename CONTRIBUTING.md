@@ -30,8 +30,8 @@ make test     # run all tests
 | **Documentation** | Translating docs, improving READMEs, API reference |
 | **Testing** | Integration tests, load testing, security fuzzing |
 | **Hardware** | Codec Terminal firmware, SBC validation, PCB design |
-| **Drivers** | Codec Terminal are Debian Minimal, so drivers are very welcome |
-| **Kernel** | The whole Ecosystem relies on Linux Kernel, so migrating to Rust in the long run is whitin everybody interests, with AI models being so powerful nowaday, there's no excuse anymore not to start migrating to a memory safe, robust and fast language like Rust, at least critical parts |
+| **Drivers** | Kernel drivers for ARM SBC hardware decoders (DRM/KMS, VAAPI, NPU, USB-IP, etc) — Codec Terminals run Debian Minimal |
+| **Kernel** | Long-term contribution to Rust-for-Linux: write new Coffee Pie kernel modules in Rust (e.g., QFDM slice-aware scheduler), port critical paths gradually over time to reduce memory bugs and zero-day exploits — no rewrite, decades-long collaborative effort |
 
 Check `ROADMAP.json` for prioritized milestones and tasks. Issues labeled `good first issue` are beginner-friendly.
 
