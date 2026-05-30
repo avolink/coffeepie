@@ -446,18 +446,22 @@
 
         restoreAllOriginals();
 
-        if (lang === 'es') {
-            document.documentElement.lang = 'es';
-            updateLanguageIndicator('es');
+        if (lang !== 'es') {
+            translateElement(document.body, lang);
             fixBrandSpacing(document.body);
-            return;
         }
-
-        translateElement(document.body, lang);
-        fixBrandSpacing(document.body);
 
         document.documentElement.lang = lang;
         updateLanguageIndicator(lang);
+
+        if (lang === 'es') {
+            fixBrandSpacing(document.body);
+        }
+
+        // Notify listeners (e.g. vanilla-gallery) to re-render
+        if (typeof CustomEvent !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('cplangchange', {detail: {lang: lang}}));
+        }
     }
 
     // ---- Language indicator ----
@@ -611,6 +615,7 @@
     window.CoffeePieLang = {
         set: setLanguage,
         get: getLanguage,
+        translate: translateText,
         refresh: function () { applyLanguage(currentLang); },
         supported: SUPPORTED,
         enforceLTRNumbers: enforceLTRNumbers

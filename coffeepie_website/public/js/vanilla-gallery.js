@@ -14,20 +14,28 @@
     var currentFilter = 'todos';
     var currentSort = 'default';
 
+    // ---- Translation helper ----
+    function t(text) {
+        var lang = window.CoffeePieLang;
+        if (!lang || !lang.translate) return text;
+        var translated = lang.translate(text, lang.get());
+        return translated || text;
+    }
+
     var FILTERS = [
-        { key: 'todos',     label: 'Todos' },
-        { key: 'commanders',  label: 'Commanders' },
+        { key: 'todos',          label: 'Todos' },
+        { key: 'commanders',     label: 'Codec Terminal' },
         { key: 'teclas-suiches', label: 'Teclas y Suiches' },
-        { key: 'expansion',  label: 'Expansión Framework' },
-        { key: 'adaptadores', label: 'Adaptadores' },
-        { key: 'modulos',    label: 'Módulos' },
-        { key: 'accesorios', label: 'Accesorios' }
+        { key: 'expansion',      label: 'Tarjetas Expansión' },
+        { key: 'adaptadores',    label: 'Adaptadores' },
+        { key: 'modulos',        label: 'Módulos' },
+        { key: 'accesorios',     label: 'Accesorios' }
     ];
 
     var SORTS = [
-        { key: 'default', label: 'Destacados' },
-        { key: 'price-asc', label: 'Menor precio' },
-        { key: 'price-desc', label: 'Mayor precio' }
+        { key: 'default',     label: 'Destacados' },
+        { key: 'price-asc',   label: 'Menor precio' },
+        { key: 'price-desc',  label: 'Mayor precio' }
     ];
 
     function parsePriceNum(priceStr) {
@@ -51,7 +59,7 @@
 
         var gallery = document.createElement('div');
         gallery.id = GALLERY_ID;
-        gallery.innerHTML = '<div class="vg-loading">Cargando productos...</div>';
+        gallery.innerHTML = '<div class="vg-loading">' + t('Cargando productos...') + '</div>';
         parent.appendChild(gallery);
 
         fetch(DATA_URL)
@@ -63,7 +71,7 @@
             })
             .catch(function(err) {
                 console.error('[VanillaGallery] Failed:', err);
-                gallery.innerHTML = '<div class="vg-error">Error al cargar productos. <a href="/tienda">Recargar</a></div>';
+                gallery.innerHTML = '<div class="vg-error">' + t('Error al cargar productos.') + ' <a href="/tienda">' + t('Recargar') + '</a></div>';
             });
     }
 
@@ -86,16 +94,16 @@
 
         var filterBtns = FILTERS.map(function(f) {
             var active = f.key === currentFilter ? ' vg-filter-active' : '';
-            return '<button class="vg-filter-btn' + active + '" data-filter="' + f.key + '">' + f.label + '</button>';
+            return '<button class="vg-filter-btn' + active + '" data-filter="' + f.key + '">' + t(f.label) + '</button>';
         }).join('');
 
         var sortOpts = SORTS.map(function(s) {
             var sel = s.key === currentSort ? ' selected' : '';
-            return '<option value="' + s.key + '"' + sel + '>' + s.label + '</option>';
+            return '<option value="' + s.key + '"' + sel + '>' + t(s.label) + '</option>';
         }).join('');
 
         gallery.innerHTML = 
-            '<h1 class="vg-title">Tienda</h1>' +
+            '<h1 class="vg-title">' + t('Tienda') + '</h1>' +
             '<div class="vg-toolbar">' +
                 '<div class="vg-filters">' + filterBtns + '</div>' +
                 '<select class="vg-sort">' + sortOpts + '</select>' +
@@ -123,7 +131,7 @@
 
     function refreshGrid() {
         var products = getFilteredProducts();
-        renderFilterBar(); // re-render to update active states
+        renderFilterBar(); // re-render to update active states and translations
         renderGrid(products);
     }
 
@@ -133,7 +141,7 @@
         if (!grid) return;
 
         if (!products.length) {
-            grid.innerHTML = '<div class="vg-empty">No se encontraron productos.</div>';
+            grid.innerHTML = '<div class="vg-empty">' + t('No se encontraron productos.') + '</div>';
             if (count) count.textContent = '';
             return;
         }
@@ -151,7 +159,7 @@
                         '<span class="vg-price">' + p.price + '</span>' +
                     '</div>' +
                 '</a>' +
-                '<button class="vg-add-btn" data-name="' + p.name + '" data-price="' + p.price + '" data-image="' + imgSrc + '" data-url="' + p.url + '">Agregar al carrito</button>' +
+                '<button class="vg-add-btn" data-name="' + p.name + '" data-price="' + p.price + '" data-image="' + imgSrc + '" data-url="' + p.url + '">' + t('Agregar al carrito') + '</button>' +
             '</div>';
         });
 
@@ -177,16 +185,24 @@
                     if (existing) { existing.quantity++; }
                     else { cart.push({ name: name, price: price, image: image, url: url.replace('/productos/', ''), quantity: 1 }); }
                     saveCart(cart);
-                    btn.textContent = '✓ Agregado';
+                    btn.textContent = t('✓ Agregado');
                     btn.classList.add('vg-added');
                     setTimeout(function() {
-                        btn.textContent = 'Agregar al carrito';
+                        btn.textContent = t('Agregar al carrito');
                         btn.classList.remove('vg-added');
                     }, 1500);
                 }
             });
         });
     }
+
+    // Listen for language changes to re-render filter bar
+    window.addEventListener('cplangchange', function() {
+        var gallery = document.getElementById(GALLERY_ID);
+        if (gallery && gallery.querySelector('.vg-filters')) {
+            refreshGrid();
+        }
+    });
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 500); });
