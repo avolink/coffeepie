@@ -11,7 +11,7 @@ Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie Colombia is a Benefit and Colletive Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
+Company: Coffee Pie® Colombia is a Benefit and Colletive Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
@@ -38,7 +38,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
 - QFDM is the Backbone: The highway connecting all the Airports in the Global Network.<br>
 - The Datacenters are the Airlines operating their Aircrafts (Servers: Clusters/Nodes).<br>
-- Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system, abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
+- Coffee Pie® is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system, abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
 - The Codec Terminal is your remote controller (thin-client): A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
 - The Slices are the "tickets" (the seats in the airplane).<br>
  
@@ -67,7 +67,7 @@ ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
   - Operating System: Debian Minimal.<br>
   - Display Server: Wayland
   - Window Manager: Sway (Kiosk Mode).<br>
-  - Graphical User Interface: Coffee Pie Qt.<br>
+  - Graphical User Interface: Coffee Pie® Qt.<br>
   - Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
  4. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT Admins (Ctrl + Alt + T).<br>
 
@@ -89,7 +89,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
  - At least 10% of the profits will be used for granting internet access and terminal codecs in developing countries, mainly through libraries, elementary schools, high-schools, universities, cybercafes, NGOs, etc, until every human being, willing to, has access to our service.<br>
 
 ❌ Strictly Prohibited in the Ecosystem:<br>
-❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails (.gov), duly processed through the Coffee Pie Legal Department: legal@coffeepie.co.<br>
+❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails (.gov), duly processed through the Coffee Pie® Legal Department: legal@coffeepie.co.<br>
 ❌ Illegal Content: Including, but not limited to, illicit drugs, counterfeit products and services that violate the law.<br>
 ❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability. All software and hardware, free, open or propietary, is welcome to the community, as long as aligning with the Circular Economy Principles.<br>
 ❌ Violence and Disturbing Content: Incitement to violence, terrorism, animal cruelty or graphic images of damage.<br>
@@ -104,20 +104,20 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
  2040: 1'000'000'000 active users in the QFDM Network.<br>
  2050: Guaranteed Global Access to a Codec Terminal.<br>
  
- 💎 COFP Token: Coffee Pie's native utility token (TRC-20 on TRON) — symbol COFP, it is NOT a fiat currency nor a regulated asset, it's more a bookkeeping tool meant to be deployed on TRON for ultra-low fees and fast settlement. Smart contract: `blockchain/COFP_Token.sol` — deployment guide at `blockchain/DEPLOY.md`. COFP tokens confer different rights depending on how they were acquired:
+ 💎 COFP Token: Coffee Pie®'s native utility token (TRC-20 on TRON) — symbol COFP, it is NOT a fiat currency nor a regulated asset, it's more a bookkeeping tool meant to be deployed on TRON for ultra-low fees and fast settlement. Smart contract: `blockchain/COFP_Token.sol` — deployment guide at `blockchain/DEPLOY.md`. COFP tokens confer different rights depending on how they were acquired:
 
-  * Contributors (Community Developers): Earn COFP by contributing code, documentation, translations, or community support. Rights: vote on technical decisions (development stack, deprecation policies, implementation priorities); burn tokens for Platform Credits to consume computing power, capped at 100'000 COFP per wallet per month to prevent capacity abuse. Wallet holding limit: 1'000'000 COFP per wallet (1% of the 100M total supply), enforced by the Coffee Pie backend. **Important**: selling earned COFP on the open market is permitted, but the seller permanently loses all voting rights — the buyer receives an Investor-class token with economic rights only (dividends, valuation), no governance vote. These limits are enforced by the Coffee Pie backend, not the smart contract.
+  * Contributors (Community Developers): Earn COFP by contributing code, documentation, translations, or community support. Rights: vote on technical decisions (development stack, deprecation policies, implementation priorities); burn tokens for Platform Credits to consume computing power, capped at 100'000 COFP per wallet per month to prevent capacity abuse. Wallet holding limit: 1'000'000 COFP per wallet (1% of the 100M total supply), enforced by the Coffee Pie® backend. **Important**: selling earned COFP on the open market is permitted, but the seller permanently loses all voting rights — the buyer receives an Investor-class token with economic rights only (dividends, valuation), no governance vote. These limits are enforced by the Coffee Pie® backend, not the smart contract.
 
   * Trusted Providers (Datacenter Operators): Earn COFP by supplying computing resources to the QFDM Network. Rights: vote on regional pricing (average slice cost, electricity rates, labor costs); burn tokens for fiat currency transferred to their registered bank accounts within 24-72 hours (no burning cap — providers are selling real resources). Provider settlement is an internal ledger operation — provider-earned COFP is not publicly tradeable. **Important**: if a provider transfers COFP to a secondary wallet and sells on the open market, those tokens lose all voting and burning-for-fiat rights — the buyer receives an Investor-class token.
 
   * Investors (BVC Stock Exchange): Acquire COFP through public markets. Rights: proportional dividends and valuation appreciation. No voting rights in technical or operational decisions; their sole governance function is the binary choice of reinvesting profits versus distributing dividends.
 
-  COFP tokens are convertible into Coffee Pie Platform Credits (Cr) via a one-way burning mechanism: holders may irreversibly burn or retire their tokens (and corresponding associated voting and economic rights) in exchange for immediately spendable credits, analogous to a company repurchasing B shares with service obligations instead of cash. Monetary policy: fixed supply of 100'000'000 COFP. No inflation, no deflation. Burned tokens can be restored via `remint()` (owner-only, up to the 100M cap). Coffee Pie is not a bank, COFP is not a coin, more like an in-game score representing the relevance of Providers and Contributors within the QFDM Network, and granting them vote weight accordingly. The more time and talent invested, and the more capital at risk, the more voting power, but that power naturally dilutes as new contributors earn their stake, so plutocrats or populists can not cheat the Ecosystem.
+  COFP tokens are convertible into Coffee Pie® Platform Credits (Cr) via a one-way burning mechanism: holders may irreversibly burn or retire their tokens (and corresponding associated voting and economic rights) in exchange for immediately spendable credits, analogous to a company repurchasing B shares with service obligations instead of cash. Monetary policy: fixed supply of 100'000'000 COFP. No inflation, no deflation. Burned tokens can be restored via `remint()` (owner-only, up to the 100M cap). Coffee Pie® is not a bank, COFP is not a coin, more like an in-game score representing the relevance of Providers and Contributors within the QFDM Network, and granting them vote weight accordingly. The more time and talent invested, and the more capital at risk, the more voting power, but that power naturally dilutes as new contributors earn their stake, so plutocrats or populists can not cheat the Ecosystem.
  <br>
  <br>
  BIC Status: A private capital company with socio-environmental consciousness.<br>
 
-No Controlling Stakes: No single entity will own the majority. Coffee Pie belongs to the community and the conscious investors prioritizing humanity and environment over profits. Maximum private ownership is limited to 10% aside the founder.<br>
+No Controlling Stakes: No single entity will own the majority. Coffee Pie® belongs to the community and the conscious investors prioritizing humanity and environment over profits. Maximum private ownership is limited to 10% aside the founder.<br>
 
 "Competition is the law of the jungle, cooperation the law of civilization."<br>
 

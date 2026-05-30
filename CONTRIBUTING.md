@@ -1,6 +1,6 @@
-# Contributing to Coffee Pie
+# Contributing to Coffee Pie®
 
-Welcome. Coffee Pie is an open ecosystem — hardware, software, documentation, translations, testing, and community support are all valued contributions.
+Welcome. Coffee Pie® is an open ecosystem — hardware, software, documentation, translations, testing, and community support are all valued contributions.
 
 ## Quick Start (5 minutes)
 
@@ -31,7 +31,7 @@ make test     # run all tests
 | **Testing** | Integration tests, load testing, security fuzzing |
 | **Hardware** | Codec Terminal firmware, SBC validation, PCB design |
 | **Drivers** | Kernel drivers for ARM SBC hardware decoders (DRM/KMS, VAAPI, NPU, USB-IP, etc) — Codec Terminals run Debian Minimal |
-| **Kernel** | Long-term contribution to Rust-for-Linux: write new Coffee Pie kernel modules in Rust (e.g., QFDM slice-aware scheduler), port critical paths gradually over time to reduce memory bugs and zero-day exploits — no rewrite, decades-long collaborative effort |
+| **Kernel** | Long-term contribution to Rust-for-Linux: write new Coffee Pie® kernel modules in Rust (e.g., QFDM slice-aware scheduler), port critical paths gradually over time to reduce memory bugs and zero-day exploits — no rewrite, decades-long collaborative effort |
 
 Check `ROADMAP.json` for prioritized milestones and tasks. Issues labeled `good first issue` are beginner-friendly.
 
@@ -50,12 +50,17 @@ coffeepie/
 ├── blockchain/               # COFP Token (TRC-20 on TRON)
 ├── hardware-manufacturers/   # Codec Terminal reference designs
 ├── cloud-providers/          # Datacenter provider docs
-├── tools/                    # CLI tools (benchmark, security, dev, admin)
+├── tools/                    # CLI tools (benchmark, security, dev, admin, monitoring)
 │   ├── benchmark/            # latency, bandwidth, storage, streaming tests
-│   ├── security/             # keygen, harden
-│   ├── dev/                  # translations-validator
-│   └── admin/                # deploy
-├── scripts/                  # Utility scripts, mocks
+│   ├── security/             # keygen, harden, audit
+│   ├── dev/                  # translations-validator, product-sync, schema-gen
+│   ├── admin/                # deploy, billing, payment-test, provider-onboard
+│   └── monitoring/           # healthd, loadgen, stream-monitor
+├── tests/                    # Integration & unit test suites
+│   └── integration/          # Docker-based full-stack tests
+├── scripts/                  # Utility scripts, init SQL, mock servers
+│   └── mocks/proxmox/        # Proxmox API mock for development
+├── coffeepie_backend/payments/  # PSE, Bre-B, Bancolombia QR payment module
 ├── docker-compose.yml        # Local development environment
 ├── Makefile                  # Common commands
 └── ROADMAP.json              # Milestones and task tracking
@@ -76,7 +81,7 @@ git checkout -b feat/my-feature
 - **Rust**: `cargo build`, `cargo test`, `cargo clippy` before committing
 - **Python**: `ruff check .`, `python manage.py test`
 - **Website**: Test in browser at `file://` or via `python -m http.server` in `coffeepie_website/public/`
-- **Translations**: Edit `coffeepie_website/public/translations.json` only. Run `translations-validator` from `tools/dev/`.
+- **Translations**: Edit `coffeepie_website/public/translations.json` only. Run `translations-validator` from `tools/dev/` (`cargo run --bin translations-validator`).
 
 ### 4. Pre-commit checks
 ```bash
@@ -149,7 +154,7 @@ Push and open a PR against `main`. CI runs automatically (build + lint + test).
 
 ## Getting Help
 
-- **Discord**: [Coffee Pie Community](https://discord.gg/coffeepie)
+- **Discord**: [Coffee Pie® Community](https://discord.gg/coffeepie)
 - **Documentation**: `AGENTS.md`, `CONSTITUTION.md`, `README.md`
 - **Roadmap**: `ROADMAP.json`
 

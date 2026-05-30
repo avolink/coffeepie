@@ -3,7 +3,7 @@
     "version": "0.1.0-alpha",
     "governance_document": "CONSTITUTION.md",
     "philosophy": "Open Standard, Protected Core, Zero E-Waste",
-    "last_updated": "2026-05-25",
+    "last_updated": "2026-05-30",
     "version_targets": {
         "0.2.0": "Foundation complete — QFDM core, streaming pipeline, codec terminal firmware operational",
         "0.5.0": "Next Phase complete — frontend REST client, PIN pairing, IAM sovereignty migrated",
