@@ -51,7 +51,7 @@ and capable machines (vertical scaling), according to your needs:<br>
 | Resource | Capacity | Description |
 |---|---|---|
 | PWR | 1 Wh | Max electrical consumption per hour |
-| CPU | 1 vCore | Logical thread for serial processing |
+| CPU | 1 vCore | Logical thread for serial processing (x86-64) |
 | RAM | 1 GB | Volatile memory |
 | SSD | 8 GB | High-speed for OS & App storage |
 | HDD | 125 GB | Low-speed bulk storage & backups |
