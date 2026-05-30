@@ -24,7 +24,7 @@
 
     var FILTERS = [
         { key: 'todos',          label: 'Todos' },
-        { key: 'commanders',     label: 'Codec Terminal' },
+        { key: 'commanders',     label: 'Terminales Codec' },
         { key: 'teclas-suiches', label: 'Teclas y Suiches' },
         { key: 'expansion',      label: 'Tarjetas Expansión' },
         { key: 'adaptadores',    label: 'Adaptadores' },

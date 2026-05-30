@@ -8398,17 +8398,17 @@
         "ar": "The"
     },
     "Terminales Codec": {
-        "en": "Codec terminals",
+        "en": "Codec Terminals",
         "es": "Terminales Codec",
-        "pt": "Terminals Codec",
-        "fr": "Terminaux de codec",
-        "de": "Codec Terminals",
-        "ru": "Терминалы Codec",
+        "pt": "Terminais Codec",
+        "fr": "Terminaux Codec",
+        "de": "Codec-Terminals",
+        "ru": "Codec-терминалы",
         "hi": "कोडेक टर्मिनल",
-        "ja": "Codec 端末",
-        "zh": "编码终端",
-        "ko": "Codec 맨끝",
-        "ar": "محطات طرفية للمدونة(ج)"
+        "ja": "コーデック端末",
+        "zh": "编解码终端",
+        "ko": "코덱 터미널",
+        "ar": "محطات الترميز"
     },
     "son dispositivos de núcleo patentado pero de estándar abierto (Licencia CERN), modulares, compactos, de bajo costo, algunos parecidos a teclados, tablets y smartphones (Líneas Commander™, Sentinel™, Ranger™), pero altamente personalizables, reparables, actualizables y reciclables hasta en un 97%, los cuales te permiten acceder a nuestro novedoso servicio": {
         "en": "are patented but open-standard (CERN License), modular, compact, low-cost, some similar to keyboards, tablets and smartphones (Command™, Sentinel™, Ranger™ lines), but highly customizable, reparable, up to 97%, which allow you to access our new service",
@@ -22163,18 +22163,5 @@
         "ko": "새로 고침",
         "ar": "إعادة تحميل",
         "es": "Recargar"
-    },
-    "Codec Terminal": {
-        "en": "Codec Terminal",
-        "es": "Codec Terminal",
-        "pt": "Terminal Codec",
-        "fr": "Terminal Codec",
-        "de": "Codec-Terminal",
-        "ru": "Codec-терминал",
-        "hi": "कोडेक टर्मिनल",
-        "ja": "コーデック端末",
-        "zh": "编解码终端",
-        "ko": "코덱 터미널",
-        "ar": "محطة الترميز"
     }
 }
