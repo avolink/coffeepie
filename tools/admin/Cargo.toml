@@ -1,0 +1,28 @@
+[package]
+name = "coffeepie-admin"
+version = "0.1.0"
+edition = "2021"
+description = "Admin & deployment tools for Coffee Pie — deploy, bootstrap, manage"
+license = "MIT OR Apache-2.0"
+authors = ["Coffee Pie Contributors"]
+
+[[bin]]
+name = "coffeepie-deploy"
+path = "src/bin/coffeepie-deploy.rs"
+
+[[bin]]
+name = "coffeepie-billing"
+path = "src/bin/coffeepie-billing.rs"
+
+[[bin]]
+name = "coffeepie-payment-test"
+path = "src/bin/coffeepie-payment-test.rs"
+
+[[bin]]
+name = "coffeepie-provider-onboard"
+path = "src/bin/coffeepie-provider-onboard.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
