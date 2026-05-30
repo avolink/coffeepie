@@ -106,7 +106,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
  2040: 1'000'000'000 active users in the QFDM Network.<br>
  2050: Guaranteed Global Access to a Codec Terminal.<br>
  
- 💎 COFP Token: Coffee Pie's native utility token (TRC-20 on TRON) — symbol COFP. Deployed on TRON for ultra-low fees and fast settlement. Smart contract: `blockchain/COFP_Token.sol` — deployment guide at `blockchain/DEPLOY.md`. COFP tokens confer different rights depending on how they were acquired:
+ 💎 COFP Token: Coffee Pie's native utility token (TRC-20 on TRON) — symbol COFP, is NOT a fiat currency nor a regulated assets, its more a bookkeeping tool. Meant to be deployed on TRON for ultra-low fees and fast settlement. Smart contract: `blockchain/COFP_Token.sol` — deployment guide at `blockchain/DEPLOY.md`. COFP tokens confer different rights depending on how they were acquired:
 
   * Contributors (Community Developers): Earn COFP by contributing code, documentation, translations, or community support. Rights: vote on technical decisions (development stack, deprecation policies, implementation priorities); burn tokens for Platform Credits to consume computing power, capped at 100'000 COFP per wallet per month to prevent capacity abuse. **Important**: selling earned COFP on the open market is permitted, but the seller permanently loses all voting rights — the buyer receives an Investor-class token with economic rights only (dividends, valuation), no governance vote. These limits are enforced by the Coffee Pie backend, not the smart contract.
 
