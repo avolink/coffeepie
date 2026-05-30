@@ -20,7 +20,8 @@ Developers, translators, auditors, pentesters, and community supporters earn COF
 **Rights:**
 - Vote on technical decisions (development stack, deprecation policies, implementation priorities)
 - Burn tokens for **Platform Credits (Cr)** to consume computing power on the QFDM Network
-- **Burning cap:** 100,000 COFP per wallet per month (enforced by Coffee Pie backend, not the smart contract)
+- **Burning cap:** 100,000 COFP per wallet per month for Platform Credits (enforced by Coffee Pie backend, not the smart contract)
+- **Wallet holding limit:** 1,000,000 COFP per wallet (1% of the 100M total supply)
 
 **On secondary sale:** Selling earned COFP on the open market is permitted, but the seller permanently loses all voting rights. The buyer receives an Investor-class token with economic rights only (dividends, valuation) — no governance vote.
 
@@ -29,7 +30,7 @@ Datacenter operators earn COFP by supplying computing resources to the QFDM Netw
 
 **Rights:**
 - Vote on regional pricing (average slice cost, electricity rates, labor costs)
-- Burn tokens for **fiat currency** transferred to registered bank accounts within 24–72 hours
+- Burn tokens for **fiat currency** transferred to registered bank accounts within 24–72 hours (Trusted Providers only)
 - **No burning cap** — providers are selling real resources and need unrestricted cash flow
 
 **On secondary sale:** If a provider transfers COFP to a secondary wallet and sells on the open market, those tokens lose all voting and burning-for-fiat rights. The buyer receives an Investor-class token.
