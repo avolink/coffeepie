@@ -26,6 +26,31 @@
 
 use serde::{Deserialize, Serialize};
 
+/// Maximum slice multiplier (a single user can request up to 64 base slices).
+/// This is consistent with the per-node capacity estimate of 64 slices/node.
+pub const MAX_SLICE_FACTOR: u32 = 64;
+
+/// Base slice specification (1 slice = 1 unit of each resource).
+/// These values match the Coffee Pie Slice Technical Specifications from AGENTS.md.
+pub const BASE_CPU_CORES: u32 = 1;
+pub const BASE_RAM_GB: u32 = 1;
+pub const BASE_SSD_GB: u32 = 8;
+pub const BASE_HDD_GB: u32 = 125;
+pub const BASE_NET_MBPS: u32 = 8;
+pub const BASE_GPU_MB: u32 = 125;
+pub const BASE_RES_VMPX_S: u32 = 15;
+pub const BASE_AI_TOPS: u32 = 3;
+
+/// Maximum allowed values per field = base × max factor.
+pub const MAX_CPU_CORES: u32 = BASE_CPU_CORES * MAX_SLICE_FACTOR;
+pub const MAX_RAM_GB: u32 = BASE_RAM_GB * MAX_SLICE_FACTOR;
+pub const MAX_SSD_GB: u32 = BASE_SSD_GB * MAX_SLICE_FACTOR;
+pub const MAX_HDD_GB: u32 = BASE_HDD_GB * MAX_SLICE_FACTOR;
+pub const MAX_NET_MBPS: u32 = BASE_NET_MBPS * MAX_SLICE_FACTOR;
+pub const MAX_GPU_MB: u32 = BASE_GPU_MB * MAX_SLICE_FACTOR;
+pub const MAX_RES_VMPX_S: u32 = BASE_RES_VMPX_S * MAX_SLICE_FACTOR;
+pub const MAX_AI_TOPS: u32 = BASE_AI_TOPS * MAX_SLICE_FACTOR;
+
 /// A Coffee Pie "slice" — the unit of computing power a user requests.
 /// Maps 1:1 to the Slice Technical Specifications from AGENTS.md.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -51,31 +76,108 @@ pub struct SliceSpec {
 impl Default for SliceSpec {
     fn default() -> Self {
         Self {
-            cpu_cores: 1,
-            ram_gb: 1,
-            ssd_gb: 8,
-            hdd_gb: 125,
-            net_mbps: 8,
-            gpu_mb: 125,
-            res_vmpx_s: 15,
-            ai_tops: 3,
+            cpu_cores: BASE_CPU_CORES,
+            ram_gb: BASE_RAM_GB,
+            ssd_gb: BASE_SSD_GB,
+            hdd_gb: BASE_HDD_GB,
+            net_mbps: BASE_NET_MBPS,
+            gpu_mb: BASE_GPU_MB,
+            res_vmpx_s: BASE_RES_VMPX_S,
+            ai_tops: BASE_AI_TOPS,
         }
     }
 }
 
 impl SliceSpec {
-    /// Multiply all resources by a factor (e.g., a "4-slice" instance = factor 4)
-    pub fn scale(&self, factor: u32) -> Self {
-        Self {
-            cpu_cores: self.cpu_cores * factor,
-            ram_gb: self.ram_gb * factor,
-            ssd_gb: self.ssd_gb * factor,
-            hdd_gb: self.hdd_gb * factor,
-            net_mbps: self.net_mbps * factor,
-            gpu_mb: self.gpu_mb * factor,
-            res_vmpx_s: self.res_vmpx_s * factor,
-            ai_tops: self.ai_tops * factor,
+    /// Multiply all resources by a factor (e.g., a "4-slice" instance = factor 4).
+    /// Uses saturating multiplication to prevent integer overflow wrapping.
+    /// Returns None if any field would exceed its maximum allowed value.
+    pub fn scale(&self, factor: u32) -> Option<Self> {
+        let cpu_cores = self.cpu_cores.saturating_mul(factor);
+        let ram_gb = self.ram_gb.saturating_mul(factor);
+        let ssd_gb = self.ssd_gb.saturating_mul(factor);
+        let hdd_gb = self.hdd_gb.saturating_mul(factor);
+        let net_mbps = self.net_mbps.saturating_mul(factor);
+        let gpu_mb = self.gpu_mb.saturating_mul(factor);
+        let res_vmpx_s = self.res_vmpx_s.saturating_mul(factor);
+        let ai_tops = self.ai_tops.saturating_mul(factor);
+
+        if cpu_cores > MAX_CPU_CORES
+            || ram_gb > MAX_RAM_GB
+            || ssd_gb > MAX_SSD_GB
+            || hdd_gb > MAX_HDD_GB
+            || net_mbps > MAX_NET_MBPS
+            || gpu_mb > MAX_GPU_MB
+            || res_vmpx_s > MAX_RES_VMPX_S
+            || ai_tops > MAX_AI_TOPS
+        {
+            return None;
         }
+
+        Some(Self {
+            cpu_cores,
+            ram_gb,
+            ssd_gb,
+            hdd_gb,
+            net_mbps,
+            gpu_mb,
+            res_vmpx_s,
+            ai_tops,
+        })
+    }
+
+    /// Validate that all fields are within allowed bounds.
+    /// Returns Ok(()) if valid, or an error message describing which field is out of range.
+    pub fn validate(&self) -> Result<(), String> {
+        if self.cpu_cores == 0 || self.cpu_cores > MAX_CPU_CORES {
+            return Err(format!(
+                "cpu_cores must be 1–{} (got {})",
+                MAX_CPU_CORES, self.cpu_cores
+            ));
+        }
+        if self.ram_gb == 0 || self.ram_gb > MAX_RAM_GB {
+            return Err(format!(
+                "ram_gb must be 1–{} (got {})",
+                MAX_RAM_GB, self.ram_gb
+            ));
+        }
+        if self.ssd_gb == 0 || self.ssd_gb > MAX_SSD_GB {
+            return Err(format!(
+                "ssd_gb must be 1–{} (got {})",
+                MAX_SSD_GB, self.ssd_gb
+            ));
+        }
+        if self.hdd_gb > MAX_HDD_GB {
+            return Err(format!(
+                "hdd_gb must be 0–{} (got {})",
+                MAX_HDD_GB, self.hdd_gb
+            ));
+        }
+        if self.net_mbps == 0 || self.net_mbps > MAX_NET_MBPS {
+            return Err(format!(
+                "net_mbps must be 1–{} (got {})",
+                MAX_NET_MBPS, self.net_mbps
+            ));
+        }
+        if self.gpu_mb > MAX_GPU_MB {
+            return Err(format!(
+                "gpu_mb must be 0–{} (got {})",
+                MAX_GPU_MB, self.gpu_mb
+            ));
+        }
+        if self.res_vmpx_s == 0 || self.res_vmpx_s > MAX_RES_VMPX_S {
+            return Err(format!(
+                "res_vmpx_s must be 1–{} (got {})",
+                MAX_RES_VMPX_S, self.res_vmpx_s
+            ));
+        }
+        if self.ai_tops > MAX_AI_TOPS {
+            return Err(format!(
+                "ai_tops must be 0–{} (got {})",
+                MAX_AI_TOPS, self.ai_tops
+            ));
+        }
+        Ok(())
     }
 }
 
@@ -85,7 +187,7 @@ impl SliceSpec {
 pub struct SliceHandle {
     /// Unique instance identifier (UUID v4, assigned by this DC Agent)
     pub instance_id: String,
-    /// The hypervisor's internal VM identifier (Proxmox vmid, etc.)
+    /// The VM name in the hypervisor (e.g., "cp-<uuid>")
     pub provider_vm_id: String,
     /// Which node/host in the DC this instance is running on
     pub node: String,
@@ -189,6 +291,48 @@ pub struct CreateSliceRequest {
     pub preferred_node: Option<String>,
 }
 
+impl CreateSliceRequest {
+    /// Validate the request payload.
+    pub fn validate(&self) -> Result<(), String> {
+        // Validate slice spec bounds
+        self.spec.validate()?;
+
+        // Validate template name — must be non-empty and not contain path traversal
+        if self.template.is_empty() {
+            return Err("template is required".to_string());
+        }
+        if !is_safe_identifier(&self.template) {
+            return Err(format!(
+                "template contains invalid characters: {}",
+                self.template
+            ));
+        }
+
+        // Validate user_id
+        if self.user_id.is_empty() {
+            return Err("user_id is required".to_string());
+        }
+        if !is_safe_identifier(&self.user_id) {
+            return Err(format!(
+                "user_id contains invalid characters: {}",
+                self.user_id
+            ));
+        }
+
+        // Validate preferred_node if provided
+        if let Some(ref node) = self.preferred_node {
+            if !is_safe_identifier(node) {
+                return Err(format!(
+                    "preferred_node contains invalid characters: {}",
+                    node
+                ));
+            }
+        }
+
+        Ok(())
+    }
+}
+
 /// Response when a slice is created
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CreateSliceResponse {
@@ -215,5 +359,105 @@ impl<T: Serialize> ApiResponse<T> {
             result: None,
             error: Some(error.into()),
         }
+    }
+}
+
+/// Validate that a string is safe as an identifier for use in URL paths
+/// and hypervisor naming. Allowed: alphanumeric, hyphen, underscore, dot.
+/// Must be non-empty and start with an alphanumeric character.
+pub fn is_safe_identifier(s: &str) -> bool {
+    if s.is_empty() {
+        return false;
+    }
+    let first = s.chars().next().unwrap();
+    if !first.is_ascii_alphanumeric() {
+        return false;
+    }
+    s.chars()
+        .all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_' || c == '.')
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_default_spec_is_valid() {
+        SliceSpec::default().validate().unwrap();
+    }
+
+    #[test]
+    fn test_max_spec_is_valid() {
+        let spec = SliceSpec {
+            cpu_cores: MAX_CPU_CORES,
+            ram_gb: MAX_RAM_GB,
+            ssd_gb: MAX_SSD_GB,
+            hdd_gb: MAX_HDD_GB,
+            net_mbps: MAX_NET_MBPS,
+            gpu_mb: MAX_GPU_MB,
+            res_vmpx_s: MAX_RES_VMPX_S,
+            ai_tops: MAX_AI_TOPS,
+        };
+        spec.validate().unwrap();
+    }
+
+    #[test]
+    fn test_over_max_fails() {
+        let spec = SliceSpec {
+            cpu_cores: MAX_CPU_CORES + 1,
+            ..SliceSpec::default()
+        };
+        assert!(spec.validate().is_err());
+    }
+
+    #[test]
+    fn test_zero_fails() {
+        let spec = SliceSpec {
+            cpu_cores: 0,
+            ..SliceSpec::default()
+        };
+        assert!(spec.validate().is_err());
+    }
+
+    #[test]
+    fn test_scale_is_valid_for_default() {
+        let scaled = SliceSpec::default().scale(4).unwrap();
+        assert_eq!(scaled.cpu_cores, 4);
+        assert_eq!(scaled.ram_gb, 4);
+    }
+
+    #[test]
+    fn test_scale_overflow_returns_none() {
+        let huge = SliceSpec {
+            cpu_cores: u32::MAX,
+            ..SliceSpec::default()
+        };
+        assert!(huge.scale(2).is_none());
+    }
+
+    #[test]
+    fn test_scale_factor_zero_returns_none() {
+        // Factor 0 would make all required fields 0, which fails validation
+        assert!(SliceSpec::default().scale(0).is_none());
+    }
+
+    #[test]
+    fn test_is_safe_identifier_valid() {
+        assert!(is_safe_identifier("test"));
+        assert!(is_safe_identifier("ubuntu-2404-template"));
+        assert!(is_safe_identifier("cp-550e8400-e29b-41d4-a716-446655440000"));
+        assert!(is_safe_identifier("pve-west-1.internal"));
+    }
+
+    #[test]
+    fn test_is_safe_identifier_invalid() {
+        assert!(!is_safe_identifier(""));
+        assert!(!is_safe_identifier("-badstart"));
+        assert!(!is_safe_identifier("../../etc"));
+        assert!(!is_safe_identifier("name with spaces"));
+        assert!(!is_safe_identifier("inject\nheader"));
+        assert!(!is_safe_identifier("traversal/../evil"));
+        assert!(!is_safe_identifier("semicolon;drop"));
+        assert!(!is_safe_identifier("backtick`cmd`"));
     }
 }

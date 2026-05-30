@@ -7,7 +7,7 @@ use std::net::SocketAddr;
 use std::sync::Arc;
 
 use axum::{routing::get, Router};
-use tower_http::cors::{Any, CorsLayer};
+use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 
 mod adapter;
@@ -47,7 +47,7 @@ async fn main() -> anyhow::Result<()> {
     });
 
     let bearer_token = std::env::var("DC_AGENT_BEARER_TOKEN").unwrap_or_else(|_| {
-        tracing::warn!("DC_AGENT_BEARER_TOKEN not set — authentication will fail");
+        tracing::warn!("DC_AGENT_BEARER_TOKEN not set — backend authentication will fail");
         String::new()
     });
 
@@ -58,6 +58,34 @@ async fn main() -> anyhow::Result<()> {
     });
 
     let broker_url = std::env::var("QFDM_BROKER_URL").ok();
+
+    // Shared auth token for mutation endpoints (Broker → Agent).
+    // If set, all mutation endpoints require `Authorization: Bearer <token>`.
+    // If empty, auth is skipped (WARNING: insecure, development only).
+    let auth_token: Option<String> = std::env::var("DC_AGENT_AUTH_TOKEN").ok().and_then(|t| {
+        if t.is_empty() {
+            None
+        } else {
+            Some(t)
+        }
+    });
+
+    if auth_token.is_none() {
+        tracing::warn!(
+            "DC_AGENT_AUTH_TOKEN not set — mutation endpoints are UNAUTHENTICATED! \
+             Set this in production to prevent unauthorized VM lifecycle operations."
+        );
+    }
+
+    // CORS origin: if set, restrict to this origin.
+    // If empty (default), don't add CORS headers at all (server-to-server API).
+    let cors_origin: Option<String> = std::env::var("DC_AGENT_CORS_ORIGIN").ok().and_then(|o| {
+        if o.is_empty() {
+            None
+        } else {
+            Some(o)
+        }
+    });
 
     // ── Build hypervisor adapter ────────────────────────────────────
 
@@ -75,6 +103,7 @@ async fn main() -> anyhow::Result<()> {
         hypervisor = %hypervisor_type,
         backend = %backend_url,
         agent_id = %agent_id,
+        auth_configured = auth_token.is_some(),
         "Hypervisor adapter initialized"
     );
 
@@ -93,16 +122,12 @@ async fn main() -> anyhow::Result<()> {
         adapter,
         broker_url,
         agent_id: agent_id.clone(),
+        auth_token,
     };
 
     // ── Build router ────────────────────────────────────────────────
 
-    let cors = CorsLayer::new()
-        .allow_origin(Any)
-        .allow_methods(Any)
-        .allow_headers(Any);
-
-    let app = Router::new()
+    let mut app = Router::new()
         // Health check
         .route("/health", get(api::health))
         // Capacity
@@ -123,9 +148,30 @@ async fn main() -> anyhow::Result<()> {
             "/instances/{instance_id}/stop",
             axum::routing::post(api::stop_instance),
         )
-        .layer(TraceLayer::new_for_http())
-        .layer(cors)
-        .with_state(state);
+        .layer(TraceLayer::new_for_http());
+
+    // CORS: only add if a specific origin is configured.
+    // Server-to-server API communication does not need CORS headers.
+    if let Some(ref origin) = cors_origin {
+        let cors = CorsLayer::new()
+            .allow_origin(
+                origin
+                    .parse::<axum::http::HeaderValue>()
+                    .expect("Invalid DC_AGENT_CORS_ORIGIN"),
+            )
+            .allow_methods([
+                axum::http::Method::GET,
+                axum::http::Method::POST,
+                axum::http::Method::DELETE,
+            ])
+            .allow_headers([axum::http::header::AUTHORIZATION, axum::http::header::CONTENT_TYPE]);
+        app = app.layer(cors);
+        tracing::info!(cors_origin = %origin, "CORS restricted to configured origin");
+    } else {
+        tracing::info!("CORS disabled (no DC_AGENT_CORS_ORIGIN set) — server-to-server mode");
+    }
+
+    app = app.with_state(state);
 
     // ── Start server ────────────────────────────────────────────────
 
