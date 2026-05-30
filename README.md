@@ -36,17 +36,14 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
  
  🚀 The Vision "The Airport of Computing":
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
-
-- The Datacenters are the Airlines operating their Aircrafts (Servers).<br>
-- Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system (QFDM), abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
-
-- The Codec Terminal is your remote controller: A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
-
+- QFDM is the Backbone: The highway connecting all the Airports in the Global Network<br>
+- The Datacenters are the Airlines operating their Aircrafts (Servers: Clusters/Nodes).<br>
+- Coffee Pie is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system, abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting offer and demand in real time.<br>
+- The Codec Terminal is your remote controller (thin-client): A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
 - The Slices are the "tickets" (the seats in the airplane)<br>
  
  📐 The Atomic Unit - Coffee Pie® Slice:
-We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical node configuration. They can be added together like lego bricks or shipping containers to get more powerful  
-and capable machines (vertical scaling), according to your needs:<br>
+We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical Node configuration. They can be added together like lego bricks or shipping containers to get more powerful and capable machines (vertical scaling), according to your needs:<br>
 
 | Resource | Capacity | Description |
 |---|---|---|
