@@ -17,7 +17,7 @@ License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
-🖥️ Legit and Recommended Uses (but not limited):<br>
+🖥️ Legit and Recommended Uses (but not limited to):<br>
 AI training, AI inferencing, Big Data, deploying servers, apps and databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
 
 🛠 Project Identity & Stack:<br>
@@ -60,15 +60,16 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 > Anti-Abuse Guardrail: If an instance exceeds its power limit then warnings, automatic AI Agent observation and recording will be triggered for human audit, if violating Law or community rules (e.g., unauthorized pentesting, cryptomining, spamming, fake news, etc), it will lead to temporary account suspension or even permanent ban, depending on the severity of the violation or repeated offenses. Note: Cryptocurrency mining is strictly prohibited, but crypto transactions are allowed if regional Law permits. We want to save the planet, not the bots!...<br>
 
  🏗 System Architecture:<br>
- 1. The Orchestrator (The Brain): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used by the Datacenters (Proxmox Recommended).<br>
- 2. The Codec Terminal (The Remote Controller):<br>
+ 1. The Orchestrator (The Traffic Guard): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used by the Datacenters (Proxmox Recommended).<br>
+ 2. The Providers (The Brain): Datacenters and companies with structured hardware willing to monetize their unused hardware in the Ecosystem.<br>
+ 3. The Codec Terminal (The Remote Controller):<br>
 ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
-  - OS: Debian Minimal.<br>
+  - Operating System: Debian Minimal.<br>
   - Display Server: Wayland
   - Window Manager: Sway (Kiosk Mode).<br>
-  - GUI: Coffee Pie Qt.<br>
+  - Graphical User Interface: Coffee Pie Qt.<br>
   - Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
- 3. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT admins (Ctrl + Alt + T).<br>
+ 4. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT Admins (Ctrl + Alt + T).<br>
 
  ⚖️ Licensing & Contribution (The Social Contract):<br>
 Coffee Pie® is full open hardware and mostly open software. To protect our path to a 2035 IPO and ensure the ecosystem remains standardized, we use a tiered licensing model:
