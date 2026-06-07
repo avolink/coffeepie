@@ -1,0 +1,6 @@
+pytest>=8.0
+pytest-xdist>=3.6
+pytest-timeout>=2.3
+requests>=2.31
+websocket-client>=1.8
+docker>=7.1

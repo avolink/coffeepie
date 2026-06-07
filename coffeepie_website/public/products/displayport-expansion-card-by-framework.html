@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Expansión DisplayPort by Framework | Coffee Pie</title>
+    <meta name="description" content="Tarjeta de Expansión DisplayPort by Framework. Tarjetas Expansión. Coffee Pie.">
+    <meta property="og:title" content="Tarjeta de Expansión DisplayPort by Framework | Coffee Pie">
+    <meta property="og:description" content="Tarjeta de Expansión DisplayPort by Framework. Tarjetas Expansión. Coffee Pie.">
+    <meta property="og:image" content="https://coffeepie.co/assets/avo/downloads/8627574db5415ed499abc67cccc72c23.webp">
+    <meta property="og:url" content="https://coffeepie.co/products/displayport-expansion-card-by-framework">
+    <meta property="og:site_name" content="Coffee Pie">
+    <meta property="og:type" content="product">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://coffeepie.co/products/displayport-expansion-card-by-framework">
+    <link rel="stylesheet" href="/css/producto.css">
+    <script src="/js/cart.js" defer></script>
+    <script src="/js/firebase-init.js" defer></script>
+    <style>
+        /* Avo platform CSS variables — same as index.html :root */
+        :root {
+            --one-unit: 1vw;
+            --section-max-width: 9999px;
+            --spx-stopper-max: 9999px;
+            --spx-stopper-min: 0px;
+            --browser-zoom: 1;
+            --scrollbar-width: 0px;
+            --full-viewport: 100 * var(--one-unit) * var(--browser-zoom);
+            --scaling-factor: clamp(var(--spx-stopper-min), var(--full-viewport), min(var(--spx-stopper-max), var(--section-max-width)));
+            --theme-spx-ratio: var(--scaling-factor) / 1280;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="reusable-header-placeholder"></div>
+    <script src="/header.js" defer></script>
+
+    <main class="cp-product">
+        <div class="cp-product__grid">
+            <div class="cp-product__image-wrap">
+                <img id="product-hero" class="cp-product__image" src="" alt="" loading="eager">
+            </div>
+            <div class="cp-product__info">
+                <p class="cp-product__category" id="product-category"></p>
+                <h1 class="cp-product__title" id="product-title"></h1>
+                <p class="cp-product__price" id="product-price"></p>
+                <p class="cp-product__rental-notice" data-translate="*No está a la venta, sólo se entrega en alquiler o comodato con depósito reembolsable.">
+                    *No está a la venta, sólo se entrega en alquiler o comodato con depósito reembolsable.
+                </p>
+
+                <div class="cp-product__quantity">
+                    <label for="product-qty" data-translate="Cantidad">Cantidad</label>
+                    <div class="cp-product__qty-controls">
+                        <button type="button" class="cp-product__qty-btn" id="qty-minus" aria-label="Eliminar uno">−</button>
+                        <input type="number" id="product-qty" class="cp-product__qty-input" value="1" min="1" max="999">
+                        <button type="button" class="cp-product__qty-btn" id="qty-plus" aria-label="Agregar uno">+</button>
+                    </div>
+                </div>
+
+                <button id="add-to-cart-btn" class="cp-product__add-btn" aria-label="Agregar al carrito">
+                    <span data-translate="Agregar al Carrito">Agregar al Carrito</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="reusable-footer-placeholder"></div>
+    <script src="/footer.js"></script>
+
+    <script>
+    (function() {
+        'use strict';
+        var CATEGORY_NAMES = {
+            'commanders': 'Terminales Codec', 'teclas-suiches': 'Teclas y Suiches',
+            'expansion': 'Tarjetas Expansión', 'adaptadores': 'Adaptadores',
+            'modulos': 'Módulos', 'accesorios': 'Accesorios'
+        };
+        var product = {"slug": "displayport-expansion-card-by-framework", "name": "Tarjeta de Expansi\u00f3n DisplayPort by Framework", "image": "/assets/avo/downloads/8627574db5415ed499abc67cccc72c23.webp", "price": "94'000 COP", "url": "/products/displayport-expansion-card-by-framework", "category": "expansion"};
+        renderProduct(product);
+        function renderProduct(p) {
+            document.getElementById('product-title').textContent = p.name;
+            document.getElementById('product-title').setAttribute('data-cp-original', p.name);
+            document.getElementById('product-price').textContent = p.price;
+            document.getElementById('product-category').textContent = CATEGORY_NAMES[p.category] || p.category;
+            document.getElementById('product-category').setAttribute('data-cp-original', CATEGORY_NAMES[p.category] || p.category);
+            var img = document.getElementById('product-hero');
+            img.src = p.image;
+            img.alt = p.name;
+        }
+        var qtyInput = document.getElementById('product-qty');
+        document.getElementById('qty-minus').addEventListener('click', function() {
+            var v = parseInt(qtyInput.value) || 1;
+            if (v > 1) qtyInput.value = v - 1;
+        });
+        document.getElementById('qty-plus').addEventListener('click', function() {
+            var v = parseInt(qtyInput.value) || 1;
+            if (v < 999) qtyInput.value = v + 1;
+        });
+        qtyInput.addEventListener('change', function() {
+            var v = parseInt(this.value);
+            if (isNaN(v) || v < 1) this.value = 1;
+            if (v > 999) this.value = 999;
+        });
+        
+    })();
+    </script>
+</body>
+</html>

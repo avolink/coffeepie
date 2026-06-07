@@ -1,0 +1,30 @@
+[package]
+name = "coffeepie-monitoring"
+version = "0.1.0"
+edition = "2021"
+description = "Monitoring daemons for Coffee Pie — stream quality, health checks, alerts"
+license = "MIT OR Apache-2.0"
+authors = ["Coffee Pie Contributors"]
+
+# Tools planned:
+#   coffeepie-stream-monitor — Sunshine stream quality daemon
+#   coffeepie-healthd — orchestrator/actor health check daemon
+#   coffeepie-loadgen — simulate N concurrent QFDM users
+
+[[bin]]
+name = "coffeepie-healthd"
+path = "src/bin/coffeepie-healthd.rs"
+
+[[bin]]
+name = "coffeepie-loadgen"
+path = "src/bin/coffeepie-loadgen.rs"
+
+[[bin]]
+name = "coffeepie-stream-monitor"
+path = "src/bin/coffeepie-stream-monitor.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }

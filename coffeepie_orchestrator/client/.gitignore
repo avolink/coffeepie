@@ -1,0 +1,12 @@
+target/
+# Debian source builds
+# Some convenient 
+*_enterprise.*
+*_ignore.*
+/bin
+/building/udslauncher*
+/building/bin
+.vscode
+.vs
+*~
+/local_dlls

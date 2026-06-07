@@ -1,0 +1,87 @@
+*.pyc
+*.pyo
+*.orig
+*~
+*.swp
+.DS_Store
+*_enterprise.*
+.settings/
+.ipynb_checkpoints
+.idea/
+
+# Debian buildings
+*.debhelper*
+*-stamp
+*.substvars
+.coverage*
+
+# /server/
+*_enterprise
+
+# /src/
+/src/taskmanager.pid
+/src/testing
+/src/*_enterprise*
+
+# /src/log/
+/src/log/uds.log.*
+/src/log/sql.log.*
+/src/log/*.log.*
+
+# /src/server/
+/src/server/settings.py
+/src/server/*_enterprise.py
+/src/server/enterprise*
+
+# /src/static/
+/src/static/cache
+
+# /src/uds/
+/src/uds/*_enterprise.py
+/src/uds/fixtures
+
+# /src/uds/auths/
+/src/uds/auths/*-enterprise
+/src/uds/auths/*_enterprise
+
+# /src/uds/core/util/
+/src/uds/core/util/*enterprise.py
+
+# /src/uds/dispatchers/
+/src/uds/dispatchers/*_enterprise
+
+# /src/uds/locale/
+/src/uds/locale/*.sh
+
+# /src/uds/management/commands/
+/src/uds/management/commands/*_enterprise.py
+
+# /src/uds/models/
+/src/uds/models/enterprise*
+
+# /src/uds/plugins/
+/src/uds/plugins/enterprise*
+
+# /src/uds/services/
+/src/uds/services/*-enterprise
+/src/uds/services/*_enterprise
+
+# /src/uds/static/adm/css/
+/src/uds/static/adm/css/admin.min.css
+
+# /src/uds/static/adm/js/
+/src/uds/static/adm/js/admin.min.js
+
+# /src/uds/templates/uds/admin/
+/src/uds/templates/uds/admin/sample.html
+
+# /src/uds/transports/
+/src/uds/transports/*-enterprise
+
+.vscode
+.mypy_cache
+.pytest_cache
+.python-version
+
+target/
+test-vars.ini

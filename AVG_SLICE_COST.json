@@ -1,0 +1,2492 @@
+{
+  "meta": {
+    "description": "Average COFP token cost per country/territory in local fiat currency. Used by the Coffee Pie® backend to display localized pricing in the Provider settlement panel.",
+    "unit": "1 COFP = 1 Coffee Pie® Slice·min (1 Slice served for 1 minute)",
+    "base_reference": {
+      "country": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL",
+      "currency_code": "COP",
+      "cost": 0.29,
+      "note": "Reference price set by community governance vote. All other costs are derived from this base via approximate exchange rates."
+    },
+    "base_usd": 0.00008286,
+    "exchange_rate_note": "All costs are approximate, derived from 1 COFP = 0.29 COP ≈ 0.00008286 USD at 3,500 COP/USD. Exchange rates are indicative (2025–2026 averages). Actual Provider settlement amounts are recalculated at the time of each fiat withdrawal request using a live governance-approved rate oracle. Regional pricing may be further adjusted by local provider governance votes.",
+    "tier_note": "The fiat amount a Provider receives per COFP = cost × (1 + tier_margin). See coffeepie.co/proveedores-nube for Tier I–V requirements and margins.",
+    "last_updated": "2026-06-04",
+    "version": "1.0.0"
+  },
+  "countries": [
+    {
+      "name": "Afghanistan",
+      "iso2": "AF",
+      "iso3": "AFG",
+      "currency_name": "Afghan Afghani",
+      "currency_code": "AFN",
+      "symbol": "؋",
+      "fx_rate_usd": 70,
+      "cost": "0.00580000"
+    },
+    {
+      "name": "Åland Islands",
+      "iso2": "AX",
+      "iso3": "ALA",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Albania",
+      "iso2": "AL",
+      "iso3": "ALB",
+      "currency_name": "Albanian Lek",
+      "currency_code": "ALL",
+      "symbol": "L",
+      "fx_rate_usd": 95,
+      "cost": "0.00787143"
+    },
+    {
+      "name": "Algeria",
+      "iso2": "DZ",
+      "iso3": "DZA",
+      "currency_name": "Algerian Dinar",
+      "currency_code": "DZD",
+      "symbol": "DA",
+      "fx_rate_usd": 134,
+      "cost": "0.01110286"
+    },
+    {
+      "name": "American Samoa",
+      "iso2": "AS",
+      "iso3": "ASM",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Andorra",
+      "iso2": "AD",
+      "iso3": "AND",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Angola",
+      "iso2": "AO",
+      "iso3": "AGO",
+      "currency_name": "Angolan Kwanza",
+      "currency_code": "AOA",
+      "symbol": "Kz",
+      "fx_rate_usd": 870,
+      "cost": "0.07208571"
+    },
+    {
+      "name": "Anguilla",
+      "iso2": "AI",
+      "iso3": "AIA",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Antigua and Barbuda",
+      "iso2": "AG",
+      "iso3": "ATG",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Argentina",
+      "iso2": "AR",
+      "iso3": "ARG",
+      "currency_name": "Argentine Peso",
+      "currency_code": "ARS",
+      "symbol": "$",
+      "fx_rate_usd": 1200,
+      "cost": "0.09942857",
+      "note": "Highly volatile; rate subject to frequent revision by governance oracle."
+    },
+    {
+      "name": "Armenia",
+      "iso2": "AM",
+      "iso3": "ARM",
+      "currency_name": "Armenian Dram",
+      "currency_code": "AMD",
+      "symbol": "֏",
+      "fx_rate_usd": 390,
+      "cost": "0.03231429"
+    },
+    {
+      "name": "Aruba",
+      "iso2": "AW",
+      "iso3": "ABW",
+      "currency_name": "Aruban Florin",
+      "currency_code": "AWG",
+      "symbol": "Afl.",
+      "fx_rate_usd": 1.79,
+      "cost": "0.00014831"
+    },
+    {
+      "name": "Australia",
+      "iso2": "AU",
+      "iso3": "AUS",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "Austria",
+      "iso2": "AT",
+      "iso3": "AUT",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Azerbaijan",
+      "iso2": "AZ",
+      "iso3": "AZE",
+      "currency_name": "Azerbaijani Manat",
+      "currency_code": "AZN",
+      "symbol": "₼",
+      "fx_rate_usd": 1.7,
+      "cost": "0.00014086"
+    },
+    {
+      "name": "Bahamas",
+      "iso2": "BS",
+      "iso3": "BHS",
+      "currency_name": "Bahamian Dollar",
+      "currency_code": "BSD",
+      "symbol": "B$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Bahrain",
+      "iso2": "BH",
+      "iso3": "BHR",
+      "currency_name": "Bahraini Dinar",
+      "currency_code": "BHD",
+      "symbol": "BD",
+      "fx_rate_usd": 0.376,
+      "cost": "0.00003115"
+    },
+    {
+      "name": "Bangladesh",
+      "iso2": "BD",
+      "iso3": "BGD",
+      "currency_name": "Bangladeshi Taka",
+      "currency_code": "BDT",
+      "symbol": "৳",
+      "fx_rate_usd": 110,
+      "cost": "0.00911429"
+    },
+    {
+      "name": "Barbados",
+      "iso2": "BB",
+      "iso3": "BRB",
+      "currency_name": "Barbadian Dollar",
+      "currency_code": "BBD",
+      "symbol": "Bds$",
+      "fx_rate_usd": 2.0,
+      "cost": "0.00016571"
+    },
+    {
+      "name": "Belarus",
+      "iso2": "BY",
+      "iso3": "BLR",
+      "currency_name": "Belarusian Ruble",
+      "currency_code": "BYN",
+      "symbol": "Br",
+      "fx_rate_usd": 3.3,
+      "cost": "0.00027343"
+    },
+    {
+      "name": "Belgium",
+      "iso2": "BE",
+      "iso3": "BEL",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Belize",
+      "iso2": "BZ",
+      "iso3": "BLZ",
+      "currency_name": "Belize Dollar",
+      "currency_code": "BZD",
+      "symbol": "BZ$",
+      "fx_rate_usd": 2.02,
+      "cost": "0.00016737"
+    },
+    {
+      "name": "Benin",
+      "iso2": "BJ",
+      "iso3": "BEN",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Bermuda",
+      "iso2": "BM",
+      "iso3": "BMU",
+      "currency_name": "Bermudian Dollar",
+      "currency_code": "BMD",
+      "symbol": "BD$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Bhutan",
+      "iso2": "BT",
+      "iso3": "BTN",
+      "currency_name": "Bhutanese Ngultrum",
+      "currency_code": "BTN",
+      "symbol": "Nu.",
+      "fx_rate_usd": 83.5,
+      "cost": "0.00691857"
+    },
+    {
+      "name": "Bolivia",
+      "iso2": "BO",
+      "iso3": "BOL",
+      "currency_name": "Bolivian Boliviano",
+      "currency_code": "BOB",
+      "symbol": "Bs.",
+      "fx_rate_usd": 6.91,
+      "cost": "0.00057254"
+    },
+    {
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "iso2": "BQ",
+      "iso3": "BES",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "iso2": "BA",
+      "iso3": "BIH",
+      "currency_name": "Bosnian Convertible Mark",
+      "currency_code": "BAM",
+      "symbol": "KM",
+      "fx_rate_usd": 1.806,
+      "cost": "0.00014964"
+    },
+    {
+      "name": "Botswana",
+      "iso2": "BW",
+      "iso3": "BWA",
+      "currency_name": "Botswana Pula",
+      "currency_code": "BWP",
+      "symbol": "P",
+      "fx_rate_usd": 13.5,
+      "cost": "0.00111857"
+    },
+    {
+      "name": "Brazil",
+      "iso2": "BR",
+      "iso3": "BRA",
+      "currency_name": "Brazilian Real",
+      "currency_code": "BRL",
+      "symbol": "R$",
+      "fx_rate_usd": 5.15,
+      "cost": "0.00042671"
+    },
+    {
+      "name": "British Indian Ocean Territory",
+      "iso2": "IO",
+      "iso3": "IOT",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "British Virgin Islands",
+      "iso2": "VG",
+      "iso3": "VGB",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Brunei",
+      "iso2": "BN",
+      "iso3": "BRN",
+      "currency_name": "Brunei Dollar",
+      "currency_code": "BND",
+      "symbol": "B$",
+      "fx_rate_usd": 1.35,
+      "cost": "0.00011186"
+    },
+    {
+      "name": "Bulgaria",
+      "iso2": "BG",
+      "iso3": "BGR",
+      "currency_name": "Bulgarian Lev",
+      "currency_code": "BGN",
+      "symbol": "лв",
+      "fx_rate_usd": 1.806,
+      "cost": "0.00014964"
+    },
+    {
+      "name": "Burkina Faso",
+      "iso2": "BF",
+      "iso3": "BFA",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Burundi",
+      "iso2": "BI",
+      "iso3": "BDI",
+      "currency_name": "Burundian Franc",
+      "currency_code": "BIF",
+      "symbol": "Fr",
+      "fx_rate_usd": 2870,
+      "cost": "0.23780000"
+    },
+    {
+      "name": "Cabo Verde",
+      "iso2": "CV",
+      "iso3": "CPV",
+      "currency_name": "Cape Verdean Escudo",
+      "currency_code": "CVE",
+      "symbol": "Esc",
+      "fx_rate_usd": 101.8,
+      "cost": "0.00843486"
+    },
+    {
+      "name": "Cambodia",
+      "iso2": "KH",
+      "iso3": "KHM",
+      "currency_name": "Cambodian Riel",
+      "currency_code": "KHR",
+      "symbol": "៛",
+      "fx_rate_usd": 4100,
+      "cost": "0.33971429"
+    },
+    {
+      "name": "Cameroon",
+      "iso2": "CM",
+      "iso3": "CMR",
+      "currency_name": "Central African CFA Franc",
+      "currency_code": "XAF",
+      "symbol": "FCFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Canada",
+      "iso2": "CA",
+      "iso3": "CAN",
+      "currency_name": "Canadian Dollar",
+      "currency_code": "CAD",
+      "symbol": "C$",
+      "fx_rate_usd": 1.37,
+      "cost": "0.00011351"
+    },
+    {
+      "name": "Cayman Islands",
+      "iso2": "KY",
+      "iso3": "CYM",
+      "currency_name": "Cayman Islands Dollar",
+      "currency_code": "KYD",
+      "symbol": "CI$",
+      "fx_rate_usd": 0.833,
+      "cost": "0.00006902"
+    },
+    {
+      "name": "Central African Republic",
+      "iso2": "CF",
+      "iso3": "CAF",
+      "currency_name": "Central African CFA Franc",
+      "currency_code": "XAF",
+      "symbol": "FCFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Chad",
+      "iso2": "TD",
+      "iso3": "TCD",
+      "currency_name": "Central African CFA Franc",
+      "currency_code": "XAF",
+      "symbol": "FCFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Chile",
+      "iso2": "CL",
+      "iso3": "CHL",
+      "currency_name": "Chilean Peso",
+      "currency_code": "CLP",
+      "symbol": "$",
+      "fx_rate_usd": 970,
+      "cost": "0.08037143"
+    },
+    {
+      "name": "China",
+      "iso2": "CN",
+      "iso3": "CHN",
+      "currency_name": "Chinese Yuan Renminbi",
+      "currency_code": "CNY",
+      "symbol": "¥",
+      "fx_rate_usd": 7.25,
+      "cost": "0.00060071"
+    },
+    {
+      "name": "Christmas Island",
+      "iso2": "CX",
+      "iso3": "CXR",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "Cocos (Keeling) Islands",
+      "iso2": "CC",
+      "iso3": "CCK",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "Colombia",
+      "iso2": "CO",
+      "iso3": "COL",
+      "currency_name": "Colombian Peso",
+      "currency_code": "COP",
+      "symbol": "$",
+      "fx_rate_usd": 3500,
+      "cost": "0.29",
+      "note": "Reference base price set by governance vote."
+    },
+    {
+      "name": "Comoros",
+      "iso2": "KM",
+      "iso3": "COM",
+      "currency_name": "Comorian Franc",
+      "currency_code": "KMF",
+      "symbol": "Fr",
+      "fx_rate_usd": 532.8,
+      "cost": "0.04414629"
+    },
+    {
+      "name": "Congo, Democratic Republic of the",
+      "iso2": "CD",
+      "iso3": "COD",
+      "currency_name": "Congolese Franc",
+      "currency_code": "CDF",
+      "symbol": "FC",
+      "fx_rate_usd": 2800,
+      "cost": "0.23200000"
+    },
+    {
+      "name": "Congo, Republic of the",
+      "iso2": "CG",
+      "iso3": "COG",
+      "currency_name": "Central African CFA Franc",
+      "currency_code": "XAF",
+      "symbol": "FCFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Cook Islands",
+      "iso2": "CK",
+      "iso3": "COK",
+      "currency_name": "New Zealand Dollar",
+      "currency_code": "NZD",
+      "symbol": "NZ$",
+      "fx_rate_usd": 1.64,
+      "cost": "0.00013589"
+    },
+    {
+      "name": "Costa Rica",
+      "iso2": "CR",
+      "iso3": "CRI",
+      "currency_name": "Costa Rican Colón",
+      "currency_code": "CRC",
+      "symbol": "₡",
+      "fx_rate_usd": 520,
+      "cost": "0.04308571"
+    },
+    {
+      "name": "Côte d'Ivoire",
+      "iso2": "CI",
+      "iso3": "CIV",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Croatia",
+      "iso2": "HR",
+      "iso3": "HRV",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Cuba",
+      "iso2": "CU",
+      "iso3": "CUB",
+      "currency_name": "Cuban Peso",
+      "currency_code": "CUP",
+      "symbol": "$",
+      "fx_rate_usd": 24,
+      "cost": "0.00198857",
+      "note": "Official rate used; actual market rate may differ significantly."
+    },
+    {
+      "name": "Curaçao",
+      "iso2": "CW",
+      "iso3": "CUW",
+      "currency_name": "Netherlands Antillean Guilder",
+      "currency_code": "ANG",
+      "symbol": "NAf.",
+      "fx_rate_usd": 1.79,
+      "cost": "0.00014831"
+    },
+    {
+      "name": "Cyprus",
+      "iso2": "CY",
+      "iso3": "CYP",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Czechia",
+      "iso2": "CZ",
+      "iso3": "CZE",
+      "currency_name": "Czech Koruna",
+      "currency_code": "CZK",
+      "symbol": "Kč",
+      "fx_rate_usd": 23,
+      "cost": "0.00190571"
+    },
+    {
+      "name": "Denmark",
+      "iso2": "DK",
+      "iso3": "DNK",
+      "currency_name": "Danish Krone",
+      "currency_code": "DKK",
+      "symbol": "kr",
+      "fx_rate_usd": 7.0,
+      "cost": "0.00058000"
+    },
+    {
+      "name": "Djibouti",
+      "iso2": "DJ",
+      "iso3": "DJI",
+      "currency_name": "Djiboutian Franc",
+      "currency_code": "DJF",
+      "symbol": "Fr",
+      "fx_rate_usd": 177.8,
+      "cost": "0.01473200"
+    },
+    {
+      "name": "Dominica",
+      "iso2": "DM",
+      "iso3": "DMA",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Dominican Republic",
+      "iso2": "DO",
+      "iso3": "DOM",
+      "currency_name": "Dominican Peso",
+      "currency_code": "DOP",
+      "symbol": "RD$",
+      "fx_rate_usd": 60,
+      "cost": "0.00497143"
+    },
+    {
+      "name": "Ecuador",
+      "iso2": "EC",
+      "iso3": "ECU",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Egypt",
+      "iso2": "EG",
+      "iso3": "EGY",
+      "currency_name": "Egyptian Pound",
+      "currency_code": "EGP",
+      "symbol": "E£",
+      "fx_rate_usd": 48,
+      "cost": "0.00397714"
+    },
+    {
+      "name": "El Salvador",
+      "iso2": "SV",
+      "iso3": "SLV",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Equatorial Guinea",
+      "iso2": "GQ",
+      "iso3": "GNQ",
+      "currency_name": "Central African CFA Franc",
+      "currency_code": "XAF",
+      "symbol": "FCFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Eritrea",
+      "iso2": "ER",
+      "iso3": "ERI",
+      "currency_name": "Eritrean Nakfa",
+      "currency_code": "ERN",
+      "symbol": "Nfk",
+      "fx_rate_usd": 15,
+      "cost": "0.00124286"
+    },
+    {
+      "name": "Estonia",
+      "iso2": "EE",
+      "iso3": "EST",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Eswatini",
+      "iso2": "SZ",
+      "iso3": "SWZ",
+      "currency_name": "Swazi Lilangeni",
+      "currency_code": "SZL",
+      "symbol": "L",
+      "fx_rate_usd": 18.5,
+      "cost": "0.00153286"
+    },
+    {
+      "name": "Ethiopia",
+      "iso2": "ET",
+      "iso3": "ETH",
+      "currency_name": "Ethiopian Birr",
+      "currency_code": "ETB",
+      "symbol": "Br",
+      "fx_rate_usd": 57,
+      "cost": "0.00472286"
+    },
+    {
+      "name": "Falkland Islands",
+      "iso2": "FK",
+      "iso3": "FLK",
+      "currency_name": "Falkland Islands Pound",
+      "currency_code": "FKP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "Faroe Islands",
+      "iso2": "FO",
+      "iso3": "FRO",
+      "currency_name": "Danish Krone",
+      "currency_code": "DKK",
+      "symbol": "kr",
+      "fx_rate_usd": 7.0,
+      "cost": "0.00058000"
+    },
+    {
+      "name": "Fiji",
+      "iso2": "FJ",
+      "iso3": "FJI",
+      "currency_name": "Fijian Dollar",
+      "currency_code": "FJD",
+      "symbol": "FJ$",
+      "fx_rate_usd": 2.3,
+      "cost": "0.00019057"
+    },
+    {
+      "name": "Finland",
+      "iso2": "FI",
+      "iso3": "FIN",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "France",
+      "iso2": "FR",
+      "iso3": "FRA",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "French Guiana",
+      "iso2": "GF",
+      "iso3": "GUF",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "French Polynesia",
+      "iso2": "PF",
+      "iso3": "PYF",
+      "currency_name": "CFP Franc",
+      "currency_code": "XPF",
+      "symbol": "Fr",
+      "fx_rate_usd": 110.2,
+      "cost": "0.00913086"
+    },
+    {
+      "name": "French Southern Territories",
+      "iso2": "TF",
+      "iso3": "ATF",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Gabon",
+      "iso2": "GA",
+      "iso3": "GAB",
+      "currency_name": "Central African CFA Franc",
+      "currency_code": "XAF",
+      "symbol": "FCFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Gambia",
+      "iso2": "GM",
+      "iso3": "GMB",
+      "currency_name": "Gambian Dalasi",
+      "currency_code": "GMD",
+      "symbol": "D",
+      "fx_rate_usd": 62,
+      "cost": "0.00513714"
+    },
+    {
+      "name": "Georgia",
+      "iso2": "GE",
+      "iso3": "GEO",
+      "currency_name": "Georgian Lari",
+      "currency_code": "GEL",
+      "symbol": "₾",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Germany",
+      "iso2": "DE",
+      "iso3": "DEU",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Ghana",
+      "iso2": "GH",
+      "iso3": "GHA",
+      "currency_name": "Ghanaian Cedi",
+      "currency_code": "GHS",
+      "symbol": "GH₵",
+      "fx_rate_usd": 14,
+      "cost": "0.00116000"
+    },
+    {
+      "name": "Gibraltar",
+      "iso2": "GI",
+      "iso3": "GIB",
+      "currency_name": "Gibraltar Pound",
+      "currency_code": "GIP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "Greece",
+      "iso2": "GR",
+      "iso3": "GRC",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Greenland",
+      "iso2": "GL",
+      "iso3": "GRL",
+      "currency_name": "Danish Krone",
+      "currency_code": "DKK",
+      "symbol": "kr",
+      "fx_rate_usd": 7.0,
+      "cost": "0.00058000"
+    },
+    {
+      "name": "Grenada",
+      "iso2": "GD",
+      "iso3": "GRD",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Guadeloupe",
+      "iso2": "GP",
+      "iso3": "GLP",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Guam",
+      "iso2": "GU",
+      "iso3": "GUM",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Guatemala",
+      "iso2": "GT",
+      "iso3": "GTM",
+      "currency_name": "Guatemalan Quetzal",
+      "currency_code": "GTQ",
+      "symbol": "Q",
+      "fx_rate_usd": 7.8,
+      "cost": "0.00064629"
+    },
+    {
+      "name": "Guernsey",
+      "iso2": "GG",
+      "iso3": "GGY",
+      "currency_name": "British Pound Sterling",
+      "currency_code": "GBP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "Guinea",
+      "iso2": "GN",
+      "iso3": "GIN",
+      "currency_name": "Guinean Franc",
+      "currency_code": "GNF",
+      "symbol": "Fr",
+      "fx_rate_usd": 8600,
+      "cost": "0.71257143"
+    },
+    {
+      "name": "Guinea-Bissau",
+      "iso2": "GW",
+      "iso3": "GNB",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Guyana",
+      "iso2": "GY",
+      "iso3": "GUY",
+      "currency_name": "Guyanese Dollar",
+      "currency_code": "GYD",
+      "symbol": "G$",
+      "fx_rate_usd": 209,
+      "cost": "0.01731714"
+    },
+    {
+      "name": "Haiti",
+      "iso2": "HT",
+      "iso3": "HTI",
+      "currency_name": "Haitian Gourde",
+      "currency_code": "HTG",
+      "symbol": "G",
+      "fx_rate_usd": 131,
+      "cost": "0.01085429"
+    },
+    {
+      "name": "Honduras",
+      "iso2": "HN",
+      "iso3": "HND",
+      "currency_name": "Honduran Lempira",
+      "currency_code": "HNL",
+      "symbol": "L",
+      "fx_rate_usd": 24.7,
+      "cost": "0.00204657"
+    },
+    {
+      "name": "Hong Kong",
+      "iso2": "HK",
+      "iso3": "HKG",
+      "currency_name": "Hong Kong Dollar",
+      "currency_code": "HKD",
+      "symbol": "HK$",
+      "fx_rate_usd": 7.8,
+      "cost": "0.00064629"
+    },
+    {
+      "name": "Hungary",
+      "iso2": "HU",
+      "iso3": "HUN",
+      "currency_name": "Hungarian Forint",
+      "currency_code": "HUF",
+      "symbol": "Ft",
+      "fx_rate_usd": 360,
+      "cost": "0.02982857"
+    },
+    {
+      "name": "Iceland",
+      "iso2": "IS",
+      "iso3": "ISL",
+      "currency_name": "Icelandic Króna",
+      "currency_code": "ISK",
+      "symbol": "kr",
+      "fx_rate_usd": 141,
+      "cost": "0.01168286"
+    },
+    {
+      "name": "India",
+      "iso2": "IN",
+      "iso3": "IND",
+      "currency_name": "Indian Rupee",
+      "currency_code": "INR",
+      "symbol": "₹",
+      "fx_rate_usd": 83.5,
+      "cost": "0.00691857"
+    },
+    {
+      "name": "Indonesia",
+      "iso2": "ID",
+      "iso3": "IDN",
+      "currency_name": "Indonesian Rupiah",
+      "currency_code": "IDR",
+      "symbol": "Rp",
+      "fx_rate_usd": 16200,
+      "cost": "1.34228571"
+    },
+    {
+      "name": "Iran",
+      "iso2": "IR",
+      "iso3": "IRN",
+      "currency_name": "Iranian Rial",
+      "currency_code": "IRR",
+      "symbol": "﷼",
+      "fx_rate_usd": 42000,
+      "cost": "3.48000000",
+      "note": "Official rate used; open-market rate is significantly higher (~580,000 IRR/USD). Governance oracle must use verified rate."
+    },
+    {
+      "name": "Iraq",
+      "iso2": "IQ",
+      "iso3": "IRQ",
+      "currency_name": "Iraqi Dinar",
+      "currency_code": "IQD",
+      "symbol": "ع.د",
+      "fx_rate_usd": 1310,
+      "cost": "0.10854286"
+    },
+    {
+      "name": "Ireland",
+      "iso2": "IE",
+      "iso3": "IRL",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Isle of Man",
+      "iso2": "IM",
+      "iso3": "IMN",
+      "currency_name": "British Pound Sterling",
+      "currency_code": "GBP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "Israel",
+      "iso2": "IL",
+      "iso3": "ISR",
+      "currency_name": "Israeli New Shekel",
+      "currency_code": "ILS",
+      "symbol": "₪",
+      "fx_rate_usd": 3.7,
+      "cost": "0.00030657"
+    },
+    {
+      "name": "Italy",
+      "iso2": "IT",
+      "iso3": "ITA",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Jamaica",
+      "iso2": "JM",
+      "iso3": "JAM",
+      "currency_name": "Jamaican Dollar",
+      "currency_code": "JMD",
+      "symbol": "J$",
+      "fx_rate_usd": 157,
+      "cost": "0.01300857"
+    },
+    {
+      "name": "Japan",
+      "iso2": "JP",
+      "iso3": "JPN",
+      "currency_name": "Japanese Yen",
+      "currency_code": "JPY",
+      "symbol": "¥",
+      "fx_rate_usd": 155,
+      "cost": "0.01284286"
+    },
+    {
+      "name": "Jersey",
+      "iso2": "JE",
+      "iso3": "JEY",
+      "currency_name": "British Pound Sterling",
+      "currency_code": "GBP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "Jordan",
+      "iso2": "JO",
+      "iso3": "JOR",
+      "currency_name": "Jordanian Dinar",
+      "currency_code": "JOD",
+      "symbol": "JD",
+      "fx_rate_usd": 0.709,
+      "cost": "0.00005875"
+    },
+    {
+      "name": "Kazakhstan",
+      "iso2": "KZ",
+      "iso3": "KAZ",
+      "currency_name": "Kazakhstani Tenge",
+      "currency_code": "KZT",
+      "symbol": "₸",
+      "fx_rate_usd": 470,
+      "cost": "0.03894286"
+    },
+    {
+      "name": "Kenya",
+      "iso2": "KE",
+      "iso3": "KEN",
+      "currency_name": "Kenyan Shilling",
+      "currency_code": "KES",
+      "symbol": "KSh",
+      "fx_rate_usd": 130,
+      "cost": "0.01077143"
+    },
+    {
+      "name": "Kiribati",
+      "iso2": "KI",
+      "iso3": "KIR",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "Korea, North",
+      "iso2": "KP",
+      "iso3": "PRK",
+      "currency_name": "North Korean Won",
+      "currency_code": "KPW",
+      "symbol": "₩",
+      "fx_rate_usd": 900,
+      "cost": "0.07457143",
+      "note": "Official rate used; currency not freely convertible. Provider settlement unavailable."
+    },
+    {
+      "name": "Korea, South",
+      "iso2": "KR",
+      "iso3": "KOR",
+      "currency_name": "South Korean Won",
+      "currency_code": "KRW",
+      "symbol": "₩",
+      "fx_rate_usd": 1330,
+      "cost": "0.11020000"
+    },
+    {
+      "name": "Kosovo",
+      "iso2": "XK",
+      "iso3": "XKX",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Kuwait",
+      "iso2": "KW",
+      "iso3": "KWT",
+      "currency_name": "Kuwaiti Dinar",
+      "currency_code": "KWD",
+      "symbol": "KD",
+      "fx_rate_usd": 0.307,
+      "cost": "0.00002544"
+    },
+    {
+      "name": "Kyrgyzstan",
+      "iso2": "KG",
+      "iso3": "KGZ",
+      "currency_name": "Kyrgyzstani Som",
+      "currency_code": "KGS",
+      "symbol": "с",
+      "fx_rate_usd": 89,
+      "cost": "0.00737429"
+    },
+    {
+      "name": "Laos",
+      "iso2": "LA",
+      "iso3": "LAO",
+      "currency_name": "Lao Kip",
+      "currency_code": "LAK",
+      "symbol": "₭",
+      "fx_rate_usd": 21700,
+      "cost": "1.79800000"
+    },
+    {
+      "name": "Latvia",
+      "iso2": "LV",
+      "iso3": "LVA",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Lebanon",
+      "iso2": "LB",
+      "iso3": "LBN",
+      "currency_name": "Lebanese Pound",
+      "currency_code": "LBP",
+      "symbol": "LL",
+      "fx_rate_usd": 90000,
+      "cost": "7.45714286",
+      "note": "Ongoing economic crisis; market rate used (~90,000 LBP/USD). Highly volatile; governance oracle must use live rate."
+    },
+    {
+      "name": "Lesotho",
+      "iso2": "LS",
+      "iso3": "LSO",
+      "currency_name": "Lesotho Loti",
+      "currency_code": "LSL",
+      "symbol": "L",
+      "fx_rate_usd": 18.5,
+      "cost": "0.00153286"
+    },
+    {
+      "name": "Liberia",
+      "iso2": "LR",
+      "iso3": "LBR",
+      "currency_name": "Liberian Dollar",
+      "currency_code": "LRD",
+      "symbol": "LD$",
+      "fx_rate_usd": 191,
+      "cost": "0.01582571"
+    },
+    {
+      "name": "Libya",
+      "iso2": "LY",
+      "iso3": "LBY",
+      "currency_name": "Libyan Dinar",
+      "currency_code": "LYD",
+      "symbol": "LD",
+      "fx_rate_usd": 4.8,
+      "cost": "0.00039771"
+    },
+    {
+      "name": "Liechtenstein",
+      "iso2": "LI",
+      "iso3": "LIE",
+      "currency_name": "Swiss Franc",
+      "currency_code": "CHF",
+      "symbol": "Fr",
+      "fx_rate_usd": 0.9,
+      "cost": "0.00007457"
+    },
+    {
+      "name": "Lithuania",
+      "iso2": "LT",
+      "iso3": "LTU",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Luxembourg",
+      "iso2": "LU",
+      "iso3": "LUX",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Macao",
+      "iso2": "MO",
+      "iso3": "MAC",
+      "currency_name": "Macanese Pataca",
+      "currency_code": "MOP",
+      "symbol": "P",
+      "fx_rate_usd": 8.07,
+      "cost": "0.00066866"
+    },
+    {
+      "name": "Madagascar",
+      "iso2": "MG",
+      "iso3": "MDG",
+      "currency_name": "Malagasy Ariary",
+      "currency_code": "MGA",
+      "symbol": "Ar",
+      "fx_rate_usd": 4500,
+      "cost": "0.37285714"
+    },
+    {
+      "name": "Malawi",
+      "iso2": "MW",
+      "iso3": "MWI",
+      "currency_name": "Malawian Kwacha",
+      "currency_code": "MWK",
+      "symbol": "MK",
+      "fx_rate_usd": 1740,
+      "cost": "0.14417143"
+    },
+    {
+      "name": "Malaysia",
+      "iso2": "MY",
+      "iso3": "MYS",
+      "currency_name": "Malaysian Ringgit",
+      "currency_code": "MYR",
+      "symbol": "RM",
+      "fx_rate_usd": 4.7,
+      "cost": "0.00038943"
+    },
+    {
+      "name": "Maldives",
+      "iso2": "MV",
+      "iso3": "MDV",
+      "currency_name": "Maldivian Rufiyaa",
+      "currency_code": "MVR",
+      "symbol": "Rf.",
+      "fx_rate_usd": 15.5,
+      "cost": "0.00128429"
+    },
+    {
+      "name": "Mali",
+      "iso2": "ML",
+      "iso3": "MLI",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Malta",
+      "iso2": "MT",
+      "iso3": "MLT",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Marshall Islands",
+      "iso2": "MH",
+      "iso3": "MHL",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Martinique",
+      "iso2": "MQ",
+      "iso3": "MTQ",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Mauritania",
+      "iso2": "MR",
+      "iso3": "MRT",
+      "currency_name": "Mauritanian Ouguiya",
+      "currency_code": "MRU",
+      "symbol": "UM",
+      "fx_rate_usd": 36,
+      "cost": "0.00298286"
+    },
+    {
+      "name": "Mauritius",
+      "iso2": "MU",
+      "iso3": "MUS",
+      "currency_name": "Mauritian Rupee",
+      "currency_code": "MUR",
+      "symbol": "Rs",
+      "fx_rate_usd": 45,
+      "cost": "0.00372857"
+    },
+    {
+      "name": "Mayotte",
+      "iso2": "YT",
+      "iso3": "MYT",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Mexico",
+      "iso2": "MX",
+      "iso3": "MEX",
+      "currency_name": "Mexican Peso",
+      "currency_code": "MXN",
+      "symbol": "$",
+      "fx_rate_usd": 17.0,
+      "cost": "0.00140857"
+    },
+    {
+      "name": "Micronesia",
+      "iso2": "FM",
+      "iso3": "FSM",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Moldova",
+      "iso2": "MD",
+      "iso3": "MDA",
+      "currency_name": "Moldovan Leu",
+      "currency_code": "MDL",
+      "symbol": "L",
+      "fx_rate_usd": 17.7,
+      "cost": "0.00146657"
+    },
+    {
+      "name": "Monaco",
+      "iso2": "MC",
+      "iso3": "MCO",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Mongolia",
+      "iso2": "MN",
+      "iso3": "MNG",
+      "currency_name": "Mongolian Tögrög",
+      "currency_code": "MNT",
+      "symbol": "₮",
+      "fx_rate_usd": 3420,
+      "cost": "0.28337143"
+    },
+    {
+      "name": "Montenegro",
+      "iso2": "ME",
+      "iso3": "MNE",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Montserrat",
+      "iso2": "MS",
+      "iso3": "MSR",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Morocco",
+      "iso2": "MA",
+      "iso3": "MAR",
+      "currency_name": "Moroccan Dirham",
+      "currency_code": "MAD",
+      "symbol": "MAD",
+      "fx_rate_usd": 10.0,
+      "cost": "0.00082857"
+    },
+    {
+      "name": "Mozambique",
+      "iso2": "MZ",
+      "iso3": "MOZ",
+      "currency_name": "Mozambican Metical",
+      "currency_code": "MZN",
+      "symbol": "MT",
+      "fx_rate_usd": 64,
+      "cost": "0.00530286"
+    },
+    {
+      "name": "Myanmar",
+      "iso2": "MM",
+      "iso3": "MMR",
+      "currency_name": "Burmese Kyat",
+      "currency_code": "MMK",
+      "symbol": "K",
+      "fx_rate_usd": 2100,
+      "cost": "0.17400000",
+      "note": "Official rate used; open-market rate differs due to political situation."
+    },
+    {
+      "name": "Namibia",
+      "iso2": "NA",
+      "iso3": "NAM",
+      "currency_name": "Namibian Dollar",
+      "currency_code": "NAD",
+      "symbol": "N$",
+      "fx_rate_usd": 18.5,
+      "cost": "0.00153286"
+    },
+    {
+      "name": "Nauru",
+      "iso2": "NR",
+      "iso3": "NRU",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "Nepal",
+      "iso2": "NP",
+      "iso3": "NPL",
+      "currency_name": "Nepalese Rupee",
+      "currency_code": "NPR",
+      "symbol": "Rs.",
+      "fx_rate_usd": 133,
+      "cost": "0.01102000"
+    },
+    {
+      "name": "Netherlands",
+      "iso2": "NL",
+      "iso3": "NLD",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "New Caledonia",
+      "iso2": "NC",
+      "iso3": "NCL",
+      "currency_name": "CFP Franc",
+      "currency_code": "XPF",
+      "symbol": "Fr",
+      "fx_rate_usd": 110.2,
+      "cost": "0.00913086"
+    },
+    {
+      "name": "New Zealand",
+      "iso2": "NZ",
+      "iso3": "NZL",
+      "currency_name": "New Zealand Dollar",
+      "currency_code": "NZD",
+      "symbol": "NZ$",
+      "fx_rate_usd": 1.64,
+      "cost": "0.00013589"
+    },
+    {
+      "name": "Nicaragua",
+      "iso2": "NI",
+      "iso3": "NIC",
+      "currency_name": "Nicaraguan Córdoba",
+      "currency_code": "NIO",
+      "symbol": "C$",
+      "fx_rate_usd": 36.7,
+      "cost": "0.00304086"
+    },
+    {
+      "name": "Niger",
+      "iso2": "NE",
+      "iso3": "NER",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Nigeria",
+      "iso2": "NG",
+      "iso3": "NGA",
+      "currency_name": "Nigerian Naira",
+      "currency_code": "NGN",
+      "symbol": "₦",
+      "fx_rate_usd": 1600,
+      "cost": "0.13257143"
+    },
+    {
+      "name": "Niue",
+      "iso2": "NU",
+      "iso3": "NIU",
+      "currency_name": "New Zealand Dollar",
+      "currency_code": "NZD",
+      "symbol": "NZ$",
+      "fx_rate_usd": 1.64,
+      "cost": "0.00013589"
+    },
+    {
+      "name": "Norfolk Island",
+      "iso2": "NF",
+      "iso3": "NFK",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "North Macedonia",
+      "iso2": "MK",
+      "iso3": "MKD",
+      "currency_name": "Macedonian Denar",
+      "currency_code": "MKD",
+      "symbol": "den",
+      "fx_rate_usd": 57.5,
+      "cost": "0.00476429"
+    },
+    {
+      "name": "Northern Mariana Islands",
+      "iso2": "MP",
+      "iso3": "MNP",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Norway",
+      "iso2": "NO",
+      "iso3": "NOR",
+      "currency_name": "Norwegian Krone",
+      "currency_code": "NOK",
+      "symbol": "kr",
+      "fx_rate_usd": 10.7,
+      "cost": "0.00088657"
+    },
+    {
+      "name": "Oman",
+      "iso2": "OM",
+      "iso3": "OMN",
+      "currency_name": "Omani Rial",
+      "currency_code": "OMR",
+      "symbol": "OMR",
+      "fx_rate_usd": 0.385,
+      "cost": "0.00003190"
+    },
+    {
+      "name": "Pakistan",
+      "iso2": "PK",
+      "iso3": "PAK",
+      "currency_name": "Pakistani Rupee",
+      "currency_code": "PKR",
+      "symbol": "₨",
+      "fx_rate_usd": 280,
+      "cost": "0.02320000"
+    },
+    {
+      "name": "Palau",
+      "iso2": "PW",
+      "iso3": "PLW",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Palestine",
+      "iso2": "PS",
+      "iso3": "PSE",
+      "currency_name": "Israeli New Shekel",
+      "currency_code": "ILS",
+      "symbol": "₪",
+      "fx_rate_usd": 3.7,
+      "cost": "0.00030657"
+    },
+    {
+      "name": "Panama",
+      "iso2": "PA",
+      "iso3": "PAN",
+      "currency_name": "Panamanian Balboa / USD",
+      "currency_code": "PAB",
+      "symbol": "B/.",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Papua New Guinea",
+      "iso2": "PG",
+      "iso3": "PNG",
+      "currency_name": "Papua New Guinean Kina",
+      "currency_code": "PGK",
+      "symbol": "K",
+      "fx_rate_usd": 3.9,
+      "cost": "0.00032314"
+    },
+    {
+      "name": "Paraguay",
+      "iso2": "PY",
+      "iso3": "PRY",
+      "currency_name": "Paraguayan Guaraní",
+      "currency_code": "PYG",
+      "symbol": "₲",
+      "fx_rate_usd": 7350,
+      "cost": "0.60900000"
+    },
+    {
+      "name": "Peru",
+      "iso2": "PE",
+      "iso3": "PER",
+      "currency_name": "Peruvian Sol",
+      "currency_code": "PEN",
+      "symbol": "S/",
+      "fx_rate_usd": 3.8,
+      "cost": "0.00031486"
+    },
+    {
+      "name": "Philippines",
+      "iso2": "PH",
+      "iso3": "PHL",
+      "currency_name": "Philippine Peso",
+      "currency_code": "PHP",
+      "symbol": "₱",
+      "fx_rate_usd": 57,
+      "cost": "0.00472286"
+    },
+    {
+      "name": "Pitcairn Islands",
+      "iso2": "PN",
+      "iso3": "PCN",
+      "currency_name": "New Zealand Dollar",
+      "currency_code": "NZD",
+      "symbol": "NZ$",
+      "fx_rate_usd": 1.64,
+      "cost": "0.00013589"
+    },
+    {
+      "name": "Poland",
+      "iso2": "PL",
+      "iso3": "POL",
+      "currency_name": "Polish Złoty",
+      "currency_code": "PLN",
+      "symbol": "zł",
+      "fx_rate_usd": 4.0,
+      "cost": "0.00033143"
+    },
+    {
+      "name": "Portugal",
+      "iso2": "PT",
+      "iso3": "PRT",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Puerto Rico",
+      "iso2": "PR",
+      "iso3": "PRI",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Qatar",
+      "iso2": "QA",
+      "iso3": "QAT",
+      "currency_name": "Qatari Riyal",
+      "currency_code": "QAR",
+      "symbol": "QR",
+      "fx_rate_usd": 3.64,
+      "cost": "0.00030160"
+    },
+    {
+      "name": "Réunion",
+      "iso2": "RE",
+      "iso3": "REU",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Romania",
+      "iso2": "RO",
+      "iso3": "ROU",
+      "currency_name": "Romanian Leu",
+      "currency_code": "RON",
+      "symbol": "lei",
+      "fx_rate_usd": 4.7,
+      "cost": "0.00038943"
+    },
+    {
+      "name": "Russia",
+      "iso2": "RU",
+      "iso3": "RUS",
+      "currency_name": "Russian Ruble",
+      "currency_code": "RUB",
+      "symbol": "₽",
+      "fx_rate_usd": 90,
+      "cost": "0.00745714"
+    },
+    {
+      "name": "Rwanda",
+      "iso2": "RW",
+      "iso3": "RWA",
+      "currency_name": "Rwandan Franc",
+      "currency_code": "RWF",
+      "symbol": "RF",
+      "fx_rate_usd": 1310,
+      "cost": "0.10854286"
+    },
+    {
+      "name": "Saint Barthélemy",
+      "iso2": "BL",
+      "iso3": "BLM",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
+      "iso2": "SH",
+      "iso3": "SHN",
+      "currency_name": "Saint Helena Pound",
+      "currency_code": "SHP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "Saint Kitts and Nevis",
+      "iso2": "KN",
+      "iso3": "KNA",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Saint Lucia",
+      "iso2": "LC",
+      "iso3": "LCA",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Saint Martin (French part)",
+      "iso2": "MF",
+      "iso3": "MAF",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Saint Pierre and Miquelon",
+      "iso2": "PM",
+      "iso3": "SPM",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Saint Vincent and the Grenadines",
+      "iso2": "VC",
+      "iso3": "VCT",
+      "currency_name": "East Caribbean Dollar",
+      "currency_code": "XCD",
+      "symbol": "EC$",
+      "fx_rate_usd": 2.7,
+      "cost": "0.00022371"
+    },
+    {
+      "name": "Samoa",
+      "iso2": "WS",
+      "iso3": "WSM",
+      "currency_name": "Samoan Tālā",
+      "currency_code": "WST",
+      "symbol": "T",
+      "fx_rate_usd": 2.78,
+      "cost": "0.00023034"
+    },
+    {
+      "name": "San Marino",
+      "iso2": "SM",
+      "iso3": "SMR",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "São Tomé and Príncipe",
+      "iso2": "ST",
+      "iso3": "STP",
+      "currency_name": "São Tomé and Príncipe Dobra",
+      "currency_code": "STN",
+      "symbol": "Db",
+      "fx_rate_usd": 22.2,
+      "cost": "0.00183943"
+    },
+    {
+      "name": "Saudi Arabia",
+      "iso2": "SA",
+      "iso3": "SAU",
+      "currency_name": "Saudi Riyal",
+      "currency_code": "SAR",
+      "symbol": "SR",
+      "fx_rate_usd": 3.75,
+      "cost": "0.00031071"
+    },
+    {
+      "name": "Senegal",
+      "iso2": "SN",
+      "iso3": "SEN",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Serbia",
+      "iso2": "RS",
+      "iso3": "SRB",
+      "currency_name": "Serbian Dinar",
+      "currency_code": "RSD",
+      "symbol": "din",
+      "fx_rate_usd": 108,
+      "cost": "0.00894857"
+    },
+    {
+      "name": "Seychelles",
+      "iso2": "SC",
+      "iso3": "SYC",
+      "currency_name": "Seychellois Rupee",
+      "currency_code": "SCR",
+      "symbol": "Rs",
+      "fx_rate_usd": 13.5,
+      "cost": "0.00111857"
+    },
+    {
+      "name": "Sierra Leone",
+      "iso2": "SL",
+      "iso3": "SLE",
+      "currency_name": "Sierra Leonean Leone",
+      "currency_code": "SLE",
+      "symbol": "Le",
+      "fx_rate_usd": 22,
+      "cost": "0.00182286"
+    },
+    {
+      "name": "Singapore",
+      "iso2": "SG",
+      "iso3": "SGP",
+      "currency_name": "Singapore Dollar",
+      "currency_code": "SGD",
+      "symbol": "S$",
+      "fx_rate_usd": 1.35,
+      "cost": "0.00011186"
+    },
+    {
+      "name": "Sint Maarten (Dutch part)",
+      "iso2": "SX",
+      "iso3": "SXM",
+      "currency_name": "Netherlands Antillean Guilder",
+      "currency_code": "ANG",
+      "symbol": "NAf.",
+      "fx_rate_usd": 1.79,
+      "cost": "0.00014831"
+    },
+    {
+      "name": "Slovakia",
+      "iso2": "SK",
+      "iso3": "SVK",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Slovenia",
+      "iso2": "SI",
+      "iso3": "SVN",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Solomon Islands",
+      "iso2": "SB",
+      "iso3": "SLB",
+      "currency_name": "Solomon Islands Dollar",
+      "currency_code": "SBD",
+      "symbol": "SI$",
+      "fx_rate_usd": 8.4,
+      "cost": "0.00069600"
+    },
+    {
+      "name": "Somalia",
+      "iso2": "SO",
+      "iso3": "SOM",
+      "currency_name": "Somali Shilling",
+      "currency_code": "SOS",
+      "symbol": "Sh",
+      "fx_rate_usd": 571,
+      "cost": "0.04731143"
+    },
+    {
+      "name": "South Africa",
+      "iso2": "ZA",
+      "iso3": "ZAF",
+      "currency_name": "South African Rand",
+      "currency_code": "ZAR",
+      "symbol": "R",
+      "fx_rate_usd": 18.5,
+      "cost": "0.00153286"
+    },
+    {
+      "name": "South Georgia and the South Sandwich Islands",
+      "iso2": "GS",
+      "iso3": "SGS",
+      "currency_name": "British Pound Sterling",
+      "currency_code": "GBP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "South Sudan",
+      "iso2": "SS",
+      "iso3": "SSD",
+      "currency_name": "South Sudanese Pound",
+      "currency_code": "SSP",
+      "symbol": "£",
+      "fx_rate_usd": 1319,
+      "cost": "0.10928857"
+    },
+    {
+      "name": "Spain",
+      "iso2": "ES",
+      "iso3": "ESP",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Sri Lanka",
+      "iso2": "LK",
+      "iso3": "LKA",
+      "currency_name": "Sri Lankan Rupee",
+      "currency_code": "LKR",
+      "symbol": "Rs",
+      "fx_rate_usd": 305,
+      "cost": "0.02527143"
+    },
+    {
+      "name": "Sudan",
+      "iso2": "SD",
+      "iso3": "SDN",
+      "currency_name": "Sudanese Pound",
+      "currency_code": "SDG",
+      "symbol": "SDG",
+      "fx_rate_usd": 600,
+      "cost": "0.04971429",
+      "note": "Ongoing conflict; rate subject to high volatility."
+    },
+    {
+      "name": "Suriname",
+      "iso2": "SR",
+      "iso3": "SUR",
+      "currency_name": "Surinamese Dollar",
+      "currency_code": "SRD",
+      "symbol": "Sr$",
+      "fx_rate_usd": 36,
+      "cost": "0.00298286"
+    },
+    {
+      "name": "Svalbard and Jan Mayen",
+      "iso2": "SJ",
+      "iso3": "SJM",
+      "currency_name": "Norwegian Krone",
+      "currency_code": "NOK",
+      "symbol": "kr",
+      "fx_rate_usd": 10.7,
+      "cost": "0.00088657"
+    },
+    {
+      "name": "Sweden",
+      "iso2": "SE",
+      "iso3": "SWE",
+      "currency_name": "Swedish Krona",
+      "currency_code": "SEK",
+      "symbol": "kr",
+      "fx_rate_usd": 10.5,
+      "cost": "0.00087000"
+    },
+    {
+      "name": "Switzerland",
+      "iso2": "CH",
+      "iso3": "CHE",
+      "currency_name": "Swiss Franc",
+      "currency_code": "CHF",
+      "symbol": "Fr",
+      "fx_rate_usd": 0.9,
+      "cost": "0.00007457"
+    },
+    {
+      "name": "Syria",
+      "iso2": "SY",
+      "iso3": "SYR",
+      "currency_name": "Syrian Pound",
+      "currency_code": "SYP",
+      "symbol": "£S",
+      "fx_rate_usd": 12500,
+      "cost": "1.03571429",
+      "note": "Official rate used; actual rate differs significantly due to conflict. Provider settlement may be restricted."
+    },
+    {
+      "name": "Taiwan",
+      "iso2": "TW",
+      "iso3": "TWN",
+      "currency_name": "New Taiwan Dollar",
+      "currency_code": "TWD",
+      "symbol": "NT$",
+      "fx_rate_usd": 32,
+      "cost": "0.00265143"
+    },
+    {
+      "name": "Tajikistan",
+      "iso2": "TJ",
+      "iso3": "TJK",
+      "currency_name": "Tajikistani Somoni",
+      "currency_code": "TJS",
+      "symbol": "SM",
+      "fx_rate_usd": 10.7,
+      "cost": "0.00088657"
+    },
+    {
+      "name": "Tanzania",
+      "iso2": "TZ",
+      "iso3": "TZA",
+      "currency_name": "Tanzanian Shilling",
+      "currency_code": "TZS",
+      "symbol": "TSh",
+      "fx_rate_usd": 2650,
+      "cost": "0.21957143"
+    },
+    {
+      "name": "Thailand",
+      "iso2": "TH",
+      "iso3": "THA",
+      "currency_name": "Thai Baht",
+      "currency_code": "THB",
+      "symbol": "฿",
+      "fx_rate_usd": 35,
+      "cost": "0.00290000"
+    },
+    {
+      "name": "Timor-Leste",
+      "iso2": "TL",
+      "iso3": "TLS",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Togo",
+      "iso2": "TG",
+      "iso3": "TGO",
+      "currency_name": "West African CFA Franc",
+      "currency_code": "XOF",
+      "symbol": "CFA",
+      "fx_rate_usd": 615,
+      "cost": "0.05095714"
+    },
+    {
+      "name": "Tokelau",
+      "iso2": "TK",
+      "iso3": "TKL",
+      "currency_name": "New Zealand Dollar",
+      "currency_code": "NZD",
+      "symbol": "NZ$",
+      "fx_rate_usd": 1.64,
+      "cost": "0.00013589"
+    },
+    {
+      "name": "Tonga",
+      "iso2": "TO",
+      "iso3": "TON",
+      "currency_name": "Tongan Paʻanga",
+      "currency_code": "TOP",
+      "symbol": "T$",
+      "fx_rate_usd": 2.4,
+      "cost": "0.00019886"
+    },
+    {
+      "name": "Trinidad and Tobago",
+      "iso2": "TT",
+      "iso3": "TTO",
+      "currency_name": "Trinidad and Tobago Dollar",
+      "currency_code": "TTD",
+      "symbol": "TT$",
+      "fx_rate_usd": 6.8,
+      "cost": "0.00056343"
+    },
+    {
+      "name": "Tunisia",
+      "iso2": "TN",
+      "iso3": "TUN",
+      "currency_name": "Tunisian Dinar",
+      "currency_code": "TND",
+      "symbol": "DT",
+      "fx_rate_usd": 3.1,
+      "cost": "0.00025686"
+    },
+    {
+      "name": "Turkey",
+      "iso2": "TR",
+      "iso3": "TUR",
+      "currency_name": "Turkish Lira",
+      "currency_code": "TRY",
+      "symbol": "₺",
+      "fx_rate_usd": 32,
+      "cost": "0.00265143"
+    },
+    {
+      "name": "Turkmenistan",
+      "iso2": "TM",
+      "iso3": "TKM",
+      "currency_name": "Turkmenistani Manat",
+      "currency_code": "TMT",
+      "symbol": "T",
+      "fx_rate_usd": 3.5,
+      "cost": "0.00029000"
+    },
+    {
+      "name": "Turks and Caicos Islands",
+      "iso2": "TC",
+      "iso3": "TCA",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Tuvalu",
+      "iso2": "TV",
+      "iso3": "TUV",
+      "currency_name": "Australian Dollar",
+      "currency_code": "AUD",
+      "symbol": "A$",
+      "fx_rate_usd": 1.55,
+      "cost": "0.00012843"
+    },
+    {
+      "name": "Uganda",
+      "iso2": "UG",
+      "iso3": "UGA",
+      "currency_name": "Ugandan Shilling",
+      "currency_code": "UGX",
+      "symbol": "USh",
+      "fx_rate_usd": 3800,
+      "cost": "0.31485714"
+    },
+    {
+      "name": "Ukraine",
+      "iso2": "UA",
+      "iso3": "UKR",
+      "currency_name": "Ukrainian Hryvnia",
+      "currency_code": "UAH",
+      "symbol": "₴",
+      "fx_rate_usd": 38,
+      "cost": "0.00314857"
+    },
+    {
+      "name": "United Arab Emirates",
+      "iso2": "AE",
+      "iso3": "ARE",
+      "currency_name": "UAE Dirham",
+      "currency_code": "AED",
+      "symbol": "د.إ",
+      "fx_rate_usd": 3.67,
+      "cost": "0.00030409"
+    },
+    {
+      "name": "United Kingdom",
+      "iso2": "GB",
+      "iso3": "GBR",
+      "currency_name": "British Pound Sterling",
+      "currency_code": "GBP",
+      "symbol": "£",
+      "fx_rate_usd": 0.787,
+      "cost": "0.00006521"
+    },
+    {
+      "name": "United States",
+      "iso2": "US",
+      "iso3": "USA",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Uruguay",
+      "iso2": "UY",
+      "iso3": "URY",
+      "currency_name": "Uruguayan Peso",
+      "currency_code": "UYU",
+      "symbol": "$U",
+      "fx_rate_usd": 40,
+      "cost": "0.00331429"
+    },
+    {
+      "name": "US Virgin Islands",
+      "iso2": "VI",
+      "iso3": "VIR",
+      "currency_name": "United States Dollar",
+      "currency_code": "USD",
+      "symbol": "$",
+      "fx_rate_usd": 1.0,
+      "cost": "0.00008286"
+    },
+    {
+      "name": "Uzbekistan",
+      "iso2": "UZ",
+      "iso3": "UZB",
+      "currency_name": "Uzbekistani Som",
+      "currency_code": "UZS",
+      "symbol": "сум",
+      "fx_rate_usd": 12800,
+      "cost": "1.06057143"
+    },
+    {
+      "name": "Vanuatu",
+      "iso2": "VU",
+      "iso3": "VUT",
+      "currency_name": "Vanuatu Vatu",
+      "currency_code": "VUV",
+      "symbol": "VT",
+      "fx_rate_usd": 119,
+      "cost": "0.00986000"
+    },
+    {
+      "name": "Vatican City",
+      "iso2": "VA",
+      "iso3": "VAT",
+      "currency_name": "Euro",
+      "currency_code": "EUR",
+      "symbol": "€",
+      "fx_rate_usd": 0.924,
+      "cost": "0.00007656"
+    },
+    {
+      "name": "Venezuela",
+      "iso2": "VE",
+      "iso3": "VEN",
+      "currency_name": "Venezuelan Bolívar Soberano",
+      "currency_code": "VES",
+      "symbol": "Bs.S",
+      "fx_rate_usd": 36,
+      "cost": "0.00298286",
+      "note": "Highly volatile; governance oracle must use live rate from BCV or market reference."
+    },
+    {
+      "name": "Vietnam",
+      "iso2": "VN",
+      "iso3": "VNM",
+      "currency_name": "Vietnamese Đồng",
+      "currency_code": "VND",
+      "symbol": "₫",
+      "fx_rate_usd": 25000,
+      "cost": "2.07142857"
+    },
+    {
+      "name": "Wallis and Futuna",
+      "iso2": "WF",
+      "iso3": "WLF",
+      "currency_name": "CFP Franc",
+      "currency_code": "XPF",
+      "symbol": "Fr",
+      "fx_rate_usd": 110.2,
+      "cost": "0.00913086"
+    },
+    {
+      "name": "Western Sahara",
+      "iso2": "EH",
+      "iso3": "ESH",
+      "currency_name": "Moroccan Dirham",
+      "currency_code": "MAD",
+      "symbol": "MAD",
+      "fx_rate_usd": 10.0,
+      "cost": "0.00082857"
+    },
+    {
+      "name": "Yemen",
+      "iso2": "YE",
+      "iso3": "YEM",
+      "currency_name": "Yemeni Rial",
+      "currency_code": "YER",
+      "symbol": "﷼",
+      "fx_rate_usd": 250,
+      "cost": "0.02071429"
+    },
+    {
+      "name": "Zambia",
+      "iso2": "ZM",
+      "iso3": "ZMB",
+      "currency_name": "Zambian Kwacha",
+      "currency_code": "ZMW",
+      "symbol": "ZMW",
+      "fx_rate_usd": 27,
+      "cost": "0.00223714"
+    },
+    {
+      "name": "Zimbabwe",
+      "iso2": "ZW",
+      "iso3": "ZWE",
+      "currency_name": "Zimbabwe Gold (ZiG)",
+      "currency_code": "ZWG",
+      "symbol": "ZiG",
+      "fx_rate_usd": 24,
+      "cost": "0.00198857",
+      "note": "Zimbabwe Gold (ZiG) introduced April 2024; USD also widely accepted. Rate subject to revision."
+    }
+  ]
+}

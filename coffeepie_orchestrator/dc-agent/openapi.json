@@ -1,0 +1,387 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Coffee Pie DC Agent API",
+    "description": "Hypervisor-agnostic VM lifecycle API for the QFDM Network. Each datacenter runs one DC Agent instance. The OpenUDS orchestrator calls this API to provision and manage Coffee Pie Slices (VM instances). The DC Agent translates these calls to the underlying hypervisor (Proxmox, libvirt, VMware, etc.) — the orchestrator never talks to the hypervisor directly.\n\n**Architecture:** Frontend → OpenUDS Orchestrator → DC Agent → Hypervisor\n\n**Auth:** Read endpoints (health, capacity, templates) are unauthenticated. Mutation endpoints (create/destroy/start/stop) require `Authorization: Bearer <DC_AGENT_AUTH_TOKEN>`.",
+    "version": "0.1.0",
+    "contact": {
+      "name": "Coffee Pie Engineering",
+      "email": "security@coffeepie.co",
+      "url": "https://coffeepie.co"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://dc-agent.dc1.lan:9090",
+      "description": "Datacenter-local DC Agent"
+    }
+  ],
+  "security": [
+    {
+      "AgentAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "AgentAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "DC_AGENT_AUTH_TOKEN",
+        "description": "Shared secret between the OpenUDS orchestrator and DC Agent. Configured via DC_AGENT_AUTH_TOKEN env var. Mutation endpoints require this; read endpoints do not."
+      }
+    },
+    "schemas": {
+      "SliceSpec": {
+        "type": "object",
+        "description": "A Coffee Pie Slice — the unit of computing power. Matches slice specs from AGENTS.md. All fields are u32 integers.",
+        "required": ["cpu_cores", "ram_gb", "ssd_gb", "hdd_gb", "net_mbps", "gpu_mb", "res_vmpx_s", "ai_tops"],
+        "properties": {
+          "cpu_cores": { "type": "integer", "minimum": 1, "maximum": 64, "description": "vCores (1 = 1 serial processing thread)" },
+          "ram_gb": { "type": "integer", "minimum": 1, "maximum": 64, "description": "RAM in GB" },
+          "ssd_gb": { "type": "integer", "minimum": 1, "maximum": 512, "description": "SSD in GB (OS + small files)" },
+          "hdd_gb": { "type": "integer", "minimum": 0, "maximum": 8000, "description": "HDD in GB (bulk storage, 0 = none)" },
+          "net_mbps": { "type": "integer", "minimum": 1, "maximum": 512, "description": "Network bandwidth in Mbps" },
+          "gpu_mb": { "type": "integer", "minimum": 0, "maximum": 8000, "description": "GPU VRAM in MB (0 = no GPU)" },
+          "res_vmpx_s": { "type": "integer", "minimum": 1, "maximum": 960, "description": "Resolution: virtual megapixels/sec" },
+          "ai_tops": { "type": "integer", "minimum": 0, "maximum": 192, "description": "AI TOPS INT8 (0 = no AI accelerator)" }
+        },
+        "example": {
+          "cpu_cores": 4,
+          "ram_gb": 4,
+          "ssd_gb": 32,
+          "hdd_gb": 500,
+          "net_mbps": 32,
+          "gpu_mb": 500,
+          "res_vmpx_s": 60,
+          "ai_tops": 12
+        }
+      },
+      "CreateSliceRequest": {
+        "type": "object",
+        "description": "Request to create a new VM instance (Slice). The DC Agent assigns the instance_id and returns a SliceHandle.",
+        "required": ["template", "spec"],
+        "properties": {
+          "template": { "type": "string", "description": "OS template name (e.g., 'debian-12', 'ubuntu-24.04', 'windows-11')" },
+          "spec": { "$ref": "#/components/schemas/SliceSpec" }
+        }
+      },
+      "SliceHandle": {
+        "type": "object",
+        "description": "Handle returned when a VM instance is created. The orchestrator stores this and uses it for lifecycle operations.",
+        "properties": {
+          "instance_id": { "type": "string", "format": "uuid", "description": "Unique instance identifier (UUID v4)" },
+          "provider_vm_id": { "type": "string", "description": "VM name/ID in the hypervisor (e.g., 'cp-<uuid>')" },
+          "node": { "type": "string", "description": "Datacenter node/host running this instance" },
+          "sunshine_endpoint": {
+            "type": "object",
+            "nullable": true,
+            "description": "Sunshine streaming endpoint for the frontend (null if not yet assigned)",
+            "properties": {
+              "ip": { "type": "string", "format": "ipv4" },
+              "api_port": { "type": "integer", "example": 47990 },
+              "gamestream_port_range": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": { "type": "integer" },
+                "description": "[start, end] GameStream port range for Moonlight"
+              }
+            }
+          },
+          "created_at": { "type": "integer", "description": "Creation timestamp (epoch seconds)" },
+          "spec": { "$ref": "#/components/schemas/SliceSpec" }
+        }
+      },
+      "CapacityReport": {
+        "type": "object",
+        "description": "Datacenter capacity report sent to the QFDM broker on heartbeat.",
+        "properties": {
+          "agent_id": { "type": "string", "description": "DC Agent unique identifier" },
+          "timestamp": { "type": "integer", "description": "Report timestamp (epoch seconds)" },
+          "available_slices": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/NodeCapacity" }
+          },
+          "running_instances": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RunningInstance" }
+          },
+          "health": { "$ref": "#/components/schemas/HealthStatus" }
+        }
+      },
+      "NodeCapacity": {
+        "type": "object",
+        "properties": {
+          "node_name": { "type": "string" },
+          "total_cpu_cores": { "type": "integer" },
+          "used_cpu_cores": { "type": "integer" },
+          "total_ram_gb": { "type": "integer" },
+          "used_ram_gb": { "type": "integer" }
+        }
+      },
+      "RunningInstance": {
+        "type": "object",
+        "properties": {
+          "instance_id": { "type": "string", "format": "uuid" },
+          "node": { "type": "string" },
+          "status": { "type": "string", "enum": ["running", "stopped", "paused"] },
+          "spec": { "$ref": "#/components/schemas/SliceSpec" }
+        }
+      },
+      "HealthStatus": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string", "enum": ["healthy", "degraded", "unhealthy"] },
+          "message": { "type": "string", "nullable": true }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "description": "Standard API response wrapper.",
+        "properties": {
+          "ok": { "type": "boolean" },
+          "data": { "description": "Response payload (present when ok=true)" },
+          "error": { "type": "string", "description": "Error message (present when ok=false)" }
+        }
+      },
+      "InstanceActionBody": {
+        "type": "object",
+        "description": "Body for instance lifecycle actions (start, stop, destroy).",
+        "required": ["provider_vm_id", "node"],
+        "properties": {
+          "provider_vm_id": { "type": "string", "description": "VM identifier in the hypervisor" },
+          "node": { "type": "string", "description": "Datacenter node hosting the VM" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "operationId": "health",
+        "tags": ["Read"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Agent is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "ok" },
+                    "service": { "type": "string", "example": "coffeepie-dc-agent" },
+                    "version": { "type": "string", "example": "0.1.0" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/capacity": {
+      "get": {
+        "summary": "Get datacenter capacity",
+        "description": "Called by the QFDM broker to assess available capacity. Returns all nodes, running instances, and health status.",
+        "operationId": "getCapacity",
+        "tags": ["Read"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Capacity report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    { "$ref": "#/components/schemas/ApiResponse" }
+                  ],
+                  "example": {
+                    "ok": true,
+                    "data": {
+                      "agent_id": "dc-agent-dc1",
+                      "timestamp": 1717624800,
+                      "available_slices": [],
+                      "running_instances": [],
+                      "health": { "status": "healthy", "message": null }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templates": {
+      "get": {
+        "summary": "List OS templates",
+        "description": "Returns available OS templates that can be used when creating instances.",
+        "operationId": "listTemplates",
+        "tags": ["Read"],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "List of template names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [{ "$ref": "#/components/schemas/ApiResponse" }],
+                  "example": {
+                    "ok": true,
+                    "data": ["debian-12", "ubuntu-24.04", "windows-11", "fedora-40"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instances": {
+      "post": {
+        "summary": "Create VM instance (Slice)",
+        "description": "Provision a new VM from a template with the specified slice spec. Returns a SliceHandle with connection details.",
+        "operationId": "createInstance",
+        "tags": ["Instances"],
+        "security": [{ "AgentAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateSliceRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Instance created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [{ "$ref": "#/components/schemas/ApiResponse" }],
+                  "example": {
+                    "ok": true,
+                    "data": {
+                      "handle": {
+                        "instance_id": "550e8400-e29b-41d4-a716-446655440000",
+                        "provider_vm_id": "cp-550e8400",
+                        "node": "pve-node1",
+                        "sunshine_endpoint": {
+                          "ip": "10.0.1.50",
+                          "api_port": 47990,
+                          "gamestream_port_range": [47984, 48010]
+                        },
+                        "created_at": 1717624800,
+                        "spec": {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid slice spec", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiResponse" } } } },
+          "401": { "description": "Invalid or missing auth token" },
+          "500": { "description": "Hypervisor error", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ApiResponse" } } } }
+        }
+      }
+    },
+    "/instances/{instance_id}": {
+      "delete": {
+        "summary": "Destroy VM instance",
+        "operationId": "destroyInstance",
+        "tags": ["Instances"],
+        "security": [{ "AgentAuth": [] }],
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "Instance UUID from SliceHandle"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/InstanceActionBody" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Instance destroyed" },
+          "400": { "description": "Invalid instance_id or missing fields" },
+          "401": { "description": "Invalid or missing auth token" },
+          "500": { "description": "Hypervisor error" }
+        }
+      }
+    },
+    "/instances/{instance_id}/start": {
+      "post": {
+        "summary": "Start instance",
+        "operationId": "startInstance",
+        "tags": ["Instances"],
+        "security": [{ "AgentAuth": [] }],
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/InstanceActionBody" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Instance started" },
+          "400": { "description": "Invalid instance_id or missing fields" },
+          "401": { "description": "Invalid or missing auth token" },
+          "500": { "description": "Hypervisor error" }
+        }
+      }
+    },
+    "/instances/{instance_id}/stop": {
+      "post": {
+        "summary": "Stop instance",
+        "operationId": "stopInstance",
+        "tags": ["Instances"],
+        "security": [{ "AgentAuth": [] }],
+        "parameters": [
+          {
+            "name": "instance_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/InstanceActionBody" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Instance stopped" },
+          "400": { "description": "Invalid instance_id or missing fields" },
+          "401": { "description": "Invalid or missing auth token" },
+          "500": { "description": "Hypervisor error" }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Read", "description": "Unauthenticated read-only endpoints — health, capacity, templates" },
+    { "name": "Instances", "description": "VM instance lifecycle — create, destroy, start, stop (auth required)" }
+  ]
+}

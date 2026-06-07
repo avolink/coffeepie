@@ -1,0 +1,43 @@
+{% extends "uds/advertiser/base.html" %}
+{% block content %}
+<h2 style="margin-bottom:25px; font-weight:400;">Campañas</h2>
+
+<div style="margin-bottom:25px;">
+    <a href="/uds/page/advertiser/campaigns/create" class="btn">+ Nueva Campaña</a>
+</div>
+
+{% if campaigns %}
+<table>
+    <tr><th>Nombre</th><th>Puja</th><th>Presupuesto</th><th>Impresiones</th><th>Clics</th><th>Gastado</th><th>Estado</th><th></th></tr>
+    {% for c in campaigns %}
+    <tr>
+        <td>{{ c.campaign_name }}</td>
+        <td>{{ c.bid_amount }} Cr</td>
+        <td>{{ c.remaining_budget }}/{{ c.total_budget }} Cr</td>
+        <td>{{ c.impressions }}</td>
+        <td>{{ c.clicks }}</td>
+        <td>{{ c.spent }} Cr</td>
+        <td>
+            {% if c.is_active and c.remaining_budget > 0 %}
+            <span class="badge badge-active">ACTIVA</span>
+            {% else %}
+            <span class="badge badge-paused">PAUSADA</span>
+            {% endif %}
+        </td>
+        <td>
+            <form method="POST" action="/uds/page/advertiser/campaigns/toggle" style="display:inline;">
+                <input type="hidden" name="campaign_id" value="{{ c.uuid }}">
+                {% if c.is_active and c.remaining_budget > 0 %}
+                <button class="btn btn-small" style="background:#444; color:#ccc;">Pausar</button>
+                {% elif c.remaining_budget > 0 %}
+                <button class="btn btn-small">Reanudar</button>
+                {% endif %}
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="empty">No hay campañas todavía.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,490 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Coffee Pie Proxmox Backend API",
+    "description": "Proxy for Proxmox VE API with Firebase authentication and Sunshine streaming integration. All `/nodes/` endpoints require Bearer token authentication.",
+    "version": "0.1.0",
+    "contact": {
+      "name": "Coffee Pie Engineering",
+      "email": "security@coffeepie.co",
+      "url": "https://coffeepie.co"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local development"
+    },
+    {
+      "url": "https://api.coffeepie.co",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Firebase ID Token",
+        "description": "Firebase Authentication token obtained via Firebase Auth SDK or `/auth/login` endpoint."
+      }
+    },
+    "schemas": {
+      "CloneByNameRequest": {
+        "type": "object",
+        "required": ["source_name", "newid", "name", "node"],
+        "properties": {
+          "source_name": { "type": "string", "description": "Name of the source VM/template to clone" },
+          "newid": { "type": "integer", "description": "New VM ID for the clone" },
+          "name": { "type": "string", "description": "Name for the new VM" },
+          "node": { "type": "string", "description": "Proxmox node name" },
+          "storage": { "type": "string", "default": "local-lvm", "description": "Storage target (required if full=1)" },
+          "full": { "type": "integer", "default": 0, "description": "1 = full clone, 0 = linked clone" }
+        }
+      },
+      "SunshineRequest": {
+        "type": "object",
+        "required": ["ip", "pin", "client_name"],
+        "properties": {
+          "ip": { "type": "string", "description": "IP address of the Sunshine host" },
+          "pin": { "type": "string", "description": "PIN code for Sunshine pairing" },
+          "client_name": { "type": "string", "description": "Client name for Sunshine identification" }
+        }
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "minLength": 8 }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string" }
+        }
+      },
+      "ForgotPasswordRequest": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": { "type": "string", "format": "email" }
+        }
+      },
+      "Node": {
+        "type": "object",
+        "properties": {
+          "node": { "type": "string", "description": "Proxmox node name" },
+          "status": { "type": "string", "enum": ["online", "offline"] },
+          "cpu": { "type": "number" },
+          "maxcpu": { "type": "integer" },
+          "mem": { "type": "integer" },
+          "maxmem": { "type": "integer" }
+        }
+      },
+      "VM": {
+        "type": "object",
+        "properties": {
+          "vmid": { "type": "integer" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["running", "stopped", "paused"] },
+          "cpus": { "type": "integer" },
+          "maxmem": { "type": "integer" },
+          "maxdisk": { "type": "integer" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/nodes": {
+      "get": {
+        "summary": "List Proxmox nodes",
+        "operationId": "fetchNodes",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "List of Proxmox nodes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Node" }
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid or missing Bearer token" }
+        }
+      }
+    },
+    "/nodes/{node}/vms": {
+      "get": {
+        "summary": "List VMs on a node",
+        "operationId": "fetchVMs",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "node",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Proxmox node name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "VMs on the node",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "vms": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/VM" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{node}/vms/{vm_name}/ip": {
+      "get": {
+        "summary": "Get VM IP address",
+        "operationId": "getVmIp",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "name": "node", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "vm_name", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "VM IP addresses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "vm": { "type": "string" },
+                    "ip_addresses": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{node}/vms/{vm_name}/vnc": {
+      "get": {
+        "summary": "Get VNC console ticket",
+        "operationId": "getVncConsole",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "name": "node", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "vm_name", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "VNC WebSocket connection details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticket": { "type": "string" },
+                    "host": { "type": "string" },
+                    "port": { "type": "integer" },
+                    "url": { "type": "string", "format": "uri" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{node}/vms/{vm_name}/spice": {
+      "get": {
+        "summary": "Get SPICE console ticket",
+        "operationId": "getSpiceConsole",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "name": "node", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "vm_name", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "SPICE proxy connection details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticket": { "type": "string" },
+                    "host": { "type": "string" },
+                    "port": { "type": "integer" },
+                    "url": { "type": "string", "format": "uri" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clone-by-name": {
+      "post": {
+        "summary": "Clone VM by source name",
+        "operationId": "cloneByName",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CloneByNameRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Clone result from Proxmox"
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{node}/vms/{vm_name}": {
+      "delete": {
+        "summary": "Delete VM (must be stopped)",
+        "operationId": "deleteVm",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "name": "node", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "vm_name", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "VM deleted" },
+          "400": {
+            "description": "VM is running — must stop first",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{node}/vms/{vm_name}/start": {
+      "post": {
+        "summary": "Start VM",
+        "operationId": "startVm",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "name": "node", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "vm_name", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "VM started" },
+          "400": {
+            "description": "VM already running",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{node}/vms/{vm_name}/stop": {
+      "post": {
+        "summary": "Stop VM",
+        "operationId": "stopVm",
+        "tags": ["Proxmox"],
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "name": "node", "in": "path", "required": true, "schema": { "type": "string" } },
+          { "name": "vm_name", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "VM stopped" },
+          "400": {
+            "description": "VM already stopped",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sunshine/send-pin": {
+      "post": {
+        "summary": "Send PIN to Sunshine streaming server",
+        "operationId": "sunshineSendPin",
+        "tags": ["Sunshine"],
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SunshineRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PIN sent successfully"
+          },
+          "400": {
+            "description": "Sunshine API error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/create-user": {
+      "post": {
+        "summary": "Create Firebase user",
+        "operationId": "createUser",
+        "tags": ["Auth"],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateUserRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "user_id": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Creation failed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login and get custom token",
+        "operationId": "login",
+        "tags": ["Auth"],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "custom_token": { "type": "string", "description": "Firebase custom token for use as Bearer token" }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "description": "User not found" }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "summary": "Request password reset",
+        "operationId": "forgotPassword",
+        "tags": ["Auth"],
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ForgotPasswordRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset link sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "reset_link": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Request failed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Proxmox", "description": "Proxmox VE node and VM management (auth required)" },
+    { "name": "Sunshine", "description": "Sunshine streaming server integration (auth required)" },
+    { "name": "Auth", "description": "Firebase Authentication (no auth required)" }
+  ]
+}

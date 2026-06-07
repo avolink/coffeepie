@@ -1,0 +1,616 @@
+{
+    "project_name": "CoffeePie",
+    "version": "0.1.0-alpha",
+    "governance_document": "CONSTITUTION.md",
+    "philosophy": "Open Standard, Protected Core, Zero E-Waste",
+    "last_updated": "2026-05-30",
+    "version_targets": {
+        "0.2.0": "Foundation complete — QFDM core, streaming pipeline, codec terminal firmware operational",
+        "0.5.0": "Next Phase complete — frontend REST client, PIN pairing, IAM sovereignty migrated",
+        "0.9.0": "Production hardening complete — HA, multi-DC, monitoring, security audit cleared",
+        "1.0.0": "Public launch — internet-facing codec terminals, billing, scale phase begins"
+    },
+    "phases": {
+        "foundation": {
+            "order": 1,
+            "description": "Core product: QFDM system, streaming pipeline, codec terminal firmware, security baseline.",
+            "milestones": ["M1", "M2", "M3", "M4", "M5", "M6"]
+        },
+        "next_phase": {
+            "order": 2,
+            "description": "Frontend integration, IAM sovereignty migration, PIN pairing, QFDM slice allocator.",
+            "milestones": ["M7", "M8", "M9", "M10"]
+        },
+        "production": {
+            "order": 3,
+            "description": "High availability, multi-DC, monitoring, automated provisioning, security audit closure.",
+            "milestones": ["M11", "M12", "M13", "M14"]
+        },
+        "scale": {
+            "order": 4,
+            "description": "Internet-facing terminals, billing, licensing, AI governance, community growth.",
+            "milestones": ["M15", "M16", "M17"]
+        }
+    },
+    "milestones": [
+        {
+            "id": "M1",
+            "title": "Sunshine/Moonlight Streaming Pipeline",
+            "phase": "foundation",
+            "status": "active",
+            "description": "End-to-end hardware-accelerated streaming from VM GPU (NVENC/VAAPI/AMF) to Codec Terminal decode (/dev/dri/renderD128). H.264 for Basic Terminals, AV1 for Pro Terminals.",
+            "depends_on": [],
+            "tasks": [
+                {
+                    "id": "T-101",
+                    "description": "Sunshine transport integration in orchestrator (replaces Guacamole for new deployments).",
+                    "priority": "critical",
+                    "tags": ["streaming", "core"],
+                    "merit_weight": 1.5
+                },
+                {
+                    "id": "T-102",
+                    "description": "Actor service — VM lifecycle management (start/stop/screenshot/ping/logoff) via Sunshine API.",
+                    "priority": "critical",
+                    "tags": ["actor", "core"],
+                    "merit_weight": 1.4
+                },
+                {
+                    "id": "T-103",
+                    "description": "Moonlight CLI subprocess management in Qt/QML frontend (KMS/DRM hardware decode path).",
+                    "priority": "critical",
+                    "tags": ["frontend", "streaming"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-104",
+                    "description": "UDP direct P2P streaming — orchestrator brokers connection, does NOT proxy media.",
+                    "priority": "high",
+                    "tags": ["networking", "core"],
+                    "merit_weight": 1.1
+                }
+            ]
+        },
+        {
+            "id": "M2",
+            "title": "Codec Terminal Reference Firmware",
+            "phase": "foundation",
+            "status": "active",
+            "description": "Reference SBC firmware image: Debian Minimal + Sway Kiosk + Coffee Pie Qt GUI + USB-IP for peripherals. Boots directly into fullscreen frameless kiosk mode at 1920x1080.",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-201",
+                    "description": "Debian Minimal base image with Sway Wayland compositor in kiosk mode.",
+                    "priority": "critical",
+                    "tags": ["firmware", "linux"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-202",
+                    "description": "Coffee Pie Qt GUI (C++ + QML, CMake build) — fullscreen frameless, multi-language support.",
+                    "priority": "critical",
+                    "tags": ["frontend", "qt"],
+                    "merit_weight": 1.4
+                },
+                {
+                    "id": "T-203",
+                    "description": "USB-IP kernel module integration for peripheral passthrough (keyboard, mouse, gamepad, storage).",
+                    "priority": "high",
+                    "tags": ["firmware", "linux"],
+                    "merit_weight": 0.9
+                },
+                {
+                    "id": "T-204",
+                    "description": "Over-the-air (OTA) firmware update mechanism with rollback protection.",
+                    "priority": "medium",
+                    "tags": ["firmware", "security"],
+                    "merit_weight": 0.8
+                }
+            ]
+        },
+        {
+            "id": "M3",
+            "title": "QFDM Quantized Fractional Distribution Engine",
+            "phase": "foundation",
+            "status": "active",
+            "description": "Core patented QFDM system: demand quantization, resource fractionation, machine instantiation, and real-time transmission. The 'airport' that allocates server 'seats' (slices) to codec terminals.",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-301",
+                    "description": "Slice definition engine — CPU (1 vCore), RAM (1 GB), SSD (8 GB), GPU (125 MB), NET (8 Mbps), HDD (125 GB), RES (15 vMPX/s), IA (3 TOPS INT8) per Coffee Pie Slice specification.",
+                    "priority": "critical",
+                    "tags": ["core", "qfdm"],
+                    "merit_weight": 1.6
+                },
+                {
+                    "id": "T-302",
+                    "description": "Demand quantization and resource scheduling — O(n) linear allocation with clear rush-hour ceiling.",
+                    "priority": "critical",
+                    "tags": ["core", "qfdm"],
+                    "merit_weight": 1.5
+                },
+                {
+                    "id": "T-303",
+                    "description": "Power consumption monitoring and warnings — automatic suspension on crypto-mining or abuse detection.",
+                    "priority": "high",
+                    "tags": ["security", "qfdm"],
+                    "merit_weight": 1.1
+                }
+            ]
+        },
+        {
+            "id": "M4",
+            "title": "Hardware-Software Circularity & Zero E-Waste",
+            "phase": "foundation",
+            "status": "active",
+            "description": "Core sustainability mission: hardware health monitoring, extended lifecycle optimization, e-waste telemetry. Any feature promoting planned obsolescence is strictly prohibited.",
+            "depends_on": [],
+            "tasks": [
+                {
+                    "id": "T-401",
+                    "description": "Zero E-Waste Telemetry — monitor hardware health to suggest maintenance, repair, or responsible recycling.",
+                    "priority": "high",
+                    "tags": ["sustainability", "iot"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-402",
+                    "description": "Low-power mode optimization for legacy ARM SBC hardware nodes.",
+                    "priority": "medium",
+                    "tags": ["performance", "sustainability"],
+                    "merit_weight": 0.9
+                },
+                {
+                    "id": "T-403",
+                    "description": "Hardware lifecycle extension reporting — generate repair/upgrade recommendations per terminal.",
+                    "priority": "medium",
+                    "tags": ["sustainability", "reporting"],
+                    "merit_weight": 0.7
+                }
+            ]
+        },
+        {
+            "id": "M5",
+            "title": "Security Baseline Hardening",
+            "phase": "foundation",
+            "status": "active",
+            "description": "Close the top CRITICAL findings from the 2026-05-25 Security Audit. Eliminate undefined behavior in Rust unsafe blocks and input validation gaps.",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-501",
+                    "description": "Replace UnsafeCell in SessionRecoveryBuffer with safe concurrency primitive (tokio::sync::Mutex or crossbeam channel).",
+                    "priority": "critical",
+                    "tags": ["security", "rust"],
+                    "merit_weight": 1.4
+                },
+                {
+                    "id": "T-502",
+                    "description": "Fix addin.rs transmute between incompatible FreeRDP function pointer types — use proper type-safe FFI wrapper.",
+                    "priority": "critical",
+                    "tags": ["security", "ffi"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-503",
+                    "description": "Sandbox process.rs — restrict JS-launched commands to a whitelist and chroot/jail context.",
+                    "priority": "critical",
+                    "tags": ["security", "sandbox"],
+                    "merit_weight": 1.5
+                },
+                {
+                    "id": "T-504",
+                    "description": "Sanitize chpasswd input — reject newlines and shell metacharacters in user/password fields.",
+                    "priority": "critical",
+                    "tags": ["security", "linux"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-505",
+                    "description": "Harden noverify.rs — add runtime check ensuring TLS bypass is only active on internal L2/L3 private IP ranges.",
+                    "priority": "high",
+                    "tags": ["security", "tls"],
+                    "merit_weight": 1.1
+                },
+                {
+                    "id": "T-506",
+                    "description": "Replace 70+ unwrap/expect calls in network-facing paths with proper error handling and graceful degradation.",
+                    "priority": "high",
+                    "tags": ["security", "rust"],
+                    "merit_weight": 0.9
+                }
+            ]
+        },
+        {
+            "id": "M6",
+            "title": "Dependency & Supply Chain Cleanup",
+            "phase": "foundation",
+            "status": "active",
+            "description": "Pin all dependencies, purge unmaintained packages, eliminate git-sourced deps, fix stale lock files.",
+            "depends_on": [],
+            "tasks": [
+                {
+                    "id": "T-601",
+                    "description": "Pin all orchestrator Python dependencies with exact versions (full pip freeze).",
+                    "priority": "high",
+                    "tags": ["dependencies", "python"],
+                    "merit_weight": 0.7
+                },
+                {
+                    "id": "T-602",
+                    "description": "Replace unmaintained pqcrypto with Rust libcrux via sidecar subprocess or PyO3 FFI for orchestrator KEM operations.",
+                    "priority": "high",
+                    "tags": ["security", "crypto"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-603",
+                    "description": "Pin ldap3 git dependency to specific commit hash or migrate to maintained PyPI release.",
+                    "priority": "medium",
+                    "tags": ["dependencies", "python"],
+                    "merit_weight": 0.6
+                },
+                {
+                    "id": "T-604",
+                    "description": "Delete stale sub-Cargo.lock files (actor/crates/service/Cargo.lock, actor/crates/client/Cargo.lock).",
+                    "priority": "low",
+                    "tags": ["dependencies", "rust"],
+                    "merit_weight": 0.3
+                }
+            ]
+        },
+        {
+            "id": "M7",
+            "title": "Frontend REST API Integration",
+            "phase": "next_phase",
+            "status": "planned",
+            "description": "Add QNetworkAccessManager-based REST client to Qt/QML frontend. Replace hardcoded data with API responses from orchestrator.",
+            "depends_on": ["M1", "M2"],
+            "tasks": [
+                {
+                    "id": "T-701",
+                    "description": "QNetworkAccessManager REST client — async HTTP/WebSocket communication with orchestrator.",
+                    "priority": "critical",
+                    "tags": ["frontend", "networking"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-702",
+                    "description": "Orchestrator URL configuration (config file + env var, no hardcoded IPs).",
+                    "priority": "high",
+                    "tags": ["frontend", "config"],
+                    "merit_weight": 0.8
+                },
+                {
+                    "id": "T-703",
+                    "description": "Multi-orchestrator fallback list with health-check and automatic failover.",
+                    "priority": "medium",
+                    "tags": ["frontend", "networking"],
+                    "merit_weight": 0.9
+                }
+            ]
+        },
+        {
+            "id": "M8",
+            "title": "Moonlight PIN Pairing & Session Management",
+            "phase": "next_phase",
+            "status": "planned",
+            "description": "User-facing PIN dialog for Moonlight pairing flow. Session lifecycle: connect, recover, disconnect with visual feedback.",
+            "depends_on": ["M1", "M7"],
+            "tasks": [
+                {
+                    "id": "T-801",
+                    "description": "PIN dialog UI in QML — numeric input, copy-to-clipboard, timeout countdown, pairing status.",
+                    "priority": "critical",
+                    "tags": ["frontend", "ui"],
+                    "merit_weight": 1.1
+                },
+                {
+                    "id": "T-802",
+                    "description": "Session state machine — connect, streaming, paused, disconnected, recover with visual indicators.",
+                    "priority": "high",
+                    "tags": ["frontend", "session"],
+                    "merit_weight": 1.0
+                },
+                {
+                    "id": "T-803",
+                    "description": "Session recovery after network interruption — buffer replay and automatic reconnection.",
+                    "priority": "high",
+                    "tags": ["frontend", "networking"],
+                    "merit_weight": 1.1
+                }
+            ]
+        },
+        {
+            "id": "M9",
+            "title": "Technological Sovereignty & Open IAM",
+            "phase": "next_phase",
+            "status": "planned",
+            "description": "Migrate core backend identity services from Firebase to Supabase (PostgreSQL-based, self-hostable IAM). Aligns with AGENTS.md Decision on technological sovereignty.",
+            "depends_on": [],
+            "tasks": [
+                {
+                    "id": "T-901",
+                    "description": "Migrate user authentication from Firebase Auth to Supabase Auth (JWT, OAuth2, social logins).",
+                    "priority": "high",
+                    "tags": ["security", "sovereignty", "backend"],
+                    "merit_weight": 1.5
+                },
+                {
+                    "id": "T-902",
+                    "description": "Migrate Firebase Admin SDK service account to Supabase service role key with Row Level Security (RLS).",
+                    "priority": "high",
+                    "tags": ["security", "sovereignty", "backend"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-903",
+                    "description": "Update proxmox_backend Bearer token validation to accept Supabase JWT alongside Firebase (graceful migration period).",
+                    "priority": "medium",
+                    "tags": ["security", "backend"],
+                    "merit_weight": 0.9
+                }
+            ]
+        },
+        {
+            "id": "M10",
+            "title": "Website & Public Presence",
+            "phase": "next_phase",
+            "status": "planned",
+            "description": "Complete the migration away from Wix/Avo platform. Pure Vanilla JS, HTML, CSS e-commerce with multi-language support via translations.json.",
+            "depends_on": ["M9"],
+            "tasks": [
+                {
+                    "id": "T-1001",
+                    "description": "Complete removal of all Wix/Avo dependencies (JS bundles, inline scripts, platform CSS).",
+                    "priority": "high",
+                    "tags": ["website", "vanilla"],
+                    "merit_weight": 1.0
+                },
+                {
+                    "id": "T-1002",
+                    "description": "Vanilla JS e-commerce: cart, checkout, payment integration (Stripe/Wompi), order tracking.",
+                    "priority": "high",
+                    "tags": ["website", "ecommerce"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-1003",
+                    "description": "Multi-language SEO optimization with translations.json — Spanish-first, 10+ languages.",
+                    "priority": "medium",
+                    "tags": ["website", "i18n"],
+                    "merit_weight": 0.8
+                }
+            ]
+        },
+        {
+            "id": "M11",
+            "title": "Orchestrator High Availability",
+            "phase": "production",
+            "status": "planned",
+            "description": "Eliminate single points of failure in the management plane. Database replication, orchestrator HA restart, session persistence.",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-1101",
+                    "description": "PostgreSQL streaming replication — standby replica with automatic failover.",
+                    "priority": "critical",
+                    "tags": ["production", "database"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-1102",
+                    "description": "Orchestrator HA via Proxmox HA restart — automatic VM recovery on host failure.",
+                    "priority": "critical",
+                    "tags": ["production", "orchestrator"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-1103",
+                    "description": "Session state persistence across orchestrator restarts — TicketStore recovery.",
+                    "priority": "high",
+                    "tags": ["production", "session"],
+                    "merit_weight": 1.0
+                }
+            ]
+        },
+        {
+            "id": "M12",
+            "title": "Multi-DC MetaPool Configuration",
+            "phase": "production",
+            "status": "planned",
+            "description": "Cross-datacenter resource pooling. Codec Terminals connect to nearest DC with automatic failover.",
+            "depends_on": ["M11"],
+            "tasks": [
+                {
+                    "id": "T-1201",
+                    "description": "Multi-DC orchestrator federation — shared PostgreSQL, distributed scheduling.",
+                    "priority": "critical",
+                    "tags": ["production", "networking"],
+                    "merit_weight": 1.4
+                },
+                {
+                    "id": "T-1202",
+                    "description": "GeoDNS-based terminal routing — connect to lowest-latency DC with automatic failover.",
+                    "priority": "high",
+                    "tags": ["production", "networking"],
+                    "merit_weight": 1.1
+                },
+                {
+                    "id": "T-1203",
+                    "description": "Cross-DC VM migration for load balancing and maintenance windows.",
+                    "priority": "medium",
+                    "tags": ["production", "orchestrator"],
+                    "merit_weight": 1.0
+                }
+            ]
+        },
+        {
+            "id": "M13",
+            "title": "Monitoring, Alerting & Observability",
+            "phase": "production",
+            "status": "planned",
+            "description": "Production-grade monitoring stack: metrics, logs, traces, alerts. Proactive detection of abuse (crypto-mining, spam, malicious content).",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-1301",
+                    "description": "Prometheus metrics export from actor, orchestrator, and tunnel-server — latency, throughput, error rates.",
+                    "priority": "high",
+                    "tags": ["production", "monitoring"],
+                    "merit_weight": 1.0
+                },
+                {
+                    "id": "T-1302",
+                    "description": "Structured logging with correlation IDs across all services (Rust tracing, Django logging).",
+                    "priority": "high",
+                    "tags": ["production", "observability"],
+                    "merit_weight": 0.9
+                },
+                {
+                    "id": "T-1303",
+                    "description": "Abuse detection pipeline — power consumption anomaly detection, network traffic pattern analysis.",
+                    "priority": "medium",
+                    "tags": ["security", "monitoring"],
+                    "merit_weight": 0.8
+                }
+            ]
+        },
+        {
+            "id": "M14",
+            "title": "Automated VM Template Provisioning",
+            "phase": "production",
+            "status": "planned",
+            "description": "One-click VM template creation and deployment. Windows 10/11 and Linux images with GPU drivers, Sunshine, and Actor pre-installed.",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-1401",
+                    "description": "Packer/cloud-init template builder for Windows and Linux VM images.",
+                    "priority": "high",
+                    "tags": ["production", "devops"],
+                    "merit_weight": 1.0
+                },
+                {
+                    "id": "T-1402",
+                    "description": "Template registry with versioning — automated updates for security patches and driver updates.",
+                    "priority": "medium",
+                    "tags": ["production", "devops"],
+                    "merit_weight": 0.8
+                }
+            ]
+        },
+        {
+            "id": "M15",
+            "title": "Internet-Facing Codec Terminals & Billing",
+            "phase": "scale",
+            "status": "planned",
+            "description": "Enable Codec Terminals to connect over public internet (beyond L2/L3 private networks). Pay-As-You-Go billing, credit packages, ad-supported free tier.",
+            "depends_on": ["M9", "M12"],
+            "tasks": [
+                {
+                    "id": "T-1501",
+                    "description": "Public internet terminal connectivity — STUN/TURN, WebRTC fallback, GeoDNS routing.",
+                    "priority": "critical",
+                    "tags": ["scale", "networking"],
+                    "merit_weight": 1.3
+                },
+                {
+                    "id": "T-1502",
+                    "description": "Billing engine — credit packages, on-demand advertising, prepaid/postpaid models, invoice generation.",
+                    "priority": "critical",
+                    "tags": ["scale", "monetization"],
+                    "merit_weight": 1.4
+                },
+                {
+                    "id": "T-1503",
+                    "description": "Ad-supported free tier — on-demand ad viewing in exchange for compute credits.",
+                    "priority": "high",
+                    "tags": ["scale", "monetization"],
+                    "merit_weight": 1.0
+                }
+            ]
+        },
+        {
+            "id": "M16",
+            "title": "Corporate Licensing & Revenue Distribution",
+            "phase": "scale",
+            "status": "planned",
+            "description": "Enforce commercial license for deployments above 9 nodes per Constitution Article III.2. Automated dividend distribution to contributors via PIE tokens (TRC20).",
+            "depends_on": ["M9", "M15"],
+            "tasks": [
+                {
+                    "id": "T-1601",
+                    "description": "Node-count detection and license enforcement — free tier bypass for individuals and small-scale ≤9 nodes.",
+                    "priority": "critical",
+                    "tags": ["scale", "licensing"],
+                    "merit_weight": 0.9
+                },
+                {
+                    "id": "T-1602",
+                    "description": "PIE token smart contract (Tron TRC20) — minting, distribution, dividend allocation per Constitution Article III.",
+                    "priority": "high",
+                    "tags": ["scale", "fintech"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-1603",
+                    "description": "Automated dividend distribution pipeline — revenue → token holders, auditable on-chain.",
+                    "priority": "medium",
+                    "tags": ["scale", "fintech"],
+                    "merit_weight": 0.8
+                }
+            ]
+        },
+        {
+            "id": "M17",
+            "title": "Autonomous Governance (AI Gatekeeper)",
+            "phase": "scale",
+            "status": "planned",
+            "description": "AI-driven PR review system, formal verification layers, and automated merge/deploy pipeline per Constitution Article II. Staged rollout with human override until C > 0.95 confidence is empirically proven.",
+            "depends_on": ["M1"],
+            "tasks": [
+                {
+                    "id": "T-1701",
+                    "description": "Stochastic Review Agent — AI analysis of PRs for logic consistency, security audit, and dependency minimalism.",
+                    "priority": "medium",
+                    "tags": ["governance", "ai"],
+                    "merit_weight": 0.6
+                },
+                {
+                    "id": "T-1702",
+                    "description": "Formal verification integration — static analysis, fuzzing, and property-based testing gates in CI/CD.",
+                    "priority": "medium",
+                    "tags": ["security", "verification"],
+                    "merit_weight": 0.7
+                },
+                {
+                    "id": "T-1703",
+                    "description": "Confidence-weighted auto-merge pipeline — PRs above threshold auto-merge; below threshold queue for human review.",
+                    "priority": "low",
+                    "tags": ["governance", "automation"],
+                    "merit_weight": 0.5
+                }
+            ]
+        }
+    ],
+    "excluded_scopes": {
+        "proprietary_cloud": "No integration with non-standardized proprietary cloud providers.",
+        "telemetry": "No collection of user data beyond hardware health and licensing node-counts.",
+        "obsolescence": "Any feature promoting planned obsolescence is strictly prohibited."
+    },
+    "known_technical_debt_from_audit": [
+        "SessionRecoveryBuffer — UnsafeCell with unsafe Send+Sync (M5 T-501)",
+        "addin.rs — transmute between incompatible function pointer types (M5 T-502)",
+        "process.rs — arbitrary command execution from JS context (M5 T-503)",
+        "chpasswd — stdin injection via newlines in user parameter (M5 T-504)",
+        "noverify.rs — complete TLS verification disabled (M5 T-505)",
+        "70+ unwrap/expect in network-facing Rust paths (M5 T-506)",
+        "pickle.loads at 30+ locations in orchestrator — DB compromise = RCE",
+        "6 CSRF-exempt endpoints in orchestrator",
+        "Unpinned git dependency cannatag/ldap3.git (M6 T-603)",
+        "pqcrypto Python package unmaintained (M6 T-602)"
+    ]
+}

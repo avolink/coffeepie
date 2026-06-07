@@ -1,0 +1,29 @@
+[package]
+name = "coffeepie-security"
+version = "0.1.0"
+edition = "2021"
+description = "Security tools for Coffee Pie — key generation, audit helpers, hardening"
+license = "MIT OR Apache-2.0"
+authors = ["Coffee Pie Contributors"]
+
+[[bin]]
+name = "coffeepie-keygen"
+path = "src/bin/coffeepie-keygen.rs"
+
+[[bin]]
+name = "coffeepie-harden"
+path = "src/bin/coffeepie-harden.rs"
+
+[[bin]]
+name = "coffeepie-audit"
+path = "src/bin/coffeepie-audit.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rand = "0.8"
+ed25519-dalek = { version = "2", features = ["rand_core", "pem"] }
+base64ct = { version = "1", features = ["alloc"] }
+hex = "0.4"
+zeroize = { version = "1", features = ["derive"] }

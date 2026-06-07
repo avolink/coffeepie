@@ -1,0 +1,17 @@
+{
+    "include": [
+        "src/**/*.py",
+        "tests/**/*.py",
+    ],
+    "exclude": [
+        "src/**/scripts",
+        "**/__pycache__",
+    ],
+    "typeCheckingMode": "strict",
+    "reportPrivateUsage": false,
+    "reportUnusedImport": true,
+    "reportMissingTypeStubs": false,
+    "disableBytesTypePromotions": true,
+    "deprecateTypingAliases": true,
+    "stubPath": "../../enterprise/stubs",
+}

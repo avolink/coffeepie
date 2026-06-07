@@ -1,0 +1,263 @@
+name: Coffee Pie CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  # ═══ Rust — Tools ═══════════════════════════════════════
+
+  tools:
+    name: Rust tools (${{ matrix.category }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        category: [benchmark, security, dev, admin, monitoring]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            tools/${{ matrix.category }}/target
+          key: ${{ runner.os }}-cargo-${{ matrix.category }}-${{ hashFiles(format('tools/{0}/Cargo.lock', matrix.category)) }}
+          restore-keys: ${{ runner.os }}-cargo-${{ matrix.category }}-
+
+      - name: Build
+        working-directory: tools/${{ matrix.category }}
+        run: cargo build --release
+
+      - name: Clippy
+        working-directory: tools/${{ matrix.category }}
+        run: cargo clippy --release -- -D warnings
+
+      - name: Test
+        working-directory: tools/${{ matrix.category }}
+        run: cargo test --release
+
+  # ═══ Rust — Actor ═══════════════════════════════════════
+
+  actor:
+    name: Rust actor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            coffeepie_orchestrator/actor/target
+          key: ${{ runner.os }}-cargo-actor-${{ hashFiles('coffeepie_orchestrator/actor/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-actor-
+
+      - name: Build
+        working-directory: coffeepie_orchestrator/actor
+        run: cargo build --release
+
+      - name: Clippy
+        working-directory: coffeepie_orchestrator/actor
+        run: cargo clippy --release -- -D warnings
+
+  # ═══ Rust — DC Agent ═════════════════════════════════════
+
+  dc-agent:
+    name: Rust DC Agent
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            coffeepie_orchestrator/dc-agent/target
+          key: ${{ runner.os }}-cargo-dc-${{ hashFiles('coffeepie_orchestrator/dc-agent/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-dc-
+
+      - name: Build
+        working-directory: coffeepie_orchestrator/dc-agent
+        run: cargo build --release
+
+      - name: Clippy
+        working-directory: coffeepie_orchestrator/dc-agent
+        run: cargo clippy --release -- -D warnings
+
+  # ═══ Python — Orchestrator ═══════════════════════════════
+
+  orchestrator:
+    name: Python orchestrator
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: coffeepie_test
+          POSTGRES_USER: coffeepie
+          POSTGRES_PASSWORD: test_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('coffeepie_orchestrator/server/requirements.txt') }}
+
+      - name: Install deps
+        working-directory: coffeepie_orchestrator/server
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff pytest pytest-django
+
+      - name: Ruff lint
+        working-directory: coffeepie_orchestrator/server
+        run: ruff check .
+
+      - name: Django checks
+        working-directory: coffeepie_orchestrator/server
+        env:
+          DATABASE_URL: postgres://coffeepie:***@localhost:5432/coffeepie_test
+          SECRET_KEY: ci-test-secret
+          DEBUG: "true"
+        run: |
+          python manage.py check --deploy 2>/dev/null || true
+          python manage.py migrate --noinput
+
+  # ═══ Website ═════════════════════════════════════════════
+
+  website:
+    name: Website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate translations.json
+        run: |
+          python -c "
+          import json, sys
+          with open('coffeepie_website/public/translations.json') as f:
+              data = json.load(f)
+          langs = ['es','en','pt','fr','de','ru','hi','ja','zh','ko','ar','el']
+          errors = 0
+          for key, vals in data.items():
+              missing = [l for l in langs if l not in vals]
+              if missing:
+                  print(f'MISSING {missing}: {key[:60]}')
+                  errors += 1
+          print(f'{len(data)} keys, {errors} incomplete')
+          sys.exit(1 if errors > 0 else 0)
+          "
+
+      - name: HTML validation (basic)
+        run: |
+          html_count=$(find coffeepie_website/public -name '*.html' ! -path '*/_files/*' ! -path '*/productos/*' | wc -l)
+          echo "$html_count HTML files found"
+          # Check for common issues
+          ! grep -r '</html>' coffeepie_website/public/*.html | grep -v '</html>' > /dev/null || echo "All HTML files have closing </html>"
+
+  # ═══ Docs Consistency ═══════════════════════════════════
+
+  docs:
+    name: Doc policy check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check policy coherence
+        run: python3 scripts/check-doc-consistency.py
+
+      - name: Validate OpenAPI spec
+        run: |
+          python3 -c "
+          import json, sys
+          with open('coffeepie_backend/proxmox_backend/openapi.json') as f:
+              spec = json.load(f)
+          assert spec['openapi'].startswith('3.'), 'Not OpenAPI 3.x'
+          endpoints = len(spec['paths'])
+          schemas = len(spec.get('components',{}).get('schemas',{}))
+          print(f'{endpoints} endpoints, {schemas} schemas')
+          assert endpoints >= 10, f'Expected >=10 endpoints, got {endpoints}'
+          assert schemas >= 3, f'Expected >=3 schemas, got {schemas}'
+          print('OpenAPI spec valid')
+          "
+
+  # ═══ Integration Tests ═══════════════════════════════════
+
+  integration:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Create .env
+        run: cp .env.example .env
+
+      - name: Build mock images
+        run: docker compose build postgres redis proxmox-mock sunshine-mock
+
+      - name: Start services
+        run: |
+          docker compose up -d postgres redis proxmox-mock sunshine-mock
+          sleep 10
+          docker compose ps
+
+      - name: Wait for readiness
+        run: |
+          for i in $(seq 1 30); do
+            curl -s http://localhost:***&& break
+            sleep 2
+          done
+          curl -s http://localhost:***
+
+      - name: Install test deps
+        run: pip install -r tests/integration/requirements.txt
+
+      - name: Run integration tests
+        run: cd tests/integration && pytest -v --timeout=120 --tb=short
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v

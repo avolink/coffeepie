@@ -1,0 +1,435 @@
+// BSD 3-Clause License
+// Copyright (c) 2026, Virtual Cable S.L.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice,
+//    this list of conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice,
+//    this list of conditions and the following disclaimer in the documentation
+//    and/or other materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its contributors
+//    may be used to endorse or promote products derived from this software
+//    without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+// Authors: Adolfo Gómez, dkmaster at dkmon dot com
+use std::{cell::UnsafeCell, rc::Rc, sync::atomic::AtomicUsize, time::Duration};
+
+use anyhow::{Context, Result};
+use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
+
+use shared::{log, system::trigger::Trigger};
+
+use crypt::{
+    secrets::CryptoKeys, secrets::get_tunnel_crypts, tunnel::types::PacketBuffer, types::Ticket,
+};
+
+use super::{
+    client::TunnelClient,
+    protocol::{
+        Command as ProtoCommand, PayloadWithChannelReceiver, PayloadWithChannelSender,
+        handshake::Handshake, payload_with_channel_pair,
+    },
+};
+
+mod buffer;
+mod handler;
+pub mod open_response;
+mod servers;
+
+pub use {
+    buffer::{RecoveryError, RecoverySendBuffer},
+    handler::{Command, Handler, ServerChannels},
+};
+
+pub static RECOVERY_BUFFER_SIZE: AtomicUsize = AtomicUsize::new(64 * 1024); // Default to 64 KB, can be configured at runtime
+
+#[derive(Debug, Clone)]
+pub struct RecoveryBuffer(Rc<UnsafeCell<RecoverySendBuffer>>);
+
+unsafe impl Send for RecoveryBuffer {}
+unsafe impl Sync for RecoveryBuffer {}
+
+impl RecoveryBuffer {
+    pub fn new(max_bytes: usize) -> Self {
+        Self(Rc::new(UnsafeCell::new(RecoverySendBuffer::new(max_bytes))))
+    }
+
+    #[allow(clippy::mut_from_ref)]
+    pub fn get(&self) -> &mut RecoverySendBuffer {
+        unsafe { &mut *self.0.get() }
+    }
+}
+
+pub struct Proxy {
+    tunnel_server: String, // Host:port of tunnel server to connect to
+    ticket: Ticket,
+    crypt_info: CryptoKeys,
+    stop: Trigger,
+    initial_timeout: std::time::Duration,
+
+    // We need to keep track of the seqs for crypt
+    // for connection recovery
+    seqs: (u64, u64),
+
+    // Channels for comms with the client side (the one that will connect to the tunnel server)
+    client_tx: PayloadWithChannelSender, // For sending messages to the client side
+    client_tx_receiver: PayloadWithChannelReceiver, // Receiver for the client
+
+    client_rx_sender: PayloadWithChannelSender, // Sender for the client
+    client_rx: PayloadWithChannelReceiver,      // For receiving messages from the client side
+
+    recover_connection: bool,
+    recovery_buffer: RecoveryBuffer,
+
+    client_correctly_closed: bool,
+
+    servers: servers::ServerChannels,
+}
+
+impl Proxy {
+    pub fn new(
+        tunnel_server: &str,
+        ticket: Ticket,
+        crypt_info: CryptoKeys,
+        initial_timeout: Duration,
+        stop: Trigger,
+    ) -> Self {
+        // Client side channels
+        let (tx, tx_receiver) = payload_with_channel_pair();
+        let (rx_sender, rx) = payload_with_channel_pair();
+
+        Self {
+            tunnel_server: tunnel_server.to_string(),
+            ticket,
+            crypt_info,
+            stop,
+            initial_timeout,
+            seqs: (0, 0),
+            client_tx: tx,
+            client_tx_receiver: tx_receiver,
+            client_rx: rx,
+            client_rx_sender: rx_sender,
+            recover_connection: false,
+            recovery_buffer: RecoveryBuffer::new(
+                RECOVERY_BUFFER_SIZE.load(std::sync::atomic::Ordering::Relaxed),
+            ),
+            client_correctly_closed: false,
+            servers: servers::ServerChannels::new(),
+        }
+    }
+
+    async fn connect(
+        &mut self,
+        ctrl_tx: &flume::Sender<handler::Command>,
+    ) -> Result<TunnelClient<OwnedReadHalf, OwnedWriteHalf>> {
+        // Try to connect to tunnel server and authenticate using the ticket and shared secret
+        let stream = tokio::time::timeout(
+            self.initial_timeout,
+            tokio::net::TcpStream::connect(&self.tunnel_server),
+        )
+        .await?
+        .context("Failed to connect to tunnel server")?;
+
+        log::debug!("Connected to tunnel server at {}", self.tunnel_server);
+
+        // Try to disable Nagle's algorithm for better performance in our case
+        stream.set_nodelay(true).ok();
+
+        // Create the crypt pair
+        let (mut inbound_crypt, mut outbound_crypt) =
+            get_tunnel_crypts(&self.crypt_info, self.seqs)?;
+
+        // Send open tunnel command with the ticket and shared secret
+        let handshake = if self.recover_connection {
+            Handshake::Recover {
+                ticket: self.ticket,
+                seqs: self.seqs,
+            }
+        } else {
+            Handshake::Open {
+                ticket: self.ticket,
+            }
+        };
+        // Split the stream into reader and writer for easier handling on the next steps
+        let (mut reader, mut writer) = stream.into_split();
+
+        log::debug!("Sending handshake to tunnel server");
+        handshake
+            .write(&mut writer)
+            .await
+            .context("Failed to send handshake")?;
+
+        log::debug!("Sending handshake ticket to tunnel server");
+        // Send the encrypted ticket now to channel 0
+        outbound_crypt
+            .write(&self.stop, &mut writer, 0, self.ticket.as_ref())
+            .await
+            .context("Failed to send handshake ticket")?;
+
+        // Read the response, should be the "reconnect" ticket, just in case some connection error
+        log::debug!("Waiting for handshake response from tunnel server");
+        let mut buffer = PacketBuffer::new();
+        let (response, channel_id) = inbound_crypt
+            .read(&self.stop, &mut reader, &mut buffer)
+            .await
+            .context("Failed to read handshake response")?;
+
+        let open_response = open_response::OpenResponse::try_from(response)
+            .context("Failed to parse handshake response")?;
+
+        log::debug!(
+            "Received handshake response from tunnel server, channel_id: {}, open_response: {:?}",
+            channel_id,
+            open_response
+        );
+
+        // Channel id should be 0 for handshake response, if not, something went wrong
+        if channel_id != 0 {
+            return Err(anyhow::anyhow!(
+                "Expected handshake response on channel 0, got channel {}",
+                channel_id
+            ));
+        }
+
+        log::debug!(
+            "Received handshake response from tunnel server, reconnect ticket: {:?}",
+            open_response.session_id
+        );
+
+        // Store reconnect ticket for future use.
+        // This is different from original, and different for every conection
+        self.ticket = open_response.session_id;
+        // Skip, if recovery, the the already processed packets (note that pre increment we must stop on PREV SEQ)
+        // inbound = other side inbound, not our
+        if self.recover_connection {
+            let recovery_buffer = self.recovery_buffer.get();
+            log::debug!(
+                "Attempting to recover connection, skipping packets until seq {:?} from {:?}",
+                open_response.inbound_seq,
+                recovery_buffer,
+            );
+            recovery_buffer
+                .skip(open_response.inbound_seq - 1)
+                .context("Failed to skip packets in recovery buffer")?;
+            log::debug!(
+                "Finished skipping packets for recovery, remaining buffer: {:?}",
+                recovery_buffer,
+            );
+        } else {
+            // Next one will be a recovery connection
+            self.recover_connection = true; // Next time we will try to recover the connection
+        }
+
+        log::debug!(
+            "Received handshake response, reconnect ticket: {:?}",
+            self.ticket
+        );
+
+        Ok(TunnelClient::new(
+            reader,
+            writer,
+            self.client_rx_sender.clone(),
+            self.client_tx_receiver.clone(),
+            inbound_crypt,
+            outbound_crypt,
+            self.stop.clone(),
+            handler::Handler::new(ctrl_tx.clone()),
+        ))
+    }
+
+    // Launches (or relaunches) the tunnel client, returns a handler to send commands to the client
+    async fn launch_client(&mut self, ctrl_tx: flume::Sender<handler::Command>) -> Result<()> {
+        let client = self.connect(&ctrl_tx).await?;
+        tokio::spawn(client.run(self.recovery_buffer.clone()));
+        Ok(())
+    }
+
+    pub async fn run(mut self) -> Result<Handler> {
+        let (ctrl_tx, ctrl_rx) = Handler::new_command_channel();
+
+        // Launch client or return an error
+        self.launch_client(ctrl_tx.clone()).await?;
+
+        // Launch the main proxy task
+        tokio::spawn({
+            let ctrl_tx = ctrl_tx.clone();
+            async move {
+                if let Err(e) = self.run_task(ctrl_tx, ctrl_rx).await {
+                    log::error!("Proxy run error: {:?}", e);
+                }
+            }
+        });
+
+        Ok(handler::Handler::new(ctrl_tx))
+    }
+
+    pub async fn run_task(
+        mut self,
+        ctrl_tx: flume::Sender<Command>,
+        ctrl_rx: flume::Receiver<Command>,
+    ) -> Result<()> {
+        // Execute the proxy task
+        // Main loop to handle tunnel communication, moves self into the async task
+        loop {
+            tokio::select! {
+                biased;
+                // Check for stop signal
+                _ = self.stop.wait_async() => {
+                    break;
+                }
+
+                // Handle control commands
+                cmd = ctrl_rx.recv_async() => {
+                    match cmd {
+                        Ok(cmd) => {
+                            if let Err(e) = self.handle_ctrl_command(cmd, &ctrl_tx).await {
+                                log::error!("Error handling command: {:?}", e);
+                                break;
+                            }
+                        }
+                        Err(_) => {
+                            // Control channel closed, we should stop
+                            break;
+                        }
+                    }
+                }
+                msg = self.servers.recv() => {
+                    match msg {
+                        Ok(msg) => {
+                            if let Err(e) = self.client_tx.send_async(msg).await {
+                                log::error!("Error sending message to channel: {:?}", e);
+                            }
+                        }
+                        Err(_) => {
+                            // Server channel closed, we should stop
+                            break;
+                        }
+                    }
+                }
+                msg = self.client_rx.recv_async() => {
+                    let msg = msg.context("Failed to receive message from channel")?;
+                    // Channel 0 messages are command messages, process them
+                    if msg.channel_id == 0 {
+                        match ProtoCommand::try_from(msg) {
+                            Ok(cmd) => {
+                                if let Err(e) = self.handle_proto_command(cmd).await {
+                                    log::error!("Error handling command: {:?}", e);
+                                    break;
+                                }
+                            }
+                            Err(e) => {
+                                log::error!("Failed to parse command from channel 0: {:?}", e);
+                                break;
+                            }
+                        }
+                        continue;
+                    }
+                    if let Err(e) = self.servers.send_to_channel(msg).await {
+                        log::error!("Error sending message to server: {:?}", e);
+                    }
+                }
+            }
+        }
+        Ok(())
+    }
+
+    async fn handle_proto_command(&mut self, cmd: ProtoCommand) -> Result<()> {
+        match cmd {
+            ProtoCommand::Close => {
+                log::debug!("Received close command from channel 0, will attempt to reconnect");
+                // Try also to send back the close command
+                let _ = self.client_tx.send_async(ProtoCommand::Close.into()).await;
+
+                // Stop all servers
+                self.servers.stop_all_servers();
+
+                // Flag we have been correctly closed by client, so we don't try to reconnect, just stop the proxy
+                self.client_correctly_closed = true;
+            }
+            _ => {
+                log::debug!("Received command from channel 0: {:?}", cmd);
+                // For now, we just log the command, but we could handle some more commands here if needed
+            }
+        }
+        Ok(())
+    }
+
+    async fn handle_ctrl_command(
+        &mut self,
+        cmd: handler::Command,
+        ctrl_tx: &flume::Sender<handler::Command>,
+    ) -> Result<()> {
+        match cmd {
+            handler::Command::RequestChannel {
+                channel_id,
+                response,
+            } => {
+                // Register a new server, and return the comms channel for it
+                self.client_tx
+                    .send_async(super::protocol::Command::OpenChannel { channel_id }.to_message())
+                    .await
+                    .context("Failed to send open channel command to client")?;
+                let (tx, rx) = self.servers.register_server(channel_id).await?;
+                response
+                    .send_async(Ok(handler::ServerChannels { tx, rx }))
+                    .await?;
+            }
+            handler::Command::ReleaseChannel { channel_id } => {
+                log::debug!("Processing command release channel {}", channel_id);
+                self.servers.close_server(channel_id);
+                self.client_tx
+                    .send_async(super::protocol::Command::CloseChannel { channel_id }.to_message())
+                    .await
+                    .context("Failed to send close channel command to client")?;
+                // If no server remains (all are closed), send also the Close command to client, so it can cleanup and close all
+                if self.servers.is_empty() {
+                    log::debug!("No more active channels, sending close command to client");
+                    self.client_tx
+                        .send_async(super::protocol::Command::Close.into())
+                        .await
+                        .context("Failed to send close command to client")?;
+                    // Flag we have been correctly closed by client, so we don't try to reconnect, just stop the proxy
+                    self.client_correctly_closed = true;
+                }
+            }
+            handler::Command::ClientResult { message, sequence } => {
+                // If we received the close command from remote, we should not try to reconnect, just stop the proxy
+                // If we stopped the server, stopped also will be set, do not try to reconnect in that case either
+                if self.stop.is_triggered() || !self.client_correctly_closed {
+                    self.seqs = sequence;
+                    log::debug!(
+                        "Client Result: {}, packet for recovery: {:?}, seqs: {:?}",
+                        message,
+                        self.recovery_buffer,
+                        self.seqs,
+                    );
+                    // Give a bit of time, this is a network error
+                    // so if something ephemeral happened, it should be resolved by the time we try to reconnect
+                    tokio::time::sleep(Duration::from_millis(500)).await;
+                    self.launch_client(ctrl_tx.clone()).await?;
+                }
+            }
+        }
+        Ok(())
+    }
+}
+
+// Tests module
+#[cfg(test)]
+mod tests;

@@ -1,0 +1,44 @@
+[package]
+name = "coffeepie-benchmark"
+version = "0.1.0"
+edition = "2021"
+description = "Benchmark and diagnostic tools for Coffee Pie QFDM Ecosystem"
+license = "MIT OR Apache-2.0"
+authors = ["Coffee Pie Contributors"]
+
+[[bin]]
+name = "latency-test"
+path = "src/bin/latency-test.rs"
+
+[[bin]]
+name = "coffeepie-slices-calc"
+path = "src/bin/coffeepie-slices-calc.rs"
+
+[[bin]]
+name = "storage-sync-speed"
+path = "src/bin/storage-sync-speed.rs"
+
+[[bin]]
+name = "bandwidth-bench"
+path = "src/bin/bandwidth-bench.rs"
+
+[[bin]]
+name = "network-health"
+path = "src/bin/network-health.rs"
+
+[[bin]]
+name = "disk-iops-bench"
+path = "src/bin/disk-iops-bench.rs"
+
+[[bin]]
+name = "streaming-capacity"
+path = "src/bin/streaming-capacity.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+indicatif = "0.17"
+humantime = "2"
+rand = "0.8"
