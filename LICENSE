@@ -21,12 +21,16 @@ The Software is available under a dual-licensing model:
 
     A separate commercial license is required for:
        - Each Codec Terminal willing to connect to the QFDM network.
-            Standard | 1 | 999 terminals | 9'000 COP/month per license (~2.57 USD)
-            Growth | 1'000 | 9'999 | 8'100 COP/month per license (~2.32 USD)
-            Business | 10'000 | 99'999 | 6'300 COP/month per license (~1.80 USD)
-            Corporate | 100'000 | 999'999 | 4'500 COP/month per license (~1.29 USD)
-            Global | 1'000'000 | 99'999''999 | 2'700 COP/month per license (~0.77 USD)
-            Universal | 100'000'000 | ∞ | 900 COP/month per license (~0.25 USD)
+           
+| Plan | Min Terminals | Max Terminals | Unit | Price per License |
+| :--- | :---: | :---: | :--- | :--- |
+| Standard | 1 | 999 | terminals | 9'000 COP/month (~2.57 USD) |
+| Growth | 1'000 | 9'999 | terminals | 8'100 COP/month (~2.32 USD) |
+| Business | 10'000 | 99'999 | terminals | 6'300 COP/month (~1.80 USD) |
+| Corporate | 100'000 | 999'999 | terminals | 4'500 COP/month (~1.29 USD) |
+| Global | 1'000'000 | 99'999'999 | terminals | 2'700 COP/month (~0.77 USD) |
+| Universal | 100'000'000 | ∞ | terminals | 900 COP/month (~0.25 USD) |
+
        - Deployments of ten (10) or more nodes.
        - Hosting the service as a third-party provider.
        - Embedding the software in proprietary products.
