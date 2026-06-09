@@ -1,29 +1,32 @@
-# Coffee Pie® - Custom Dual License
+Coffee Pie® - Custom Dual License
+==================================
 
-Copyright (C) 2025 Grupo 3P1 Colombia. All rights reserved.
+Copyright (C) 2025  Grupo 3P1 Colombia. All rights reserved.
 
 This software and associated documentation files (the "Software") are the proprietary intellectual property of Grupo 3P1 Colombia. Unauthorized copying, distribution, modification, or use of the Software, via any medium, is strictly prohibited.
 
 The Coffee Pie® name, logo, and QFDM (Quantized Fractional Distribution and Management System) are protected by trademark and patent law (Patent NC2025/0012723). Nothing in this license shall be construed as granting any rights under said patent or trademark.
 
-## DUAL LICENSING
+DUAL LICENSING
+--------------
 
 The Software is available under a dual-licensing model:
 
-1. **COMMUNITY LICENSE (Open Core)**  
-   The open-source components of this Software are available under the GNU Affero General Public License v3 (AGPLv3) for up to nine (9) nodes, free of charge, for non-commercial, community, home lab, and educational use. See the `LICENSE-AGPL` file or https://www.gnu.org/licenses/agpl-3.0.html.
+  1. COMMUNITY LICENSE (Open Core)
+     The open-source components of this Software are available under the GNU Affero General Public License v3 (AGPLv3) for up to nine (9) nodes, free of charge, for non-commercial, community, home lab, and educational use. See the LICENSE-AGPL file or https://www.gnu.org/licenses/agpl-3.0.html.
 
-2. **COMMERCIAL LICENSE**  
-   Home Lab enthusiasts are encouraged to grow their deployments. Once you reach ten (10) or more nodes, you become eligible to apply for integration into the QFDM Backend Infrastructure as a compensated provider, earning real money for your room, energy, and maintenance contributions — subject to meeting basic requirements such as proof of electricity bill origin, physical safety compliance, and secured hardware access.
+  2. COMMERCIAL LICENSE
+     Home Lab enthusiasts are encouraged to grow their deployments. Once you reach ten (10) or more nodes, you become eligible to apply for integration into the QFDM Backend Infrastructure as a compensated provider, earning real money for your room, energy, and maintenance contributions — subject to meeting basic
+     requirements such as proof of electricity bill origin, physical safety compliance, and secured hardware access.
 
-A separate commercial license is required for:
-* Each Codec Terminal willing to connect to the QFDM network.
-* Deployments of ten (10) or more nodes.
-* Hosting the service as a third-party provider.
-* Embedding the software in proprietary products.
-* Any use that directly or indirectly generates revenue.
+    A separate commercial license is required for:
+       - Each Codec Terminal willing to connect to the QFDM network.
+       - Deployments of ten (10) or more nodes.
+       - Hosting the service as a third-party provider.
+       - Embedding the software in proprietary products.
+       - Any use that directly or indirectly generates revenue.
+       *Commercial licenses may include royalties, patent grants, warranties, support, and indemnification.
 
-*\*Commercial licenses may include royalties, patent grants, warranties, support, and indemnification.*
 
 | Plan | Min Terminals | Max Terminals | Unit | Price per License |
 | :--- | :---: | :---: | :--- | :--- |
@@ -35,12 +38,27 @@ A separate commercial license is required for:
 | Universal | 100'000'000 | ∞ | terminals | 900 COP/month (~0.25 USD) |
 
 To obtain a commercial license, please use the licensing tool at:
-* **Web:** [https://www.coffeepie.co/panel](https://www.coffeepie.co/panel) (`Licensing Tab`)
 
-## THIRD-PARTY COMPONENTS
+    Web:   https://www.coffeepie.co/panel => Licensing Tab
 
-This Software includes third-party open-source components licensed under their respective terms. See individual subdirectories for applicable licenses (e.g., `OpenUDS/BSD-3-Clause`, `Sunshine/GPLv3`, `Moonlight/GPLv3`).
+THIRD-PARTY COMPONENTS
+----------------------
 
-## DISCLAIMER
+This Software includes third-party open-source components licensed under
+their respective terms. See individual subdirectories for applicable
+licenses (e.g., OpenUDS/BSD-3-Clause, Sunshine/GPLv3, Moonlight/GPLv3).
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+DISCLAIMER
+----------
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
