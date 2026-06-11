@@ -12,6 +12,12 @@ import re
 import sys
 from pathlib import Path
 
+# The report uses Unicode marks (✓). On Windows the default console encoding
+# is cp1252, which cannot encode them and crashes the script. Force UTF-8 so
+# contributors can run this locally on any platform, matching CI (Linux).
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parent.parent
 
 # ── Checks ────────────────────────────────────────────────────────────

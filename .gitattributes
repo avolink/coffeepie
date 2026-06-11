@@ -46,3 +46,14 @@ hardware/LICENSE text
 
 # Cloud providers — scalable hardware designs (binary only)
 cloud-providers/scalable-hardware/**/.gitkeep text
+
+# Line endings — force LF on files that break with CRLF on Linux/Docker.
+# Without this, a Windows checkout stores CRLF and `make`/shell recipes fail.
+Makefile text eol=lf
+*.mk text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.rs text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf

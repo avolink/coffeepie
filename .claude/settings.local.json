@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -iE '\\\\.\\(env|pem|key|p12|pfx|crt|csr|der|jks|keystore|sqlite|db\\)$|secret|credential|password|token|\\\\.env\\\\.|id_rsa|id_ed25519')",
+      "Bash(git config *)",
+      "Bash(grep -iE '\\\\.\\(env|pem|key|p12|pfx|crt|csr|der|jks|keystore|sqlite|sqlite3|db|dump|bak\\)$|secret|credential|passwd|password|token|id_rsa|id_ed25519|serviceaccount|service-account')",
+      "Bash(git grep *)",
+      "Bash(grep -v '^$')",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\({k:\\(v[:40]+'...' if isinstance\\(v,str\\) and len\\(v\\)>40 else v\\) for k,v in d.items\\(\\)}\\)\")",
+      "Bash(grep -E '\\(^|/\\)Makefile$')",
+      "Bash(grep -iE '\\\\.\\(bak|orig|swp|tmp\\)$|\\\\.wix\\\\.')",
+      "Bash(python3 scripts/check-doc-consistency.py)",
+      "Bash(git remote *)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -c \"import json; d=json.load\\(open\\('coffeepie_website/public/translations.json'\\)\\); k=next\\(iter\\(d\\)\\); print\\('sample key langs:', sorted\\(d[k].keys\\(\\)\\)\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 python3 scripts/check-doc-consistency.py)",
+      "Bash(git reflog *)",
+      "Bash(git prune *)",
+      "Bash(git gc *)",
+      "Bash(git rev-parse *)",
+      "PowerShell(wsl -d ubuntu --cd /home/avolink/DEV/coffeepie/tools/dev -- bash -lc \"cargo run --bin translations-validator\")",
+      "PowerShell(wsl -d ubuntu -- bash -c \"ls /home/avolink/.cargo/bin/ 2>$null; which cargo; ls /home/avolink/DEV/coffeepie/tools/dev\")",
+      "PowerShell(try { \\(Get-Command cargo -ErrorAction Stop\\).Source } catch { \"no cargo on Windows\" })",
+      "WebFetch(domain:grupo3p1.co)"
+    ]
+  }
+}

@@ -28,15 +28,15 @@ The Software is available under a dual-licensing model:
        *Commercial licenses may include royalties, patent grants, warranties, support, and indemnification.
 
 
-|    Plan    |   Min Terminals  | Max Terminals |    Unit   | Price per License  | Estimated in USD |
+|    Plan    |   Min Terminals  | Max Terminals | Price per License  | Aprox USD |
 -----------------------------------------------------------------------------------------------------
-| Standard   | 1                | 999           | terminals |   9'000 COP/month  | ~2.57 USD/month  |
-| Growth     | 1'000            | 9'999         | terminals |   8'100 COP/month  | ~2.32 USD/month  |
-| Business   | 10'000           | 99'999        | terminals |   6'300 COP/month  | ~1.80 USD/month  |
-| Corporate  | 100'000          | 999'999       | terminals |   4'500 COP/month  | ~1.29 USD/month  |
-| National   | 1'000'000        | 9'999'999     | terminals |   2'700 COP/month  | ~0.77 USD/month  |
-| Global     | 10'000'000       | 99'999'999    | terminals |   1'500 COP/month  | ~0.43 USD/month  |
-| Universal  | 100'000'000      |      ∞        | terminals |     900 COP/month  | ~0.25 USD/month  |
+| Standard   | 1                | 999           |   9'000 COP/month  | ~2.57     |
+| Growth     | 1'000            | 9'999         |   8'100 COP/month  | ~2.32     |
+| Business   | 10'000           | 99'999        |   6'300 COP/month  | ~1.80     |
+| Corporate  | 100'000          | 999'999       |   4'500 COP/month  | ~1.29     |
+| National   | 1'000'000        | 9'999'999     |   2'700 COP/month  | ~0.77     |
+| Global     | 10'000'000       | 99'999'999    |   1'500 COP/month  | ~0.43     |
+| Universal  | 100'000'000      |      ∞        |     900 COP/month  | ~0.25     |
 
 To obtain a commercial license, please use the licensing tool at:
 

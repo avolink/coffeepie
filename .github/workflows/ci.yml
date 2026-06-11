@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+# Least privilege: this CI only builds, lints, and tests — it never writes to
+# the repo. Restrict the GITHUB_TOKEN so a compromised dependency or action
+# cannot push commits, open releases, or alter issues/PRs.
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

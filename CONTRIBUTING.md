@@ -5,7 +5,7 @@ Welcome. Coffee Pie® is an open ecosystem — hardware, software, documentation
 ## Quick Start (5 minutes)
 
 ```bash
-git clone https://github.com/coffeepie/coffeepie.git
+git clone https://github.com/avolink/coffeepie.git
 cd coffeepie
 cp .env.example .env
 make setup
@@ -132,7 +132,7 @@ Push and open a PR against `main`. CI runs automatically (build + lint + test).
 
 1. Edit only `coffeepie_website/public/translations.json`
 2. The key is the **Spanish** text. `es` field = same as key.
-3. Add all 11 languages: `es, en, pt, fr, de, ru, hi, ja, zh, ko, ar`
+3. Add all 12 languages: `es, en, pt, fr, de, ru, hi, ja, zh, ko, ar, el` (CI fails if any are missing)
 4. **Never translate** these (they stay identical in all languages):
    - Emails (`accesibility@coffeepie.co`)
    - Physical addresses
@@ -160,5 +160,10 @@ Push and open a PR against `main`. CI runs automatically (build + lint + test).
 
 ## License
 
-MIT OR Apache-2.0. All contributions are dual-licensed.
-By contributing, you agree to license your work under these terms.
+Coffee Pie® uses a **tiered license model** — there is no single blanket license. See [`LICENSE`](LICENSE) and [`CONSTITUTION.md`](CONSTITUTION.md) for the binding terms. In summary:
+
+- **QFDM Core & Orchestrator** — Open Core (source-available, proprietary); commercial license required for codec-terminal manufacturers, large-scale/enterprise deployments, and competitors.
+- **Frontend & Drivers** — Apache-2.0.
+- **Hardware Design** — CERN Open Hardware License.
+
+By contributing you agree to the project **Contributor License Agreement (CLA)**, which keeps the ecosystem commercially viable under its BIC (Benefit and Collective Interest) status. Contributions are licensed under the tier that applies to the component you modify.

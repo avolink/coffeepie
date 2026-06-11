@@ -11,7 +11,7 @@ Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie® Colombia is a Benefit and Colletive Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
+Company: Coffee Pie® Colombia is a Benefit and Collective Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
 
@@ -25,14 +25,14 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
  Main Contributors (and initial Moderators):<br>
  - avolink (The Architect, Industrial Designer, Frontend Developer and Marketer)<br>
  - juandaniel777 (The Engineer and Software Backend Developer)<br>
- - Diego-M-PZ (The Electronics and Maintenace Manager).<br>
+ - Diego-M-PZ (The Electronics and Maintenance Manager).<br>
 
   ⌨️ Development Stack:<br>
     - Backend: Rust, Shell/Bash Scripting (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel).<br>
     - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
 
- 🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unsued infrastructure for profit (tokens earned are burnable for fiat money, altough right now the provider needs a bank account in Colombia, or can be kept for future dividends and valuation).<br>
+ 🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for future dividends and valuation).<br>
  
  🚀 The Vision "The Airport of Computing":
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
@@ -91,7 +91,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 ❌ Strictly Prohibited in the Ecosystem:<br>
 ❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails (.gov), duly processed through the Coffee Pie® Legal Department: legal@coffeepie.co.<br>
 ❌ Illegal Content: Including, but not limited to, illicit drugs, counterfeit products and services that violate the law.<br>
-❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability. All software and hardware, free, open or propietary, is welcome to the community, as long as aligning with the Circular Economy Principles.<br>
+❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability. All software and hardware, free, open or proprietary, is welcome to the community, as long as aligning with the Circular Economy Principles.<br>
 ❌ Violence and Disturbing Content: Incitement to violence, terrorism, animal cruelty or graphic images of damage.<br>
 ❌ The service is NOT meant nor allowed for military or warlike purposes.<br>
 ❌ Weapons and Explosives: Promotion of the sale of firearms, ammunition or explosive material.<br>

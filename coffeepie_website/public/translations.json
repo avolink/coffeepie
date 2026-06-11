@@ -10177,7 +10177,7 @@
     "ko": "우리는 아직도 성장하고 있습니다, 그래서 이익의 100%는 reinvested. 예상 시장 점유율이 도달 한 경우, 또는 시장은 포화되었습니다, 배당금은 투자자에게 배포되기 시작합니다.",
     "ar": "نحن لا نزال ننمو لذا 100% من الأرباح تعاد استثمارها وحالما يتم الوصول إلى الحصة المتوقعة من السوق، أو تم تهدئة السوق، يبدأ توزيع الأرباح على المستثمرين."
   },
-  "Tokens PIE y Créditos de Plataforma": {
+  "Tokens COFP y Créditos de Plataforma": {
     "en": "COFP Tokens and Platform Credits",
     "es": "Tokens COFP y Créditos de Plataforma",
     "pt": "COFP Tokens e Créditos da Plataforma",
@@ -10191,7 +10191,7 @@
     "ko": "COFP 토큰 및 플랫폼 크레딧",
     "ar": "عملات COFP وأرصدة المنصة"
   },
-  "Sí. Puedes convertir tus tokens PIE en Créditos de Plataforma en cualquier momento mediante un mecanismo de quema (burning). Esta conversión es irreversible: tus tokens se retiran permanentemente, perdiendo todos los derechos económicos (dividendos, valorización) y de gobernanza (voto) asociados, pero obtienes créditos que puedes usar inmediatamente para consumir el servicio, anunciarte, o acceder a funcionalidades premium. Es similar a una recompra de acciones, donde la compañía entrega capacidad de cómputo futura en lugar de efectivo.": {
+  "Sí. Puedes convertir tus tokens COFP en Créditos de Plataforma en cualquier momento mediante un mecanismo de quema (burning). Esta conversión es irreversible: tus tokens se retiran permanentemente, perdiendo todos los derechos económicos (dividendos, valorización) y de gobernanza (voto) asociados, pero obtienes créditos que puedes usar inmediatamente para consumir el servicio, anunciarte, o acceder a funcionalidades premium. Es similar a una recompra de acciones, donde la compañía entrega capacidad de cómputo futura en lugar de efectivo.": {
     "en": "Yes. You can convert your COFP tokens into Platform Credits at any time through a burning mechanism. This conversion is irreversible: your tokens are permanently retired, losing all associated economic rights (dividends, valuation) and governance rights (voting), but you receive credits you can immediately use to consume the service, advertise, or access premium features. This is similar to a stock buyback, where the company delivers future compute capacity instead of cash.",
     "es": "Sí. Puedes convertir tus tokens COFP en Créditos de Plataforma en cualquier momento mediante un mecanismo de quema (burning). Esta conversión es irreversible: tus tokens se retiran permanentemente, perdiendo todos los derechos económicos (dividendos, valorización) y de gobernanza (voto) asociados, pero obtienes créditos que puedes usar inmediatamente para consumir el servicio, anunciarte, o acceder a funcionalidades premium. Es similar a una recompra de acciones, donde la compañía entrega capacidad de cómputo futura en lugar de efectivo.",
     "pt": "Sim. Voc^e pode converter seus tokens COFP em Créditos da Plataforma a qualquer momento através de um mecanismo de queima (burning). Esta conversão é irreversível: seus tokens são retirados permanentemente, perdendo todos os direitos econômicos (dividendos, valorização) e de governança (voto) associados, mas você recebe créditos que pode usar imediatamente para consumir o serviço, anunciar ou acessar funcionalidades premium. É semelhante a uma recompra de ações, onde a empresa entrega capacidade de computação futura em vez de dinheiro.",
@@ -18017,6 +18017,34 @@
     "ko": "글로벌",
     "ar": "عالمي"
   },
+  "Nacional": {
+    "en": "National",
+    "es": "Nacional",
+    "pt": "Nacional",
+    "fr": "National",
+    "de": "National",
+    "el": "Εθνικό",
+    "ru": "Национальный",
+    "hi": "राष्ट्रीय",
+    "ja": "ナショナル",
+    "zh": "国家",
+    "ko": "내셔널",
+    "ar": "وطني"
+  },
+  "Universal": {
+    "en": "Universal",
+    "es": "Universal",
+    "pt": "Universal",
+    "fr": "Universel",
+    "de": "Universal",
+    "el": "Καθολικό",
+    "ru": "Универсальный",
+    "hi": "सार्वभौमिक",
+    "ja": "ユニバーサル",
+    "zh": "通用",
+    "ko": "유니버설",
+    "ar": "شامل"
+  },
   "Somos una comunidad abierta, cualquiera que lo desee puede proponer, desarrollar y rentabilizar sus propios módulos, accesorios, periféricos, tarjetas de expansión, dispositivos de visualización, baterías, suiches, teclas y software al rededor de nuestro servicio libre de cargos, nosotros simplemente brindamos un \"marco de trabajo estandarizado, optimizado, con mínimos desperdicios, además del backend, para que los usuario puedan consumir poder de cómputo bajo demanda\". Aunque si deseas alquilar tus productos compatibles a través de nuestra tienda y canales de distribución, debes saber que se adiciona un márgen de al menos 15% por cada transacción, a parte de los costos asociados a los métodos de pago y envío. Si eres fabricante también podrías fabricar los Terminales Codec en sí mismos, pero con un pequeño porcentaje de regalías sobre el valor del alquiler a terceros como proveedores de internet, entidades estatales o consumidores directos, 7% bajo la marca del fabricante/cliente (OEM/marca blanca), o bajo la marca Coffee Pie® desde tan sólo 1 USD/mes por licencia (Precio de Lista para 1 a 999 licencias), 0.90 USD/mes (1'000 a 9'999), 0.70 USD/mes (10'000 a 99'999), 0.50 USD/mes (100'000 a 999'999), 0.30 USD/mes (+1'000'000)": {
     "en": "We are an open community; anyone who wishes can propose, develop and monetize their own modules, accessories, peripherals, expansion cards, display devices, batteries, switches, keycaps and software around our service free of charge. We simply provide a \"standardized, optimized framework with minimal waste, in addition to the backend, so that users can consume computing power on demand\". However, if you wish to rent your compatible products through our store and distribution channels, you should know that a margin of at least 15% is added per transaction, apart from the costs associated with payment methods and shipping. If you are a manufacturer, you could also manufacture the Codec Terminals themselves, but with a small percentage of royalties on the rental value to third parties such as internet providers, state entities, or direct consumers: 7% under the manufacturer/client brand (OEM/white label), or under the Coffee Pie® brand starting at just 1.00 USD/month per license (List Price for 1 to 999 licenses), 0.90 USD/month (1'000 to 9'999), 0.70 USD/month (10'000 to 99'999), 0.50 USD/month (100'000 to 999'999), 0.30 USD/month (+1'000'000)",
     "es": "Somos una comunidad abierta, cualquiera que lo desee puede proponer, desarrollar y rentabilizar sus propios módulos, accesorios, periféricos, tarjetas de expansión, dispositivos de visualización, baterías, suiches, teclas y software al rededor de nuestro servicio libre de cargos, nosotros simplemente brindamos un \"marco de trabajo estandarizado, optimizado, con mínimos desperdicios, además del backend, para que los usuario puedan consumir poder de cómputo bajo demanda\". Aunque si deseas alquilar tus productos compatibles a través de nuestra tienda y canales de distribución, debes saber que se adiciona un márgen de al menos 15% por cada transacción, a parte de los costos asociados a los métodos de pago y envío. Si eres fabricante también podrías fabricar los Terminales Codec en sí mismos, pero con un pequeño porcentaje de regalías sobre el valor del alquiler a terceros como proveedores de internet, entidades estatales o consumidores directos, 7% bajo la marca del fabricante/cliente (OEM/marca blanca), o bajo la marca Coffee Pie® desde tan sólo 1 USD/mes por licencia (Precio de Lista para 1 a 999 licencias), 0.90 USD/mes (1'000 a 9'999), 0.70 USD/mes (10'000 a 99'999), 0.50 USD/mes (100'000 a 999'999), 0.30 USD/mes (+1'000'000)",
@@ -23043,7 +23071,7 @@
     "ko": "총 출금액",
     "ar": "إجمالي المسحوب"
   },
-  "PIE": {
+  "COFP": {
     "en": "COFP",
     "es": "COFP",
     "pt": "COFP",
@@ -23071,7 +23099,7 @@
     "ko": "법정 화폐를 위한 토큰 소각",
     "ar": "حرق الرموز مقابل النقود الورقية"
   },
-  "Al solicitar un retiro, tus tokens PIE se queman (burning) y recibes el equivalente en tu moneda local via transferencia bancaria. Tiempo promedio:": {
+  "Al solicitar un retiro, tus tokens COFP se queman (burning) y recibes el equivalente en tu moneda local via transferencia bancaria. Tiempo promedio:": {
     "en": "When you request a withdrawal, your COFP tokens are burned and you receive the equivalent in your local currency via bank transfer. Average time:",
     "es": "Al solicitar un retiro, tus tokens COFP se queman (burning) y recibes el equivalente en tu moneda local via transferencia bancaria. Tiempo promedio:",
     "pt": "Ao solicitar uma retirada, seus tokens COFP são queimados e você recebe o equivalente em sua moeda local via transferência bancária. Tempo médio:",

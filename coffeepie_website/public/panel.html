@@ -6248,10 +6248,20 @@
                                                                     <div class="pricing-tier-count">Corporativo</div>
                                                                     <div class="pricing-tier-price">4'500 <small>COP /mes</small></div>
                                                                 </div>
-                                                                <div class="pricing-tier-card" data-tier="5" data-min="1000000" data-max="999999999" data-price="0.90" onclick="selectPricingTier(this)">
-                                                                    <div class="pricing-tier-range">+1'000'000</div>
-                                                                    <div class="pricing-tier-count">Global</div>
+                                                                <div class="pricing-tier-card" data-tier="5" data-min="1000000" data-max="9999999" data-price="0.90" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">1'000'000 a 9'999'999</div>
+                                                                    <div class="pricing-tier-count">Nacional</div>
                                                                     <div class="pricing-tier-price">2'700 <small>COP /mes</small></div>
+                                                                </div>
+                                                                <div class="pricing-tier-card" data-tier="6" data-min="10000000" data-max="99999999" data-price="0.50" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">10'000'000 a 99'999'999</div>
+                                                                    <div class="pricing-tier-count">Global</div>
+                                                                    <div class="pricing-tier-price">1'500 <small>COP /mes</small></div>
+                                                                </div>
+                                                                <div class="pricing-tier-card" data-tier="7" data-min="100000000" data-max="999999999999" data-price="0.30" onclick="selectPricingTier(this)">
+                                                                    <div class="pricing-tier-range">+100'000'000</div>
+                                                                    <div class="pricing-tier-count">Universal</div>
+                                                                    <div class="pricing-tier-price">900 <small>COP /mes</small></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -6266,7 +6276,7 @@
                                                             <div class="license-purchase-form" style="padding:16px 0;">
                                                                 <div class="form-group">
                                                                     <label class="form-label">Cantidad de Terminales</label>
-                                                                    <input type="number" id="licenseQuantity" class="form-input" min="1" max="100000000" value="1" oninput="updateLicenseTotal()" placeholder="Ej: 50">
+                                                                    <input type="number" id="licenseQuantity" class="form-input" min="1" max="999999999999" value="1" oninput="updateLicenseTotal()" placeholder="Ej: 50">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="form-label">Período de Facturación</label>
@@ -7568,13 +7578,13 @@
         function updateLicenseTotal() {
             var qty = parseInt(document.getElementById('licenseQuantity').value) || 1;
 
-            // Clamp to valid range (no negative, no zero, max 100'000'000)
+            // Clamp to valid range (no negative, no zero, max 999'999'999'999)
             if (qty < 1) {
                 qty = 1;
                 document.getElementById('licenseQuantity').value = 1;
-            } else if (qty > 100000000) {
-                qty = 100000000;
-                document.getElementById('licenseQuantity').value = 100000000;
+            } else if (qty > 999999999999) {
+                qty = 999999999999;
+                document.getElementById('licenseQuantity').value = 999999999999;
             }
 
             var period = document.getElementById('licensePeriod').value;
@@ -7587,7 +7597,9 @@
                 { min: 1000, max: 9999, price: 8100 },
                 { min: 10000, max: 99999, price: 6300 },
                 { min: 100000, max: 999999, price: 4500 },
-                { min: 1000000, max: 999999999, price: 2700 }
+                { min: 1000000, max: 9999999, price: 2700 },
+                { min: 10000000, max: 99999999, price: 1500 },
+                { min: 100000000, max: 999999999999, price: 900 }
             ];
             for (var i = 0; i < tiers.length; i++) {
                 if (qty >= tiers[i].min && qty <= tiers[i].max) {

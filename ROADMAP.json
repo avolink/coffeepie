@@ -538,7 +538,7 @@
             "title": "Corporate Licensing & Revenue Distribution",
             "phase": "scale",
             "status": "planned",
-            "description": "Enforce commercial license for deployments above 9 nodes per Constitution Article III.2. Automated dividend distribution to contributors via PIE tokens (TRC20).",
+            "description": "Enforce commercial license for deployments above 9 nodes per Constitution Article III.2. Automated dividend distribution to contributors via COFP tokens (TRC20).",
             "depends_on": ["M9", "M15"],
             "tasks": [
                 {
@@ -550,7 +550,7 @@
                 },
                 {
                     "id": "T-1602",
-                    "description": "PIE token smart contract (Tron TRC20) — minting, distribution, dividend allocation per Constitution Article III.",
+                    "description": "COFP token smart contract (Tron TRC20) — minting, distribution, dividend allocation per Constitution Article III.",
                     "priority": "high",
                     "tags": ["scale", "fintech"],
                     "merit_weight": 1.2

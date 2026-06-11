@@ -48,7 +48,15 @@ node_modules/
 # Qt
 *.qmlrc.bin
 *.autosave
+*~RF*.TMP
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
-Makefile
+# NOTE: CMake-generated Makefiles already fall under the ignored build*/ and
+# *-Debug/ directories above. Do NOT add a blanket "Makefile" rule here — it
+# silently excludes the hand-written root ./Makefile that the dev workflow and
+# CONTRIBUTING.md ("make setup", "make test", ...) depend on.
+
+# Editor / backup files
+*.bak
+*.orig
