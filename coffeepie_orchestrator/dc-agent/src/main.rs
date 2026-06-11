@@ -14,6 +14,7 @@ mod adapter;
 mod adapters;
 mod api;
 mod heartbeat;
+mod placement;
 pub mod types;
 
 use api::AppState;
@@ -171,7 +172,9 @@ async fn main() -> anyhow::Result<()> {
         tracing::info!("CORS disabled (no DC_AGENT_CORS_ORIGIN set) — server-to-server mode");
     }
 
-    app = app.with_state(state);
+    // New binding (not reassignment): with_state() converts Router<AppState>
+    // into the stateless Router<()> that axum::serve accepts.
+    let app = app.with_state(state);
 
     // ── Start server ────────────────────────────────────────────────
 

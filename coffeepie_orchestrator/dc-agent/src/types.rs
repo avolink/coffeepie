@@ -91,8 +91,12 @@ impl Default for SliceSpec {
 impl SliceSpec {
     /// Multiply all resources by a factor (e.g., a "4-slice" instance = factor 4).
     /// Uses saturating multiplication to prevent integer overflow wrapping.
-    /// Returns None if any field would exceed its maximum allowed value.
+    /// Returns None if any field would exceed its maximum allowed value,
+    /// or if factor is 0 (which would zero out required fields).
     pub fn scale(&self, factor: u32) -> Option<Self> {
+        if factor == 0 {
+            return None;
+        }
         let cpu_cores = self.cpu_cores.saturating_mul(factor);
         let ram_gb = self.ram_gb.saturating_mul(factor);
         let ssd_gb = self.ssd_gb.saturating_mul(factor);

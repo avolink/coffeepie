@@ -58,10 +58,12 @@ pub fn spawn_heartbeat(
                             );
                         }
                         Ok(resp) => {
+                            // Capture the status before .text() consumes the response.
+                            let status = resp.status().as_u16();
                             let body = resp.text().await.unwrap_or_default();
                             tracing::warn!(
                                 agent_id = %agent_id,
-                                status = resp.status().as_u16(),
+                                status = status,
                                 body = %body,
                                 "Heartbeat rejected by broker"
                             );

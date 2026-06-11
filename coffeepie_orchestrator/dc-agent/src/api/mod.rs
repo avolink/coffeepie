@@ -59,7 +59,7 @@ fn verify_auth(headers: &HeaderMap, auth_token: &Option<String>) -> Result<(), (
 /// Sanitize an error for the API response.
 /// Logs the full error via tracing and returns a generic message to the caller
 /// to avoid leaking internal infrastructure details (hostnames, IPs, paths).
-fn sanitize_error(context: &str, error: &dyn std::error::Error) -> String {
+fn sanitize_error(context: &str, error: &anyhow::Error) -> String {
     tracing::error!(error = %error, context = %context, "Request failed");
     format!("{}: internal error", context)
 }

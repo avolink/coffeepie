@@ -1,0 +1,35 @@
+# Coffee Pie Panel — QA test database.
+#
+# SECURITY: the port is published to 127.0.0.1 ONLY. Even though this may run on
+# the Endpoints VM (which already exposes an API publicly), Postgres stays
+# unreachable from the internet — it is bound to loopback, and the backend
+# reaches it over localhost. NEVER change this to "5432:5432" (that binds
+# 0.0.0.0 and exposes the DB + every user credential to the world).
+#
+# Bring up:   docker compose -f db/docker-compose.yml up -d
+# Tear down:  docker compose -f db/docker-compose.yml down -v   (-v wipes data)
+
+services:
+  panel-db:
+    image: postgres:16-alpine
+    container_name: coffeepie-panel-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coffeepie}
+      POSTGRES_USER: ${POSTGRES_USER:-coffeepie}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-coffeepie_dev}
+    ports:
+      - "127.0.0.1:5432:5432"   # loopback only — do not expose publicly
+    volumes:
+      - panel_db_data:/var/lib/postgresql/data
+      # *.sql here run once, in filename order, on first init of an empty volume.
+      - ./01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./02_seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-coffeepie} -d ${POSTGRES_DB:-coffeepie}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  panel_db_data:

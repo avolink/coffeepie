@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+  Coffee Pie — LOCAL QA login harness.
+  Proves the browser → panel_backend → test DB chain end-to-end, in a real
+  browser, before anything is wired into the production panel.
+
+  Open at:  http://localhost:5000/login-test.html
+  Backend:  auto-detected — localhost → http://localhost:8000, else prod.
+  Login:    testing@coffeepie.co / testing  (or any *@qa.coffeepie.co / testing)
+
+  Vanilla HTML/CSS/JS only (per AGENTS.md). Delete before production deploy.
+-->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Coffee Pie · QA Login Test</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; background:#141414; color:#eee;
+         display:flex; justify-content:center; padding:40px 16px; }
+  .card { background:#1c1c1c; border:1px solid #333; border-radius:14px;
+          width:100%; max-width:560px; padding:28px 26px; }
+  h1 { color:#c18b44; font-size:20px; margin:0 0 4px; }
+  .sub { color:#888; font-size:13px; margin:0 0 20px; }
+  label { display:block; font-size:12px; color:#aaa; margin:12px 0 4px; }
+  input { width:100%; box-sizing:border-box; padding:11px; background:#222;
+          border:1px solid #444; border-radius:8px; color:#fff; font-size:15px; }
+  button { background:#c18b44; color:#111; border:none; border-radius:8px;
+           padding:11px 16px; font-size:14px; font-weight:bold; cursor:pointer; margin:6px 6px 0 0; }
+  button.secondary { background:#2a2a2a; color:#ddd; border:1px solid #444; }
+  button:disabled { opacity:.5; cursor:not-allowed; }
+  .row { display:flex; gap:10px; }
+  .row > div { flex:1; }
+  .api { font-size:11px; color:#666; margin-top:16px; word-break:break-all; }
+  pre { background:#111; border:1px solid #333; border-radius:8px; padding:12px;
+        font-size:12px; overflow:auto; max-height:280px; white-space:pre-wrap; color:#bdf0c8; }
+  .err { color:#ff6b6b; }
+  .ok { color:#7ee787; }
+  .pill { display:inline-block; background:#2a2a2a; border:1px solid #444; border-radius:999px;
+          padding:2px 10px; font-size:11px; margin:2px 4px 0 0; color:#c18b44; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Coffee Pie · QA Login Test</h1>
+  <p class="sub">Local end-to-end check: Login (2FA-less QA) → token → role-gated panel API.</p>
+
+  <div class="row">
+    <div>
+      <label>Email</label>
+      <input id="email" type="email" value="testing@coffeepie.co" autocomplete="username">
+    </div>
+    <div>
+      <label>Contraseña</label>
+      <input id="password" type="password" value="testing" autocomplete="current-password">
+    </div>
+  </div>
+
+  <div style="margin-top:14px;">
+    <button id="loginBtn">Iniciar Sesión</button>
+    <button id="logoutBtn" class="secondary">Cerrar Sesión</button>
+  </div>
+
+  <div id="who" style="margin-top:14px;"></div>
+
+  <div style="margin-top:14px;">
+    <button class="secondary" data-call="/cofp/balance">GET /cofp/balance</button>
+    <button class="secondary" data-call="/cofp/provider/summary">GET /cofp/provider/summary</button>
+    <button class="secondary" data-call="/cofp/governance/voting-power">GET /cofp/governance/voting-power</button>
+  </div>
+
+  <label style="margin-top:18px;">Resultado</label>
+  <pre id="out">—</pre>
+
+  <p class="api" id="apiLabel"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── API base: localhost during QA, production otherwise ───────────────
+  var isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var API = isLocal ? 'http://localhost:8000' : 'https://api.coffeepie.co';
+  document.getElementById('apiLabel').textContent = 'API base: ' + API +
+    (isLocal ? '  (local QA backend)' : '  (production)');
+
+  var out = document.getElementById('out');
+  var who = document.getElementById('who');
+  var TOKEN_KEY = 'cp_qa_token';
+
+  function show(obj, isErr) {
+    out.className = isErr ? 'err' : '';
+    out.textContent = typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2);
+  }
+
+  function renderWho() {
+    var t = sessionStorage.getItem(TOKEN_KEY);
+    if (!t) { who.innerHTML = '<span class="err">No autenticado.</span>'; return; }
+    // Decode the JWT payload (display only — never trust client-side).
+    try {
+      var p = JSON.parse(atob(t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+      var roles = (p.app_metadata && p.app_metadata.roles) || [];
+      who.innerHTML = '<span class="ok">Sesión activa:</span> ' + (p.email || p.sub) +
+        '<br>' + roles.map(function (r) { return '<span class="pill">' + r + '</span>'; }).join('');
+    } catch (e) { who.textContent = 'token presente'; }
+  }
+
+  document.getElementById('loginBtn').onclick = function () {
+    show('…');
+    fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: document.getElementById('email').value.trim(),
+        password: document.getElementById('password').value
+      })
+    })
+    .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
+    .then(function (res) {
+      if (res.ok && res.body.access_token) {
+        sessionStorage.setItem(TOKEN_KEY, res.body.access_token);
+        renderWho();
+        show({ login: 'OK', uid: res.body.uid, roles: res.body.roles });
+      } else {
+        show({ login: 'FAILED', status: res.status, detail: res.body.detail || res.body }, true);
+      }
+    })
+    .catch(function (e) { show('Network error: ' + e + '\n(Is the backend up at ' + API + '?)', true); });
+  };
+
+  document.getElementById('logoutBtn').onclick = function () {
+    sessionStorage.removeItem(TOKEN_KEY);
+    renderWho();
+    show('Sesión cerrada.');
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll('button[data-call]'), function (btn) {
+    btn.onclick = function () {
+      var t = sessionStorage.getItem(TOKEN_KEY);
+      if (!t) { show('Inicia sesión primero.', true); return; }
+      var path = btn.getAttribute('data-call');
+      show('GET ' + path + ' …');
+      fetch(API + path, { headers: { 'Authorization': 'Bearer ' + t } })
+        .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+        .then(function (res) { show({ endpoint: path, status: res.status, response: res.body }, res.status >= 400); })
+        .catch(function (e) { show('Network error: ' + e, true); });
+    };
+  });
+
+  renderWho();
+})();
+</script>
+</body>
+</html>
