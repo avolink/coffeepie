@@ -6,6 +6,11 @@ Coffee Pie® exists to democratize computing power and eradicate electronic wast
 
 We are guided by ethical and stoic principles — Meritocracy, Ataraxia, Areté, Eudaimonia — and we measure our success mainly by positive social and environmental impact, not just profits and ROI.
 
+- Meritocracy (mereō-κράτος): Progress, power and status are determined by individual ability and effort, rather than wealth, social class, or privilege.
+- Ataraxia (ἀταραξία): State of serenity, untroubled tranquility, freedom from emotional disturbance and anxiety.
+- Areté (ἀρετή): Justice, wisdom, virtue, courage, moderation and temperance.
+- Eudaimonia (εὐδαιμονία): State of living well, realization of self full potential or inherent purpose.
+
 ## Our Standards
 
 Examples of behavior that contributes to a positive environment:
