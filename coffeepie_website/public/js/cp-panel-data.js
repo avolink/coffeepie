@@ -2,7 +2,11 @@
 // Replaces the client-side-only node table with real backend persistence:
 //   • On load: GET /nodes → render the table from the database.
 //   • "Guardar Nodo": POST /nodes → row persists (survives refresh).
+//   • Edit (pencil): fills the modal from cache, PATCH /nodes/{id}.
 //   • Delete: DELETE /nodes/{id}.
+//   • Same-IP warning (non-blocking): typing an IP another node already uses
+//     shows a hint — duplicates are legal (NAT'd domestic nodes) but usually
+//     a typo for datacenter providers.
 // Overrides the inline saveNode/deleteNode globals AFTER the inline script ran
 // (functions resolve at click time), so the Wix export needs no surgery.
 // Requires cp-panel-auth.js (token + API base). Vanilla JS only.
@@ -52,12 +56,19 @@
                 '<td data-label="Estado"><span class="node-status ' + statusClass + '">' + statusLabel + '</span></td>' +
                 '<td data-label="Mantenimiento"><span class="node-maint none">—</span></td>' +
                 '<td data-label="Acciones"><div style="display:flex;gap:6px;">' +
+                '<button class="node-action-btn edit" onclick="editNode(\'' + esc(n.id) + '\')" title="Editar">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' +
+                '</button>' +
                 '<button class="node-action-btn delete" onclick="deleteNode(\'' + esc(n.id) + '\')" title="Eliminar">' +
                 '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
                 '</button></div></td>';
         }
 
+        var nodeCache = {};   // id → node, source of truth for the edit modal
+
         function renderNodes(nodes) {
+            nodeCache = {};
+            nodes.forEach(function (n) { nodeCache[n.id] = n; });
             var tbody = document.getElementById('nodesTableBody');
             if (!tbody) return;
             tbody.innerHTML = '';
@@ -82,8 +93,43 @@
                 .catch(function (e) { toast('No se pudieron cargar los nodos (' + e.message + ')'); });
         }
 
+        // ── Same-IP hint under the IP field (non-blocking: NAT'd domestic
+        // nodes legitimately share a public IP, but for a datacenter it's
+        // almost always a typo — exactly how N104 got N103's IP) ──────────
+        function ipWarningEl() {
+            var el = document.getElementById('cpIpDupWarning');
+            if (!el) {
+                var input = document.getElementById('modalNodeIP');
+                if (!input) return null;
+                el = document.createElement('div');
+                el.id = 'cpIpDupWarning';
+                el.style.cssText = 'display:none;font-size:12px;color:var(--cp-warning,#ffb400);margin-top:6px;';
+                input.parentNode.appendChild(el);
+            }
+            return el;
+        }
+        function checkDupIP() {
+            var el = ipWarningEl();
+            if (!el) return;
+            var ip = document.getElementById('modalNodeIP').value.trim();
+            var editId = (document.getElementById('editNodeId') || {}).value || '';
+            var holder = null;
+            Object.keys(nodeCache).forEach(function (id) {
+                if (id !== editId && ip && nodeCache[id].public_ip === ip) holder = nodeCache[id].name;
+            });
+            if (holder) {
+                el.textContent = '⚠ El nodo "' + holder + '" ya usa esta IP. ¿Misma máquina/router, o un error de tipeo?';
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+        var ipInput = document.getElementById('modalNodeIP');
+        if (ipInput) ipInput.addEventListener('input', checkDupIP);
+
         // ── Override the inline, DOM-only handlers with real persistence ──
         window.saveNode = function () {
+            var editId = (document.getElementById('editNodeId') || {}).value || '';
             var name = document.getElementById('modalNodeName').value.trim();
             var ip = document.getElementById('modalNodeIP').value.trim();
             var location = document.getElementById('modalNodeLocation').value.trim();
@@ -102,17 +148,22 @@
                 location: location
             };
 
-            fetch(API + '/nodes', { method: 'POST', headers: authHeaders(true), body: JSON.stringify(body) })
+            var url = editId ? API + '/nodes/' + encodeURIComponent(editId) : API + '/nodes';
+            var method = editId ? 'PATCH' : 'POST';
+            fetch(url, { method: method, headers: authHeaders(true), body: JSON.stringify(body) })
                 .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
                 .then(function (res) {
                     if (res.ok) {
-                        toast('Nodo "' + name + '" registrado en la base de datos.');
+                        toast(editId ? 'Nodo "' + name + '" actualizado.' : 'Nodo "' + name + '" registrado en la base de datos.');
                         if (typeof window.closeNodeModal === 'function') window.closeNodeModal();
                         loadNodes();
                     } else if (res.status === 403) {
                         toast('Tu cuenta no tiene rol de Proveedor.');
+                    } else if (res.status === 404) {
+                        toast('Nodo no encontrado (¿eliminado en otra sesión?).');
+                        loadNodes();
                     } else {
-                        toast('Error al registrar: ' + (res.body.detail || ('HTTP ' + res.status)));
+                        toast((editId ? 'Error al actualizar: ' : 'Error al registrar: ') + (res.body.detail || ('HTTP ' + res.status)));
                     }
                 })
                 .catch(function () { toast('No se pudo conectar al servidor (' + API + ').'); });
@@ -129,10 +180,34 @@
                 .catch(function () { toast('No se pudo conectar al servidor.'); });
         };
 
-        // Editing is not persisted server-side yet — be honest instead of lying.
-        window.editNode = function () {
-            toast('La edición de nodos estará disponible próximamente.');
+        // Edit: fill the modal from the cache (not DOM-scraping, which loses
+        // precision — the table rounds SSD to TB and GPU to GB) and let
+        // saveNode() PATCH instead of POST via the editNodeId hidden field.
+        window.editNode = function (id) {
+            var n = nodeCache[id];
+            if (!n) { toast('Nodo no encontrado — recarga la página.'); return; }
+            document.getElementById('nodeModalTitle').textContent = 'Editar Nodo';
+            document.getElementById('editNodeId').value = id;
+            document.getElementById('modalNodeName').value = n.name;
+            document.getElementById('modalNodeIP').value = n.public_ip;
+            document.getElementById('modalNodeCores').value = n.vcores;
+            document.getElementById('modalNodeRAM').value = n.ram_gb;
+            document.getElementById('modalNodeSSD').value = n.ssd_gb;
+            document.getElementById('modalNodeGPU').value = n.gpu_vram_mb;
+            document.getElementById('modalNodeHypervisor').value = n.hypervisor;
+            document.getElementById('modalNodeLocation').value = n.location;
+            document.getElementById('modalNodeSaveBtn').textContent = 'Actualizar Nodo';
+            checkDupIP();
+            document.getElementById('nodeModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         };
+
+        // Re-evaluate the IP hint when the blank "Registrar Nodo" modal opens
+        // (programmatic value resets don't fire the 'input' listener).
+        var _openAdd = window.openAddNodeModal;
+        if (typeof _openAdd === 'function') {
+            window.openAddNodeModal = function () { _openAdd(); checkDupIP(); };
+        }
 
         // ── Stat cards ───────────────────────────────────────────────────
         // Format a COFP amount with apostrophe thousands separators (panel style:

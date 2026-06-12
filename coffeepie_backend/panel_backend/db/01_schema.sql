@@ -90,6 +90,12 @@ CREATE TABLE IF NOT EXISTS node (
 
 CREATE INDEX IF NOT EXISTS ix_node_provider ON node (provider_id);
 
+-- A provider can't register two nodes with the same name (typo/double-submit
+-- guard). Deliberately NO uniqueness on public_ip: several domestic nodes
+-- behind one NAT/CGNAT router legitimately share a public IP — the frontend
+-- warns about same-IP instead of the DB rejecting it.
+CREATE UNIQUE INDEX IF NOT EXISTS ux_node_provider_name ON node (provider_id, name);
+
 COMMIT;
 
 -- ── Row-Level Security (apply on Supabase) ─────────────────────────────

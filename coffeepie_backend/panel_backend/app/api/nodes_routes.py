@@ -39,6 +39,25 @@ class NodeOut(NodeIn):
     created_at: str
 
 
+class NodePatch(BaseModel):
+    """Partial update — only the fields present are written."""
+
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+    public_ip: str | None = Field(default=None, min_length=1, max_length=64)
+    vcores: int | None = Field(default=None, ge=0, le=4096)
+    ram_gb: int | None = Field(default=None, ge=0, le=65536)
+    ssd_gb: int | None = Field(default=None, ge=0, le=1048576)
+    gpu_vram_mb: int | None = Field(default=None, ge=0, le=1048576)
+    hypervisor: str | None = Field(default=None, max_length=40)
+    location: str | None = Field(default=None, max_length=160)
+    status: str | None = None
+
+
+def _is_unique_violation(e: Exception) -> bool:
+    s = str(e)
+    return "23505" in s or "duplicate key" in s.lower()
+
+
 def _row_to_node(r) -> NodeOut:
     return NodeOut(
         id=r[0],
@@ -118,10 +137,66 @@ def create_node(
             row = cur.fetchone()
         except Exception as e:
             conn.rollback()
+            if _is_unique_violation(e):
+                raise HTTPException(
+                    status_code=409,
+                    detail=f'Ya tienes un nodo llamado "{body.name}".',
+                )
             # inet cast rejects malformed IPs, CHECKs reject bad numbers, etc.
             raise HTTPException(status_code=400, detail=f"Invalid node data: {e}")
         finally:
             cur.close()
+    return _row_to_node(row)
+
+
+@router.patch("/{node_id}", response_model=NodeOut)
+def update_node(
+    node_id: str,
+    body: NodePatch,
+    user: AuthenticatedUser = Depends(require_roles(Role.PROVIDER)),
+):
+    """Partially update a node. Owners edit their own; admins any."""
+    fields = body.model_dump(exclude_unset=True, exclude_none=True)
+    if not fields:
+        raise HTTPException(status_code=400, detail="No fields to update")
+    if "status" in fields and fields["status"] not in VALID_STATUS:
+        raise HTTPException(
+            status_code=400, detail=f"status must be one of {VALID_STATUS}"
+        )
+
+    # Column names come from the NodePatch model, never from the request.
+    casts = {"public_ip": "%s::inet", "status": "%s::node_status"}
+    set_sql = ", ".join(k + " = " + casts.get(k, "%s") for k in fields)
+    params: list = list(fields.values())
+
+    is_admin = Role.ADMIN in roles_of(user)
+    where = "id = %s::uuid"
+    params.append(node_id)
+    if not is_admin:
+        where += " AND provider_id = %s::uuid"
+        params.append(user.uid)
+
+    with get_conn() as conn:
+        cur = conn.cursor()
+        try:
+            cur.execute(f"UPDATE node SET {set_sql} WHERE {where}", params)
+            updated = cur.rowcount
+            conn.commit()
+            if updated:
+                cur.execute(_SELECT + " WHERE id = %s::uuid", (node_id,))
+                row = cur.fetchone()
+        except Exception as e:
+            conn.rollback()
+            if _is_unique_violation(e):
+                raise HTTPException(
+                    status_code=409,
+                    detail=f'Ya tienes un nodo llamado "{fields.get("name", "")}".',
+                )
+            raise HTTPException(status_code=400, detail=f"Invalid node data: {e}")
+        finally:
+            cur.close()
+    if not updated:
+        raise HTTPException(status_code=404, detail="Node not found or not yours")
     return _row_to_node(row)
 
 
