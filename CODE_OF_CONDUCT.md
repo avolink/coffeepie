@@ -4,7 +4,7 @@
 
 Coffee Pie® exists to democratize computing power and eradicate electronic waste — a mission that only works if the community building it is open, welcoming, and safe for everyone. We as members, contributors, and moderators pledge to make participation in our project and ecosystem a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
-We are guided by the project's stated principles — Meritocracy, Areté, and Eudaimonia — and measure our success by social and environmental impact, not only output.
+We are guided by ethical and stoic principles — Meritocracy, Ataraxia, Areté, Eudaimonia — and we measure our success mainly by positive social and environmental impact, not just profits and ROI.
 
 ## Our Standards
 
