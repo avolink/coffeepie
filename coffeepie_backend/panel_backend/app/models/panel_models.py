@@ -18,6 +18,13 @@ class LoginOut(BaseModel):
     roles: list[str]
 
 
+class RegisterIn(BaseModel):
+    """QA-local registration request."""
+    name: str
+    email: str
+    password: str = Field(min_length=8)
+
+
 class UsageEventIn(BaseModel):
     """Metering event forwarded from the DC Agent / streaming layer.
 

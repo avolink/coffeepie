@@ -2349,6 +2349,15 @@
 
             .panel-balance-row {
                 display: flex;
+                /* Mirror the desktop header balance, which sits at the right
+                   edge — applies to every width the strip is shown at. */
+                justify-content: flex-end;
+            }
+
+            /* The inner wrapper goes full-width when its two balance groups
+               wrap (phones), so each wrapped line must right-align itself. */
+            .panel-balance-row > div {
+                justify-content: flex-end;
             }
 
             #panel-balance-label-row {
@@ -2452,6 +2461,12 @@
         }
 
         @media screen and (min-width: 320px) and (max-width: 767px) {
+            /* The two balance groups wrap onto separate lines here, leaving
+               the "|" divider dangling at a line end — hide it. */
+            .panel-balance-row > div > span {
+                display: none;
+            }
+
             .panel-logout-wrapper {
                 right: 16px;
                 margin-top: -10px;
@@ -2937,6 +2952,7 @@
             background: var(--cp-dark);
             border: 1px solid var(--cp-border);
             border-radius: 10px;
+            color: var(--cp-text);
             transition: border-color 0.15s ease;
         }
 
@@ -6555,7 +6571,7 @@
                                                             <div class="form-row">
                                                                 <div class="form-cell">
                                                                     <label class="form-label" for="withdrawAmount">Cantidad de Tokens a Retirar</label>
-                                                                    <input class="form-input" type="number" id="withdrawAmount" min="1" value="1000" placeholder="COFP" oninput="updateWithdrawalPreview()" data-dynamic-max="true">
+                                                                    <input class="form-input" type="number" id="withdrawAmount" min="100000" value="100000" placeholder="COFP" oninput="updateWithdrawalPreview()" data-dynamic-max="true">
                                                                 </div>
                                                                 <div class="form-cell">
                                                                     <label class="form-label" for="withdrawFiatPreview">Recibir&aacute;s Aproximadamente</label>

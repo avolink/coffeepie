@@ -231,8 +231,12 @@
                     var cop = Math.round(parseFloat(s.cofp_this_month) * 0.29);
                     var sub = document.querySelector('#provTokensEarned + .stat-change');
                     if (sub) sub.textContent = 'COFP · ≈ ' + cop.toLocaleString('es-CO') + ' COP (base)';
-                    // Top-of-panel COFP balance.
+                    // Top-of-panel COFP balance — header element AND the balance
+                    // strip above the sidebar (was a hardcoded 25'000'000).
+                    // Don't route through the inline updateCOFFEEBalance(): its
+                    // parseInt mangles decimal strings ("…210.75" → …21075).
                     setText('coffee-balance-value', fmtCOFP(s.cofp_balance));
+                    setText('panel-coffee-balance-value-row', fmtCOFP(s.cofp_balance));
                     var cur = document.getElementById('coffee-balance-currency');
                     if (cur) cur.textContent = 'COFP';
                 })
@@ -286,6 +290,15 @@
 
         function bindInvoices() {
             getJSON('/panel/invoices').then(function (rows) {
+                // Credits balance for the top strip ("Balance: … Cr") — the only
+                // DB source for credits today is purchases: sum of PAID invoice
+                // credits. There is no spend/consumption model yet, so this is
+                // purchased-to-date, not remaining.
+                var paidCredits = rows.reduce(function (acc, r) {
+                    return acc + (r.status === 'paid' ? Number(r.credits) || 0 : 0);
+                }, 0);
+                setText('panel-balance-value-row', fmtCOFP(paidCredits));
+                setText('balance-value', fmtCOFP(paidCredits));
                 fill('invoiceTableBody', rows, function (r) {
                     return '<tr>' +
                         '<td data-label="Factura N.º">' + esc(r.invoice_number) + '</td>' +
@@ -356,7 +369,7 @@
                         '<div class="campaign-name">' + esc(s.name) + '</div>' +
                         '<div class="campaign-meta" style="font-size:12px;color:var(--cp-text-muted);">' + esc(meta) + '</div>' +
                         '</div>' +
-                        '<div class="campaign-stat"><strong>' + fmtInt(s.size_estimate) + '</strong><span style="font-size:11px;color:var(--cp-text-muted);"> alcance</span></div>' +
+                        '<div class="campaign-stat"><strong style="color:var(--cp-text);">' + fmtInt(s.size_estimate) + '</strong><span style="font-size:11px;color:var(--cp-text-muted);"> alcance</span></div>' +
                         '</div>';
                 }).join('');
             });

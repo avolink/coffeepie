@@ -220,6 +220,13 @@
                     "priority": "high",
                     "tags": ["security", "rust"],
                     "merit_weight": 0.9
+                },
+                {
+                    "id": "T-507",
+                    "description": "Email verification anti-bot gate for panel registration — rate-limited /auth/register, verification token flow via smtplib, unverified-account rejection on login, verification email with expiring token link.",
+                    "priority": "high",
+                    "tags": ["security", "auth", "anti-bot"],
+                    "merit_weight": 1.1
                 }
             ]
         },
@@ -418,10 +425,10 @@
         },
         {
             "id": "M12",
-            "title": "Multi-DC MetaPool Configuration",
+            "title": "Multi-DC MetaPool Configuration & IPv8 Readiness",
             "phase": "production",
             "status": "planned",
-            "description": "Cross-datacenter resource pooling. Codec Terminals connect to nearest DC with automatic failover.",
+            "description": "Cross-datacenter resource pooling and next-generation network protocol adoption. Codec Terminals connect to nearest DC with automatic failover. IPv8 (IETF draft-thain-ipv8-02) Zone Server prototyping and migration path — target 2035 or RFC maturity. See NETWORK.md for addressing plan and topology.",
             "depends_on": ["M11"],
             "tasks": [
                 {
@@ -444,6 +451,20 @@
                     "priority": "medium",
                     "tags": ["production", "orchestrator"],
                     "merit_weight": 1.0
+                },
+                {
+                    "id": "T-1204",
+                    "description": "IPv8 Zone Server lab prototyping — deploy Zone Server appliances (DHCP8, DNS8, NTP8, OAuth8, ACL8, XLATE8) in DC1 lab environment. Validate against existing IPv4 infrastructure (IPv4 is an IPv8 proper subset, prefix 0.0.0.0). Test OAuth8 JWT integration with Coffee Pie PKI mTLS.",
+                    "priority": "high",
+                    "tags": ["networking", "ipv8", "future"],
+                    "merit_weight": 1.2
+                },
+                {
+                    "id": "T-1205",
+                    "description": "IPv8 full adoption across QFDM Network — hybrid operation (dual-stack IPv4 + IPv8), Zone Servers authoritative for DHCP/DNS, all new VM slices receive IPv8 127.x.x.x.n.n.n.n addresses. Target: 2035 or when draft-thain-ipv8 reaches RFC maturity. See NETWORK.md § Migration Path.",
+                    "priority": "medium",
+                    "tags": ["networking", "ipv8", "future"],
+                    "merit_weight": 0.8
                 }
             ]
         },

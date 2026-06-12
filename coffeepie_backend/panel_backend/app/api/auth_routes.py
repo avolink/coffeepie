@@ -19,7 +19,7 @@ from fastapi import APIRouter, HTTPException
 from app import config
 from app.auth.qa_passwords import verify_password
 from app.db import get_conn
-from app.models.panel_models import LoginIn, LoginOut
+from app.models.panel_models import LoginIn, LoginOut, RegisterIn
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -92,3 +92,66 @@ def login(body: LoginIn):
     }
     token = jwt.encode(claims, config.SUPABASE_JWT_SECRET, algorithm="HS256")
     return LoginOut(access_token=token, uid=uid, email=email, roles=roles)
+
+
+@router.post("/register", response_model=LoginOut, status_code=201)
+def register(body: RegisterIn):
+    if not config.QA_LOCAL_AUTH:
+        raise HTTPException(status_code=404, detail="Not found")
+    if not config.SUPABASE_JWT_SECRET:
+        raise HTTPException(
+            status_code=500,
+            detail="QA register needs SUPABASE_JWT_SECRET set (token signing key).",
+        )
+
+    import jwt
+    from app.auth.qa_passwords import hash_password
+
+    email = body.email.strip().lower()
+    name = body.name.strip()
+
+    with get_conn() as conn:
+        cur = conn.cursor()
+        try:
+            # Check if email already exists
+            cur.execute("SELECT id FROM app_user WHERE lower(email) = lower(%s)", (email,))
+            if cur.fetchone():
+                raise HTTPException(status_code=409, detail="Email already registered")
+
+            # Create user
+            cur.execute(
+                "INSERT INTO app_user (email, display_name) VALUES (%s, %s) RETURNING id",
+                (email, name),
+            )
+            uid = str(cur.fetchone()[0])
+
+            # Assign default role: advertiser (the base panel role)
+            cur.execute(
+                "INSERT INTO user_role (user_id, role) VALUES (%s, 'advertiser')",
+                (uid,),
+            )
+
+            # Store password
+            pw_hash = hash_password(body.password)
+            cur.execute(
+                "INSERT INTO qa_credential (user_id, password_hash) VALUES (%s, %s)",
+                (uid, pw_hash),
+            )
+
+            conn.commit()
+        finally:
+            cur.close()
+
+    # Mint a token so the new user is logged in immediately
+    now = int(time.time())
+    claims = {
+        "sub": uid,
+        "email": email,
+        "aud": "authenticated",
+        "role": "authenticated",
+        "app_metadata": {"roles": ["advertiser"]},
+        "iat": now,
+        "exp": now + _TOKEN_TTL_SECONDS,
+    }
+    token = jwt.encode(claims, config.SUPABASE_JWT_SECRET, algorithm="HS256")
+    return LoginOut(access_token=token, uid=uid, email=email, roles=["advertiser"])

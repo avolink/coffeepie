@@ -26,13 +26,31 @@ in the repo and should be reused, not duplicated.
    the Composite provider that accepts either token — the roadmap's
    Firebase→Supabase migration window. Per AGENTS.md, Supabase is the sovereign,
    self-hostable, PostgreSQL-aligned target. Roles did not exist anywhere before.
-2. **COFP metering** (`app/cofp/metering.py`) — the rule **1 COFP = 1 slice·minute
+
+2. **Registration anti-bot gate** (roadmap — T-507). The `/auth/register` endpoint
+   currently creates accounts immediately (QA-local only, gated by
+   `QA_LOCAL_AUTH=***. The production registration flow will add:
+
+   | Layer | Mechanism |
+   |---|---|
+   | Rate limiting | Per-IP: max 3 registrations per 15 min. DB-backed `qa_rate_limit` table so it survives restarts. |
+   | Verification token | Registration creates account in `unverified` state. A random 32-byte token (24h expiry) is stored in `qa_verification` and sent via email. |
+   | Login gate | `/auth/login` rejects accounts with `email_verified = FALSE`. |
+   | Verify endpoint | `GET /auth/verify-email?token=...` activates the account and redirects to login. |
+   | Email transport | `smtplib` via env vars (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`). Falls back to stdout logging when unconfigured (QA). |
+   | Frontend UX | After registration, modal shows "Revisa tu correo para verificar tu cuenta" instead of redirecting. |
+
+   The Supabase production path already has email verification built in — this
+   implementation mirrors the same contract so the frontend works identically in
+   both environments. See ROADMAP.json M5 T-507.
+
+3. **COFP metering** (`app/cofp/metering.py`) — the rule **1 COFP = 1 slice·minute
    *effectively served***. Idle/booted-but-unused VM time mints nothing.
-3. **COFP ledger** (`app/cofp/ledger.py`) — off-chain source of truth: accrual to
+4. **COFP ledger** (`app/cofp/ledger.py`) — off-chain source of truth: accrual to
    Providers, balances, Contributor voting power, burn-on-withdrawal with
    tier-adjusted fiat quotes. Storage is behind a `LedgerRepository` Protocol
    (in-memory impl for now).
-4. **Role-gated routes** (`app/api/cofp_routes.py`) — usage ingest, balance,
+5. **Role-gated routes** (`app/api/cofp_routes.py`) — usage ingest, balance,
    provider summary, governance voting power, withdraw.
 
 Pure logic is covered by tests:
