@@ -183,8 +183,115 @@
             });
         }
 
+        // ── Other tabs (invoices, API keys, licenses, withdrawals, segments) ──
+        function fmtInt(n) { return Number(n).toLocaleString('es-CO').replace(/,/g, "'"); }
+        function fmtDate(s) { return s ? String(s).slice(0, 10) : '—'; }
+
+        function getJSON(path) {
+            return fetch(API + path, { headers: authHeaders(false) })
+                .then(function (r) { return r.ok ? r.json() : []; })
+                .catch(function () { return []; });
+        }
+        function fill(id, rows, rowHtml, emptyCols) {
+            var tb = document.getElementById(id);
+            if (!tb) return;
+            if (!rows.length) {
+                tb.innerHTML = '<tr><td colspan="' + (emptyCols || 6) +
+                    '" style="text-align:center;color:var(--cp-text-muted);padding:18px;">Sin registros</td></tr>';
+                return;
+            }
+            tb.innerHTML = rows.map(rowHtml).join('');
+        }
+
+        var INVOICE_ST = { paid: ['Pagada', 'paid'], pending: ['Pendiente', 'pending'], rejected: ['Pago Rechazado', 'rejected'] };
+        var LICENSE_ST = { active: ['Activa', 'active'], expired: ['Expirada', 'expired'], suspended: ['Suspendida', 'pending'] };
+        function stPill(map, k, cls) {
+            var m = map[k] || [k, '']; return '<span class="' + cls + ' ' + m[1] + '">' + m[0] + '</span>';
+        }
+
+        function bindInvoices() {
+            getJSON('/panel/invoices').then(function (rows) {
+                fill('invoiceTableBody', rows, function (r) {
+                    return '<tr>' +
+                        '<td data-label="Factura N.º">' + esc(r.invoice_number) + '</td>' +
+                        '<td data-label="Fecha">' + fmtDate(r.issued_on) + '</td>' +
+                        '<td data-label="Concepto">' + esc(r.concept) + '</td>' +
+                        '<td data-label="Monto COP" class="invoice-amount">$' + fmtInt(r.amount_cop) + ' COP</td>' +
+                        '<td data-label="Créditos" class="invoice-amount">' + fmtInt(r.credits) + ' Cr</td>' +
+                        '<td data-label="Estado">' + stPill(INVOICE_ST, r.status, 'invoice-status') + '</td>' +
+                        '<td data-label="Descargar"><a href="#" onclick="return false;" style="color:var(--cp-accent);">PDF</a></td>' +
+                        '</tr>';
+                }, 7);
+            });
+        }
+        function bindApiKeys() {
+            getJSON('/panel/apikeys').then(function (rows) {
+                fill('apiKeysTableBody', rows, function (r) {
+                    return '<tr>' +
+                        '<td data-label="Nombre">' + esc(r.name) + '</td>' +
+                        '<td data-label="Clave API"><code style="font-size:12px;">' + esc(r.masked_key) + '</code></td>' +
+                        '<td data-label="Entorno"><span class="tag">' + esc(r.environment) + '</span></td>' +
+                        '<td data-label="Creada">' + fmtDate(r.created_at) + '</td>' +
+                        '<td data-label="Último Uso">' + fmtDate(r.last_used) + '</td>' +
+                        '<td data-label="Acciones"><a href="#" onclick="return false;" style="color:var(--cp-danger,#e66);">Revocar</a></td>' +
+                        '</tr>';
+                }, 6);
+            });
+        }
+        function bindLicenses() {
+            getJSON('/panel/licenses').then(function (rows) {
+                fill('licensesTableBody', rows, function (r) {
+                    return '<tr>' +
+                        '<td data-label="Clave de Licencia"><code style="font-size:12px;">' + esc(r.license_key) + '</code></td>' +
+                        '<td data-label="Terminales">' + fmtInt(r.terminals) + '</td>' +
+                        '<td data-label="Tipo">' + esc(r.plan_type) + '</td>' +
+                        '<td data-label="Inicio">' + fmtDate(r.start_date) + '</td>' +
+                        '<td data-label="Expiración">' + fmtDate(r.expiration) + '</td>' +
+                        '<td data-label="Estado">' + stPill(LICENSE_ST, r.status, 'invoice-status') + '</td>' +
+                        '<td data-label="Acciones"><a href="#" onclick="return false;" style="color:var(--cp-accent);">Renovar</a></td>' +
+                        '</tr>';
+                }, 7);
+            });
+        }
+        function bindWithdrawals() {
+            getJSON('/panel/withdrawals').then(function (rows) {
+                fill('withdrawalsTableBody', rows, function (r) {
+                    return '<tr>' +
+                        '<td data-label="ID Retiro">#' + esc(String(r.created_at).slice(0, 10).replace(/-/g, '')) + '</td>' +
+                        '<td data-label="Fecha">' + fmtDate(r.created_at) + '</td>' +
+                        '<td data-label="Tokens Quemados" class="invoice-amount">' + fmtInt(Math.round(parseFloat(r.cofp_burned))) + ' COFP</td>' +
+                        '<td data-label="Monto Recibido" class="invoice-amount">' + fmtInt(r.cop_received) + ' COP</td>' +
+                        '<td data-label="Concepto">' + esc(r.concept) + '</td>' +
+                        '<td data-label="Estado">' + stPill(INVOICE_ST, r.status, 'invoice-status') + '</td>' +
+                        '</tr>';
+                }, 6);
+            });
+        }
+        function bindSegments() {
+            getJSON('/panel/segments').then(function (rows) {
+                var el = document.getElementById('segmentsList');
+                if (!el) return;
+                if (!rows.length) { el.innerHTML = '<div style="color:var(--cp-text-muted);padding:12px;">Sin segmentos</div>'; return; }
+                el.innerHTML = rows.map(function (s) {
+                    var meta = [s.industry, s.role, (s.age_min + '-' + s.age_max + ' años'), s.region].filter(Boolean).join(' · ');
+                    return '<div class="campaign-item" style="border-left:3px solid var(--cp-accent);">' +
+                        '<div class="campaign-info">' +
+                        '<div class="campaign-name">' + esc(s.name) + '</div>' +
+                        '<div class="campaign-meta" style="font-size:12px;color:var(--cp-text-muted);">' + esc(meta) + '</div>' +
+                        '</div>' +
+                        '<div class="campaign-stat"><strong>' + fmtInt(s.size_estimate) + '</strong><span style="font-size:11px;color:var(--cp-text-muted);"> alcance</span></div>' +
+                        '</div>';
+                }).join('');
+            });
+        }
+
         loadNodes();
         bindProviderSummary();
         markDemoStats();
+        bindInvoices();
+        bindApiKeys();
+        bindLicenses();
+        bindWithdrawals();
+        bindSegments();
     });
 })();

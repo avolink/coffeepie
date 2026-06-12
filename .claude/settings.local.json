@@ -111,7 +111,8 @@
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8000/health)",
       "Bash(wsl -d ubuntu -- bash -lc 'pgrep -af \"uvicorn app.main\" | head -1 || echo \"NOT running\"')",
       "Bash(rm -f _remove_inline_node.py _remove_registernode_fn.py)",
-      "Bash(wsl -d ubuntu -- bash -lc 'cd ~/DEV/coffeepie/coffeepie_website && python3 -c \"import re; s=open\\(\\\\\"public/panel.html\\\\\"\\).read\\(\\); print\\(\\\\\"openAddNodeModal defined:\\\\\", bool\\(re.search\\(r\\\\\"function openAddNodeModal\\\\\", s\\)\\)\\); print\\(\\\\\"saveNode defined:\\\\\", bool\\(re.search\\(r\\\\\"function saveNode\\\\\", s\\)\\)\\)\"')"
+      "Bash(wsl -d ubuntu -- bash -lc 'cd ~/DEV/coffeepie/coffeepie_website && python3 -c \"import re; s=open\\(\\\\\"public/panel.html\\\\\"\\).read\\(\\); print\\(\\\\\"openAddNodeModal defined:\\\\\", bool\\(re.search\\(r\\\\\"function openAddNodeModal\\\\\", s\\)\\)\\); print\\(\\\\\"saveNode defined:\\\\\", bool\\(re.search\\(r\\\\\"function saveNode\\\\\", s\\)\\)\\)\"')",
+      "Bash(sed -n '/id=\"section-campaigns\"/,/id=\"section-assets\"/p' public/panel.html)"
     ]
   }
 }
