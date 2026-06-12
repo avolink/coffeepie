@@ -330,6 +330,8 @@
         }
         function bindWithdrawals() {
             getJSON('/panel/withdrawals').then(function (rows) {
+                var label = document.getElementById('withdrawalCountLabel');
+                if (label) label.textContent = rows.length + ' retiro' + (rows.length !== 1 ? 's' : '');
                 fill('withdrawalsTableBody', rows, function (r) {
                     return '<tr>' +
                         '<td data-label="ID Retiro">#' + esc(String(r.created_at).slice(0, 10).replace(/-/g, '')) + '</td>' +
@@ -359,6 +361,75 @@
                 }).join('');
             });
         }
+
+        // ── Withdrawal request: burn COFP for real via POST /cofp/withdraw ──
+        // Replaces the inline DOM-only mock. The server is authoritative on
+        // balance (400 on insufficient COFP), so no client-side max check —
+        // the inline one misparses decimal balances anyway.
+
+        // The input's max is the per-withdrawal settlement cap, NOT the balance.
+        // The inline syncWithdrawMax() scraped the rendered balance string for
+        // it — grabbing the 25'000'000 placeholder before the live balance
+        // arrived. Earnings run far past that (1 COFP = 1 slice·min ⇒ a 20-node
+        // rack ≈ 221M COFP/month). Keep in sync with MAX_WITHDRAWAL_COFP in
+        // app/cofp/ledger.py, which enforces the real rule.
+        var WITHDRAW_CAP = 100000000;
+        // Floor (≈ 31'900 COP at tier2): each payout is a real bank transfer
+        // with a fixed cost — dust withdrawals would be net-negative. Keep in
+        // sync with MIN_WITHDRAWAL_COFP in app/cofp/ledger.py.
+        var WITHDRAW_MIN = 100000;
+        var wdAmountInput = document.getElementById('withdrawAmount');
+        if (wdAmountInput) {
+            wdAmountInput.max = WITHDRAW_CAP;
+            wdAmountInput.min = WITHDRAW_MIN;
+            // The Wix-export prefill is 1000 — below the floor; lift it.
+            if ((parseInt(wdAmountInput.value) || 0) < WITHDRAW_MIN) {
+                wdAmountInput.value = WITHDRAW_MIN;
+                if (typeof window.updateWithdrawalPreview === 'function') window.updateWithdrawalPreview();
+            }
+        }
+        window.syncWithdrawMax = function () {
+            var i = document.getElementById('withdrawAmount');
+            if (i) { i.max = WITHDRAW_CAP; i.min = WITHDRAW_MIN; }
+        };
+        window.requestWithdrawal = function () {
+            var amount = parseInt(document.getElementById('withdrawAmount').value) || 0;
+            var concept = document.getElementById('withdrawConcept').value.trim();
+            if (!amount || amount < 1) { toast('Ingresa una cantidad válida de tokens'); return; }
+            if (amount < WITHDRAW_MIN) {
+                toast('El retiro mínimo es ' + fmtInt(WITHDRAW_MIN) + ' COFP (≈ ' +
+                    fmtInt(Math.floor(WITHDRAW_MIN * 0.319)) + ' COP) — los costos de la ' +
+                    'transferencia bancaria se comerían un monto menor.');
+                return;
+            }
+            if (!concept) { toast('Ingresa un concepto para el retiro'); return; }
+
+            var tier = window.PROVIDER_TIER || 'tier1';
+            fetch(API + '/cofp/withdraw', {
+                method: 'POST', headers: authHeaders(true),
+                body: JSON.stringify({ cofp_amount: String(amount), tier: tier, concept: concept })
+            })
+                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
+                .then(function (res) {
+                    if (res.ok) {
+                        toast('Retiro solicitado: ' + res.body.cofp_burned + ' COFP → ' +
+                            fmtInt(res.body.payout_cop) + ' COP (tasa ' + res.body.effective_rate_cop +
+                            '). Transferencia estimada en 24-72h.');
+                        document.getElementById('withdrawAmount').value = String(WITHDRAW_MIN);
+                        document.getElementById('withdrawConcept').value = '';
+                        if (typeof window.updateWithdrawalPreview === 'function') window.updateWithdrawalPreview();
+                        bindWithdrawals();        // re-render history from the DB
+                        bindProviderSummary();    // balance went down — refetch
+                    } else if (res.status === 400) {
+                        toast('Retiro rechazado: ' + (res.body.detail || 'datos inválidos'));
+                    } else if (res.status === 403) {
+                        toast('Tu cuenta no tiene rol de Proveedor o Contribuidor.');
+                    } else {
+                        toast('Error al solicitar el retiro: ' + (res.body.detail || ('HTTP ' + res.status)));
+                    }
+                })
+                .catch(function () { toast('No se pudo conectar al servidor (' + API + ').'); });
+        };
 
         loadNodes();
         bindProviderSummary();

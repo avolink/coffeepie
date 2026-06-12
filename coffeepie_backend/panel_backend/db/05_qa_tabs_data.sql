@@ -100,8 +100,14 @@ CREATE TABLE IF NOT EXISTS withdrawal (
     cop_received BIGINT NOT NULL,
     concept     TEXT,
     status      invoice_status NOT NULL DEFAULT 'paid',
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    -- Provenance: the ledger_entry burn this request projects. The settlement
+    -- worker joins on it to execute payout + on-chain burnFrom, then flips
+    -- status pending → paid. No FK: ledger and history may live in different
+    -- stores (in-memory dev ledger writes no ledger_entry row).
+    ledger_entry_id UUID
 );
+ALTER TABLE withdrawal ADD COLUMN IF NOT EXISTS ledger_entry_id UUID;
 
 -- ── Seed (idempotent via fixed UUIDs) ───────────────────────────────────
 \set ff '''00000000-0000-0000-0000-0000000000ff'''
@@ -147,10 +153,12 @@ INSERT INTO qfdm_license (id, user_id, license_key, terminals, plan_type, period
  ('00000000-0000-0000-0000-0000000b0003', :ff, 'B3NTD-RF89S-GH2PL-6MK4W-X7ZYQ', 10,  'Estandar',    'Anual',   '2025-11-20', '2026-05-20', 'expired')
 ON CONFLICT (id) DO NOTHING;
 
--- Withdrawals (burn → fiat history)
+-- Withdrawals (burn → fiat history). cop_received follows the ledger formula:
+-- floor(cofp_burned × 0.29 × (1 + tier_margin)); both rows assume tier2 (+10%),
+-- i.e. 0.319 COP/COFP — keep in sync with app/cofp/ledger.py.
 INSERT INTO withdrawal (id, user_id, cofp_burned, cop_received, concept, status) VALUES
- ('00000000-0000-0000-0000-0000000c0001', :ff, 50.000000, 15950, 'Retiro Tier II', 'paid'),
- ('00000000-0000-0000-0000-0000000c0002', :ff, 40000.000000, 20000000, 'Ampliación de almacenamiento', 'pending')
+ ('00000000-0000-0000-0000-0000000c0001', :ff, 50.000000, 15, 'Retiro Tier II', 'paid'),
+ ('00000000-0000-0000-0000-0000000c0002', :ff, 40000.000000, 12760, 'Ampliación de almacenamiento', 'pending')
 ON CONFLICT (id) DO NOTHING;
 
 COMMIT;

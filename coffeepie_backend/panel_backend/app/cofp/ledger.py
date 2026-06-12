@@ -56,6 +56,17 @@ class LedgerError(Exception):
 # Tier liquidation margins, mirroring panel.html TIER_RATES. Providers in higher
 # datacenter tiers get a better fiat conversion when they burn COFP.
 COFP_BASE_COP = Decimal("0.29")  # governance-voted global base; see /api/pricing
+
+# Per-withdrawal ceiling. NOT an earnings limit (1 COFP = 1 slice·min, so an
+# average 20-node rack accrues ~221M COFP/month) — it bounds the blast radius
+# of a single settlement: one bank payout + one on-chain burnFrom batch.
+# Keep in sync with WITHDRAW_CAP in cp-panel-data.js.
+MAX_WITHDRAWAL_COFP = Decimal(100_000_000)
+
+# Per-withdrawal floor (≈ 31'900 COP at the tier2 rate). Each payout is a real
+# bank transfer with a fixed cost — dust withdrawals would be net-negative.
+# Keep in sync with WITHDRAW_MIN in cp-panel-data.js.
+MIN_WITHDRAWAL_COFP = Decimal(100_000)
 TIER_MARGINS: dict[str, Decimal] = {
     "tier1": Decimal("0.08"),
     "tier2": Decimal("0.10"),
@@ -174,6 +185,17 @@ class CofpLedger:
         amount = amount.quantize(COFP_QUANTUM)
         if amount <= 0:
             raise LedgerError("withdrawal amount must be positive")
+        if amount < MIN_WITHDRAWAL_COFP:
+            raise LedgerError(
+                f"amount is below the per-withdrawal minimum of "
+                f"{MIN_WITHDRAWAL_COFP:,.0f} COFP — bank transfer costs would "
+                f"eat a smaller payout"
+            )
+        if amount > MAX_WITHDRAWAL_COFP:
+            raise LedgerError(
+                f"amount exceeds the per-withdrawal cap of "
+                f"{MAX_WITHDRAWAL_COFP:,.0f} COFP — split it into several requests"
+            )
         if self.repo.balance_of(account_id) < amount:
             raise LedgerError("insufficient COFP balance")
 

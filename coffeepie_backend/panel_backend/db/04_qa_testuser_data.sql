@@ -31,6 +31,22 @@ INSERT INTO ledger_entry (account_id, entry_type, amount, reason, dedup_key) VAL
 ON CONFLICT (dedup_key) DO NOTHING;
 -- Net balance for ff: 96 + 54.5 + 120.25 - 50 = 220.750000 COFP.
 
+-- QA top-up: a fat audited adjustment so QA can exercise repeated withdrawals
+-- and 7-digit balance rendering (apostrophe formatting) in every viewport.
+INSERT INTO ledger_entry (account_id, entry_type, amount, reason, dedup_key) VALUES
+    ('00000000-0000-0000-0000-0000000000ff', 'adjustment', 1000000.000000,
+     'QA top-up — withdrawal flow testing', 'qa-ff-topup-1')
+ON CONFLICT (dedup_key) DO NOTHING;
+
+-- Second top-up: one average rack-month of accruals (20 nodes × 256 slices ×
+-- 43'200 min = 221'184'000 slice·min), so QA can test the 100M per-withdrawal
+-- settlement cap (MAX_WITHDRAWAL_COFP) from both sides at realistic scale.
+INSERT INTO ledger_entry (account_id, entry_type, amount, reason, dedup_key) VALUES
+    ('00000000-0000-0000-0000-0000000000ff', 'adjustment', 221184000.000000,
+     'QA top-up — one average rack-month (20 nodes × 256 slices × 30d)', 'qa-ff-topup-2')
+ON CONFLICT (dedup_key) DO NOTHING;
+-- Net balance for ff after both top-ups: 222'184'220.75 COFP minus QA burns.
+
 -- A node owned by the test user (Proveedores tab).
 INSERT INTO node (id, provider_id, name, public_ip, vcores, ram_gb, ssd_gb, gpu_vram_mb, hypervisor, location, status) VALUES
     ('00000000-0000-0000-0000-0000000000bf', '00000000-0000-0000-0000-0000000000ff',

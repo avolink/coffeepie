@@ -11,7 +11,7 @@
     {
       "name": "coffeepie-site-qa",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "cd coffeepie_website && npx --yes firebase-tools serve --only hosting --port 8080"],
+      "runtimeArgs": ["-c", "cd /home/avolink/DEV/coffeepie/coffeepie_website && /home/avolink/.local/bin/node /mnt/c/Users/Avolink/AppData/Roaming/npm/node_modules/firebase-tools/lib/bin/firebase.js serve --only hosting --port 8080"],
       "port": 8080,
       "autoPort": false
     }

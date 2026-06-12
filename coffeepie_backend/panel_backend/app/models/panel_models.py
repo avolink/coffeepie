@@ -55,6 +55,7 @@ class ProviderSummaryOut(BaseModel):
 class WithdrawIn(BaseModel):
     cofp_amount: str = Field(description="COFP to burn, as a decimal string")
     tier: str = Field(default="tier1", pattern=r"^tier[1-5]$")
+    concept: str = Field(default="", max_length=200)
 
 
 class WithdrawOut(BaseModel):

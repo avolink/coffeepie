@@ -141,6 +141,38 @@ def withdraw(
         quote = _ledger.withdraw(uid, amount, body.tier)
     except LedgerError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+    # Project the burn into the withdrawal history table (Historial de Retiros).
+    # The ledger entry above is the source of truth; this row is the user-facing
+    # record the settlement worker flips pending → paid. A failure here surfaces
+    # as 500 instead of being hidden — the burn stands in the ledger either way.
+    from app.db import get_conn
+
+    try:
+        with get_conn() as conn:
+            cur = conn.cursor()
+            try:
+                cur.execute(
+                    "INSERT INTO withdrawal "
+                    "  (user_id, cofp_burned, cop_received, concept, status, ledger_entry_id) "
+                    "VALUES (%s::uuid, %s, %s, %s, 'pending', %s::uuid)",
+                    (
+                        uid,
+                        str(quote.cofp_burned),
+                        quote.payout_cop,
+                        body.concept or f"Retiro {body.tier}",
+                        quote.entry_id,
+                    ),
+                )
+                conn.commit()
+            finally:
+                cur.close()
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Burn {quote.entry_id} recorded in ledger but the withdrawal "
+                   f"history row failed: {e}",
+        )
     return WithdrawOut(
         cofp_burned=str(quote.cofp_burned),
         tier=quote.tier,
