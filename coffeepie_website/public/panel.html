@@ -4333,7 +4333,7 @@
                                                                     data-motion-part="BG_IMG comp-kbgakxea_r_comp-lza51c5x"
                                                                     class="Ux33nC">
                                                                     <picture><img loading="lazy"
-                                                                            src="/index_files/Coffe_Pie_Logo_edited.png"
+                                                                            src="/assets/Coffe_Pie_Logo_edited.png"
                                                                             alt="Coffee Pie"
                                                                             style="object-fit: cover; object-position: 50% 50%; width: 100%;"
                                                                             fetchpriority="high"></picture>
@@ -6648,71 +6648,6 @@
                                                     <div class="content-grid">
                                                         <div class="section-card">
                                                             <div class="section-card-header">
-                                                                <span class="section-card-title">Registrar Nodo</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="modalNodeName">Nombre del Nodo</label>
-                                                                <input class="form-input" type="text" id="nodeName" placeholder="e.g. DC-Bogota-Rack1-Node01">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label">IP Pública</label>
-                                                                <input class="form-input" type="text" id="nodePublicIP" placeholder="e.g. 190.145.32.100">
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-cell">
-                                                                    <label class="form-label" for="nodeOpenUDSPort">Puerto OpenUDS</label>
-                                                                    <input class="form-input" type="number" id="nodeOpenUDSPort" value="443" placeholder="443">
-                                                                </div>
-                                                                <div class="form-cell">
-                                                                    <label class="form-label" for="nodeSunshinePort">Puerto Sunshine</label>
-                                                                    <input class="form-input" type="number" id="nodeSunshinePort" value="47984" placeholder="47984">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-cell">
-                                                                    <label class="form-label" for="nodeCores">vCores Totales</label>
-                                                                    <input class="form-input" type="number" id="nodeCores" min="1" value="32" placeholder="e.g. 32">
-                                                                </div>
-                                                                <div class="form-cell">
-                                                                    <label class="form-label" for="nodeRAM">RAM Total (GB)</label>
-                                                                    <input class="form-input" type="number" id="nodeRAM" min="1" value="128" placeholder="e.g. 128">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row">
-                                                                <div class="form-cell">
-                                                                    <label class="form-label" for="nodeSSD">SSD Total (GB)</label>
-                                                                    <input class="form-input" type="number" id="nodeSSD" min="1" value="2000" placeholder="e.g. 2000">
-                                                                </div>
-                                                                <div class="form-cell">
-                                                                    <label class="form-label" for="nodeGPUVRAM">GPU vRAM (MB)</label>
-                                                                    <input class="form-input" type="number" id="nodeGPUVRAM" min="0" value="16000" placeholder="e.g. 16000">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="nodeHypervisor">Hipervisor</label>
-                                                                <select class="form-input" id="nodeHypervisor">
-                                                                    <option value="proxmox">Proxmox VE</option>
-                                                                    <option value="esxi">VMware ESXi</option>
-                                                                    <option value="hyperv">Hyper-V</option>
-                                                                    <option value="xen">XenServer</option>
-                                                                    <option value="kvm">KVM / libvirt</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label">Ubicación del Datacenter</label>
-                                                                <input class="form-input" type="text" id="nodeLocation" placeholder="e.g. Bogota D.C., Colombia">
-                                                            </div>
-                                                            <button class="btn btn-primary" onclick="registerNode()" style="width:100%;justify-content:center;">
-                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                                    <line x1="12" y1="5" x2="12" y2="19" />
-                                                                    <line x1="5" y1="12" x2="19" y2="12" />
-                                                                </svg>
-                                                                Registrar Nodo
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="section-card">
-                                                            <div class="section-card-header">
                                                                 <span class="section-card-title">Programar Mantenimiento</span>
                                                             </div>
                                                             <div class="form-group">
@@ -7869,64 +7804,6 @@
             showToast('Nodo "' + name + '" eliminado. Migrando VMs...');
         }
 
-        function registerNode() {
-            var name = document.getElementById('nodeName').value.trim();
-            var ip = document.getElementById('nodePublicIP').value.trim();
-            var cores = parseInt(document.getElementById('nodeCores').value) || 0;
-            var ram = parseInt(document.getElementById('nodeRAM').value) || 0;
-            var ssd = parseInt(document.getElementById('nodeSSD').value) || 0;
-            var gpu = parseInt(document.getElementById('nodeGPUVRAM').value) || 0;
-            var hypervisor = document.getElementById('nodeHypervisor').value;
-            var location = document.getElementById('nodeLocation').value.trim();
-
-            if (!name) { showToast('Ingresa un nombre para el nodo'); return; }
-            if (!ip) { showToast('Ingresa la IP pública del nodo'); return; }
-            if (!location) { showToast('Ingresa la ubicación del Datacenter'); return; }
-
-            var hypervisorLabels = { proxmox: 'Proxmox VE', esxi: 'VMware ESXi', hyperv: 'Hyper-V', xen: 'XenServer', kvm: 'KVM / libvirt' };
-            var hypervisorLabel = hypervisorLabels[hypervisor] || hypervisor;
-            var ssdTB = (ssd / 1000).toFixed(ssd >= 1000 ? 1 : 0);
-            var gpuGB = (gpu / 1000).toFixed(gpu >= 1000 ? 1 : 0);
-
-            nodeIdCounter++;
-
-            var row = document.createElement('tr');
-            row.setAttribute('data-node-id', nodeIdCounter);
-            row.innerHTML =
-                '<td data-label="Nodo">' +
-                '<strong style="color:var(--cp-text);">' + name + '</strong>' +
-                '<div style="font-size:11px;color:var(--cp-text-muted);margin-top:2px;">' + location + '</div>' +
-                '</td>' +
-                '<td data-label="IP Pública">' +
-                '<code style="background:rgba(255,255,255,0.05);padding:3px 8px;border-radius:4px;font-size:12px;">' + ip + '</code>' +
-                '</td>' +
-                '<td data-label="Recursos">' +
-                '<div style="font-size:12px;">' + cores + ' vCores | ' + ram + ' GB RAM</div>' +
-                '<div style="font-size:12px;">' + ssdTB + ' TB SSD | ' + gpuGB + ' GB GPU</div>' +
-                '</td>' +
-                '<td data-label="Hipervisor"><span class="tag">' + hypervisorLabel + '</span></td>' +
-                '<td data-label="Estado"><span class="node-status active">Activo</span></td>' +
-                '<td data-label="Mantenimiento"><span class="node-maint none">—</span></td>' +
-                '<td data-label="Acciones">' +
-                '<div style="display:flex;gap:6px;">' +
-                '<button class="node-action-btn edit" onclick="editNode(\'' + nodeIdCounter + '\')" title="Editar">' +
-                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' +
-                '</button>' +
-                '<button class="node-action-btn delete" onclick="deleteNode(\'' + nodeIdCounter + '\')" title="Eliminar">' +
-                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>' +
-                '</button>' +
-                '</div>' +
-                '</td>';
-
-            document.getElementById('nodesTableBody').prepend(row);
-
-            document.getElementById('nodeName').value = '';
-            document.getElementById('nodePublicIP').value = '';
-            document.getElementById('nodeLocation').value = '';
-            updateProviderStats();
-            populateMaintenanceSelect();
-            showToast('Nodo "' + name + '" registrado exitosamente!');
-        }
 
         function scheduleMaintenance() {
             var nodeSelect = document.getElementById('maintenanceNode');

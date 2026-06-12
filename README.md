@@ -23,9 +23,9 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
  Main Contributors (and initial Moderators):<br>
- - avolink (The Architect, Industrial Designer, Frontend Developer and Marketer)<br>
+ - avolink (The Architect and QA, Industrial Designer, Frontend Developer and Marketer)<br>
  - juandaniel777 (The Engineer and Software Backend Developer)<br>
- - Diego-M-PZ (The Electronics and Maintenance Manager).<br>
+ - Diego-M-PZ (The Electronics, Maintenance and Circular Services Manager).<br>
 
   ⌨️ Development Stack:<br>
     - Backend: Rust, Shell/Bash Scripting (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel).<br>

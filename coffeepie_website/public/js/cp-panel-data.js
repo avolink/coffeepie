@@ -134,6 +134,57 @@
             toast('La edición de nodos estará disponible próximamente.');
         };
 
+        // ── Stat cards ───────────────────────────────────────────────────
+        // Format a COFP amount with apostrophe thousands separators (panel style:
+        // "100'000"), trimming trailing-zero decimals.
+        function fmtCOFP(v) {
+            var n = parseFloat(v); if (isNaN(n)) return v;
+            var dec = Math.round((n - Math.trunc(n)) * 100) / 100;
+            var intPart = Math.trunc(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+            return dec ? intPart + '.' + String(dec).split('.')[1] : intPart;
+        }
+        function setText(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
+
+        // LIVE: bound to real DB data via GET /cofp/provider/summary.
+        function bindProviderSummary() {
+            fetch(API + '/cofp/provider/summary', { headers: authHeaders(false) })
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (s) {
+                    if (!s) return;
+                    setText('provTokensEarned', fmtCOFP(s.cofp_this_month));
+                    // Sub-label: rough COP at the governance base rate (0.29 COP/COFP).
+                    var cop = Math.round(parseFloat(s.cofp_this_month) * 0.29);
+                    var sub = document.querySelector('#provTokensEarned + .stat-change');
+                    if (sub) sub.textContent = 'COFP · ≈ ' + cop.toLocaleString('es-CO') + ' COP (base)';
+                    // Top-of-panel COFP balance.
+                    setText('coffee-balance-value', fmtCOFP(s.cofp_balance));
+                    var cur = document.getElementById('coffee-balance-currency');
+                    if (cur) cur.textContent = 'COFP';
+                })
+                .catch(function () { /* leave existing values on failure */ });
+            // provActiveNodes is kept live by updateProviderStats() (counts rendered rows).
+        }
+
+        // DEMO: capacity/utilization cards have no data source yet — that data
+        // lives in the DC-Agent, not in panel_backend. Mark them honestly so QA
+        // doesn't mistake placeholders for live numbers.
+        function markDemoStats() {
+            ['provTotalSlices', 'provBusySlices', 'provAvailableSlices',
+             'provUnavailableSlices', 'provHostedVMs', 'provAvgUptime'].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (!el || el.dataset.cpDemo) return;
+                el.dataset.cpDemo = '1';
+                el.title = 'Dato de demostración — pendiente de integración con el DC-Agent';
+                el.style.opacity = '0.55';
+                var tag = document.createElement('span');
+                tag.textContent = ' demo';
+                tag.style.cssText = 'font-size:9px;vertical-align:super;color:var(--cp-warning,#ffb400);letter-spacing:.5px;';
+                el.appendChild(tag);
+            });
+        }
+
         loadNodes();
+        bindProviderSummary();
+        markDemoStats();
     });
 })();

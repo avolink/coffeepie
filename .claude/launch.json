@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "coffeepie-site",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd coffeepie_website && npx --yes firebase-tools serve --only hosting --port 5000"],
+      "port": 5000,
+      "autoPort": false
+    }
+  ]
+}

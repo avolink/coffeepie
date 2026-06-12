@@ -97,7 +97,21 @@
       "Bash(python -c \"import sys,json; [print\\(n['name'], n['status'], n['created_at']\\) for n in json.load\\(sys.stdin\\)]\")",
       "Bash(wsl -d ubuntu -- bash -lc 'docker exec coffeepie-panel-db psql -U coffeepie -d coffeepie -t -c \"SELECT name, created_at FROM node ORDER BY created_at;\"')",
       "Bash(curl -s -o /dev/null -w \"/js/cp-panel-data.js → HTTP %{http_code}\\\\n\" http://localhost:5000/js/cp-panel-data.js)",
-      "Bash(wsl -d ubuntu -- bash -lc 'docker exec coffeepie-panel-db psql -U coffeepie -d coffeepie -t -c \"SELECT count\\(*\\) FROM node;\"')"
+      "Bash(wsl -d ubuntu -- bash -lc 'docker exec coffeepie-panel-db psql -U coffeepie -d coffeepie -t -c \"SELECT count\\(*\\) FROM node;\"')",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:5000/panel)",
+      "Bash(curl -s http://localhost:8000/health)",
+      "Read(///wsl.localhost/ubuntu/home/avolink/DEV/coffeepie/**)",
+      "Bash(mkdir -p .claude)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s http://localhost:5000/js/cp-panel-data.js)",
+      "Bash(wsl -d ubuntu -- bash -lc 'cd ~/DEV/coffeepie/coffeepie_backend/panel_backend && bash db/qa_testuser_check.sh 2>/dev/null | grep -A0 \"provider summ\"')",
+      "Bash(curl -s -i http://localhost:5000/js/cp-panel-data.js)",
+      "Bash(curl -s -o /dev/null -w \"/ → HTTP %{http_code}\\\\n\" http://localhost:5000/)",
+      "Bash(wsl -d ubuntu -- bash -lc 'wc -l ~/DEV/coffeepie/coffeepie_website/public/js/cp-panel-data.js; grep -c \"bindProviderSummary\\\\|markDemoStats\" ~/DEV/coffeepie/coffeepie_website/public/js/cp-panel-data.js')",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8000/health)",
+      "Bash(wsl -d ubuntu -- bash -lc 'pgrep -af \"uvicorn app.main\" | head -1 || echo \"NOT running\"')",
+      "Bash(rm -f _remove_inline_node.py _remove_registernode_fn.py)",
+      "Bash(wsl -d ubuntu -- bash -lc 'cd ~/DEV/coffeepie/coffeepie_website && python3 -c \"import re; s=open\\(\\\\\"public/panel.html\\\\\"\\).read\\(\\); print\\(\\\\\"openAddNodeModal defined:\\\\\", bool\\(re.search\\(r\\\\\"function openAddNodeModal\\\\\", s\\)\\)\\); print\\(\\\\\"saveNode defined:\\\\\", bool\\(re.search\\(r\\\\\"function saveNode\\\\\", s\\)\\)\\)\"')"
     ]
   }
 }

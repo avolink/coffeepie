@@ -34,6 +34,13 @@
         document.head.appendChild(translateScript);
     }
 
+    // cp-panel-auth.js gates the panel link — must be present wherever the header is
+    if (!document.querySelector('script[src="/js/cp-panel-auth.js"]')) {
+        var authScript = document.createElement('script');
+        authScript.src = '/js/cp-panel-auth.js';
+        document.head.appendChild(authScript);
+    }
+
     fetch('/header.html')
         .then(function (response) {
             if (!response.ok) throw new Error('Failed to load header.html');
