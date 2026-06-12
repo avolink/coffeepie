@@ -79,7 +79,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 - Contributing: We welcome anyone to contribute, but by contributing, you agree to our Contributor License Agreement (CLA) to keep the project commercially viable for its "BIC status" (Benefit and Collective Interest, in middle-ground between private company and NGO).<br>
 
 💰 Monetization & Ethics:<br>
- We are guided by stoic and ethical principles, with Meritocracy, Ataraxia, Areté and Eudaimonia, as the backbone and ultimate goals of humanity. Our success is measured mainly by social and environmental impact, not just profits and ROI.<br>
+ We are guided by ethical and stoic principles — Meritocracy, Ataraxia, Areté, Eudaimonia — and we measure our success mainly by positive social and environmental impact, not just profits and ROI.<br>
  
  1. Free Tier: Advertisers pay for the computing power, ideal for casual users (Ads on-demand).<br>
  2. Credits Packages: No interruptions, high-performance and more resources for professionals and casual gamers.<br>
