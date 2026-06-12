@@ -1,7 +1,10 @@
 # Coffee Pie PKI Certificate Lifecycle
 
-Manages certificates for internal L2/L3 network communication between
-orchestrator, DC agents, actors, and Sunshine nodes.
+Manages certificates for internal L2/L3/L4 network communication between
+orchestrator, DC agents, actors, and Sunshine nodes. Currently operates
+on IPv4. IPv8 (IETF draft-thain-ipv8-02) Zone Server authentication (OAuth8/JWT)
+is on the roadmap as a complementary network-layer identity layer (target: 2035
+or RFC maturity).
 
 ## Architecture
 
@@ -190,7 +193,7 @@ coffeepie-deploy --phase 4  # Re-run key generation phase
 - [ ] Intermediate CA keys on dedicated CA server (not on orchestrator)
 - [ ] Node certificates: 365-day validity, auto-rotated at 30 days
 - [ ] CRL distributed within 1 hour of revocation
-- [ ] All TLS traffic uses mutual TLS (mTLS) on L2/L3 internal network
+- [ ] All TLS traffic uses mutual TLS (mTLS) on L2/L3/L4 internal network
 - [ ] Certificate transparency logs enabled
 - [ ] Quarterly audit: check all certs, revoke unused, rotate intermediates
 

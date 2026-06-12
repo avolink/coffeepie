@@ -1,6 +1,6 @@
 # Coffee Pie DC Agent
 
-Hypervisor-agnostic datacenter orchestration agent. Runs at each datacenter, abstracts the hypervisor behind a uniform REST API, and reports capacity to the central QFDM broker via heartbeat.
+Hypervisor-agnostic datacenter orchestration agent. Runs at each datacenter, abstracts the hypervisor behind a uniform REST API, and reports capacity to the central QFDM broker via heartbeat. Currently operates on IPv4. IPv8 (IETF draft-thain-ipv8-02) private zones (127.0.0.0/8) are on the roadmap (target: 2035 or RFC maturity).
 
 ## Architecture
 

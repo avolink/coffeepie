@@ -95,15 +95,24 @@ CORE PRINCIPLES
    The orchestrator brokers the connection but does NOT proxy the stream.
    The tunnel server is for orchestration signaling only, not for media transport.
 
-3. L2/L3/L4 PRIVATE NETWORKS
-   The system operates over a Layer 2/3/4 Private LAN/MAN/WAN (stretched VLAN).
+3. L2/L3/L4 PRIVATE NETWORKS (IPv4 current, IPv8 roadmap)
+   The system operates over a Layer 2/3/4 Private LAN/MAN/WAN (stretched VLAN),
+   currently on IPv4. IPv8 (IETF draft-thain-ipv8-02) is on the roadmap for
+   early adoption by 2035 or when the standard reaches RFC maturity — whichever
+   comes first. IPv8 would provide 64-bit addressing with 127.0.0.0/8 private
+   zones (2^32 host addresses per ASN without collision risk) and unified Zone
+   Server services (DHCP8, DNS8, NTP8, OAuth8, ACL8, XLATE8). Critically,
+   IPv4 is a proper subset of IPv8 (prefix 0.0.0.0), so migration requires
+   zero modification to existing infrastructure.
    Assumptions:
-   - All hosts are directly reachable at private IPsFF
+   - All hosts are directly reachable at private IPs
    - No NAT traversal needed
    - mDNS works across the domain
    - Encryption is optional (network-layer security handles it)
    - No GeoDNS needed (single IP space)
-   - Accesing from L2 and from not certified devices will be implemented for Pay-As-You-Go users only (Free Tier users will be restricted to L3/L4 network connections from internet at the cost of higher latencies)
+   - Accesing from L2 and from not certified devices will be implemented for Pay-As-You-Go
+     users only (Free Tier users will be restricted to L3/L4 network connections from
+     internet at the cost of higher latencies)
 
 4. HARDWARE-ACCELERATED EVERYTHING
    Streaming is GPU-accelerated end-to-end:
@@ -212,6 +221,16 @@ Decision: Single orchestrator per DC initially
   Reason: Over L2 private network, frontend fallback list handles failover.
   A GeoDNS layer adds complexity with no benefit at this stage.
   Revisit: When deploying internet-facing Codec Terminals.
+
+Decision: IPv8 (IETF draft-thain-ipv8-02) on roadmap for early adoption by 2035
+  Reason: IPv8 is currently an IETF Internet-Draft, not a ratified standard.
+  Coffee Pie operates on IPv4 today. IPv8 is a roadmap item — target early
+  adoption by 2035 or when the draft reaches RFC maturity, whichever comes
+  first. When adopted, IPv8's 64-bit addressing with 127.0.0.0/8 private
+  zones would provide a standardized, collision-free addressing scheme for
+  the stretched VLAN architecture, and Zone Servers would unify DHCP, DNS,
+  authentication, and access control at the network layer. IPv4's status as
+  a proper subset (prefix 0.0.0.0) guarantees zero- modification migration.
 
 Decision: PostgreSQL single instance + streaming replica
   Reason: The database is the real single point of failure. Standby replica

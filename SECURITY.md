@@ -57,6 +57,7 @@ If you run a node on the QFDM Network, harden it before exposing it:
 - Run with `DEBUG=False`, an explicit `ALLOWED_HOSTS` whitelist, TLS certificate verification enabled, and secure cookie flags in production.
 - Keep secrets in environment variables or a vault — never commit them. The repository's `.gitignore` blocks `.env` / `*.env`; do not override it.
 - Review [`EMERGENCY_PROTOCOL.md`](EMERGENCY_PROTOCOL.md) and [`DISASTER_RECOVERY.md`](DISASTER_RECOVERY.md) for incident response.
+- IPv8 (IETF draft-thain-ipv8-02) is on the roadmap (2035 or RFC maturity) — its OAuth8 JWT and ACL8 would provide future network-layer defense-in-depth on the L2/L3/L4 stretched VLAN, complementing application-layer security.
 
 ## A Note on History
 

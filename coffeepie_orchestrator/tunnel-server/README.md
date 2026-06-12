@@ -1,8 +1,7 @@
 # UDS Tunnel Server
 
 ## Overview
-
-The UDS Tunnel Server is a high-performance tunneling service written in Rust that enables secure connections between clients and backend services through authenticated ticket-based access control.
+The UDS Tunnel Server is a high-performance tunneling service written in Rust that enables secure connections between clients and backend services through authenticated ticket-based access control. Currently operates on IPv4. IPv8 (IETF draft-thain-ipv8-02) private zones (127.0.0.0/8) with OAuth8 JWT token authentication are on the roadmap as a complementary network-layer identity mechanism (target: 2035 or RFC maturity).
 
 ## Features
 
@@ -76,6 +75,7 @@ cargo run --bin tunnel-server
 - HTTPS communication with broker API
 - Tunnel is encrypted using a pre-shared key, used with the ticket to derive session keys
 - The pre-shared key has been shared previously between the broker/client using ml-kyber and using TLS with tunnel.
+- IPv8 OAuth8 JWT tokens are on the roadmap (2035 or RFC maturity) as future defense-in-depth on the L2/L3/L4 stretched VLAN.
 
 ## Version
 
@@ -83,5 +83,4 @@ Current version: 5.0.0
 
 ## License
 
-BSD 3-Clause License</content>
-<parameter name="filePath">/home/dkmaster/projects/uds/5.0/repos/tunnel/tunnel-server.md
+BSD 3-Clause License

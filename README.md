@@ -31,6 +31,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
     - Backend: Rust, Shell/Bash Scripting (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel).<br>
     - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
+    - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 or RFC maturity.<br>
 
  🌐 Potential Contributors and Investors:<br> Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for future dividends and valuation).<br>
  
