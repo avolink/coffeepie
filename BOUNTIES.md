@@ -1,5 +1,7 @@
 # Coffee Pie Token (COFP) — Contribution & Bounty Program
 
+> **Status: Under construction.** The COFP token has not yet been deployed to TRON mainnet. Bounty rewards will be live once the token is deployed and the bounty platform is operational. Until then, contributions are tracked for future reward allocation.
+
 Welcome to the **Coffee Pie Token (COFP)** contribution program. This ecosystem is designed to reward high-efficiency, results-oriented, and self-managed contributions from developers, auditors, translators, moderators and tech support guiding volunteers, without traditional corporate bureaucracy or hourly tracking. 
 
 We strictly enforce **Goodhart's Law** prevention: We do not reward lines of code (to prevent spaghetti code) or hours worked (to incentivize efficiency and optimization). Contributions are evaluated solely on **complexity, impact, and peer-reviewed quality**.

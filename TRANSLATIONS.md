@@ -1,5 +1,7 @@
 # Coffee Pie - Translation Management Guide
 
+> **Status: Roadmap.** The Weblate integration, namespaced JSON structure (`locales/{es,en,...}/`), and CI validation workflow described in this document represent the target translation infrastructure. Currently (alpha, v0.1.0), translations are managed via the monolithic `coffeepie_website/public/translations.json` file. See `CONTRIBUTING.md` for the current workflow. The migration to Weblate and namespaced locales is planned — `scripts/migrate_to_namespaces.py` and `.github/workflows/validate-translations.yml` will be created as part of this migration.
+
 ## Canonical TMS: Weblate
 
 Weblate is the canonical Translation Management System for Coffee Pie. It provides a web-based GUI that allows translators (technical and non-technical) to contribute without touching code or JSON directly. Weblate syncs bidirectionally with this GitHub repository — translations approved in Weblate are committed as pull requests automatically.

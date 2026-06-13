@@ -11,9 +11,9 @@ Concluded Phase: Lab Testing (TRL6)<br>
 Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie® Colombia is a Benefit and Collective Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
+Company: Coffee Pie® Colombia is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S. (BIC status pending).<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
-License: Community License & QFDM Royalty Terms (see LICENSE and CONSTITUTION files)<br>
+License: Tiered — Open Core (QFDM/Orchestrator), Apache 2.0 (Frontend/Drivers), CERN OHL (Hardware). See LICENSE and CONSTITUTION files.<br>
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
@@ -28,7 +28,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
  - Diego-M-PZ (The Electronics, Maintenance and Circular Services Manager).<br>
 
   ⌨️ Development Stack:<br>
-    - Backend: Rust, Shell/Bash Scripting, (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel. Bounties could be added for gradually migrating Linux Kernel to Rust, which could fix over 70% of memory leakages, crucial for avoiding most zero day exploits).<br>
+    - Backend: Rust, Shell/Bash Scripting, C/C++ (in transition — Rust becoming Canon gradually, C/C++ still present in dependencies and Linux Kernel; bounties for migrating critical paths to Rust over time).<br>
     - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
     - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 if mature enough or after RFC approval (crucial for avoiding CGNAT and added latency).<br>
@@ -41,7 +41,7 @@ Our architecture is designed to welcome contributions (and future partnerships) 
 - QFDM is the Backbone: It's like a highway connecting all the Airports in a Global Network of Decentrilzed Providers.<br>
 - The Datacenters are like the Airlines, operating their own or leased Aircrafts (Servers: Clusters/Nodes).<br>
 - Coffee Pie® is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system, abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting supply and demand in real time.<br>
-- The Codec Terminal is like your remote controller (thin-client): A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device, that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, no e-waste.<br>
+- The Codec Terminal is like your remote controller (thin-client): A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device, that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, nearly zero e-waste.<br>
 - The Slices are like the "tickets" (the seats in the airplane).<br>
  
  📐 The Atomic Unit - Coffee Pie® Slice:<br>
@@ -63,7 +63,7 @@ We don't sell "computers", we rent slices. Each slice is a standardized determin
 
  🏗 System Architecture:<br>
  1. The Orchestrator (The Traffic Guard): Based on OpenUDS v4.0, heavily customized for ultra-low latency streaming. It manages the connection between the frontend and the available nodes, regardless of the Type 1 Hypervisor being used by the Datacenters (Proxmox Recommended).<br>
- 2. The Providers (The Brain): Datacenters and companies with structured hardware willing to monetize their unused hardware in the Ecosystem.<br>
+ 2. The Providers (The Brain): Datacenters and companies with structured hardware willing to monetize their unused hardware in the Ecosystem. See `PROVIDERS.md` for tier requirements and settlement details.<br>
  3. The Codec Terminal (The Remote Controller):<br>
 ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
   - Operating System: Debian Minimal.<br>
@@ -102,14 +102,14 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 
  🎯 The Goals:<br>
  2030: Becoming an Open, Reliable, Global Standard and the Backbone of Computing.<br>
- 2035: Initial Public Offering (IPO) or Tokenization (TRC20) by the end of 2035.<br>
+ 2035: Initial Public Offering (IPO) and Tokenization (TRC-20) by the end of 2035.<br>
  2040: 1'000'000'000 active users in the QFDM Network.<br>
  2050: Guaranteed Global Access to a Codec Terminal.<br>
  
  💎 COFP Token:<br>
  Coffee Pie®'s native utility token (TRC-20 on TRON), symbol COFP, it is NOT a fiat currency nor a regulated asset. **Token unit: 1 COFP = 1 Coffee Pie® Slice served for 1 minute.** Earnings scale linearly (e.g., a Provider hosting 4 Slices for 60 minutes earns 4 × 60 = 240 COFP). Smart contract: `blockchain/COFP_Token.sol`, deployment guide at `blockchain/DEPLOY.md`. **Elastic supply model**: initial supply of 100'000'000 COFP. New tokens are emitted at a fixed rate of 1 COFP per Slice·min by Providers, supply grows organically with the network. No supply cap. **Two-currency model**: COFP is exclusively for Providers and Contributors. End users (consumers) never hold or interact with COFP, but operate entirely with Coffee Pie® Credits (Cr), obtained by watching Ads (paid by Advertisers) or purchasing Credit Packages at `coffeepie.co/prices`. COFP tokens confer different rights depending on how they were acquired:
 
-  * Contributors (Community Developers, Moderators, Translators, Auditors, Tech Supporters, etc.): Earn COFP by contributing to the ecosystem (code, documentation, translations, moderation, community support, etc.). Rights: vote on technical decisions (development stack, deprecation policies, implementation priorities). Wallet holding limit: 100'000'000'000 COFP per wallet (or 10% of the total supply), enforced by the Coffee Pie® backend. Contributors may: (a) sell earned COFP on the TRON open market (TRC-20), the seller permanently loses all voting rights, the buyer receives an Investor-class token with economic rights only; (b) hold COFP for long-term valuation appreciation and future dividends after IPO; (c) burn COFP for Credits at a rate of 10 Cr per COFP. **Contributors cannot burn COFP for fiat**, that right is exclusive to Providers.
+  * Contributors (Community Developers, Moderators, Translators, Auditors, Tech Supporters, etc.): Earn COFP by contributing to the ecosystem (code, documentation, translations, moderation, community support, etc.). Rights: vote on technical decisions (development stack, deprecation policies, implementation priorities). Wallet holding limit: 10% of the total COFP supply per wallet, enforced by the Coffee Pie® backend. Contributors may: (a) sell earned COFP on the TRON open market (TRC-20), the seller permanently loses all voting rights, the buyer receives an Investor-class token with economic rights only; (b) hold COFP for long-term valuation appreciation and future dividends after IPO; (c) burn COFP for Credits at a rate of 10 Cr per COFP. **Contributors cannot burn COFP for fiat**, that right is exclusive to Providers.
 
   * Trusted Providers (Datacenter Operators): Earn COFP by supplying computing resources to the QFDM Network at a rate of **1 COFP per Slice per minute** (e.g., hosting 4 Slices for 60 minutes = 240 COFP). Rights: vote on regional pricing (average slice cost, electricity rates, labor costs); burn tokens for fiat currency transferred to their registered bank accounts within 24-72 hours (no burning cap, providers are selling real resources). Provider settlement is an internal ledger operation, provider-earned COFP is not publicly tradeable. **Important**: if a provider transfers COFP to a secondary wallet and sells on the open market, those tokens lose all voting and burning-for-fiat rights, the buyer receives an Investor-class token.
 

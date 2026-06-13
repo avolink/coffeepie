@@ -4,17 +4,19 @@ Canonical networking specification for the Coffee Pie QFDM Network.
 All other documentation references this file for network addressing, topology,
 and protocol standards.
 
+> **Note:** The IPv8 sections below describe a **target architecture** for future adoption (roadmap: 2035 or RFC maturity). IPv8 is currently an IETF Internet-Draft, not a ratified standard. All production infrastructure today operates on IPv4 as described in the Current Standard section.
+
 ## Current Standard: IPv4
 
 Coffee Pie currently operates on **IPv4** across its L2/L3/L4 stretched VLAN
 architecture. All hosts are directly reachable at private IPv4 addresses, with
 no NAT traversal needed. mDNS provides service discovery across the domain.
 
-## Roadmap: IPv8 (target 2035 or RFC maturity)
+## Roadmap: IPv8 (target 2035 after mature enough or RFC approval)
 
 Coffee Pie has **IPv8** (IETF draft-thain-ipv8-02, published 17 April 2026)
 on the roadmap for early adoption. Target: **2035**, or when the draft reaches
-RFC maturity — whichever comes first.
+RFC maturity — whichever comes first. It's crucial for avoiding CGNAT and reduce latencies of the service, the lower the latency, the better for our users.
 
 IPv8 is currently an IETF Internet-Draft, not a ratified standard. Until it
 matures, Coffee Pie continues on IPv4 with no changes. The addressing plan

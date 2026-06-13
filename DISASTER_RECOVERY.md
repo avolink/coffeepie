@@ -3,7 +3,9 @@
 Procedures for recovering Coffee Pie infrastructure from common failure scenarios.
 Integrates with `EMERGENCY_PROTOCOL.md` for security incidents.
 
-## Recovery Time Objectives (RTO)
+## Recovery Time Objectives (RTO) — Targets
+
+> **Note:** These are target objectives for production operations. Actual recovery times have not yet been validated through quarterly DR drills at current alpha scale.
 
 | Component | RTO | RPO |
 |-----------|-----|-----|
@@ -211,6 +213,50 @@ coffeepie-deploy --phase 2 --target root@new-pve-node
 # 5. Queue reconnection to avoid thundering herd
 # Orchestrator handles this automatically with exponential backoff
 ```
+
+---
+
+## Scenario 6: Legal Entity or Sanctions Risk
+
+**Symptoms:** Colombian legal entity (GRUPO 3P1 COLOMBIA S.A.S.) subject to sanctions (OFAC, Colombian SFC), regulatory investigation, or corporate dissolution. BVC listing blocked or revoked.
+
+### Recovery Steps
+
+```bash
+# 1. Assess scope
+# - Does the sanction freeze the entity's bank accounts?
+# - Are provider fiat settlements blocked?
+# - Can the entity continue operating while resolving the issue?
+
+# 2. Activate legal counsel
+# Contact: legal@coffeepie.co
+# Engage external counsel specialized in sanctions/regulatory defense
+
+# 3. Short-term continuity (if entity frozen)
+# A. Community-operated infrastructure continues under open-source licenses
+# B. Providers continue earning COFP (on-chain, no bank needed)
+# C. Provider fiat settlements paused — communicate timeline to providers
+# D. Credit purchases via third-party payment processors if unaffected
+
+# 4. Medium-term restructuring options
+# A. Establish foreign subsidiary in neutral jurisdiction
+# B. Transfer IP/assets to a foundation structure (Swiss Stiftung or similar)
+# C. DAO wrapper for governance continuity
+# D. Alternative exchange listing (non-Colombian) if BVC is blocked
+
+# 5. Communication
+# Update: https://status.coffeepie.co
+# Notify: providers, investors, community via Discord and email
+# Transparency: publish summary of situation and recovery plan
+```
+
+### Prevention
+
+- [ ] Foreign subsidiary or foundation established as contingency vehicle
+- [ ] Multi-jurisdiction banking relationships (not solely Colombian)
+- [ ] Backup exchange listing plan documented (beyond BVC)
+- [ ] IP/patent transfer procedure defined and legally reviewed
+- [ ] Key-man risk: succession plan for founder and core team roles
 
 ---
 

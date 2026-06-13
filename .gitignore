@@ -45,6 +45,9 @@ node_modules/
 .env
 *.env
 
+# Sensitive audit artifacts (do NOT commit to public repo)
+ADVERSARIAL_AUDIT.md
+
 # Qt
 *.qmlrc.bin
 *.autosave

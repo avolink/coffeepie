@@ -37,7 +37,7 @@ Please include:
 | Fix or mitigation plan | within **30 days** for High/Critical |
 | Public disclosure | coordinated, after a fix ships (typically ≤ 90 days) |
 
-We follow **coordinated disclosure**. We will credit you in the release notes and `audits/SECURITY_AUDITS.md` unless you prefer to remain anonymous. We do not currently run a paid bug-bounty program, but high-impact reports may be rewarded in COFP at the maintainers' discretion.
+We follow **coordinated disclosure**. We will credit you in the release notes and `audits/SECURITY_AUDITS.md` unless you prefer to remain anonymous. A paid bug-bounty program (rewarded in COFP) is under construction and will launch once the COFP token is deployed to TRON mainnet. See `BOUNTIES.md` for the planned reward tiers. In the interim, high-impact reports may be rewarded in COFP at the maintainers' discretion once the token is live.
 
 ## Scope
 

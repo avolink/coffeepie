@@ -6,6 +6,8 @@ on IPv4. IPv8 (IETF draft-thain-ipv8-02) Zone Server authentication (OAuth8/JWT)
 is on the roadmap as a complementary network-layer identity layer (target: 2035
 or RFC maturity).
 
+> **Post-Quantum Roadmap:** Current certificates use Ed25519 (non-PQ). Coffee Pie's Rust components already use `libcrux-ml-kem` (0.0.7-0.0.8) for ML-KEM-768 key exchange in the actor/tunnel-server layers. A hybrid certificate strategy (Ed25519 + ML-KEM) and migration to NIST PQC standards (FIPS 203/204/205) are on the roadmap for the PKI layer. Target: before root CA expiry (2036) or when CRQC-capable hardware becomes viable — whichever comes first.
+
 ## Architecture
 
 ```

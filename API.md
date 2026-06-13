@@ -1,5 +1,7 @@
 # Coffee Pie API Reference
 
+> **Alpha status (v0.1.0):** This document describes the target API specification. In the current alpha, some security features (CSRF protection, authentication validation) are still being hardened. See [EMERGENCY_PROTOCOL.md](EMERGENCY_PROTOCOL.md) for known vulnerabilities and hardening roadmap.
+
 Base URLs depend on deployment. Development defaults:
 
 | Service | Base URL | Auth |

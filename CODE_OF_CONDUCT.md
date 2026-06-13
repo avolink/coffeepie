@@ -43,6 +43,8 @@ This Code of Conduct applies within all community spaces — this repository, th
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported privately to the moderators at **`conduct@coffeepie.co`**. All complaints will be reviewed and investigated promptly and fairly. All moderators are obligated to respect the privacy and security of the reporter of any incident.
 
+Moderators: `avolink`, `juandaniel777`, `diegoalejandromendoza` (the Main Contributors listed in `README.md`).
+
 ### Enforcement Guidelines
 
 Moderators will follow these impact guidelines in determining consequences:
@@ -51,6 +53,16 @@ Moderators will follow these impact guidelines in determining consequences:
 2. **Warning** — A warning with consequences for continued behavior. No interaction with the people involved for a specified period. Violating these terms may lead to a temporary or permanent ban.
 3. **Temporary Ban** — A temporary ban from any sort of interaction or public communication with the community for a specified period.
 4. **Permanent Ban** — A permanent ban from any sort of public interaction within the community.
+
+### Appeal Process
+
+Any individual subject to enforcement action may appeal the decision by emailing **`conduct@coffeepie.co`** within 30 days. Appeals will be reviewed by a moderator who was not involved in the original decision. The appeal review will consider:
+
+- Whether the enforcement action was proportional to the violation
+- Any new evidence or context provided by the appellant
+- The appellant's history of contributions and conduct
+
+The appeal decision is final and will be communicated within 14 days.
 
 ## Attribution
 

@@ -19,7 +19,7 @@ Developers, translators, auditors, pentesters, and community supporters earn COF
 
 **Rights:**
 - Vote on technical decisions (development stack, deprecation policies, implementation priorities)
-- **Wallet holding limit:** 100,000,000,000 COFP per wallet (or 10% of the total supply), enforced by the Coffee Pie backend
+- **Wallet holding limit:** 10% of the total COFP supply per wallet, enforced by the Coffee Pie backend
 - May sell earned COFP on the TRON open market (TRC-20) — proceeds are the contributor's to keep
 - May hold COFP for long-term valuation appreciation and future dividends after IPO
 - May burn COFP for Credits at a rate of 10 Cr per COFP
@@ -63,7 +63,9 @@ Consumers never hold, earn, or interact with COFP directly. Credits are the only
 
 ## Governance
 
-The COFP smart contract is governed by a **Gnosis Safe multi-signature wallet** (minimum 4 of 7 signers) with a **48-hour timelock** on all administrative functions. This is mandatory before any stock exchange listing — no single individual may hold unilateral control over minting, pausing, or ownership transfer.
+**Current state (alpha):** The COFP smart contract currently uses a single `owner` address for administrative functions (`mint`, `pause`, `transferOwnership`). This is appropriate for the pre-deployment design and configuration phase.
+
+**Target state (pre-IPO):** Before any stock exchange listing or mainnet deployment, contract ownership MUST be transferred to a **Gnosis Safe multi-signature wallet** (minimum 4 of 7 signers) with a **48-hour timelock** on all administrative functions. This ensures no single individual holds unilateral control over minting, pausing, or ownership transfer.
 
 **Signers:**
 - Core Development Lead
@@ -98,7 +100,7 @@ COFP is backed by five transparent revenue streams:
 
 ## Long-Term Vision
 
-- **2035 Target:** Initial Public Offering (IPO) on BVC or tokenization (TRC-20)
+- **2035 Target:** Initial Public Offering (IPO) on BVC and tokenization (TRC-20)
 - No single individual or entity will hold controlling stakes
 - Success measured by positive impact on society and the environment, not just profit
 - Guided by stoic and ethical principles
