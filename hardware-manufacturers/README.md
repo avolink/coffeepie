@@ -11,8 +11,8 @@ to the user's cloud desktop.
 All hardware designs are open source under **CERN-OHL-S v2 + Coffee Pie
 Circular Economy Addendum** (see `hardware/LICENSE`). Anyone may freely
 study, manufacture, modify, and distribute these devices. Commercial
-connection to the QFDM Backend requires a dirt-cheap license (cents per
-terminal per month).
+connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
+(cents per terminal per month) for use of the patented QFDM system.
 
 ## Product Lines
 
@@ -99,7 +99,7 @@ schematics, PCB layouts, BOM, enclosure models, and technical drawings.
 ### 3. Build Prototypes
 
 You are free to build as many prototypes as you want at zero royalty cost.
-No license is needed for personal, educational, or research use (up to 9
+No QFDM royalty fees apply for personal, educational, or research use (up to 9
 terminals).
 
 ### 4. Get Certified (Optional but Recommended)
@@ -112,12 +112,13 @@ To sell devices under the Coffee Pie brand or as "Coffee Pie Certified":
 3. Execute a Brand License Agreement with Grupo 3P1 Colombia
 
 OEM/White-Label manufacturing (under your own brand) does not require
-certification or a brand agreement — just the QFDM Backend License.
+certification or a brand agreement — just the QFDM Royalty Fees.
 
-### 5. Obtain QFDM Backend License
+### 5. Arrange QFDM Royalty Fees
 
 If the terminals will connect to the QFDM Backend for commercial use
-(renting to third parties), a license is required:
+(renting to third parties), QFDM Royalty Fees apply (patent royalties for
+use of the patented QFDM system, not a software license fee):
 
 | Terminals | USD/terminal/month |
 |---|---|
@@ -127,15 +128,15 @@ If the terminals will connect to the QFDM Backend for commercial use
 | 100'000 – 999'999 | 0.50 |
 | 1'000'000+ | 0.30 |
 
-Licenses are obtained at: https://www.coffeepie.co/panel (Licensing Tab)
+QFDM Royalty Fees are arranged at: https://www.coffeepie.co/panel (QFDM Royalty Fees Tab)
 
 ## ISP / Rental Model
 
 ISPs and rental companies are the primary distribution channel. They can:
 
 - **Manufacture themselves** or through third parties, paying only the
-  QFDM Backend License per terminal.
-- **Offer terminals free to customers** (the license cost is absorbed by
+  QFDM Royalty Fee per terminal.
+- **Offer terminals free to customers** (the royalty fee is absorbed by
   the ISP) or **charge a small monthly fee** for the service.
 - **White-label** under their own brand without additional certification.
 - **Benefit from the Community Incentive Program**: 1% monthly credit on
@@ -165,7 +166,7 @@ These obligations are binding. Violation terminates the license.
 | Resource | URL |
 |---|---|
 | Manufacturer Registration | https://www.coffeepie.co/fabricantes |
-| Licensing Dashboard | https://www.coffeepie.co/panel |
+| QFDM Royalty Fees Dashboard | https://www.coffeepie.co/panel |
 | Certified Service Partners | https://www.coffeepie.co/dispositivos-certificados |
 | Reference SBC Info | https://wiki.radxa.com/Zero3E |
 | iFixit Repairability | https://www.ifixit.com/repairability |

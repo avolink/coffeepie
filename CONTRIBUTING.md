@@ -162,7 +162,7 @@ Push and open a PR against `main`. CI runs automatically (build + lint + test).
 
 Coffee Pie® uses a **tiered license model** — there is no single blanket license. See [`LICENSE`](LICENSE) and [`CONSTITUTION.md`](CONSTITUTION.md) for the binding terms. In summary:
 
-- **QFDM Core & Orchestrator** — Open Core (source-available, proprietary); commercial license required for codec-terminal manufacturers, large-scale/enterprise deployments, and competitors.
+- **QFDM Core & Orchestrator** — Open Core (source-available, proprietary); commercial use by codec-terminal manufacturers, large-scale/enterprise deployments, and competitors is subject to **QFDM Royalty Fees** — patent royalties for use of the patented QFDM system (Patent NC2025/0012723), not a software license fee.
 - **Frontend & Drivers** — Apache-2.0.
 - **Hardware Design** — CERN Open Hardware License.
 

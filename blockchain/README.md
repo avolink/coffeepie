@@ -79,7 +79,7 @@ The COFP smart contract is governed by a **Gnosis Safe multi-signature wallet** 
 ## Monetization Model
 
 COFP is backed by five transparent revenue streams:
-1. Licenses and royalties for Codec Terminal rentals from manufacturers to third parties
+1. QFDM Royalty Fees for Codec Terminal rentals from manufacturers to third parties
 2. Sale of highly segmented advertising spaces to advertisers
 3. Alliances with public sector, educational entities, libraries, and NGOs
 4. Manufacturer services: maintenance, repair, restore, recycling and final disposal

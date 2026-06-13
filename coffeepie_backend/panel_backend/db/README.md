@@ -52,7 +52,7 @@ join it on the public interface:
 | Email | Role(s) | Notes |
 |---|---|---|
 | advertiser@qa.coffeepie.co | advertiser | campaigns/segments/assets |
-| manufacturer@qa.coffeepie.co | manufacturer | QFDM licenses |
+| manufacturer@qa.coffeepie.co | manufacturer | QFDM royalty fees |
 | provider@qa.coffeepie.co | provider | owns 2 nodes, balance 240 COFP |
 | contributor@qa.coffeepie.co | contributor | balance 500 COFP (voting power) |
 | admin@qa.coffeepie.co | admin | passes all role gates |

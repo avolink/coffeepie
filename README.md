@@ -13,7 +13,7 @@ Current Version: v0.1.0-alpha<br>
 
 Company: Coffee Pie® Colombia is a Benefit and Collective Interest (BIC) subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
-License: Custom Dual License (see LICENSE and CONSTITUTION files)<br>
+License: Community License & QFDM Royalty Terms (see LICENSE and CONSTITUTION files)<br>
 
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
@@ -23,8 +23,8 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
  Main Contributors (and initial Moderators):<br>
- - avolink (The Architect and QA, Industrial Designer, Frontend Developer and Marketer)<br>
- - juandaniel777 (The Engineer and Software Backend Developer)<br>
+ - avolink (The Architect and QA, Frontend Developer UI/UX, Industrial Designer and Marketer)<br>
+ - juandaniel777 (The Engineer and Software Backend Developer, Embedded Specialist)<br>
  - Diego-M-PZ (The Electronics, Maintenance and Circular Services Manager).<br>
 
   ⌨️ Development Stack:<br>
@@ -74,7 +74,7 @@ ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
 
  ⚖️ Licensing & Contribution (The Social Contract):<br>
 Coffee Pie® is full open hardware and mostly open software. To protect our path to a 2035 IPO and ensure the ecosystem remains standardized, we use a tiered licensing model:
-- QFDM Core & Orchestrator: Open Core. The core orchestration and QFDM Backend components are source-available under a proprietary Open Core license, granting free use for personal and small-scale deployments while requiring a commercial license for codec terminal manufacturers, large-scale deployments, enterprise use and potential competitors.<br>
+- QFDM Core & Orchestrator: Open Core. The core orchestration and QFDM Backend components are source-available under a proprietary Open Core license, granting free use for personal and small-scale deployments, while any commercial use — by codec terminal manufacturers, large-scale deployments, enterprise use and potential competitors — is subject to QFDM Royalty Fees for use of the patented QFDM system (Patent NC2025/0012723), payable as patent royalties rather than a software license fee.<br>
 - Frontend & Drivers: Apache 2.0. We want these everywhere.<br>
 - Hardware Design: CERN Open Hardware License. Easily repairable and upgradeable.<br>
 - Contributing: We welcome anyone to contribute, but by contributing, you agree to our Contributor License Agreement (CLA) to keep the project commercially viable for its "BIC status" (Benefit and Collective Interest, in middle-ground between private company and NGO).<br>

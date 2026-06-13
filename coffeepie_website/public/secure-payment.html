@@ -203,7 +203,7 @@
                 var qrTotal = document.getElementById('qr-total');
 
                 if (pType && pQty > 0 && pTotal > 0) {
-                    // --- Licensing Checkout Mode ---
+                    // --- Royalty Checkout Mode ---
                     
                     // Customize QR section title to say "Total a Pagar"
                     var qrTitle = document.querySelector('.qr-box h3');
@@ -218,10 +218,10 @@
                         backBtn.innerHTML = '<span>Volver</span>'; 
                     }
 
-                    // Render license item with nested spans matching translation keys
+                    // Render royalty item with nested spans matching translation keys
                     var periodLabel = pPeriod === 'annual' ? 'Anual' : 'Mensual';
                     var rows = '<tr>' +
-                        '<td class="cart-item-name"><span>Licencias QFDM</span> (<span>' + pType + '</span>) — <span>' + periodLabel + '</span></td>' +
+                        '<td class="cart-item-name"><span>Regalías QFDM</span> (<span>' + pType + '</span>) — <span>' + periodLabel + '</span></td>' +
                         '<td>' + pQty.toLocaleString('de-DE').replace(/\./g, "'") + '</td>' +
                         '<td>' + fmtCOP(pTotal) + '</td>' +
                         '</tr>';

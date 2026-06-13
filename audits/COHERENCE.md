@@ -161,7 +161,7 @@ The `audits/SECURITY_AUDITS.md` lists 8 unresolved items. None of our tools addr
 
 | Revenue Stream | README.md | AGENTS.md | CONSTITUTION |
 |----------------|-----------|-----------|-------------|
-| Licenses/royalties (Codec Terminal rentals) | ✓ | ✓ | — |
+| QFDM Royalty Fees (Codec Terminal rentals) | ✓ | ✓ | — |
 | Advertising (segmented ad spaces) | ✓ | ✓ | — |
 | Alliances (public sector, education, NGOs) | ✓ | ✓ | — |
 | Manufacturer services (repair, recycling) | ✓ | ✓ | — |

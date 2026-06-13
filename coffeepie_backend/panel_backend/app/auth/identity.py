@@ -26,7 +26,7 @@ class Role(str, Enum):
     testable and reusable outside the HTTP layer."""
 
     ADVERTISER = "advertiser"        # main clients — campaigns, segments, assets
-    MANUFACTURER = "manufacturer"    # terminal makers — QFDM licenses
+    MANUFACTURER = "manufacturer"    # terminal makers — QFDM royalty fees
     PROVIDER = "provider"            # register nodes, earn COFP for served slices
     CONTRIBUTOR = "contributor"      # hold COFP, vote on technical decisions
     ADMIN = "admin"                  # platform operators

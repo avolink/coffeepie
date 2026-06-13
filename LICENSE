@@ -1,5 +1,5 @@
-Coffee Pie® - Custom Dual License
-==================================
+Coffee Pie® - Community License & QFDM Royalty Terms
+====================================================
 
 Copyright (C) 2025  Grupo 3P1 Colombia. All rights reserved.
 
@@ -7,28 +7,30 @@ This software and associated documentation files (the "Software") are the propri
 
 The Coffee Pie® name, logo, and QFDM (Quantized Fractional Distribution and Management System) are protected by trademark and patent law (Patent NC2025/0012723). Nothing in this license shall be construed as granting any rights under said patent or trademark.
 
-DUAL LICENSING
---------------
+COMMUNITY LICENSE & QFDM ROYALTY TERMS
+--------------------------------------
 
-The Software is available under a dual-licensing model:
+The Software is available under a dual model — a free open-source community license for the software, and royalty-based terms for any commercial exploitation of the patented QFDM system:
 
   1. COMMUNITY LICENSE (Open Core)
      The open-source components of this Software are available under the GNU Affero General Public License v3 (AGPLv3) for up to nine (9) nodes, free of charge, for non-commercial, community, home lab, and educational use. See the LICENSE-AGPL file or https://www.gnu.org/licenses/agpl-3.0.html.
 
-  2. COMMERCIAL LICENSE
+  2. COMMERCIAL USE — QFDM ROYALTY FEES
      Home Lab enthusiasts are encouraged to grow their deployments. Once you reach ten (10) or more nodes, you become eligible to apply for integration into the QFDM Backend Infrastructure as a compensated provider, earning real money for your room, energy, and maintenance contributions — subject to meeting basic
      requirements such as proof of electricity bill origin, physical safety compliance, and secured hardware access.
 
-    A separate commercial license is required for:
-       - Each Codec Terminal willing to connect to the QFDM network.
+     Commercial exploitation of the QFDM system is NOT a software license and is NOT a fee for any software service rendered to the public. It is the exercise of rights under Patent NC2025/0012723, and the amounts payable are ROYALTY FEES — consideration paid to the patent holder, Grupo 3P1 Colombia, for the right to use and exploit the patented QFDM (Quantized Fractional Distribution and Management System) invention.
+
+     QFDM Royalty Fees are payable for any commercial exploitation of the patented QFDM system, including:
+       - Each Codec Terminal connecting to the QFDM network.
        - Deployments of ten (10) or more nodes.
        - Hosting the service as a third-party provider.
-       - Embedding the software in proprietary products.
+       - Embedding the patented QFDM technology in proprietary products.
        - Any use that directly or indirectly generates revenue.
-       *Commercial licenses may include royalties, patent grants, warranties, support, and indemnification.
+       *QFDM Royalty Fees are paid as patent royalties and may be accompanied by patent grants, warranties, support, and indemnification.
 
 
-|    Plan    |   Min Terminals  | Max Terminals | Price per License  | Aprox USD |
+|    Plan    |   Min Terminals  | Max Terminals | Royalty/Terminal   | Aprox USD |
 -----------------------------------------------------------------------------------------------------
 | Standard   | 1                | 999           |   9'000 COP/month  |   ~2.57   |
 | Growth     | 1'000            | 9'999         |   8'100 COP/month  |   ~2.32   |
@@ -38,9 +40,9 @@ The Software is available under a dual-licensing model:
 | Global     | 10'000'000       | 99'999'999    |   1'500 COP/month  |   ~0.43   |
 | Universal  | 100'000'000      |      ∞        |     900 COP/month  |   ~0.25   |
 
-To obtain a commercial license, please use the licensing tool at:
+To arrange QFDM Royalty Fees, please use the royalty management tool at:
 
-    Web: https://www.coffeepie.co/panel => Licensing Tab
+    Web: https://www.coffeepie.co/panel => QFDM Royalty Fees Tab
 
 THIRD-PARTY COMPONENTS
 ----------------------

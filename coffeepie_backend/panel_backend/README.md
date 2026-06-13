@@ -100,7 +100,7 @@ partner can own, roughly in priority order:
    add. Needs a chain signer (KMS-held key) for the mint/burn settlement.
 
 4. **Per-tab CRUD + DB schema.** Campaigns, Segments, Assets, Reports, API Keys,
-   Licenses, and Node-registry persistence are not implemented — they're
+   Royalty Fees, and Node-registry persistence are not implemented — they're
    straightforward once the DB is chosen. Each maps to a panel tab; models should
    mirror the field names already in `panel.html`. The node-registry endpoint
    should reuse the DC-Agent (`POST /instances`, `/capacity`) rather than a new

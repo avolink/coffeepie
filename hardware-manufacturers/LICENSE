@@ -306,28 +306,30 @@ A. OPEN MANUFACTURING RIGHTS
 
    You are NOT free to:
      - Connect Codec Terminals to the QFDM Backend for commercial rental to
-       third parties without a valid QFDM Backend License (see Section B).
+       third parties without paying the applicable QFDM Royalty Fees (see Section B).
      - Use the Coffee Pie®, QFDM™, Commander™, Sentinel™, or Ranger™ trademarks
        or branding on your products without a separate brand license agreement.
      - Apply planned obsolescence or any design practice that intentionally
        shortens the useful life of a device.
 
 
-B. QFDM BACKEND CONNECTION LICENSE
+B. QFDM BACKEND CONNECTION — QFDM ROYALTY FEES
 
    Connecting a Codec Terminal to the Coffee Pie® QFDM Backend for the purpose
    of renting or providing computing services to third parties (commercial use)
-   requires a paid QFDM Backend License issued by Grupo 3P1 Colombia or an
-   authorized licensing agent. License fees are as follows:
+   requires payment of QFDM Royalty Fees to Grupo 3P1 Colombia (or an authorized
+   royalty-collection agent) for use of the patented QFDM system (Patent
+   NC2025/0012723). These are patent royalties, not a software license fee. The
+   royalty schedule is as follows:
 
      Terminals connected to QFDM Backend (per unit/month):
-       1     to    999 terminals:  1.00 USD/month per license
-       1'000 to  9'999 terminals:  0.90 USD/month per license
-       10'000 to 99'999 terminals: 0.70 USD/month per license
-       100'000 to 999'999 terminals: 0.50 USD/month per license
-       1'000'000+ terminals:       0.30 USD/month per license
+       1     to    999 terminals:  1.00 USD/month per terminal
+       1'000 to  9'999 terminals:  0.90 USD/month per terminal
+       10'000 to 99'999 terminals: 0.70 USD/month per terminal
+       100'000 to 999'999 terminals: 0.50 USD/month per terminal
+       1'000'000+ terminals:       0.30 USD/month per terminal
 
-   Licenses are obtained at: https://www.coffeepie.co/panel (Licensing Tab)
+   QFDM Royalty Fees are arranged at: https://www.coffeepie.co/panel (QFDM Royalty Fees Tab)
 
    Personal, educational, and research use connecting to the QFDM Backend (up to
    nine (9) terminals) is permitted free of charge under the Community License
@@ -426,10 +428,11 @@ E. COMMUNITY INCENTIVE PROGRAM
 F. TERMINATION
 
    In addition to the termination conditions in CERN-OHL-S v2 Section 8.4 and
-   8.5, this Addendum and the QFDM Backend License shall terminate immediately
-   upon:
+   8.5, this Addendum and the QFDM Backend connection rights shall terminate
+   immediately upon:
      - Any violation of the Circular Economy Obligations in Section C;
-     - Connection of unlicensed Codec Terminals to the QFDM Backend;
+     - Connection of Codec Terminals to the QFDM Backend without payment of the
+       applicable QFDM Royalty Fees;
      - Use of Coffee Pie® trademarks without authorization;
      - Any confirmed instance of planned obsolescence as defined in Section C.6.
 
@@ -516,7 +519,7 @@ H. NORMATIVE REFERENCES
 
 
 ===============================================================================
-For licensing inquiries:   https://www.coffeepie.co/panel (Licensing Tab)
+For QFDM Royalty Fee inquiries: https://www.coffeepie.co/panel (QFDM Royalty Fees Tab)
 For manufacturer program:  https://www.coffeepie.co/fabricantes
 For CERN-OHL-S v2 text:    https://ohwr.org/cern_ohl_s_v2.txt
 Normative references:      ISO 14040 | ISO 14044 | ISO 14001 | IEC 62635 |

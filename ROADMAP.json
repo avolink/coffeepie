@@ -556,10 +556,10 @@
         },
         {
             "id": "M16",
-            "title": "Corporate Licensing & Revenue Distribution",
+            "title": "Corporate QFDM Royalty Fees & Revenue Distribution",
             "phase": "scale",
             "status": "planned",
-            "description": "Enforce commercial license for deployments above 9 nodes per Constitution Article III.2. Automated dividend distribution to contributors via COFP tokens (TRC20).",
+            "description": "Enforce QFDM Royalty Fees for deployments above 9 nodes per Constitution Article III.2 (patent royalties under Patent NC2025/0012723, not a software license fee). Automated dividend distribution to contributors via COFP tokens (TRC20).",
             "depends_on": ["M9", "M15"],
             "tasks": [
                 {

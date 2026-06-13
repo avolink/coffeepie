@@ -1,7 +1,7 @@
 -- Coffee Pie Panel — QA data for the REMAINING tabs.
 --
 -- Adds tables + realistic seed for: campaigns, segments, assets, invoices,
--- API keys, QFDM licenses, withdrawals. Tied to the QA users so the panel
+-- API keys, QFDM royalty fees, withdrawals. Tied to the QA users so the panel
 -- behaves like real user data for QA inspection.
 --
 -- The memorable QA user testing@coffeepie.co (uid …ff) is made a full superuser
@@ -146,7 +146,7 @@ INSERT INTO api_key (id, user_id, name, masked_key, environment, last_used) VALU
  ('00000000-0000-0000-0000-0000000a0002', :ff, 'Pruebas CI',           'cp_test_••••9b71', 'development', now() - interval '5 days')
 ON CONFLICT (id) DO NOTHING;
 
--- QFDM licenses
+-- QFDM royalty fees
 INSERT INTO qfdm_license (id, user_id, license_key, terminals, plan_type, period, start_date, expiration, status) VALUES
  ('00000000-0000-0000-0000-0000000b0001', :ff, 'VK7JG-NPHTM-C97JM-9MPGT-3V66T', 50,  'Crecimiento', 'Mensual', '2026-05-01', '2026-06-01', 'active'),
  ('00000000-0000-0000-0000-0000000b0002', :ff, 'QJ8XW-LM2RN-D45BT-7FGYH-9KPVR', 200, 'Empresarial', 'Anual',   '2026-04-15', '2027-04-15', 'active'),
