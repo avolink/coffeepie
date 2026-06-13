@@ -28,10 +28,10 @@ AI training, AI inferencing, Big Data, deploying servers, apps and databases, st
  - Diego-M-PZ (The Electronics, Maintenance and Circular Services Manager).<br>
 
   ⌨️ Development Stack:<br>
-    - Backend: Rust, Shell/Bash Scripting, (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel).<br>
+    - Backend: Rust, Shell/Bash Scripting, (C/C++ deprecated by 2030, Rust becoming Canon, but still a lot of Legacy Code in dependencies like Linux Kernel. Bounties could be added for gradually migrating Linux Kernel to Rust, which could fix over 70% of memory leakages, crucial for avoiding most zero day exploits).<br>
     - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
-    - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 or RFC maturity.<br>
+    - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 if mature enough or after RFC approval (crucial for avoiding CGNAT and added latency).<br>
 
  🌐 Potential Contributors and Investors:<br>
 Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for potential future dividends and valuation).<br>

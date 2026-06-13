@@ -86,12 +86,12 @@ function updateCartUI() {
 
 function initCartPage() {
     if (window.location.pathname.includes('carrito') || window.location.pathname.includes('cart')) {
-        // Clean vanilla page: render immediately (no Wix hook to wait for)
+        // Clean vanilla page: render immediately (no Avo hook to wait for)
         if (document.getElementById('cart-container')) {
             renderCartPage();
             return;
         }
-        // Legacy Wix page: wait for CartAppDataHook.root
+        // Legacy Avo page: wait for CartAppDataHook.root
         let attempts = 0;
         const tryRender = () => {
             const hook = document.querySelector('[data-hook="CartAppDataHook.root"]');
@@ -126,7 +126,7 @@ function renderCartPage() {
             container = cleanContainer;
             container.id = 'custom-cart-root'; // reuse ID for CSS styling
         } else {
-            // Legacy Wix page: hijack the Avo container
+            // Legacy Avo page: hijack the Avo container
         const selectors = ['[data-hook="CartAppDataHook.root"]', '#PAGES_CONTAINER', '[data-main-content-parent="true"]', 'main', '#site-root > div'];
         let bestTarget = null;
         for (const sel of selectors) {

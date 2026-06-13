@@ -8,7 +8,7 @@
 //     shows a hint — duplicates are legal (NAT'd domestic nodes) but usually
 //     a typo for datacenter providers.
 // Overrides the inline saveNode/deleteNode globals AFTER the inline script ran
-// (functions resolve at click time), so the Wix export needs no surgery.
+// (functions resolve at click time), so the Avo export needs no surgery.
 // Requires cp-panel-auth.js (token + API base). Vanilla JS only.
 (function () {
     'use strict';
@@ -395,7 +395,7 @@
         if (wdAmountInput) {
             wdAmountInput.max = WITHDRAW_CAP;
             wdAmountInput.min = WITHDRAW_MIN;
-            // The Wix-export prefill is 1000 — below the floor; lift it.
+            // The Avo-export prefill is 1000 — below the floor; lift it.
             if ((parseInt(wdAmountInput.value) || 0) < WITHDRAW_MIN) {
                 wdAmountInput.value = WITHDRAW_MIN;
                 if (typeof window.updateWithdrawalPreview === 'function') window.updateWithdrawalPreview();
