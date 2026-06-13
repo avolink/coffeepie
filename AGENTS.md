@@ -7,7 +7,7 @@ PROJECT IDENTITY
 
 - Project URL: https://www.coffeepie.co
 
-- Main Contributors: avolink, juandaniel777, diegoalejandromendoza, torvalds?, linuxfoundation?, valve?, microsoft?, apple?, google?, nvidia?, amd?, intel?, arm?...
+- Main Contributors: avolink, juandaniel777, Diego-M-PZ, torvalds?, linuxfoundation?, valve?, microsoft?, google?, nvidia?, amd?, intel?, arm?...
 
  Development Stack:<br>
     Backend: Rust, C/C++, Shell/Bash Scripting.<br>
