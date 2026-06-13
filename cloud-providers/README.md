@@ -207,6 +207,6 @@ The fiat amount received when burning COFP = **base COFP price × (1 + tier marg
 - Provider registration: https://www.coffeepie.co/panel
 - Technical docs: https://docs.coffeepie.co (coming soon)
 - Provider community: https://discord.gg/coffeepie (coming soon)
-- Email: proveedores@coffeepie.co
+- Email: cloud-providers@coffeepie.co
 
 Join the QFDM Network and help democratize computing power worldwide.

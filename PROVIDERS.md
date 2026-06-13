@@ -1,6 +1,6 @@
 # Coffee Pie® — Cloud Providers
 
-Becoming a Trusted Provider on the QFDM Network. Full requirements at `coffeepie.co/proveedores-nube`.
+Becoming a Trusted Provider on the QFDM Network. Full requirements at `coffeepie.co/cloud-providers`.
 
 ---
 
@@ -35,7 +35,7 @@ When Providers burn COFP for fiat, the amount received = base COFP price × (1 +
 
 ## Getting Started
 
-1. Review requirements at `coffeepie.co/proveedores-nube`
+1. Review requirements at `coffeepie.co/cloud-providers`
 2. Prepare infrastructure: Proxmox VE nodes (recommended), stretched VLAN connectivity, TLS certificates (see `PKI.md`)
 3. Run provider onboarding: `tools/admin/provider-onboard`
 4. Register bank account for fiat settlement (currently Colombian accounts only)
