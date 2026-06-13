@@ -293,6 +293,14 @@
             if (node.nodeType === Node.TEXT_NODE) {
                 translateTextNode(node, toLang);
             } else if (node.nodeType === Node.ELEMENT_NODE) {
+                // Never translate/mutate these. translateElement() guards them too, but the
+                // single-text-node shortcut below bypasses that guard — so re-check here.
+                // (For Arabic, enforceLTRNumbers would otherwise inject LRM marks into inline
+                // <style>/<script>/<code> text and corrupt the CSS/JS, e.g. ".ec-row { ‎display:flex" .)
+                if (node.tagName === 'SCRIPT' || node.tagName === 'STYLE' || node.tagName === 'NOSCRIPT' ||
+                    node.tagName === 'CODE' || node.tagName === 'PRE' || node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') {
+                    continue;
+                }
                 if (node.children.length === 0 && node.childNodes.length === 1 && node.firstChild.nodeType === Node.TEXT_NODE) {
                     translateTextNode(node.firstChild, toLang);
                 } else {
