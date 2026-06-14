@@ -59,6 +59,8 @@ Coffee Pie® operates two strictly separate currencies:
 
 Consumers never hold, earn, or interact with COFP directly. Credits are the only currency consumers spend to rent computing Slices.
 
+**Parking Fee:** dormant Slices (powered off or suspended) still reserve storage on a provider's node, so they are billed in Credits at **10 Cr per dormant Slice per hour**. The first 9 dormant Slices per account are free; the fee applies from the 10th dormant Slice and up. See `PROVIDERS.md` for the provider-side settlement.
+
 ---
 
 ## Governance

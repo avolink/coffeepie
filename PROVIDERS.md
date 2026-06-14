@@ -33,6 +33,22 @@ When Providers burn COFP for fiat, the amount received = base COFP price × (1 +
 
 ---
 
+## Dormant Slices — The Parking Fee
+
+A Slice that is powered off or suspended (e.g. a stopped Proxmox VM) releases its compute, power, RAM, network and GPU — but its disk image **still reserves SSD (8 GB) and HDD (125 GB)** on your node. To keep the airport metaphor: a parked plane no longer burns fuel, but it still occupies apron space.
+
+So that providers are paid for storage they hold for idle workloads — and to discourage zombie-VM hoarding on the Freemium tier — dormant Slices accrue a **Parking Fee**:
+
+- **Provider earnings:** a dormant Slice mints **1.5 COFP per Slice per hour** (vs. 60 COFP/hour for an active Slice). At Tier IV this settles to roughly cover real storage cost (capex amortization + idle power + DC overhead) plus the tier margin, giving providers a fair incentive to invest in SSD/HDD capacity.
+- **Consumer charge:** end users pay **10 Cr per dormant Slice per hour** (≈ 10% of the active Slice rate). The **first 9 dormant Slices per account are free**; the Parking Fee applies **from the 10th dormant Slice and up**.
+- **Reserved-Slice basis:** the fee is charged on the *reserved* Slice (the booked quanto), not on thin-provisioned written blocks — consistent with the deterministic Slice abstraction.
+
+> The Parking Fee rate is set by the same regional-pricing governance vote as `avgSliceCost` and is a configurable parameter, not a hardcoded constant.
+
+> **Future work:** the current flat rate is sized for cost-recovery (cost + tier margin), which is fair reimbursement but a weak signal to invest in storage specifically for parked workloads. Once we have telemetry on how many Slices accounts actually park, consider an **escalating Parking Fee** — near cost for light parkers, rising per-Slice beyond a heavy-usage threshold — so heavy storage users fund the capacity they reserve without penalizing casual ones.
+
+---
+
 ## Getting Started
 
 1. Review requirements at `coffeepie.co/cloud-providers`

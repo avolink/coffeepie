@@ -8,6 +8,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Token Economics
+- **Parking Fee for dormant Slices** — powered-off/suspended Slices still reserve SSD/HDD on a provider's node, so they now accrue a holding fee. Consumers pay **10 Cr per dormant Slice per hour** (≈10% of the active rate), free for the first 9 dormant Slices per account, applied from the 10th and up. Providers earn **1.5 COFP per dormant Slice per hour** (vs. 60 COFP/hour active), sized to cover storage cost plus Tier IV margin. Rate is a governance parameter, not a hardcoded constant (see `BACKEND_INFRA_AUDIT.md` Finding #45). Documented in `PROVIDERS.md`, `README.md`, `CONSTITUTION.md`, `blockchain/README.md`, `cloud-providers/README.md`.
+
 ## [0.1.0] — 2026-06-07
 
 ### Token Economics

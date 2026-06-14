@@ -100,6 +100,10 @@ mid-tier users or ~50 basic users.
 
 Providers earn COFP at a rate of **1 COFP per Slice per minute** of verified capacity delivered. Example: a node serving 10 Slices for 8 hours earns 10 × 8 × 60 = 4,800 COFP. The rate in fiat equivalent is set by community governance (providers vote on regional pricing considering electricity costs, labor costs, and market rates). Note: end users (consumers) never interact with COFP — they pay for Slices using Coffee Pie® Credits (Cr), obtained via Ads or Credit Package purchases.
 
+### Dormant Slices (Parking Fee)
+
+A powered-off or suspended Slice still reserves SSD/HDD storage on your node, so it keeps earning at the reduced **Parking Fee** rate of **1.5 COFP per Slice per hour** (vs. 60 COFP/hour when active). At Tier IV this is sized to cover real storage cost plus the tier margin. Consumers are billed for this in Credits (10 Cr per dormant Slice per hour, free for their first 9 dormant Slices). See `PROVIDERS.md` for details.
+
 ### Settling to Fiat
 
 1. COFP accumulates in your provider wallet (on-chain, TRC-20)

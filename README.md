@@ -83,7 +83,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 💰 Monetization & Ethics:<br>
  We are guided by ethical and stoic principles — Meritocracy, Ataraxia, Areté, Eudaimonia — and we measure our success mainly by positive social and environmental impact, not just profits and ROI.<br>
  
- 1. Free Tier: Advertisers pay for the computing power, ideal for casual users (Ads on-demand).<br>
+ 1. Free Tier: Advertisers pay for the computing power, ideal for casual users (Ads on-demand). Have as many Slices as you want — but a dormant Slice (powered off or suspended) still reserves SSD/HDD on a provider's node, so a small **Parking Fee** of 10 Cr per dormant Slice per hour applies from the 10th dormant Slice and up (the first 9 are free). It only covers the providers' storage cost plus their fair margin, and keeps idle "zombie" machines from hoarding storage — saving the planet, not the bots. See `PROVIDERS.md`.<br>
  2. Credits Packages: No interruptions, high-performance and more resources for professionals and casual gamers.<br>
  3. B2B / ISP Licensing: Royalties from manufacturers and ISPs renting codec terminals to third parties.<br>
  4. Circular Services: Preventive maintenance, repair, remanufacturing, recycling and/or safe final disposal.<br>
