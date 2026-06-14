@@ -386,6 +386,32 @@ Decision: Django production security flags must be enabled before deployment.
   5. Set SECURE_SSL_REDIRECT=True, SECURE_HSTS_SECONDS=31536000
   6. Set SECURE_BROWSER_XSS_FILTER=True, SECURE_CONTENT_TYPE_NOSNIFF=True
 
+Decision: `unsafe` Rust is prohibited except at unavoidable FFI/OS-interop boundaries.
+  Reason: `unsafe` opts out of Rust's compiler-enforced memory and thread-safety
+  guarantees — the very reason Rust is the canonical language (see "Latency and
+  performance is the top priority ... that's why Rust is the canonical language").
+  Misusing it reintroduces the C-class bugs (use-after-free, data races, undefined
+  behavior) that Rust exists to prevent, defeating the purpose of choosing Rust.
+  Policy — binding on ALL AI agents AND human contributors:
+  1. Do NOT introduce `unsafe` in first-party business logic (billing/payments,
+     orchestration logic, CLIs, benchmark/tools). These stay 100% safe Rust.
+  2. `unsafe` is permitted ONLY where genuinely unavoidable: C/C++ FFI (FreeRDP,
+     Win32, libc, objc2) and OS syscalls with no safe wrapper available.
+  3. Every `unsafe` block, `unsafe fn`, and `unsafe impl Send/Sync` MUST carry a
+     `// SAFETY:` comment directly above it stating (a) why `unsafe` is required,
+     (b) why it cannot be replaced with safe code, and (c) the invariants the
+     author upholds to make it sound. Undocumented `unsafe` is not allowed.
+  4. Prefer wrapping `unsafe` in a minimal, tested safe API; never expose `unsafe`
+     to callers that don't need it.
+  5. Any NEW `unsafe` outside the established FFI crates requires explicit reviewer
+     sign-off in the PR description.
+  Audit (2026-06-14): 357 `unsafe` occurrences across 66 files, ALL confined to
+  `coffeepie_orchestrator/` FFI/OS-interop layers (FreeRDP bindings, Windows/Unix
+  syscalls, objc2 mac-launcher) plus UnsafeCell recovery buffers. Zero `unsafe` in
+  first-party business logic (payments backend is Python; the Rust benchmark tool is
+  clean; blockchain is Solidity). Existing `unsafe` predates this policy and is
+  grandfathered, but must be retrofitted with `// SAFETY:` comments over time.
+
 Known Technical Debt (from audit):
   - `SessionRecoveryBuffer` uses UnsafeCell with unsafe Send+Sync (tunnel-server, client)
   - `addin.rs` transmutes between incompatible function pointer types (RDP FFI)
@@ -396,3 +422,4 @@ Known Technical Debt (from audit):
   - 6 CSRF-exempt endpoints in orchestrator
   - Unpinned git dependency `cannatag/ldap3.git` in orchestrator requirements
   - `pqcrypto` Python package is unmaintained (migration to Rust libcrux pending)
+  - `unsafe impl Send/Sync` on `SessionRecoveryBuffer`, `RecoveryBuffer`, `SafePtr`, and the Windows `HandleInner`/`ServiceContext` wrappers lack `// SAFETY:` justification comments (retrofit per the `unsafe` policy above)

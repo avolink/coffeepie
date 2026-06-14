@@ -25,7 +25,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps, databases, study
  Main Contributors and initial Moderators:<br>
  - avolink: "The Architect" and QA, Frontend Developer (UI/UX), Industrial Designer and Marketer.<br>
  - juandaniel777: "The Magician", Physics Engineer, Backend Software Developer and Embedded Systems Specialist.<br>
- - Diego-M-PZ: "The Technician", Electronics Maintenance, Circular Services and Community Manager.<br>
+ - Diego-M-PZ: "The Technician", Electronics Design & Maintenance, Circular Services and Community Manager.<br>
 
   ⌨️ Development Stack:<br>
     - Backend: Rust, Shell/Bash Scripting, C/C++ (in transition — Rust becoming Canon gradually, C/C++ still present in dependencies and Linux Kernel; bounties for migrating critical paths to Rust over time).<br>

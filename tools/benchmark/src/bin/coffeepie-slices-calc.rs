@@ -54,6 +54,14 @@ struct Cli {
     #[arg(long, default_value = "1")]
     overcommit_ram: f64,
 
+    /// Consumer price per active Slice per hour, in Credits (governance-set)
+    #[arg(long, default_value = "100")]
+    cr_per_slice_hour: u64,
+
+    /// Parking Fee per dormant Slice per hour, in Credits (governance-set)
+    #[arg(long, default_value = "10")]
+    parking_cr_per_slice_hour: u64,
+
     /// JSON output
     #[arg(long)]
     json: bool,
@@ -264,12 +272,21 @@ fn main() {
         // Revenue estimation
         println!();
         println!("--- Revenue Estimation (COFP) ---");
-        println!("  Assuming 50% utilization at 100 Cr/slice/hour:");
+        println!("  Assuming 50% utilization at {} Cr/slice/hour:", cli.cr_per_slice_hour);
         let active = max_slices / 2;
-        let credits_per_hour = active * 100;
+        let credits_per_hour = active * cli.cr_per_slice_hour;
         let credits_per_month = credits_per_hour * 24 * 30;
         println!("  Active slices: {} | Cr/hour: {} | Cr/month: {}",
             format_slices(active), format_slices(credits_per_hour), format_slices(credits_per_month));
+
+        // Parking Fee: dormant slices still reserve SSD/HDD (see PROVIDERS.md).
+        // Estimate the other 50% of capacity sitting dormant (powered off/suspended).
+        let dormant = max_slices - active;
+        let parking_per_hour = dormant * cli.parking_cr_per_slice_hour;
+        let parking_per_month = parking_per_hour * 24 * 30;
+        println!("  Dormant slices: {} | Parking Cr/hour: {} | Parking Cr/month: {}",
+            format_slices(dormant), format_slices(parking_per_hour), format_slices(parking_per_month));
+        println!("  (Parking Fee applies from a consumer's 10th dormant slice up; first 9 free.)");
 
         // Simultaneous users at different tiers
         println!();

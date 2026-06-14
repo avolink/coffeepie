@@ -177,3 +177,35 @@ def cofp_to_cop(cofp: int) -> int:
 def cofp_to_credits(cofp: int) -> int:
     """Convert COFP to Credits. 1 COFP = 10 Cr (contributor burn rate)."""
     return cofp * 10
+
+
+# ── Parking Fee (dormant Slices) ──────────────────────────────────────
+# A powered-off or suspended Slice (e.g. a stopped Proxmox VM) releases its
+# compute/power but still reserves SSD (8 GB) + HDD (125 GB) on a provider's
+# node, so it accrues a reduced "Parking Fee". These rates are governance
+# parameters (set by the same regional-pricing vote as avgSliceCost), not
+# fixed constants — keep them here as the single source of truth. See
+# PROVIDERS.md "Dormant Slices — The Parking Fee".
+PARKING_FEE_CR_PER_SLICE_HOUR = 10      # consumer charge, in Credits (~10% of active 100 Cr/h)
+PARKING_FREE_DORMANT_SLICES = 9         # first N dormant Slices per account are free
+PARKING_COFP_MINT_PER_SLICE_HOUR = 1.5  # provider earning (vs 60 COFP/hour active)
+
+
+def parking_fee_cr(dormant_slices: int, hours: float) -> int:
+    """Consumer Parking Fee in Credits for dormant (off/suspended) Slices.
+
+    The first PARKING_FREE_DORMANT_SLICES per account are free; the fee applies
+    from the (PARKING_FREE_DORMANT_SLICES + 1)-th dormant Slice and up.
+    """
+    chargeable = max(0, dormant_slices - PARKING_FREE_DORMANT_SLICES)
+    return int(chargeable * PARKING_FEE_CR_PER_SLICE_HOUR * hours)
+
+
+def dormant_cofp_mint(dormant_slices: int, hours: float) -> float:
+    """COFP minted to the provider for hosting dormant Slices.
+
+    Unlike the consumer fee, there is NO free allowance here: the provider
+    reserves storage for *every* dormant Slice, so it earns on all of them —
+    the platform absorbs the cost of a consumer's first free Slices.
+    """
+    return dormant_slices * PARKING_COFP_MINT_PER_SLICE_HOUR * hours

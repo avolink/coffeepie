@@ -2,7 +2,11 @@
 // Coffee Pie — COFP Token (TRC-20 on TRON)
 // Monetary Policy: Elastic supply. Initial supply of 100'000'000 COFP.
 // Tokens are emitted at a rate of 1 COFP per 1 Slice served for 1 minute
-// by Providers on the QFDM Network. No supply cap — supply grows with the network.
+// by Providers on the QFDM Network. Dormant Slices (powered off/suspended, but
+// still reserving SSD/HDD) emit at the reduced Parking Fee rate of 1.5 COFP per
+// Slice per hour. No supply cap — supply grows with the network.
+// Emission amounts are computed off-chain by the backend (see payments/models.py)
+// and minted via mint(); this contract intentionally stays a thin TRC-20.
 // Deployable via Remix IDE + TronLink wallet.
 // Target: TRON Mainnet (chain ID 728126428)
 
