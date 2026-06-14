@@ -4,11 +4,11 @@
 
 🍰 Coffee Pie® Ecosystem ☕<br>Democratizing Computing Power & Eradicating Global Electronic Waste.<br>
 
-"In the future, you won't own anything, but you'll have access to everything and you'll be happy. Life is too short, so don't worry. Enjoy life peacefully with your loved ones, eat healthily, meditate, train your mind, exercise your body, travel light like a backpacker while you can, and find your balance. We came into this world with nothing, and we'll leave with nothing. All that remains are the lives we improved, the happiness we brought to others and to ourselves." - Anonymous<br>
+"In the future you won't own anything, but you'll have access to everything and you'll be happy. Life is too short, so don't worry, enjoy life peacefully with your loved ones, eat healthily, meditate, train your mind, exercise your body, travel light like a backpacker while you can, and find your balance. We came into this life with empty hands, and we leave the same way, all that remains are the lives we improved, the happiness we brought to others and to ourselves." - Anonymous<br>
 
 Project Status: Active<br>
+Current Phase: **Alpha Testing (TRL7)**<br>
 Concluded Phase: Lab Testing (TRL6)<br>
-Current Phase: Alpha Testing (TRL7)<br>
 Current Version: v0.1.0-alpha<br>
 
 Company: Coffee Pie® Colombia is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S. (BIC status pending).<br>
@@ -18,34 +18,34 @@ License: Tiered — Open Core (QFDM/Orchestrator), Apache 2.0 (Frontend/Drivers)
 Coffee Pie® is an open technological ecosystem that provides a general-purpose computing service. Think of it as a "global freemium cybercafe" accessible from anywhere, powered by the patented Quantized Fractional Distribution and Management System (QFDM), transforming what was an exponential problem O(n²) with no clear limits (infinite resource extraction and infinite waste) into a linear one O(n) with a clear limit: the maximum demand for the service at any given time (rush hour). Furthermore, it can be implemented on existing infrastructure, minimizing adoption risk to virtually zero...<br>
 
 🖥️ Legit and Recommended Uses (but not limited to):<br>
-AI training, AI inferencing, Big Data, deploying servers, apps and databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
+AI training, AI inferencing, Big Data, deploying servers, apps, databases, studying, working, writing, developing, programming, compiling, designing, composing, transforming, editing, exporting, rendering, calculating, organizing, communicating, collaborating, undertaking, selling, analysing, researching, creating, entertaining, casual gaming, but not really meant for hardcore gaming due to higher latency (10 ~ 80ms), you'd enjoy competitive games better with a handheld or console.<br>
 
 🛠 Project Identity & Stack:<br>
  Official URL: https://coffeepie.co<br>
  Main Contributors (and initial Moderators):<br>
- - avolink (The Architect and QA, Frontend Developer UI/UX, Industrial Designer and Marketer)<br>
- - juandaniel777 (The Engineer and Software Backend Developer, Embedded Specialist)<br>
- - Diego-M-PZ (The Electronics, Maintenance and Circular Services Manager).<br>
+ - avolink: "The Architect" and QA, Frontend Developer (UI/UX), Industrial Designer and Marketer.<br>
+ - juandaniel777: "The Engineer" and Software Backend Developer, Embedded Specialist.<br>
+ - Diego-M-PZ: "The Electronics", Maintenance and Circular Services Manager.<br>
 
   ⌨️ Development Stack:<br>
     - Backend: Rust, Shell/Bash Scripting, C/C++ (in transition — Rust becoming Canon gradually, C/C++ still present in dependencies and Linux Kernel; bounties for migrating critical paths to Rust over time).<br>
     - Frontend: Qt (QML), Django, HTML, CSS, JavaScript (No Frameworks).<br>
     - Prototyping & Automation: Python.<br>
-    - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 if mature enough or after RFC approval (crucial for avoiding CGNAT and added latency).<br>
+    - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 if mature enough or after RFC approval (crucial for avoiding added latency and CGNAT).<br>
 
  🌐 Potential Contributors and Investors:<br>
-Our architecture is designed to welcome contributions (and future partnerships) from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for potential future dividends and valuation).<br>
+Our architecture is designed to welcome contributions(and future partnerships from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for potential future dividends and valuation).<br>
  
  🚀 The Vision "The Airport of Computing":<br>
-- Imagine a computer as an airplane. Usually you don't buy an airplane, you get a ticket just when you need it.<br>
-- QFDM is the Backbone: It's like a highway connecting all the Airports in a Global Network of Decentrilzed Providers.<br>
-- The Datacenters are like the Airlines, operating their own or leased Aircrafts (Servers: Clusters/Nodes).<br>
-- Coffee Pie® is the Admin of the Airport: The infrastructure glue, the control tower, and the ticketing system, abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting supply and demand in real time.<br>
+- Imagine a computer as an airplane. Usually you don't buy an airplane, you just get a ticket whenever you need it.<br>
+- QFDM is the Backbone: It's like a highway connecting all the Airports in a Global Network of Decentrilzed Computing Providers.<br>
+- The Datacenters are like the Airlines, operating their own or leased aircrafts (Servers: Clusters/Nodes).<br>
+- Coffee Pie® is the Admin of the Airport: The infrastructure connective tissue, the control tower, and the ticketing system, abstracting all the complexity, operating, maintenance and marketing costs, for directly connecting supply and demand in real time.<br>
 - The Codec Terminal is like your remote controller (thin-client): A dirt-cheap, modular, durable, easily repairable, upgradeable and highly recyclable standardized device, that connects you to your machine/s in the cloud, although your data is yours, just sync it locally and take it away whenever you want, no ties, no high costs, no maintenance, no complex setups, no heat, no noise, nearly zero e-waste.<br>
 - The Slices are like the "tickets" (the seats in the airplane).<br>
  
  📐 The Atomic Unit - Coffee Pie® Slice:<br>
-We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical Node configuration. They can be added together like lego bricks or shipping containers to get more powerful and capable machines (vertical scaling), according to your needs:<br>
+We don't sell "computers", we rent slices. Each slice is a standardized deterministic portion of hardware resources (the Quanto in QFDM), regardless of the physical Node configuration. You can have as many as you want as long as you have enough credits to run them and the infrastructure currently holds the growing demand (virtually unlimited horizontal scaling), these slices can be added together like lego bricks or shipping containers to get more powerful and capable machines (vertical scaling), according to your needs:<br>
 
 | Resource | Capacity | Description |
 |---|---|---|
