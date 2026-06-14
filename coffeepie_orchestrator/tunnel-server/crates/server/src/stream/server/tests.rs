@@ -264,7 +264,7 @@ async fn test_outbound_server_stores_recover_packet() -> Result<()> {
 
     // The session should contain the packet in the recovery buffer
     let ses_rec_buf = session.recovery_buffer();
-    let buffer = ses_rec_buf.get();
+    let mut buffer = ses_rec_buf.get();
     assert_eq!(buffer.len(), 1);
     let (item, _old_seq) = buffer.take_unsent_packet().unwrap();
     assert_eq!(item.channel_id, 0);
@@ -288,14 +288,18 @@ async fn test_outbound_server_reads_recover_packet() -> Result<()> {
 
     // Insert a packet in the recovery buffer, simulating a previous failed send
     let ses_rec_buf = session.recovery_buffer();
-    let buffer = ses_rec_buf.get();
-    buffer.push(
-        out_crypt.current_seq(),
-        PayloadWithChannel {
-            channel_id: 0,
-            payload: b"test".into(),
-        },
-    )?;
+    // Scope the lock guard so it is released before the network `.await` below
+    // (a held MutexGuard would make this test future !Send).
+    {
+        let mut buffer = ses_rec_buf.get();
+        buffer.push(
+            out_crypt.current_seq(),
+            PayloadWithChannel {
+                channel_id: 0,
+                payload: b"test".into(),
+            },
+        )?;
+    }
 
     let mut outbound =
         TunnelServerOutboundStream::new(server, out_crypt, rx, stop.clone(), *session.id());

@@ -137,7 +137,11 @@ where
     pub async fn recover_buffer(&mut self, recovery_buffer: &RecoveryBuffer) -> Result<()> {
         log::debug!("Resending unsent packet for session in client outbound stream");
         // Send all unsent packets
-        while let Some((unsent_packet, old_seq)) = recovery_buffer.get().take_unsent_packet() {
+        loop {
+            // Take the packet under the lock, then release it before sending so the
+            // guard is never held across `.await` (which would make the future !Send).
+            let next = recovery_buffer.get().take_unsent_packet();
+            let Some((unsent_packet, old_seq)) = next else { break };
             // We can block here because we are already in the connection task, and we want to ensure the unsent packet is sent before processing new packets
             // If we fail to send, we will retry on next connection, so it's not critical to send it on this connection
             log::debug!(
@@ -175,8 +179,13 @@ where
                             }
                         };
                         // Store on recovery buffer before sending, so if we fail to send, we can retry on recovery
-                        let data = recovery_buffer.get().push(self.crypt.current_seq() + 1, packet)?;
-                        self.send_data(data).await?;
+                        // Push under the lock and clone the stored packet out, releasing the
+                        // lock before the `.await` on send_data.
+                        let data = {
+                            let mut buf = recovery_buffer.get();
+                            buf.push(self.crypt.current_seq() + 1, packet)?.clone()
+                        };
+                        self.send_data(&data).await?;
 
                         if data.channel_id == 0 {
                             #[cfg(debug_assertions)]

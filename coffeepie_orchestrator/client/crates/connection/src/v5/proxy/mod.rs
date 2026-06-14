@@ -28,7 +28,10 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Authors: Adolfo Gómez, dkmaster at dkmon dot com
-use std::{cell::UnsafeCell, rc::Rc, sync::atomic::AtomicUsize, time::Duration};
+use std::{
+    sync::{Arc, Mutex, atomic::AtomicUsize},
+    time::Duration,
+};
 
 use anyhow::{Context, Result};
 use tokio::net::tcp::{OwnedReadHalf, OwnedWriteHalf};
@@ -60,19 +63,18 @@ pub use {
 pub static RECOVERY_BUFFER_SIZE: AtomicUsize = AtomicUsize::new(64 * 1024); // Default to 64 KB, can be configured at runtime
 
 #[derive(Debug, Clone)]
-pub struct RecoveryBuffer(Rc<UnsafeCell<RecoverySendBuffer>>);
-
-unsafe impl Send for RecoveryBuffer {}
-unsafe impl Sync for RecoveryBuffer {}
+pub struct RecoveryBuffer(Arc<Mutex<RecoverySendBuffer>>);
 
 impl RecoveryBuffer {
     pub fn new(max_bytes: usize) -> Self {
-        Self(Rc::new(UnsafeCell::new(RecoverySendBuffer::new(max_bytes))))
+        Self(Arc::new(Mutex::new(RecoverySendBuffer::new(max_bytes))))
     }
 
-    #[allow(clippy::mut_from_ref)]
-    pub fn get(&self) -> &mut RecoverySendBuffer {
-        unsafe { &mut *self.0.get() }
+    /// Locks the recovery buffer for exclusive access. Lock poisoning is ignored
+    /// (the buffered bytes stay valid even if a previous holder panicked), so this
+    /// never panics on lock. The guard must be dropped before any `.await`.
+    pub fn get(&self) -> std::sync::MutexGuard<'_, RecoverySendBuffer> {
+        self.0.lock().unwrap_or_else(|poisoned| poisoned.into_inner())
     }
 }
 
@@ -218,7 +220,7 @@ impl Proxy {
         // Skip, if recovery, the the already processed packets (note that pre increment we must stop on PREV SEQ)
         // inbound = other side inbound, not our
         if self.recover_connection {
-            let recovery_buffer = self.recovery_buffer.get();
+            let mut recovery_buffer = self.recovery_buffer.get();
             log::debug!(
                 "Attempting to recover connection, skipping packets until seq {:?} from {:?}",
                 open_response.inbound_seq,

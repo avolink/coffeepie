@@ -22,6 +22,8 @@ target/
 .qtc_clangd/
 .qt/
 .antigravitycli/
+.claude/
+.cursor/
 .hermes/
 
 # OS
@@ -36,7 +38,12 @@ Thumbs.db
 __pycache__/
 venv/
 .venv/
+.audit_venv/
 env/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.tox/
 
 # Node
 node_modules/
@@ -59,6 +66,9 @@ cmake_install.cmake
 # *-Debug/ directories above. Do NOT add a blanket "Makefile" rule here — it
 # silently excludes the hand-written root ./Makefile that the dev workflow and
 # CONTRIBUTING.md ("make setup", "make test", ...) depend on.
+
+# Logs
+*.log
 
 # Editor / backup files
 *.bak

@@ -411,9 +411,17 @@ Decision: `unsafe` Rust is prohibited except at unavoidable FFI/OS-interop bound
   first-party business logic (payments backend is Python; the Rust benchmark tool is
   clean; blockchain is Solidity). Existing `unsafe` predates this policy and is
   grandfathered, but must be retrofitted with `// SAFETY:` comments over time.
+  Update (2026-06-14): the two recovery buffers (`SessionRecoveryBuffer` in
+  tunnel-server, `RecoveryBuffer` in client) — the only genuinely *unsound* cases
+  (`Rc<UnsafeCell<…>>` + forced Send/Sync + `&mut` aliasing from `&self`) — were
+  converted to `Arc<Mutex<…>>`, removing 6 `unsafe` (357 → 351 across 64 files).
+  The hot-path `push` now clones the stored packet out of the lock before sending
+  (one Vec copy per outbound packet) so the guard is never held across `.await`.
+  Verified: both crates build; tunnel-server recovery/stream tests + client
+  connection tests pass. All remaining `unsafe` is FFI/OS-interop.
 
 Known Technical Debt (from audit):
-  - `SessionRecoveryBuffer` uses UnsafeCell with unsafe Send+Sync (tunnel-server, client)
+  - ~~`SessionRecoveryBuffer` uses UnsafeCell with unsafe Send+Sync (tunnel-server, client)~~ RESOLVED 2026-06-14: converted to `Arc<Mutex<…>>`
   - `addin.rs` transmutes between incompatible function pointer types (RDP FFI)
   - `process.rs` allows arbitrary command execution from JS context (needs sandboxing)
   - 70+ unwrap/expect calls in network-facing Rust paths (DoS risk on lock poisoning)
@@ -422,4 +430,4 @@ Known Technical Debt (from audit):
   - 6 CSRF-exempt endpoints in orchestrator
   - Unpinned git dependency `cannatag/ldap3.git` in orchestrator requirements
   - `pqcrypto` Python package is unmaintained (migration to Rust libcrux pending)
-  - `unsafe impl Send/Sync` on `SessionRecoveryBuffer`, `RecoveryBuffer`, `SafePtr`, and the Windows `HandleInner`/`ServiceContext` wrappers lack `// SAFETY:` justification comments (retrofit per the `unsafe` policy above)
+  - `unsafe impl Send/Sync` on `SafePtr` (RDP FFI) and the Windows `HandleInner`/`ServiceContext` wrappers lack `// SAFETY:` justification comments (retrofit per the `unsafe` policy above)

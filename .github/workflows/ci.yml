@@ -267,3 +267,30 @@ jobs:
       - name: Cleanup
         if: always()
         run: docker compose down -v
+
+  # ═══ Gitignore Drift ═══════════════════════════════════════
+
+  gitignore-drift:
+    name: Gitignore drift check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for un-ignored dot-directories
+        run: |
+          echo "Checking for dot-directories that aren't gitignored..."
+          untracked=$(git ls-files --others --directory --exclude-standard \
+            | grep '^\.' \
+            | grep '/$' \
+            | sed 's|/$||' \
+            || true)
+          if [ -n "$untracked" ]; then
+            echo ""
+            echo "UN-IGNORED DOT-DIRECTORIES FOUND:"
+            echo "$untracked"
+            echo ""
+            echo "These directories are present on disk but not tracked or ignored."
+            echo "Add them to .gitignore or remove them."
+            exit 1
+          fi
+          echo "All dot-directories are either tracked or ignored."

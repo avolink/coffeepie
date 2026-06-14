@@ -30,11 +30,9 @@
 // Authors: Adolfo Gómez, dkmaster at dkmon dot com
 
 use std::{
-    cell::UnsafeCell,
     net::SocketAddr,
-    rc::Rc,
     sync::{
-        RwLock,
+        Arc, Mutex, RwLock,
         atomic::{AtomicBool, AtomicUsize},
     },
 };
@@ -66,19 +64,18 @@ pub type SessionId = ticket::Ticket;
 pub static RECOVERY_BUFFER_SIZE: AtomicUsize = AtomicUsize::new(64 * 1024); // Default to 64 KB, can be configured at runtime
 
 #[derive(Debug, Clone)]
-pub struct SessionRecoveryBuffer(Rc<UnsafeCell<RecoverySendBuffer>>);
-
-unsafe impl Send for SessionRecoveryBuffer {}
-unsafe impl Sync for SessionRecoveryBuffer {}
+pub struct SessionRecoveryBuffer(Arc<Mutex<RecoverySendBuffer>>);
 
 impl SessionRecoveryBuffer {
     pub fn new(max_bytes: usize) -> Self {
-        Self(Rc::new(UnsafeCell::new(RecoverySendBuffer::new(max_bytes))))
+        Self(Arc::new(Mutex::new(RecoverySendBuffer::new(max_bytes))))
     }
 
-    #[allow(clippy::mut_from_ref)]
-    pub fn get(&self) -> &mut RecoverySendBuffer {
-        unsafe { &mut *self.0.get() }
+    /// Locks the recovery buffer for exclusive access. Lock poisoning is ignored
+    /// (the buffered bytes stay valid even if a previous holder panicked), so this
+    /// never panics on lock. The guard must be dropped before any `.await`.
+    pub fn get(&self) -> std::sync::MutexGuard<'_, RecoverySendBuffer> {
+        self.0.lock().unwrap_or_else(|poisoned| poisoned.into_inner())
     }
 }
 

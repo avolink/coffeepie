@@ -150,7 +150,11 @@ impl<W: AsyncWriteExt + Unpin> TunnelServerOutboundStream<W> {
             self.session_id
         );
         // Send all unsent packets
-        while let Some((unsent_packet, old_seq)) = recovery_buffer.get().take_unsent_packet() {
+        loop {
+            // Take the packet under the lock, then release it before sending so the
+            // guard is never held across `.await` (which would make the future !Send).
+            let next = recovery_buffer.get().take_unsent_packet();
+            let Some((unsent_packet, old_seq)) = next else { break };
             // We can block here because we are already in the connection task, and we want to ensure the unsent packet is sent before processing new packets
             // If we fail to send, we will retry on next connection, so it's not critical to send it on this connection
             log::debug!(
@@ -188,8 +192,13 @@ impl<W: AsyncWriteExt + Unpin> TunnelServerOutboundStream<W> {
                         Ok(channel_data) => {
                             // Store on recovery buffer, so if we fail to send, we can retry on next connection
                             // Returns a reference to the newly added item, so we can send it without cloning
-                            let data = recovery_buffer.get().push(self.crypt.current_seq() + 1, channel_data)?;
-                            self.send_data(data).await?;
+                            // Push under the lock and clone the stored packet out, so the
+                            // lock is released before the `.await` on send_data.
+                            let data = {
+                                let mut buf = recovery_buffer.get();
+                                buf.push(self.crypt.current_seq() + 1, channel_data)?.clone()
+                            };
+                            self.send_data(&data).await?;
                         }
                         Err(e) => {
                             // Maybe the receiver "won" the select! but stop is already set. This is fine
