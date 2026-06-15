@@ -8,8 +8,8 @@
 #include <QGuiApplication>
 #include "qqmlextensionplugin.h"
 
-Q_IMPORT_QML_PLUGIN(CoffeePiePlugin)
 Q_IMPORT_QML_PLUGIN(CoffeePieContentPlugin)
+Q_IMPORT_QML_PLUGIN(CoffeePiePlugin)
 
 const char mainQmlFile[] = "qrc:/qt/qml/CoffeePieContent/Login_Screen.qml";
 

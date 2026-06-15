@@ -1,0 +1,34 @@
+services:
+  coffeepie:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coffeepie-app
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"   # ← add this
+    # No Xvfb needed — talk directly to the host X server
+    entrypoint: []
+    command: python3 CoffeePieContent/python/main.py
+
+    environment:
+      - DISPLAY=:0          # inherits :0 from your host shell
+      - QT_QPA_PLATFORM=xcb
+      - QT_AUTO_SCREEN_SCALE_FACTOR=1
+      - QT_XCB_GL_INTEGRATION=none
+      - LIBGL_ALWAYS_SOFTWARE=1     # software renderer — safe default
+      - API_HOST=host.docker.internal
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw   # ← the key line
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
+    networks:
+      - app-network
+
+    stdin_open: true
+    tty: true
+
+networks:
+  app-network:
+    driver: bridge

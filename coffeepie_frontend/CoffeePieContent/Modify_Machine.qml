@@ -1,5 +1,6 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick  2.15
+import QtQuick.Controls  2.15
+
 
 
 Item {
@@ -56,8 +57,8 @@ Item {
 
             Slider {
                 id: slider
-                x: 135
-                y: 400
+                x: 130
+                y: 340
                 width: 1646
                 height: 108
                 value: 4
@@ -65,28 +66,31 @@ Item {
                 from: 1
                 Text {
                     id: machineDescription
-                    x: 2
-                    y: 99
+                    x: 4
+                    y: 116
                     width: 1638
                     height: 398
                     color: "#eaeaea"
-                    text: qsTr("4 Porciones (500GB) te costarán: 2800 Cr/hora\n4 Wh Consumo Eléctrico\n4 NúcleosLógicos\n4 GB RAM\n32 GB SSD\n500 GB HDD\n500 MB VRAM\n32 Mbps Ancho de Banda\n12 MPX/s Resolución/Tasa Refresco\n")
+                    text: qsTr("4 Porciones (500GB) te costarán: 3600 Cr/hora\n4 Wh Consumo Eléctrico\n4 Núcleos Lógicos\n4 GB RAM\n32 GB SSD\n500 GB HDD\n500 MB VRAM\n32 Mbps Ancho de Banda\n12 MPX/s Resolución/Tasa Refresco\n")
                     font.pixelSize: 32
                     horizontalAlignment: Text.AlignHCenter
                 }
 
                 Connections {
                     target: slider
-                    function onValueChanged() { machineDescription.text = slider.value + " Porciones (" + slider.value * 125 + " GB) te costarán: " + slider.value * 700 + " Cr/hora\n"
-                                                + slider.value * 1 + " Wh Consumo Eléctrico\n"
-                                                + slider.value * 1 + " Núcleos Lógicos\n"
-                                                + slider.value * 1 + " GB RAM\n"
-                                                + slider.value * 8 + " GB SSD\n"
-                                                + slider.value * 125 + " GB HDD\n"
-                                                + slider.value * 125 + " MB VRAM\n"
-                                                + slider.value * 8 + " Mbps Ancho de Banda\n"
-                                                + slider.value * 3 + " MPX/s Resolución/Tasa Refresco\n"
-                    }
+                    function onValueChanged() { machineDescription.text = slider.value + " Porciones (" + slider.value * 125 + " GB) te costarán: " + slider.value * 30 + " Cr/min\n"
+                                               + slider.value * 1 + " Wh Consumo Eléctrico\n"
+                                               + slider.value * 1 + " Núcleos Lógicos\n"
+                                               + slider.value * 1 + " GB RAM\n"
+                                             + slider.value * 8 + " GB SSD\n"
+                                              + slider.value * 125 + " GB HDD\n"
+                                               + slider.value * 125 + " MB VRAM\n"
+                                             + slider.value * 8 + " Mbps Ancho de Banda\n"
+                                              + slider.value * 3 + " MPX/s Resolución/Tasa Refresco\n"
+                   }
+
+
+                  
                 }
                 to: 256
             }
@@ -161,7 +165,7 @@ Item {
                             width: 478
                             height: 56
                             color: "#ffffff"
-                            text: qsTr("700 Cr")
+                            text: qsTr("30 Cr")
                             font.pixelSize: 38
                             horizontalAlignment: Text.AlignHCenter
                         }
@@ -173,8 +177,9 @@ Item {
                             width: 478
                             height: 53
                             color: "#ffffff"
-                            text: qsTr("Porción/Hora")
+                            text: qsTr("Porción/Minuto")
                             horizontalAlignment: Text.AlignHCenter
+                            styleColor: "#ffffff"
                             font.pointSize: 30
                             font.bold: false
                         }
@@ -245,6 +250,7 @@ Item {
                             color: "#ffffff"
                             text: qsTr("Porción/Mes")
                             horizontalAlignment: Text.AlignHCenter
+                            styleColor: "#ffffff"
                             font.pointSize: 30
                             font.bold: false
                         }
@@ -316,6 +322,7 @@ Item {
                             color: "#ffffff"
                             text: qsTr("Porción/Año")
                             horizontalAlignment: Text.AlignHCenter
+                            styleColor: "#ffffff"
                             font.pointSize: 30
                             font.bold: false
                         }
@@ -326,7 +333,7 @@ Item {
             RoundButton {
                 id: buttonSubstractSlice
                 x: 24
-                y: 400
+                y: 364
                 width: 100
                 height: 100
                 icon.height: 170
@@ -352,7 +359,7 @@ Item {
             RoundButton {
                 id: buttonAddSlice
                 x: 1790
-                y: 400
+                y: 364
                 width: 103
                 height: 103
                 spacing: 0
@@ -365,7 +372,9 @@ Item {
                 Image {
                     id: coffee_Pie_Full
                     x: 0
-                    y: 24
+                    y: 22
+                    width: 96
+                    height: 55
                     source: "images/Coffee_Pie_Full.png"
                     fillMode: Image.PreserveAspectFit
                 }
@@ -394,6 +403,36 @@ Item {
             icon.color: "#007a2828"
         }
 
+
+        Image {
+    id: input_Field_Vector1
+    x:690
+    y: 820
+    width: 479
+    height: 68
+    source: "images/Input_Field_Vector.png"
+    fillMode: Image.Stretch
+}
+
+TextField {
+    id: inputFieldnamechine
+    x: 690
+    y: 830
+    width: 458
+    height: 51
+    visible: true
+    selectionColor: "#908f8f"
+    selectedTextColor: "#ffffff"
+    placeholderText: qsTr("nombre de vm")
+    inputMask: ""
+    font.pointSize: 20
+    onFocusChanged: if (focus) selectAll()
+    background: Rectangle {
+        color: flat
+    }
+}
+
+
         Image {
             id: modifyButton
             x: 697
@@ -405,7 +444,7 @@ Item {
                 id: buttonCreate
                 x: 0
                 y: 2
-                width: 527
+                width: 427
                 height: 130
                 icon.color: "#ffffff"
                 font.pointSize: 30
@@ -423,7 +462,7 @@ Item {
                     width: 498
                     height: 116
                     color: "#ffffff"
-                    text: qsTr("Modificar Máquina")
+                    text: qsTr("Continuar")
                     font.pixelSize: 44
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
@@ -432,11 +471,59 @@ Item {
 
                 Connections {
                     target: buttonCreate
-                    function onClicked() { stackView.clear() }
+                    function onClicked() { 
+                         var specs = {
+                namevm: inputFieldnamechine.text,
+                source_name: "tempWindows10",
+                node: "proxmox",
+                storage: "local-lvm",
+                full: 0,
+                ipconfig0: "string",
+                cores: slider.value * 1,
+                sockets: 1,
+                memory: slider.value * 1000,
+                disk: "ide0",
+                disk_size: (slider.value * 125) + "G",
+                credits_for_minutes: slider.value * 30
+            };
+            var result = myMachine.cloneVMWithSpecs(myMachine.userToken, specs);
+           
+    if (result && result.success === false) {
+        resultDialog.message = result.detail;
+        resultDialog.visible = true;
+    } else {
+        resultDialog.message = "Máquina clonada exitosamente.";
+        resultDialog.visible = true;
+    }
+                        
+                        
+                        
+                        
+                        
+                        
+                        stackView.clear() }
                 }
             }
         }
     }
+
+
+Dialog {
+    id: resultDialog
+    property string message: ""
+    title: "Resultado"
+    visible: false
+    standardButtons: Dialog.Ok
+    onAccepted: visible = false
+
+    Text {
+        text: resultDialog.message
+        color: "white"
+        wrapMode: Text.WordWrap
+    }
+}
+
+
 }
 
 

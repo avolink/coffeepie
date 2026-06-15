@@ -1,0 +1,2 @@
+// GlobalToken.js
+var accessToken = "";

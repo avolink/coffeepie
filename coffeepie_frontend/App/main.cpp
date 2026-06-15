@@ -3,7 +3,6 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QWindow>
 
 #include "autogen/environment.h"
 
@@ -27,12 +26,6 @@ int main(int argc, char *argv[])
 
     if (engine.rootObjects().isEmpty())
         return -1;
-
-    QWindow *window = qobject_cast<QWindow *>(engine.rootObjects().first());
-    if (window) {
-        window->setFlags(Qt::FramelessWindowHint);
-        window->showFullScreen();
-    }
 
     return app.exec();
 }

@@ -16,15 +16,10 @@ set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
     FORCE
 )
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Gui Qml Quick)
-qt_standard_project_setup()
+find_package(Qt5 5.15 REQUIRED COMPONENTS Core Gui Qml Quick)
 
 
-qt_add_executable(${CMAKE_PROJECT_NAME})
-qt_add_resources(${CMAKE_PROJECT_NAME} "configuration"
-    PREFIX "/"
-    FILES
-        qtquickcontrols2.conf)
+add_executable(${CMAKE_PROJECT_NAME})
 
 include(qds)
 

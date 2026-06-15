@@ -1,5 +1,5 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Item {
     id: root
@@ -31,13 +31,6 @@ Item {
             }
         }
 
-        Connections {
-            target: api
-            function onOrchestratorsLoaded(data) {
-                txtOrchFallback.text = data
-            }
-        }
-
         Text {
             id: lblKeepAdvancedMode
             x: 39
@@ -45,7 +38,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Iniciar en Modo Avanzado")
+            text: qsTr("Iniciar en Modo Avanzado")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -58,7 +51,7 @@ Item {
             width: 1646
             height: 62
             color: "#ffffff"
-            text: tr.tr("Configuración Avanzada")
+            text: qsTr("Configuración Avanzada")
             font.pixelSize: 54
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -71,7 +64,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Upscaling")
+            text: qsTr("Upscaling")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -84,7 +77,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Renderization")
+            text: qsTr("Renderization")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -97,7 +90,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Rasterization")
+            text: qsTr("Rasterization")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -110,7 +103,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Shaders")
+            text: qsTr("Shaders")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -123,7 +116,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Anti-aliasing")
+            text: qsTr("Anti-aliasing")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -136,7 +129,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Motion Blur")
+            text: qsTr("Motion Blur")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -149,7 +142,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("USB/IP")
+            text: qsTr("USB/IP")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -180,7 +173,7 @@ Item {
         y: 1017
         width: 435
         height: 63
-        text: tr.tr("Cargar Valores Predeterminados")
+        text: qsTr("Cargar Valores Predeterminados")
         icon.width: 30
         font.pointSize: 20
         flat: false
@@ -197,10 +190,15 @@ Item {
         y: 1017
         width: 435
         height: 63
-        text: tr.tr("Guardar Cambios")
+        text: qsTr("Guardar Cambios")
         icon.width: 30
         font.pointSize: 20
         flat: false
+        Connections {
+            target: buttonSaveChanges
+            onClicked: console.log("clicked")
+        }
+
         Connections {
             target: buttonSaveChanges
             onClicked: console.log("clicked")
@@ -301,99 +299,6 @@ Item {
         font.pointSize: 20
         flat: false
         editable: false
-    }
-
-    Text {
-        id: lblNetworkConfig
-        x: 39
-        y: 620
-        width: 545
-        height: 50
-        color: "#ffffff"
-        text: tr.tr("Red y Conectividad")
-        font.pixelSize: 36
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-    }
-
-    Text {
-        id: lblNetworkTier
-        x: 39
-        y: 680
-        width: 545
-        height: 50
-        color: "#999999"
-        text: tr.tr("Nivel de Red")
-        font.pixelSize: 28
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-    }
-
-    Text {
-        id: txtNetworkTier
-        x: 588
-        y: 680
-        width: 700
-        height: 50
-        color: "#ffffff"
-        text: api.getNetworkTierLabel()
-        font.pixelSize: 24
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-    }
-
-    Text {
-        id: lblOrchFallback
-        x: 39
-        y: 740
-        width: 545
-        height: 50
-        color: "#999999"
-        text: tr.tr("Orquestadores")
-        font.pixelSize: 28
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
-    }
-
-    TextArea {
-        id: txtOrchFallback
-        x: 588
-        y: 740
-        width: 700
-        height: 120
-        color: "#ffffff"
-        text: api.orchestratorsJson
-        font.pixelSize: 16
-        readOnly: true
-        background: Rectangle { color: "#555555"; radius: 4 }
-    }
-
-    Button {
-        id: buttonFetchOrch
-        x: 1308
-        y: 740
-        width: 120
-        height: 40
-        text: tr.tr("Actualizar")
-        font.pointSize: 14
-        Connections {
-            target: buttonFetchOrch
-            onClicked: api.fetchOrchestrators()
-        }
-    }
-
-    Button {
-        id: buttonFetchTurn
-        x: 588
-        y: 870
-        width: 200
-        height: 40
-        text: tr.tr("Obtener credenciales TURN")
-        font.pointSize: 14
-        Connections {
-            target: buttonFetchTurn
-            onClicked: api.fetchTurnCredentials()
-        }
     }
 
 }

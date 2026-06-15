@@ -1,5 +1,5 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Item {
     id: root
@@ -38,7 +38,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Lenguaje de Interfaz")
+            text: qsTr("Lenguaje de Interfaz")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -50,7 +50,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Dirección MAC")
+                text: qsTr("Dirección MAC")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -63,7 +63,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Proveedor de Internet (ISP)")
+                text: qsTr("Proveedor de Internet (ISP)")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -76,7 +76,7 @@ Item {
                 width: 537
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Dirección IPv4")
+                text: qsTr("Dirección IPv4")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -89,7 +89,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Dirección IPv6")
+                text: qsTr("Dirección IPv6")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -102,7 +102,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Máscara de Subred")
+                text: qsTr("Máscara de Subred")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -115,7 +115,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Puerta de Enlace Predeterminada")
+                text: qsTr("Puerta de Enlace Predeterminada")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -129,7 +129,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Conexión Predeterminada")
+            text: qsTr("Conexión Predeterminada")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -142,7 +142,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Codec Predeterminado")
+            text: qsTr("Codec Predeterminado")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -155,7 +155,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Resolución Predeterminada")
+            text: qsTr("Resolución Predeterminada")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -168,7 +168,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Bitrate Predeterminado")
+            text: qsTr("Bitrate Predeterminado")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -181,7 +181,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Recurrencia Predeterminada")
+            text: qsTr("Recurrencia Predeterminada")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -194,7 +194,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Estado Predeterminado Máquina")
+            text: qsTr("Estado Predeterminado Máquina")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -207,7 +207,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Sincronización de Datos")
+            text: qsTr("Sincronización de Datos")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -220,38 +220,10 @@ Item {
             width: 1646
             height: 62
             color: "#ffffff"
-            text: tr.tr("Configuración Básica")
+            text: qsTr("Configuración Básica")
             font.pixelSize: 54
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-        }
-
-        Text {
-            id: lblOrchestratorUrl
-            x: 1403
-            y: 121
-            width: 545
-            height: 50
-            color: "#ffffff"
-            text: tr.tr("URL Orquestador")
-            font.pixelSize: 36
-            horizontalAlignment: Text.AlignLeft
-            verticalAlignment: Text.AlignVCenter
-        }
-
-        TextField {
-            id: inputOrchestratorUrl
-            x: 1403
-            y: 170
-            width: 500
-            height: 50
-            visible: true
-            text: "https://orquestador.coffeepie.co"
-            selectionColor: "#908f8f"
-            selectedTextColor: "#ffffff"
-            placeholderText: tr.tr("https://orquestador.coffeepie.co")
-            font.pointSize: 16
-            background: Rectangle { color: "transparent" }
         }
 
         Text {
@@ -261,7 +233,7 @@ Item {
             width: 1691
             height: 50
             color: "#ffffff"
-            text: tr.tr("Configuración de Red")
+            text: qsTr("Configuración de Red")
             font.pixelSize: 54
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -274,7 +246,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Sincronización de Respaldos")
+            text: qsTr("Sincronización de Respaldos")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -289,17 +261,7 @@ Item {
             font.pointSize: 20
             flat: false
             editable: false
-            textRole: "name"
-            valueRole: "code"
-            model: tr.availableLangs()
-            currentIndex: {
-                var langs = tr.availableLangs()
-                for (var i = 0; i < langs.length; i++) {
-                    if (langs[i].code === tr.currentLang()) return i
-                }
-                return 0
-            }
-            onActivated: tr.setLang(currentValue)
+            model: ["Spanish","English","Portuguese","French"]
         }
 
         ComboBox {
@@ -404,7 +366,7 @@ Item {
             y: 1017
             width: 435
             height: 63
-            text: tr.tr("Configuración Avanzada")
+            text: qsTr("Configuración Avanzada")
             font.pointSize: 20
             icon.width: 30
             flat: false
@@ -422,7 +384,7 @@ Item {
             width: 793
             height: 50
             color: "#ffffff"
-            text: tr.tr("40-B0-76-7C-3D-F6")
+            text: qsTr("40-B0-76-7C-3D-F6")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -435,7 +397,7 @@ Item {
             width: 793
             height: 50
             color: "#ffffff"
-            text: tr.tr("tigoune.com.co")
+            text: qsTr("tigoune.com.co")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -448,7 +410,7 @@ Item {
             width: 793
             height: 50
             color: "#ffffff"
-            text: tr.tr("192.168.1.255")
+            text: qsTr("192.168.1.255")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -461,7 +423,7 @@ Item {
             width: 793
             height: 50
             color: "#ffffff"
-            text: tr.tr("2800:e2:b27f:fba9:5737:443f:9345:6774")
+            text: qsTr("2800:e2:b27f:fba9:5737:443f:9345:6774")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -474,7 +436,7 @@ Item {
             width: 793
             height: 50
             color: "#ffffff"
-            text: tr.tr("255.255.255.0")
+            text: qsTr("255.255.255.0")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -487,7 +449,7 @@ Item {
             width: 793
             height: 50
             color: "#ffffff"
-            text: tr.tr("fe80::4632:c8ff:feee:bf47%14")
+            text: qsTr("fe80::4632:c8ff:feee:bf47%14")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -518,13 +480,18 @@ Item {
         y: 1017
         width: 435
         height: 63
-        text: tr.tr("Cargar Valores Predeterminados")
+        text: qsTr("Cargar Valores Predeterminados")
         icon.width: 30
         font.pointSize: 20
         flat: false
         Connections {
             target: buttonLoadDefaults
             onClicked: stackView.push("Config_Advanced.qml")
+        }
+
+        Connections {
+            target: buttonLoadDefaults
+            onClicked: console.log("clicked")
         }
     }
 
@@ -534,16 +501,18 @@ Item {
         y: 1017
         width: 435
         height: 63
-        text: tr.tr("Guardar Cambios")
+        text: qsTr("Guardar Cambios")
         icon.width: 30
         font.pointSize: 20
         flat: false
         Connections {
             target: buttonSaveChanges
-            onClicked: {
-                api.setOrchestratorUrl(inputOrchestratorUrl.text)
-                console.log("Config saved")
-            }
+            onClicked: console.log("clicked")
+        }
+
+        Connections {
+            target: buttonSaveChanges
+            onClicked: console.log("clicked")
         }
     }
 }

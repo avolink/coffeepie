@@ -1,33 +1,128 @@
-# Build directories
-*-Debug/
-*-Release/
-*-MinSizeRel/
-*-RelWithDebInfo/
-build*/
-Build*/
+# General ignores
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+*.~*
+*.orig
+*.rej
+*.pyc
+*.pyo
+*.pdb
+*.idb
+*.ilk
+*.class
+*.cache
+*.out
+*.dSYM
+*.stackdump
+*.plist
+*.xib
+*.xcsettings
+*.xcscheme
+*.xcodeproj
+*.qmlc
+*.qmlcache
+*.version
+*.version.in
 
-# Qt Creator user files
-*.autosave
+# Python-specific ignores
+__pycache__/
 
-# Qt Design Studio auto-generated QRC files
-*.qmlrc.bin
+*.pyo
+*.env
+*.venv
+*.egg
+*.egg-info/
+dist/
+build/
+*.sqlite3
 
-# IDE
-.qtc_clangd/
-.qt/
-.vscode/
-.idea/
+# Qt-specific ignores
+*.pro.user
+*.qmlproject.user*
+*.qmake.stash
+*.qmake.cache
+*.qmake.vars
+*.prl
+*.moc
+*.rcc
+*.ui
+*.qrc
+*.qmlc
+*.qmlcache
+*.qmltypes
+*.qmake.stash
+*.qmake.cache
+*.qmake.vars
+*.qmake.conf
+*.qmake.stash
+*.qmake.cache
+*.qmake.vars
+*.qmake.conf
+*.qmake.stash
+*.qmake.cache
+*.qmake.vars
+*.qmake.conf
 
-# CMake generated
+# CMake-specific ignores
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 Makefile
+install_manifest.txt
+*.cmake
 
-# Archives
-*.rar
-*.zip
+# Build directories
+build/
+dist/
+*.o
+*.obj
+*.so
+*.so.*
+*.dll
+*.dylib
+*.lib
+*.exp
+*.a
+*.la
+*.core
+*.Debug
+*.Release
 
-# OS files
-.DS_Store
-Thumbs.db
+# Generated files
+*_autogen/
+*.moc
+*.ui.h
+*.qrc.cpp
+*.qmltyperegistrations.cpp
+*.plugin_import.cpp
+
+# IDE-specific ignores
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.sln
+*.suo
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.ncb
+*.pch
+*.directory
+*.project
+*.cproject
+*.workspace
+
+# Project-specific ignores
+CoffeePie.qmlproject.user
+CoffeePie.qmlrc.bin
+
+CoffeePieContent/*.qmlc
+CoffeePieContent/*.qmlcache
+Dependencies/Components/.gitignore
+Generated/

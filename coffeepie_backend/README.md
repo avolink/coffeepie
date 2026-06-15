@@ -1,96 +1,248 @@
-# OpenUDS — Universal Desktop Service (Coffee Pie® Orchestrator)
+# Server Proxmox DB
 
-OpenUDS (Universal Desktop Service) is the Coffee Pie® orchestrator — a FastAPI-based backend that brokers user sessions to virtual desktops (VMs and Containers), manages pool provisioning, and coordinates with the hypervisor layer. It replaces Guacamole with Sunshine/Moonlight for ultra-low latency streaming over UDP.
+A FastAPI-based application for managing Proxmox VMs with MongoDB integration, featuring user authentication, company management, VM operations, and terminal access.
 
-## Architecture
+## Prerequisites
 
-The orchestrator sits between the Coffee Pie® Frontend (Codec Terminals) and the hypervisor infrastructure, brokering connections without proxying media streams. Video/audio flows direct P2P between VM and terminal via Sunshine → Moonlight over UDP.
-
-```
-Codec Terminal → [TCP: Orchestrator API] → Proxmox Backend → Proxmox Hosts
-                 [UDP: Sunshine/Moonlight direct P2P stream]
-```
-
-## Features
-
-- VM and Container lifecycle management (create, clone, delete, start, stop, reboot)
-- User session brokering — authenticated desktop assignment
-- Pool provisioning and resource scheduling (via QFDM)
-- Direct UDP streaming handoff (Sunshine ↔ Moonlight)
-- Integrated payment processing (PSE, Bancolombia QR, Bre-B)
-- Provider-tier settlement and COFP token economics
+- Python 3.8+ (for venv installation)
+- Docker & Docker Compose (for containerized setup)
+- MongoDB (included in docker-compose.yml)
+- Proxmox Server with API access
 
 ## Project Structure
 
 ```
-coffeepie_backend/
-├── app/                        # OpenUDS orchestrator (FastAPI)
-│   ├── main.py                 # FastAPI app entry point
-│   ├── controllers/            # API route handlers
-│   │   └── proxmox_controller.py
-│   ├── models/                 # Pydantic request/response models
-│   │   └── proxmox_models.py
-│   └── services/               # Business logic (VM/CT operations)
-│       └── proxmox_service.py
-├── proxmox_backend/            # Proxmox hypervisor connector
-│   └── README.md
-├── payments/                   # Payment processing
-│   ├── services.py
-│   ├── webhook.py
-│   ├── models.py
-│   └── backends/
-│       ├── pse.py              # PSE (Colombia ACH)
-│       ├── bancolombia.py      # Bancolombia QR
-│       └── breb.py             # Bre-B instant transfers
-├── sunshine/                   # Sunshine streaming server (forked)
-├── requirements.txt
-└── README.md
+app/
+├── api/                 # API routes (auth, VMs, snapshots, etc.)
+├── core/               # Security configurations
+├── crud/               # Database operations
+├── models/             # Data models
+├── services/           # Business logic services
+└── utilities/          # Helper functions
 ```
+
+## Installation & Setup
+
+### Option 1: Using Virtual Environment (venv)
+
+#### 1. Create and Activate Virtual Environment
+
+**On Windows (PowerShell):**
+```powershell
+python -m venv venv
+(Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned)
+.\venv\Scripts\Activate.ps1
+```
+
+**On macOS/Linux:**
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+#### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 3. Configure Environment Variables
+
+Create a `.env` file in the project root (see [Example .env File](#example-env-file) below):
+
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+#### 4. Setup MongoDB (Local)
+
+Ensure MongoDB is running locally or update `MONGO_URI` in `.env` to point to your MongoDB instance.
+
+#### 5. Run the Application
+
+```bash
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8080
+```
+
+The API will be available at `http://localhost:8000`
+
+API Documentation:
+- Swagger UI: `http://localhost:8080/docs`
+- ReDoc: `http://localhost:8080/redoc`
+
+---
+
+### Option 2: Using Docker Compose
+
+#### 1. Configure Environment Variables
+
+Create a `.env` file in the project root with your configuration:
+
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+#### 2. Build and Run Containers
+
+```bash
+docker-compose up -d
+```
+
+This will start:
+- FastAPI application on `http://localhost:8080`
+- MongoDB on `mongodb://localhost:27017`
+
+#### 3. View Logs
+
+```bash
+docker-compose logs -f app
+```
+
+#### 4. Stop Containers
+
+```bash
+docker-compose down
+```
+
+#### 5. Rebuild Containers (after code changes)
+
+```bash
+docker-compose up -d --build
+```
+
+---
+
+## Example .env File
+
+Create a `.env` file in the project root with the following configuration:
+
+```env
+# Proxmox Configuration
+PROXMOX_URL=https://206.62.137.22:8006/api2/json
+PROXMOX_USER=root@pam
+PROXMOX_PASSWORD=your-proxmox-password
+PROXMOX_ip=206.62.137.22:8006
+
+# MongoDB Configuration
+MONGO_INITDB_ROOT_USERNAME=root
+MONGO_INITDB_ROOT_PASSWORD=password
+MONGO_URI=mongodb://root:password@mongo:27017
+MONGO_DB_NAME=serverproxmoxdb
+
+# JWT Configuration
+JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+JWT_ALGORITHM=HS256
+JWT_EXPIRE_MINUTES=30
+
+# Documentation API Key
+DOCS_API_KEY=prx_doc_key_9bL4kM2wP7nR5vX3yC8qT1jF6sD0aE2lH
+```
+
+### Environment Variables Explanation
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `PROXMOX_URL` | Proxmox API endpoint | `https://your-proxmox-ip:8006/api2/json` |
+| `PROXMOX_USER` | Proxmox username | `root@pam` |
+| `PROXMOX_PASSWORD` | Proxmox password | `your-password` |
+| `PROXMOX_ip` | Proxmox server IP and port | `206.62.137.22:8006` |
+| `MONGO_INITDB_ROOT_USERNAME` | MongoDB root username | `root` |
+| `MONGO_INITDB_ROOT_PASSWORD` | MongoDB root password | `password` |
+| `MONGO_URI` | MongoDB connection string | `mongodb://root:password@mongo:27017` |
+| `MONGO_DB_NAME` | MongoDB database name | `serverproxmoxdb` |
+| `JWT_SECRET_KEY` | Secret key for JWT tokens | Generate a secure random string |
+| `JWT_ALGORITHM` | JWT algorithm | `HS256` |
+| `JWT_EXPIRE_MINUTES` | JWT token expiration time | `30` |
+| `DOCS_API_KEY` | Documentation API key | `prx_doc_key_...` |
+
+---
 
 ## API Endpoints
 
-### VM Operations
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/clone-vm` | Clone an existing VM |
-| POST | `/create-vm` | Create a new VM |
-| GET  | `/vms` | List all VMs |
-| POST | `/update-vm` | Update VM configuration |
-| POST | `/delete-vm` | Delete a VM |
-| POST | `/control-vm/{action}` | Start, stop, shutdown, reboot a VM |
-| GET  | `/vm/{vmid}/network` | Get VM network information |
+### Authentication
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/refresh` - Refresh JWT token
 
-### CT Operations
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/clone-ct` | Clone an existing Container |
-| POST | `/create-ct` | Create a new Container |
-| GET  | `/cts` | List all Containers |
-| POST | `/control-ct/{action}` | Start, stop, shutdown, reboot a CT |
+### Users
+- `GET /api/users/me` - Get current user
+- `GET /api/users` - Get all users (admin)
+- `POST /api/users` - Create user (admin)
 
-## Requirements
+### Companies
+- `GET /api/companies` - Get all companies
+- `GET /api/companies/{id}` - Get company details
+- `POST /api/companies` - Create company
 
-- Python 3.8+
-- Proxmox CLI tools (`qm`, `pct`) installed and accessible on the host
-- Sunshine streaming server (included in `sunshine/`)
-- uvicorn for ASGI serving
+### Virtual Machines (VMs)
+- `GET /api/vms` - List all VMs
+- `GET /api/vms/{id}` - Get VM details
+- `POST /api/vms` - Create VM
+- `POST /api/vms/{id}/start` - Start VM
+- `POST /api/vms/{id}/stop` - Stop VM
+- `POST /api/vms/{id}/reboot` - Reboot VM
+- `POST /api/vms/{id}/clone` - Clone VM
+- `DELETE /api/vms/{id}` - Delete VM
 
-## Running
+### Snapshots
+- `GET /api/snapshots` - List snapshots
+- `POST /api/snapshots` - Create snapshot
+- `DELETE /api/snapshots/{id}` - Delete snapshot
+
+### Terminals
+- `GET /api/terminals` - Get terminal access
+
+---
+
+## Development
+
+### Install Development Dependencies
 
 ```bash
-cd coffeepie_backend
 pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-## Related Components
+### Run Tests
 
-- **Proxmox Backend** (`proxmox_backend/`): Refactored FastAPI backend with Firebase auth, Sunshine integration, and extended Proxmox operations.
-- **DC Agent** (`coffeepie_orchestrator/dc-agent/`): Rust Axum server for hypervisor abstraction and Slice management at datacenter scale.
-- **Coffee Pie® Qt Frontend**: Kiosk-mode GUI running on Codec Terminals, connecting to this orchestrator via TCP credentials + UDP streaming.
+```bash
+pytest
+```
 
-## Contributing
+### Code Style
 
-Contributions are welcome! Please fork the repository and submit a pull request. See the main [LICENSE](/LICENSE) for licensing terms.
+The project follows PEP 8 guidelines.
 
-Coffee Pie® — Democratizing computing power.
+---
+
+## Troubleshooting
+
+### MongoDB Connection Error
+- Ensure MongoDB is running
+- Verify `MONGO_URI` in `.env` is correct
+- Check MongoDB credentials
+
+### Proxmox Connection Error
+- Verify `PROXMOX_URL` and credentials
+- Ensure Proxmox server is accessible from your machine
+- Check SSL certificate if using HTTPS
+
+### Port Already in Use
+- Change port in startup command: `--port 8001`
+- Or kill process using port 8080
+
+### Docker Issues
+- Rebuild containers: `docker-compose up -d --build`
+- Check logs: `docker-compose logs app`
+- Remove volumes and restart: `docker-compose down -v && docker-compose up -d`
+
+---
+
+## License
+
+Proprietary - All rights reserved
+
+## Support
+
+For issues or questions, contact your system administrator.

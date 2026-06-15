@@ -1,5 +1,5 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Item {
     id: root
@@ -14,20 +14,6 @@ Item {
         height: 1080
         visible: true
         color: "#908f8f"
-
-        Text {
-            id: lblAccountStatus
-            x: 14
-            y: 120
-            width: 1342
-            height: 40
-            color: "#00ff00"
-            text: ""
-            font.pixelSize: 24
-            horizontalAlignment: Text.AlignHCenter
-            visible: false
-        }
-
         Button {
             id: buttonClose
             x: 1807
@@ -45,30 +31,6 @@ Item {
             }
         }
 
-        Connections {
-            target: api
-            function onAccountSaved(message) {
-                lblAccountStatus.text = message
-                lblAccountStatus.color = "#00ff00"
-                lblAccountStatus.visible = true
-                timerHide.interval = 5000
-                timerHide.start()
-            }
-            function onAccountError(error) {
-                lblAccountStatus.text = error
-                lblAccountStatus.color = "#ff6666"
-                lblAccountStatus.visible = true
-                timerHide.interval = 5000
-                timerHide.start()
-            }
-        }
-
-        Timer {
-            id: timerHide
-            interval: 5000
-            onTriggered: lblAccountStatus.visible = false
-        }
-
         Text {
             id: lblOrganization
             x: 14
@@ -76,7 +38,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Organización (Nombre Comercial)")
+            text: qsTr("Organización (Nombre Comercial)")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -88,10 +50,11 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Correo Electrónico Sistemas")
+                text: qsTr("Correo Electrónico Sistemas")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
+                onFocusChanged: if (focus) selectAll()
             }
 
             Text {
@@ -101,7 +64,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Nombre del Contacto")
+                text: qsTr("Nombre del Contacto")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -114,7 +77,7 @@ Item {
                 width: 537
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Número del Contacto")
+                text: qsTr("Número del Contacto")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -127,7 +90,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Sitio Web (URL)")
+                text: qsTr("Sitio Web (URL)")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -140,7 +103,7 @@ Item {
                 width: 545
                 height: 50
                 color: "#ffffff"
-                text: tr.tr("Dominio")
+                text: qsTr("Dominio")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -154,7 +117,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Razón Social (Nombre Fiscal)")
+            text: qsTr("Razón Social (Nombre Fiscal)")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -167,7 +130,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Identificación Tributaria (NIT)")
+            text: qsTr("Identificación Tributaria (NIT)")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -180,7 +143,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Correo Electrónico")
+            text: qsTr("Correo Electrónico")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -193,7 +156,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Nombre de Contacto")
+            text: qsTr("Nombre de Contacto")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -206,7 +169,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Número de Contacto")
+            text: qsTr("Número de Contacto")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -219,7 +182,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Dirección Fiscal (Facturación)")
+            text: qsTr("Dirección Fiscal (Facturación)")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -232,7 +195,7 @@ Item {
             width: 545
             height: 50
             color: "#ffffff"
-            text: tr.tr("Dirección Física (Instalaciones)")
+            text: qsTr("Dirección Física (Instalaciones)")
             font.pixelSize: 36
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
@@ -245,7 +208,7 @@ Item {
             width: 1637
             height: 60
             color: "#ffffff"
-            text: tr.tr("Contacto Facturación (Contabilidad)")
+            text: qsTr("Contacto Facturación (Contabilidad)")
             font.pixelSize: 50
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -258,7 +221,7 @@ Item {
             width: 1605
             height: 62
             color: "#ffffff"
-            text: tr.tr("Mi Cuenta")
+            text: qsTr("Mi Cuenta")
             font.pixelSize: 64
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -271,7 +234,7 @@ Item {
             width: 1691
             height: 50
             color: "#ffffff"
-            text: tr.tr("Contacto Sistemas (Tech/IT)")
+            text: qsTr("Contacto Sistemas (Tech/IT)")
             font.pixelSize: 50
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -302,7 +265,7 @@ Item {
         y: 999
         width: 435
         height: 63
-        text: tr.tr("Guardar Cambios")
+        text: qsTr("Guardar Cambios")
         icon.width: 30
         font.pointSize: 20
         flat: false
@@ -321,14 +284,16 @@ Item {
         visible: true
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Organización")
+        placeholderText: qsTr("Organización")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldOrganization
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -341,14 +306,16 @@ Item {
         visible: true
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Razón Social")
+        placeholderText: qsTr("Razón Social")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldLegalName
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -362,14 +329,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Identificación Tributaria")
+        placeholderText: qsTr("Identificación Tributaria")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldLegalId
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -383,14 +352,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Correo Electrónico")
+        placeholderText: qsTr("Correo Electrónico")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldInvoiceEmail
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -404,14 +375,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Nombre de Contacto")
+        placeholderText: qsTr("Nombre de Contacto")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldInvoiceContactName
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -425,14 +398,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Número de Contacto")
+        placeholderText: qsTr("Número de Contacto")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldContactNumber
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -446,14 +421,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Dirección Fiscal")
+        placeholderText: qsTr("Dirección Fiscal")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldLegalAddress
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -467,14 +444,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Correo Electrónico Sistemas")
+        placeholderText: qsTr("Correo Electrónico Sistemas")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldTechContactEmail
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -488,14 +467,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Nombre de Contacto")
+        placeholderText: qsTr("Nombre de Contacto")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldTechContactName
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -509,14 +490,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Número de Contacto")
+        placeholderText: qsTr("Número de Contacto")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldTechContactNumber
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -530,14 +513,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Sitio Web")
+        placeholderText: qsTr("Sitio Web")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldWebsite
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -551,14 +536,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Dominio")
+        placeholderText: qsTr("Dominio")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldDomain
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 
@@ -572,14 +559,16 @@ Item {
         text: ""
         selectionColor: "#908f8f"
         selectedTextColor: "#ffffff"
-        placeholderText: tr.tr("Dirección Física")
+        placeholderText: qsTr("Dirección Física")
         inputMask: ""
         font.pointSize: 20
-        Keys.onReturnPressed: {
+        Connections {
+            target: inputFieldPhysicalAddress
+        } Keys.onReturnPressed: {
             nextItemInFocusChain().forceActiveFocus()
         }
         background: Rectangle {
-            color: "transparent"
+            color: flat
         }
     }
 }

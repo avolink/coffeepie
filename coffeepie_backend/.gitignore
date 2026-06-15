@@ -1,31 +1,10 @@
-# Python
+.env
+.env.local
+venv/
+__pycache__/
 *.pyc
 *.pyo
-*.pyd
-__pycache__/
-*.env
-
-# Virtual Environment
-venv/
-env/
-
-# IDEs and Editors
-.vscode/
-.idea/
-*.swp
-
-# Logs and Debugging
-*.log
-*.sqlite3
-
-# OS Files
-.DS_Store
-Thumbs.db
-
-# Dependencies
 *.egg-info/
-pip-wheel-metadata/
-
-# Archives
-*.rar
-*.zip
+.pytest_cache/
+.DS_Store
+node_modules/

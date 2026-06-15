@@ -1,11 +1,12 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick   2.15
+import QtQuick.Controls  2.15
+
 
 Item {
     id: root
     width: 1920
     height: 1080
-
+     z: 2
     Rectangle {
         id: mainMenu
         x: 1420
@@ -27,7 +28,7 @@ Item {
             flat: true
             Connections {
                 target: buttonClose
-                onClicked: stackView.clear("Main_Manu.qml", StackView.Immediate)
+                onClicked: stackView.clear("Main_Menu.qml", StackView.Immediate)
             }
         }
 
@@ -57,10 +58,11 @@ Item {
                 width: 334
                 height: 53
                 color: "#ffffff"
-                text: tr.tr("Recargar Saldo")
+                text: qsTr("Recargar Saldo")
                 font.pixelSize: 30
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
+                styleColor: "#ffffff"
                 font.bold: true
             }
         }
@@ -85,7 +87,7 @@ Item {
                 width: 316
                 height: 53
                 color: "#ffffff"
-                text: tr.tr("Mi Cuenta")
+                text: qsTr("Mi Cuenta")
                 font.pixelSize: 30
                 verticalAlignment: Text.AlignVCenter
                 font.bold: true
@@ -117,7 +119,7 @@ Item {
                 width: 308
                 height: 53
                 color: "#ffffff"
-                text: tr.tr("Configuración")
+                text: qsTr("Configuración")
                 font.pixelSize: 30
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
@@ -144,11 +146,7 @@ Item {
             palette.buttonText: "white"
             Connections {
                 target: buttonLogout
-                onClicked: {
-                    api.logout()
-                    stackView.clear()
-                    stackView.push("Login_Screen.qml")
-                }
+                onClicked: Qt.quit()
             }
 
             Text {
@@ -158,7 +156,7 @@ Item {
                 width: 256
                 height: 53
                 color: "#ffffff"
-                text: tr.tr("Cerrar Sesión")
+                text: qsTr("Cerrar Sesión")
                 font.pixelSize: 30
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter

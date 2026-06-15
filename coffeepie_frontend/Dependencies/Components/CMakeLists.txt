@@ -1,18 +1,57 @@
-find_package(Qt6 COMPONENTS ShaderTools)
+cmake_minimum_required(VERSION 3.16)
 
-add_library(QtQuickDesignerComponents INTERFACE)
+##PROJECT_VERSION_MAJOR = 6
 
-function(register_plugin module_name)
-    target_link_libraries(QtQuickDesignerComponents INTERFACE ${module_name}plugin)
-endfunction()
+## project(QtQuickDesignerComponents
+##    DESCRIPTION "QtQuick Designer Components"
+##    HOMEPAGE_URL "https://qt.io/"
+##    VERSION "6.4.0"
+##   LANGUAGES CXX C
+##)
 
-set(qds_qml_extra_args "")
-if(QT_QDS_COMPONENTS_NOWARN)
-   list(APPEND qds_qml_extra_args NO_LINT)
+include(CMakePrintHelpers)
+
+if(WIN32 AND NOT IGNORE_TOO_LONG_PATH_CHECK)
+  set(LIMIT 250)
+  set(FILE_SUFFIX "/src/imports/compat/QuickUltraLiteStudioComponentsplugin_autogen/include/QuickUltraLiteStudioComponentsplugin_QtQuickUltralite_Studio_ComponentsPlugin.moc")
+
+  set(fullMocFilePath "${CMAKE_BINARY_DIR}${FILE_SUFFIX}")
+
+  string(LENGTH "${fullMocFilePath}" fullPathLen)
+  string(LENGTH "${FILE_SUFFIX}" suffixLen)
+  math(EXPR maxBuildDirLen "${LIMIT} - ${suffixLen}")
+
+  if(fullPathLen GREATER LIMIT)
+    message(FATAL_ERROR
+      "The path to the build directory is too long. "
+      "Maximum allowed build directory length is ${maxBuildDirLen} characters. "
+      "Please use a shorter path or pass -DIGNORE_TOO_LONG_PATH_CHECK=ON to skip this check."
+    )
+  endif()
 endif()
 
-if (Qt6_VERSION VERSION_GREATER_EQUAL "6.8")
-    qt_policy(SET QTP0004 NEW)
-endif()
+set(PROJECT_VERSION_MAJOR 6)
+set(PROJECT_VERSION_MINOR 4)
+set(PROJECT_VERSION 6.4.1)
 
-add_subdirectory(imports)
+cmake_print_variables(PROJECT_SOURCE_DIR)
+cmake_print_variables(PROJECT_VERSION_MAJOR)
+message("$(PROJECT_SOURCE_DIR)")
+message("$(PROJECT_VERSION_MAJOR)")
+
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt6
+    CONFIG
+    REQUIRED
+    COMPONENTS
+        BuildInternals
+        Quick
+        Core
+        Qml
+        Gui
+)
+
+### qt_standard_project_setup()
+add_subdirectory(src)
+

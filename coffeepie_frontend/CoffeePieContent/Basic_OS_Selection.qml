@@ -1,11 +1,11 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick   2.15
+import QtQuick.Controls   2.15
 
 Item {
     id: root
     width: 1920
     height: 1080
-
+ z: 2
 
     StackView {
         id: stackViewBasicOSselection
@@ -76,7 +76,7 @@ Item {
                     icon.source: "images/Operating_Systems/W11_Icon.png"
                     icon.height: 90
                     icon.color: "#007a2828"
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
 
                 Text {
@@ -99,7 +99,7 @@ Item {
                     width: 485
                     height: 55
                     color: "#eaeaea"
-                    text: qsTr("Desde 3'600 Cr")
+                    text: qsTr("Desde 180 Cr/min")
                     font.pixelSize: 36
                     horizontalAlignment: Text.AlignRight
                     verticalAlignment: Text.AlignVCenter
@@ -114,7 +114,7 @@ Item {
 
                     Connections {
                         target: mouseArea1
-                        onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                        onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                     }
                 }
             }
@@ -135,7 +135,7 @@ Item {
                     icon.source: "images/Operating_Systems/W10_Icon.png"
                     icon.height: 100
                     icon.color: "#007a2828"
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -156,7 +156,7 @@ Item {
                     icon.height: 100
                     icon.width: 100
                     icon.source: "images/Operating_Systems/Bodhi_Linux_Icon.png"
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -177,7 +177,7 @@ Item {
                     icon.height: 100
                     icon.width: 100
                     icon.source: "images/Operating_Systems/Steam_OS_Icon.png"
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -198,7 +198,7 @@ Item {
                     icon.height: 100
                     icon.width: 100
                     icon.source: "images/Operating_Systems/Linux_Mint_Icon.png"
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
 
                 MouseArea {
@@ -210,7 +210,7 @@ Item {
 
                     Connections {
                         target: mouseArea4
-                        onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                        onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                     }
                 }
             }
@@ -232,7 +232,7 @@ Item {
                     icon.height: 130
                     icon.width: 130
                     icon.source: "images/Operating_Systems/Docker_OS_Icon.png"
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -308,7 +308,7 @@ Item {
                 width: 485
                 height: 55
                 color: "#eaeaea"
-                text: qsTr("Desde 2'800 Cr")
+                text: qsTr("Desde 120 Cr/min")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
@@ -321,7 +321,7 @@ Item {
                 width: 485
                 height: 55
                 color: "#eaeaea"
-                text: qsTr("Desde 2'800 Cr")
+                text: qsTr("Desde 120 Cr/min")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
@@ -334,7 +334,7 @@ Item {
                 width: 485
                 height: 55
                 color: "#eaeaea"
-                text: qsTr("Desde 1'400 Cr")
+                text: qsTr("Desde 60 Cr/min")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
@@ -347,7 +347,7 @@ Item {
                 width: 485
                 height: 55
                 color: "#eaeaea"
-                text: qsTr("Desde 700 Cr")
+                text: qsTr("Desde 30 Cr/min")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
@@ -360,7 +360,7 @@ Item {
                 width: 485
                 height: 55
                 color: "#eaeaea"
-                text: qsTr("Desde 700 Cr")
+                text: qsTr("Desde 30 Cr/min")
                 font.pixelSize: 36
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
@@ -375,7 +375,7 @@ Item {
 
                 Connections {
                     target: mouseArea2
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -388,7 +388,7 @@ Item {
 
                 Connections {
                     target: mouseArea3
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -401,7 +401,7 @@ Item {
 
                 Connections {
                     target: mouseArea5
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
 
@@ -414,7 +414,7 @@ Item {
 
                 Connections {
                     target: mouseArea6
-                    onClicked: stackView.push("Basic_Machine_Properties_Selection.qml", StackView.Immediate)
+                    onClicked: stackView.push("Modify_Machine.qml", StackView.Immediate)
                 }
             }
         }

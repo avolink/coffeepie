@@ -43,7 +43,7 @@ This Code of Conduct applies within all community spaces — this repository, th
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported privately to the moderators at **`conduct@coffeepie.co`**. All complaints will be reviewed and investigated promptly and fairly. All moderators are obligated to respect the privacy and security of the reporter of any incident.
 
-Moderators: `avolink`, `juandaniel777`, `diegoalejandromendoza` (the Main Contributors listed in `README.md`).
+Moderators: `avolink`, `juanvelezmunoz32-ai`, `diegoalejandromendoza` (the Main Contributors listed in `README.md`).
 
 ### Enforcement Guidelines
 

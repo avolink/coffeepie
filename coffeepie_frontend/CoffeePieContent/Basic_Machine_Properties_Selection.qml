@@ -1,12 +1,12 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick   2.15
+import QtQuick.Controls   2.15
 
 
 Item {
     id: root
     width: 1920
     height: 1080
-
+       z: 3
     StackView {
         id: stackViewBasicMachinePropertiesSelection
         x: 0
@@ -281,9 +281,11 @@ Item {
             width: 235
             height: 154
             icon.width: 100
-            icon.source: "../CoffeePieContent/images/Operating_Systems/W10_Icon.png"
+           
+           icon.source: "../CoffeePieContent/images/Operating_Systems/W10_Icon.png"
             icon.height: 100
             icon.color: "#007a2828"
+         
         }
 
         Image {
@@ -314,8 +316,9 @@ Item {
                 color: "#ffffff"
                 text: qsTr("Porción/Hora")
                 horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 30
-                            font.bold: false
+                styleColor: "#ffffff"
+                font.pointSize: 30
+                font.bold: false
             }
         }
 
@@ -347,8 +350,9 @@ Item {
                 color: "#ffffff"
                 text: qsTr("Porción/Mes")
                 horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 30
-                            font.bold: false
+                styleColor: "#ffffff"
+                font.pointSize: 30
+                font.bold: false
             }
         }
 
@@ -372,7 +376,10 @@ Item {
 
             Connections {
                 target: buttonCreate
-                onClicked: StackView.clear()
+                onClicked:  {
+                 
+                 StackView.clear(); 
+                 }
             }
 
             Text {
@@ -391,7 +398,13 @@ Item {
 
             Connections {
                 target: buttonCreate
-                function onClicked() { stackView.clear() }
+                function onClicked() {
+                     myMachine.createAndStreamVM("111", "N001", "windows10");
+                 console.log("Crear Máquina button clicked"); 
+                    stackView.clear() 
+                     myMachine.fetchVMList("N001");
+                    stackView.push("Home_Screen.qml", StackView.Immediate);
+                    }
             }
         }
 
@@ -423,8 +436,9 @@ Item {
                 color: "#ffffff"
                 text: qsTr("Porción/Año")
                 horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 30
-                            font.bold: false
+                styleColor: "#ffffff"
+                font.pointSize: 30
+                font.bold: false
             }
         }
     }

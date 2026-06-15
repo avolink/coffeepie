@@ -3,17 +3,15 @@
 
 import QtQuick
 import CoffeePie
-import QtQuick.Controls
-
 
 Window {
+    width: mainScreen.width
+    height: mainScreen.height
+
     visible: true
     title: "CoffeePie"
 
-    visibility: Window.FullScreen
-    flags: Qt.FramelessWindowHint
-
-    Login_Screen {
+    LoginScreen {
         id: mainScreen
     }
 

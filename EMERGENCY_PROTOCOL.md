@@ -69,7 +69,7 @@ This emergency protocol is designed to **minimize socio-environmental impact, pr
 | Role | Core Member / Team | Primary Action During Crisis |
 | :--- | :--- | :--- |
 | **Incident Commander (IC)** | `avolink` / Core Team | Technical direction, strategic isolation/emergency shutdown decisions. |
-| **Infrastructure Coordinator** | `juandaniel777` / Admins | Proxmox API intervention, ZFS/NVMe pool balancing, Leaf switch management. |
+| **Infrastructure Coordinator** | `juanvelezmunoz32-ai` / Admins | Proxmox API intervention, ZFS/NVMe pool balancing, Leaf switch management. |
 | **Communications & Community** | `diegoalejandromendoza` / Moderators | Status page updates, GitHub Security Advisory, Discord/community transparency. |
 | **Industrial / SENA Liaison** | `diegoalejandromendoza` / Experts | Physical hardware diagnostics, OSHW node troubleshooting, power/cooling. |
 | **Smart Contract Guardian (NEW)** | To be appointed | COFP contract monitoring, Gnosis Safe transaction review, emergency pause coordination. |

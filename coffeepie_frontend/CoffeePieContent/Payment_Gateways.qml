@@ -1,5 +1,5 @@
-import QtQuick
-import QtQuick.Controls
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Item {
     id: root
@@ -21,28 +21,6 @@ Item {
         }
     }
 
-    Connections {
-        target: api
-        function onPurchaseCompleted(result) {
-            purchaseStatus.text = "Compra exitosa"
-            purchaseStatus.color = "#00ff00"
-            purchaseStatus.visible = true
-            timerHideStatus.start()
-        }
-        function onPurchaseFailed(error) {
-            purchaseStatus.text = "Error: " + error
-            purchaseStatus.color = "#ff6666"
-            purchaseStatus.visible = true
-            timerHideStatus.start()
-        }
-    }
-
-    Timer {
-        id: timerHideStatus
-        interval: 5000
-        onTriggered: purchaseStatus.visible = false
-    }
-
     Rectangle {
         id: mainMenu
         x: 235
@@ -58,21 +36,10 @@ Item {
             y: 30
             width: 1170
             height: 56
-            text: tr.tr("PASARELAS DE PAGO")
+            text: qsTr("PASARELAS DE PAGO")
             font.pixelSize: 44
             horizontalAlignment: Text.AlignHCenter
             font.bold: false
-        }
-
-        Text {
-            id: purchaseStatus
-            x: 145
-            y: 90
-            width: 1170
-            height: 30
-            font.pixelSize: 20
-            horizontalAlignment: Text.AlignHCenter
-            visible: false
         }
 
         MouseArea {
@@ -103,157 +70,172 @@ Item {
                 onClicked: stackView.clear()
             }
         }
-    }
 
-    Image {
-        id: nequi_Logo
-        x: 757
-        y: 534
-        width: 426
-        height: 306
-        source: "images/Payment_Gateways/Nequi_Logo.png"
-        fillMode: Image.PreserveAspectFit
+        Image {
+            id: nequi_Logo
+            x: 522
+            y: 424
+            width: 426
+            height: 306
+            source: "images/Payment_Gateways/Nequi_Logo.png"
+            fillMode: Image.PreserveAspectFit
 
-        MouseArea {
-            id: mouseArea5
-            x: 35
-            y: 22
-            width: 357
-            height: 261
+            MouseArea {
+                id: mouseArea5
+                x: 35
+                y: 22
+                width: 357
+                height: 261
 
-            Connections {
-                target: mouseArea5
-                onClicked: stackView.push("PagoSeguro.qml")
+                Connections {
+                    target: mouseArea5
+                    onClicked: console.log("clicked")
+                }
             }
         }
-    }
 
-    Image {
-        id: payU_Logo
-        x: 361
-        y: 237
-        width: 408
-        height: 304
-        source: "images/Payment_Gateways/PayU_Logo.png"
-        fillMode: Image.PreserveAspectFit
+        Image {
+            id: payU_Logo
+            x: 126
+            y: 127
+            width: 408
+            height: 304
+            source: "images/Payment_Gateways/PayU_Logo.png"
+            fillMode: Image.PreserveAspectFit
 
-        MouseArea {
-            id: mouseArea1
-            x: 23
-            y: 21
-            width: 366
-            height: 263
+            MouseArea {
+                id: mouseArea1
+                x: 23
+                y: 21
+                width: 366
+                height: 263
 
-            Connections {
-                target: mouseArea1
-                onClicked: stackView.push("PagoSeguro.qml")
+                Connections {
+                    target: mouseArea1
+                    onClicked: console.log("clicked")
+                }
             }
         }
-    }
 
-    Image {
-        id: placeToPay_Logo
-        x: 360
-        y: 534
-        width: 415
-        height: 306
-        source: "images/Payment_Gateways/PlaceToPay_Logo.png"
-        fillMode: Image.PreserveAspectFit
+        Image {
+            id: placeToPay_Logo
+            x: 125
+            y: 424
+            width: 415
+            height: 306
+            source: "images/Payment_Gateways/PlaceToPay_Logo.png"
+            fillMode: Image.PreserveAspectFit
 
-        MouseArea {
-            id: mouseArea4
-            x: 22
-            y: 20
-            width: 362
-            height: 261
+            MouseArea {
+                id: mouseArea4
+                x: 22
+                y: 20
+                width: 362
+                height: 261
 
-            Connections {
-                target: mouseArea4
-                onClicked: stackView.push("PagoSeguro.qml")
+                Connections {
+                    target: mouseArea4
+                    onClicked: console.log("clicked")
+                }
             }
         }
-    }
 
-    Image {
-        id: ePayco_Logo
-        x: 1161
-        y: 237
-        width: 422
-        height: 304
-        source: "images/Payment_Gateways/ePayco_Logo.png"
-        fillMode: Image.PreserveAspectFit
+        Image {
+            id: ePayco_Logo
+            x: 926
+            y: 127
+            width: 422
+            height: 304
+            source: "images/Payment_Gateways/ePayco_Logo.png"
+            fillMode: Image.PreserveAspectFit
 
-        MouseArea {
-            id: mouseArea3
-            x: 38
-            y: 26
-            width: 349
-            height: 255
+            MouseArea {
+                id: mouseArea3
+                x: 38
+                y: 26
+                width: 349
+                height: 255
 
-            Connections {
-                target: mouseArea3
-                onClicked: stackView.push("PagoSeguro.qml")
+                Connections {
+                    target: mouseArea3
+                    onClicked: console.log("clicked")
+                }
             }
         }
-    }
 
+        Image {
+            id: pSE_Logo
+            x: 533
+            y: 127
+            width: 404
+            height: 304
+            source: "images/Payment_Gateways/PSE_Logo.png"
+            fillMode: Image.PreserveAspectFit
 
-    Image {
-        id: mercadoPago
-        x: 1168
-        y: 541
-        width: 415
-        height: 297
-        source: "images/Payment_Gateways/MercadoPago.png"
-        fillMode: Image.PreserveAspectFit
+            MouseArea {
+                id: mouseArea2
+                x: 25
+                y: 26
+                width: 358
+                height: 258
 
-        MouseArea {
-            id: mouseArea6
-            x: 26
-            y: 18
-            width: 357
-            height: 255
-
-            Connections {
-                target: mouseArea6
-                onClicked: stackView.push("PagoSeguro.qml")
+                Connections {
+                    target: mouseArea2
+                    onClicked: console.log("clicked")
+                }
             }
         }
-    }
 
-    Image {
-        id: pSE_Logo
-        x: 768
-        y: 237
-        width: 404
-        height: 304
-        source: "images/Payment_Gateways/PSE_Logo.png"
-        fillMode: Image.PreserveAspectFit
+        Image {
+            id: mercadoPago
+            x: 933
+            y: 431
+            width: 415
+            height: 297
+            source: "images/Payment_Gateways/MercadoPago.png"
+            fillMode: Image.PreserveAspectFit
 
-        MouseArea {
-            id: mouseArea2
-            x: 25
-            y: 26
-            width: 358
-            height: 258
+            MouseArea {
+                id: mouseArea6
+                x: 26
+                y: 18
+                width: 357
+                height: 255
 
-            Connections {
-                target: mouseArea2
-                onClicked: stackView.push("PagoSeguro.qml")
+                Connections {
+                    target: mouseArea6
+                    onClicked: console.log("clicked")
+                }
             }
         }
+
+        RoundButton {
+            id: honeyButton
+            x: 659
+            y: 660
+            width: 152
+            height: 156
+            layer.enabled: false
+            checkable: false
+            flat: true
+            highlighted: false
+            transformOrigin: Item.Center
+            icon.width: 160
+            icon.source: "images/Payment_Gateways/Honey_Button.png"
+            icon.height: 160
+            icon.color: "#007a2828"
+            onClicked: stackView.push("Ads_Display.qml", StackView.Immediate)
+
+        }
+
+
+
+
+
+
     }
 
-    RoundButton {
-        id: roundButton
-        x: 884
-        y: 780
-        width: 152
-        height: 156
-        icon.width: 160
-        icon.source: "images/Honey_Button.png"
-        icon.height: 160
-        icon.color: "#007a2828"
-        flat: true
-    }
+
 }
+
+
