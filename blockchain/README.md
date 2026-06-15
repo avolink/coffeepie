@@ -59,6 +59,8 @@ Coffee Pie® operates two strictly separate currencies:
 
 Consumers never hold, earn, or interact with COFP directly. Credits are the only currency consumers spend to rent computing Slices.
 
+**Credit lifecycle & validity:** Ad-earned Cr are credited **1:1 from the Advertiser's bid** (no conversion markup — keeps taxation simple) and **expire 1 hour after being granted**; unused Cr are forfeited (breakage), which keeps free usage live and discourages ad-credit hoarding. Free machines consume **30 Cr/slice·min** off-peak (subject to **Rush Hour Balancing** — a Free-tier-only, demand-scaled surge up to ~1'000 Cr/slice·min during peak windows; see `README.md`). Purchased Credit Packages carry their own longer validity — **1 week, 1 month, or 1 year** — and are never surged.
+
 **Parking Fee:** dormant Slices (powered off or suspended) still reserve storage on a provider's node, so they are billed in Credits at **10 Cr per dormant Slice per hour**. The first 9 dormant Slices per account are free; the fee applies from the 10th dormant Slice and up. See `PROVIDERS.md` for the provider-side settlement.
 
 ---

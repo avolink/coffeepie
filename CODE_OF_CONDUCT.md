@@ -17,7 +17,7 @@ Examples of behavior that contributes to a positive environment:
 
 - Demonstrating empathy and kindness toward other people.
 - Being respectful of differing opinions, viewpoints, and experiences.
-- Giving and gracefully accepting constructive feedback.
+- Giving and gracefully accepting and embracing feedback or constructive criticism.
 - Accepting responsibility, apologizing to those affected by our mistakes, and learning from the experience.
 - Focusing on what is best for the community and the mission, not just for ourselves.
 

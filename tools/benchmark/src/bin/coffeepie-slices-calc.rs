@@ -54,9 +54,9 @@ struct Cli {
     #[arg(long, default_value = "1")]
     overcommit_ram: f64,
 
-    /// Consumer price per active Slice per hour, in Credits (governance-set)
-    #[arg(long, default_value = "100")]
-    cr_per_slice_hour: u64,
+    /// Consumer price per active Slice per MINUTE, in Credits (governance-set)
+    #[arg(long, default_value = "30")]
+    cr_per_slice_min: u64,
 
     /// Parking Fee per dormant Slice per hour, in Credits (governance-set)
     #[arg(long, default_value = "10")]
@@ -272,9 +272,9 @@ fn main() {
         // Revenue estimation
         println!();
         println!("--- Revenue Estimation (COFP) ---");
-        println!("  Assuming 50% utilization at {} Cr/slice/hour:", cli.cr_per_slice_hour);
+        println!("  Assuming 50% utilization at {} Cr/slice/min:", cli.cr_per_slice_min);
         let active = max_slices / 2;
-        let credits_per_hour = active * cli.cr_per_slice_hour;
+        let credits_per_hour = active * cli.cr_per_slice_min * 60;
         let credits_per_month = credits_per_hour * 24 * 30;
         println!("  Active slices: {} | Cr/hour: {} | Cr/month: {}",
             format_slices(active), format_slices(credits_per_hour), format_slices(credits_per_month));
@@ -302,7 +302,7 @@ fn format_slices(n: u64) -> String {
     if n >= 1_000_000 {
         format!("{:.1}M", n as f64 / 1_000_000.0)
     } else if n >= 1_000 {
-        format!("{}'{}", n / 1_000, n % 1_000)
+        format!("{}'{:03}", n / 1_000, n % 1_000)
     } else {
         n.to_string()
     }

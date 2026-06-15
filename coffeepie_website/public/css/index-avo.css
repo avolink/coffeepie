@@ -33705,6 +33705,12 @@
             --static-spx: 0.1 * var(--one-unit);
         }
 
+        @media screen and (min-width: 1001px) {
+            #comp-men1saut {
+                margin-top: 54px;
+            }
+        }
+
         #comp-lylainb3 {
             min-height: 100vh;
             --comp-display: grid;

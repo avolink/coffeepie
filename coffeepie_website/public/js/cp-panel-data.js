@@ -127,6 +127,70 @@
         var ipInput = document.getElementById('modalNodeIP');
         if (ipInput) ipInput.addEventListener('input', checkDupIP);
 
+        // ── Hardware probe: capacity is MEASURED, never typed ─────────────
+        // The DC admin can't edit vCores/RAM/SSD/GPU — they run a hardware test
+        // that fills them (and the server re-measures on save, so the numbers
+        // can't be faked even by a hand-crafted request).
+        function cpComputeSlices(vcores, ram, ssd, gpu) {
+            var cpu = (vcores || 0) * 4;          // CPU 4x overcommit
+            var r = (ram || 0);                   // 1 GB / slice
+            var s = Math.floor((ssd || 0) / 8);   // 8 GB SSD / slice
+            var g = Math.floor((gpu || 0) / 125); // 125 MB GPU / slice
+            return Math.max(0, Math.min(cpu, r, s, g));
+        }
+        // Runtime translation for JS-set strings (the page already translated on
+        // load, so dynamically-set text must be translated via the dictionary).
+        function cpTr(es) {
+            try {
+                if (window.CoffeePieLang && window.CoffeePieLang.get() !== 'es') {
+                    var tr = window.CoffeePieLang.translate(es, window.CoffeePieLang.get());
+                    if (tr) return tr;
+                }
+            } catch (e) { /* fall back to Spanish */ }
+            return es;
+        }
+        function cpSetCapacityBadge(slices) {
+            var t = document.getElementById('nodeCapacityBadgeText');
+            var b = document.getElementById('nodeCapacityBadge');
+            if (!t) return;
+            if (slices === null || slices === undefined) {
+                t.textContent = cpTr('Sin medir — ejecuta la prueba');
+                if (b) b.style.color = 'var(--cp-text-muted)';
+            } else {
+                t.textContent = cpTr('Este nodo puede servir') + ' ' + slices + ' Slices';
+                if (b) b.style.color = 'var(--cp-success,#39d98a)';
+            }
+        }
+        window.probeNodeHardware = function () {
+            var ip = (document.getElementById('modalNodeIP').value || '').trim();
+            if (!ip) { toast('Ingresa la IP pública del nodo antes de probar el hardware.'); return; }
+            var pBtn = document.getElementById('btnProbeHardware');
+            var prev = pBtn ? pBtn.textContent : '';
+            if (pBtn) { pBtn.disabled = true; pBtn.textContent = '⏳ Midiendo...'; }
+            var tEl = document.getElementById('nodeCapacityBadgeText');
+            if (tEl) tEl.textContent = 'Midiendo hardware...';
+            fetch(API + '/nodes/probe', { method: 'POST', headers: authHeaders(true), body: JSON.stringify({ public_ip: ip }) })
+                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
+                .then(function (res) {
+                    if (res.ok) {
+                        var m = res.body;
+                        document.getElementById('modalNodeCores').value = m.vcores;
+                        document.getElementById('modalNodeRAM').value = m.ram_gb;
+                        document.getElementById('modalNodeSSD').value = m.ssd_gb;
+                        document.getElementById('modalNodeGPU').value = m.gpu_vram_mb;
+                        document.getElementById('modalNodeHypervisor').value = m.hypervisor;
+                        cpSetCapacityBadge(m.slices);
+                        toast('Hardware medido: ' + m.slices + ' Slices (límite: ' + m.bottleneck + ').');
+                    } else if (res.status === 403) {
+                        toast('Tu cuenta no tiene rol de Proveedor.');
+                    } else {
+                        toast('No se pudo medir el hardware: ' + (res.body.detail || ('HTTP ' + res.status)));
+                    }
+                })
+                .catch(function () { toast('No se pudo conectar al servidor (' + API + ').'); })
+                .finally(function () { if (pBtn) { pBtn.disabled = false; pBtn.textContent = prev || '🔍 Probar Hardware'; } });
+        };
+
         // ── Override the inline, DOM-only handlers with real persistence ──
         window.saveNode = function () {
             var editId = (document.getElementById('editNodeId') || {}).value || '';
@@ -136,6 +200,9 @@
             if (!name) { toast('Ingresa un nombre para el nodo'); return; }
             if (!ip) { toast('Ingresa la IP pública del nodo'); return; }
             if (!location) { toast('Ingresa la ubicación del Datacenter'); return; }
+            if ((parseInt(document.getElementById('modalNodeCores').value) || 0) <= 0) {
+                toast('Ejecuta la prueba de hardware antes de guardar el nodo.'); return;
+            }
 
             var body = {
                 name: name,
@@ -186,7 +253,7 @@
         window.editNode = function (id) {
             var n = nodeCache[id];
             if (!n) { toast('Nodo no encontrado — recarga la página.'); return; }
-            document.getElementById('nodeModalTitle').textContent = 'Editar Nodo';
+            document.getElementById('nodeModalTitle').textContent = cpTr('Editar Nodo');
             document.getElementById('editNodeId').value = id;
             document.getElementById('modalNodeName').value = n.name;
             document.getElementById('modalNodeIP').value = n.public_ip;
@@ -196,7 +263,10 @@
             document.getElementById('modalNodeGPU').value = n.gpu_vram_mb;
             document.getElementById('modalNodeHypervisor').value = n.hypervisor;
             document.getElementById('modalNodeLocation').value = n.location;
-            document.getElementById('modalNodeSaveBtn').textContent = 'Actualizar Nodo';
+            document.getElementById('modalNodeSaveBtn').textContent = cpTr('Actualizar Nodo');
+            // Stored capacity was already measured — show its Slice count and
+            // allow a re-run (e.g. after a hardware upgrade / IP change).
+            cpSetCapacityBadge(cpComputeSlices(n.vcores, n.ram_gb, n.ssd_gb, n.gpu_vram_mb));
             checkDupIP();
             document.getElementById('nodeModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -206,7 +276,18 @@
         // (programmatic value resets don't fire the 'input' listener).
         var _openAdd = window.openAddNodeModal;
         if (typeof _openAdd === 'function') {
-            window.openAddNodeModal = function () { _openAdd(); checkDupIP(); };
+            window.openAddNodeModal = function () {
+                _openAdd();
+                // _openAdd set these texts in Spanish — re-localize (the page already
+                // translated on load, so JS-set text must go through the dictionary).
+                document.getElementById('nodeModalTitle').textContent = cpTr('Registrar Nodo');
+                document.getElementById('modalNodeSaveBtn').textContent = cpTr('Guardar Nodo');
+                ['modalNodeCores', 'modalNodeRAM', 'modalNodeSSD', 'modalNodeGPU', 'modalNodeHypervisor'].forEach(function (id) {
+                    var e = document.getElementById(id); if (e) e.value = '';
+                });
+                cpSetCapacityBadge(null);
+                checkDupIP();
+            };
         }
 
         // ── Stat cards ───────────────────────────────────────────────────

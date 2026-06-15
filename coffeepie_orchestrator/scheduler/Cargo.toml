@@ -1,0 +1,9 @@
+[package]
+name = "coffeepie-scheduler"
+version = "0.1.0"
+edition = "2024"
+description = "Coffee Pie QFDM placement policy — service-class → tier DC selection logic (the DC-selection broker's decision core)"
+license = "BSD-3-Clause"
+
+[dependencies]
+serde = { version = "1.0.228", features = ["derive"] }

@@ -293,6 +293,12 @@ pub struct CreateSliceRequest {
     pub template: String,
     /// Preferred node (optional — agent picks if empty)
     pub preferred_node: Option<String>,
+    /// Service class of the requesting account (free/standard/priority/sovereign),
+    /// set by the broker from the user's plan/credit package. The agent uses it for
+    /// HA / anti-affinity placement; `None` on legacy callers. See the
+    /// `coffeepie-scheduler` crate for the class → tier policy.
+    #[serde(default)]
+    pub service_class: Option<String>,
 }
 
 impl CreateSliceRequest {

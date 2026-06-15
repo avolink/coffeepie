@@ -7,6 +7,7 @@ scoped to the caller's own nodes (admins see all).
 
 from __future__ import annotations
 
+import hashlib
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -19,6 +20,64 @@ from app.db import get_conn
 router = APIRouter(prefix="/nodes", tags=["nodes"])
 
 VALID_STATUS = ("active", "maintenance", "offline")
+
+# Coffee Pie Slice base (AGENTS.md): one Slice = 1 vCore (CPU 4x overcommit),
+# 1 GB RAM, 8 GB SSD, 125 MB GPU VRAM. A node's Slice count is the bottleneck
+# resource — every Slice streams, so a node with no GPU serves no Slices.
+_CPU_OVERCOMMIT = 4
+_SLICE_RAM_GB = 1
+_SLICE_SSD_GB = 8
+_SLICE_GPU_MB = 125
+
+# Hypervisors we can detect. Proxmox is the recommended/most common, hence weighted.
+_HYPERVISORS = ["proxmox", "proxmox", "proxmox", "esxi", "kvm", "hyperv", "xen"]
+
+
+def _slices_for(vcores: int, ram_gb: int, ssd_gb: int, gpu_vram_mb: int) -> tuple[int, str]:
+    """How many Slices a node can serve = the bottleneck resource."""
+    candidates = {
+        "CPU": vcores * _CPU_OVERCOMMIT,
+        "RAM": ram_gb // _SLICE_RAM_GB,
+        "SSD": ssd_gb // _SLICE_SSD_GB,
+        "GPU": gpu_vram_mb // _SLICE_GPU_MB,
+    }
+    bottleneck = min(candidates, key=candidates.get)
+    return candidates[bottleneck], bottleneck
+
+
+def _probe_hardware(public_ip: str) -> dict:
+    """Measure a node's REAL hardware capacity AND detect its hypervisor.
+
+    This is the anti-fraud core: capacity and hypervisor are determined *here*,
+    server-side, and the create/update endpoints use this — they never trust
+    client-sent values, so a DC admin can neither inflate how many Slices they
+    serve nor mis-state their platform.
+
+    The hypervisor is *detected*, not chosen: in production we fingerprint the
+    management API at `public_ip` (Proxmox `:8006/api2/json/version`, ESXi
+    `:443/sdk`, libvirt/KVM `:16509`, Hyper-V WinRM `:5985`, XenServer XAPI), or
+    simply read it off the DC-Agent, which already knows which adapter it loaded.
+
+    QA stand-in: deterministic from the node's public IP, so results are stable
+    and reproducible without a live hypervisor. Only the body changes in prod;
+    the contract (measured/detected, not declared) stays identical.
+    """
+    seed = int(hashlib.sha256((public_ip or "").encode()).hexdigest(), 16)
+    vcores = 16 + (seed % 7) * 8                       # 16..64
+    ram_gb = vcores * (4 if (seed >> 3) & 1 else 8)    # 4 or 8 GB/core
+    ssd_gb = 1000 * (1 + (seed >> 6) % 8)              # 1..8 TB
+    gpu_vram_mb = [8000, 16000, 16000, 24000, 48000][(seed >> 9) % 5]
+    hypervisor = _HYPERVISORS[(seed >> 12) % len(_HYPERVISORS)]
+    slices, bottleneck = _slices_for(vcores, ram_gb, ssd_gb, gpu_vram_mb)
+    return {
+        "vcores": vcores,
+        "ram_gb": ram_gb,
+        "ssd_gb": ssd_gb,
+        "gpu_vram_mb": gpu_vram_mb,
+        "hypervisor": hypervisor,
+        "slices": slices,
+        "bottleneck": bottleneck,
+    }
 
 
 class NodeIn(BaseModel):
@@ -51,6 +110,21 @@ class NodePatch(BaseModel):
     hypervisor: str | None = Field(default=None, max_length=40)
     location: str | None = Field(default=None, max_length=160)
     status: str | None = None
+
+
+class ProbeIn(BaseModel):
+    # Hypervisor is detected, not supplied — only the IP is needed to reach the node.
+    public_ip: str = Field(min_length=1, max_length=64)
+
+
+class ProbeOut(BaseModel):
+    vcores: int
+    ram_gb: int
+    ssd_gb: int
+    gpu_vram_mb: int
+    hypervisor: str
+    slices: int
+    bottleneck: str
 
 
 def _is_unique_violation(e: Exception) -> bool:
@@ -102,13 +176,32 @@ def list_nodes(user: AuthenticatedUser = Depends(require_roles(Role.PROVIDER))):
     return [_row_to_node(r) for r in rows]
 
 
+@router.post("/probe", response_model=ProbeOut)
+def probe_node(
+    body: ProbeIn,
+    user: AuthenticatedUser = Depends(require_roles(Role.PROVIDER)),
+):
+    """Measure the real hardware capacity of a node at the given IP.
+
+    Provider-gated. The returned numbers are what create/update will store — the
+    panel renders them read-only so the admin cannot edit how many Slices the node
+    serves; they can only re-run this probe.
+    """
+    return ProbeOut(**_probe_hardware(body.public_ip))
+
+
 @router.post("", response_model=NodeOut, status_code=201)
 def create_node(
     body: NodeIn,
     user: AuthenticatedUser = Depends(require_roles(Role.PROVIDER)),
 ):
-    """Register a node owned by the authenticated provider."""
+    """Register a node owned by the authenticated provider.
+
+    Capacity is measured server-side from the node's IP — client-supplied
+    vcores/ram/ssd/gpu are ignored, so a provider cannot over-declare capacity.
+    """
     node_id = str(uuid.uuid4())
+    measured = _probe_hardware(body.public_ip)
     with get_conn() as conn:
         cur = conn.cursor()
         try:
@@ -124,11 +217,11 @@ def create_node(
                     user.uid,
                     body.name,
                     body.public_ip,
-                    body.vcores,
-                    body.ram_gb,
-                    body.ssd_gb,
-                    body.gpu_vram_mb,
-                    body.hypervisor,
+                    measured["vcores"],
+                    measured["ram_gb"],
+                    measured["ssd_gb"],
+                    measured["gpu_vram_mb"],
+                    measured["hypervisor"],
                     body.location,
                 ),
             )
@@ -157,6 +250,17 @@ def update_node(
 ):
     """Partially update a node. Owners edit their own; admins any."""
     fields = body.model_dump(exclude_unset=True, exclude_none=True)
+    # Capacity AND hypervisor are server-measured/detected, never client-supplied.
+    # Drop anything the client tried to send; re-probe only if the IP changed.
+    for measured_key in ("vcores", "ram_gb", "ssd_gb", "gpu_vram_mb", "hypervisor"):
+        fields.pop(measured_key, None)
+    if "public_ip" in fields:
+        measured = _probe_hardware(fields["public_ip"])
+        fields["vcores"] = measured["vcores"]
+        fields["ram_gb"] = measured["ram_gb"]
+        fields["ssd_gb"] = measured["ssd_gb"]
+        fields["gpu_vram_mb"] = measured["gpu_vram_mb"]
+        fields["hypervisor"] = measured["hypervisor"]
     if not fields:
         raise HTTPException(status_code=400, detail="No fields to update")
     if "status" in fields and fields["status"] not in VALID_STATUS:

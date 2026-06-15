@@ -40,7 +40,7 @@ A Slice that is powered off or suspended (e.g. a stopped Proxmox VM) releases it
 So that providers are paid for storage they hold for idle workloads — and to discourage zombie-VM hoarding on the Freemium tier — dormant Slices accrue a **Parking Fee**:
 
 - **Provider earnings:** a dormant Slice mints **1.5 COFP per Slice per hour** (vs. 60 COFP/hour for an active Slice). At Tier IV this settles to roughly cover real storage cost (capex amortization + idle power + DC overhead) plus the tier margin, giving providers a fair incentive to invest in SSD/HDD capacity.
-- **Consumer charge:** end users pay **10 Cr per dormant Slice per hour** (≈ 10% of the active Slice rate). The **first 9 dormant Slices per account are free**; the Parking Fee applies **from the 10th dormant Slice and up**.
+- **Consumer charge:** end users pay **10 Cr per dormant Slice per hour** (a small holding rate — a dormant Slice consumes no compute, only reserved storage). The **first 9 dormant Slices per account are free**; the Parking Fee applies **from the 10th dormant Slice and up**.
 - **Reserved-Slice basis:** the fee is charged on the *reserved* Slice (the booked quanto), not on thin-provisioned written blocks — consistent with the deterministic Slice abstraction.
 
 > The Parking Fee rate is set by the same regional-pricing governance vote as `avgSliceCost` and is a configurable parameter, not a hardcoded constant.
@@ -64,4 +64,5 @@ So that providers are paid for storage they hold for idle workloads — and to d
 - `NETWORK.md` — Network architecture and addressing
 - `PKI.md` — Certificate lifecycle for internal communication
 - `CONSTITUTION.md` — Governance and revenue distribution
+- `SCHEDULING.md` — Service classes → tier placement (how tiers map to user plans)
 - `README.md` — Full ecosystem overview
