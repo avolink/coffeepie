@@ -191,15 +191,57 @@
                 .finally(function () { if (pBtn) { pBtn.disabled = false; pBtn.textContent = prev || '🔍 Probar Hardware'; } });
         };
 
+        // ── Root credentials: show/hide toggle + reset helper ──────────────
+        var EYE_OPEN = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/>';
+        var EYE_OFF = '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.06 21.06 0 0 1 5.06-6.06M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a21.13 21.13 0 0 1-3.22 4.44M1 1l22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/>';
+
+        window.toggleRootPasswordVisibility = function () {
+            var input = document.getElementById('modalNodeRootPassword');
+            var icon = document.getElementById('iconRootPasswordEye');
+            var btn = document.getElementById('btnToggleRootPassword');
+            if (!input) return;
+            var showing = input.type === 'text';
+            input.type = showing ? 'password' : 'text';
+            if (icon) icon.innerHTML = showing ? EYE_OPEN : EYE_OFF;
+            if (btn) btn.setAttribute('aria-label', showing ? cpTr('Mostrar contraseña') : cpTr('Ocultar contraseña'));
+        };
+
+        // Always start hidden + blank (password never round-trips from the API).
+        // The dataset flag (not the placeholder text, which is translated and
+        // therefore an unreliable thing to string-match) is what saveNode()
+        // checks to know whether a blank field is legal.
+        function resetRootPasswordField(hasStoredCredential) {
+            var input = document.getElementById('modalNodeRootPassword');
+            var icon = document.getElementById('iconRootPasswordEye');
+            if (!input) return;
+            input.value = '';
+            input.type = 'password';
+            input.dataset.hasStoredCredential = hasStoredCredential ? '1' : '';
+            if (icon) icon.innerHTML = EYE_OPEN;
+            input.placeholder = hasStoredCredential
+                ? cpTr('Dejar en blanco para no cambiar')
+                : cpTr('Contraseña Root');
+        }
+
         // ── Override the inline, DOM-only handlers with real persistence ──
         window.saveNode = function () {
             var editId = (document.getElementById('editNodeId') || {}).value || '';
             var name = document.getElementById('modalNodeName').value.trim();
             var ip = document.getElementById('modalNodeIP').value.trim();
             var location = document.getElementById('modalNodeLocation').value.trim();
+            var rootUsername = ((document.getElementById('modalNodeRootUser') || {}).value || '').trim();
+            var rootPassword = (document.getElementById('modalNodeRootPassword') || {}).value || '';
             if (!name) { toast('Ingresa un nombre para el nodo'); return; }
             if (!ip) { toast('Ingresa la IP pública del nodo'); return; }
             if (!location) { toast('Ingresa la ubicación del Datacenter'); return; }
+            if (!rootUsername) { toast('Ingresa el usuario root del nodo'); return; }
+            // The Orchestrator needs a password to log in at least once; on edit
+            // a blank field means "keep the one already stored", so it's only
+            // mandatory when there's no stored credential yet.
+            var hasStoredCredential = document.getElementById('modalNodeRootPassword').dataset.hasStoredCredential === '1';
+            if (!rootPassword && !hasStoredCredential) {
+                toast('Ingresa la contraseña root del nodo'); return;
+            }
             if ((parseInt(document.getElementById('modalNodeCores').value) || 0) <= 0) {
                 toast('Ejecuta la prueba de hardware antes de guardar el nodo.'); return;
             }
@@ -214,6 +256,12 @@
                 hypervisor: document.getElementById('modalNodeHypervisor').value,
                 location: location
             };
+
+            // root_username is always sent (required); root_password only when
+            // the admin actually typed something — an empty value on edit must
+            // leave the stored credential untouched (validated above).
+            body.root_username = rootUsername;
+            if (rootPassword) body.root_password = rootPassword;
 
             var url = editId ? API + '/nodes/' + encodeURIComponent(editId) : API + '/nodes';
             var method = editId ? 'PATCH' : 'POST';
@@ -263,6 +311,10 @@
             document.getElementById('modalNodeGPU').value = n.gpu_vram_mb;
             document.getElementById('modalNodeHypervisor').value = n.hypervisor;
             document.getElementById('modalNodeLocation').value = n.location;
+            document.getElementById('modalNodeRootUser').value = n.root_username || '';
+            // Never prefill the password — the API doesn't return it either.
+            // Placeholder tells the admin blank = keep the stored credential.
+            resetRootPasswordField(n.has_root_credentials);
             document.getElementById('modalNodeSaveBtn').textContent = cpTr('Actualizar Nodo');
             // Stored capacity was already measured — show its Slice count and
             // allow a re-run (e.g. after a hardware upgrade / IP change).
@@ -282,9 +334,10 @@
                 // translated on load, so JS-set text must go through the dictionary).
                 document.getElementById('nodeModalTitle').textContent = cpTr('Registrar Nodo');
                 document.getElementById('modalNodeSaveBtn').textContent = cpTr('Guardar Nodo');
-                ['modalNodeCores', 'modalNodeRAM', 'modalNodeSSD', 'modalNodeGPU', 'modalNodeHypervisor'].forEach(function (id) {
+                ['modalNodeCores', 'modalNodeRAM', 'modalNodeSSD', 'modalNodeGPU', 'modalNodeHypervisor', 'modalNodeRootUser'].forEach(function (id) {
                     var e = document.getElementById(id); if (e) e.value = '';
                 });
+                resetRootPasswordField(false);
                 cpSetCapacityBadge(null);
                 checkDupIP();
             };

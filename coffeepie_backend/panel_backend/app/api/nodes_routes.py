@@ -14,6 +14,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 from app.auth.identity import AuthenticatedUser, Role, roles_of
+from app.auth.node_credentials import encrypt_password
 from app.auth.rbac import require_roles
 from app.db import get_conn
 
@@ -89,13 +90,33 @@ class NodeIn(BaseModel):
     gpu_vram_mb: int = Field(default=0, ge=0, le=1048576)
     hypervisor: str = Field(default="proxmox", max_length=40)
     location: str = Field(default="", max_length=160)
+    # Root credentials so the Orchestrator/Broker can take control of the node
+    # to provision instances. Required — a node the Orchestrator can't log
+    # into can't serve Slices. Write-only — never echoed back in NodeOut.
+    root_username: str = Field(min_length=1, max_length=64)
+    root_password: str = Field(min_length=1, max_length=256)
 
 
-class NodeOut(NodeIn):
+class NodeOut(BaseModel):
+    """Deliberately does NOT inherit NodeIn: root_password must never round-trip
+    back to the client. root_username isn't secret so it's fine to return (lets
+    the edit modal prefill it); has_root_credentials tells the UI whether a
+    password is already stored without ever exposing it again."""
+
     id: str
     provider_id: str
+    name: str
+    public_ip: str
+    vcores: int
+    ram_gb: int
+    ssd_gb: int
+    gpu_vram_mb: int
+    hypervisor: str
+    location: str
     status: str
     created_at: str
+    root_username: str = ""
+    has_root_credentials: bool = False
 
 
 class NodePatch(BaseModel):
@@ -110,6 +131,12 @@ class NodePatch(BaseModel):
     hypervisor: str | None = Field(default=None, max_length=40)
     location: str | None = Field(default=None, max_length=160)
     status: str | None = None
+    # root_username is required on the node (see NodeIn) but optional here so a
+    # PATCH can touch just other fields; if sent, it can't be blanked to "".
+    # root_password: omit entirely (don't send an empty string) to leave the
+    # stored credential unchanged — matches the edit modal never prefilling it.
+    root_username: str | None = Field(default=None, min_length=1, max_length=64)
+    root_password: str | None = Field(default=None, max_length=256)
 
 
 class ProbeIn(BaseModel):
@@ -146,12 +173,15 @@ def _row_to_node(r) -> NodeOut:
         location=r[9] or "",
         status=r[10],
         created_at=str(r[11]),
+        root_username=r[12] or "",
+        has_root_credentials=bool(r[13]),
     )
 
 
 _SELECT = """
     SELECT id::text, provider_id::text, name, public_ip, vcores, ram_gb,
-           ssd_gb, gpu_vram_mb, hypervisor, location, status, created_at
+           ssd_gb, gpu_vram_mb, hypervisor, location, status, created_at,
+           root_username, (root_password_enc IS NOT NULL)
     FROM node
 """
 
@@ -202,6 +232,7 @@ def create_node(
     """
     node_id = str(uuid.uuid4())
     measured = _probe_hardware(body.public_ip)
+    root_password_enc = encrypt_password(body.root_password)
     with get_conn() as conn:
         cur = conn.cursor()
         try:
@@ -209,8 +240,9 @@ def create_node(
                 """
                 INSERT INTO node
                     (id, provider_id, name, public_ip, vcores, ram_gb,
-                     ssd_gb, gpu_vram_mb, hypervisor, location, status)
-                VALUES (%s::uuid, %s::uuid, %s, %s::inet, %s, %s, %s, %s, %s, %s, 'active')
+                     ssd_gb, gpu_vram_mb, hypervisor, location, status,
+                     root_username, root_password_enc)
+                VALUES (%s::uuid, %s::uuid, %s, %s::inet, %s, %s, %s, %s, %s, %s, 'active', %s, %s)
                 """,
                 (
                     node_id,
@@ -223,6 +255,8 @@ def create_node(
                     measured["gpu_vram_mb"],
                     measured["hypervisor"],
                     body.location,
+                    body.root_username,
+                    root_password_enc,
                 ),
             )
             conn.commit()
@@ -261,6 +295,14 @@ def update_node(
         fields["ssd_gb"] = measured["ssd_gb"]
         fields["gpu_vram_mb"] = measured["gpu_vram_mb"]
         fields["hypervisor"] = measured["hypervisor"]
+    # root_password is plaintext-in/encrypted-at-rest — the column is
+    # root_password_enc, so swap the key before it reaches the SQL builder.
+    # An empty string means "leave unchanged" (the edit modal never prefills
+    # the stored password, so a blank field must not wipe it).
+    root_password = fields.pop("root_password", None)
+    if root_password:
+        fields["root_password_enc"] = encrypt_password(root_password)
+
     if not fields:
         raise HTTPException(status_code=400, detail="No fields to update")
     if "status" in fields and fields["status"] not in VALID_STATUS:

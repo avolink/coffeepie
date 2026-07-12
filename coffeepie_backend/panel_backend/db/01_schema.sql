@@ -88,6 +88,14 @@ CREATE TABLE IF NOT EXISTS node (
     created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
+-- Root credentials so the Orchestrator/Broker can take control of the node to
+-- provision instances. The username isn't sensitive; the password is stored
+-- ENCRYPTED (app/auth/node_credentials.py, Fernet — reversible, since the
+-- Orchestrator needs the real secret back, not a one-way hash). Nullable: a
+-- node can be registered before its credentials are known.
+ALTER TABLE node ADD COLUMN IF NOT EXISTS root_username TEXT;
+ALTER TABLE node ADD COLUMN IF NOT EXISTS root_password_enc TEXT;
+
 CREATE INDEX IF NOT EXISTS ix_node_provider ON node (provider_id);
 
 -- A provider can't register two nodes with the same name (typo/double-submit

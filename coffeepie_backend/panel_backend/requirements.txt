@@ -3,6 +3,7 @@ uvicorn==0.34.3
 pydantic==2.11.7
 python-dotenv==1.1.1
 PyJWT[crypto]==2.10.1
+cryptography==48.0.1  # node root-credential encryption (app/auth/node_credentials.py)
 # Firebase only needed during the migration window (AUTH_PROVIDER=both|firebase)
 firebase-admin==6.6.0
 psycopg[binary]==3.2.3
