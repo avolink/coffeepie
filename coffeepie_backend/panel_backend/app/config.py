@@ -30,13 +30,15 @@ def _as_bool(v: str | None) -> bool:
 # QA-only local login (db/03_qa_auth.sql + /auth/login). MUST stay false in prod.
 QA_LOCAL_AUTH = _as_bool(os.getenv("QA_LOCAL_AUTH"))
 
-# CORS origins allowed to call this API (comma-separated). For QA, the deployed
-# prototype origin + localhost. Never use "*" with credentials.
+# CORS origins allowed to call this API (comma-separated). Production domain +
+# the old Firebase prototype origin (still may be live) + localhost for QA.
+# Never use "*" with credentials.
 CORS_ORIGINS = [
     o.strip()
     for o in os.getenv(
         "CORS_ORIGINS",
-        # Deployed prototype + local Firebase serve (:5000) + local static serve (:8080).
+        # Production + deployed prototype + local Firebase serve (:5000) + local static serve (:8080).
+        "https://coffeepie.co,https://www.coffeepie.co,"
         "https://coffeepie-firebase.web.app,"
         "http://localhost:5000,http://127.0.0.1:5000,"
         "http://localhost:8080,http://127.0.0.1:8080",
