@@ -25136,5 +25136,75 @@
   "dom_coffee_pie": {
     "es": "Coffee Pie",
     "el": "Coffee Pie"
+  },
+  "Requiere Paquete Grande": {
+    "es": "Requiere Paquete Grande",
+    "en": "Requires Big Package",
+    "pt": "Requer Pacote Grande",
+    "fr": "Nécessite le Paquet Grand",
+    "de": "Erfordert das Große Paket",
+    "el": "Απαιτεί το Μεγάλο Πακέτο",
+    "ru": "Требуется Большой пакет",
+    "hi": "बड़ा पैकेज आवश्यक",
+    "ja": "ラージパッケージが必要",
+    "zh": "需要大套餐",
+    "ko": "대형 패키지 필요",
+    "ar": "يتطلب الباقة الكبيرة"
+  },
+  "Abrir sesión en el navegador": {
+    "es": "Abrir sesión en el navegador",
+    "en": "Open session in browser",
+    "pt": "Abrir sessão no navegador",
+    "fr": "Ouvrir la session dans le navigateur",
+    "de": "Sitzung im Browser öffnen",
+    "el": "Άνοιγμα συνεδρίας στο πρόγραμμα περιήγησης",
+    "ru": "Открыть сеанс в браузере",
+    "hi": "ब्राउज़र में सत्र खोलें",
+    "ja": "ブラウザでセッションを開く",
+    "zh": "在浏览器中打开会话",
+    "ko": "브라우저에서 세션 열기",
+    "ar": "فتح الجلسة في المتصفح"
+  },
+  "Preparando tu sesión en el navegador…": {
+    "es": "Preparando tu sesión en el navegador…",
+    "en": "Preparing your browser session…",
+    "pt": "Preparando sua sessão no navegador…",
+    "fr": "Préparation de votre session dans le navigateur…",
+    "de": "Ihre Browser-Sitzung wird vorbereitet…",
+    "el": "Προετοιμασία της συνεδρίας σας στο πρόγραμμα περιήγησης…",
+    "ru": "Подготовка вашего сеанса в браузере…",
+    "hi": "आपका ब्राउज़र सत्र तैयार किया जा रहा है…",
+    "ja": "ブラウザセッションを準備しています…",
+    "zh": "正在准备您的浏览器会话…",
+    "ko": "브라우저 세션을 준비하는 중…",
+    "ar": "جارٍ تحضير جلستك في المتصفح…"
+  },
+  "El acceso por navegador requiere el Paquete Grande. Los demás paquetes usan el Terminal Codec.": {
+    "es": "El acceso por navegador requiere el Paquete Grande. Los demás paquetes usan el Terminal Codec.",
+    "en": "Browser access requires the Big Package. Other packages use the Codec Terminal.",
+    "pt": "O acesso pelo navegador requer o Pacote Grande. Os demais pacotes usam o Terminal Codec.",
+    "fr": "L'accès par navigateur nécessite le Paquet Grand. Les autres paquets utilisent le Terminal Codec.",
+    "de": "Der Browser-Zugriff erfordert das Große Paket. Andere Pakete nutzen das Codec-Terminal.",
+    "el": "Η πρόσβαση μέσω προγράμματος περιήγησης απαιτεί το Μεγάλο Πακέτο. Τα υπόλοιπα πακέτα χρησιμοποιούν το Τερματικό Codec.",
+    "ru": "Доступ через браузер требует Большого пакета. Остальные пакеты используют Codec-терминал.",
+    "hi": "ब्राउज़र एक्सेस के लिए बड़ा पैकेज आवश्यक है। अन्य पैकेज कोडेक टर्मिनल का उपयोग करते हैं।",
+    "ja": "ブラウザアクセスにはラージパッケージが必要です。他のパッケージはCodec端末を使用します。",
+    "zh": "浏览器访问需要大套餐。其他套餐使用 Codec 终端。",
+    "ko": "브라우저 접속은 대형 패키지가 필요합니다. 다른 패키지는 Codec 터미널을 사용합니다.",
+    "ar": "يتطلب الوصول عبر المتصفح الباقة الكبيرة. الباقات الأخرى تستخدم طرفية Codec."
+  },
+  "Sesión en el navegador": {
+    "es": "Sesión en el navegador",
+    "en": "Browser session",
+    "pt": "Sessão no navegador",
+    "fr": "Session dans le navigateur",
+    "de": "Browser-Sitzung",
+    "el": "Συνεδρία στο πρόγραμμα περιήγησης",
+    "ru": "Сеанс в браузере",
+    "hi": "ब्राउज़र सत्र",
+    "ja": "ブラウザセッション",
+    "zh": "浏览器会话",
+    "ko": "브라우저 세션",
+    "ar": "جلسة المتصفح"
   }
 }

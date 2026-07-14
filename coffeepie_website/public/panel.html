@@ -4288,6 +4288,7 @@
     <script src="/translate.js"></script>
     <script src="/js/cp-panel-auth.js"></script>
     <script src="/js/cp-panel-data.js"></script>
+    <script src="/js/cp-panel-stream.js"></script>
     <style>
         /* Force header to blend with the panel body */
         #comp-kbgakxea,
@@ -4358,10 +4359,22 @@
                                                         </div>
                                                     </a>
                                                 </div>
+                                                <!-- Browser-streaming launcher. Full color + clickable for Big_Package
+                                                     tier; grayscale + disabled otherwise. Thumbnail is the user's last
+                                                     session when available, else a guaranteed default image. -->
+                                                <button id="cp-stream-btn" type="button" onclick="if(window.openBrowserStream)openBrowserStream()"
+                                                    title="Sesión en el navegador"
+                                                    style="position:absolute;left:120px;top:50%;transform:translateY(-50%);z-index:11;width:74px;height:48px;padding:0;border-radius:8px;border:1px solid var(--cp-border);background:#0d0a07;cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:filter .15s ease, box-shadow .15s ease, opacity .15s ease;">
+                                                    <img id="cp-stream-thumb" src="/assets/stream-default.svg" alt="Streaming"
+                                                        style="width:100%;height:100%;object-fit:cover;display:block;"
+                                                        onerror="this.onerror=null;this.src='/assets/stream-default.svg';">
+                                                    <span id="cp-stream-lock" aria-hidden="true"
+                                                        style="position:absolute;right:3px;bottom:2px;font-size:11px;line-height:1;filter:drop-shadow(0 1px 1px #000);">🔒</span>
+                                                </button>
                                                 <div id="comp-kbgakxea_r_comp-lzg0bwm6"
                                                     class="ku3DBC zQ9jDz qvSjx3 Vq6kJx comp-kbgakxea_r_comp-lzg0bwm6 avoui-rich-text"
                                                     data-testid="richTextElement"
-                                                    style="display:flex;align-items:center;justify-content:center;">
+                                                    style="display:flex;align-items:center;justify-content:center;"
                                                     <p class="font_0 avoui-rich-text__text" style="text-align:center;">
                                                         <span style="font-weight:bold;"
                                                             class="avoui-rich-text__text">Coffee Pie® Panel de Control</span></p>

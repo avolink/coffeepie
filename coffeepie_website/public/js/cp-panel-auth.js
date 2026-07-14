@@ -16,6 +16,15 @@
     var API = isLocal ? 'http://localhost:8000' : 'https://api.coffeepie.co';
     var TOKEN_KEY = 'cp_panel_token';
 
+    // ── Supabase Auth (identity) ─────────────────────────────────────────
+    // Production design: the browser authenticates DIRECTLY against Supabase
+    // Auth; our backend (API) only VERIFIES the resulting JWT (it has no
+    // /auth/login except in QA mode). The publishable key + URL are public by
+    // design (browser-safe, protected by RLS). Data calls still go to API with
+    // the Supabase access_token as Bearer.
+    var SUPABASE_URL = 'https://watughkclobzncspmquu.supabase.co';
+    var SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_xckBPHyNvByJ1TsQNozOMw_UtwSGBmw';
+
     // ── Translation helper ───────────────────────────────────────────────
     function t(key) {
         try {
@@ -31,15 +40,31 @@
     function setToken(t) { sessionStorage.setItem(TOKEN_KEY, t); }
     function clearToken() { sessionStorage.removeItem(TOKEN_KEY); }
 
+    // Decode the JWT payload (no verification — display/gating only; the
+    // backend is authoritative). Returns {} on any problem.
+    function claims() {
+        var t = token();
+        if (!t) return {};
+        try {
+            return JSON.parse(atob(t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        } catch (e) { return {}; }
+    }
+
     // Treat a token as valid only if it's a JWT that hasn't expired.
     function tokenValid() {
         var t = token();
         if (!t) return false;
-        try {
-            var p = JSON.parse(atob(t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
-            return !p.exp || p.exp * 1000 > Date.now();
-        } catch (e) { return false; }
+        var p = claims();
+        return !p.exp || p.exp * 1000 > Date.now();
     }
+
+    // app_metadata claims, injected by the Supabase custom access token hook.
+    function roles() {
+        var am = claims().app_metadata || {};
+        var r = am.roles || [];
+        return Array.isArray(r) ? r : [r];
+    }
+    function tier() { return (claims().app_metadata || {}).tier || 'free'; }
 
     function isPanelLink(el) {
         var a = el && el.closest && el.closest('a, button, [role="link"]');
@@ -138,37 +163,43 @@
                 if (p.length < 8) { err.textContent = 'La contraseña debe tener al menos 8 caracteres.'; return; }
 
                 submit.textContent = t('Creando cuenta…'); submit.disabled = true;
-                fetch(API + '/auth/register', {
+                // Supabase Auth signup. display_name goes in user_metadata; the
+                // DB trigger (0001_init_schema.sql) mirrors it into app_user.
+                fetch(SUPABASE_URL + '/auth/v1/signup', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: name, email: e, password: p })
+                    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY },
+                    body: JSON.stringify({ email: e, password: p, data: { display_name: name } })
                 })
-                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
                 .then(function (res) {
                     submit.textContent = t('Crear Cuenta'); submit.disabled = false;
                     if (res.ok && res.body.access_token) {
+                        // Email confirmation disabled → session returned immediately.
                         setToken(res.body.access_token);
                         ok.textContent = t('Cuenta creada. Redirigiendo…');
                         setTimeout(function () { close(); location.href = '/panel'; }, 1200);
-                    } else if (res.status === 409) {
+                    } else if (res.ok && res.body.user && !res.body.access_token) {
+                        // Email confirmation required → no session yet.
+                        ok.textContent = t('Revisa tu correo para confirmar la cuenta.');
+                    } else if (res.body && /registered|already/i.test(res.body.msg || res.body.error_description || '')) {
                         err.textContent = t('Este correo ya está registrado.');
                     } else {
-                        err.textContent = (res.body && res.body.detail) || t('No se pudo conectar al servidor.') + ' (' + API + ')';
+                        err.textContent = (res.body && (res.body.msg || res.body.error_description)) || t('No se pudo crear la cuenta.');
                     }
                 })
                 .catch(function () {
                     submit.textContent = t('Crear Cuenta'); submit.disabled = false;
-                    err.textContent = t('No se pudo conectar al servidor.') + ' (' + API + ')';
+                    err.textContent = t('No se pudo conectar al servidor.') + ' (Supabase)';
                 });
             } else {
-                // Login
+                // Login — password grant directly against Supabase Auth.
                 submit.textContent = t('Entrando…'); submit.disabled = true;
-                fetch(API + '/auth/login', {
+                fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY },
                     body: JSON.stringify({ email: e, password: p })
                 })
-                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
                 .then(function (res) {
                     submit.textContent = t('Iniciar Sesión'); submit.disabled = false;
                     if (res.ok && res.body.access_token) {
@@ -181,7 +212,7 @@
                 })
                 .catch(function () {
                     submit.textContent = t('Iniciar Sesión'); submit.disabled = false;
-                    err.textContent = t('No se pudo conectar al servidor.') + ' (' + API + ')';
+                    err.textContent = t('No se pudo conectar al servidor.') + ' (Supabase)';
                 });
             }
         }
@@ -242,5 +273,9 @@
     }
 
     // Expose the token for the data-loader (cp-panel-data.js).
-    window.cpPanelAuth = { token: token, valid: tokenValid, api: API, logout: function () { clearToken(); } };
+    window.cpPanelAuth = {
+        token: token, valid: tokenValid, api: API,
+        claims: claims, roles: roles, tier: tier,
+        logout: function () { clearToken(); }
+    };
 })();
