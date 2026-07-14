@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coffee Pie® — Sesión</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #0d0a07; color: #eee;
+      font-family: Arial, Helvetica, sans-serif; overflow: hidden; }
+    #bar { position: fixed; top: 0; left: 0; right: 0; height: 40px; z-index: 10;
+      background: rgba(20,16,11,0.92); border-bottom: 1px solid #3a2e1f;
+      display: flex; align-items: center; gap: 14px; padding: 0 14px; box-sizing: border-box; }
+    #bar a, #bar span { font-size: 13px; }
+    #bar a { color: #c18b44; text-decoration: none; cursor: pointer; }
+    #status { color: #aaa; }
+    #screen { position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+      background: #000; display: flex; align-items: center; justify-content: center; }
+    #msg { color: #c18b44; font-size: 15px; text-align: center; padding: 20px; }
+    .spin { display: inline-block; width: 16px; height: 16px; margin-right: 8px;
+      border: 2px solid #4a3c28; border-top-color: #c18b44; border-radius: 50%;
+      vertical-align: middle; animation: s 0.8s linear infinite; }
+    @keyframes s { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="bar">
+    <a href="/panel">← Panel</a>
+    <span id="status"><span class="spin"></span>Conectando…</span>
+    <span id="vminfo" style="margin-left:auto;color:#7a6a52;"></span>
+  </div>
+  <div id="screen"><div id="msg"><span class="spin"></span>Preparando tu sesión…</div></div>
+
+  <script type="module">
+    import RFB from '/vendor/novnc.bundle.js';
+
+    var isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    var API = isLocal ? 'http://localhost:8000' : 'https://api.coffeepie.co';
+    var WS  = isLocal ? 'ws://localhost:8000'   : 'wss://api.coffeepie.co';
+
+    var statusEl = document.getElementById('status');
+    var msgEl = document.getElementById('msg');
+    var screenEl = document.getElementById('screen');
+    var vminfoEl = document.getElementById('vminfo');
+
+    function fail(text) {
+      statusEl.textContent = 'Error';
+      msgEl.innerHTML = text + '<br><br><a href="/panel" style="color:#c18b44">Volver al Panel</a>';
+    }
+
+    var sess;
+    try { sess = JSON.parse(sessionStorage.getItem('cp_stream_session') || 'null'); } catch (e) {}
+    if (!sess || !sess.session_id) {
+      fail('No hay una sesión activa. Vuelve al Panel y abre la sesión desde el ícono de streaming.');
+    } else {
+      vminfoEl.textContent = (sess.vm_name || sess.vmid) + ' @ ' + (sess.node || '');
+      var url = WS + '/stream/vnc/' + encodeURIComponent(sess.session_id);
+      var rfb;
+      try {
+        rfb = new RFB(screenEl, url, { credentials: { password: sess.vnc_password || '' } });
+        rfb.scaleViewport = true;
+        rfb.resizeSession = false;
+        rfb.background = '#000';
+        rfb.addEventListener('connect', function () {
+          statusEl.textContent = 'Conectado';
+          if (msgEl.parentNode) msgEl.style.display = 'none';
+        });
+        rfb.addEventListener('disconnect', function (e) {
+          if (e.detail && e.detail.clean) fail('La sesión se cerró.');
+          else fail('Se perdió la conexión con el nodo.');
+        });
+        rfb.addEventListener('securityfailure', function () {
+          fail('Fallo de autenticación con la máquina virtual.');
+        });
+      } catch (e) {
+        fail('No se pudo iniciar el cliente de streaming: ' + e.message);
+      }
+    }
+  </script>
+</body>
+</html>

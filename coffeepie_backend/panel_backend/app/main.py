@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import config
-from app.api import cofp_routes, nodes_routes, panel_data_routes
+from app.api import cofp_routes, nodes_routes, panel_data_routes, stream_routes
 
 app = FastAPI(title="Coffee Pie Panel API")
 
@@ -18,6 +18,7 @@ app.add_middleware(
 app.include_router(cofp_routes.router)
 app.include_router(nodes_routes.router)
 app.include_router(panel_data_routes.router)
+app.include_router(stream_routes.router)
 
 # QA-only local login is mounted ONLY when explicitly enabled. In production
 # (QA_LOCAL_AUTH unset/false) this router does not exist at all.

@@ -4,6 +4,7 @@ pydantic==2.11.7
 python-dotenv==1.1.1
 PyJWT[crypto]==2.10.1
 cryptography==48.0.1  # node root-credential encryption (app/auth/node_credentials.py)
+websockets==16.1  # browser-streaming relay to Proxmox vncwebsocket (app/api/stream_routes.py)
 # Firebase only needed during the migration window (AUTH_PROVIDER=both|firebase)
 firebase-admin==6.6.0
 psycopg[binary]==3.2.3
