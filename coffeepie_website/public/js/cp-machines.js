@@ -559,6 +559,61 @@
         $('btnContinuar').addEventListener('click', createMachine);
     }
 
+    // ── Recargar Saldo: pasarelas de pago + ads-for-credits ─────────────
+    // The gateways are the paid top-up path; the honey button is the
+    // watch-ads path (Coffee Pie's ad inventory — spaces sold to agencies
+    // and ad platforms). Rewards here update the DISPLAYED balance only
+    // until the Cr wallet endpoint lands (billing engine pending).
+    var AD_SECONDS = 5;         // demo ad length (production standard: 30)
+    var AD_REWARD = 500;
+    var adTimer = null;
+
+    function openPay() { $('payModal').classList.add('open'); }
+    function closePay() { $('payModal').classList.remove('open'); }
+
+    function openAds() {
+        closePay();
+        $('adsModal').classList.add('open');
+        var n = AD_SECONDS;
+        $('adCount').textContent = n;
+        $('adClaim').disabled = true;
+        $('adMsg').textContent = 'Mira el anuncio completo y gana Créditos gratis';
+        clearInterval(adTimer);
+        adTimer = setInterval(function () {
+            n -= 1;
+            $('adCount').textContent = n > 0 ? n : '✓';
+            if (n <= 0) {
+                clearInterval(adTimer); adTimer = null;
+                $('adClaim').disabled = false;
+                $('adMsg').textContent = '¡Anuncio completado!';
+            }
+        }, 1000);
+    }
+    function closeAds() {
+        clearInterval(adTimer); adTimer = null;
+        $('adsModal').classList.remove('open');
+    }
+
+    function wirePayAds() {
+        // Triggers: Saldo label/value, and Recargar Saldo in the main menu.
+        $('saldoRow').addEventListener('click', openPay);
+        $('payClose').addEventListener('click', closePay);
+        $('payModal').addEventListener('click', function (e) { if (e.target === this) closePay(); });
+        $('payModal').addEventListener('click', function (e) {
+            var gw = e.target.closest('.gw');
+            if (gw) toast('Recargas con ' + gw.getAttribute('data-gw') + ' estarán disponibles próximamente.');
+        });
+        $('honeyBtn').addEventListener('click', openAds);
+        $('adsClose').addEventListener('click', closeAds);
+        $('adsModal').addEventListener('click', function (e) { if (e.target === this) closeAds(); });
+        $('adClaim').addEventListener('click', function () {
+            credits += AD_REWARD;
+            renderHeader();
+            closeAds();
+            notify('+' + fmt(AD_REWARD) + ' Cr añadidos a tu Saldo');
+        });
+    }
+
     // ── Toolbar / nav ────────────────────────────────────────────────────
     function wireToolbar() {
         $('advToggle').addEventListener('change', function () {
@@ -572,12 +627,21 @@
         });
         $('btnNav').addEventListener('click', function () { $('navMenu').classList.add('open'); });
         $('navMenu').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
-        $('navReload').addEventListener('click', function (e) { e.preventDefault(); $('navMenu').classList.remove('open'); refresh(); });
-        $('navLogout').addEventListener('click', function (e) {
-            e.preventDefault(); if (A.logout) A.logout(); location.href = '/';
+        $('navClose').addEventListener('click', function () { $('navMenu').classList.remove('open'); });
+        $('navRecharge').addEventListener('click', function () {
+            $('navMenu').classList.remove('open'); openPay();
+        });
+        $('navAccount').addEventListener('click', function () { location.href = '/panel'; });
+        $('navConfig').addEventListener('click', function () { location.href = '/panel'; });
+        $('navSupport').addEventListener('click', function () { toast('Soporte: soporte@coffeepie.co'); });
+        $('navLogout').addEventListener('click', function () {
+            if (A.logout) A.logout(); location.href = '/';
         });
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') { closeCtx(); closeResize(); $('navMenu').classList.remove('open'); }
+            if (e.key === 'Escape') {
+                closeCtx(); closeResize(); closePay(); closeAds();
+                $('navMenu').classList.remove('open');
+            }
         });
     }
 
@@ -596,7 +660,7 @@
             return;
         }
         renderOsCards();
-        wireCtx(); wireResize(); wireGrid(); wireCreateFlow(); wireToolbar();
+        wireCtx(); wireResize(); wireGrid(); wireCreateFlow(); wirePayAds(); wireToolbar();
 
         if (!isBig()) {
             renderHeader();

@@ -295,13 +295,100 @@
     .btn.primary:disabled { background: #5a4a30; color: #9a8a70; cursor: not-allowed; }
     .btn.ghost { background: transparent; color: #cbb8a0; border: 1px solid #4a3c28; }
 
+    /* Main menu — right drawer, cloned from Main_Menu.qml (#908f8f panel,
+       bold white left-aligned items, close X, support round button). */
+    #navMenu.overlay { align-items: stretch; justify-content: flex-end; background: rgba(0,0,0,0.25); }
     #navMenu .panel {
-      margin: 76px 34px 0 auto; width: 260px; background: #241d15; border: 1px solid #4a3c28;
-      border-radius: 12px; padding: 8px; box-shadow: 0 16px 40px rgba(0,0,0,.5);
+      width: min(430px, 88vw); background: var(--cp-menu-gray); height: 100%;
+      display: flex; flex-direction: column; padding: 26px 30px;
+      box-shadow: -14px 0 44px rgba(0,0,0,.45); position: relative;
     }
-    #navMenu .panel a { display: block; padding: 12px 16px; color: #e7ddcd; text-decoration: none; border-radius: 8px; font-size: 16px; }
-    #navMenu .panel a:hover { background: #33291c; }
-    #navMenu.overlay { align-items: flex-start; justify-content: flex-end; }
+    #navMenu .navx {
+      position: absolute; top: 22px; right: 24px; width: 56px; height: 56px;
+      border: none; background: transparent; cursor: pointer; padding: 4px;
+    }
+    #navMenu .navx svg { width: 100%; height: 100%; stroke: #fff; stroke-width: 5;
+      stroke-linecap: round; fill: none; }
+    #navMenu .navx:hover { transform: scale(1.1); }
+    #navMenu .item {
+      display: block; background: transparent; border: none; cursor: pointer;
+      color: #fff; font-size: 27px; font-weight: 700; text-align: left;
+      padding: 20px 6px; font-family: inherit;
+    }
+    #navMenu .item:hover { color: #2a2114; }
+    #navMenu .support {
+      margin: auto 12px 14px auto; width: 92px; height: 92px; border-radius: 50%;
+      border: none; background: #e9e9e9; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+    }
+    #navMenu .support svg { width: 52px; height: 52px; stroke: #2a2a2a; fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    #navMenu .support:hover { transform: scale(1.06); }
+
+    /* Pasarelas de Pago — white panel from Payment_Gateways.qml */
+    #payModal .panel {
+      margin-top: 6vh; width: min(1100px, 94vw); max-height: 88vh; overflow-y: auto;
+      background: #fff; border-radius: 10px; padding: 30px 56px 40px; position: relative;
+      box-shadow: 0 24px 70px rgba(0,0,0,.55); color: #111;
+    }
+    #payModal h2 { margin: 6px 0 30px; text-align: center; font-size: 38px; font-weight: 400;
+      letter-spacing: 1px; color: #111; }
+    #payModal .payx {
+      position: absolute; top: 18px; right: 20px; width: 52px; height: 52px;
+      border: none; background: transparent; cursor: pointer; padding: 6px;
+    }
+    #payModal .payx svg { width: 100%; height: 100%; stroke: #111; stroke-width: 5;
+      stroke-linecap: round; fill: none; }
+    #payModal .gwgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    @media (max-width: 900px) { #payModal .gwgrid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { #payModal .gwgrid { grid-template-columns: 1fr; } }
+    #payModal .gw {
+      background: #fff; border: none; border-radius: 8px; cursor: pointer;
+      box-shadow: 0 6px 22px rgba(0,0,0,.14); padding: 28px 20px;
+      display: flex; align-items: center; justify-content: center; min-height: 150px;
+      transition: transform .13s ease, box-shadow .13s ease;
+    }
+    #payModal .gw:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.22); }
+    #payModal .gw img { max-width: 82%; max-height: 92px; object-fit: contain; }
+    #payModal .honeywrap { text-align: center; margin-top: 26px; }
+    #payModal .honey {
+      border: none; background: transparent; cursor: pointer; padding: 0;
+      transition: transform .13s ease, filter .13s ease;
+    }
+    #payModal .honey img { width: 132px; height: auto; }
+    #payModal .honey:hover { transform: scale(1.08); filter: drop-shadow(0 6px 16px rgba(193,139,68,.6)); }
+
+    /* Watch-Ads-for-Credits — full white screen from Ads_Display.qml */
+    #adsModal .panel {
+      margin-top: 3vh; width: min(1280px, 96vw); height: 90vh; background: #fff;
+      border-radius: 10px; position: relative; color: #111; overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,.55);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    #adsModal .adx {
+      position: absolute; top: 16px; right: 18px; width: 52px; height: 52px;
+      border: none; background: transparent; cursor: pointer; padding: 6px; z-index: 3;
+    }
+    #adsModal .adx svg { width: 100%; height: 100%; stroke: #111; stroke-width: 5;
+      stroke-linecap: round; fill: none; }
+    #adsModal .slot {
+      width: min(900px, 88%); aspect-ratio: 16 / 9; background: #101010; border-radius: 8px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #d8c6a4; gap: 14px; position: relative;
+    }
+    #adsModal .slot .brand { font-size: 30px; font-weight: 300; letter-spacing: 2px; color: #eee; }
+    #adsModal .slot .count { font-size: 64px; font-weight: 200; color: var(--cp-accent); }
+    #adsModal .slot .sub { font-size: 14px; color: #8d8d8d; }
+    #adsModal .reward { margin-top: 26px; text-align: center; }
+    #adsModal .reward .msg { font-size: 24px; color: #222; margin-bottom: 14px; }
+    #adsModal .claim {
+      border: none; border-radius: 10px; background: var(--cp-accent); color: #1a120a;
+      font-size: 22px; font-weight: 700; padding: 14px 44px; cursor: pointer;
+    }
+    #adsModal .claim:disabled { opacity: .45; cursor: progress; }
+    #adsModal .finePrint { position: absolute; bottom: 12px; left: 0; right: 0;
+      text-align: center; font-size: 12px; color: #9a9a9a; }
 
     .gate {
       display: none; margin: 40px auto; max-width: 640px; text-align: center; background: rgba(20,16,11,.85);
@@ -335,7 +422,7 @@
           <button class="help" id="btnHelp" title="Soporte">?</button>
           <div class="meta">
             <div><span class="k">Tipo Cuenta:&nbsp;</span><span class="v" id="acctType">…</span></div>
-            <div><span class="k">Saldo:&nbsp;</span><span class="v" id="acctCredits">…</span> <span class="k">Cr</span></div>
+            <div id="saldoRow" style="cursor:pointer;" title="Recargar Saldo"><span class="k">Saldo:&nbsp;</span><span class="v" id="acctCredits">…</span> <span class="k">Cr</span></div>
           </div>
         </div>
         <div class="brandmid"><h1>Mis Máquinas</h1></div>
@@ -509,12 +596,67 @@
     </div>
   </div>
 
-  <!-- ── Top-right nav menu ────────────────────────────────────────────── -->
+  <!-- ── Main menu (right drawer, from Main_Menu.qml) ──────────────────── -->
   <div class="overlay" id="navMenu">
     <div class="panel">
-      <a href="/panel">← Volver al Panel</a>
-      <a href="#" id="navReload">Recargar máquinas</a>
-      <a href="#" id="navLogout">Cerrar sesión</a>
+      <button class="navx" id="navClose" title="Cerrar">
+        <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <button class="item" id="navRecharge">Recargar Saldo</button>
+      <button class="item" id="navAccount">Mi Cuenta</button>
+      <button class="item" id="navConfig">Configuración</button>
+      <button class="item" id="navLogout">Cerrar Sesión</button>
+      <button class="support" id="navSupport" title="Soporte Técnico">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 13a8 8 0 0 1 16 0"/>
+          <rect x="3" y="13" width="4" height="6" rx="1.6"/>
+          <rect x="17" y="13" width="4" height="6" rx="1.6"/>
+          <path d="M19 19a4 4 0 0 1-4 3h-2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Pasarelas de Pago (from Payment_Gateways.qml) ─────────────────── -->
+  <div class="overlay" id="payModal">
+    <div class="panel">
+      <button class="payx" id="payClose" title="Cerrar">
+        <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <h2>PASARELAS DE PAGO</h2>
+      <div class="gwgrid">
+        <button class="gw" data-gw="PayU"><img src="/assets/machines/pay/PayU_Logo.png" alt="PayU"></button>
+        <button class="gw" data-gw="PSE"><img src="/assets/machines/pay/PSE_Logo.png" alt="PSE"></button>
+        <button class="gw" data-gw="ePayco"><img src="/assets/machines/pay/ePayco_Logo.png" alt="ePayco"></button>
+        <button class="gw" data-gw="PlacetoPay"><img src="/assets/machines/pay/PlaceToPay_Logo.png" alt="PlacetoPay"></button>
+        <button class="gw" data-gw="NEQUI"><img src="/assets/machines/pay/Nequi_Logo.png" alt="NEQUI"></button>
+        <button class="gw" data-gw="Mercado Pago"><img src="/assets/machines/pay/MercadoPago.png" alt="Mercado Pago"></button>
+      </div>
+      <div class="honeywrap">
+        <button class="honey" id="honeyBtn" title="Ver anuncios por Créditos gratis">
+          <img src="/assets/machines/pay/Honey_Button.png" alt="Ads → Free Cr">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Watch Ads for Free Credits (from Ads_Display.qml) ─────────────── -->
+  <div class="overlay" id="adsModal">
+    <div class="panel">
+      <button class="adx" id="adsClose" title="Cerrar">
+        <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <div class="slot">
+        <div class="brand">ESPACIO PUBLICITARIO</div>
+        <div class="count" id="adCount">30</div>
+        <div class="sub" id="adSub">Tu recompensa se desbloquea al terminar el anuncio</div>
+      </div>
+      <div class="reward">
+        <div class="msg" id="adMsg">Mira el anuncio completo y gana Créditos gratis</div>
+        <button class="claim" id="adClaim" disabled>Reclamar +500 Cr</button>
+      </div>
+      <div class="finePrint">Inventario publicitario Coffee Pie — espacios a la venta para agencias
+        y plataformas (Google Ads, Meta Ads, TikTok Ads, X Ads…). Anuncio de demostración.</div>
     </div>
   </div>
 
