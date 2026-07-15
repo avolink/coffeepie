@@ -172,13 +172,12 @@
     }
 
     function loadCredits() {
-        try {
-            var c = A.claims ? A.claims() : null;
-            var am = c && c.app_metadata;
-            if (am && am.credits != null) { credits = Number(am.credits); return Promise.resolve(); }
-        } catch (e) { /* fall through */ }
-        credits = 1000000;      // display placeholder until the Cr wallet endpoint lands
-        return Promise.resolve();
+        // Real Cr wallet: Saldo = SUM(credit_ledger) served by the backend.
+        return req('GET', '/credits/balance').then(function (res) {
+            if (res.ok && res.data && res.data.credits != null) {
+                credits = Number(res.data.credits);
+            } else { credits = 1000000; }   // display placeholder (endpoint absent)
+        }).catch(function () { credits = 1000000; });
     }
 
     // ── Views ────────────────────────────────────────────────────────────
@@ -567,14 +566,27 @@
     var AD_SECONDS = 5;         // demo ad length (production standard: 30)
     var AD_REWARD = 500;
     var adTimer = null;
+    var currentAd = null;       // the ad served by /ads/next for this view
 
     function openPay() { $('payModal').classList.add('open'); }
     function closePay() { $('payModal').classList.remove('open'); }
 
-    function openAds() {
-        closePay();
-        $('adsModal').classList.add('open');
-        var n = AD_SECONDS;
+    // The slot shows the BEST ad for this viewer: the backend scores every
+    // active campaign's segment (age/role/region/interests from Segmentación)
+    // against the user's audience profile — best fit first, best bid as the
+    // tiebreak. No inventory → Coffee Pie house ad.
+    function renderAdSlot(ad) {
+        currentAd = ad;
+        var slot = document.querySelector('#adsModal .slot .brand');
+        var sub = $('adSub');
+        slot.textContent = (ad.name || 'ESPACIO PUBLICITARIO').toUpperCase();
+        sub.textContent = (ad.brand ? ad.brand + ' · ' : '') + (ad.objective || '') +
+            (ad.house ? '' : ' — anuncio seleccionado para ti');
+        $('adClaim').textContent = 'Reclamar +' + fmt(ad.reward_cr || AD_REWARD) + ' Cr';
+    }
+
+    function startAdCountdown(seconds) {
+        var n = seconds;
         $('adCount').textContent = n;
         $('adClaim').disabled = true;
         $('adMsg').textContent = 'Mira el anuncio completo y gana Créditos gratis';
@@ -588,6 +600,18 @@
                 $('adMsg').textContent = '¡Anuncio completado!';
             }
         }, 1000);
+    }
+
+    function openAds() {
+        closePay();
+        $('adsModal').classList.add('open');
+        renderAdSlot({ name: 'ESPACIO PUBLICITARIO', house: true, reward_cr: AD_REWARD });
+        startAdCountdown(AD_SECONDS);
+        // Ask the ad server for the best-fit ad; re-render the slot when it
+        // answers (countdown keeps running — the slot is already live).
+        req('GET', '/ads/next').then(function (res) {
+            if (res.ok && res.data && res.data.name) renderAdSlot(res.data);
+        }).catch(function () { /* house placeholder stays */ });
     }
     function closeAds() {
         clearInterval(adTimer); adTimer = null;
@@ -607,10 +631,23 @@
         $('adsClose').addEventListener('click', closeAds);
         $('adsModal').addEventListener('click', function (e) { if (e.target === this) closeAds(); });
         $('adClaim').addEventListener('click', function () {
-            credits += AD_REWARD;
-            renderHeader();
+            var ad = currentAd || {};
             closeAds();
-            notify('+' + fmt(AD_REWARD) + ' Cr añadidos a tu Saldo');
+            // Register the impression and credit the reward on the REAL
+            // ledger; fall back to display-only when the endpoint is absent.
+            req('POST', '/ads/complete', { campaign_id: ad.house ? null : ad.campaign_id })
+                .then(function (res) {
+                    if (res.ok && res.data && res.data.balance != null) {
+                        credits = Number(res.data.balance);
+                        renderHeader();
+                        notify('+' + fmt(res.data.reward_cr || AD_REWARD) + ' Cr añadidos a tu Saldo');
+                    } else { throw new Error('offline'); }
+                })
+                .catch(function () {
+                    credits += (ad.reward_cr || AD_REWARD);
+                    renderHeader();
+                    notify('+' + fmt(ad.reward_cr || AD_REWARD) + ' Cr añadidos a tu Saldo');
+                });
         });
     }
 
@@ -635,7 +672,11 @@
         $('navConfig').addEventListener('click', function () { location.href = '/panel'; });
         $('navSupport').addEventListener('click', function () { toast('Soporte: soporte@coffeepie.co'); });
         $('navLogout').addEventListener('click', function () {
-            if (A.logout) A.logout(); location.href = '/';
+            // Web experience only: "Cerrar Sesión" here closes the STREAMING
+            // session (this machines area), not the website login — the user
+            // returns to the panel still authenticated and logs out of the
+            // platform from there. (Embedded ARM keeps its Qt.quit() meaning.)
+            location.href = '/panel';
         });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
