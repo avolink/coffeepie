@@ -66,11 +66,25 @@
 
         var nodeCache = {};   // id → node, source of truth for the edit modal
 
+        function setNodeCount(txt) {
+            var el = document.getElementById('nodeCountLabel');
+            if (el) el.textContent = txt;
+        }
+        function placeholderRow(msg) {
+            return '<tr data-cp-placeholder="1"><td colspan="7" style="text-align:center;' +
+                   'color:var(--cp-text-muted);padding:18px;">' + msg + '</td></tr>';
+        }
+
         function renderNodes(nodes) {
             nodeCache = {};
             nodes.forEach(function (n) { nodeCache[n.id] = n; });
             var tbody = document.getElementById('nodesTableBody');
             if (!tbody) return;
+            if (!nodes.length) {
+                tbody.innerHTML = placeholderRow(cpTr('Sin nodos registrados — usa "Registrar Nodo" para añadir el primero.'));
+                setNodeCount('0 ' + cpTr('nodos'));
+                return;
+            }
             tbody.innerHTML = '';
             nodes.forEach(function (n) {
                 var tr = document.createElement('tr');
@@ -78,6 +92,7 @@
                 tr.innerHTML = rowHTML(n);
                 tbody.appendChild(tr);
             });
+            setNodeCount(nodes.length + ' ' + cpTr(nodes.length === 1 ? 'nodo' : 'nodos'));
             if (typeof window.updateProviderStats === 'function') window.updateProviderStats();
             if (typeof window.populateMaintenanceSelect === 'function') window.populateMaintenanceSelect();
         }
@@ -90,7 +105,14 @@
                     return r.json();
                 })
                 .then(renderNodes)
-                .catch(function (e) { toast('No se pudieron cargar los nodos (' + e.message + ')'); });
+                .catch(function (e) {
+                    // NEVER leave stale/mock rows looking like live data: on
+                    // failure the table says so explicitly.
+                    var tbody = document.getElementById('nodesTableBody');
+                    if (tbody) tbody.innerHTML = placeholderRow(cpTr('No se pudieron cargar los nodos — verifica que la API esté en línea.'));
+                    setNodeCount('—');
+                    toast('No se pudieron cargar los nodos (' + e.message + ')');
+                });
         }
 
         // ── Same-IP hint under the IP field (non-blocking: NAT'd domestic

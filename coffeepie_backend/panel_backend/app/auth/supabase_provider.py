@@ -46,10 +46,16 @@ class SupabaseIdentityProvider:
     def verify(self, token: str) -> AuthenticatedUser:
         import jwt
 
+        # leeway: a freshly-minted token is used within the same second it was
+        # issued; if our clock trails Supabase's even slightly, iat/nbf checks
+        # reject it (401 on the FIRST page load after login, then fine). 30 s
+        # of skew tolerance is the conventional cure and doesn't weaken exp
+        # meaningfully.
         try:
             if self.secret:
                 claims = jwt.decode(
-                    token, self.secret, algorithms=["HS256"], audience=_EXPECTED_AUDIENCE
+                    token, self.secret, algorithms=["HS256"], audience=_EXPECTED_AUDIENCE,
+                    leeway=30,
                 )
             else:
                 signing_key = self._jwks().get_signing_key_from_jwt(token)
@@ -58,6 +64,7 @@ class SupabaseIdentityProvider:
                     signing_key.key,
                     algorithms=["ES256", "RS256"],
                     audience=_EXPECTED_AUDIENCE,
+                    leeway=30,
                 )
         except Exception as e:  # jwt.PyJWTError and JWKS/network errors
             raise IdentityError(f"supabase token rejected: {e}") from e
