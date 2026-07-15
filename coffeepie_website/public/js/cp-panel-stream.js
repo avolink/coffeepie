@@ -61,26 +61,12 @@
             toast(tr('El acceso por navegador requiere el Paquete Grande. Los demás paquetes usan el Terminal Codec.'));
             return;
         }
-        // Big_Package: ask the backend to broker a session (pick a node, start
-        // the VM, get a VNC console ticket), stash it, and open the noVNC view.
+        // Big_Package: open "Mis Máquinas" — the browser machine manager
+        // (VanillaJS clone of the QML frontend). From there the user manages
+        // and launches their instances; the actual VM stream is brokered by
+        // /stream/session when they click a machine.
         if (!auth().api || !auth().token || !auth().token()) { toast(tr('Sesión no válida.')); return; }
-        toast(tr('Preparando tu sesión en el navegador…'));
-        fetch(auth().api + '/stream/session', {
-            method: 'POST', headers: { 'Authorization': 'Bearer ' + auth().token() }
-        })
-        .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, status: r.status, body: b }; }); })
-        .then(function (res) {
-            if (res.ok && res.body.session_id) {
-                // Same-tab navigation keeps the session in sessionStorage.
-                sessionStorage.setItem('cp_stream_session', JSON.stringify(res.body));
-                location.href = '/stream.html';
-            } else if (res.status === 403) {
-                toast(tr('El acceso por navegador requiere el Paquete Grande. Los demás paquetes usan el Terminal Codec.'));
-            } else {
-                toast((res.body && res.body.detail) || tr('No se pudo iniciar la sesión.'));
-            }
-        })
-        .catch(function () { toast(tr('No se pudo conectar al servidor.') + ' (' + auth().api + ')'); });
+        location.href = '/machines.html';
     };
 
     // ── Apply enabled/disabled visual state ──────────────────────────────
