@@ -158,13 +158,71 @@ def _destroy_vm(ip, cookie, csrf, node, vmid):
         pass
 
 
+def _pick_owned_vm(vm_id: str, owner_uid: str):
+    """Resolve a consumer-owned VM row → (node creds, proxmox vmid, name).
+    Used when the panel streams a specific machine rather than a throwaway."""
+    with get_conn() as conn:
+        cur = conn.cursor()
+        try:
+            cur.execute(
+                "SELECT v.proxmox_vmid, v.name, v.status, n.name, host(n.public_ip), "
+                "       n.root_username, n.root_password_enc "
+                "FROM vm v JOIN node n ON n.id = v.node_id "
+                "WHERE v.id = %s::uuid AND v.owner_id = %s::uuid",
+                (vm_id, owner_uid))
+            row = cur.fetchone()
+        finally:
+            cur.close()
+    if not row:
+        raise HTTPException(404, "Máquina no encontrada.")
+    pvmid, vname, vstatus, nname, ip, ruser, penc = row
+    if not pvmid:
+        raise HTTPException(409, "La máquina aún se está creando.")
+    if not penc:
+        raise HTTPException(503, "El nodo de esta máquina no está disponible.")
+    node = {"name": nname, "ip": ip, "user": ruser, "pw": decrypt_password(penc)}
+    return node, int(pvmid), vname
+
+
 @router.post("/session")
-def create_session(user: AuthenticatedUser = Depends(verify_bearer_token)):
+def create_session(vm_id: str | None = None,
+                   user: AuthenticatedUser = Depends(verify_bearer_token)):
     tier = str((user.claims.get("app_metadata") or {}).get("tier", "free")).lower()
     if tier != "big_package":
         raise HTTPException(403, "El acceso por navegador requiere el Paquete Grande.")
 
     sid = uuid.uuid4().hex
+
+    if vm_id:
+        # Stream one of the caller's OWN machines: never cloned, never
+        # destroyed on disconnect — "Mantener Encendida" controls its power.
+        node, pvmid, vname = _pick_owned_vm(vm_id, user.uid)
+        cookie, csrf = _authenticate(node["ip"], node["user"], node["pw"])
+        pve_node = _pve(node["ip"], "/nodes", cookie=cookie)[0]["node"]
+
+        st = _pve(node["ip"], f"/nodes/{pve_node}/qemu/{pvmid}/status/current", cookie=cookie)
+        if not st or st.get("status") != "running":
+            _pve(node["ip"], f"/nodes/{pve_node}/qemu/{pvmid}/status/start",
+                 cookie=cookie, csrf=csrf, data={})
+            _wait_running(node["ip"], cookie, pve_node, pvmid)
+        with get_conn() as conn:
+            cur = conn.cursor()
+            try:
+                cur.execute("UPDATE vm SET status = 'running' WHERE id = %s::uuid", (vm_id,))
+                conn.commit()
+            finally:
+                cur.close()
+
+        vp = _pve(node["ip"], f"/nodes/{pve_node}/qemu/{pvmid}/vncproxy",
+                  cookie=cookie, csrf=csrf, data={"websocket": 1})
+        _SESSIONS[sid] = {
+            "ip": node["ip"], "node": pve_node, "vmid": pvmid,
+            "port": vp["port"], "vncticket": vp["ticket"], "cookie": cookie, "csrf": csrf,
+            "is_clone": False, "exp": time.time() + _SESSION_TTL, "uid": user.uid,
+        }
+        return {"session_id": sid, "vnc_password": vp["ticket"],
+                "node": node["name"], "vmid": pvmid, "vm_name": vname}
+
     node = _pick_node()
     cookie, csrf = _authenticate(node["ip"], node["user"], node["pw"])
 

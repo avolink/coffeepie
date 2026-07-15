@@ -8,19 +8,20 @@
   <style>
     /* ─────────────────────────────────────────────────────────────────────
        Mis Máquinas — VanillaJS clone of the Coffee Pie QML frontend.
-       Design tokens lifted from the QML (Home_Screen / StackViewBasic2 /
-       Contextual_Menu / StackViewAdvanced) and the reference screenshots.
+       Views: #viewHome (grid), #viewOS (Selecciona un Sistema Operativo),
+       #viewSlices (Elije la Recurrencia y Capacidad de la Máquina).
+       Design tokens lifted from the QML sources and reference screenshots.
        ───────────────────────────────────────────────────────────────────── */
     :root {
       --cp-bg-light: #eaeaea;          /* headings / labels (QML #eaeaea)      */
       --cp-text: #f2f8f9;              /* card text (QML #f2f8f9)              */
       --cp-card-blue: #2f73b7;         /* VM card (sampled OS_Selector_Bg.png) */
-      --cp-card-blue-hi: #3a82c9;
       --cp-status: #e1cfb2;            /* "Creado" status (QML #e1cfb2)        */
       --cp-menu-gray: #908f8f;         /* contextual menu panel (QML #908f8f)  */
-      --cp-accent: #c18b44;            /* Coffee Pie orange (leaf ring)        */
+      --cp-box-dark: #323030;          /* recurrence box (QML rectangleDark)   */
+      --cp-box-sel: #565151;           /* selected recurrence (rectangleLight) */
+      --cp-accent: #c18b44;            /* Coffee Pie orange                    */
       --cp-negative: #8b4513;          /* negative credits (QML brown)         */
-      --cp-new-tile: #4a4a4a;
       --card-radius: 22px;
     }
 
@@ -32,33 +33,44 @@
       background: #17110c url('/assets/machines/Coffee_Background.jpg') center/cover fixed no-repeat;
       -webkit-font-smoothing: antialiased;
     }
-    /* Darken the very busy right side so text stays readable, like the app. */
     body::before {
       content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background: linear-gradient(90deg, rgba(10,7,4,0.82) 0%, rgba(10,7,4,0.55) 45%, rgba(10,7,4,0.15) 100%);
     }
     .wrap { position: relative; z-index: 1; max-width: 1680px; margin: 0 auto; padding: 22px 34px 60px; }
+    .view { display: none; }
+    .view.active { display: block; }
 
-    /* ── Top bar ──────────────────────────────────────────────────────── */
-    .topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 12px; }
-    .acct { display: flex; align-items: flex-start; gap: 14px; }
-    .acct .help {
+    /* ── Shared: corner buttons + big titles ──────────────────────────── */
+    .help {
       width: 66px; height: 62px; flex: none; border: 2px solid #cfcaba; border-radius: 8px;
       background: transparent; color: #cfcaba; font-size: 30px; font-weight: 300; cursor: pointer;
       display: flex; align-items: center; justify-content: center; line-height: 1;
     }
-    .acct .help:hover { border-color: #fff; color: #fff; }
+    .help:hover { border-color: #fff; color: #fff; }
+    .backbtn {
+      width: 64px; height: 64px; border: none; background: transparent; cursor: pointer;
+      color: #fff; padding: 0;
+    }
+    .backbtn svg { width: 100%; height: 100%; stroke: #fff; fill: none; stroke-width: 2.4;
+      stroke-linecap: round; stroke-linejoin: round; }
+    .backbtn:hover { transform: scale(1.08); }
+    .screenhead { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; }
+    .screenhead h1 { margin: 0; font-size: 50px; font-weight: 200; text-align: center; color: #fff; }
+    @media (max-width: 900px) { .screenhead h1 { font-size: 30px; } }
+
+    /* ── Home: top bar ────────────────────────────────────────────────── */
+    .topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 12px; }
+    .acct { display: flex; align-items: flex-start; gap: 14px; }
     .acct .meta { font-size: 19px; line-height: 1.55; color: #fff; }
     .acct .meta .k { color: #d7d2c6; font-weight: 300; }
     .acct .meta .v { font-weight: 600; }
     #acctCredits.neg { color: var(--cp-negative); }
-
     .brandmid { text-align: center; }
     .brandmid h1 {
       margin: 2px 0 0; font-size: 54px; font-weight: 200; letter-spacing: 0.5px;
       color: var(--cp-bg-light); white-space: nowrap;
     }
-
     .topright { display: flex; justify-content: flex-end; }
     .hamburger {
       width: 62px; height: 62px; background: transparent; border: none; cursor: pointer; padding: 12px;
@@ -67,7 +79,7 @@
     .hamburger span { display: block; height: 5px; border-radius: 3px; background: var(--cp-bg-light); }
     .hamburger:hover span { background: #fff; }
 
-    /* ── Toolbar (reload / Básico–Avanzado / search) ──────────────────── */
+    /* ── Home: toolbar ────────────────────────────────────────────────── */
     .toolbar {
       display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
       gap: 18px; margin: 6px 0 26px;
@@ -81,13 +93,9 @@
     .iconbtn:hover { transform: rotate(-35deg); transition: transform .2s ease; }
     .switchrow .lbl { font-size: 27px; font-weight: 200; color: var(--cp-bg-light); }
 
-    /* iOS-style toggle */
     .toggle { position: relative; width: 66px; height: 34px; flex: none; }
     .toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
-    .toggle .track {
-      position: absolute; inset: 0; border-radius: 34px; background: #6f6f6f;
-      transition: background .18s ease;
-    }
+    .toggle .track { position: absolute; inset: 0; border-radius: 34px; background: #6f6f6f; transition: background .18s ease; }
     .toggle .thumb {
       position: absolute; top: 3px; left: 3px; width: 28px; height: 28px; border-radius: 50%;
       background: #fff; transition: transform .18s ease; box-shadow: 0 1px 3px rgba(0,0,0,.4);
@@ -98,8 +106,7 @@
     .searchwrap { display: flex; justify-content: flex-end; }
     .search {
       width: min(460px, 100%); height: 52px; border-radius: 26px; border: none; padding: 0 22px;
-      font-size: 20px; color: #333; background: #f4f4f4;
-      box-shadow: 0 2px 10px rgba(0,0,0,.35);
+      font-size: 20px; color: #333; background: #f4f4f4; box-shadow: 0 2px 10px rgba(0,0,0,.35);
     }
     .search::placeholder { color: #9a9a9a; }
     .search:focus { outline: 2px solid var(--cp-accent); }
@@ -121,6 +128,8 @@
     }
     .card.vm .name:focus { outline: 1px solid rgba(255,255,255,.5); border-radius: 6px; }
     .card.vm .status { text-align: center; color: var(--cp-status); font-size: 18px; margin-top: -2px; }
+    .card.vm[data-state="creating"] .status { animation: pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
     .card.vm .osicon {
       align-self: center; justify-self: center; width: 40%; max-width: 150px; aspect-ratio: 1;
       background: transparent; border: none; cursor: pointer; padding: 0;
@@ -131,6 +140,7 @@
       filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
     .card.vm .osicon:hover { transform: scale(1.06); }
     .card.vm .osicon:hover img { filter: drop-shadow(0 0 12px rgba(193,139,68,.9)); }
+    .card.vm[data-state="creating"] .osicon { cursor: progress; opacity: .55; }
     .card.vm .footer { display: flex; justify-content: space-between; align-items: flex-end;
       color: var(--cp-text); font-size: 24px; }
     .card.vm .footer .rate { font-weight: 500; }
@@ -145,10 +155,10 @@
       position: absolute; top: 16px; left: 16px; width: 12px; height: 12px; border-radius: 50%;
       background: #58c25a; box-shadow: 0 0 8px #58c25a; display: none;
     }
-    .card.vm[data-running="true"] .runbadge { display: block; }
-    .card.vm[data-running="true"] .status { color: #b7e6b8; }
+    .card.vm[data-state="running"] .runbadge { display: block; }
+    .card.vm[data-state="running"] .status { color: #b7e6b8; }
+    .card.vm[data-state="error"] .status { color: #ff9d9d; }
 
-    /* New-machine tile (gray desktop illustration PNG) */
     .card.newtile { background: transparent; box-shadow: none; border: none; cursor: pointer; padding: 0; }
     .card.newtile img { width: 100%; height: 100%; object-fit: contain; }
     .card.newtile:hover { transform: translateY(-3px); transition: transform .15s ease; }
@@ -162,7 +172,7 @@
       background: rgba(244,244,244,0.96); color: #2a2a2a; padding: 10px 16px; font-size: 18px;
       border-bottom: 2px solid rgba(0,0,0,0.08); vertical-align: middle; white-space: nowrap;
     }
-    .advanced th { background: rgba(255,255,255,0.9); font-weight: 600; color: #555; font-size: 15px; text-transform: none; }
+    .advanced th { background: rgba(255,255,255,0.9); font-weight: 600; color: #555; font-size: 15px; }
     .advanced td.check { width: 46px; text-align: center; background: rgba(230,230,230,0.96); }
     .advanced input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--cp-accent); }
     .advanced td .tname { border: none; background: transparent; font-size: 18px; color: #222; width: 100%; }
@@ -173,6 +183,72 @@
     .stepper .qty { min-width: 40px; text-align: center; font-size: 18px; }
     .advanced .os { background: rgba(236,236,236,0.96); }
 
+    /* ── View: Selecciona un Sistema Operativo ────────────────────────── */
+    #viewOS .oses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 40px; }
+    @media (max-width: 1180px) { #viewOS .oses { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 760px)  { #viewOS .oses { grid-template-columns: 1fr; } }
+    .oscard {
+      position: relative; border-radius: 26px; aspect-ratio: 537 / 360;
+      background: var(--cp-card-blue); border: none; cursor: pointer; overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35); color: var(--cp-text);
+      display: grid; grid-template-rows: auto 1fr auto; padding: 18px 24px 16px;
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+    .oscard:hover { transform: translateY(-4px); box-shadow: 0 0 0 3px rgba(255,255,255,.6), 0 10px 24px rgba(0,0,0,.4); }
+    .oscard .t { text-align: center; font-size: 30px; font-weight: 300; }
+    .oscard .plaque {
+      align-self: center; justify-self: center; width: 46%; aspect-ratio: 4 / 3;
+      background: #dcdcdc; display: flex; align-items: center; justify-content: center;
+    }
+    .oscard .plaque img { width: 62%; height: 62%; object-fit: contain; }
+    .oscard .price { text-align: right; font-size: 26px; }
+
+    /* ── View: Elije la Recurrencia y Capacidad ───────────────────────── */
+    #viewSlices .oschip {
+      width: 96px; height: 74px; background: #dcdcdc; border-radius: 6px; margin-left: 12px;
+      display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+    }
+    #viewSlices .oschip img { width: 60%; height: 60%; object-fit: contain; }
+    .recurrences { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin: 52px 0 10px; }
+    @media (max-width: 900px) { .recurrences { grid-template-columns: 1fr; gap: 16px; } }
+    .recbox {
+      background: var(--cp-box-dark); border: 4px solid #fff; border-radius: 26px;
+      color: #fff; text-align: center; padding: 22px 12px 26px; cursor: pointer;
+      transition: background .12s ease;
+    }
+    .recbox:hover { background: #3d3a3a; }
+    .recbox.sel { background: var(--cp-box-sel); }
+    .recbox .rl { font-size: 30px; font-weight: 300; margin-bottom: 12px; }
+    .recbox .rp { font-size: 28px; font-weight: 400; }
+
+    .sliderrow { display: flex; align-items: center; gap: 18px; margin: 44px 0 30px; }
+    .pieend { width: 84px; height: 84px; flex: none; border: none; background: transparent;
+      cursor: pointer; padding: 0; border-radius: 50%; }
+    .pieend img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .pieend:hover { transform: scale(1.08); }
+    #sliceRange { flex: 1; appearance: none; -webkit-appearance: none; height: 6px; border-radius: 3px;
+      background: #f0f0f0; outline: none; cursor: pointer; }
+    #sliceRange::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%;
+      background: #fff; border: 2px solid #ddd; box-shadow: 0 2px 6px rgba(0,0,0,.5); cursor: grab;
+    }
+    #sliceRange::-moz-range-thumb {
+      width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 2px solid #ddd; cursor: grab;
+    }
+
+    .speclist { text-align: center; color: #fff; font-size: 26px; line-height: 1.55; font-weight: 300; }
+    .speclist .head { font-size: 28px; margin-bottom: 6px; }
+    @media (max-width: 900px) { .speclist { font-size: 18px; } .speclist .head { font-size: 20px; } }
+
+    .continuar-wrap { text-align: center; margin-top: 44px; }
+    .continuar {
+      min-width: 320px; padding: 20px 60px; border: none; border-radius: 14px; cursor: pointer;
+      background: #b8b6b4; color: #fff; font-size: 34px; font-weight: 300;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35); transition: background .12s ease;
+    }
+    .continuar:hover:not(:disabled) { background: var(--cp-accent); }
+    .continuar:disabled { opacity: .55; cursor: progress; }
+
     /* ── Modal shell ──────────────────────────────────────────────────── */
     .overlay {
       position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,0.35);
@@ -180,7 +256,6 @@
     }
     .overlay.open { display: flex; }
 
-    /* Contextual menu (per card) */
     #ctxMenu .panel {
       margin-top: 48px; width: 340px; max-width: 92vw; background: var(--cp-menu-gray);
       border-radius: 14px; padding: 18px 0 24px; color: var(--cp-text);
@@ -203,42 +278,31 @@
     #ctxMenu .gbtn.filled svg { fill: #fff; stroke: #fff; }
     #ctxMenu .divider { height: 1px; background: rgba(255,255,255,.18); margin: 14px 34px; }
 
-    /* OS picker (new machine) */
-    #osPicker .panel {
-      margin-top: 60px; width: 720px; max-width: 94vw; background: #262017;
-      border: 1px solid #4a3c28; border-radius: 16px; padding: 26px 28px 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+    /* Resize ("descargar RAM") modal */
+    #resizeModal .panel {
+      margin-top: 90px; width: 560px; max-width: 94vw; background: #262017;
+      border: 1px solid #4a3c28; border-radius: 16px; padding: 26px 30px 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.55); color: var(--cp-bg-light);
     }
-    #osPicker h2 { margin: 0 0 4px; font-weight: 300; font-size: 26px; color: var(--cp-bg-light); }
-    #osPicker .sub { color: #b7ab97; font-size: 15px; margin-bottom: 20px; }
-    #osPicker .oses { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    #osPicker .os {
-      background: #1c1710; border: 2px solid #3a2e1f; border-radius: 12px; cursor: pointer;
-      padding: 14px 8px 12px; text-align: center; color: #e7ddcd; transition: border-color .12s, transform .12s;
-    }
-    #osPicker .os:hover { border-color: var(--cp-accent); transform: translateY(-2px); }
-    #osPicker .os.sel { border-color: var(--cp-accent); background: #2a2114; }
-    #osPicker .os img { width: 62px; height: 62px; object-fit: contain; }
-    #osPicker .os .n { display: block; font-size: 14px; margin-top: 8px; }
-    #osPicker .os .c { display: block; font-size: 12px; color: var(--cp-accent); margin-top: 2px; }
-    #osPicker .actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+    #resizeModal h2 { margin: 0 0 4px; font-weight: 300; font-size: 24px; }
+    #resizeModal .sub { color: #b7ab97; font-size: 14px; margin-bottom: 20px; }
+    #resizeModal .sliderrow { margin: 26px 0 10px; }
+    #resizeModal .pieend { width: 54px; height: 54px; }
+    #resizeModal .rz-info { text-align: center; font-size: 19px; color: #fff; line-height: 1.6; }
+    #resizeModal .actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
     .btn { border: none; border-radius: 8px; padding: 12px 22px; font-size: 16px; cursor: pointer; }
     .btn.primary { background: var(--cp-accent); color: #1a120a; font-weight: 600; }
     .btn.primary:disabled { background: #5a4a30; color: #9a8a70; cursor: not-allowed; }
     .btn.ghost { background: transparent; color: #cbb8a0; border: 1px solid #4a3c28; }
 
-    /* Top-right nav menu */
     #navMenu .panel {
       margin: 76px 34px 0 auto; width: 260px; background: #241d15; border: 1px solid #4a3c28;
       border-radius: 12px; padding: 8px; box-shadow: 0 16px 40px rgba(0,0,0,.5);
     }
-    #navMenu .panel a {
-      display: block; padding: 12px 16px; color: #e7ddcd; text-decoration: none; border-radius: 8px; font-size: 16px;
-    }
+    #navMenu .panel a { display: block; padding: 12px 16px; color: #e7ddcd; text-decoration: none; border-radius: 8px; font-size: 16px; }
     #navMenu .panel a:hover { background: #33291c; }
     #navMenu.overlay { align-items: flex-start; justify-content: flex-end; }
 
-    /* Gate notice (non–Big Package) */
     .gate {
       display: none; margin: 40px auto; max-width: 640px; text-align: center; background: rgba(20,16,11,.85);
       border: 1px solid #4a3c28; border-radius: 16px; padding: 34px; color: #e7ddcd;
@@ -246,7 +310,6 @@
     .gate h2 { font-weight: 300; margin-top: 0; }
     .gate .btn { margin-top: 14px; }
 
-    /* Toast */
     #toast {
       position: fixed; left: 50%; bottom: 34px; transform: translateX(-50%) translateY(20px);
       background: #2a2114; color: #f2ead9; border: 1px solid var(--cp-accent); border-radius: 10px;
@@ -255,7 +318,6 @@
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* Demo-mode chip */
     #demoChip {
       display: none; position: fixed; right: 16px; bottom: 16px; z-index: 70;
       background: rgba(42,33,20,.9); border: 1px solid #6b5836; color: #d8c6a4;
@@ -265,57 +327,100 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- Top bar -->
-    <div class="topbar">
-      <div class="acct">
-        <button class="help" id="btnHelp" title="Soporte">?</button>
-        <div class="meta">
-          <div><span class="k">Tipo Cuenta:&nbsp;</span><span class="v" id="acctType">…</span></div>
-          <div><span class="k">Saldo:&nbsp;</span><span class="v" id="acctCredits">…</span> <span class="k" id="acctCr">Cr</span></div>
+
+    <!-- ══ VIEW: home (Mis Máquinas) ══════════════════════════════════ -->
+    <div class="view active" id="viewHome">
+      <div class="topbar">
+        <div class="acct">
+          <button class="help" id="btnHelp" title="Soporte">?</button>
+          <div class="meta">
+            <div><span class="k">Tipo Cuenta:&nbsp;</span><span class="v" id="acctType">…</span></div>
+            <div><span class="k">Saldo:&nbsp;</span><span class="v" id="acctCredits">…</span> <span class="k">Cr</span></div>
+          </div>
+        </div>
+        <div class="brandmid"><h1>Mis Máquinas</h1></div>
+        <div class="topright">
+          <button class="hamburger" id="btnNav" aria-label="Menú"><span></span><span></span><span></span></button>
         </div>
       </div>
-      <div class="brandmid"><h1>Mis Máquinas</h1></div>
-      <div class="topright">
-        <button class="hamburger" id="btnNav" aria-label="Menú"><span></span><span></span><span></span></button>
+
+      <div class="toolbar">
+        <div></div>
+        <div class="switchrow">
+          <button class="iconbtn" id="btnReload" title="Recargar"><img src="/assets/machines/Btn_Reload.png" alt="Recargar"></button>
+          <span class="lbl">Básico</span>
+          <label class="toggle"><input type="checkbox" id="advToggle"><span class="track"></span><span class="thumb"></span></label>
+          <span class="lbl">Avanzado</span>
+        </div>
+        <div class="searchwrap">
+          <input class="search" id="search" type="text" placeholder="Buscar máquina" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="gate" id="gate">
+        <h2>Acceso por navegador</h2>
+        <p>Las máquinas en el navegador están disponibles para el <strong>Paquete Grande</strong>.
+           Los demás paquetes acceden a través del Terminal Codec.</p>
+        <a class="btn primary" href="/panel">Volver al Panel</a>
+      </div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="advanced" id="advanced">
+        <table>
+          <thead>
+            <tr>
+              <th class="check"></th><th>Nombre</th><th>Cantidad</th><th>Sistema</th>
+              <th>Slices</th><th>Tostado</th><th>Cuerpo</th><th>Perfil</th>
+            </tr>
+          </thead>
+          <tbody id="advBody"></tbody>
+        </table>
       </div>
     </div>
 
-    <!-- Toolbar -->
-    <div class="toolbar">
-      <div></div>
-      <div class="switchrow">
-        <button class="iconbtn" id="btnReload" title="Recargar"><img src="/assets/machines/Btn_Reload.png" alt="Recargar"></button>
-        <span class="lbl">Básico</span>
-        <label class="toggle"><input type="checkbox" id="advToggle"><span class="track"></span><span class="thumb"></span></label>
-        <span class="lbl">Avanzado</span>
+    <!-- ══ VIEW: Selecciona un Sistema Operativo ══════════════════════ -->
+    <div class="view" id="viewOS">
+      <div class="screenhead">
+        <button class="help" data-help title="Soporte">?</button>
+        <h1>Selecciona un Sistema Operativo</h1>
+        <button class="backbtn" id="osBack" title="Volver">
+          <svg viewBox="0 0 24 24"><path d="M14 5c-5 0-8 3-8 8"/><path d="M9 9l-3 4 4 3"/><path d="M6 13h9a5 5 0 0 0 0-10"/></svg>
+        </button>
       </div>
-      <div class="searchwrap">
-        <input class="search" id="search" type="text" placeholder="Buscar máquina" autocomplete="off">
-      </div>
+      <div class="oses" id="osCards"></div>
     </div>
 
-    <!-- Big Package gate (shown when tier != big_package) -->
-    <div class="gate" id="gate">
-      <h2>Acceso por navegador</h2>
-      <p>Las máquinas en el navegador están disponibles para el <strong>Paquete Grande</strong>.
-         Los demás paquetes acceden a través del Terminal Codec.</p>
-      <a class="btn primary" href="/panel">Volver al Panel</a>
-    </div>
+    <!-- ══ VIEW: Elije la Recurrencia y Capacidad ═════════════════════ -->
+    <div class="view" id="viewSlices">
+      <div class="screenhead">
+        <div style="display:flex;align-items:center;">
+          <button class="help" data-help title="Soporte">?</button>
+          <span class="oschip"><img id="chosenOsIcon" src="" alt=""></span>
+        </div>
+        <h1>Elije la Recurrencia y Capacidad de la Máquina</h1>
+        <button class="backbtn" id="slBack" title="Volver">
+          <svg viewBox="0 0 24 24"><path d="M14 5c-5 0-8 3-8 8"/><path d="M9 9l-3 4 4 3"/><path d="M6 13h9a5 5 0 0 0 0-10"/></svg>
+        </button>
+      </div>
 
-    <!-- Básico: card grid -->
-    <div class="grid" id="grid"></div>
+      <div class="recurrences">
+        <div class="recbox sel" data-rec="minute"><div class="rl">Porción/Minuto</div><div class="rp" id="pMin">30 Cr</div></div>
+        <div class="recbox" data-rec="month"><div class="rl">Porción/Mes</div><div class="rp" id="pMon">500'000 Cr</div></div>
+        <div class="recbox" data-rec="year"><div class="rl">Porción/Año</div><div class="rp" id="pYear">6'000'000 Cr</div></div>
+      </div>
 
-    <!-- Avanzado: table -->
-    <div class="advanced" id="advanced">
-      <table>
-        <thead>
-          <tr>
-            <th class="check"></th><th>Nombre</th><th>Cantidad</th><th>Sistema</th>
-            <th>Slices</th><th>Tostado</th><th>Cuerpo</th><th>Perfil</th>
-          </tr>
-        </thead>
-        <tbody id="advBody"></tbody>
-      </table>
+      <div class="sliderrow">
+        <button class="pieend" id="sliceDec" title="Menos Porciones"><img src="/assets/machines/Coffee_Pie_Logo.png" alt="-1 Porción"></button>
+        <input type="range" id="sliceRange" min="1" max="256" step="1" value="1">
+        <button class="pieend" id="sliceInc" title="Más Porciones"><img src="/assets/machines/Coffee_Pie_Full.png" alt="+1 Porción"></button>
+      </div>
+
+      <div class="speclist" id="specList"></div>
+
+      <div class="continuar-wrap">
+        <button class="continuar" id="btnContinuar">Continuar</button>
+      </div>
     </div>
   </div>
 
@@ -342,7 +447,7 @@
       <div class="sec">
         <div class="t">Modificar Máquina</div>
         <div class="btnrow">
-          <button class="gbtn" id="ctxEdit" title="Modificar">
+          <button class="gbtn" id="ctxEdit" title="Modificar Porciones">
             <svg viewBox="0 0 24 24"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z"/><path d="M13.5 6.5l3 3"/></svg>
           </button>
         </div>
@@ -386,15 +491,20 @@
     </div>
   </div>
 
-  <!-- ── OS picker modal (new machine) ─────────────────────────────────── -->
-  <div class="overlay" id="osPicker">
+  <!-- ── Resize ("descargar RAM") modal ────────────────────────────────── -->
+  <div class="overlay" id="resizeModal">
     <div class="panel">
-      <h2>Nueva Máquina</h2>
-      <div class="sub" id="osPickerSub">Elige un sistema operativo. El costo se descuenta de tu saldo por minuto de uso.</div>
-      <div class="oses" id="oses"></div>
+      <h2>Modificar Porciones</h2>
+      <div class="sub">La máquina debe estar apagada — los hipervisores solo cambian el hardware virtual en frío.</div>
+      <div class="sliderrow">
+        <button class="pieend" id="rzDec"><img src="/assets/machines/Coffee_Pie_Logo.png" alt="-1"></button>
+        <input type="range" id="rzRange" min="1" max="256" step="1" value="1">
+        <button class="pieend" id="rzInc"><img src="/assets/machines/Coffee_Pie_Full.png" alt="+1"></button>
+      </div>
+      <div class="rz-info" id="rzInfo"></div>
       <div class="actions">
-        <button class="btn ghost" id="osCancel">Cancelar</button>
-        <button class="btn primary" id="osCreate" disabled>Crear Máquina</button>
+        <button class="btn ghost" id="rzCancel">Cancelar</button>
+        <button class="btn primary" id="rzSave">Aplicar</button>
       </div>
     </div>
   </div>
