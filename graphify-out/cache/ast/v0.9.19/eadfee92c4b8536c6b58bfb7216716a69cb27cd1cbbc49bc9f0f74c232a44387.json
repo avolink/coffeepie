@@ -1,0 +1,1 @@
+{"nodes": [{"id": "pkg_sunshine", "label": "Sunshine", "file_type": "code", "type": "package", "ecosystem": "python", "source_file": "coffeepie_backend/sunshine/pyproject.toml", "source_location": "L1"}], "edges": []}

@@ -1,0 +1,1 @@
+{"nodes": [{"id": "coffeepie_orchestrator_client_github_codeql_config", "label": "Client CodeQL config (Rust workspace crates analysis)", "file_type": "code", "source_file": "coffeepie_orchestrator/client/.github/codeql/codeql-config.yml", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}

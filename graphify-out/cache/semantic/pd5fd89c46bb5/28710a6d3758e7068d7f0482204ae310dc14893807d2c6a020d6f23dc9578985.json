@@ -1,0 +1,1 @@
+{"nodes": [{"id": "coffeepie_backend_proxmox_backend_requirements_deps", "label": "Proxmox backend Python dependencies", "file_type": "code", "source_file": "coffeepie_backend/proxmox_backend/requirements.txt", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
