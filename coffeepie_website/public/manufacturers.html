@@ -30303,8 +30303,9 @@
 
 
 
-    <!-- Old Browsers Deprecation -->
-    <script async="" src="/assets/browser-deprecation.bundle.es5.js.download"></script>
+    <!-- Old Browsers Deprecation: removed. Its supportsES2017() probe uses new Function(),
+         which our CSP (no 'unsafe-eval') blocks; the catch treats that as "old browser" and
+         wipes #SITE_CONTAINER, then overlays a blocked parastorage iframe. -->
 
 
     <!-- bi -->
