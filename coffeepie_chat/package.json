@@ -1,0 +1,20 @@
+{
+  "name": "coffeepie-chat",
+  "version": "1.0.0",
+  "description": "Coffee Pie® public web assistant — isolated chat service. Answers only from a knowledge base generated out of the public website. Holds no database, no hypervisor credentials and no identity secrets.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "CHAT_DEV=1 node server.js",
+    "kb": "node tools/gen-kb.mjs",
+    "probe": "node tools/chat-probe.mjs",
+    "test": "node --test 'test/**/*.test.js'"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/rate-limit": "^10.1.1",
+    "fastify": "^5.1.0"
+  }
+}

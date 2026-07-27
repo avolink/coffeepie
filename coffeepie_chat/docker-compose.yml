@@ -1,0 +1,49 @@
+# Coffee Pie chat assistant — VPS deployment (Docker Compose v2).
+#   cp .env.example .env     → point CHAT_BASE_URL at the tunnelled model
+#   npm run kb               → build data/chat-kb.json from the public site
+#   docker compose up -d --build
+#
+# Publishes to 127.0.0.1 only. The public-facing web server is HestiaCP's nginx
+# on the coffeepie.co vhost, which proxies /v1/chat here (snippet in
+# deploy/nginx-chat.conf — NOT api.coffeepie.co, which 301s to itself today).
+# Binding to 127.0.0.1 rather than 0.0.0.0 means the container is unreachable
+# from the internet except through that proxy and its TLS — the assistant is
+# never exposed raw on :8791.
+services:
+  chat:
+    build: .
+    container_name: coffeepie-chat
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:8791:8791"
+    # Lets the assistant reach the model. The reverse SSH tunnel from the SENA
+    # GPU box already lands on this VPS — it is the same box that serves
+    # panelesa — and it is bound to PANELESA's compose gateway, 172.18.0.1.
+    #
+    # ⚠ So CHAT_BASE_URL points at 172.18.0.1, not at this network's own
+    #   gateway and not at host.docker.internal (which resolves to the default
+    #   bridge, 172.17.0.1, usually an idle interface). Docker permits traffic
+    #   between bridges by default, so this normally works untouched; if it
+    #   does not, README.md explains the second bind + permitlisten.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    logging:
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+# The gateway of this network is the address the SSH tunnel from the GPU box
+# binds to, and it gets written into the VPS's authorized_keys as a permitlisten
+# restriction. Compose would otherwise choose a subnet on its own and could move
+# it after a `docker compose down` — silently breaking the tunnel, with the only
+# visible symptom being that the assistant stops paraphrasing. So pin it.
+#
+# 172.19.0.0/16 (not .18) leaves room for another compose project on this host;
+# if it collides with something already running, change BOTH this and the
+# permitlisten line on the VPS together.
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1
