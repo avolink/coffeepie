@@ -272,10 +272,34 @@
         gatePanelPage();
     }
 
+    // Step-up authentication: prove the account password again without
+    // disturbing the session. Used before actions that are disruptive rather
+    // than merely destructive — resizing a VM has to power it off first, so
+    // holding an open tab must not be enough to trigger it.
+    // Re-runs the same password grant as login; a success also refreshes the
+    // token, since it is the same identity. Resolves {ok} or {ok:false,error}.
+    function reauth(password) {
+        var email = claims().email;
+        if (!email) return Promise.resolve({ ok: false, error: 'Sesión no válida. Vuelve a iniciar sesión.' });
+        if (!password) return Promise.resolve({ ok: false, error: 'Escribe tu contraseña.' });
+        return fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_PUBLISHABLE_KEY },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+        .then(function (res) {
+            if (res.ok && res.body.access_token) { setToken(res.body.access_token); return { ok: true }; }
+            return { ok: false, error: 'Contraseña incorrecta.' };
+        })
+        .catch(function () { return { ok: false, error: 'No se pudo conectar al servidor.' }; });
+    }
+
     // Expose the token for the data-loader (cp-panel-data.js).
     window.cpPanelAuth = {
         token: token, valid: tokenValid, api: API,
         claims: claims, roles: roles, tier: tier,
+        reauth: reauth,
         logout: function () { clearToken(); }
     };
 })();

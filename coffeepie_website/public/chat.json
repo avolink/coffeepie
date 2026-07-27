@@ -1,0 +1,137 @@
+{
+  "start": {
+    "title": "Menú principal",
+    "text": "Hola, soy el asistente de Coffee Pie. ¿En qué puedo ayudarte?",
+    "options": [
+      { "label": "Quiero empezar a usar Coffee Pie", "go": "empezar" },
+      { "label": "Planes y precios", "go": "precios" },
+      { "label": "Tengo un problema", "go": "problema" },
+      { "label": "Quiero ser proveedor o fabricante", "go": "aliados" },
+      { "label": "¿Qué es Coffee Pie?", "go": "quees" }
+    ]
+  },
+
+  "quees": {
+    "title": "Qué es Coffee Pie",
+    "text": "Coffee Pie es un servicio de cómputo bajo demanda: en vez de comprar un computador, alquilas por minutos la potencia que necesitas y la usas desde el navegador o desde una Terminal Codec. Se basa en el sistema QFDM (patente NC2025/0012723), que reparte servidores reales en porciones llamadas Slices. La idea es doble: que acceder a un buen computador no dependa de poder comprarlo, y que dejemos de fabricar millones de equipos que pasan la mayor parte del tiempo apagados.",
+    "links": [
+      { "label": "Conocer más", "url": "/about.html" },
+      { "label": "Ver precios", "url": "/pricing.html" }
+    ],
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "empezar": {
+    "title": "Cómo empezar",
+    "text": "Crea una cuenta gratuita, elige un plan (o empieza con la capa gratuita) y crea tu primera máquina: eliges el sistema operativo y cuántos Slices quieres. La máquina se abre en el navegador y puedes apagarla cuando no la uses para dejar de consumir Créditos.",
+    "links": [
+      { "label": "Ver planes", "url": "/pricing.html" },
+      { "label": "Ir al Panel", "url": "/panel" },
+      { "label": "Tutoriales", "url": "/tutorials.html" }
+    ],
+    "options": [
+      { "label": "¿Qué es un Slice?", "go": "slices" },
+      { "label": "¿Cómo consigo Créditos?", "go": "creditos" },
+      { "label": "Volver al menú", "go": "start" }
+    ]
+  },
+
+  "slices": {
+    "title": "Qué es un Slice",
+    "text": "Un Slice es la unidad de cómputo que alquilas: una porción de un servidor real, con su parte de procesador, memoria, almacenamiento y red. Varios Slices se suman para formar una máquina más potente, y puedes cambiar la cantidad después. Para cambiar la capacidad hay que apagar la máquina primero: el hardware virtual solo se modifica en frío.",
+    "links": [{ "label": "Ver precios por Slice", "url": "/pricing.html" }],
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "creditos": {
+    "title": "Créditos",
+    "text": "El consumo se paga con Créditos (Cr). Hay dos formas de obtenerlos: viendo anuncios, donde el anunciante paga por ti, o comprando paquetes de Créditos. No hay equipo que comprar ni mantenimiento que pagar, y si apagas la máquina dejas de consumir.",
+    "links": [
+      { "label": "Comprar Créditos", "url": "/pricing.html" },
+      { "label": "Ver mi saldo", "url": "/panel" }
+    ],
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "precios": {
+    "title": "Planes y precios",
+    "text": "Hay una capa gratuita para probar el servicio y paquetes de pago con más capacidad y vigencia. El precio depende de cuántos Slices uses y por cuánto tiempo. En la página de precios está el detalle actualizado de cada plan.",
+    "links": [{ "label": "Ver todos los planes", "url": "/pricing.html" }],
+    "options": [
+      { "label": "¿Cómo consigo Créditos?", "go": "creditos" },
+      { "label": "Volver al menú", "go": "start" }
+    ]
+  },
+
+  "problema": {
+    "title": "Ayuda",
+    "text": "¿Con qué tienes el problema?",
+    "options": [
+      { "label": "Mi máquina no enciende o va lenta", "go": "problema_maquina" },
+      { "label": "Mi cuenta o mi acceso", "go": "problema_cuenta" },
+      { "label": "Un cobro o mi saldo", "go": "problema_pago" },
+      { "label": "Volver al menú", "go": "start" }
+    ]
+  },
+
+  "problema_maquina": {
+    "title": "Problemas con una máquina",
+    "text": "Primero revisa el estado de la máquina en tu Panel: si aparece detenida, enciéndela desde ahí. Si va lenta, puede que necesite más Slices. Si sigue sin responder, cuéntanoslo por soporte indicando el nombre de la máquina y qué estabas haciendo.",
+    "links": [{ "label": "Ir a mis máquinas", "url": "/machines.html" }],
+    "support": true,
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "problema_cuenta": {
+    "title": "Problemas de cuenta",
+    "text": "Si no puedes entrar, revisa que estés usando el mismo correo con el que te registraste. Nunca te pediremos tu contraseña por chat ni por correo. Si necesitas recuperar el acceso, escríbenos a soporte desde el correo de la cuenta.",
+    "support": true,
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "problema_pago": {
+    "title": "Cobros y saldo",
+    "text": "El saldo y el historial de consumo están en tu Panel. Si ves un cobro que no reconoces o el saldo no cuadra, escríbenos a soporte con la fecha aproximada y te lo revisamos.",
+    "links": [{ "label": "Ver mi cuenta", "url": "/panel" }],
+    "support": true,
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "aliados": {
+    "title": "Proveedores y fabricantes",
+    "text": "¿Qué te interesa?",
+    "options": [
+      { "label": "Aportar servidores (Proveedor)", "go": "aliados_proveedor" },
+      { "label": "Fabricar hardware", "go": "aliados_fabricante" },
+      { "label": "Invertir en el proyecto", "go": "aliados_inversion" },
+      { "label": "Volver al menú", "go": "start" }
+    ]
+  },
+
+  "aliados_proveedor": {
+    "title": "Ser proveedor de cómputo",
+    "text": "Un Proveedor aporta servidores a la red QFDM y recibe pagos por los Slices que sirve. Se clasifican por niveles según redundancia eléctrica y de red, disponibilidad comprometida, refrigeración, seguridad física y uso de energías renovables: a mejor nivel, mejor margen.",
+    "links": [{ "label": "Requisitos para proveedores", "url": "/cloud-providers.html" }],
+    "support": true,
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "aliados_fabricante": {
+    "title": "Fabricar hardware",
+    "text": "La Terminal Codec es un equipo ARM sencillo, modular, reparable y reciclable. Cualquier fabricante puede integrar módulos y accesorios alrededor del servicio. Fabricar terminales para alquilarlas a terceros requiere un acuerdo de regalías de patente para conectarse al backend QFDM.",
+    "links": [
+      { "label": "Información para fabricantes", "url": "/manufacturers.html" },
+      { "label": "Equipos certificados", "url": "/certified-devices.html" }
+    ],
+    "support": true,
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  },
+
+  "aliados_inversion": {
+    "title": "Inversión",
+    "text": "Coffee Pie es un proyecto abierto en proceso de formalización como empresa de beneficio e interés colectivo. La información para inversionistas está en el portal correspondiente.",
+    "links": [{ "label": "Portal de inversionistas", "url": "/investor-portal.html" }],
+    "support": true,
+    "options": [{ "label": "Volver al menú", "go": "start" }]
+  }
+}

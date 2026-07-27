@@ -1,0 +1,152 @@
+/* ===========================================================================
+   Coffee Pie® — asistente virtual. Estilos del widget.
+
+   Se carga en páginas propias (panel, machines) y en las exportadas de Wix, que
+   NO definen las variables --cp-*. Por eso cada var() lleva su valor de reserva:
+   el widget se ve igual aunque la página no aporte la paleta.
+
+   z-index: las páginas de Wix apilan capas muy altas; el asistente tiene que
+   quedar por encima de todas ellas, de ahí el valor casi máximo.
+   =========================================================================== */
+
+.cpchat-fab,
+.cpchat-panel { --cpc-dark: var(--cp-dark, #181818);
+                --cpc-card: var(--cp-dark-card, #222);
+                --cpc-accent: var(--cp-accent, #805d40);
+                --cpc-accent-hi: var(--cp-accent-hover, #a08060);
+                --cpc-border: var(--cp-border, #333);
+                --cpc-text: var(--cp-text, #fff);
+                --cpc-muted: var(--cp-text-muted, #b0b0b0);
+                font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+
+/* ---- launcher ----------------------------------------------------------- */
+.cpchat-fab {
+  position: fixed; right: 22px; bottom: 22px; z-index: 2147482000;
+  width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--cpc-accent); color: #fff; padding: 13px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .16s ease, background .16s ease;
+}
+.cpchat-fab:hover { background: var(--cpc-accent-hi); transform: scale(1.06); }
+.cpchat-fab:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.cpchat-fab svg { width: 100%; height: 100%; }
+.cpchat-fab[hidden] { display: none; }
+/* Un punto discreto la primera vez, para que se note que hay algo nuevo. */
+.cpchat-dot {
+  position: absolute; top: 4px; right: 4px; width: 13px; height: 13px;
+  border-radius: 50%; background: #4CAF50; border: 2px solid var(--cpc-dark);
+}
+
+/* ---- panel -------------------------------------------------------------- */
+.cpchat-panel {
+  position: fixed; right: 22px; bottom: 22px; z-index: 2147483000;
+  width: 380px; max-width: calc(100vw - 28px);
+  height: 560px; max-height: calc(100vh - 44px);
+  background: var(--cpc-dark); color: var(--cpc-text);
+  border: 1px solid var(--cpc-border); border-radius: 16px; overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .6);
+  display: flex; flex-direction: column;
+}
+.cpchat-panel[hidden] { display: none; }
+@media (max-width: 460px) {
+  .cpchat-panel { right: 0; bottom: 0; width: 100vw; height: 100dvh; max-height: none; border-radius: 0; border: none; }
+}
+
+.cpchat-head {
+  display: flex; align-items: center; gap: 11px; padding: 12px 14px;
+  background: var(--cpc-card); border-bottom: 1px solid var(--cpc-border); flex: none;
+}
+.cpchat-head-ico {
+  width: 38px; height: 38px; flex: none; border-radius: 50%; padding: 7px;
+  background: var(--cpc-accent); color: #fff;
+}
+.cpchat-head-ico svg { width: 100%; height: 100%; }
+.cpchat-title { font-size: 15px; font-weight: 600; }
+.cpchat-beta {
+  font-size: 9px; font-weight: 700; letter-spacing: .6px; margin-left: 6px;
+  padding: 2px 5px; border-radius: 4px; background: var(--cpc-accent); color: #fff;
+  vertical-align: 2px;
+}
+.cpchat-sub { font-size: 11.5px; color: var(--cpc-muted); }
+.cpchat-head-actions { margin-left: auto; display: flex; gap: 2px; }
+.cpchat-x {
+  width: 32px; height: 32px; border: none; background: transparent; cursor: pointer;
+  color: var(--cpc-muted); font-size: 16px; border-radius: 6px; line-height: 1;
+}
+.cpchat-x:hover { background: rgba(255, 255, 255, .08); color: var(--cpc-text); }
+
+/* ---- log ---------------------------------------------------------------- */
+.cpchat-log {
+  flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column;
+  gap: 9px; scrollbar-width: thin; scrollbar-color: #444 transparent;
+}
+.cpchat-log::-webkit-scrollbar { width: 8px; }
+.cpchat-log::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+
+.cpchat-msg {
+  max-width: 86%; padding: 10px 13px; border-radius: 14px; font-size: 14px;
+  line-height: 1.45; white-space: pre-wrap; word-wrap: break-word;
+}
+.cpchat-bot { align-self: flex-start; background: var(--cpc-card); border-bottom-left-radius: 4px; }
+.cpchat-me  { align-self: flex-end; background: var(--cpc-accent); color: #fff; border-bottom-right-radius: 4px; }
+.cpchat-msg a { color: var(--cpc-accent-hi); text-decoration: underline; }
+.cpchat-me a { color: #fff; }
+
+/* ---- chips (opciones del menú y enlaces sugeridos) ---------------------- */
+.cpchat-chips { display: flex; flex-wrap: wrap; gap: 7px; align-self: flex-start; max-width: 96%; }
+.cpchat-chip {
+  border: 1px solid var(--cpc-accent); background: transparent; color: var(--cpc-text);
+  border-radius: 16px; padding: 7px 13px; font-size: 13px; cursor: pointer;
+  font-family: inherit; text-decoration: none; display: inline-block;
+  transition: background .14s ease;
+}
+.cpchat-chip:hover { background: rgba(var(--cp-accent-rgb, 128, 93, 64), .3); }
+.cpchat-chip-link { border-style: dashed; }
+
+.cpchat-support {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  background: #4CAF50; color: #fff; border-radius: 16px; padding: 9px 15px;
+  font-size: 13.5px; font-weight: 600; text-decoration: none;
+}
+.cpchat-support:hover { background: #43a047; }
+.cpchat-support svg { width: 17px; height: 17px; flex: none; }
+
+/* ---- "escribiendo…" ----------------------------------------------------- */
+.cpchat-typing { display: flex; gap: 4px; align-items: center; padding: 13px; }
+.cpchat-typing span {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--cpc-muted);
+  animation: cpchat-blink 1.3s infinite both;
+}
+.cpchat-typing span:nth-child(2) { animation-delay: .18s; }
+.cpchat-typing span:nth-child(3) { animation-delay: .36s; }
+@keyframes cpchat-blink { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .cpchat-typing span { animation: none; opacity: .6; }
+  .cpchat-fab { transition: none; }
+}
+
+/* ---- composer ----------------------------------------------------------- */
+.cpchat-form {
+  display: flex; gap: 8px; align-items: flex-end; padding: 10px 12px;
+  border-top: 1px solid var(--cpc-border); background: var(--cpc-card); flex: none;
+}
+.cpchat-input {
+  flex: 1; resize: none; border: 1px solid var(--cpc-border); border-radius: 10px;
+  background: var(--cpc-dark); color: var(--cpc-text); padding: 10px 12px;
+  font-size: 14px; font-family: inherit; line-height: 1.35; max-height: 90px;
+}
+.cpchat-input:focus { outline: none; border-color: var(--cpc-accent); }
+.cpchat-input::placeholder { color: #777; }
+.cpchat-send {
+  width: 40px; height: 40px; flex: none; border: none; border-radius: 10px;
+  background: var(--cpc-accent); color: #fff; cursor: pointer; padding: 9px;
+}
+.cpchat-send:hover:not(:disabled) { background: var(--cpc-accent-hi); }
+.cpchat-send:disabled { opacity: .4; cursor: default; }
+.cpchat-send svg { width: 100%; height: 100%; }
+
+.cpchat-legal {
+  margin: 0; padding: 7px 12px 10px; font-size: 10.5px; color: var(--cpc-muted);
+  text-align: center; background: var(--cpc-card); flex: none;
+}

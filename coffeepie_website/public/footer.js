@@ -82,3 +82,35 @@
         });
     }
 })();
+
+/**
+ * Asistente virtual (site-wide loader).
+ *
+ * Vive aquí porque /footer.js es el único script que cargan TODAS las páginas
+ * exportadas de Wix, y su marcado está horneado: añadir una etiqueta <script>
+ * a mano significaría editar quince ficheros y acordarse del decimosexto. El
+ * cargador va en su propio IIFE, separado del de arriba, porque aquél sale
+ * temprano cuando la página no tiene footer — y el asistente debe aparecer
+ * igualmente.
+ *
+ * Las páginas propias de la aplicación (machines.html, panel.html) incluyen
+ * cp-chat.js con su etiqueta, así que aquí se comprueba antes de duplicar.
+ */
+(function () {
+    'use strict';
+
+    if (window.CoffeePieChat) return;                       // ya montado por la página
+    if (document.querySelector('script[src^="/js/cp-chat.js"]')) return;
+
+    if (!document.querySelector('link[href^="/css/cp-chat.css"]')) {
+        var css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = '/css/cp-chat.css';
+        document.head.appendChild(css);
+    }
+
+    var s = document.createElement('script');
+    s.src = '/js/cp-chat.js';
+    s.defer = true;
+    document.head.appendChild(s);
+})();

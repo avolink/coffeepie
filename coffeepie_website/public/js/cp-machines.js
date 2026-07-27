@@ -36,6 +36,12 @@
         centos:  { label: 'CentOS',    icon: 'Cent_OS_Icon.png', min: 1, hidden: true }
     };
     var OS_DIR = '/assets/machines/os/';
+    // Hardware descriptors shown in the advanced table. The whole fleet is
+    // x86-64 silicon today (Proxmox/QEMU nodes), so these are the defaults;
+    // give an OS its own `tech`/`arch` above when photonic or ARM64/RISC-V
+    // nodes land, or let the backend override per-VM via `tech`/`arch`.
+    var DEFAULT_TECH = 'Silicon';
+    var DEFAULT_ARCH = 'x86-64';
     // Per-Slice physical mapping (from the reference: 4 Slices = 4 Wh, 4
     // cores, 4 GB RAM, 32 GB SSD, 500 GB HDD, 500 MB VRAM, 32 Mbps, 12 MPX/s)
     var PER_SLICE = { wh: 1, cores: 1, ramGb: 1, ssdGb: 8, hddGb: 125, vramMb: 125, mbps: 8, mpxs: 3 };
@@ -101,6 +107,23 @@
         });
     }
     function cssEsc(s) { return String(s).replace(/["\\]/g, '\\$&'); }
+    var DASH = '—';
+    function fmtDate(iso) {
+        if (!iso) return DASH;
+        // A date-only string is already the calendar date; parsing it would
+        // read as UTC midnight and shift a day back west of Greenwich.
+        if (/^\d{4}-\d{2}-\d{2}$/.test(iso)) return iso;
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return DASH;
+        var p = function (n) { return (n < 10 ? '0' : '') + n; };
+        return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+    }
+    // The scheduler measures node latency (_tcp_ping_ms) but never returns it
+    // on /vms/me, so real machines show a dash until the backend exposes it.
+    function fmtPing(ms) {
+        var n = Number(ms);
+        return (ms == null || isNaN(n)) ? DASH : Math.round(n) + 'ms';
+    }
 
     // ── State ────────────────────────────────────────────────────────────
     var machines = [];
@@ -115,21 +138,31 @@
 
     function DEMO() {
         return [
-            mk('Mi Máquina Personal', 'win10', 8), mk('Mi Workstation', 'win11', 16),
-            mk('Production DB', 'debian', 2), mk('Mint', 'mint', 4), mk('Arch Pentesting', 'arch', 1)
+            mk('Mi Máquina Personal', 'win10', 8, 'Medellín (N1)', 16, '2026-05-14'),
+            mk('Mi Workstation', 'win11', 16, 'Bogotá (N3)', 35, '2026-06-02'),
+            mk('Production DB', 'debian', 2, 'Cali', 42, '2026-03-21'),
+            mk('Mint', 'mint', 4, 'Barranquilla', 53, '2026-06-28'),
+            mk('Arch Pentesting', 'arch', 1, 'Bogotá (N4)', 39, '2026-07-09')
         ];
-        function mk(name, key, slices) {
+        // Demo rows never pass through normalize(), so they carry the same
+        // fields it produces. Values are fixed, not random, so the table does
+        // not reshuffle on every re-render.
+        function mk(name, key, slices, node, pingMs, createdAt) {
             return {
                 id: 'demo-' + Math.random().toString(36).slice(2, 8),
                 vmid: 100 + Math.floor(Math.random() * 900),
                 name: name, os: key, osLabel: osInfo(key).label, rate: slices * RATE,
-                state: 'created', slices: slices, recurrence: 'minute'
+                state: 'created', slices: slices, recurrence: 'minute',
+                node: node, pingMs: pingMs, createdAt: createdAt,
+                tech: osInfo(key).tech || DEFAULT_TECH,
+                arch: osInfo(key).arch || DEFAULT_ARCH
             };
         }
     }
 
     function normalize(v) {
         var key = osKey(v.os || (v.specs ? v.specs.so : ''));
+        var info = osInfo(key);
         var st = String(v.status || 'created').toLowerCase();
         if (!STATE_LABEL[st]) st = /run/.test(st) ? 'running' : 'created';
         return {
@@ -141,7 +174,11 @@
             state: st, error: v.error_detail || null,
             slices: v.slices || (v.specs && v.specs.cpu) || 1,
             recurrence: v.recurrence || 'minute',
-            node: v.node || null
+            node: v.node || null,
+            tech: v.tech || info.tech || DEFAULT_TECH,
+            arch: v.arch || info.arch || DEFAULT_ARCH,
+            createdAt: v.created_at || null,
+            pingMs: v.ping_ms != null ? v.ping_ms : null
         };
     }
 
@@ -233,15 +270,37 @@
 
     function renderAdvanced() {
         var body = $('advBody');
-        body.innerHTML = machines.map(function (m) {
+        // Advanced mode needs its own way in to the create flow — the grid has
+        // the "Nueva Máquina" tile, this table had nothing. colspan is read off
+        // the header so it keeps up if a column is ever added or removed.
+        var cols = document.querySelectorAll('#advanced thead th').length || 1;
+        var newRow =
+            '<tr class="newrow">' +
+              '<td colspan="' + cols + '">' +
+                '<button class="newbtn" type="button" title="Nueva Máquina">' +
+                  '<span class="plus">+</span><span>Nueva Máquina</span>' +
+                '</button>' +
+              '</td>' +
+            '</tr>';
+        body.innerHTML = newRow + machines.map(function (m) {
             return '' +
             '<tr data-id="' + esc(m.id) + '">' +
               '<td class="check"><input type="checkbox"></td>' +
               '<td><input class="tname" value="' + esc(m.name) + '" spellcheck="false"></td>' +
-              '<td><div class="stepper"><button class="dec">–</button><span class="qty">1</span><button class="inc">+</button></div></td>' +
+              '<td class="qtycell"><div class="stepper"><button class="dec">–</button>' +
+                '<span class="qty">' + esc(m.slices) + '</span>' +
+              '<button class="inc">+</button></div>' +
+              '<button class="applyqty" type="button" disabled' +
+                ' title="Aplicar cambio" aria-label="Aplicar cambio">' +
+                '<svg viewBox="0 0 24 24"><path d="M4 13l5 5L20 6"/></svg>' +
+              '</button></td>' +
               '<td class="os">' + esc(m.osLabel) + '</td>' +
               '<td>' + esc(m.slices) + '</td>' +
-              '<td>Medio</td><td>Redondo</td><td>Suave</td>' +
+              '<td>' + esc(m.tech || DEFAULT_TECH) + '</td>' +
+              '<td>' + esc(m.arch || DEFAULT_ARCH) + '</td>' +
+              '<td>' + esc(fmtDate(m.createdAt)) + '</td>' +
+              '<td>' + esc(fmtPing(m.pingMs)) + '</td>' +
+              '<td>' + esc(m.node || DASH) + '</td>' +
             '</tr>';
         }).join('');
     }
@@ -478,6 +537,85 @@
     }
     function closeResize() { $('resizeModal').classList.remove('open'); resizeVmRef = null; }
 
+    // Push a new Slice count to the hypervisor. Virtual hardware only changes
+    // cold, so a running machine is shut down first — which is precisely why
+    // the table's stepper demands the password before reaching this point.
+    function applyResize(m, n) {
+        if (machinesDemo || String(m.id).indexOf('demo-') === 0) {
+            m.slices = n; m.rate = n * RATE; renderAll(); toast('Porciones actualizadas (demo)');
+            return Promise.resolve();
+        }
+        var cold = Promise.resolve();
+        if (m.state === 'running') { toast('Apagando la máquina…'); cold = shutdownVM(m); }
+        return cold.then(function () {
+            toast('Aplicando ' + n + ' Porciones…');
+            return req('PATCH', '/vms/' + m.id + '/specs', { slices: n });
+        }).then(function (res) {
+            if (res && res.ok) {
+                return loadMachines().then(function (l) {
+                    machines = l; renderAll(); toast('Porciones actualizadas: ' + n);
+                });
+            }
+            renderAll();   // nothing applied — put the stepper back
+            toast((res && res.data && res.data.detail) || 'No se pudo redimensionar.');
+        }).catch(function () { renderAll(); toast('No se pudo conectar al servidor.'); });
+    }
+
+    // ── Spec-change authorisation ────────────────────────────────────────
+    // The Cantidad stepper only stages a number. Nothing reaches the
+    // hypervisor until the password is confirmed here, because applying it
+    // powers the machine off — an open tab must not be enough to do that.
+    var authVm = null, authQty = 0, authBusy = false;
+
+    function openAuth(m, n) {
+        authVm = m; authQty = n; authBusy = false;
+        $('authMsg').textContent =
+            'Para poder cambiar las especificaciones de la Máquina debemos reiniciarla ' +
+            'primero, recuerda guardar los cambios antes de hacerlo, ¿deseas iniciar el ' +
+            'cambio ahora? (' + m.slices + ' → ' + n + (n === 1 ? ' Porción)' : ' Porciones)');
+        $('authErr').textContent = '';
+        $('authPass').value = '';
+        $('authModal').classList.add('open');
+        $('authPass').focus();
+    }
+
+    function closeAuth(revert) {
+        $('authModal').classList.remove('open');
+        $('authPass').value = '';          // never leave the password in the DOM
+        authVm = null; authBusy = false;
+        if (revert) renderAdvanced();      // stepper snaps back to the stored Slices
+    }
+
+    function submitAuth() {
+        if (!authVm || authBusy) return;
+        var pw = $('authPass').value;
+        if (!pw) { $('authErr').textContent = 'Escribe tu contraseña.'; return; }
+        var m = authVm, n = authQty;
+        authBusy = true;
+        $('authErr').textContent = 'Verificando…';
+        // The demo dataset has no real session to authenticate against, so
+        // there is nothing to authorise — the machines are not real either.
+        var check = (machinesDemo || !A.reauth) ? Promise.resolve({ ok: true }) : A.reauth(pw);
+        check.then(function (r) {
+            if (!r.ok) {
+                authBusy = false;
+                $('authErr').textContent = r.error || 'Contraseña incorrecta.';
+                return;
+            }
+            closeAuth(false);
+            applyResize(m, n);
+        });
+    }
+
+    function wireAuth() {
+        $('authCancel').addEventListener('click', function () { closeAuth(true); });
+        $('authModal').addEventListener('click', function (e) { if (e.target === this) closeAuth(true); });
+        $('authPass').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') { e.preventDefault(); submitAuth(); }
+            if (e.key === 'Escape') { e.preventDefault(); closeAuth(true); }
+        });
+    }
+
     function wireResize() {
         $('rzRange').addEventListener('input', renderRzInfo);
         $('rzDec').addEventListener('click', function () { var r = $('rzRange'); r.value = Math.max(+r.min, +r.value - 1); renderRzInfo(); });
@@ -488,18 +626,7 @@
             if (!resizeVmRef) return;
             var m = resizeVmRef, n = parseInt($('rzRange').value, 10) || 1;
             closeResize();
-            if (machinesDemo || String(m.id).indexOf('demo-') === 0) {
-                m.slices = n; m.rate = n * RATE; renderAll(); toast('Porciones actualizadas (demo)');
-                return;
-            }
-            toast('Aplicando ' + n + ' Porciones…');
-            req('PATCH', '/vms/' + m.id + '/specs', { slices: n }).then(function (res) {
-                if (res.ok) {
-                    loadMachines().then(function (l) { machines = l; renderAll(); toast('Porciones actualizadas: ' + n); });
-                } else {
-                    toast((res.data && res.data.detail) || 'No se pudo redimensionar.');
-                }
-            }).catch(function () { toast('No se pudo conectar al servidor.'); });
+            applyResize(m, n);
         });
     }
 
@@ -522,11 +649,35 @@
             }
         });
         $('advBody').addEventListener('click', function (e) {
+            if (e.target.closest('.newbtn')) { showView('OS'); return; }
             var row = e.target.closest('tr'); if (!row) return;
             var qty = row.querySelector('.qty'); if (!qty) return;
-            var n = parseInt(qty.textContent, 10) || 1;
-            if (e.target.classList.contains('inc')) qty.textContent = Math.min(256, n + 1);
-            if (e.target.classList.contains('dec')) qty.textContent = Math.max(1, n - 1);
+            var m = byId(row.getAttribute('data-id')); if (!m) return;
+
+            // The tick is the only thing that starts the authorisation. The
+            // stepper never does on its own, so the user can settle on a
+            // number — and change their mind — before anything asks for a
+            // password. The Slices column stays put until the hypervisor
+            // accepts the change.
+            if (e.target.closest('.applyqty')) {
+                var staged = parseInt(qty.textContent, 10) || m.slices;
+                if (staged !== m.slices) openAuth(m, staged);
+                return;
+            }
+
+            var isInc = e.target.classList.contains('inc');
+            var isDec = e.target.classList.contains('dec');
+            if (!isInc && !isDec) return;
+
+            var min = osInfo(m.os).min;
+            var n = parseInt(qty.textContent, 10) || m.slices;
+            n = isInc ? Math.min(256, n + 1) : Math.max(min, n - 1);
+            qty.textContent = n;
+
+            var dirty = n !== m.slices;
+            row.classList.toggle('pending', dirty);
+            var apply = row.querySelector('.applyqty');
+            if (apply) apply.disabled = !dirty;
         });
     }
 
@@ -659,8 +810,18 @@
         });
         $('search').addEventListener('input', renderGrid);
         $('btnReload').addEventListener('click', refresh);
-        Array.prototype.forEach.call(document.querySelectorAll('#btnHelp, [data-help]'), function (b) {
-            b.addEventListener('click', function () { toast('Soporte: soporte@coffeepie.co'); });
+        // Los "?" de cada pantalla y "Soporte Técnico" del menú abren el
+        // asistente. Antes sólo enseñaban un toast con el correo, que obligaba
+        // al usuario a salirse de la aplicación para preguntar cualquier cosa.
+        // El correo sigue estando: es el botón "Contactar Soporte" que el
+        // asistente ofrece cuando no puede resolverlo, así que quien necesita
+        // una persona sigue a un clic de ella.
+        Array.prototype.forEach.call(document.querySelectorAll('#btnHelp, [data-help], #navSupport'), function (b) {
+            b.addEventListener('click', function () {
+                $('navMenu').classList.remove('open');       // el de soporte vive en el menú lateral
+                if (window.CoffeePieChat) window.CoffeePieChat.open();
+                else toast('Soporte: soporte@coffeepie.co');  // sin el widget, el comportamiento de antes
+            });
         });
         $('btnNav').addEventListener('click', function () { $('navMenu').classList.add('open'); });
         $('navMenu').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
@@ -670,7 +831,7 @@
         });
         $('navAccount').addEventListener('click', function () { location.href = '/panel'; });
         $('navConfig').addEventListener('click', function () { location.href = '/panel'; });
-        $('navSupport').addEventListener('click', function () { toast('Soporte: soporte@coffeepie.co'); });
+        // #navSupport se engancha arriba, junto a los demás botones de soporte.
         $('navLogout').addEventListener('click', function () {
             // Web experience only: "Cerrar Sesión" here closes the STREAMING
             // session (this machines area), not the website login — the user
@@ -701,7 +862,7 @@
             return;
         }
         renderOsCards();
-        wireCtx(); wireResize(); wireGrid(); wireCreateFlow(); wirePayAds(); wireToolbar();
+        wireCtx(); wireResize(); wireAuth(); wireGrid(); wireCreateFlow(); wirePayAds(); wireToolbar();
 
         if (!isBig()) {
             renderHeader();

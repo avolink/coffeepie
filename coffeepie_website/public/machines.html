@@ -52,8 +52,10 @@
       width: 64px; height: 64px; border: none; background: transparent; cursor: pointer;
       color: #fff; padding: 0;
     }
-    .backbtn svg { width: 100%; height: 100%; stroke: #fff; fill: none; stroke-width: 2.4;
-      stroke-linecap: round; stroke-linejoin: round; }
+    /* Back_Button.png is the Qt asset (101x95, white artwork). QML draws it
+       with icon.color "#eaeaea", so dim the white by the same amount rather
+       than leaving it pure #fff. object-fit keeps its 101:95 shape. */
+    .backbtn img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0.918); }
     .backbtn:hover { transform: scale(1.08); }
     .screenhead { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; }
     .screenhead h1 { margin: 0; font-size: 50px; font-weight: 200; text-align: center; color: #fff; }
@@ -89,7 +91,9 @@
       width: 46px; height: 46px; border: none; background: transparent; cursor: pointer; padding: 0;
       display: flex; align-items: center; justify-content: center;
     }
-    .iconbtn img { width: 42px; height: 42px; }
+    /* Btn_Reload.png is 300x370 — a fixed square squashed it. QML sets
+       icon.color "#00000000" (no tint), so the artwork's own grey is correct. */
+    .iconbtn img { width: 42px; height: 42px; object-fit: contain; }
     .iconbtn:hover { transform: rotate(-35deg); transition: transform .2s ease; }
     .switchrow .lbl { font-size: 27px; font-weight: 200; color: var(--cp-bg-light); }
 
@@ -169,19 +173,34 @@
     .advanced { display: none; }
     .advanced table { width: 100%; border-collapse: separate; border-spacing: 0 0; }
     .advanced td, .advanced th {
-      background: rgba(244,244,244,0.96); color: #2a2a2a; padding: 10px 16px; font-size: 18px;
-      border-bottom: 2px solid rgba(0,0,0,0.08); vertical-align: middle; white-space: nowrap;
+      background: rgba(50,48,48,0.96); color: var(--cp-text); padding: 10px 16px; font-size: 18px;
+      border-bottom: 2px solid rgba(0,0,0,0.35); vertical-align: middle; white-space: nowrap;
     }
-    .advanced th { background: rgba(255,255,255,0.9); font-weight: 600; color: #555; font-size: 15px; }
-    .advanced td.check { width: 46px; text-align: center; background: rgba(230,230,230,0.96); }
+    .advanced th { background: rgba(32,30,30,0.94); font-weight: 600; color: #bdb9b4; font-size: 15px; }
+    .advanced td.check { width: 46px; text-align: center; background: rgba(40,38,38,0.96); }
     .advanced input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--cp-accent); }
-    .advanced td .tname { border: none; background: transparent; font-size: 18px; color: #222; width: 100%; }
+    .advanced td .tname { border: none; background: transparent; font-size: 18px; color: var(--cp-text); width: 100%; }
     .advanced td .tname:focus { outline: 1px solid var(--cp-accent); }
-    .stepper { display: inline-flex; align-items: center; background: #e9e9e9; border-radius: 6px; overflow: hidden; }
-    .stepper button { width: 34px; height: 34px; border: none; background: #e0e0e0; font-size: 20px; cursor: pointer; color: #444; }
-    .stepper button:hover { background: #d2d2d2; }
+    .stepper { display: inline-flex; align-items: center; background: var(--cp-box-sel); border-radius: 6px; overflow: hidden; }
+    .stepper button { width: 34px; height: 34px; border: none; background: #635d5d; font-size: 20px; cursor: pointer; color: var(--cp-text); }
+    .stepper button:hover { background: #736c6c; }
     .stepper .qty { min-width: 40px; text-align: center; font-size: 18px; }
-    .advanced .os { background: rgba(236,236,236,0.96); }
+    .advanced .os { background: rgba(44,42,42,0.96); }
+    /* First row of the table = the create-machine entry point (mirrors the
+       "Nueva Máquina" tile the grid shows in Básico). */
+    .advanced tr.newrow td { background: rgba(38,36,36,0.96); padding: 0; }
+    .advanced .newbtn {
+      display: flex; align-items: center; gap: 14px; width: 100%; border: none;
+      background: transparent; color: var(--cp-text); font: inherit; font-size: 18px;
+      padding: 11px 16px; cursor: pointer; text-align: left;
+    }
+    .advanced .newbtn:hover { background: rgba(193,139,68,0.16); }
+    .advanced .newbtn:focus-visible { outline: 2px solid var(--cp-accent); outline-offset: -2px; }
+    .advanced .newbtn .plus {
+      width: 34px; height: 34px; border-radius: 6px; flex: none; background: var(--cp-accent);
+      color: #241a0e; font-size: 24px; line-height: 1; font-weight: 600;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
 
     /* ── View: Selecciona un Sistema Operativo ────────────────────────── */
     #viewOS .oses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 40px; }
@@ -294,6 +313,45 @@
     .btn.primary { background: var(--cp-accent); color: #1a120a; font-weight: 600; }
     .btn.primary:disabled { background: #5a4a30; color: #9a8a70; cursor: not-allowed; }
     .btn.ghost { background: transparent; color: #cbb8a0; border: 1px solid #4a3c28; }
+
+    /* Spec-change authorisation — the golden "ATENCIÓN!!!" panel from Figma.
+       Deliberately loud: confirming it powers the machine off. */
+    #authModal .panel {
+      margin-top: 14vh; width: 720px; max-width: 94vw; background: #c8960c;
+      border: 4px solid #000; border-radius: 30px; padding: 20px 30px 26px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.6); color: #fff; text-align: center;
+    }
+    #authModal h2 { margin: 0 0 10px; font-size: 34px; font-weight: 800; letter-spacing: .5px; }
+    #authModal p { margin: 0 0 18px; font-size: 21px; font-weight: 700; line-height: 1.34; }
+    #authModal .authrow { display: flex; align-items: center; gap: 18px; }
+    #authModal .authrow label { font-size: 27px; font-weight: 700; flex: none; }
+    #authModal .authrow input {
+      flex: 1; height: 48px; border-radius: 10px; border: 3px solid #000; background: #000;
+      color: #fff; font-size: 20px; padding: 0 16px; font-family: inherit;
+    }
+    #authModal .authrow input::placeholder { color: #8b8b8b; }
+    #authModal .autherr { min-height: 24px; padding: 4px 0 2px; color: #3d1d00; font-weight: 700; font-size: 16px; }
+    #authModal .authcancel {
+      width: 100%; height: 62px; border-radius: 16px; border: 3px solid #000; background: #fff;
+      color: #111; font-size: 26px; font-weight: 700; cursor: pointer; font-family: inherit;
+    }
+    #authModal .authcancel:hover { background: #efefef; }
+    /* A row whose Cantidad no longer matches its applied Slices. */
+    .advanced tr.pending .qty { color: #ffd27f; font-weight: 700; }
+    /* Confirm tick — nothing is authorised until this is pressed, so it stays
+       dimmed and unclickable while Cantidad still equals Slices. */
+    .advanced td.qtycell { white-space: nowrap; }
+    .advanced .applyqty {
+      width: 34px; height: 34px; margin-left: 12px; padding: 5px; border: none;
+      background: transparent; vertical-align: middle; cursor: pointer;
+      opacity: .22; transition: opacity .15s ease, transform .15s ease;
+    }
+    .advanced .applyqty svg { width: 100%; height: 100%; fill: none; stroke: #fff;
+      stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+    .advanced .applyqty:disabled { cursor: default; }
+    .advanced tr.pending .applyqty { opacity: 1; }
+    .advanced tr.pending .applyqty:hover { transform: scale(1.14); }
+    .advanced .applyqty:focus-visible { outline: 2px solid var(--cp-accent); border-radius: 6px; }
 
     /* Main menu — right drawer, cloned from Main_Menu.qml (#908f8f panel,
        bold white left-aligned items, close X, support round button). */
@@ -458,7 +516,8 @@
           <thead>
             <tr>
               <th class="check"></th><th>Nombre</th><th>Cantidad</th><th>Sistema</th>
-              <th>Slices</th><th>Tostado</th><th>Cuerpo</th><th>Perfil</th>
+              <th>Slices</th><th>Tech.</th><th>Inst. Set</th>
+              <th>Lanzamiento</th><th>Ping</th><th>Nodo</th>
             </tr>
           </thead>
           <tbody id="advBody"></tbody>
@@ -472,7 +531,7 @@
         <button class="help" data-help title="Soporte">?</button>
         <h1>Selecciona un Sistema Operativo</h1>
         <button class="backbtn" id="osBack" title="Volver">
-          <svg viewBox="0 0 24 24"><path d="M14 5c-5 0-8 3-8 8"/><path d="M9 9l-3 4 4 3"/><path d="M6 13h9a5 5 0 0 0 0-10"/></svg>
+          <img src="/assets/machines/Back_Button.png" alt="Volver">
         </button>
       </div>
       <div class="oses" id="osCards"></div>
@@ -487,7 +546,7 @@
         </div>
         <h1>Elije la Recurrencia y Capacidad de la Máquina</h1>
         <button class="backbtn" id="slBack" title="Volver">
-          <svg viewBox="0 0 24 24"><path d="M14 5c-5 0-8 3-8 8"/><path d="M9 9l-3 4 4 3"/><path d="M6 13h9a5 5 0 0 0 0-10"/></svg>
+          <img src="/assets/machines/Back_Button.png" alt="Volver">
         </button>
       </div>
 
@@ -596,6 +655,21 @@
     </div>
   </div>
 
+  <!-- ── Spec-change authorisation (Figma "ATENCIÓN!!!" panel) ─────────── -->
+  <div class="overlay" id="authModal">
+    <div class="panel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <h2 id="authTitle">ATENCIÓN!!!</h2>
+      <p id="authMsg"></p>
+      <div class="authrow">
+        <label for="authPass">Sí:</label>
+        <input type="password" id="authPass" placeholder="Escribe tu contraseña"
+               autocomplete="current-password" spellcheck="false">
+      </div>
+      <div class="autherr" id="authErr" role="alert"></div>
+      <button class="authcancel" id="authCancel">Cancelar</button>
+    </div>
+  </div>
+
   <!-- ── Main menu (right drawer, from Main_Menu.qml) ──────────────────── -->
   <div class="overlay" id="navMenu">
     <div class="panel">
@@ -663,7 +737,10 @@
   <div id="toast"></div>
   <div id="demoChip">Modo demostración · datos de ejemplo</div>
 
+  <link rel="stylesheet" href="/css/cp-chat.css">
   <script src="/js/cp-panel-auth.js"></script>
+  <script src="/js/cp-switch.js"></script>
+  <script src="/js/cp-chat.js"></script>
   <script src="/js/cp-machines.js"></script>
 </body>
 </html>
