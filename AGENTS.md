@@ -13,7 +13,7 @@ Always implement the best practices for Professional Development:
 
 3) Use aphostrophe "'" as Thousands Separator for presentation to human users, dot "." as decimal separator, comma "," as prhases separator in strings and paragraphs.
 
-4) Version Control. Make sure GIT and/or GitHub are configured optimally, junk and private keys (.env) must be git ignored and never pushed. Make sure every change is added, commited with a meaninful comment of the changes made, and pushed to remote repo (if no remote repo warn the user so they're aware of it and fix it asap).
+4) Version Control. Make sure GIT and GitHub are configured optimally, junk and private keys (.env) must be git ignored and never pushed. Make sure every change is added, commited with a meaninful comment about the changes made, and pushed to remote repo (if no remote repo warn the user so they're aware of it and fix it asap).
 
 5) Unit Testing Strategies:
 Adopt AI-Assisted TDD: Write the test specifications, interfaces, or high-level assertions manually first, then let the AI implement the logic—or write the logic and explicitly prompt the AI to find boundary conditions (null values, network drops, integer overflows).
