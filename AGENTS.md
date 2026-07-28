@@ -1,5 +1,6 @@
 <!-- BEGIN:avolink-rules -->
-<!-- Sincronizado desde ~/DEV/AVOLINK.md por sync-agents-header.mjs.
+<!-- Sincronizado desde ~/DEV/avolink_website/AVOLINK.md
+     por scripts/sync-agents-header.mjs de ese mismo repositorio.
      NO editar aqui: se sobrescribe. Cambie el original y vuelva a ejecutarlo.
      Estas reglas MANDAN sobre lo que diga el resto de este documento. -->
 
