@@ -7,13 +7,13 @@
 
 Always implement the best practices for Professional Development:
 
-1) Context Mapping and Project Awareness (Graphify), Full Context with Images by Default. Make sure getting contex from graph, if it's outdated, haves no full context with images, or the graph is non-existent, generate it with Graphify and get context from it before making any change in the repo.
+1) Context Mapping and Project Awareness (Graphify), Full Context with Images by Default. Make sure getting contex from graph, if it's outdated, haves no full context with images, or the graph is non-existent, generate it with Graphify and get context from it before making any change in the repo. Always use free open source tools and software unless explicitly asked for the developer.
 
-2) Develop in Englsih, Translate Labels and Text with Local Dictionary in JSON Only. Things like names, brands, emails, physical addresses and numbers should not be transalted, unless explicitly requested for a particular feature, like optimizing SEO/AEO/GEO.
+2) Develop in English with a translations.json (unless developer says it's a web project meant to be optimized for an specific locale and language, e.g: Spanish), Translate Labels and Text from the translations.json only. Things like names, brands, emails, physical addresses and numbers should not be transalted, unless explicitly requested for a particular feature, like optimizing SEO/AEO/GEO. By default use TypeScript for Frontend, Python for automation and scripting, Rust for very heavy and/or critical tasks in the Backend.
 
 3) Use aphostrophe "'" as Thousands Separator for presentation to human users, dot "." as decimal separator, comma "," as prhases separator in strings and paragraphs.
 
-4) Version Control. Make sure GIT and GitHub are configured optimally, junk and private keys (.env) must be git ignored and never pushed. Make sure every change is added, commited with a meaninful comment about the changes made, and pushed to remote repo (if no remote repo warn the user so they're aware of it and fix it asap).
+4) Version Control. Make sure GIT and GitHub are configured optimally, junk and private keys (.env) must be git ignored and never pushed. Make sure every change is added, commited with a meaninful comment about the changes made, and pushed to remote repo (if no remote repo configured, warn the user so they're aware of it and fix it asap).
 
 5) Unit Testing Strategies:
 Adopt AI-Assisted TDD: Write the test specifications, interfaces, or high-level assertions manually first, then let the AI implement the logic—or write the logic and explicitly prompt the AI to find boundary conditions (null values, network drops, integer overflows).
