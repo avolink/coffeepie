@@ -1,5 +1,5 @@
 <!-- BEGIN:avolink-rules -->
-<!-- Sincronizado desde ~/DEV/AGENTS.md por sync-agents-header.mjs.
+<!-- Sincronizado desde ~/DEV/AVOLINK.md por sync-agents-header.mjs.
      NO editar aqui: se sobrescribe. Cambie el original y vuelva a ejecutarlo.
      Estas reglas MANDAN sobre lo que diga el resto de este documento. -->
 
@@ -13,7 +13,7 @@ Always implement the best practices for Professional Development:
 
 3) Use aphostrophe "'" as Thousands Separator for presentation to human users, dot "." as decimal separator, comma "," as prhases separator in strings and paragraphs.
 
-4) Version Control. Make sure GIT and GitHub are configured optimally, junk and private keys (.env) must be git ignored and never pushed. Make sure every change is added, commited with a meaninful comment about the changes made, and pushed to remote repo (if no remote repo configured, warn the user so they're aware of it and fix it asap).
+4) Version Control. Make sure GIT and GitHub are configured optimally, junk and private keys (.env) must be git ignored and never pushed. Make sure every change is added, commited with a meaninful comment about the changes made, and pushed to remote repo (if no remote repo configured, warn the user so they're aware of it and fix it asap). Deploys must be atomic and reversible within seconds at any traffic level — release directories plus a symlink flip, never editing the live root in place. Canary deploys are an addition on top of that, not a replacement: adopt them once the app sustains over 1'000 sessions a day on the main app's sensitive features and a failure signal is in place (a client-side error beacon tagged with the release, so the two cohorts can be compared). Below that threshold, deploying to everyone with instant rollback has the same blast radius and gives faster feedback. When a canary does go wrong, it buys time to stop the exposure and decide deliberately — fix forward, or roll back if necessary.
 
 5) Unit Testing Strategies:
 Adopt AI-Assisted TDD: Write the test specifications, interfaces, or high-level assertions manually first, then let the AI implement the logic—or write the logic and explicitly prompt the AI to find boundary conditions (null values, network drops, integer overflows).
