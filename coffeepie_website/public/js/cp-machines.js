@@ -575,6 +575,9 @@
             'cambio ahora? (' + m.slices + ' → ' + n + (n === 1 ? ' Porción)' : ' Porciones)');
         $('authErr').textContent = '';
         $('authPass').value = '';
+        // Hidden companion field: it is what the password manager fills, and
+        // naming the account keeps it from offering a different saved login.
+        $('authUser').value = (A.claims && A.claims().email) || '';
         $('authModal').classList.add('open');
         $('authPass').focus();
     }

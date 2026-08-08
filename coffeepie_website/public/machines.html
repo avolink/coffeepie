@@ -111,7 +111,10 @@
     .search {
       width: min(460px, 100%); height: 52px; border-radius: 26px; border: none; padding: 0 22px;
       font-size: 20px; color: #333; background: #f4f4f4; box-shadow: 0 2px 10px rgba(0,0,0,.35);
+      /* type="search" only to steer autofill — it must still look like the pill. */
+      -webkit-appearance: none; appearance: none;
     }
+    .search::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
     .search::placeholder { color: #9a9a9a; }
     .search:focus { outline: 2px solid var(--cp-accent); }
 
@@ -330,6 +333,12 @@
       color: #fff; font-size: 20px; padding: 0 16px; font-family: inherit;
     }
     #authModal .authrow input::placeholder { color: #8b8b8b; }
+    /* Off-flow, not display:none — managers ignore hidden fields, and an
+       ignored decoy sends them back to the search box. */
+    #authModal .authrow input.authuser {
+      flex: none; position: absolute; width: 1px; height: 1px; min-width: 0;
+      padding: 0; border: 0; opacity: 0; pointer-events: none;
+    }
     #authModal .autherr { min-height: 24px; padding: 4px 0 2px; color: #3d1d00; font-weight: 700; font-size: 16px; }
     #authModal .authcancel {
       width: 100%; height: 62px; border-radius: 16px; border: 3px solid #000; background: #fff;
@@ -498,7 +507,12 @@
           <span class="lbl">Avanzado</span>
         </div>
         <div class="searchwrap">
-          <input class="search" id="search" type="text" placeholder="Buscar máquina" autocomplete="off">
+          <!-- type="search" + the data-* opt-outs keep password managers from
+               treating this as the username field for #authPass and dropping
+               the account email in it. See the decoy input in #authModal. -->
+          <input class="search" id="search" type="search" name="q" placeholder="Buscar máquina"
+                 autocomplete="off" data-lpignore="true" data-1p-ignore
+                 data-bwignore data-form-type="other">
         </div>
       </div>
 
@@ -662,6 +676,11 @@
       <p id="authMsg"></p>
       <div class="authrow">
         <label for="authPass">Sí:</label>
+        <!-- A lone password field makes managers hunt the page for a username
+             and fill the first text input they find. Give them a real one so
+             they stop writing the account email into the search box. -->
+        <input class="authuser" type="text" id="authUser" name="username"
+               autocomplete="username" readonly tabindex="-1" aria-hidden="true">
         <input type="password" id="authPass" placeholder="Escribe tu contraseña"
                autocomplete="current-password" spellcheck="false">
       </div>
