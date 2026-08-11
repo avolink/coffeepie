@@ -23,9 +23,11 @@ warning at the end of this section.
 
 | # | Question | How to answer it | If the answer is no |
 |---|---|---|---|
-| 0.1 | Is TCP **80 and 443** reachable from the public internet to the SENA IP? | From the VPS: `nc -vz 206.62.137.22 80` and `443` | No direct hosting. Fall back to a Cloudflare Tunnel (§7) — the site still moves, the ports do not have to open. |
-| 0.2 | Is TCP **25** reachable **inbound**, and is outbound 25 unblocked? | Inbound: `nc -vz 206.62.137.22 25`. Outbound, from the VM: `nc -vz gmail-smtp-in.l.google.com 25` | Mail does not move. Keep Namecheap forwarding, or relay (§6). |
-| 0.3 | Can you set the **PTR / reverse DNS** for 206.62.137.22? | Ask whoever administers the IP block (SENA network, or their ISP) | Do not self-host outbound mail at all. Relay it (§6). |
+| # | Status |
+|---|---|
+| 0.1 | Is TCP **80 and 443** reachable from the public internet to the SENA IP? — **answered, see below: refused, meaning reachable but unforwarded.** |
+| 0.2 | Is TCP **25** reachable inbound, and is outbound 25 unblocked? — **inbound 25 answers, but something else already owns it.** Outbound still untested: from the VM, `nc -vz gmail-smtp-in.l.google.com 25`. |
+| 0.3 | Can you set the **PTR / reverse DNS** for 206.62.137.22? — **open.** Ask whoever administers the IP block. If no, do not self-host outbound mail; relay it (§6). |
 
 **Why the tests must run from outside.** Probing 206.62.137.22 from a machine
 on the office LAN answers a different question. A probe of port 80 from here
@@ -40,7 +42,50 @@ That is the office router refusing to hairpin a LAN client back to its own
 public address — not the SENA server, which never saw the packet. A local
 "open" or "closed" result is noise either way.
 
-**Current state, measured 2026-08-09** (authoritative, from 8.8.8.8):
+### Result of 0.1 and 0.2, measured 2026-08-11 from the VPS
+
+```
+nc: connect to 206.62.137.22 port 80 (tcp) failed: Connection refused
+nc: connect to 206.62.137.22 port 443 (tcp) failed: Connection refused
+Connection to 206.62.137.22 25 port [tcp/smtp] succeeded!
+```
+
+**Read "refused", not "closed".** A refusal is a TCP RST coming back, which
+means the packet reached a host that answered. A policy firewall dropping
+traffic gives a *timeout* instead. So the path from the public internet to
+this address is open, and 80/443 are refused because nothing is listening or
+forwarded behind them — not because the network is blocking us. That is the
+good outcome: it is a configuration gap, not a policy wall.
+
+Port 25 answering, however, is **not ours to claim**. Something already
+listens on SMTP at that address, and on an institution's range that is most
+likely SENA's own mail server. Pointing coffeepie.co's MX there would hand our
+mail to a server we do not control. Identify it before assuming anything:
+
+```bash
+printf 'QUIT\r\n' | nc -w 5 206.62.137.22 25    # read the 220 banner
+```
+
+### The remaining question, and how to settle it cheaply
+
+We know packets arrive. We do not yet know whether 80/443 can be *forwarded*
+to our VM, or whether they are blocked upstream specifically (some providers
+single out those two ports). Ladder, cheapest first:
+
+1. `nc -vz 206.62.137.22 8006` from the VPS. Proxmox is reachable on 8006 from
+   the office, so if it answers from outside too, inbound forwarding to an
+   internal host demonstrably works here and someone already configured one.
+2. Ask whoever runs the office router to forward 80 and 443 to the new VM's
+   internal address.
+3. If 80/443 still refuse afterwards, forward a high port (8080) to the same
+   VM and test that. If 8080 works and 80 does not, the block is
+   port-specific and upstream — go to the tunnel in §7. If neither works, the
+   forward itself is wrong.
+
+Nothing in §1 or §2 depends on this answer. Build the VM and the site now;
+only the cutover in §5 is gated.
+
+**Current DNS, measured 2026-08-11** (authoritative, from 8.8.8.8):
 
 - `coffeepie.co` → 209.74.89.188 (the VPS)
 - `www.coffeepie.co` → 209.74.89.188
