@@ -71,7 +71,7 @@ ARM-based SBCs (Radxa, Orange Pi, custom RISC-V, etc) running:<br>
   - Window Manager: Sway (Kiosk Mode).<br>
   - Graphical User Interface: Coffee Pie® Qt.<br>
   - Connectivity: USB-IP for local peripherals + QFDM Protocol (Sunshine/Moonlight based for ultra-low latency).<br>
- 4. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT Admins (Ctrl + Alt + T).<br>
+ 4. The Frontend: A lightweight package that manages TCP credentials and UDP streaming protocols. Available in GUI (Qt) for casual users, and also CLI for experienced IT Admins (Ctrl + Alt + F1 => GUI | Ctrl + Alt + F2 => CLI).<br>
 
  ⚖️ Licensing & Contribution (The Social Contract):<br>
 Coffee Pie® is full open hardware and mostly open software. To protect our path to a 2035 IPO and ensure the ecosystem remains standardized, we use a tiered licensing model:
