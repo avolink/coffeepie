@@ -7,4 +7,4 @@ Graphical User Interface: Coffee Pie Qt<br>
 
 Program: Coffee Pie CLI<br>
 Basic terminal interface for experienced IT Administrators usually for high scale deployments like Web Servers, Databases, Applications, Content Delivery Networks, Docker, Kubevirt, etc.<br>
-Shortcut (Ctrl + Alt + T)
+Shortcut (Ctrl + Alt + F1 => GUI | Ctrl + Alt + F2 => CLI)
