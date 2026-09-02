@@ -94,7 +94,7 @@ Coffee Pie® is full open hardware and mostly open software. To protect our path
 ❌ Strictly Prohibited in the Ecosystem:<br>
 ❌ NEITHER governments nor third parties will have access to users' private info, unless supplied a valid court order directly issued and sent by a judge from verified emails (.gov), duly processed through the Coffee Pie® Legal Department: legal@coffeepie.co.<br>
 ❌ Illegal Content: Including, but not limited to, illicit drugs, counterfeit products and services that violate the law.<br>
-❌ Hate and Discrimination: Content that attacks or degrades groups based on race, religion, gender, sexual orientation or disability. All software and hardware, free, open or proprietary, is welcome to the community, as long as aligning with the Circular Economy Principles.<br>
+❌ Hate and Discrimination: Content that attacks or degrades groups based on ethnicity, race, religion, gender, sexual orientation or disability. All software and hardware, free, open or proprietary, is welcome to the community, as long as aligning with the Circular Economy Principles.<br>
 ❌ Violence and Disturbing Content: Incitement to violence, terrorism, animal cruelty or graphic images of damage.<br>
 ❌ The service is NOT meant nor allowed for military or warlike purposes.<br>
 ❌ Weapons and Explosives: Promotion of the sale of firearms, ammunition or explosive material.<br>
