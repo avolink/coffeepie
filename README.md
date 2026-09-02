@@ -34,7 +34,7 @@ AI training, AI inferencing, Big Data, deploying servers, apps, databases, study
     - Networking: IPv4 (current). IPv8 roadmap — early adoption by 2035 if mature enough or after RFC approval (crucial for avoiding added latency and CGNAT).<br>
 
  🌐 Potential Contributors and Investors:<br>
-Our architecture is designed to welcome contributions(and future partnerships from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for potential future dividends and valuation).<br>
+Our architecture is designed to welcome contributions and future partnerships from pioneers like the Linux Foundation, Valve, AMD, Intel, Nvidia, ARM, Apple, Microsoft, Alphabet, IBM, OpenAI, Anthropic, Meta, SpaceX, AST Space Mobile, up to anyone committed to open standards and e-waste eradication. Big Cloud players like Azure, AWS, GCP, Linode, ShadowTech, etc, are also welcome to provide their unused infrastructure for profit (tokens earned are burnable for fiat money, although right now the provider needs a bank account in Colombia, or can be kept for potential future valuation and/or dividends, likely).<br>
  
  🚀 The Vision "The Airport of Computing":<br>
 - Imagine a computer as an airplane. Usually you don't buy an airplane, you just get a ticket whenever you need it.<br>
