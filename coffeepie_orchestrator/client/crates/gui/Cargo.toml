@@ -1,0 +1,26 @@
+[package]
+name = "gui"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+shared = { path = "../shared" }
+connection = { path = "../connection" }
+rdp = { path = "../rdp/rdp" }
+
+anyhow.workspace = true
+
+flume.workspace = true
+tokio.workspace = true
+
+eframe.workspace = true
+winit.workspace = true
+
+zeroize.workspace = true
+image.workspace = true
+
+open.workspace = true
+
+gettext.workspace = true

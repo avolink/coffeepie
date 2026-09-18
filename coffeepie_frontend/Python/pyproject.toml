@@ -1,0 +1,5 @@
+[project]
+name = "CoffeePie"
+
+[tool.pyside6-project]
+files = ["main.py", "autogen/settings.py"]

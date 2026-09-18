@@ -1,0 +1,15 @@
+[package]
+name = "gui-tester"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+shared = { path = "../shared" }
+gui = { path = "../gui" }
+
+anyhow.workspace = true
+
+gettext.workspace = true
+flume.workspace = true

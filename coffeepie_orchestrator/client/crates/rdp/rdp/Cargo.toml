@@ -1,0 +1,28 @@
+[package]
+name = "rdp"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+freerdp-sys = { path = "../freerdp-sys" }
+shared = { path = "../../shared" }
+audio = { path = "../../audio" }
+
+anyhow.workspace = true
+
+flume.workspace = true
+
+# Security dependencies
+zeroize.workspace = true
+
+# Clipboard dependencies
+clipboard-rs.workspace = true
+
+# Windows dependencies
+[target.'cfg(windows)'.dependencies]
+windows.workspace = true
+
+[build-dependencies]
+glob.workspace = true

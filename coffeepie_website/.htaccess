@@ -1,0 +1,69 @@
+# --- START PRODUCTION CONFIG PARA COFFEE PIE ---
+
+# 1. Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /
+
+# 2. Replicate Firebase "cleanUrls": true
+# This allows access to /tienda without typing /tienda.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# Permanent Redirects
+Redirect 301 /princing /pricing
+
+# 3. Explicit Rewrites from firebase.json
+# Note: These are redundant if cleanUrls logic above works, but kept for absolute 1:1 parity with Firebase
+RewriteRule ^precios$ pricing.html [L]
+RewriteRule ^pricing$ pricing.html [L]
+RewriteRule ^tienda$ store.html [L]
+RewriteRule ^store$ store.html [L]
+RewriteRule ^tutoriales$ tutorials.html [L]
+RewriteRule ^tutorials$ tutorials.html [L]
+RewriteRule ^acerca-de$ about.html [L]
+RewriteRule ^about$ about.html [L]
+RewriteRule ^api$ api.html [L]
+RewriteRule ^politica-de-envios$ shipping-policy.html [L]
+RewriteRule ^shipping-policy$ shipping-policy.html [L]
+RewriteRule ^politica-de-privacidad$ privacy-policy.html [L]
+RewriteRule ^privacy-policy$ privacy-policy.html [L]
+RewriteRule ^politica-de-retornos$ return-policy.html [L]
+RewriteRule ^return-policy$ return-policy.html [L]
+RewriteRule ^terminos-y-condiciones$ terms-and-conditions.html [L]
+RewriteRule ^terms-and-conditions$ terms-and-conditions.html [L]
+RewriteRule ^portal-de-inversionistas$ investor-portal.html [L]
+RewriteRule ^portal-inversionistas$ investor-portal.html [L]
+RewriteRule ^investor-portal$ investor-portal.html [L]
+RewriteRule ^accesibilidad$ accessibility.html [L]
+RewriteRule ^accessibility$ accessibility.html [L]
+RewriteRule ^dispositivos-certificados$ certified-devices.html [L]
+RewriteRule ^certified-devices$ certified-devices.html [L]
+RewriteRule ^fabricantes$ manufacturers.html [L]
+RewriteRule ^manufacturers$ manufacturers.html [L]
+RewriteRule ^proveedores-nube$ cloud-providers.html [L]
+RewriteRule ^cloud-providers$ cloud-providers.html [L]
+RewriteRule ^carrito$ cart.html [L]
+RewriteRule ^cart$ cart.html [L]
+
+# 4. Custom 404 Page (matches your 404.html in public/)
+ErrorDocument 404 /404.html
+
+# 5. Performance: Enable Gzip Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# 6. Performance: Leverage Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# --- END PRODUCTION CONFIG ---

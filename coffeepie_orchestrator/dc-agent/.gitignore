@@ -1,0 +1,8 @@
+# Rust build artifacts
+target/
+
+# Compiled binary
+coffeepie-dc-agent
+
+# Environment (keep .env.example in version control)
+.env

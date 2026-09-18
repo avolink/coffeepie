@@ -1,0 +1,68 @@
+# Coffee Pie® — Cloud Providers
+
+Becoming a Trusted Provider on the QFDM Network. Full requirements at `coffeepie.co/cloud-providers`.
+
+---
+
+## How Providers Earn
+
+Trusted Providers (datacenter operators) earn COFP by supplying computing resources to the QFDM Network at a rate of **1 COFP per Slice per minute**. Earnings scale linearly: hosting 4 Slices for 60 minutes = 4 × 60 = 240 COFP.
+
+Providers may burn earned COFP for **fiat currency** transferred to their registered bank accounts within 24–72 hours. There is no burning cap — providers are selling real resources and need unrestricted cash flow. Provider settlement is an internal ledger operation; provider-earned COFP is not publicly tradeable.
+
+> **Important:** If a provider transfers COFP to a secondary wallet and sells on the open market, those tokens permanently lose all voting and burning-for-fiat rights. The buyer receives an Investor-class token with economic rights only.
+
+**Provider rights:**
+- Vote on regional pricing (average slice cost, electricity rates, labor costs)
+- Burn tokens for fiat currency (registered bank account, 24–72h settlement)
+- No burning cap — proportional to real compute resources served
+
+---
+
+## Fiat Settlement Tiers
+
+When Providers burn COFP for fiat, the amount received = base COFP price × (1 + tier margin). The global base cost is 0.29 COP/COFP (approx 0.000069 USD) per governance vote; all regional pricing derivatives are tracked in `avgSliceCost.json`. Tiers reward infrastructure quality, reliability, and environmental responsibility — the higher the Tier, the better the margin.
+
+| Tier | Margin | Key Requirements |
+|---|---|---|
+| Tier I | +8% | Basic connectivity, ≥99% uptime SLA |
+| Tier II | +10% | Redundant network, ≥99.5% uptime, UPS |
+| Tier III | +12% | N+1 power redundancy, ≥99.9% uptime, dedicated cooling |
+| Tier IV | +15% | 2N power redundancy, ≥99.95% uptime, physical security |
+| Tier V | +18% | All Tier IV + dedicated SAN + ≥90% Renewable/Alternative Energy (solar, wind, nuclear, geothermal, etc.) |
+
+---
+
+## Dormant Slices — The Parking Fee
+
+A Slice that is powered off or suspended (e.g. a stopped Proxmox VM) releases its compute, power, RAM, network and GPU — but its disk image **still reserves SSD (8 GB) and HDD (125 GB)** on your node. To keep the airport metaphor: a parked plane no longer burns fuel, but it still occupies apron space.
+
+So that providers are paid for storage they hold for idle workloads — and to discourage zombie-VM hoarding on the Freemium tier — dormant Slices accrue a **Parking Fee**:
+
+- **Provider earnings:** a dormant Slice mints **1.5 COFP per Slice per hour** (vs. 60 COFP/hour for an active Slice). At Tier IV this settles to roughly cover real storage cost (capex amortization + idle power + DC overhead) plus the tier margin, giving providers a fair incentive to invest in SSD/HDD capacity.
+- **Consumer charge:** end users pay **10 Cr per dormant Slice per hour** (a small holding rate — a dormant Slice consumes no compute, only reserved storage). The **first 9 dormant Slices per account are free**; the Parking Fee applies **from the 10th dormant Slice and up**.
+- **Reserved-Slice basis:** the fee is charged on the *reserved* Slice (the booked quanto), not on thin-provisioned written blocks — consistent with the deterministic Slice abstraction.
+
+> The Parking Fee rate is set by the same regional-pricing governance vote as `avgSliceCost` and is a configurable parameter, not a hardcoded constant.
+
+> **Future work:** the current flat rate is sized for cost-recovery (cost + tier margin), which is fair reimbursement but a weak signal to invest in storage specifically for parked workloads. Once we have telemetry on how many Slices accounts actually park, consider an **escalating Parking Fee** — near cost for light parkers, rising per-Slice beyond a heavy-usage threshold — so heavy storage users fund the capacity they reserve without penalizing casual ones.
+
+---
+
+## Getting Started
+
+1. Review requirements at `coffeepie.co/cloud-providers`
+2. Prepare infrastructure: Proxmox VE nodes (recommended), stretched VLAN connectivity, TLS certificates (see `PKI.md`)
+3. Run provider onboarding: `tools/admin/provider-onboard`
+4. Register bank account for fiat settlement (currently Colombian accounts only)
+5. Deploy DC Agent and connect to the orchestrator
+
+---
+
+## References
+
+- `NETWORK.md` — Network architecture and addressing
+- `PKI.md` — Certificate lifecycle for internal communication
+- `CONSTITUTION.md` — Governance and revenue distribution
+- `SCHEDULING.md` — Service classes → tier placement (how tiers map to user plans)
+- `README.md` — Full ecosystem overview

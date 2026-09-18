@@ -1,0 +1,113 @@
+/* ============================================================
+   Coffee Pie® — Design Tokens
+   Extracted from Avo Studio theme + css/main.css palette
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* ─── Brand Palette ─── */
+    --cp-black:        #050505;
+    --cp-surface:      #111111;
+    --cp-surface-light:#1a1a1a;
+    --cp-white:        #ffffff;
+    --cp-gray-50:      #fafafa;
+    --cp-gray-100:     #f5f5f5;
+    --cp-gray-200:     #e5e5e5;
+    --cp-gray-300:     #d4d4d4;
+    --cp-gray-400:     #a3a3a3;
+    --cp-gray-500:     #737373;
+    --cp-gray-600:     #525252;
+    --cp-gray-700:     #404040;
+    --cp-gray-800:     #262626;
+    --cp-gray-900:     #171717;
+
+    /* ─── Accent Colors ─── */
+    --cp-coffee:       #c6a482;   /* Warm Coffee Gold — primary brand */
+    --cp-coffee-light: #e0bc9a;
+    --cp-coffee-dark:  #a07d56;
+    --cp-coffee-glow:  rgba(198, 164, 130, 0.3);
+    --cp-green:        #4caf50;   /* Success / check */
+    --cp-red:          #f44336;   /* Error / X */
+    --cp-blue:         #2B328C;   /* Video play accent */
+
+    /* ─── Semantic Colors ─── */
+    --color-bg:            var(--cp-black);
+    --color-bg-alt:        var(--cp-surface);
+    --color-bg-elevated:   var(--cp-surface-light);
+    --color-text:          var(--cp-white);
+    --color-text-dim:      #999999;
+    --color-text-muted:    var(--cp-gray-500);
+    --color-cta:           var(--cp-coffee);
+    --color-cta-hover:     var(--cp-coffee-light);
+    --color-cta-text:      #000000;
+    --color-border:        rgba(255, 255, 255, 0.08);
+    --color-glass:         rgba(255, 255, 255, 0.03);
+    --color-success:       var(--cp-green);
+    --color-error:         var(--cp-red);
+
+    /* ─── Typography ─── */
+    --font-family:       'Outfit', 'Helvetica Neue', Arial, sans-serif;
+    --font-size-xs:      0.75rem;     /* 12px */
+    --font-size-sm:      0.875rem;    /* 14px */
+    --font-size-base:    1rem;        /* 16px */
+    --font-size-lg:      1.125rem;    /* 18px */
+    --font-size-xl:      1.25rem;     /* 20px */
+    --font-size-2xl:     1.5rem;      /* 24px */
+    --font-size-3xl:     2rem;        /* 32px */
+    --font-size-4xl:     2.5rem;      /* 40px */
+    --font-size-5xl:     3.5rem;      /* 56px */
+    --font-size-6xl:     5rem;        /* 80px */
+
+    /* ─── Font Weights ─── */
+    --fw-light:    300;
+    --fw-regular:  400;
+    --fw-medium:   500;
+    --fw-semibold: 600;
+    --fw-bold:     700;
+
+    /* ─── Spacing (8pt Grid) ─── */
+    --space-1:   0.25rem;     /* 4px */
+    --space-2:   0.5rem;      /* 8px */
+    --space-3:   0.75rem;     /* 12px */
+    --space-4:   1rem;        /* 16px */
+    --space-5:   1.25rem;     /* 20px */
+    --space-6:   1.5rem;      /* 24px */
+    --space-8:   2rem;        /* 32px */
+    --space-10:  2.5rem;      /* 40px */
+    --space-12:  3rem;        /* 48px */
+    --space-16:  4rem;        /* 64px */
+    --space-20:  5rem;        /* 80px */
+    --space-24:  6rem;        /* 96px */
+
+    /* ─── Layout ─── */
+    --max-width:         1400px;
+    --content-padding:   8%;
+    --header-height:     80px;
+
+    /* ─── Borders & Radii ─── */
+    --radius-sm:   8px;
+    --radius-md:   12px;
+    --radius-lg:   24px;
+    --radius-full: 100px;
+
+    /* ─── Shadows ─── */
+    --shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg:   0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 10px 30px var(--cp-coffee-glow);
+
+    /* ─── Transitions ─── */
+    --ease-out:    cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-fast:   150ms;
+    --duration-normal: 300ms;
+    --duration-slow:   500ms;
+
+    /* ─── Z-Index Scale ─── */
+    --z-dropdown:  100;
+    --z-sticky:    200;
+    --z-overlay:   500;
+    --z-modal:     1000;
+    --z-toast:     2000;
+}

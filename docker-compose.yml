@@ -1,0 +1,184 @@
+# Coffee Pie Development Environment
+# Spins up the full stack locally for development and testing.
+#
+# Quick start:
+#   cp .env.example .env
+#   docker compose up -d
+#   docker compose logs -f orchestrator
+#
+# Services:
+#   postgres:5432       — PostgreSQL (orchestrator DB)
+#   redis:6379          — Redis (cache/sessions)
+#   orchestrator:8000   — Django orchestrator (OpenUDS fork)
+#   dc-agent:9090       — DC Agent (Rust axum, hypervisor abstraction)
+#   proxmox-mock:8001   — Mock Proxmox backend for dev (no real hypervisor needed)
+#   sunshine-mock:47989 — Mock Sunshine server for stream testing
+
+version: "3.9"
+
+services:
+  # ─── Databases ───────────────────────────────────────────
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: coffeepie-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-coffeepie}
+      POSTGRES_USER: ${POSTGRES_USER:-coffeepie}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-coffeepie_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-coffeepie} -d ${POSTGRES_DB:-coffeepie}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - coffeepie-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: coffeepie-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - coffeepie-net
+
+  # ─── Orchestrator ────────────────────────────────────────
+
+  orchestrator:
+    build:
+      context: ./coffeepie_orchestrator/server
+      dockerfile: Dockerfile.dev
+    container_name: coffeepie-orchestrator
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-coffeepie}:${POSTGRES_PASSWORD:-coffeepie_dev}@postgres:5432/${POSTGRES_DB:-coffeepie}
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${ORCH_SECRET_KEY:-dev-secret-key-change-in-production}
+      DEBUG: ${ORCH_DEBUG:-true}
+      ALLOWED_HOSTS: "*"
+      DC_AGENT_URL: http://dc-agent:9090
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./coffeepie_orchestrator/server:/app:ro
+      - orch-static:/app/static
+      - orch-media:/app/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: >
+      sh -c "
+        python manage.py migrate --noinput &&
+        python manage.py collectstatic --noinput &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+    restart: unless-stopped
+    networks:
+      - coffeepie-net
+
+  # ─── DC Agent (Rust) ─────────────────────────────────────
+
+  dc-agent:
+    build:
+      context: ./coffeepie_orchestrator/dc-agent
+      dockerfile: Dockerfile.dev
+    container_name: coffeepie-dc-agent
+    environment:
+      DC_AGENT_BIND: 0.0.0.0:9090
+      DC_AGENT_HYPERVISOR: ${DC_AGENT_HYPERVISOR:-proxmox-mock}
+      DC_AGENT_BACKEND_URL: http://proxmox-mock:8001
+      DC_AGENT_AUTH_TOKEN: ${DC_AGENT_AUTH_TOKEN:-dev-agent-token}
+      RUST_LOG: ${DC_AGENT_LOG:-info}
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./coffeepie_orchestrator/dc-agent:/app
+      - cargo-cache:/usr/local/cargo/registry
+    depends_on:
+      - proxmox-mock
+    command: cargo run --release
+    restart: unless-stopped
+    networks:
+      - coffeepie-net
+
+  # ─── Development Mocks ───────────────────────────────────
+
+  proxmox-mock:
+    build:
+      context: ./scripts/mocks/proxmox
+      dockerfile: Dockerfile
+    container_name: coffeepie-proxmox-mock
+    environment:
+      MOCK_NODES: 4
+      MOCK_VMS_PER_NODE: 16
+    ports:
+      - "8001:8001"
+    networks:
+      - coffeepie-net
+
+  sunshine-mock:
+    image: alpine:3.20
+    container_name: coffeepie-sunshine-mock
+    command: >
+      sh -c "
+        apk add --no-cache socat &&
+        echo 'Sunshine mock listening on 47989' &&
+        socat TCP-LISTEN:47989,fork,reuseaddr EXEC:'echo -e \"HTTP/1.1 200 OK\\r\\n\\r\\n{\\\"status\\\":\\\"mock_sunshine\\\",\\\"version\\\":\\\"dev\\\"}\"',nofork
+      "
+    ports:
+      - "47989:47989"
+      - "47984:47984"
+      - "47990:47990"
+      - "48010:48010"
+    networks:
+      - coffeepie-net
+
+  # ─── Actor (Rust, dev build) ─────────────────────────────
+
+  actor:
+    build:
+      context: ./coffeepie_orchestrator/actor
+      dockerfile: Dockerfile.dev
+    container_name: coffeepie-actor
+    environment:
+      ORCHESTRATOR_URL: http://orchestrator:8000
+      ACTOR_BIND: 0.0.0.0:43910
+      RUST_LOG: ${ACTOR_LOG:-debug}
+      SUNSHINE_URL: http://sunshine-mock:47989
+    ports:
+      - "43910:43910"
+    volumes:
+      - ./coffeepie_orchestrator/actor:/app
+      - cargo-cache:/usr/local/cargo/registry
+    depends_on:
+      - orchestrator
+      - sunshine-mock
+    command: cargo run --release
+    restart: unless-stopped
+    networks:
+      - coffeepie-net
+
+networks:
+  coffeepie-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  pgdata:
+  orch-static:
+  orch-media:
+  cargo-cache:

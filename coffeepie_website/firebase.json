@@ -1,0 +1,360 @@
+{
+    "hosting": {
+        "public": "public",
+        "cleanUrls": true,
+        "trailingSlash": false,
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**",
+            "tools/**",
+            "package.json",
+            "package-lock.json",
+            "firebase-debug.log",
+            "**/*.zip",
+            "**/*.rar",
+            "**/*.7z",
+            "**/*.tar",
+            "**/*.gz",
+            "**/*.py"
+        ],
+        "headers": [
+            {
+                "source": "**/*.@(jpg|jpeg|gif|png|webp|avif|svg)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=2592000, immutable"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.@(js|css)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=604800"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.@(woff|woff2|ttf|otf|eot)",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=31536000, immutable"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    }
+                ]
+            },
+            {
+                "source": "**/*.html",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=3600, must-revalidate"
+                    }
+                ]
+            },
+            {
+                "source": "sitemap.xml",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/xml; charset=utf-8"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=86400"
+                    }
+                ]
+            },
+            {
+                "source": "en_en-sitemap.xml",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/xml; charset=utf-8"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=86400"
+                    }
+                ]
+            },
+            {
+                "source": "robots.txt",
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "text/plain; charset=utf-8"
+                    },
+                    {
+                        "key": "Cache-Control",
+                        "value": "public, max-age=86400"
+                    }
+                ]
+            },
+            {
+                "source": "**",
+                "headers": [
+                    {
+                        "key": "X-Content-Type-Options",
+                        "value": "nosniff"
+                    },
+                    {
+                        "key": "X-Frame-Options",
+                        "value": "SAMEORIGIN"
+                    },
+                    {
+                        "key": "X-XSS-Protection",
+                        "value": "1; mode=block"
+                    },
+                    {
+                        "key": "Referrer-Policy",
+                        "value": "strict-origin-when-cross-origin"
+                    },
+                    {
+                        "key": "Strict-Transport-Security",
+                        "value": "max-age=31536000; includeSubDomains; preload"
+                    },
+                    {
+                        "key": "Permissions-Policy",
+                        "value": "camera=(), microphone=(), geolocation=(self)"
+                    }
+                ]
+            }
+        ],
+        "redirects": [
+            {
+                "source": "/princing",
+                "destination": "/pricing",
+                "type": 301
+            },
+            {
+                "source": "/index.html",
+                "destination": "/",
+                "type": 301
+            },
+            {
+                "source": "/precios",
+                "destination": "/pricing",
+                "type": 301
+            },
+            {
+                "source": "/tienda",
+                "destination": "/store",
+                "type": 301
+            },
+            {
+                "source": "/tutoriales",
+                "destination": "/tutorials",
+                "type": 301
+            },
+            {
+                "source": "/acerca-de",
+                "destination": "/about",
+                "type": 301
+            },
+            {
+                "source": "/fabricantes",
+                "destination": "/manufacturers",
+                "type": 301
+            },
+            {
+                "source": "/proveedores-nube",
+                "destination": "/cloud-providers",
+                "type": 301
+            },
+            {
+                "source": "/dispositivos-certificados",
+                "destination": "/certified-devices",
+                "type": 301
+            },
+            {
+                "source": "/portal-inversionistas",
+                "destination": "/investor-portal",
+                "type": 301
+            },
+            {
+                "source": "/portal-de-inversionistas",
+                "destination": "/investor-portal",
+                "type": 301
+            },
+            {
+                "source": "/politica-de-envios",
+                "destination": "/shipping-policy",
+                "type": 301
+            },
+            {
+                "source": "/politica-de-privacidad",
+                "destination": "/privacy-policy",
+                "type": 301
+            },
+            {
+                "source": "/politica-de-retornos",
+                "destination": "/return-policy",
+                "type": 301
+            },
+            {
+                "source": "/terminos-y-condiciones",
+                "destination": "/terms-and-conditions",
+                "type": 301
+            },
+            {
+                "source": "/accesibilidad",
+                "destination": "/accessibility",
+                "type": 301
+            },
+            {
+                "source": "/carrito",
+                "destination": "/cart",
+                "type": 301
+            },
+            {
+                "source": "/pago-seguro",
+                "destination": "/secure-payment",
+                "type": 301
+            },
+            {
+                "source": "/productos",
+                "destination": "/products",
+                "type": 301
+            },
+            {
+                "source": "/productos/:slug*",
+                "destination": "/products/:slug",
+                "type": 301
+            }
+        ],
+        "rewrites": [
+            {
+                "source": "/precios",
+                "destination": "/pricing.html"
+            },
+            {
+                "source": "/pricing",
+                "destination": "/pricing.html"
+            },
+            {
+                "source": "/tienda",
+                "destination": "/store.html"
+            },
+            {
+                "source": "/store",
+                "destination": "/store.html"
+            },
+            {
+                "source": "/tutoriales",
+                "destination": "/tutorials.html"
+            },
+            {
+                "source": "/tutorials",
+                "destination": "/tutorials.html"
+            },
+            {
+                "source": "/acerca-de",
+                "destination": "/about.html"
+            },
+            {
+                "source": "/about",
+                "destination": "/about.html"
+            },
+            {
+                "source": "/api",
+                "destination": "/api.html"
+            },
+            {
+                "source": "/politica-de-envios",
+                "destination": "/shipping-policy.html"
+            },
+            {
+                "source": "/shipping-policy",
+                "destination": "/shipping-policy.html"
+            },
+            {
+                "source": "/politica-de-privacidad",
+                "destination": "/privacy-policy.html"
+            },
+            {
+                "source": "/privacy-policy",
+                "destination": "/privacy-policy.html"
+            },
+            {
+                "source": "/politica-de-retornos",
+                "destination": "/return-policy.html"
+            },
+            {
+                "source": "/return-policy",
+                "destination": "/return-policy.html"
+            },
+            {
+                "source": "/terminos-y-condiciones",
+                "destination": "/terms-and-conditions.html"
+            },
+            {
+                "source": "/terms-and-conditions",
+                "destination": "/terms-and-conditions.html"
+            },
+            {
+                "source": "/portal-inversionistas",
+                "destination": "/investor-portal.html"
+            },
+            {
+                "source": "/investor-portal",
+                "destination": "/investor-portal.html"
+            },
+            {
+                "source": "/accesibilidad",
+                "destination": "/accessibility.html"
+            },
+            {
+                "source": "/accessibility",
+                "destination": "/accessibility.html"
+            },
+            {
+                "source": "/dispositivos-certificados",
+                "destination": "/certified-devices.html"
+            },
+            {
+                "source": "/certified-devices",
+                "destination": "/certified-devices.html"
+            },
+            {
+                "source": "/fabricantes",
+                "destination": "/manufacturers.html"
+            },
+            {
+                "source": "/manufacturers",
+                "destination": "/manufacturers.html"
+            },
+            {
+                "source": "/proveedores-nube",
+                "destination": "/cloud-providers.html"
+            },
+            {
+                "source": "/cloud-providers",
+                "destination": "/cloud-providers.html"
+            },
+            {
+                "source": "/pago-seguro",
+                "destination": "/secure-payment.html"
+            },
+            {
+                "source": "/secure-payment",
+                "destination": "/secure-payment.html"
+            },
+            {
+                "source": "/carrito",
+                "destination": "/cart.html"
+            },
+            {
+                "source": "/cart",
+                "destination": "/cart.html"
+            }
+        ]
+    }
+}
