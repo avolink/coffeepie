@@ -1,0 +1,64 @@
+User-agent: *
+Allow: /
+Disallow: *?lightbox=
+Disallow: /index_files/
+Disallow: /*_files/
+Disallow: /tools/
+Disallow: /node_modules/
+Disallow: /firebase.json
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /header.html
+Disallow: /header.css
+Disallow: /header.js
+Disallow: /translations.json
+Disallow: /os-list-coffeepie.json
+Disallow: /*.py$
+Disallow: /carrito
+Disallow: /producto
+
+# Block AI Scrapers and unwanted bots
+User-agent: CCBot
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: AnthropicAI
+Disallow: /
+User-agent: Claude-Web
+Disallow: /
+User-agent: PerplexityBot
+Disallow: /
+User-agent: YouBot
+Disallow: /
+User-agent: PiplBot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+User-agent: FacebookBot
+Disallow: /
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Optimization for Google Ads Bot
+User-agent: AdsBot-Google-Mobile
+User-agent: AdsBot-Google
+Disallow: /_partials*
+Disallow: /pro-gallery-webapp/v1/galleries/*
+
+# Block PetalBot
+User-agent: PetalBot
+Disallow: /
+
+# Crawl delay for overly enthusiastic bots
+User-agent: dotbot
+Crawl-delay: 10
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+# Sitemaps (absolute URLs required by spec)
+Sitemap: https://coffeepie.co/sitemap.xml
+Sitemap: https://coffeepie.co/en_en-sitemap.xml

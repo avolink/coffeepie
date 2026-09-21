@@ -1,0 +1,174 @@
+/* ============================================================
+   Coffee Pie® — Layout System
+   Containers, grids, and responsive utilities
+   ============================================================ */
+
+/* ─── Containers ─── */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--content-padding);
+}
+
+.container--narrow {
+    max-width: 900px;
+}
+
+.container--wide {
+    max-width: 1600px;
+}
+
+.container--full {
+    max-width: none;
+    padding-inline: 0;
+}
+
+/* ─── Section ─── */
+.section {
+    padding-block: var(--space-24);
+}
+
+.section--compact {
+    padding-block: var(--space-16);
+}
+
+.section--hero {
+    padding-block: 0;
+    min-height: 100vh;
+}
+
+/* ─── Grid System ─── */
+.grid {
+    display: grid;
+    gap: var(--space-8);
+}
+
+.grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--auto {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* ─── Flex Utilities ─── */
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex--between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex--column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex--gap-sm  { gap: var(--space-2); }
+.flex--gap-md  { gap: var(--space-4); }
+.flex--gap-lg  { gap: var(--space-8); }
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+    .grid--4 { grid-template-columns: repeat(2, 1fr); }
+    .grid--3 { grid-template-columns: repeat(2, 1fr); }
+
+    h1 { font-size: var(--font-size-5xl); }
+    h2 { font-size: var(--font-size-3xl); }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --content-padding: 5%;
+    }
+
+    .grid--4,
+    .grid--3,
+    .grid--2 {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding-block: var(--space-16);
+    }
+
+    h1 {
+        font-size: var(--font-size-4xl);
+        letter-spacing: -1px;
+    }
+
+    h2 {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+/* ─── Animations ─── */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%   { box-shadow: 0 0 5px var(--cp-coffee-glow); }
+    50%  { box-shadow: 0 0 20px var(--cp-coffee-glow); }
+    100% { box-shadow: 0 0 5px var(--cp-coffee-glow); }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ─── Utility: Animate on Scroll ─── */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-slow) var(--ease-out),
+                transform var(--duration-slow) var(--ease-out);
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

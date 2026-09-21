@@ -1,0 +1,5 @@
+name: UDS Broker CodeQL Config
+
+paths-ignore:
+  - '**/*.js'
+  - '**/*.map'

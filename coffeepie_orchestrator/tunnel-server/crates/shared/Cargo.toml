@@ -1,0 +1,39 @@
+[package]
+name = "shared"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# utilities
+anyhow.workspace = true
+rand.workspace = true
+num_enum.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Encoding/Decoding
+base64.workspace = true
+
+# Asynchronous channels
+flume.workspace = true
+
+# Encryption
+aes-gcm.workspace = true
+hkdf.workspace = true
+sha2.workspace = true
+
+# Post-quantum cryptography
+libcrux-ml-kem.workspace = true
+
+# Logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+tracing-log.workspace = true
+
+# Asynchronous runtime
+tokio-rustls.workspace = true
+tokio.workspace = true

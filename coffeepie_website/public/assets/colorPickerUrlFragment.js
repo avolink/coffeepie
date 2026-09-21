@@ -1,0 +1,1 @@
+class ColorPickerUrlFragment extends HTMLElement{connectedCallback(){this.innerHTML='<div id="view-more-options-1" />'}}customElements.define("color-picker-url-fragment",ColorPickerUrlFragment);

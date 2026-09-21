@@ -1,0 +1,35 @@
+[package]
+name = "udsactor-service"
+version = "5.0.0"
+edition = "2024"
+
+authors = ["Adolfo Gómez <dkmaster@dkmon.com>"]
+license = "BSD-3-Clause"
+
+[dependencies]
+shared = { path = "../shared" }
+anyhow = { workspace = true }
+
+# Async runtime
+tokio = { workspace = true }
+
+rustls = { workspace = true }
+
+reqwest = { workspace = true }
+
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+chrono = { workspace = true }
+
+ipnetwork = { workspace = true }
+shlex = { workspace = true }
+
+[build-dependencies]
+builder = { path = "../builder" }
+
+[dev-dependencies]
+mockito = { workspace = true }
+tower = { workspace = true }
+hyper = { workspace = true }
+serial_test = { workspace = true }

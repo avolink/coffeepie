@@ -1,0 +1,44 @@
+{% extends "uds/advertiser/base.html" %}
+{% block content %}
+<h2 style="margin-bottom:25px; font-weight:400;">API Keys</h2>
+
+<div style="margin-bottom:25px;">
+    <form method="POST" action="/uds/page/advertiser/keys/create" style="display:inline;">
+        <button class="btn">+ Nueva API Key</button>
+    </form>
+</div>
+
+{% if api_keys %}
+<table>
+    <tr><th>Nombre</th><th>API Key</th><th>Creada</th><th>Último uso</th><th>Estado</th></tr>
+    {% for k in api_keys %}
+    <tr>
+        <td>{{ k.name }}</td>
+        <td><code style="background:#222; padding:4px 8px; border-radius:4px;">{{ k.api_key }}</code></td>
+        <td>{{ k.created|date:"Y-m-d H:i" }}</td>
+        <td>{{ k.last_used|date:"Y-m-d H:i"|default:"Nunca" }}</td>
+        <td>
+            {% if k.is_active %}
+            <span class="badge badge-active">ACTIVA</span>
+            {% else %}
+            <span class="badge badge-paused">REVOCADA</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div style="margin-top:25px; background:#1a1a1a; border:1px solid #333; border-radius:8px; padding:20px;">
+    <h4 style="color:#c18b44; margin-bottom:15px;">Uso de la API</h4>
+    <p style="color:#888; font-size:0.9rem; line-height:1.6;">
+        Incluye el API Key en el header <code style="background:#222; padding:2px 6px;">X-API-Key: cp_ad_...</code>
+        o como parámetro <code style="background:#222; padding:2px 6px;">api_key=cp_ad_...</code> en tus requests.
+    </p>
+    <p style="color:#888; font-size:0.9rem; margin-top:10px;">
+        Endpoint: <code style="background:#222; padding:2px 6px;">POST /uds/rest/coffeepie/ads/ad/request</code>
+    </p>
+</div>
+{% else %}
+<div class="empty">No tienes API Keys. Crea una para empezar a usar la API de anuncios.</div>
+{% endif %}
+{% endblock %}

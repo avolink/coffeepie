@@ -1,0 +1,110 @@
+  Component {
+    id: vmWidget
+    Item {
+         property alias text3: text3 
+         property string vmId  
+        width: 550
+        height: 375
+
+        Image {
+            id: oS_Selector_Background
+            x: 0
+            y: 0
+            width: parent.width
+            height: parent.height
+            source: "images/OS_Selector_Background.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        TextInput {
+            id: textInput
+            x: 133
+            y: 22
+            width: 284
+            height: 52
+            color: "#f2f8f9"
+            text: qsTr("Mi Máquina")//// thi is  the name field
+            font.pixelSize: 30
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            selectionColor: "#565151"
+        }
+
+        Text {
+            id: text1
+            x: 29
+            y: 307
+            width: 241
+            height: 39
+            color: "#f2f8f9"
+            text:  vmId
+            font.pixelSize: 28
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignBottom
+        }
+
+        Text {
+            id: text2
+            x: 276
+            y: 307
+            width: 235
+            height: 39
+            color: "#f2f8f9"
+            text: qsTr("700 Cr/hora")/ this the   "credits_for_minutes field
+            font.pixelSize: 28
+            horizontalAlignment: Text.AlignRight
+            verticalAlignment: Text.AlignBottom
+        }
+
+        Button {
+            id: button
+            x: 458
+            y: 21
+            width: 65
+            height: 65
+            icon.height: 60
+            icon.width: 60
+            icon.color: "#f2f8f9"
+            icon.source: "images/Menu_Button.png"
+            flat: true
+
+            Connections {
+                target: button
+                function onClicked() { stackView.push("Contextual_Menu.qml") }
+            }
+        }
+
+        Button {
+            id: button1
+            x: 125
+            y: 101
+            width: 300
+            height: 200
+            icon.height: 200
+            icon.width: 200
+            icon.color: "#00000000"
+            icon.source: "images/Operating_Systems/W10_Icon.png"// this the SO must to be a logic for this each so have a image
+            flat: true
+
+            Connections {
+                target: button1
+                function onClicked() { console.log("VM ID clicked:", vmId);   myMachine.openConsole("N001", parseInt(vmId), vmId); ;//root.ipAddress = ipAddress;  // Store the IP address
+                  //  pinDialog.visible = true; 
+                    }
+            }
+        }
+           
+        Text {
+            id: text3
+            x: 154
+            y: 66
+            width: 243
+            height: 39
+            color: "#e1cfb2b2"
+            text: qsTr("Creado")/ this is the  status
+            font.pixelSize: 22
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignTop
+        }
+    }
+}

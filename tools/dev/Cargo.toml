@@ -1,0 +1,25 @@
+[package]
+name = "coffeepie-dev"
+version = "0.1.0"
+edition = "2021"
+description = "Development tools for Coffee Pie — validators, codegen, sync utilities"
+license = "MIT OR Apache-2.0"
+authors = ["Coffee Pie Contributors"]
+
+[[bin]]
+name = "translations-validator"
+path = "src/bin/translations-validator.rs"
+
+[[bin]]
+name = "product-sync"
+path = "src/bin/product-sync.rs"
+
+[[bin]]
+name = "schema-gen"
+path = "src/bin/schema-gen.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+regex = "1"

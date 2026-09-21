@@ -1,0 +1,43 @@
+[package]
+name = "shared"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+# Logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+tracing-log.workspace = true
+
+# Utility
+anyhow.workspace = true
+chrono.workspace = true
+directories-next.workspace = true
+hostname.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+rand.workspace = true
+
+# SSL/TLS
+rustls.workspace = true
+rustls-native-certs.workspace = true
+
+# non blocking TLS streams
+tokio-rustls.workspace = true
+tokio.workspace = true
+futures.workspace = true
+async-trait.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows.workspace = true
+widestring.workspace = true
+
+[dev-dependencies]
+rcgen.workspace = true
+serial_test.workspace = true
+mockito.workspace = true

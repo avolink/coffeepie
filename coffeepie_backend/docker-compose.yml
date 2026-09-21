@@ -1,0 +1,42 @@
+services:
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    container_name: proxmox_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - proxmox-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI Application
+  api:
+    build: .
+    container_name: proxmox_api
+    ports:
+      - "8080:8080"
+    env_file: .env
+    volumes:
+      - .:/app
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - proxmox-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+
+volumes:
+  mongo_data:
+
+networks:
+  proxmox-network:
+    driver: bridge
