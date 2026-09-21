@@ -1,10 +1,11 @@
 ﻿#!/bin/bash
 # Instructions: Download this script to the VM you want to become a template
-# run it with root privileges, the VM will be cleaned and shut down,
-# then you can convert it into a template from the Coffee Pie GUI
+# and run it with root privileges, the VM will be cleaned and shut down.
+# Then you can convert it into a template from the Coffee Pie GUI,
 # making instances as any other default template, this way,
 # cloned instances will request a new random IP to the DHCP server
-# without the user needing to manually type the network configuration to get Internet access.
+# without the user needing to manually type the network
+# configuration to get Internet access.
 
 # --- 1. System Identity Cleanup (Machine-ID) ---
 # Ensures each clone gets a unique IP via DHCP
