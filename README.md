@@ -11,7 +11,7 @@ Current Phase: **Alpha Testing (TRL7)**<br>
 Concluded Phase: Lab Testing (TRL6)<br>
 Current Version: v0.1.0-alpha<br>
 
-Company: Coffee Pie® Colombia is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S. (BIC status pending).<br>
+Company: Coffee Pie® Colombia (BIC status pending) is a subsidiary of GRUPO 3P1 COLOMBIA S.A.S.<br>
 Patent: NC2025/0012723 (expiring by 2045).<br>
 License: Tiered — Open Core (QFDM/Orchestrator), Apache 2.0 (Frontend/Drivers), CERN OHL (Hardware). See LICENSE and CONSTITUTION files.<br>
 
