@@ -1,1 +1,0 @@
-class DetailsPlaceholder extends HTMLElement{connectedCallback(){this.innerHTML='<div data-hook="details-placeholder" />'}}customElements.define("details-placeholder",DetailsPlaceholder);

@@ -1,1 +1,0 @@
-class BottomPlaceholder extends HTMLElement{connectedCallback(){this.innerHTML='<div data-hook="bottom-placeholder" />'}}customElements.define("bottom-placeholder",BottomPlaceholder);
