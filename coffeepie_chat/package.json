@@ -4,7 +4,7 @@
   "description": "Coffee Pie® public web assistant — isolated chat service. Answers only from a knowledge base generated out of the public website. Holds no database, no hypervisor credentials and no identity secrets.",
   "type": "module",
   "private": true,
-  "engines": { "node": ">=20" },
+  "engines": { "node": ">=22" },
   "scripts": {
     "start": "node server.js",
     "dev": "CHAT_DEV=1 node server.js",

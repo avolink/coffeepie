@@ -1,7 +1,8 @@
-# Coffee Pie chat image. node:20-slim (Debian/glibc): LTS, matches package.json
-# engines >=20, and avoids the npm "Exit handler never called" flakiness seen on
-# node:*-alpine. ~200 MB, small enough for the VPS disk budget.
-FROM node:20-slim
+# Coffee Pie chat image. node:22-slim (Debian/glibc): LTS, matches package.json
+# engines >=22 (Node 20 reached end-of-life on 2026-04-30 and no longer gets
+# security fixes), and avoids the npm "Exit handler never called" flakiness seen
+# on node:*-alpine. ~200 MB, small enough for the VPS disk budget.
+FROM node:22-slim
 
 ENV NODE_ENV=production
 WORKDIR /app
