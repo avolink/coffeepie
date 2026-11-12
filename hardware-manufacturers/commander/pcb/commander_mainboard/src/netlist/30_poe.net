@@ -1,0 +1,74 @@
+# NEW for the Commander: IEEE 802.3at (Type 2, class 4) powered device + isolated 5 V flyback,
+# replacing the Radxa ZERO 3E PoE HAT. Built around TI TPS23754 following the datasheet typical
+# application (SLVS885I, section 8.2) in its diode-rectified form (GAT2 unused, DT tied to VB).
+#
+# Everything on nets POE_* sits on the PRIMARY side of the isolation barrier. The only parts that
+# bridge the barrier are T1 (flyback transformer), U31 (optocoupler) and C518 (Y capacitor).
+# AUDIT: magnetics, current-sense, clamp and loop-compensation values are first-pass numbers and
+# must be validated on the bench (or replaced by the values of the chosen transformer's reference design).
+SHEET poe
+# --- input rectifiers: both PoE alternatives (data pairs A: TR0/TR1, spare pairs B: TR2/TR3), either polarity ---
+D31 SCHOTTKY:SS110 A=TR0_48V K=POE_VDD
+D32 SCHOTTKY:SS110 A=POE_VSS K=TR0_48V
+D33 SCHOTTKY:SS110 A=TR1_48V K=POE_VDD
+D34 SCHOTTKY:SS110 A=POE_VSS K=TR1_48V
+D35 SCHOTTKY:SS110 A=TR2_48V K=POE_VDD
+D36 SCHOTTKY:SS110 A=POE_VSS K=TR2_48V
+D37 SCHOTTKY:SS110 A=TR3_48V K=POE_VDD
+D38 SCHOTTKY:SS110 A=POE_VSS K=TR3_48V
+D39 TVS_UNI:SMAJ58A K=POE_VDD A=POE_VSS
+C501 100nF_100V POE_VDD POE_VSS
+# --- PD interface + DC/DC controller ---
+U30 TPS23754 12=POE_VDD 11=POE_VDD 10=POE_VSS 21=POE_VSS 13=POE_DEN 15=POE_CLS 14=POE_VSS
+P U30 9=POE_RTN 8=POE_RTN 4=POE_RTN 17=POE_RTN 18=POE_RTN 16=POE_VB 19=POE_FRS 2=POE_VB 1=POE_CTL 3=POE_CS 5=POE_GATE 6=POE_VC
+NC U30 7 20
+R501 24.9K_1% POE_VDD POE_DEN
+R502 63.4R_1% POE_CLS POE_VSS
+R503 69.8K_1% POE_FRS POE_RTN
+C502 100nF POE_VB POE_RTN
+R504 2K POE_VB POE_CTL
+C503 1nF POE_CTL POE_RTN
+# --- input bulk (after the hot-swap switch) ---
+C504 22uF_100V_ALU POE_VDD POE_RTN
+C505 2.2uF_100V POE_VDD POE_RTN
+C506 2.2uF_100V POE_VDD POE_RTN
+# --- controller bias from the transformer auxiliary winding ---
+D40 DIODE:BAV21W A=POE_AUX K=POE_VC_R
+R505 22R POE_VC_R POE_VC
+C507 22uF_25V POE_VC POE_RTN
+C508 1uF_25V POE_VC POE_RTN
+# --- primary switch, current sense, clamp ---
+Q30 NMOS_PWR:150V_60mR G=POE_GATE_R D=POE_SW S=POE_ISNS
+R506 10R POE_GATE POE_GATE_R
+R507 10K POE_GATE_R POE_RTN
+R508 0.15R_1%_1W POE_ISNS POE_RTN
+R509 1K POE_ISNS POE_CS
+C509 100pF POE_CS POE_RTN
+D42 DIODE:ES1D A=POE_SW K=POE_CLAMP
+R511 39K_1W POE_CLAMP POE_VDD
+C516 10nF_100V POE_CLAMP POE_VDD
+# --- flyback transformer, 30 W class, 5 V output (e.g. Coilcraft POE300F-50L); pin numbers per final part ---
+T1 XFMR_FLYBACK:POE300F-50L PA=POE_VDD PB=POE_SW XA=POE_AUX XB=POE_RTN SA=POE_SEC SB=GND
+# --- secondary: rectifier, output filter ---
+D41 SCHOTTKY_PWR:PDS1040 A=POE_SEC K=VOUT_5V_PRE
+R510 10R POE_SEC POE_SNUB
+C510 1nF POE_SNUB VOUT_5V_PRE
+C511 47uF_10V VOUT_5V_PRE GND
+C512 47uF_10V VOUT_5V_PRE GND
+C513 47uF_10V VOUT_5V_PRE GND
+L30 1uH_5A VOUT_5V_PRE VOUT_5V
+C514 220uF_6.3V_POLY VOUT_5V GND
+C515 22uF VOUT_5V GND
+TP5 TP VOUT_5V
+TP6 TP GND
+# --- isolated feedback: TL431 + optocoupler, set point 5.05 V ---
+U31 OPTO:LTV-817S 1=FB_LED_A 2=FB_K 3=POE_RTN 4=POE_CTL
+R512 499R VOUT_5V FB_LED_A
+R513 1K FB_LED_A FB_K
+U32 TL431 1=FB_K 2=FB_REF 3=GND
+R514 10K_1% VOUT_5V FB_REF
+R515 9.76K_1% FB_REF GND
+C517 100nF FB_K FB_COMP
+R516 2K FB_COMP FB_REF
+# --- barrier capacitor (primary return to secondary ground) ---
+C518 2.2nF_2kV_Y POE_RTN GND
