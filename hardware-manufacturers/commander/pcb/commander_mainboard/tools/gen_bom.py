@@ -15,7 +15,7 @@ from collections import OrderedDict
 import cpmodel
 
 OUTDIR = os.path.normpath(os.path.join(cpmodel.ROOT, "..", "..", "fabrication", "bom"))
-NEW_SHEETS = ("poe", "usb3_hub", "usb2_hub")
+NEW_SHEETS = ("poe", "usb3_hub", "usb2_hub", "battery")
 NEW_REFS = re.compile(r"^(U20|U21|J21|SW\d|TP[2-6]|R40\d|C40\d|D30)$")
 
 
@@ -49,7 +49,7 @@ def main():
         key = (value, fp, c.desc if c.kind in ("ic", "two") else "", c.dnp, origin)
         groups.setdefault(key, []).append(c.ref)
     os.makedirs(OUTDIR, exist_ok=True)
-    out = os.path.join(OUTDIR, "commander_mainboard_revA0_bom.csv")
+    out = os.path.join(OUTDIR, "commander_mainboard_revA1_bom.csv")
     rows = []
     for (value, fp, desc, dnp, origin), refs in groups.items():
         refs.sort(key=natural)

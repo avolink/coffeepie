@@ -45,6 +45,7 @@ SHEET_TITLES = {
     "poe": "PoE PD and isolated 5 V flyback (NEW)",
     "usb3_hub": "USB5744 hub and SuperSpeed bays 1-4 (NEW)",
     "usb2_hub": "USB2517 hub, Hi-Speed bays 5-9, keyboard link (NEW)",
+    "battery": "Front battery port (USB-C) and PoE / battery 5 V selector (NEW)",
 }
 
 

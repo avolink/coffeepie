@@ -6,8 +6,9 @@ P U1 1E16=VCCIO_WL
 R10 0R VCCIO_WL VCC_1V8
 C53 100nF VCCIO_WL GND
 # --- U1N VCCIO7 domain ---
-# GPIO4_C2/C3/C5/C6 fed the 40-pin header on the 3E: unused here
-NC U1 1U7 AP12 1U6 1T6
+# GPIO4_C2/C3/C5 fed the 40-pin header on the 3E: now the battery-port controls (33_battery_port.net)
+P U1 1U7=BATT_VBUS_EN AP12=PWR_SRC_ST 1U6=BATT_VBUS_FLT_N
+NC U1 1T6
 P U1 AR12=HDMITX_SCL AP11=HDMITX_SDA 1V5=GPIO4_D1_3V3 1N8=VCC_3V3
 NC U1 1V6
 C54 100nF VCC_3V3 GND

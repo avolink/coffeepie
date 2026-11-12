@@ -7,6 +7,8 @@ Set KICAD_BIN if KiCad is not in the default location.  Steps:
   1  regenerate the repetitive USB netlists, check the design model
   2  project file, custom footprints, symbol library, schematic sheets
   3  board (runs under KiCad's bundled Python: footprints, nets, first placement)
+     then routing tranche 1 (tools/route.py; skip it with --no-route)
+     (--keep-board skips both and only re-runs the checks and exports on the board that is on disk)
   4  ERC, netlist export, model / schematic / board cross-check, DRC
   5  exports into the repository layout:
         ../../schematics/                 schematic PDF
@@ -25,7 +27,7 @@ EXE = ".exe" if os.name == "nt" else ""
 KPY = os.path.join(KBIN, "python" + EXE)
 KCLI = os.path.join(KBIN, "kicad-cli" + EXE)
 PRJ = "commander_mainboard"
-REV = "revA0"
+REV = "revA1"
 
 
 def run(title, cmd, ok_codes=(0,)):
@@ -63,7 +65,11 @@ def main():
     run("project file", py("gen_project.py"))
     run("custom footprints", py("gen_footprints.py"))
     run("symbols + schematic", py("gen_schematic.py"))
-    run("board", kpy("gen_pcb.py"))
+    keep = "--keep-board" in sys.argv           # reuse the board on disk (already placed and routed)
+    if not keep:
+        run("board", kpy("gen_pcb.py"))
+    if not keep and "--no-route" not in sys.argv:
+        run("routing, tranche 1 (several minutes)", kpy("route.py"))
 
     sch, pcb = PRJ + ".kicad_sch", PRJ + ".kicad_pcb"
     run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", sch], ok_codes=(0, 5))
@@ -71,6 +77,10 @@ def main():
     run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"))
     run("DRC", [KCLI, "pcb", "drc", "--format", "report", "--severity-all", "-o", "build/drc.rpt", pcb], ok_codes=(0, 5))
     run("placement collision report", kpy("report_overlaps.py"))
+    if "--no-route" not in sys.argv:
+        run("DRC (json)", [KCLI, "pcb", "drc", "--format", "json", "--severity-all", "-o", "build/drc.json", pcb], ok_codes=(0, 5))
+        run("routing check", py("check_routing.py"))
+    run("isolation check (PoE primary to everything else)", kpy("check_isolation.py"))
 
     out_sch = os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf")
     run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", out_sch, sch])

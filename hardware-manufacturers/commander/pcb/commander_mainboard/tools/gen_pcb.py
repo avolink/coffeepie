@@ -52,6 +52,15 @@ CFG = dict(
     RJ45_X=20.50,           # centre line of the RJ45
     CORE_Y0=60.0,           # where Radxa x = CORE_XR0 lands
     CORE_XR0=19.0,          # Radxa parts with x >= this are transplanted as the codec core
+    BATT_X=8.0,             # centre line of the front battery-port USB-C
+    # Head of the column, left to right: HDMI corridor | 2 mm barrier | PoE primary | 2 mm barrier | SELV corridor.
+    # The right corridor is not optional: the bay strip joins the column on that edge.
+    HDMI_COR=5.8,           # SELV on the left edge ends here (micro HDMI -> SoC)
+    PRI_X0=8.0,             # PoE primary zone, centred under the RJ45
+    PRI_X1=22.0,
+    PRI_Y0=9.8,             # just below the Bob-Smith / chassis parts of the Ethernet front end
+    PRI_Y1=39.4,            # the transformer primary pins sit right below
+    SELV_COR=24.2,          # SELV on the right edge starts here (RGMII, USB, SD, 5 V to the strip)
 )
 OX, OY = CFG["PAGE"]
 RADXA_RJ45_Y = 15.025       # centre of the RJ45 notch on the Radxa board
@@ -71,6 +80,21 @@ def eth_xy(xr, yr):
 
 def bay_x(k):
     return CFG["COL_W"] + CFG["BAY_X0"] + (k - 1) * CFG["BAY_PITCH"]
+
+
+def outline_pts():
+    """Board outline (design coordinates, mm), clockwise from the rear-left corner."""
+    C = CFG
+    s = C["RJ45_X"] - RADXA_RJ45_Y
+    t = -C["TAB_RJ45"]
+    sx1 = C["COL_W"] + C["STRIP_L"]
+    sy = C["STRIP_Y"]
+    return [
+        (0, -C["TAB_HDMI"]), (C["TAB_SPLIT"], -C["TAB_HDMI"]), (C["TAB_SPLIT"], t),
+        (7.57 + s, t), (7.57 + s, t + 3.66), (8.02 + s, t + 6.17), (22.03 + s, t + 6.17), (22.48 + s, t + 3.66), (22.48 + s, t),
+        (C["COL_W"], t), (C["COL_W"], sy), (sx1, sy), (sx1, sy + C["STRIP_H"]),
+        (C["COL_W"], sy + C["STRIP_H"]), (C["COL_W"], C["COL_L"]), (0, C["COL_L"]),
+    ]
 
 
 # --------------------------------------------------------------------------
@@ -128,8 +152,10 @@ def face_towards(fp, dx, dy):
 class Packer:
     """Row packer for a rectangular zone; fills the top side first, then the bottom."""
 
-    def __init__(self, name, x0, y0, x1, y1, sides=("F", "B"), gap=0.2):
+    def __init__(self, name, x0, y0, x1, y1, sides=("F", "B"), gap=0.2, turn_wide=False):
         self.name, self.r, self.sides, self.gap = name, (x0, y0, x1, y1), list(sides), gap
+        self.turn_wide = turn_wide          # stand parts on end when two of them would not fit side by side;
+        self.used = {s: [] for s in sides}  # ... and, as a last resort, drop a part into any hole left between rows
         self.cur = {s: [x0, y0, 0.0] for s in sides}       # x cursor, row y, row height
         self.blocked = {s: [] for s in sides}
 
@@ -143,7 +169,7 @@ class Packer:
             set_pose(fp, 0, 0, 0, bottom=(side == "B"))
             c = court(fp)
             w, h = c[2] - c[0], c[3] - c[1]
-            if w > x1 - x0 and h <= x1 - x0:                 # too wide: turn it
+            if (w > x1 - x0 and h <= x1 - x0) or (self.turn_wide and h < w and 2 * w + self.gap > x1 - x0):   # too wide: turn it
                 fp.SetOrientationDegrees(90)
                 c = court(fp)
                 w, h = c[2] - c[0], c[3] - c[1]
@@ -158,9 +184,27 @@ class Packer:
                 if not hit:
                     centre_on(fp, cx + w / 2, ry + h / 2)
                     self.cur[side] = [cx + w + self.gap, ry, max(rh, h)]
+                    self.used[side].append(bx)
                     return True
                 cx = max(b[2] for b in hit) + self.gap
             self.cur[side] = [cx, ry, rh]
+        if self.turn_wide:
+            g = self.gap
+            for side in self.sides:
+                set_pose(fp, 0, 0, 0, bottom=(side == "B"))
+                c = court(fp)
+                w, h = c[2] - c[0], c[3] - c[1]
+                taken = self.used[side] + self.blocked[side]
+                yy = y0
+                while yy + h <= y1 + 1e-6:
+                    xx = x0
+                    while xx + w <= x1 + 1e-6:
+                        if not any(not (xx + w + g <= b[0] or xx - g >= b[2] or yy + h + g <= b[1] or yy - g >= b[3]) for b in taken):
+                            centre_on(fp, xx + w / 2, yy + h / 2)
+                            self.used[side].append((xx, yy, xx + w, yy + h))
+                            return True
+                        xx += 0.25
+                    yy += 0.25
         return False
 
 
@@ -258,12 +302,7 @@ def main():
     t = -C["TAB_RJ45"]
     sx1 = C["COL_W"] + C["STRIP_L"]
     sy = C["STRIP_Y"]
-    outline = [
-        (0, -C["TAB_HDMI"]), (C["TAB_SPLIT"], -C["TAB_HDMI"]), (C["TAB_SPLIT"], t),
-        (7.57 + s, t), (7.57 + s, t + 3.66), (8.02 + s, t + 6.17), (22.03 + s, t + 6.17), (22.48 + s, t + 3.66), (22.48 + s, t),
-        (C["COL_W"], t), (C["COL_W"], sy), (sx1, sy), (sx1, sy + C["STRIP_H"]),
-        (C["COL_W"], sy + C["STRIP_H"]), (C["COL_W"], C["COL_L"]), (0, C["COL_L"]),
-    ]
+    outline = outline_pts()
     for a, b in zip(outline, outline[1:] + outline[:1]):
         seg = pcbnew.PCB_SHAPE(board)
         seg.SetShape(pcbnew.SHAPE_T_SEGMENT)
@@ -381,7 +420,7 @@ def main():
             continue
         if c.sheet == "ethernet":
             xf = eth_xy
-        elif c.sheet in ("hdmi", "storage", "poe", "usb3_hub", "usb2_hub") or src[1] < C["CORE_XR0"]:
+        elif c.sheet in ("hdmi", "storage", "poe", "usb3_hub", "usb2_hub", "battery") or src[1] < C["CORE_XR0"]:
             continue
         else:
             xf = core_xy
@@ -398,46 +437,61 @@ def main():
     put("U1", *core_xy(28.194, 12.7), 180.0, how="radxa (anchor)")       # orientation solved from the ball map
 
     # ---------------- 3. zones ----------------
+    VG = 0.6        # courtyard gap in the zones that get routed: leaves room for a via between neighbours
     Z = {
         "HDMI": Packer("HDMI", 0.6, -10.5, 11.6, 8.8),
-        "POE_PRI": Packer("POE_PRI", 1.0, 12.5, 18.3, 38.6),
-        "POE_SEC": Packer("POE_SEC", 21.0, 34.5, 29.4, 59.4),
-        "POE_SEC2": Packer("POE_SEC2", 0.8, 55.6, 20.6, 59.5),
-        "HUB3": Packer("HUB3", 30.8, sy + 0.8, 40.2, sy + 21.2),
-        "MID12": Packer("MID12", 54.6, sy + 8.6, 77.0, sy + 21.2),
-        "HUB2": Packer("HUB2", bay_x(5) + 9.5, sy + 1.0, bay_x(6) - 9.5, sy + 21.2),
+        "POE_PRI": Packer("POE_PRI", C["PRI_X0"], C["PRI_Y0"], C["PRI_X1"], C["PRI_Y1"], turn_wide=True),
+        "POE_SEC": Packer("POE_SEC", 23.5, 43.5, 29.4, 59.4),          # secondary side, right of the transformer
+        "POE_SEC2": Packer("POE_SEC2", 0.8, 55.6, 23.0, 59.5),         # ... below it
+        "POE_SEC3": Packer("POE_SEC3", 0.8, 41.5, C["HDMI_COR"], 55.2), # ... and left of it (HDMI passes underneath on B.Cu)
+        "HUB3": Packer("HUB3", 30.8, sy + 0.8, 40.2, sy + 21.2, gap=VG),
+        "MID12": Packer("MID12", 54.6, sy + 8.6, 77.0, sy + 21.2, gap=VG),
+        "HUB2": Packer("HUB2", bay_x(5) + 9.5, sy + 1.0, bay_x(6) - 9.5, sy + 21.2, gap=VG),
         "EMMC": Packer("EMMC", 2.0, 86.0, 28.0, 105.6, sides=("B",)),
-        "FRONT": Packer("FRONT", 0.8, 106.9, 29.2, 118.0, sides=("F",)),
+        "FRONT": Packer("FRONT", 0.8, 106.9, 29.2, 118.0, sides=("F", "B"), gap=0.45),
+        "CHAS": Packer("CHAS", 12.2, 4.9, 22.0, 9.7),          # chassis bleed network, next to the RJ45 shield
     }
     for k in range(1, 10):
-        Z[f"BAY{k}"] = Packer(f"BAY{k}", bay_x(k) - 9.0, sy + 9.4, bay_x(k) + 9.0, sy + 21.2)
+        Z[f"BAY{k}"] = Packer(f"BAY{k}", bay_x(k) - 9.0, sy + 9.4, bay_x(k) + 9.0, sy + 21.2, gap=VG)
 
     for k in range(1, 10):
         edge_mount(f"J3{k}", bay_x(k), sy, 0.8, (0, -1))
-    put("T1", 10.0, 47.0, 0)
-    put("U31", 20.0, 29.0, 180)
-    put("C518", 20.0, 23.5, 0)
+    put("T1", (C["PRI_X0"] + C["PRI_X1"]) / 2, 47.0, 180, bottom=True)   # bottom face (tallest part, about 12.7 mm); 180 deg keeps the primary pins towards the rear
+    put("U31", (C["PRI_X1"] + C["SELV_COR"]) / 2, 35.5, 180)      # optocoupler and Y capacitor straddle the right barrier
+    put("C518", (C["PRI_X1"] + C["SELV_COR"]) / 2, 31.6, 0)
     put("U20", 15.0, 96.0, 0, bottom=True)
     put("J21", 19.0, 116.6, 90)
     put("U40", 35.4, sy + 5.6, 0)
     put("U50", (bay_x(5) + bay_x(6)) / 2, sy + 11.0, 0)
     edge_mount("J6", 66.0, sy + C["STRIP_H"], 0.3, (0, 1))
-    for name in ("HUB3", "MID12", "HUB2", "EMMC", "POE_PRI", "POE_SEC", "POE_SEC2", "FRONT"):
-        for r_ in ("U40", "U50", "J6", "U20", "U31", "C518", "T1", "J21"):
+    edge_mount("J40", C["BATT_X"], C["COL_L"], 0.9, (0, 1))      # front "TO BATT" USB-C
+    for name in ("HUB3", "MID12", "HUB2", "EMMC", "POE_PRI", "POE_SEC", "POE_SEC2", "POE_SEC3", "CHAS", "FRONT"):
+        for r_ in ("U40", "U50", "J6", "U20", "U31", "C518", "T1", "J21", "J40"):
             fp = fps[r_]
             Z[name].block("B" if fp.IsFlipped() else "F", *court(fp))
+    for r_ in ("J40", "J21"):               # through-hole legs of the front connectors also occupy the bottom side
+        for p in fps[r_].Pads():
+            if p.HasHole():
+                px_, py_ = ToMM(p.GetPosition().x) - OX, ToMM(p.GetPosition().y) - OY
+                hw, hh = ToMM(p.GetSize().x) / 2 + 0.4, ToMM(p.GetSize().y) / 2 + 0.4
+                hw = hh = max(hw, hh)
+                Z["FRONT"].block("B", px_ - hw, py_ - hh, px_ + hw, py_ + hh)
     for k in range(1, 10):
         Z[f"BAY{k}"].block("F", *court(fps[f"J3{k}"]))
-    for r_ in transplanted:                 # keep the eMMC zone off the transplanted bottom-side parts
+    for r_ in transplanted:                # keep the eMMC zone off the transplanted bottom-side parts
         fp = fps[r_]
         if fp.IsFlipped():
             Z["EMMC"].block("B", *court(fp))
+        for zn in ("CHAS", "POE_PRI"):
+            Z[zn].block("B" if fp.IsFlipped() else "F", *court(fp))
 
     sec_nets = ("VOUT_5V", "VOUT_5V_PRE", "FB_K", "FB_REF", "FB_COMP", "FB_LED_A", "POE_SNUB")
 
     def zone_of(c):
         m = re.match(r"^\d?[A-Z]+(\d+)$", c.ref)
         n = int(m.group(1)) if m else 0
+        if c.ref in ("R400", "C400"):
+            return "CHAS"
         if c.sheet == "hdmi":
             return "HDMI"
         if c.sheet == "poe":
@@ -448,8 +502,11 @@ def main():
             return "POE_SEC" if sec or not pri else "POE_PRI"
         if c.sheet == "usb3_hub":
             return f"BAY{(n - 630) // 10}" if 640 <= n < 680 else "HUB3"
+        if c.sheet == "battery":
+            # the source selector sits at the PoE output; the port, its CC controller and charge switch at the front
+            return "POE_SEC" if c.ref in ("U81", "TP7") or 811 <= n <= 818 else "FRONT"
         if c.sheet == "usb2_hub":
-            if c.ref in ("J20", "F1", "C713", "U51", "J22"):
+            if c.ref in ("J20", "F1", "C713", "U51"):
                 return "MID12"
             return f"BAY{(n - 700) // 10}" if 750 <= n < 800 else "HUB2"
         if c.sheet == "storage":
@@ -459,7 +516,7 @@ def main():
                 return "EMMC"
         return "FRONT"
 
-    overflow = {"HUB3": "MID12", "POE_SEC": "POE_SEC2", "POE_SEC2": "POE_SEC"}
+    overflow = {"HUB3": ["MID12"], "POE_SEC": ["POE_SEC2", "POE_SEC3"], "POE_SEC2": ["POE_SEC", "POE_SEC3"]}
 
     def area(c):
         b = court(fps[c.ref])
@@ -469,9 +526,12 @@ def main():
     for c in todo:
         z = zone_of(c)
         ok = Z[z].place(fps[c.ref])
-        if not ok and z in overflow:
-            z = overflow[z]
-            ok = Z[z].place(fps[c.ref])
+        for z2 in overflow.get(z, ()):
+            if ok:
+                break
+            ok = Z[z2].place(fps[c.ref])
+            if ok:
+                z = z2
         if ok:
             placed[c.ref] = "zone " + z
         else:
@@ -551,11 +611,14 @@ def main():
         board.Add(fp)
 
     # ---------------- 6. documentation layers ----------------
-    box(1.0, 12.5, 18.3, 38.6)
-    note("PoE PRIMARY (isolated, 57 V)", 1.2, 11.8, 0.9)
+    box(C["PRI_X0"], C["PRI_Y0"], C["PRI_X1"], C["PRI_Y1"])
+    note("PoE PRIMARY (57 V)", C["PRI_X0"] + 0.2, C["PRI_Y0"] + 1.0, 0.8)
+    for bx in (C["HDMI_COR"], C["SELV_COR"]):                 # the two barrier lines
+        box(bx, C["PRI_Y0"] - 2.0, bx, 46.0, width=0.1)
     note("ISOLATION BARRIER: keep 2.0 mm clear on ALL layers around the primary zone." + NL +
          "Only T1, U31 and C518 may bridge it.", 32.0, 40.0, 1.2)
-    note("SELV corridor: HDMI, RGMII, USB, 5 V", 29.4, 58.0, 0.8, rot=90)
+    note("SELV corridor: RGMII, USB, SD, 5 V", 29.4, 58.0, 0.8, rot=90)
+    note("HDMI corridor", 2.0, 40.0, 0.8, rot=90)
     box(0.0, C["CORE_Y0"], C["COL_W"], C["CORE_Y0"] + 65.0 - C["CORE_XR0"])
     note("CODEC CORE - placement transplanted from Radxa ZERO 3E V1.2 (rotated 90 deg)", -1.0, 106.0, 1.0, rot=90)
     for k in range(1, 10):

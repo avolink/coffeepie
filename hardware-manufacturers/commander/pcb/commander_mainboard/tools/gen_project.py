@@ -29,13 +29,13 @@ def cls(name, clearance, width, via_d=0.45, via_drill=0.2, dp_w=None, dp_gap=Non
 CLASSES = [
     cls("Default", 0.09, 0.10),
     cls("DDR", 0.09, 0.09, dp_w=0.09, dp_gap=0.10, color="rgb(0, 132, 132)"),          # 40 ohm SE / 80 ohm diff nominal
-    cls("USB3_SS", 0.12, 0.10, dp_w=0.10, dp_gap=0.12, color="rgb(194, 0, 194)"),      # 90 ohm diff
-    cls("USB2", 0.12, 0.11, dp_w=0.11, dp_gap=0.13, color="rgb(132, 0, 132)"),         # 90 ohm diff
-    cls("HDMI", 0.12, 0.10, dp_w=0.10, dp_gap=0.11, color="rgb(0, 132, 0)"),           # 100 ohm diff
+    cls("USB3_SS", 0.10, 0.10, dp_w=0.10, dp_gap=0.12, color="rgb(194, 0, 194)"),      # 90 ohm diff
+    cls("USB2", 0.10, 0.11, dp_w=0.11, dp_gap=0.13, color="rgb(132, 0, 132)"),         # 90 ohm diff
+    cls("HDMI", 0.10, 0.10, dp_w=0.10, dp_gap=0.11, color="rgb(0, 132, 0)"),           # 100 ohm diff
     cls("ETH_MDI", 0.15, 0.11, dp_w=0.11, dp_gap=0.15, color="rgb(0, 0, 194)"),        # 100 ohm diff
     cls("RGMII", 0.10, 0.10, color="rgb(132, 132, 0)"),                                 # 50 ohm SE
-    cls("PWR", 0.15, 0.40, via_d=0.6, via_drill=0.3, color="rgb(194, 0, 0)"),
-    cls("PWR_5V", 0.20, 0.80, via_d=0.7, via_drill=0.35, color="rgb(255, 80, 0)"),
+    cls("PWR", 0.10, 0.30, via_d=0.6, via_drill=0.3, color="rgb(194, 0, 0)"),
+    cls("PWR_5V", 0.15, 0.40, via_d=0.7, via_drill=0.35, color="rgb(255, 80, 0)"),
     cls("POE_PRIMARY", 0.60, 0.50, via_d=0.8, via_drill=0.4, color="rgb(255, 0, 0)"),  # 57 V; 2 mm to anything not POE_PRIMARY
 ]
 
@@ -43,14 +43,17 @@ PATTERNS = [
     ("LPDDR4_*", "DDR"),
     ("USB3_HOST1_SS*", "USB3_SS"), ("HUB3_UP_*", "USB3_SS"), ("HUB3_TX*", "USB3_SS"), ("HUB3_RX*", "USB3_SS"),
     ("SSTX*", "USB3_SS"), ("SSRX*", "USB3_SS"),
-    ("USB_P?_D?", "USB2"), ("USB*_D[PM]", "USB2"), ("SVC_D[PM]", "USB2"),
+    ("USB*_DP", "USB2"), ("USB*_DM", "USB2"), ("SVC_DP", "USB2"), ("SVC_DM", "USB2"),
     ("HDMI_TX*", "HDMI"),
     ("MDI*", "ETH_MDI"), ("PHY_MDI*", "ETH_MDI"),
     ("GMAC1_*", "RGMII"), ("PHY1_RX*", "RGMII"),
     ("VDD_*", "PWR"), ("VCC_DDR", "PWR"), ("VCC0V6_DDR", "PWR"), ("VCC3V3_SYS", "PWR"), ("VCC_3V3", "PWR"),
     ("VCC3V3_HUB", "PWR"), ("VCC1V2_HUB", "PWR"), ("PMIC_SW?", "PWR"), ("RK860_SW", "PWR"), ("HUB_SW??", "PWR"),
     ("VCC_SYS", "PWR_5V"), ("VOUT_5V*", "PWR_5V"), ("VBUS_*", "PWR_5V"), ("VCC5V*", "PWR_5V"), ("SVC_VBUS", "PWR_5V"),
-    ("POE_*", "POE_PRIMARY"), ("TR?_48V", "POE_PRIMARY"),
+    ("POE_SEC", "PWR_5V"), ("POE_SNUB", "PWR"),          # secondary side of the flyback
+    ("POE_A*", "POE_PRIMARY"), ("POE_C*", "POE_PRIMARY"), ("POE_D*", "POE_PRIMARY"), ("POE_F*", "POE_PRIMARY"),
+    ("POE_G*", "POE_PRIMARY"), ("POE_I*", "POE_PRIMARY"), ("POE_R*", "POE_PRIMARY"), ("POE_SW", "POE_PRIMARY"),
+    ("POE_V*", "POE_PRIMARY"), ("TR?_48V", "POE_PRIMARY"),
 ]
 
 ERC_OFF = ["footprint_link_issues", "lib_symbol_issues", "lib_symbol_mismatch", "simulation_model_issue",

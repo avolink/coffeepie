@@ -1,0 +1,61 @@
+# NEW for the Commander (rev A1): front "TO BATT" USB-C port and the 5 V source selector.
+#
+# The port is a 5 V-only dual-role USB-C port. A pogo-pin-to-USB-C adapter will dock the battery module here.
+#   * PoE absent : the module (or any USB-C power bank / 5 V charger) sources VBUS_BATT and U81 feeds the board from it.
+#   * PoE present: U81 keeps the board on PoE; the SoC may turn U82 on to push 5 V out and charge the module.
+# Everything that used to hang on VOUT_5V (VCC_SYS, the nine bay switches, the keyboard) now hangs on VCC5V_BUS.
+# AUDIT: the battery module is not designed yet - treat CC / SBU / data on this port as a provisional interface.
+SHEET battery
+
+# --- 5 V source selector: TPS2121, IN1 = PoE (priority), IN2 = battery port, fast switch-over (XCOMP mode) ---
+# IN1 is used while 0.333 x VOUT_5V > 0.270 x VBUS_BATT, i.e. until PoE sags below about 81 % of the battery voltage.
+U81 TPS2121 7=VOUT_5V 2=VBUS_BATT 1=VCC5V_BUS 8=VCC5V_BUS 6=PSEL_PR1 3=PSEL_CP2 5=GND 4=PSEL_OV2 9=PWR_SRC_ST 10=PSEL_ILIM 11=PSEL_SS 12=GND
+R811 20K_1% VOUT_5V PSEL_PR1
+R812 10K_1% PSEL_PR1 GND
+R813 27K_1% VBUS_BATT PSEL_CP2
+R814 10K_1% PSEL_CP2 GND
+# battery-port over-voltage lock-out at 6.0 V (the port is 5 V only; a source that goes higher is disconnected)
+R815 46.4K_1% VBUS_BATT PSEL_OV2
+R816 10K_1% PSEL_OV2 GND
+# current limit 4.5 A, output slew about 0.8 V/ms
+R817 22.1K_1% PSEL_ILIM GND
+C811 100nF PSEL_SS GND
+# status to the SoC: high = running from PoE, low = running from the battery port
+R818 10K VCC_3V3 PWR_SRC_ST
+C812 10uF VOUT_5V GND
+C813 4.7uF VBUS_BATT GND
+C814 22uF VCC5V_BUS GND
+C815 100nF VCC5V_BUS GND
+TP7 TP VCC5V_BUS
+
+# --- the port (front edge of the codec column) ---
+J40 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_BATT A9=VBUS_BATT B4=VBUS_BATT B9=VBUS_BATT
+P J40 A5=BATT_CC1 B5=BATT_CC2 A6=USB_AUX_DP B6=USB_AUX_DP A7=USB_AUX_DM B7=USB_AUX_DM A8=BATT_SBU1 B8=BATT_SBU2
+D80 TVS:SMF5.0CA VBUS_BATT GND
+C801 100nF VBUS_BATT GND
+# USB 2.0 data to USB2517 port 6, so the module can enumerate (fuel gauge / HID power device)
+U83 USBLC6-2SC6 1=USB_AUX_DP 6=USB_AUX_DP 3=USB_AUX_DM 4=USB_AUX_DM 2=GND 5=VBUS_BATT
+
+# --- CC controller: FUSB302B (same circuit as U6 / ET7301B on the Radxa ZERO 3E sheet 14), I2C3_M1 address 0x22 ---
+# Unpowered it presents Rd on both CC pins (dead-battery sink), so a source on this port can start a dead board.
+U80 FUSB302B 1=BATT_CC2 14=BATT_CC2 10=BATT_CC1 11=BATT_CC1 2=VBUS_BATT 3=VCC_3V3 4=VCC_3V3 5=TYPEC_INT 6=I2C3_SCL_M1 7=I2C3_SDA_M1
+P U80 8=GND 9=GND 15=GND 12=VCC_SYS 13=VCC_SYS
+C802 100nF VCC_3V3 GND
+C803 1uF VCC_3V3 GND
+C804 220pF BATT_CC1 GND
+C805 220pF BATT_CC2 GND
+C806 100nF VCC_SYS GND
+R801 2.2K VCC_3V3 TYPEC_INT
+# Stuffing option: fit 5.1 k here (and leave U80 out) for a hard-wired sink-only port that needs no software
+R802 DNP BATT_CC1 GND
+R803 DNP BATT_CC2 GND
+
+# --- 5 V out to the module (charging), off by default, current-limited, enabled by the SoC ---
+U82 PWRSW:AP22804AW5 5=VCC5V_BUS 1=VBUS_BATT 2=GND 4=BATT_VBUS_EN 3=BATT_VBUS_FLT_N
+R804 100K BATT_VBUS_EN GND
+R805 10K VCC_3V3 BATT_VBUS_FLT_N
+C807 100nF VCC5V_BUS GND
+
+# --- optional module telemetry on the SBU pins (I2C2_M1, shared with the ID EEPROM); leave unpopulated until the module is defined ---
+R806 DNP BATT_SBU1 I2C2_SCL_M1
+R807 DNP BATT_SBU2 I2C2_SDA_M1

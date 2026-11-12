@@ -1415,7 +1415,7 @@
     (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
     (uuid "5a08d445-f518-58ae-9bfe-4ecb2ee97a0a")
     (property "Reference" "R515" (at 141.478 91.44 0) (effects (font (size 1.27 1.27)) (justify right)))
-    (property "Value" "9.76K_1%" (at 143.002 91.44 0) (effects (font (size 1.27 1.27)) (justify left)))
+    (property "Value" "9.53K_1%" (at 143.002 91.44 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Resistor_SMD:R_0402_1005Metric" (at 142.24 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 142.24 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Description" "R" (at 142.24 93.98 0) (effects (font (size 1.27 1.27)) (hide yes)))

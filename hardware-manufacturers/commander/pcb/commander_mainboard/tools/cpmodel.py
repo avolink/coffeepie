@@ -153,6 +153,10 @@ PARTS = {
         "63:RBIAS 64:VDD33PLL 65:VSS(EP)")),
     "TPS23754": dict(fp="Package_SO:HTSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP3.4x6.5mm", desc="TI TPS23754 PoE PD + DC/DC controller, HTSSOP-20", pins=named(
         "1:CTL 2:VB 3:CS 4:COM 5:GATE 6:VC 7:GAT2 8:ARTN 9:RTN 10:VSS 11:VDD1 12:VDD 13:DEN 14:PPD 15:CLS 16:DT 17:APD 18:BLNK 19:FRS 20:T2P 21:VSS(EP)")),
+    "FUSB302B": dict(fp="Package_DFN_QFN:WQFN-14-1EP_2.5x2.5mm_P0.5mm_EP1.45x1.45mm", desc="onsemi FUSB302B USB-C port controller (or ET7301B), WQFN-14", pins=named(
+        "1:CC2 2:VBUS 3:VDD 4:VDD 5:INT_N 6:SCL 7:SDA 8:GND 9:GND 10:CC1 11:CC1 12:VCONN 13:VCONN 14:CC2 15:EPAD")),
+    "TPS2121": dict(fp="Package_DFN_QFN:Texas_VQFN-HR-12_2x2.5mm_P0.5mm", desc="TI TPS2121 power mux 2.8-22 V 4.5 A, fast switch-over, VQFN-HR-12", pins=named(
+        "7:IN1 2:IN2 6:PR1 3:CP2 5:OV1 4:OV2 10:ILM 11:SS 9:ST 1:OUT 8:OUT 12:GND")),
     "PWRSW": dict(fp="Package_TO_SOT_SMD:SOT-23-5", desc="USB power switch with fault flag", pins=named("5:IN 4:EN 3:FLG 2:GND 1:OUT")),
     "BUCK_SOT235": dict(fp="Package_TO_SOT_SMD:SOT-23-5", desc="synchronous buck 2 A, SOT-23-5", pins=named("4:VIN 1:EN 5:FB 2:GND 3:SW")),
     "AT24C02": dict(fp="Package_TO_SOT_SMD:SOT-23-5", desc="I2C EEPROM 2 kbit (AT24C02 / AT24CS02), SOT-23-5", pins=named("1:SCL 2:GND 3:SDA 4:VCC 5:WP")),

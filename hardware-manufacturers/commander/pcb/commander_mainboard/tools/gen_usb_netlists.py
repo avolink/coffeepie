@@ -39,8 +39,8 @@ U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND
 R{b+5} 56K VBUS_P{k} CC1_P{k}
 R{b+6} 56K VBUS_P{k} CC2_P{k}
 # port power: PRT_CTLx is both the enable output and the over-current input on the USB5744
-U{b+3} PWRSW:AP22804AW5 5=VOUT_5V 1=VBUS_P{k} 2=GND 4=HUB3_PRT_CTL{k} 3=HUB3_PRT_CTL{k}
-C{b+5} 100nF VOUT_5V GND
+U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1=VBUS_P{k} 2=GND 4=HUB3_PRT_CTL{k} 3=HUB3_PRT_CTL{k}
+C{b+5} 100nF VCC5V_BUS GND
 C{b+6} 47uF VBUS_P{k} GND
 C{b+7} 100nF VBUS_P{k} GND"""
 
@@ -57,8 +57,8 @@ NC J3{k} A8 B8
 U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5=VBUS_P{k}
 R{b+5} 56K VBUS_P{k} CC1_P{k}
 R{b+6} 56K VBUS_P{k} CC2_P{k}
-U{b+3} PWRSW:AP22804AW5 5=VOUT_5V 1=VBUS_P{k} 2=GND 4=HUB2_PRTPWR{n} 3=HUB2_OCS{n}_N
-C{b+5} 100nF VOUT_5V GND
+U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1=VBUS_P{k} 2=GND 4=HUB2_PRTPWR{n} 3=HUB2_OCS{n}_N
+C{b+5} 100nF VCC5V_BUS GND
 C{b+6} 47uF VBUS_P{k} GND
 C{b+7} 100nF VBUS_P{k} GND"""
 
@@ -148,11 +148,10 @@ C712 4.7uF VCC3V3_HUB GND
 # --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub ---
 P U1 Y2=USB2_HOST3_DP Y1=USB2_HOST3_DM
 J20 JST_SH4 1=VBUS_KB 2=USB2_HOST3_DM 3=USB2_HOST3_DP 4=GND
-F1 PTC:500mA VOUT_5V VBUS_KB
+F1 PTC:500mA VCC5V_BUS VBUS_KB
 C713 10uF VBUS_KB GND
 U51 USBLC6-2SC6 1=USB2_HOST3_DP 6=USB2_HOST3_DP 3=USB2_HOST3_DM 4=USB2_HOST3_DM 2=GND 5=VBUS_KB
-# --- spare internal USB 2.0 port (USB2517 port 6), unpopulated header for a future internal device ---
-J22 JST_SH4:DNP 1=VBUS_KB 2=USB_AUX_DM 3=USB_AUX_DP 4=GND
+# USB2517 port 6 (USB_AUX) goes to the front battery port J40, see 33_battery_port.net
 """
 
 with open(os.path.join(OUT, "31_usb3_hub.net"), "w", encoding="utf-8", newline="\n") as f:
