@@ -230,7 +230,11 @@ def face_towards(fp, dx, dy):
     fp.SetOrientationDegrees(best[1])
 
 
-FINE_BAND = 0.0     # mm kept free round a fine-pitch chip that the packer places (its pins' way out).  1.0-1.4 frees the
+# small parts that belong to one pin of a chip: placed beside that pin right after the chip, before the large parts
+# take the room (host -> [(part, pin)]).  The PoE controller TPS23754: DEN, CLS, FRS, VB, CTL, CS, GATE, VC.
+SATELLITES = {"U30": [("R501", "13"), ("R502", "15"), ("R503", "19"), ("C502", "16"), ("R504", "2"), ("C503", "1"),
+                      ("R509", "3"), ("C509", "3"), ("R506", "5"), ("C508", "6"), ("C507", "6")]}
+FINE_BAND = float(os.environ.get("CP_FINE_BAND", "0.0"))     # mm kept free round a fine-pitch chip that the packer places (its pins' way out).  1.0-1.4 frees the
                     # TPS23754's pins, but the PoE primary area is then too small for the rest (C516, D42 left over): off
 
 
@@ -273,6 +277,30 @@ class Packer:
                     bx[(edge + 2) % 4] = c[edge]
                     self.blocked[side].append(tuple(min(bx[k], bx[k + 2]) if k < 2 else max(bx[k - 2], bx[k]) for k in range(4)))
         return ok
+
+    def place_near(self, fp, side, px, py, ux, uy):
+        """A small part beside a pin at (px, py) of a chip, outwards along (ux, uy): its long axis along that direction,
+        as close to the pin as the free space allows, sliding sideways if the spot is taken."""
+        set_pose(fp, 0, 0, 0, bottom=(side == "B"))
+        fp.SetOrientationDegrees(90 if uy else 0)
+        c = court(fp)
+        w, h = c[2] - c[0], c[3] - c[1]
+        x0, y0, x1, y1 = self.r
+        g = self.gap
+        taken = self.used[side] + self.blocked[side]
+        for k in range(0, 40):
+            d = 0.6 + k * 0.2 + (h if uy else w) / 2
+            for lat in (0, 0.5, -0.5, 1.0, -1.0, 1.5, -1.5, 2.0, -2.0, 2.5, -2.5, 3.0, -3.0):
+                cx, cy = px + ux * d + (lat if uy else 0), py + uy * d + (0 if uy else lat)
+                bx = (cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2)
+                if bx[0] < x0 or bx[1] < y0 or bx[2] > x1 or bx[3] > y1:
+                    continue
+                if any(not (bx[2] + g <= t[0] or bx[0] - g >= t[2] or bx[3] + g <= t[1] or bx[1] - g >= t[3]) for t in taken):
+                    continue
+                centre_on(fp, cx, cy)
+                self.used[side].append(bx)
+                return True
+        return False
 
     def _place(self, fp, first=None):
         x0, y0, x1, y1 = self.r
@@ -593,7 +621,8 @@ def main():
     Z = {
         "HDMI": Packer("HDMI", 0.6, -10.5, 11.6, 8.8),
         # (57 V between neighbours here: the gap leaves room for a 0.4 mm track with 0.3 mm either side)
-        "POE_PRI": Packer("POE_PRI", C["PRI_X0"], C["PRI_Y0"], C["PRI_X1"], C["PRI_Y1"], turn_wide=True, gap=0.45),
+        "POE_PRI": Packer("POE_PRI", C["PRI_X0"], C["PRI_Y0"], C["PRI_X1"], C["PRI_Y1"], turn_wide=True,
+                          gap=float(os.environ.get("CP_POE_GAP", "0.45"))),
         "POE_SEC": Packer("POE_SEC", 23.5, 43.5, 29.4, 59.4),          # secondary side, right of the transformer
         "POE_SEC2": Packer("POE_SEC2", 0.8, 55.6, 23.0, 59.5),         # ... below it
         "POE_SEC3": Packer("POE_SEC3", 0.8, 41.5, C["HDMI_COR"], 55.2), # ... and left of it (HDMI passes underneath on B.Cu)
@@ -715,6 +744,8 @@ def main():
 
     todo = sorted([c for c in d.comps.values() if c.ref not in placed], key=lambda c: -area(c))
     for c in todo:
+        if c.ref in placed:                 # (a satellite, placed beside its chip's pin already)
+            continue
         z = zone_of(c)
         # nothing on the top face may stand taller than the bay connectors (3.3 mm): the one part without a
         # low-profile equivalent, the 100 V electrolytic of the PoE input, goes underneath
@@ -728,6 +759,20 @@ def main():
                 z = z2
         if ok:
             placed[c.ref] = "zone " + z
+            for sref, pin in SATELLITES.get(c.ref, ()):
+                if sref not in fps or sref in placed:
+                    continue
+                host = fps[c.ref]
+                hp = next(p_ for p_ in host.Pads() if p_.GetNumber() == pin)
+                hx, hy = ToMM(host.GetPosition().x) - OX, ToMM(host.GetPosition().y) - OY
+                px_, py_ = ToMM(hp.GetPosition().x) - OX, ToMM(hp.GetPosition().y) - OY
+                dx_, dy_ = px_ - hx, py_ - hy
+                ux_, uy_ = ((1 if dx_ > 0 else -1), 0) if abs(dx_) > abs(dy_) else (0, (1 if dy_ > 0 else -1))
+                side_ = "B" if host.IsFlipped() else "F"
+                if Z[z].place_near(fps[sref], side_, px_, py_, ux_, uy_):
+                    placed[sref] = "beside %s.%s" % (c.ref, pin)
+        elif c.ref in placed:
+            pass
         else:
             parked.append((c.ref, z))
     px, py, rowh = 40.0, 45.0, 0.0          # park what did not fit, in rows below the strip

@@ -1,10 +1,10 @@
-commander_keyboard revK1 - QUOTATION PACKAGE - NOT FOR MANUFACTURE
+commander_keyboard revK1 - PROTOTYPE PACKAGE
 
 The keyboard of the Commander terminal: the prototyped Altium design (Teclado_V2), converted to KiCad, with the
 Arduino Micro module replaced by an ATmega32U4 circuit soldered on the board.
 
 State
-  NOT complete: 2 connections are still open - do not build from these files
+  every connection is made (KiCad: 0 unconnected); design-rule check: 45 remarks, listed in pcb/commander_keyboard/README.md
   the new copper was drawn by script and has not been reviewed by a layout engineer; the copper of the proven
   prototype (switch matrix, zones) is unchanged
 

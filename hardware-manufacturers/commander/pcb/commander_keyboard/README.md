@@ -4,19 +4,32 @@ The keyboard of the Commander terminal as a KiCad project: the prototyped Altium
 (84 Keychron low-profile optical switches, 6 x 16 matrix) converted to KiCad, with the hand-soldered
 **Arduino Micro module replaced by an ATmega32U4 circuit soldered on the board**.
 
-**Status (2026-11-14): everything connected except two items; not ready to order yet.**
+**Status (2026-11-14): every connection made.** Ready for a prototype order once the assumptions at the end of
+this file are confirmed (board thickness, USB-C position) and someone has looked over the new copper.
 
 | Check | Result |
 |---|---|
 | ERC | clean |
 | Model / schematic / board | identical, pad by pad (989 pads) |
-| KiCad DRC: unconnected | **2**: (1) **D10**, from chip pin 28 to its old copper north of the chip (the track that ends at x 129.2, y 128.1 mm); (2) the **ground pad of C209** (a crystal capacitor), which sits on an island of the bottom ground pour |
-| KiCad DRC: other remarks | none on the new copper except 17 vias beside the chip that connect on one layer only (harmless); the rest are in the prototype's own copper (see *Found in the prototype's design*) |
+| KiCad DRC: unconnected | **0** |
+| KiCad DRC: other remarks | none on the new copper except 15 vias beside the chip that connect on one layer only (harmless); the rest are in the prototype's own copper (see *Found in the prototype's design*) |
 
-The two open items are a few minutes' work by hand in KiCad: *Route > Interactive Router* in **Shove** mode pushes
-the neighbouring tracks aside, which this project's grid router cannot do. Do that in `commander_keyboard.kicad_pcb`,
-then run `build.py --variant keyboard --keep-board` (checks and exports only) - and from then on do not regenerate
-the board, or the hand routing is lost.
+The fabrication files are in `../../fabrication/gerber/commander_keyboard_revK1_PROTOTYPE/` (+ BOM and placement
+in `../../fabrication/bom` and `/position`).
+
+**This board file is now the master.** The last three connections were made by targeted fixes after the routing
+run (below); a full rebuild would route again from scratch and need them again. For changes use
+`build.py --variant keyboard --keep-board` (checks and exports only) or KiCad itself.
+
+How the board was finished (KiCad's Python, `CP_ROOT` = this folder, tools in `../commander_mainboard/tools/`):
+
+```
+kbd_board.py --stage route      (CP_VARIANT_FROM=12: orders 13..24; best: 36 of 37 nets)
+kbd_board.py --stage ground
+kbd_fix_net.py    <in> <out> D10 105 118 D9,D6,D12,D5,D4,D13,D8     D10 west first, the west-row bundle re-laid
+kbd_fix_ground.py <in> <out> C209.2 RESET_N,D0_RX,D7,MOSI           C209's ground off its pour island
+kbd_fix_net.py    <in> <out> MOSI 146 160 SS_RXLED,RESET_N,D0_RX,D7,MISO,SCK
+```
 
 ## What was taken over, what is new
 

@@ -1311,6 +1311,15 @@ def ground_round():
         inner = ~R.dilate(~mask, R.ceil_(0.4 / G))
         js, is_ = np.nonzero(inner[::4, ::4])
         reg.assign(gnd, [(l, int(i) * 4, int(j) * 4) for i, j in zip(is_, js)], zn)
+    # ... and so are the pads and vias of the main ground, wherever they are (a pour may be too narrow to reach)
+    for pd in reg.pads.get(gnd, []):
+        if pd["pad"].m_Uuid.AsString() in main_ids:
+            reg.assign(gnd, list(pd["cells"]), zn)
+    for it in main_items:
+        if it.GetClass() == "PCB_VIA":
+            i, j = int(round((ToMM(it.GetPosition().x) - OX - reg.x0) / G)), int(round((ToMM(it.GetPosition().y) - OY - reg.y0) / G))
+            if 0 <= i < reg.nx and 0 <= j < reg.ny:
+                reg.assign(gnd, [(0, i, j), (2, i, j)], zn)
     joined = 0
     names = []
     for ids, items in lost:
