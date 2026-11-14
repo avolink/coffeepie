@@ -45,7 +45,7 @@ def schematic_pads(path):
 
 
 def board_pads():
-    b = pcbnew.LoadBoard(os.path.join(ROOT, "commander_mainboard.kicad_pcb"))
+    b = pcbnew.LoadBoard(os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb"))
     out = {}
     for fp in b.GetFootprints():
         for p in fp.Pads():
@@ -89,6 +89,10 @@ def main():
         total += n
     else:
         print("model vs schematic  : skipped (no netlist file given)")
+
+    if "U1" not in d.comps:                 # a variant without the codec core
+        print("CONSISTENT" if total == 0 else f"INCONSISTENT ({total})")
+        raise SystemExit(0 if total == 0 else 1)
 
     # RK3566 footprint vs Radxa pad drawing
     ref = json.load(open(os.path.join(ROOT, "src", "reference", "radxa_zero3e_placement.json")))

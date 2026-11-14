@@ -20,7 +20,7 @@ qty,value,footprint,description,populate,origin,references
 2,22pF,C_0402_1005Metric,,,Radxa ZERO 3E V1.2,C347 C349
 1,4.7nF_2kV,C_1808_4520Metric,,,Commander,C400
 2,2.2uF,C_0402_1005Metric,,,Commander,C401 C403
-60,100nF,C_0402_1005Metric,,,Commander,C402 C404 C406 C502 C517 C601 C602 C603 C604 C608 C609 C610 C611 C613 C614 C615 C616 C617 C618 C619 C620 C641 C642 C645 C647 C651 C652 C655 C657 C661 C662 C665 C667 C671 C672 C675 C677 C705 C706 C707 C708 C709 C710 C711 C755 C757 C765 C767 C775 C777 C785 C787 C795 C797 C801 C802 C806 C807 C811 C815
+68,100nF,C_0402_1005Metric,,,Commander,C402 C404 C406 C502 C517 C601 C602 C603 C604 C608 C609 C610 C611 C613 C614 C615 C616 C617 C618 C619 C620 C641 C642 C645 C647 C651 C652 C655 C657 C661 C662 C665 C667 C671 C672 C675 C677 C705 C706 C707 C708 C709 C710 C711 C755 C757 C765 C767 C775 C777 C785 C787 C795 C797 C801 C802 C806 C807 C811 C815 C1013 C1015 C1023 C1025 C1033 C1035 C1043 C1045
 5,1uF,C_0402_1005Metric,,,Commander,C405 C607 C703 C704 C803
 1,100nF_100V,C_0805_2012Metric,,,Commander,C501
 2,1nF,C_0402_1005Metric,,,Commander,C503 C510
@@ -30,13 +30,14 @@ qty,value,footprint,description,populate,origin,references
 1,1uF_25V,C_0402_1005Metric,,,Commander,C508
 1,100pF,C_0402_1005Metric,,,Commander,C509
 3,47uF_10V,C_1206_3216Metric,,,Commander,C511 C512 C513
-1,220uF_6.3V_POLY,CP_EIA-7343-31_Kemet-D,,,Commander,C514
+1,220uF_6.3V_POLY,CP_EIA-7343-20_Kemet-V,,,Commander,C514
 4,22uF,C_0805_2012Metric,,,Commander,C515 C623 C625 C814
 1,10nF_100V,C_0805_2012Metric,,,Commander,C516
 1,2.2nF_2kV_Y,C_1808_4520Metric,,,Commander,C518
 2,12pF,C_0402_1005Metric,,,Commander,C605 C606
 3,4.7uF,C_0603_1608Metric,,,Commander,C612 C712 C813
-5,10uF,C_0603_1608Metric,,,Commander,C621 C622 C624 C713 C812
+9,10uF,C_0603_1608Metric,,,Commander,C621 C622 C624 C713 C812 C1014 C1024 C1034 C1044
+16,330nF,C_0402_1005Metric,,,Commander,C643 C644 C653 C654 C663 C664 C673 C674 C1011 C1012 C1021 C1022 C1031 C1032 C1041 C1042
 9,47uF,C_1206_3216Metric,,,Commander,C646 C656 C666 C676 C756 C766 C776 C786 C796
 2,18pF,C_0402_1005Metric,,,Commander,C701 C702
 2,220pF,C_0402_1005Metric,,,Commander,C804 C805
@@ -57,10 +58,9 @@ qty,value,footprint,description,populate,origin,references
 1,MICROSD,microSD_HC_Molex_104031-0811,microSD push-push socket,,Radxa ZERO 3E V1.2,J6
 1,HDMI_MICRO_D,HDMI_Micro-D_Molex_46765-2xxx,micro HDMI (type D) receptacle,,Radxa ZERO 3E V1.2,J10
 1,RJ45_8P,RJ45_HR6042S_8P8C_LowProfile,"RJ45 8P8C, no magnetics, low profile (Radxa: HanRun HR6042S-1188N15B-1R)",,Radxa ZERO 3E V1.2,J12
-1,JST_SH4,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST-SH 4-pin 1.0 mm,,Commander,J20
-1,HDR1x4,PinHeader_1x04_P2.54mm_Vertical,pin header 1x4 2.54 mm,,Commander,J21
+7,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)",,Commander,J20 J35 J36 J37 J38 J39 J40
+1,JST_SH4_UART,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,"JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",,Commander,J21
 4,USBC24,USB_C_Receptacle_JAE_DX07S024WJ1R350,"USB-C receptacle, full-featured 24-pin (JAE DX07S024WJ1R350)",,Commander,J31 J32 J33 J34
-6,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)",,Commander,J35 J36 J37 J38 J39 J40
 1,0.24uH_2520,L_1008_2520Metric,,,Radxa ZERO 3E V1.2,L2
 1,2.2uH,L_0805_2012Metric,,,Radxa ZERO 3E V1.2,L7
 1,BCMF122P900H,L_CommonModeChoke_Coilank_ACM2012,"common-mode choke, 4-pad 0805",,Radxa ZERO 3E V1.2,L9
@@ -68,8 +68,8 @@ qty,value,footprint,description,populate,origin,references
 4,GB020G00,XFMR_LAN_1CH_6P,single-channel LAN transformer 1:1 with centre taps (Radxa: GB020G00),,Radxa ZERO 3E V1.2,L15 L23 L25 L27
 5,470nH_2520,L_1008_2520Metric,,,Radxa ZERO 3E V1.2,L17 L18 L19 L20 L21
 4,CC2012A-801,L_CommonModeChoke_Coilank_ACM2012,"common-mode choke, 4-pad 0805",,Radxa ZERO 3E V1.2,L22 L24 L26 L28
-1,1uH_5A,L_Bourns_SRP5030T,,,Commander,L30
-2,2.2uH_2A,L_Sunlord_SWPA4030S,,,Commander,L41 L42
+1,1uH_5A,L_Coilcraft_XAL4020-XXX,,,Commander,L30
+2,2.2uH_2520,L_1008_2520Metric,,,Commander,L41 L42
 1,GREEN,LED_0603_1608Metric,LED 0603,,Radxa ZERO 3E V1.2,LED1
 2,2SK3018,SOT-23,N-MOSFET SOT-23,,Radxa ZERO 3E V1.2,Q1 Q2
 1,WPM3407,SOT-23,P-MOSFET SOT-23,,Radxa ZERO 3E V1.2,Q5
@@ -110,11 +110,11 @@ qty,value,footprint,description,populate,origin,references
 1,120K_1%,R_0201_0603Metric,,,Radxa ZERO 3E V1.2,R149
 1,1M,R_0402_1005Metric,,,Commander,R400
 2,22R,R_0402_1005Metric,,,Commander,R401 R505
-10,10K,R_0402_1005Metric,,,Commander,R402 R403 R405 R507 R702 R703 R704 R705 R805 R818
+14,10K,R_0402_1005Metric,,,Commander,R402 R403 R405 R507 R702 R703 R704 R705 R805 R818 R1012 R1022 R1032 R1042
 1,47K,R_0402_1005Metric,,,Commander,R404
 1,24.9K_1%,R_0402_1005Metric,,,Commander,R501
 1,63.4R_1%,R_0402_1005Metric,,,Commander,R502
-1,69.8K_1%,R_0402_1005Metric,,,Commander,R503
+1,75K_1%,R_0402_1005Metric,,,Commander,R503
 2,2K,R_0402_1005Metric,,,Commander,R504 R516
 2,10R,R_0402_1005Metric,,,Commander,R506 R510
 1,0.15R_1%_1W,R_2512_6332Metric,,,Commander,R508
@@ -124,22 +124,24 @@ qty,value,footprint,description,populate,origin,references
 4,10K_1%,R_0402_1005Metric,,,Commander,R514 R812 R814 R816
 1,9.53K_1%,R_0402_1005Metric,,,Commander,R515
 2,12K_1%,R_0402_1005Metric,,,Commander,R601 R701
-2,200K,R_0402_1005Metric,,,Commander,R602 R603
+10,200K,R_0402_1005Metric,,,Commander,R602 R603 R1013 R1014 R1023 R1024 R1033 R1034 R1043 R1044
 1,49.9K_1%,R_0402_1005Metric,,,Commander,R604
 4,100K_1%,R_0402_1005Metric,,,Commander,R605 R611 R612 R613
 1,4.7K,R_0402_1005Metric,,,Commander,R608
-9,0R,R_0402_1005Metric,,,Commander,R609 R641 R642 R651 R652 R661 R662 R671 R672
+1,0R,R_0402_1005Metric,,,Commander,R609
 1,453K_1%,R_0402_1005Metric,,,Commander,R610
-18,56K,R_0402_1005Metric,,,Commander,R645 R646 R655 R656 R665 R666 R675 R676 R755 R756 R765 R766 R775 R776 R785 R786 R795 R796
+12,56K,R_0402_1005Metric,,,Commander,R706 R707 R755 R756 R765 R766 R775 R776 R785 R786 R795 R796
 1,2.2K,R_0402_1005Metric,,,Commander,R801
 1,100K,R_0402_1005Metric,,,Commander,R804
 1,20K_1%,R_0402_1005Metric,,,Commander,R811
 1,27K_1%,R_0402_1005Metric,,,Commander,R813
 1,46.4K_1%,R_0402_1005Metric,,,Commander,R815
 1,22.1K_1%,R_0402_1005Metric,,,Commander,R817
+4,909K_1%,R_0402_1005Metric,,,Commander,R1011 R1021 R1031 R1041
 1,RECOVERY,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Commander,SW1
 1,RESET,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Commander,SW2
-1,POE300F-50L,XFMR_Flyback_EP13_PLACEHOLDER,"PoE flyback transformer 30 W, 5 V out (pin map per final part)",,Commander,T1
+1,POWER,SW_SPST_EVQP7A,"tact switch, side-operated (Panasonic EVQ-P7A, 3.5 x 2.9 x 1.35 mm)",,Commander,SW3
+1,PLN060-ER20A05S,XFMR_Bourns_PLN0xx-ER20,"Bourns PLN060-ER20A05S planar PoE flyback transformer, 5 V out, 1 : 0.25 : 0.5, 40 uH, 200 kHz, 1500 Vrms, 8.0 mm tall",,Commander,T1
 1,RK3566,RK3566_FCCSP-565_15.5x14.4mm,"Rockchip RK3566 SoC, FCCSP-565",,Radxa ZERO 3E V1.2,U1
 1,RTL8211F,QFN-40-1EP_5x5mm_P0.4mm_EP3.8x3.8mm,"Realtek RTL8211F-CG GbE PHY, QFN-40",,Radxa ZERO 3E V1.2,U2
 1,RK860,Anpec_WLCSP-20_1.76x2.03mm_Layout4x5_P0.4mm,"Rockchip RK860-0 buck (VDD_CPU), WLCSP-20",,Radxa ZERO 3E V1.2,U3
@@ -150,7 +152,7 @@ qty,value,footprint,description,populate,origin,references
 1,EMMC153,LFBGA-153_11.5x13mm_Layout14x14_P0.5mm,"eMMC 5.1 153-ball, 16 GB",,Commander,U20
 1,AT24C02,SOT-23-5,"I2C EEPROM 2 kbit (AT24C02 / AT24CS02), SOT-23-5",,Commander,U21
 1,TPS23754,HTSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP3.4x6.5mm,"TI TPS23754 PoE PD + DC/DC controller, HTSSOP-20",,Commander,U30
-1,LTV-817S,SMDIP-4_W9.53mm,"optocoupler, 4-pin",,Commander,U31
+1,TLP291,SOP-4_4.4x2.6mm_P1.27mm,"optocoupler, 4-pin mini-flat SOP, 2.1 mm tall, 5 mm creepage (TLP291 / EL3H7 / LTV-217)",,Commander,U31
 1,TL431,SOT-23,"TL431 shunt reference, SOT-23 (DBZ pinout)",,Commander,U32
 1,USB5744,QFN-56-1EP_7x7mm_P0.4mm_EP5.6x5.6mm,"Microchip USB5744 4-port USB 3.2 Gen 1 hub, VQFN-56",,Commander,U40
 2,TLV62569,SOT-23-5,"synchronous buck 2 A, SOT-23-5",,Commander,U41 U42
@@ -159,15 +161,15 @@ qty,value,footprint,description,populate,origin,references
 1,FUSB302B,WQFN-14-1EP_2.5x2.5mm_P0.5mm_EP1.45x1.45mm,"onsemi FUSB302B USB-C port controller (or ET7301B), WQFN-14",,Commander,U80
 1,TPS2121,Texas_VQFN-HR-12_2x2.5mm_P0.5mm,"TI TPS2121 power mux 2.8-22 V 4.5 A, fast switch-over, VQFN-HR-12",,Commander,U81
 10,AP22804AW5,SOT-23-5,USB power switch with fault flag,,Commander,U82 U643 U653 U663 U673 U753 U763 U773 U783 U793
-4,TPD4E05U06,USON-10_2.5x1.0mm_P0.5mm,"TI TPD4E05U06 4-ch ESD, flow-through",,Commander,U641 U651 U661 U671
+8,TPD4E05U06,USON-10_2.5x1.0mm_P0.5mm,"TI TPD4E05U06 4-ch ESD, flow-through",,Commander,U641 U651 U661 U671 U1012 U1022 U1032 U1042
+4,HD3SS3220,Texas_RNH0030A_WQFN-30-1EP_2.5x4.5mm_P0.4mm_EP1.2x3.2mm,"TI HD3SS3220 USB Type-C port controller with SuperSpeed 2:1 mux, VQFN-30 (RNH)",,Commander,U1011 U1021 U1031 U1041
 1,24MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Radxa ZERO 3E V1.2,Y1
 1,25MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Radxa ZERO 3E V1.2,Y2
 1,32.768kHz,Crystal_SMD_3215-2Pin_3.2x1.5mm,"32.768 kHz crystal, 3215",,Radxa ZERO 3E V1.2,Y6
 1,25MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Commander,Y40
 1,24MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Commander,Y50
 9,DNP,C_0201_0603Metric,,DNP,Radxa ZERO 3E V1.2,C48 C49 C50 C69 C70 C96 C121 C159 C221
-8,DNP,C_0402_1005Metric,,DNP,Commander,C643 C644 C653 C654 C663 C664 C673 C674
 8,DNP,D_0402_1005Metric,"ESD diode, bidirectional, 0402",DNP,Radxa ZERO 3E V1.2,D9 D10 D11 D12 D20 D21 D22 D23
 2,DNP,R_0402_1005Metric,,DNP,Radxa ZERO 3E V1.2,R26 R101
 23,DNP,R_0201_0603Metric,,DNP,Radxa ZERO 3E V1.2,R30 R34 R51 R61 R62 R63 R64 R68 R73 R75 R76 R79 R81 R90 R98 R100 R102 R106 R108 R109 R112 R113 R190
-14,DNP,R_0402_1005Metric,,DNP,Commander,R606 R607 R643 R644 R653 R654 R663 R664 R673 R674 R802 R803 R806 R807
+6,DNP,R_0402_1005Metric,,DNP,Commander,R606 R607 R802 R803 R806 R807

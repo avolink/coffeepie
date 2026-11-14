@@ -9,36 +9,56 @@ Bay numbering: bay 1 is the one nearest the codec column, bay 9 the far end.
   bays 5-9 : USB 2.0 from USB2517 downstream ports 1-5
 """
 import os
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "src", "netlist")
+sys.path.insert(0, HERE)
+import cpmodel          # noqa: E402
+
+OUT = cpmodel.NETDIR
+STRIP = cpmodel.VARIANT == "strip"
 
 
 def ss_bay(k):
     """SuperSpeed bay k (1..4) on USB5744 downstream port k."""
     b = 630 + k * 10          # reference block: 64x, 65x, 66x, 67x
+    q = 1000 + k * 10         # second block for the Type-C controller / mux: 101x .. 104x
     return f"""
 # ---- bay {k}: USB 3.2 Gen 1 (USB5744 port {k}) ----
 J3{k} USBC24 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
 P J3{k} A5=CC1_P{k} B5=CC2_P{k} A6=USB_P{k}_DP B6=USB_P{k}_DP A7=USB_P{k}_DM B7=USB_P{k}_DM
 P J3{k} A2=SSTX1P_P{k} A3=SSTX1N_P{k} B11=SSRX1P_P{k} B10=SSRX1N_P{k} B2=SSTX2P_P{k} B3=SSTX2N_P{k} A11=SSRX2P_P{k} A10=SSRX2N_P{k}
 NC J3{k} A8 B8
-# SuperSpeed lane select by BOM: Framework cards only ever seat one way, so no mux is fitted.
-# Default stuffing = lane 1 (A2/A3, B11/B10). If the chassis seats the cards flipped, move the
-# four parts to the DNP positions (lane 2).
-C{b+1} 100nF HUB3_TXP{k} SSTX1P_P{k}
-C{b+2} 100nF HUB3_TXN{k} SSTX1N_P{k}
-C{b+3} DNP HUB3_TXP{k} SSTX2P_P{k}
-C{b+4} DNP HUB3_TXN{k} SSTX2N_P{k}
-R{b+1} 0R HUB3_RXP{k} SSRX1P_P{k}
-R{b+2} 0R HUB3_RXN{k} SSRX1N_P{k}
-R{b+3} DNP HUB3_RXP{k} SSRX2P_P{k}
-R{b+4} DNP HUB3_RXN{k} SSRX2N_P{k}
+# Type-C port controller with SuperSpeed 2:1 mux (TI HD3SS3220), wired as in Microchip's USB5744 figure
+# "Downstream Port Type-C USB Connections": the controller reads the CC pins, advertises a source
+# (PORT high = DFP, default USB current) and switches the hub's single SuperSpeed lane to whichever
+# side of the receptacle the plug uses. GPIO mode (ADDR open): no I2C, no software.
+U{q+1} HD3SS3220 2=CC1_P{k} 1=CC2_P{k} 6=HUB3_TXCP{k} 7=HUB3_TXCN{k} 9=HUB3_RXP{k} 10=HUB3_RXN{k}
+P U{q+1} 17=SSTX1P_P{k} 16=SSTX1N_P{k} 15=SSRX1CP_P{k} 14=SSRX1CN_P{k} 21=SSTX2P_P{k} 20=SSTX2N_P{k} 19=SSRX2CP_P{k} 18=SSRX2CN_P{k}
+P U{q+1} 30=VCC5V_BUS 8=VCC3V3_HUB 13=GND 28=GND 31=GND 29=GND 4=TYPEC_PORT_P{k} 5=TYPEC_VBUSDET_P{k} 11=TYPEC_DIR_P{k}
+# ID goes low when a device is attached; it also enables the mux (ENn_MUX), so an empty bay is switched off
+P U{q+1} 27=TYPEC_ID_N_P{k} 12=TYPEC_ID_N_P{k}
+NC U{q+1} 3 22 23 24 25 26
+R{q+1} 909K_1% VBUS_P{k} TYPEC_VBUSDET_P{k}
+R{q+2} 10K VCC5V_BUS TYPEC_PORT_P{k}
+R{q+3} 200K VCC3V3_HUB TYPEC_DIR_P{k}
+R{q+4} 200K VCC3V3_HUB TYPEC_ID_N_P{k}
+C{q+3} 100nF VCC5V_BUS GND
+C{q+4} 10uF VCC5V_BUS GND
+C{q+5} 100nF VCC3V3_HUB GND
+# AC coupling: 100 nF on the transmit pair (hub side of the mux), 330 nF on each receive pair at the connector
+C{b+1} 100nF HUB3_TXP{k} HUB3_TXCP{k}
+C{b+2} 100nF HUB3_TXN{k} HUB3_TXCN{k}
+C{b+3} 330nF SSRX1P_P{k} SSRX1CP_P{k}
+C{b+4} 330nF SSRX1N_P{k} SSRX1CN_P{k}
+C{q+1} 330nF SSRX2P_P{k} SSRX2CP_P{k}
+C{q+2} 330nF SSRX2N_P{k} SSRX2CN_P{k}
+# ESD on the connector side, one part per lane
 U{b+1} TPD4E05U06 1=SSTX1P_P{k} 10=SSTX1P_P{k} 2=SSTX1N_P{k} 9=SSTX1N_P{k} 4=SSRX1P_P{k} 7=SSRX1P_P{k} 5=SSRX1N_P{k} 6=SSRX1N_P{k} 3=GND 8=GND
+U{q+2} TPD4E05U06 1=SSTX2P_P{k} 10=SSTX2P_P{k} 2=SSTX2N_P{k} 9=SSTX2N_P{k} 4=SSRX2P_P{k} 7=SSRX2P_P{k} 5=SSRX2N_P{k} 6=SSRX2N_P{k} 3=GND 8=GND
 U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5=VBUS_P{k}
-R{b+5} 56K VBUS_P{k} CC1_P{k}
-R{b+6} 56K VBUS_P{k} CC2_P{k}
-# port power: PRT_CTLx is both the enable output and the over-current input on the USB5744
+# port power: PRT_CTLx is both the enable output and the over-current input on the USB5744.
+# The controller's ID output does not gate VBUS: the bay is powered whenever the hub enables the port.
 U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1=VBUS_P{k} 2=GND 4=HUB3_PRT_CTL{k} 3=HUB3_PRT_CTL{k}
 C{b+5} 100nF VCC5V_BUS GND
 C{b+6} 47uF VBUS_P{k} GND
@@ -106,14 +126,15 @@ C612 4.7uF VCC3V3_HUB GND
 CAPS C613-C620 100nF VCC1V2_HUB GND
 C621 10uF VCC1V2_HUB GND
 # --- hub supplies from the 5 V rail (keeps the hubs off the PMIC's 3.3 V buck) ---
+# inductors: 2.2 uH in 2520 size, 1.2 mm tall, saturation current 2.3 A or more (each hub rail draws well under 1 A)
 U41 BUCK_SOT235:TLV62569 4=VCC_SYS 1=VCC_SYS 2=GND 3=HUB_SW33 5=HUB_FB33
-L41 2.2uH_2A HUB_SW33 VCC3V3_HUB
+L41 2.2uH_2520 HUB_SW33 VCC3V3_HUB
 R610 453K_1% VCC3V3_HUB HUB_FB33
 R611 100K_1% HUB_FB33 GND
 C622 10uF VCC_SYS GND
 C623 22uF VCC3V3_HUB GND
 U42 BUCK_SOT235:TLV62569 4=VCC_SYS 1=VCC_SYS 2=GND 3=HUB_SW12 5=HUB_FB12
-L42 2.2uH_2A HUB_SW12 VCC1V2_HUB
+L42 2.2uH_2520 HUB_SW12 VCC1V2_HUB
 R612 100K_1% VCC1V2_HUB HUB_FB12
 R613 100K_1% HUB_FB12 GND
 C624 10uF VCC_SYS GND
@@ -145,17 +166,31 @@ C703 1uF HUB2_VDD18 GND
 C704 1uF HUB2_VDD18PLL GND
 CAPS C705-C711 100nF VCC3V3_HUB GND
 C712 4.7uF VCC3V3_HUB GND
-# --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub ---
+# USB2517 port 6 (USB_AUX) goes to the front battery port J40, see 33_battery_port.net
+"""
+
+KEYBOARD = """# --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub.
+#     Standard USB-C receptacle (USB 2.0) on the inner edge of the column, facing the keyboard.
+#     The board is the host: Rp on both CC pins, 5 V through a resettable fuse. ---
 P U1 Y2=USB2_HOST3_DP Y1=USB2_HOST3_DM
-J20 JST_SH4 1=VBUS_KB 2=USB2_HOST3_DM 3=USB2_HOST3_DP 4=GND
+J20 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_KB A9=VBUS_KB B4=VBUS_KB B9=VBUS_KB
+P J20 A5=CC1_KB B5=CC2_KB A6=USB2_HOST3_DP B6=USB2_HOST3_DP A7=USB2_HOST3_DM B7=USB2_HOST3_DM
+NC J20 A8 B8
+R706 56K VBUS_KB CC1_KB
+R707 56K VBUS_KB CC2_KB
 F1 PTC:500mA VCC5V_BUS VBUS_KB
 C713 10uF VBUS_KB GND
 U51 USBLC6-2SC6 1=USB2_HOST3_DP 6=USB2_HOST3_DP 3=USB2_HOST3_DM 4=USB2_HOST3_DM 2=GND 5=VBUS_KB
-# USB2517 port 6 (USB_AUX) goes to the front battery port J40, see 33_battery_port.net
 """
+if STRIP:
+    # test board: no SoC, so no keyboard port; the upstream AC coupling already sits on the ZERO 3E
+    KEYBOARD = ""
+    USB3 = USB3.replace("C601 100nF USB3_HOST1_SSTXP HUB3_UP_RXP", "C601 0R USB3_HOST1_SSTXP HUB3_UP_RXP")
+    USB3 = USB3.replace("C602 100nF USB3_HOST1_SSTXN HUB3_UP_RXN", "C602 0R USB3_HOST1_SSTXN HUB3_UP_RXN")
+    assert USB3.count(" 0R USB3_HOST1_SSTX") == 2
 
 with open(os.path.join(OUT, "31_usb3_hub.net"), "w", encoding="utf-8", newline="\n") as f:
     f.write(USB3 + "".join(ss_bay(k) for k in range(1, 5)) + "\n")
 with open(os.path.join(OUT, "32_usb2_hub.net"), "w", encoding="utf-8", newline="\n") as f:
-    f.write(USB2 + "".join(hs_bay(k) for k in range(5, 10)) + "\n")
+    f.write(USB2 + KEYBOARD + "".join(hs_bay(k) for k in range(5, 10)) + "\n")
 print("wrote 31_usb3_hub.net, 32_usb2_hub.net")

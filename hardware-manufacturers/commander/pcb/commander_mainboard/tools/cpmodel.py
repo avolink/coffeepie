@@ -23,8 +23,28 @@ import re
 from collections import OrderedDict, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.normpath(os.path.join(HERE, ".."))
+# CP_ROOT selects the project directory the tools work on (default: the mainboard these tools live in).
+ROOT = os.path.normpath(os.environ.get("CP_ROOT") or os.path.join(HERE, ".."))
+PRJ = os.path.basename(ROOT)                    # project name = directory name = KiCad file stem
+VARIANT = ("strip" if PRJ.endswith("strip_test") else "kbmcu" if PRJ.endswith("keyboard_mcu")
+           else "kbd" if PRJ.endswith("commander_keyboard")
+           else "hat" if PRJ.endswith("poe_hat") else "main")
+REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0"}.get(VARIANT, "revA1")
 NETDIR = os.path.join(ROOT, "src", "netlist")
+MAIN_NETDIR = os.path.normpath(os.path.join(HERE, "..", "src", "netlist"))
+
+
+def net_files(netdir=NETDIR):
+    """Netlist files of the project, in sheet order.  A variant lists in src/netlist/shared.txt the
+    files it takes unchanged from the mainboard, so there is one source for the shared circuitry."""
+    files = glob.glob(os.path.join(netdir, "*.net"))
+    shared = os.path.join(netdir, "shared.txt")
+    if os.path.exists(shared):
+        for line in open(shared, encoding="utf-8"):
+            name = line.split("#", 1)[0].strip()
+            if name:
+                files.append(os.path.join(MAIN_NETDIR, name))
+    return sorted(files, key=os.path.basename)
 
 # --------------------------------------------------------------------------
 # footprints
@@ -40,6 +60,9 @@ FP_L0402 = "Inductor_SMD:L_0402_1005Metric"
 def footprint_for_two_pin(kind, value):
     """Package choice for R / C / L / FB by value (first-pass, cost-oriented: 0402 wherever possible)."""
     v = value.upper()
+    for size, lib in (("_0603", "0603_1608Metric"), ("_0805", "0805_2012Metric"), ("_1206", "1206_3216Metric")):
+        if v.endswith(size) and kind in ("R", "C"):         # an explicit size in the value wins (the keyboard is 0805 / 0603)
+            return ("Resistor_SMD:R_" if kind == "R" else "Capacitor_SMD:C_") + lib
     if kind == "R":
         if "1W" in v:
             return "Resistor_SMD:R_2512_6332Metric"
@@ -56,7 +79,7 @@ def footprint_for_two_pin(kind, value):
         if "_ALU" in v:
             return "Capacitor_SMD:CP_Elec_6.3x7.7"
         if "_POLY" in v:
-            return "Capacitor_Tantalum_SMD:CP_EIA-7343-31_Kemet-D"
+            return "Capacitor_Tantalum_SMD:CP_EIA-7343-20_Kemet-V"      # 2.0 mm tall (the -31 case is 3.1 mm)
         if "2KV" in v:
             return "Capacitor_SMD:C_1808_4520Metric"
         if "100V" in v:
@@ -72,7 +95,7 @@ def footprint_for_two_pin(kind, value):
         if "2520" in v:
             return "Inductor_SMD:L_1008_2520Metric"
         if "5A" in v:
-            return "Inductor_SMD:L_Bourns_SRP5030T"
+            return "Inductor_SMD:L_Coilcraft_XAL4020-XXX"               # 4 x 4 x 2.1 mm (the SRP5030T is 3.0 mm tall)
         if "2A" in v:
             return "Inductor_SMD:L_Sunlord_SWPA4030S"
         return "Inductor_SMD:L_0805_2012Metric"
@@ -153,6 +176,11 @@ PARTS = {
         "63:RBIAS 64:VDD33PLL 65:VSS(EP)")),
     "TPS23754": dict(fp="Package_SO:HTSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP3.4x6.5mm", desc="TI TPS23754 PoE PD + DC/DC controller, HTSSOP-20", pins=named(
         "1:CTL 2:VB 3:CS 4:COM 5:GATE 6:VC 7:GAT2 8:ARTN 9:RTN 10:VSS 11:VDD1 12:VDD 13:DEN 14:PPD 15:CLS 16:DT 17:APD 18:BLNK 19:FRS 20:T2P 21:VSS(EP)")),
+    "HD3SS3220": dict(fp="Package_DFN_QFN:Texas_RNH0030A_WQFN-30-1EP_2.5x4.5mm_P0.4mm_EP1.2x3.2mm",
+                      desc="TI HD3SS3220 USB Type-C port controller with SuperSpeed 2:1 mux, VQFN-30 (RNH)", pins=named(
+        "2:CC1 1:CC2 4:PORT 3:CURRENT_MODE 22:ADDR 29:ENn_CC 12:ENn_MUX 5:VBUS_DET 11:DIR 27:ID 23:INT_N/OUT3 24:VCONN_FAULT_N "
+        "25:SDA/OUT1 26:SCL/OUT2 6:TXp 7:TXn 9:RXp 10:RXn 17:TX1p 16:TX1n 15:RX1p 14:RX1n 21:TX2p 20:TX2n 19:RX2p 18:RX2n "
+        "30:VDD5 8:VCC33 13:GND 28:GND 31:EPAD")),
     "FUSB302B": dict(fp="Package_DFN_QFN:WQFN-14-1EP_2.5x2.5mm_P0.5mm_EP1.45x1.45mm", desc="onsemi FUSB302B USB-C port controller (or ET7301B), WQFN-14", pins=named(
         "1:CC2 2:VBUS 3:VDD 4:VDD 5:INT_N 6:SCL 7:SDA 8:GND 9:GND 10:CC1 11:CC1 12:VCONN 13:VCONN 14:CC2 15:EPAD")),
     "TPS2121": dict(fp="Package_DFN_QFN:Texas_VQFN-HR-12_2x2.5mm_P0.5mm", desc="TI TPS2121 power mux 2.8-22 V 4.5 A, fast switch-over, VQFN-HR-12", pins=named(
@@ -160,10 +188,12 @@ PARTS = {
     "PWRSW": dict(fp="Package_TO_SOT_SMD:SOT-23-5", desc="USB power switch with fault flag", pins=named("5:IN 4:EN 3:FLG 2:GND 1:OUT")),
     "BUCK_SOT235": dict(fp="Package_TO_SOT_SMD:SOT-23-5", desc="synchronous buck 2 A, SOT-23-5", pins=named("4:VIN 1:EN 5:FB 2:GND 3:SW")),
     "AT24C02": dict(fp="Package_TO_SOT_SMD:SOT-23-5", desc="I2C EEPROM 2 kbit (AT24C02 / AT24CS02), SOT-23-5", pins=named("1:SCL 2:GND 3:SDA 4:VCC 5:WP")),
-    "OPTO": dict(fp="Package_DIP:SMDIP-4_W9.53mm", desc="optocoupler, 4-pin", pins=named("1:A 2:K 4:C 3:E")),
+    "OPTO": dict(fp="Package_SO:SOP-4_4.4x2.6mm_P1.27mm", desc="optocoupler, 4-pin mini-flat SOP, 2.1 mm tall, 5 mm creepage (TLP291 / EL3H7 / LTV-217)",
+                 pins=named("1:A 2:K 4:C 3:E")),
     "TL431": dict(fp="Package_TO_SOT_SMD:SOT-23", desc="TL431 shunt reference, SOT-23 (DBZ pinout)", pins=named("1:K 2:REF 3:A")),
-    "XFMR_FLYBACK": dict(fp="commander:XFMR_Flyback_EP13_PLACEHOLDER", desc="PoE flyback transformer 30 W, 5 V out (pin map per final part)",
-                         pins=named("PA:PRI_A PB:PRI_B XA:AUX_A XB:AUX_B SA:SEC_A SB:SEC_B")),
+    "XFMR_FLYBACK": dict(fp="commander:XFMR_Bourns_PLN0xx-ER20",
+                         desc="Bourns PLN060-ER20A05S planar PoE flyback transformer, 5 V out, 1 : 0.25 : 0.5, 40 uH, 200 kHz, 1500 Vrms, 8.0 mm tall",
+                         pins=named("2:PRI+ 3:PRI_SW 4:AUX 1:AUX_RTN 6:SEC 5:SEC_RTN")),
     "XFMR6": dict(fp="commander:XFMR_LAN_1CH_6P", desc="single-channel LAN transformer 1:1 with centre taps (Radxa: GB020G00)",
                   pins=named("1:TD+ 6:TCT 2:TD- 5:MX+ 3:MCT 4:MX-")),
     "CMC": dict(fp="Inductor_SMD:L_CommonModeChoke_Coilank_ACM2012", desc="common-mode choke, 4-pad 0805",
@@ -174,6 +204,32 @@ PARTS = {
     "NMOS_PWR": dict(fp="Package_SO:Vishay_PowerPAK_1212-8_Single", desc="150 V N-MOSFET, PowerPAK 1212-8",
                      padmap={"S": ["1", "2", "3"], "G": ["4"], "D": ["5"]}, pins=named("G:G D:D S:S")),
     "JST_SH4": dict(fp="Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal", desc="JST-SH 4-pin 1.0 mm", pins=named("1:VBUS 2:D- 3:D+ 4:GND")),
+    "ATMEGA32U4": dict(fp="Package_QFP:TQFP-44_10x10mm_P0.8mm", desc="Microchip ATmega32U4-AU, TQFP-44 (the microcontroller of the Arduino Micro)", pins=named(
+        "14:VCC 34:VCC 2:UVCC 7:VBUS 24:AVCC 44:AVCC 42:AREF 6:UCAP 3:D- 4:D+ 13:RESET_N 33:HWB/PE2 17:XTAL1 16:XTAL2 "
+        "8:PB0 9:PB1 10:PB2 11:PB3 28:PB4 29:PB5 30:PB6 12:PB7 31:PC6 32:PC7 18:PD0 19:PD1 20:PD2 21:PD3 25:PD4 22:PD5 26:PD6 27:PD7 "
+        "1:PE6 41:PF0 40:PF1 39:PF4 38:PF5 37:PF6 36:PF7 5:UGND 15:GND 23:GND 35:GND 43:GND")),
+    "ISP2x3": dict(fp="Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical", desc="AVR ISP header 2x3, 2.54 mm",
+                   pins=named("1:MISO 2:VCC 3:SCK 4:MOSI 5:RESET 6:GND")),
+    # --- the keyboard (project commander_keyboard) ---
+    "ATMEGA32U4_MU": dict(fp="Package_DFN_QFN:QFN-44-1EP_7x7mm_P0.5mm_EP5.2x5.2mm", desc="Microchip ATmega32U4-MU, QFN-44 7 x 7 mm (the microcontroller of the Arduino Micro)", pins=named(
+        "14:VCC 34:VCC 2:UVCC 7:VBUS 24:AVCC 44:AVCC 42:AREF 6:UCAP 3:D- 4:D+ 13:RESET_N 33:HWB/PE2 17:XTAL1 16:XTAL2 "
+        "8:PB0 9:PB1 10:PB2 11:PB3 28:PB4 29:PB5 30:PB6 12:PB7 31:PC6 32:PC7 18:PD0 19:PD1 20:PD2 21:PD3 25:PD4 22:PD5 26:PD6 27:PD7 "
+        "1:PE6 41:PF0 40:PF1 39:PF4 38:PF5 37:PF6 36:PF7 5:UGND 15:GND 23:GND 35:GND 43:GND 45:EP")),
+    "ISP2x3_PADS": dict(fp="commander:ISP_2x3_P2.54mm_Pads", desc="AVR ISP, six bare pads on the 2 x 3, 2.54 mm grid (for a pogo-pin adapter)",
+                       pins=named("1:MISO 2:VCC 3:SCK 4:MOSI 5:RESET 6:GND")),
+    # footprint taken over from the Altium design; pin roles are inferred from the circuit around the switch
+    "KEYSW_OPT": dict(fp="commander:KeySwitch_Keychron_LP_Optical", desc="Keychron low-profile optical key switch",
+                      pins=named("1:PT_E 2:PT_C 3:LED_A 4:G1 5:G2 6:LED_K")),
+    "NPN_BEC": dict(fp="Package_TO_SOT_SMD:SOT-23", desc="NPN transistor SOT-23", padmap={"B": ["1"], "E": ["2"], "C": ["3"]}, pins=named("B:B C:C E:E")),
+    "JUMPER2": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical", desc="2-pin header / jumper, 2.54 mm", pins=named("1:1 2:2")),
+    "HDR1x4G": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:P1 2:P2 3:P3 4:P4")),
+    "HDR1x8G": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical", desc="pin header 1x8 2.54 mm",
+                    pins=named("1:P1 2:P2 3:P3 4:P4 5:P5 6:P6 7:P7 8:P8")),
+    "HDR2x20": dict(fp="Connector_PinHeader_2.54mm:PinHeader_2x20_P2.54mm_Vertical", desc="pin header 2x20 2.54 mm (40-pin GPIO, ribbon cable or stacking socket)",
+                    pins=named("1:3V3 2:5V 3:P3 4:5V 5:P5 6:GND 7:P7 8:P8 9:GND 10:P10 11:P11 12:P12 13:P13 14:GND 15:P15 16:P16 17:3V3 18:P18 19:P19 20:GND "
+                               "21:P21 22:P22 23:P23 24:P24 25:GND 26:P26 27:P27 28:P28 29:P29 30:GND 31:P31 32:P32 33:P33 34:GND 35:P35 36:P36 37:P37 38:P38 39:GND 40:P40")),
+    "JST_SH4_UART": dict(fp="Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal", desc="JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",
+                         pins=named("1:GND 2:TX 3:RX 4:3V3")),
     "HDR1x4": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:GND 2:TX 3:RX 4:3V3")),
     # --- two-terminal parts with an explicit part name ---
     "ESD": dict(fp="Diode_SMD:D_0402_1005Metric", two="tvs", desc="ESD diode, bidirectional, 0402"),
@@ -185,6 +241,7 @@ PARTS = {
     "LED": dict(fp="LED_SMD:LED_0603_1608Metric", two="led", desc="LED 0603", padmap={"A": ["2"], "K": ["1"]}),
     "PTC": dict(fp="Fuse:Fuse_1206_3216Metric", two="r", desc="resettable fuse"),
     "TACT": dict(fp="Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2", two="sw", desc="tact switch"),
+    "TACT_SIDE": dict(fp="Button_Switch_SMD:SW_SPST_EVQP7A", two="sw", desc="tact switch, side-operated (Panasonic EVQ-P7A, 3.5 x 2.9 x 1.35 mm)"),
     "XTAL2": dict(fp="Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm", two="xtal", desc="32.768 kHz crystal, 3215"),
 }
 # small-signal Schottky / service-port parts that are not SMA
@@ -253,7 +310,7 @@ def _two_kind(ref):
 def load(netdir=NETDIR):
     d = Design()
     sheet = None
-    for path in sorted(glob.glob(os.path.join(netdir, "*.net"))):
+    for path in net_files(netdir):
         fname = os.path.basename(path)
         with open(path, encoding="utf-8") as f:
             for ln, raw in enumerate(f, 1):

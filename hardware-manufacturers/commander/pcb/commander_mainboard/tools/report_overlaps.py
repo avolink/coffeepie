@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cpmodel      # noqa: E402
 
 AREA = {"ethernet": "ethernet", "hdmi": "hdmi", "storage": "storage", "poe": "poe",
-        "usb3_hub": "usb hubs / bays", "usb2_hub": "usb hubs / bays", "battery": "battery port"}
+        "usb3_hub": "usb hubs / bays", "usb2_hub": "usb hubs / bays", "battery": "battery port", "testif": "test interface"}
 
 
 def bbox(obj):
@@ -41,7 +41,7 @@ def main():
     p = os.path.join(cpmodel.ROOT, "build", "placement.json")
     if os.path.exists(p):
         how = json.load(open(p, encoding="utf-8"))
-    b = pcbnew.LoadBoard(os.path.join(cpmodel.ROOT, "commander_mainboard.kicad_pcb"))
+    b = pcbnew.LoadBoard(os.path.join(cpmodel.ROOT, cpmodel.PRJ + ".kicad_pcb"))
     items = []
     for fp in b.GetFootprints():
         layer = pcbnew.B_CrtYd if fp.IsFlipped() else pcbnew.F_CrtYd

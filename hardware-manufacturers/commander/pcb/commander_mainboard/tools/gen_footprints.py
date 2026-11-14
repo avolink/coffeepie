@@ -78,10 +78,11 @@ def main():
     s = header(name, "Rockchip RK3566 FCCSP-565, 15.5 x 14.4 mm, outer ring 0.40 mm pitch, inner field 0.65 mm pitch; "
                      "ball map checked against the Radxa ZERO 3E V1.2 pad drawing", "BGA FCCSP 565 RK3566")
     s += outline(15.5, 14.4, crt=0.25)
-    for ball in d.comps["U1"].pins:
-        x, y = rk3566_xy(ball)
-        s += smd(ball, "circle", x, y, 0.25, 0.25, mask=0.05)
-    write(name, s)
+    if "U1" in d.comps:                     # variants without the codec core skip this footprint
+        for ball in d.comps["U1"].pins:
+            x, y = rk3566_xy(ball)
+            s += smd(ball, "circle", x, y, 0.25, 0.25, mask=0.05)
+        write(name, s)
 
     # ---- WLCSP-12, 3 columns x 4 rows, 0.5 mm (UM3204H; pitch measured on the Radxa pad drawing) ----
     name = "WLCSP-12_3x4_P0.5mm"
@@ -131,13 +132,21 @@ def main():
     write(name, s)
 
     # ---- PoE flyback transformer placeholder ----
-    name = "XFMR_Flyback_EP13_PLACEHOLDER"
-    s = header(name, "PROVISIONAL placeholder for the PoE flyback transformer (EP13 class, 17.5 x 13.5 mm, up to 12.7 mm tall). "
-                     "Pads are named by function; renumber to the selected part (e.g. Coilcraft POE300F-50L)", "flyback transformer PoE")
-    s += outline(17.5, 13.5, crt=0.5, pin1=False)
-    for num, x, y in (("PA", -6.0, -7.4), ("PB", -2.0, -7.4), ("XA", 2.0, -7.4), ("XB", 6.0, -7.4), ("SA", -4.0, 7.4), ("SB", 4.0, 7.4)):
-        s += smd(num, "rect", x, y, 2.4, 2.0)
-    s += text("F.Fab", "PRI / AUX", 0, -4.5, 1.0) + text("F.Fab", "SEC", 0, 4.5, 1.0)
+    # ---- PoE flyback transformer: Bourns PLN0xx-ER20 planar series (PLN060-ER20A05S) ----
+    # Land pattern from the Bourns data sheet (rev. 01/24, "Recommended Layout"), drawn turned half a turn so the
+    # primary / auxiliary row (pins 1-4) is at the top and the secondary row (pins 5, 6) at the bottom.
+    # Rows: inner edges 19.0 mm apart, outer edges 23.5 mm; small pads 2.85 / 2.60 mm wide, large pads 3.8 mm.
+    name = "XFMR_Bourns_PLN0xx-ER20"
+    s = header(name, "Bourns PLN0xx-ER20 planar flyback transformer, 22.5 x 21.0 mm, 8.0 mm tall (PLN060-ER20A05S: 36-72 V in, "
+                     "5 V out, 200 kHz, 1500 Vrms). Pins 2-3 primary, 1-4 auxiliary, 5-6 secondary. Check against the current data sheet",
+               "planar flyback transformer PoE Bourns PLN")
+    s += rect("F.Fab", -10.5, -10.6, 10.5, 9.4)
+    s += rect("F.CrtYd", -10.75, -12.6, 10.75, 11.4, 0.05)
+    s += rect("F.SilkS", -10.6, -10.0, 10.6, 8.8, 0.12)
+    for num, x, y, w in (("4", -7.475, -11.225, 2.85), ("3", -4.35, -11.225, 2.6), ("2", 4.35, -11.225, 2.6), ("1", 7.475, -11.225, 2.85),
+                         ("5", -8.25, 10.025, 3.8), ("6", 8.25, 10.025, 3.8)):
+        s += smd(num, "rect", x, y, w, 2.25)
+    s += text("F.Fab", "PRI 2-3 / AUX 1-4", 0, -6.0, 1.0) + text("F.Fab", "SEC 5-6", 0, 5.5, 1.0)
     write(name, s)
 
 

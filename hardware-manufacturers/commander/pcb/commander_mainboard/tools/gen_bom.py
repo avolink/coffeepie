@@ -15,13 +15,13 @@ from collections import OrderedDict
 import cpmodel
 
 OUTDIR = os.path.normpath(os.path.join(cpmodel.ROOT, "..", "..", "fabrication", "bom"))
-NEW_SHEETS = ("poe", "usb3_hub", "usb2_hub", "battery")
+NEW_SHEETS = ("poe", "usb3_hub", "usb2_hub", "battery", "testif")
 NEW_REFS = re.compile(r"^(U20|U21|J21|SW\d|TP[2-6]|R40\d|C40\d|D30)$")
 
 
 def board_footprints():
     """ref -> footprint id as placed on the board (plain text scan, no pcbnew needed)."""
-    path = os.path.join(cpmodel.ROOT, "commander_mainboard.kicad_pcb")
+    path = os.path.join(cpmodel.ROOT, cpmodel.PRJ + ".kicad_pcb")
     out = {}
     if not os.path.exists(path):
         return out
@@ -45,11 +45,13 @@ def main():
             continue
         fp = onboard.get(c.ref, c.fp)
         origin = "Commander" if (c.sheet in NEW_SHEETS or NEW_REFS.match(c.ref)) else "Radxa ZERO 3E V1.2"
+        if cpmodel.VARIANT == "kbd":
+            origin = "Arduino Micro circuit (new on this board)" if c.sheet == "kbd_mcu" else "Teclado_V2 (Altium design)"
         value = c.value if not c.dnp else "DNP"
         key = (value, fp, c.desc if c.kind in ("ic", "two") else "", c.dnp, origin)
         groups.setdefault(key, []).append(c.ref)
     os.makedirs(OUTDIR, exist_ok=True)
-    out = os.path.join(OUTDIR, "commander_mainboard_revA1_bom.csv")
+    out = os.path.join(OUTDIR, f"{cpmodel.PRJ}_{cpmodel.REV}_bom.csv")
     rows = []
     for (value, fp, desc, dnp, origin), refs in groups.items():
         refs.sort(key=natural)

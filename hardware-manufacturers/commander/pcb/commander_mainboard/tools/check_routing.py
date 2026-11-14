@@ -10,7 +10,7 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.normpath(os.path.join(HERE, ".."))
+ROOT = os.path.normpath(os.environ.get("CP_ROOT") or os.path.join(HERE, ".."))
 NL = chr(10)
 COPPER = ("Track", "Via", "Zone", "Arc")
 
@@ -21,7 +21,7 @@ def main():
     examples = []
     for v in d.get("violations", []):
         descs = [i.get("description", "") for i in v.get("items", [])]
-        if any(x.startswith(COPPER) for x in descs):
+        if any(x.startswith(COPPER) and "Edge.Cuts" not in x for x in descs):      # an arc of the outline is not copper
             mine[v["type"]] += 1
             if len(examples) < 25:
                 pos = v["items"][0].get("pos", {}) if v.get("items") else {}

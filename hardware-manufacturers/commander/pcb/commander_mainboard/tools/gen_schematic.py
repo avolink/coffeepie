@@ -20,7 +20,7 @@ import uuid
 import cpmodel
 from cpmodel import PARTS, ROOT
 
-PROJECT = "commander_mainboard"
+PROJECT = cpmodel.PRJ
 NS = uuid.UUID("6f1b7b0e-4c0a-4b54-9a3e-c0ffee9ec0de")
 G = 1.27                  # schematic grid
 PITCH = 2 * G             # pin pitch
@@ -46,6 +46,14 @@ SHEET_TITLES = {
     "usb3_hub": "USB5744 hub and SuperSpeed bays 1-4 (NEW)",
     "usb2_hub": "USB2517 hub, Hi-Speed bays 5-9, keyboard link (NEW)",
     "battery": "Front battery port (USB-C) and PoE / battery 5 V selector (NEW)",
+    "testif": "Test-board interface: upstream USB-C to a ZERO 3E, PoE taps, control headers, rails",
+    "hatif": "PoE HAT interface: PoE taps in, 5 V out to the ZERO 3E 40-pin header and to the hub strip",
+    "kbmcu": "Commander keyboard: ATmega32U4 core (the Arduino Micro circuit, bus-powered, USB-C)",
+    "kbd_mcu": "Keyboard: ATmega32U4 core (the Arduino Micro circuit, bus-powered, USB-C)",
+    "kbd_common": "Keyboard: column pull-ups, infra-red LED switch",
+    "kbd_row1": "Keyboard matrix, row 1 (Arduino pin A0)", "kbd_row2": "Keyboard matrix, row 2 (A1)",
+    "kbd_row3": "Keyboard matrix, row 3 (A2)", "kbd_row4": "Keyboard matrix, row 4 (A3)",
+    "kbd_row5": "Keyboard matrix, row 5 (A4)", "kbd_row6": "Keyboard matrix, row 6 (A5)",
 }
 
 
@@ -323,7 +331,7 @@ def sym_inst(lib_id, x, y, unit, ref, value, fp, desc, dnp, pads, path, key, ref
 def sheet_notes(sheet):
     """The '#' comment header lines of the netlist file(s) that define this sheet -> on-sheet notes."""
     out = []
-    for path in sorted(glob.glob(os.path.join(cpmodel.NETDIR, "*.net"))):
+    for path in cpmodel.net_files():
         txt = open(path, encoding="utf-8").read().splitlines()
         if not any(l.strip() == f"SHEET {sheet}" for l in txt):
             continue

@@ -23,13 +23,19 @@ C703 1uF HUB2_VDD18 GND
 C704 1uF HUB2_VDD18PLL GND
 CAPS C705-C711 100nF VCC3V3_HUB GND
 C712 4.7uF VCC3V3_HUB GND
-# --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub ---
+# USB2517 port 6 (USB_AUX) goes to the front battery port J40, see 33_battery_port.net
+# --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub.
+#     Standard USB-C receptacle (USB 2.0) on the inner edge of the column, facing the keyboard.
+#     The board is the host: Rp on both CC pins, 5 V through a resettable fuse. ---
 P U1 Y2=USB2_HOST3_DP Y1=USB2_HOST3_DM
-J20 JST_SH4 1=VBUS_KB 2=USB2_HOST3_DM 3=USB2_HOST3_DP 4=GND
+J20 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_KB A9=VBUS_KB B4=VBUS_KB B9=VBUS_KB
+P J20 A5=CC1_KB B5=CC2_KB A6=USB2_HOST3_DP B6=USB2_HOST3_DP A7=USB2_HOST3_DM B7=USB2_HOST3_DM
+NC J20 A8 B8
+R706 56K VBUS_KB CC1_KB
+R707 56K VBUS_KB CC2_KB
 F1 PTC:500mA VCC5V_BUS VBUS_KB
 C713 10uF VBUS_KB GND
 U51 USBLC6-2SC6 1=USB2_HOST3_DP 6=USB2_HOST3_DP 3=USB2_HOST3_DM 4=USB2_HOST3_DM 2=GND 5=VBUS_KB
-# USB2517 port 6 (USB_AUX) goes to the front battery port J40, see 33_battery_port.net
 
 # ---- bay 5: USB 2.0 (USB2517 port 1) ----
 J35 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P5 A9=VBUS_P5 B4=VBUS_P5 B9=VBUS_P5

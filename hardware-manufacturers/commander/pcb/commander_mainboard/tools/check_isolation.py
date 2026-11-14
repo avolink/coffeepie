@@ -13,9 +13,10 @@ import pcbnew
 from pcbnew import ToMM
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_pcb import CFG, OX, OY     # noqa: E402
+import cpmodel                      # noqa: E402
+from gen_pcb import CFG, OX, OY, STRIP     # noqa: E402
 
-ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+ROOT = cpmodel.ROOT
 NL = chr(10)
 LIMIT = 2.0
 BRIDGES = ("T1", "U31", "C518")      # parts that are allowed to straddle the barrier
@@ -34,12 +35,12 @@ def gap(a, b):
 
 
 def main():
-    b = pcbnew.LoadBoard(os.path.join(ROOT, "commander_mainboard.kicad_pcb"))
+    b = pcbnew.LoadBoard(os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb"))
     pri, selv = [], []
     for fp in b.GetFootprints():
         for p in fp.Pads():
             r = box(p.GetBoundingBox())
-            if (r[1] + r[3]) / 2 < CFG["PRI_Y0"] - 0.2:
+            if not STRIP and (r[1] + r[3]) / 2 < CFG["PRI_Y0"] - 0.2:
                 continue
             n = p.GetNetname()
             if primary(n):
@@ -47,7 +48,10 @@ def main():
             elif n and n != "CHASSIS":
                 selv.append((r, f"pad {fp.GetReference()}.{p.GetNumber()} [{n}]", fp.GetReference()))
     for t in b.GetTracks():
-        selv.append((box(t.GetBoundingBox()), f"{t.GetClass()} [{t.GetNetname()}]", ""))
+        if primary(t.GetNetname()):
+            pri.append((box(t.GetBoundingBox()), f"{t.GetClass()} [{t.GetNetname()}]"))
+        else:
+            selv.append((box(t.GetBoundingBox()), f"{t.GetClass()} [{t.GetNetname()}]", ""))
     worst = []
     for r, name in pri:
         for s, sname, sref in selv:
