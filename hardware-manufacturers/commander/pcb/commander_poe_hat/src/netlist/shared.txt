@@ -1,0 +1,3 @@
+# Netlist files this variant takes UNCHANGED from ../../../commander_mainboard/src/netlist
+# (one source for the PoE converter: a fix made there reaches this board on the next rebuild).
+30_poe.net

@@ -1,0 +1,22 @@
+qty,value,footprint,description,populate,origin,references
+1,1uF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C201
+3,100nF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C203 C204 C206
+2,4.7uF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C205 C210
+2,15pF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C208 C209
+1,PTC:750mA,Fuse_1206_3216Metric,,,Arduino Micro circuit (new on this board),F201
+1,JUMPER2,2P,"2-pin header / jumper, 2.54 mm",,Teclado_V2 (Altium design),J1
+1,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)",,Arduino Micro circuit (new on this board),J201
+1,MMBT2222A,MMBT2222A,NPN transistor SOT-23,,Teclado_V2 (Altium design),Q1
+84,500R_0805,Res 0805,,,Teclado_V2 (Altium design),R1 R3 R5 R7 R9 R11 R13 R15 R17 R19 R21 R23 R25 R27 R29 R31 R33 R35 R37 R39 R41 R43 R45 R47 R49 R51 R53 R55 R57 R59 R61 R63 R65 R67 R69 R71 R73 R75 R77 R79 R81 R83 R85 R87 R89 R91 R93 R95 R97 R99 R101 R103 R105 R107 R109 R111 R113 R115 R117 R119 R121 R123 R125 R127 R129 R131 R133 R135 R137 R139 R141 R143 R145 R147 R149 R151 R153 R155 R157 R159 R161 R163 R165 R167
+84,560R_0805,Res 0805,,,Teclado_V2 (Altium design),R2 R4 R6 R8 R10 R12 R14 R16 R18 R20 R22 R24 R26 R28 R30 R32 R34 R36 R38 R40 R42 R44 R46 R48 R50 R52 R54 R56 R58 R60 R62 R64 R66 R68 R70 R72 R74 R76 R78 R80 R82 R84 R86 R88 R90 R92 R94 R96 R98 R100 R102 R104 R106 R108 R110 R112 R114 R116 R118 R120 R122 R124 R126 R128 R130 R132 R134 R136 R138 R140 R142 R144 R146 R148 R150 R152 R154 R156 R158 R160 R162 R164 R166 R168
+16,10K_0805,Res 0805,,,Teclado_V2 (Altium design),R169 R170 R171 R172 R173 R174 R175 R176 R177 R178 R179 R180 R181 R182 R183 R184
+1,1K_0805,Res 0805,,,Teclado_V2 (Altium design),R185
+2,5.1K_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R201 R202
+2,22R_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R203 R204
+2,10K_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R206 R207
+1,RESET,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Arduino Micro circuit (new on this board),SW201
+84,KEYSW_OPT,Interruptor óptico Keychron de bajo perfil,Keychron low-profile optical key switch,,Teclado_V2 (Altium design),T1 T2 T3 T4 T5 T6 T7 T8 T9 T10 T11 T12 T13 T14 T15 T16 T17 T18 T19 T20 T21 T22 T23 T24 T25 T26 T27 T28 T29 T30 T31 T32 T33 T34 T35 T36 T37 T38 T39 T40 T41 T42 T43 T44 T45 T46 T47 T48 T49 T50 T51 T52 T53 T54 T55 T56 T57 T58 T59 T60 T61 T62 T63 T64 T65 T66 T67 T68 T69 T70 T71 T72 T73 T74 T75 T76 T77 T78 T79 T80 T81 T82 T83 T84
+1,ATmega32U4-MU,QFN-44-1EP_7x7mm_P0.5mm_EP5.2x5.2mm,"Microchip ATmega32U4-MU, QFN-44 7 x 7 mm (the microcontroller of the Arduino Micro)",,Arduino Micro circuit (new on this board),U201
+1,USBLC6-2SC6,SOT-23-6,ST USBLC6-2SC6 USB ESD,,Arduino Micro circuit (new on this board),U202
+1,16MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Arduino Micro circuit (new on this board),Y201
+1,DNP,ISP_2x3_P2.54mm_Pads,"AVR ISP, six bare pads on the 2 x 3, 2.54 mm grid (for a pogo-pin adapter)",DNP,Arduino Micro circuit (new on this board),J202

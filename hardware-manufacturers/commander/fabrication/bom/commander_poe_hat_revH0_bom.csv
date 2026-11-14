@@ -1,0 +1,46 @@
+qty,value,footprint,description,populate,origin,references
+1,100nF_100V,C_0805_2012Metric,,,Commander,C501
+2,100nF,C_0402_1005Metric,,,Commander,C502 C517
+2,1nF,C_0402_1005Metric,,,Commander,C503 C510
+1,22uF_100V_ALU,CP_Elec_6.3x7.7,,,Commander,C504
+2,2.2uF_100V,C_1210_3225Metric,,,Commander,C505 C506
+1,22uF_25V,C_0805_2012Metric,,,Commander,C507
+1,1uF_25V,C_0402_1005Metric,,,Commander,C508
+1,100pF,C_0402_1005Metric,,,Commander,C509
+3,47uF_10V,C_1206_3216Metric,,,Commander,C511 C512 C513
+1,220uF_6.3V_POLY,CP_EIA-7343-20_Kemet-V,,,Commander,C514
+1,22uF,C_0805_2012Metric,,,Commander,C515
+1,10nF_100V,C_0805_2012Metric,,,Commander,C516
+1,2.2nF_2kV_Y,C_1808_4520Metric,,,Commander,C518
+1,22uF,C_0805_2012Metric,,,Radxa ZERO 3E V1.2,C601
+1,100nF,C_0402_1005Metric,,,Radxa ZERO 3E V1.2,C602
+8,SS110,D_SMA,Schottky diode,,Commander,D31 D32 D33 D34 D35 D36 D37 D38
+1,SMAJ58A,D_SMA,"TVS, unidirectional, SMA",,Commander,D39
+1,BAV21W,D_SOD-123,diode,,Commander,D40
+1,PDS1040,D_PowerDI-5,Schottky rectifier 10 A,,Commander,D41
+1,ES1D,D_SOD-123,diode,,Commander,D42
+1,GREEN,LED_0603_1608Metric,LED 0603,,Radxa ZERO 3E V1.2,D60
+1,PTC:3A,Fuse_1206_3216Metric,,,Radxa ZERO 3E V1.2,F60
+1,POE_TAPS,PinHeader_1x04_P2.54mm_Vertical,pin header 1x4 2.54 mm,,Radxa ZERO 3E V1.2,J60
+1,ZERO3E_40PIN,PinHeader_2x20_P2.54mm_Vertical,"pin header 2x20 2.54 mm (40-pin GPIO, ribbon cable or stacking socket)",,Radxa ZERO 3E V1.2,J61
+1,5V_OUT,PinHeader_1x04_P2.54mm_Vertical,pin header 1x4 2.54 mm,,Radxa ZERO 3E V1.2,J62
+1,1uH_5A,L_Coilcraft_XAL4020-XXX,,,Commander,L30
+1,150V_60mR,Vishay_PowerPAK_1212-8_Single,"150 V N-MOSFET, PowerPAK 1212-8",,Commander,Q30
+1,24.9K_1%,R_0402_1005Metric,,,Commander,R501
+1,63.4R_1%,R_0402_1005Metric,,,Commander,R502
+1,75K_1%,R_0402_1005Metric,,,Commander,R503
+2,2K,R_0402_1005Metric,,,Commander,R504 R516
+1,22R,R_0402_1005Metric,,,Commander,R505
+2,10R,R_0402_1005Metric,,,Commander,R506 R510
+1,10K,R_0402_1005Metric,,,Commander,R507
+1,0.15R_1%_1W,R_2512_6332Metric,,,Commander,R508
+2,1K,R_0402_1005Metric,,,Commander,R509 R513
+1,39K_1W,R_2512_6332Metric,,,Commander,R511
+1,499R,R_0402_1005Metric,,,Commander,R512
+1,10K_1%,R_0402_1005Metric,,,Commander,R514
+1,9.53K_1%,R_0402_1005Metric,,,Commander,R515
+1,1K,R_0402_1005Metric,,,Radxa ZERO 3E V1.2,R601
+1,PLN060-ER20A05S,XFMR_Bourns_PLN0xx-ER20,"Bourns PLN060-ER20A05S planar PoE flyback transformer, 5 V out, 1 : 0.25 : 0.5, 40 uH, 200 kHz, 1500 Vrms, 8.0 mm tall",,Commander,T1
+1,TPS23754,HTSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP3.4x6.5mm,"TI TPS23754 PoE PD + DC/DC controller, HTSSOP-20",,Commander,U30
+1,TLP291,SOP-4_4.4x2.6mm_P1.27mm,"optocoupler, 4-pin mini-flat SOP, 2.1 mm tall, 5 mm creepage (TLP291 / EL3H7 / LTV-217)",,Commander,U31
+1,TL431,SOT-23,"TL431 shunt reference, SOT-23 (DBZ pinout)",,Commander,U32

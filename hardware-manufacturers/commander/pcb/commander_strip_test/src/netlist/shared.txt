@@ -1,0 +1,5 @@
+# Netlist files this variant takes UNCHANGED from ../../../commander_mainboard/src/netlist
+# (one source for the circuitry under test). 31_usb3_hub.net and 32_usb2_hub.net are written
+# into this directory by tools/gen_usb_netlists.py, from the same templates as the mainboard's.
+30_poe.net
+33_battery_port.net

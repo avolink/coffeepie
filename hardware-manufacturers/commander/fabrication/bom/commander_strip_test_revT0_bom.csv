@@ -1,0 +1,85 @@
+qty,value,footprint,description,populate,origin,references
+1,100nF_100V,C_0805_2012Metric,,,Commander,C501
+65,100nF,C_0402_1005Metric,,,Commander,C502 C517 C603 C604 C608 C609 C610 C611 C613 C614 C615 C616 C617 C618 C619 C620 C641 C642 C645 C647 C651 C652 C655 C657 C661 C662 C665 C667 C671 C672 C675 C677 C705 C706 C707 C708 C709 C710 C711 C755 C757 C765 C767 C775 C777 C785 C787 C795 C797 C801 C802 C806 C807 C811 C815 C911 C914 C1013 C1015 C1023 C1025 C1033 C1035 C1043 C1045
+2,1nF,C_0402_1005Metric,,,Commander,C503 C510
+1,22uF_100V_ALU,CP_Elec_6.3x7.7,,,Commander,C504
+2,2.2uF_100V,C_1210_3225Metric,,,Commander,C505 C506
+1,22uF_25V,C_0805_2012Metric,,,Commander,C507
+1,1uF_25V,C_0402_1005Metric,,,Commander,C508
+1,100pF,C_0402_1005Metric,,,Commander,C509
+3,47uF_10V,C_1206_3216Metric,,,Commander,C511 C512 C513
+1,220uF_6.3V_POLY,CP_EIA-7343-20_Kemet-V,,,Commander,C514
+5,22uF,C_0805_2012Metric,,,Commander,C515 C623 C625 C814 C913
+1,10nF_100V,C_0805_2012Metric,,,Commander,C516
+1,2.2nF_2kV_Y,C_1808_4520Metric,,,Commander,C518
+2,0R,C_0402_1005Metric,,,Commander,C601 C602
+2,12pF,C_0402_1005Metric,,,Commander,C605 C606
+4,1uF,C_0402_1005Metric,,,Commander,C607 C703 C704 C803
+3,4.7uF,C_0603_1608Metric,,,Commander,C612 C712 C813
+9,10uF,C_0603_1608Metric,,,Commander,C621 C622 C624 C812 C912 C1014 C1024 C1034 C1044
+16,330nF,C_0402_1005Metric,,,Commander,C643 C644 C653 C654 C663 C664 C673 C674 C1011 C1012 C1021 C1022 C1031 C1032 C1041 C1042
+9,47uF,C_1206_3216Metric,,,Commander,C646 C656 C666 C676 C756 C766 C776 C786 C796
+2,18pF,C_0402_1005Metric,,,Commander,C701 C702
+2,220pF,C_0402_1005Metric,,,Commander,C804 C805
+8,SS110,D_SMA,Schottky diode,,Commander,D31 D32 D33 D34 D35 D36 D37 D38
+1,SMAJ58A,D_SMA,"TVS, unidirectional, SMA",,Commander,D39
+1,BAV21W,D_SOD-123,diode,,Commander,D40
+1,PDS1040,D_PowerDI-5,Schottky rectifier 10 A,,Commander,D41
+1,ES1D,D_SOD-123,diode,,Commander,D42
+1,SMF5.0CA,D_SOD-123F,"TVS, bidirectional",,Commander,D80
+1,PTC:2.5A,Fuse_1206_3216Metric,,,Commander,F2
+5,USBC24,USB_C_Receptacle_JAE_DX07S024WJ1R350,"USB-C receptacle, full-featured 24-pin (JAE DX07S024WJ1R350)",,Commander,J31 J32 J33 J34 J50
+7,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)",,Commander,J35 J36 J37 J38 J39 J40 J51
+1,POE_TAPS,PinHeader_1x04_P2.54mm_Vertical,pin header 1x4 2.54 mm,,Commander,J52
+1,CTRL,PinHeader_1x08_P2.54mm_Vertical,pin header 1x8 2.54 mm,,Commander,J53
+1,AUX,PinHeader_1x04_P2.54mm_Vertical,pin header 1x4 2.54 mm,,Commander,J54
+1,1uH_5A,L_Coilcraft_XAL4020-XXX,,,Commander,L30
+2,2.2uH_2520,L_1008_2520Metric,,,Commander,L41 L42
+1,150V_60mR,Vishay_PowerPAK_1212-8_Single,"150 V N-MOSFET, PowerPAK 1212-8",,Commander,Q30
+1,24.9K_1%,R_0402_1005Metric,,,Commander,R501
+1,63.4R_1%,R_0402_1005Metric,,,Commander,R502
+1,75K_1%,R_0402_1005Metric,,,Commander,R503
+2,2K,R_0402_1005Metric,,,Commander,R504 R516
+1,22R,R_0402_1005Metric,,,Commander,R505
+2,10R,R_0402_1005Metric,,,Commander,R506 R510
+11,10K,R_0402_1005Metric,,,Commander,R507 R702 R703 R704 R705 R805 R818 R1012 R1022 R1032 R1042
+1,0.15R_1%_1W,R_2512_6332Metric,,,Commander,R508
+2,1K,R_0402_1005Metric,,,Commander,R509 R513
+1,39K_1W,R_2512_6332Metric,,,Commander,R511
+1,499R,R_0402_1005Metric,,,Commander,R512
+4,10K_1%,R_0402_1005Metric,,,Commander,R514 R812 R814 R816
+1,9.53K_1%,R_0402_1005Metric,,,Commander,R515
+2,12K_1%,R_0402_1005Metric,,,Commander,R601 R701
+10,200K,R_0402_1005Metric,,,Commander,R602 R603 R1013 R1014 R1023 R1024 R1033 R1034 R1043 R1044
+1,49.9K_1%,R_0402_1005Metric,,,Commander,R604
+4,100K_1%,R_0402_1005Metric,,,Commander,R605 R611 R612 R613
+1,4.7K,R_0402_1005Metric,,,Commander,R608
+2,0R,R_0402_1005Metric,,,Commander,R609 R916
+1,453K_1%,R_0402_1005Metric,,,Commander,R610
+10,56K,R_0402_1005Metric,,,Commander,R755 R756 R765 R766 R775 R776 R785 R786 R795 R796
+3,2.2K,R_0402_1005Metric,,,Commander,R801 R917 R918
+1,100K,R_0402_1005Metric,,,Commander,R804
+1,20K_1%,R_0402_1005Metric,,,Commander,R811
+1,27K_1%,R_0402_1005Metric,,,Commander,R813
+1,46.4K_1%,R_0402_1005Metric,,,Commander,R815
+1,22.1K_1%,R_0402_1005Metric,,,Commander,R817
+2,5.1K,R_0402_1005Metric,,,Commander,R911 R912
+2,22K,R_0402_1005Metric,,,Commander,R913 R914
+1,FB120R_3A,L_0805_2012Metric,,,Commander,R915
+4,909K_1%,R_0402_1005Metric,,,Commander,R1011 R1021 R1031 R1041
+1,PLN060-ER20A05S,XFMR_Bourns_PLN0xx-ER20,"Bourns PLN060-ER20A05S planar PoE flyback transformer, 5 V out, 1 : 0.25 : 0.5, 40 uH, 200 kHz, 1500 Vrms, 8.0 mm tall",,Commander,T1
+1,TPS23754,HTSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP3.4x6.5mm,"TI TPS23754 PoE PD + DC/DC controller, HTSSOP-20",,Commander,U30
+1,TLP291,SOP-4_4.4x2.6mm_P1.27mm,"optocoupler, 4-pin mini-flat SOP, 2.1 mm tall, 5 mm creepage (TLP291 / EL3H7 / LTV-217)",,Commander,U31
+1,TL431,SOT-23,"TL431 shunt reference, SOT-23 (DBZ pinout)",,Commander,U32
+1,USB5744,QFN-56-1EP_7x7mm_P0.4mm_EP5.6x5.6mm,"Microchip USB5744 4-port USB 3.2 Gen 1 hub, VQFN-56",,Commander,U40
+2,TLV62569,SOT-23-5,"synchronous buck 2 A, SOT-23-5",,Commander,U41 U42
+1,USB2517,QFN-64-1EP_9x9mm_P0.5mm_EP7.3x7.3mm,"Microchip USB2517 7-port USB 2.0 hub, QFN-64",,Commander,U50
+1,FUSB302B,WQFN-14-1EP_2.5x2.5mm_P0.5mm_EP1.45x1.45mm,"onsemi FUSB302B USB-C port controller (or ET7301B), WQFN-14",,Commander,U80
+1,TPS2121,Texas_VQFN-HR-12_2x2.5mm_P0.5mm,"TI TPS2121 power mux 2.8-22 V 4.5 A, fast switch-over, VQFN-HR-12",,Commander,U81
+10,AP22804AW5,SOT-23-5,USB power switch with fault flag,,Commander,U82 U643 U653 U663 U673 U753 U763 U773 U783 U793
+10,USBLC6-2SC6,SOT-23-6,ST USBLC6-2SC6 USB ESD,,Commander,U83 U642 U652 U662 U672 U752 U762 U772 U782 U792
+8,TPD4E05U06,USON-10_2.5x1.0mm_P0.5mm,"TI TPD4E05U06 4-ch ESD, flow-through",,Commander,U641 U651 U661 U671 U1012 U1022 U1032 U1042
+4,HD3SS3220,Texas_RNH0030A_WQFN-30-1EP_2.5x4.5mm_P0.4mm_EP1.2x3.2mm,"TI HD3SS3220 USB Type-C port controller with SuperSpeed 2:1 mux, VQFN-30 (RNH)",,Commander,U1011 U1021 U1031 U1041
+1,25MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Commander,Y40
+1,24MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Commander,Y50
+6,DNP,R_0402_1005Metric,,DNP,Commander,R606 R607 R802 R803 R806 R807
