@@ -95,7 +95,7 @@
     (property "Sheetfile" "sheets/ethernet.kicad_sch" (at 213.36 147.92 0) (effects (font (size 1.27 1.27)) (justify left top)))
     (instances (project "commander_mainboard" (path "/6f5323c3-fd11-5368-8f15-e0edcac530c2" (page "12"))))
   )
-  (text "Gigabit Ethernet PHY, magnetics, RJ45\n77 parts, A3" (exclude_from_sim no) (at 215.9 132.08 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "d3fae1f1-be64-5d04-8777-fc9ca5c22156"))
+  (text "Gigabit Ethernet PHY, magnetics, RJ45\n66 parts, A3" (exclude_from_sim no) (at 215.9 132.08 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "d3fae1f1-be64-5d04-8777-fc9ca5c22156"))
   (sheet (at 309.88 127) (size 86.36 20.32) (fields_autoplaced yes)
     (stroke (width 0.1524) (type solid)) (fill (color 255 255 220 1.0))
     (uuid "bc804554-f118-5ec1-906f-3a1732e7cfb5")

@@ -16,16 +16,16 @@ re-floorplanned (HDMI left, PoE centre, low-voltage corridor right).
 
 Do not order this board yet. A quote from JLCPCB would succeed and the boards would not work.
 
-**Where it stands.** The scripted router now covers the whole board except two areas that are left out on purpose.
-It has made **1,570 of the 2,354 connections (66.7 %)**; 784 are still open, on 375 of 526 nets
-(`build/open_report.txt` lists them net by net, `build/usb_report.txt` the USB links). In KiCad the open ones are
+**Where it stands.** The scripted router now covers the whole board except the memory bus, which is left out on purpose.
+It has made **1,699 of the 2,335 connections (72.8 %)**; 636 are still open (KiCad's count after the Ethernet head was
+placed for isolation and routed, 2026-11-15; `build/open_report.txt` lists them net by net, `build/usb_report.txt` the USB links). In KiCad the open ones are
 the thin ratsnest lines that remain.
 
 | # | What stands between this file and an order | What it takes |
 |---|---|---|
 | 1 | **The memory bus is not routed, on purpose** (74 connections, RK3566 to LPDDR4). A maze router can join these balls, and did in an experiment (5.2a), but a memory bus joined that way looks finished and does not work | A layout engineer places Rockchip's reference layout for this interface (mirrored: the core is on the bottom face) and tunes the lengths per byte lane. |
-| 2 | **The Ethernet head is not routed, on purpose** (RJ45, the four LAN transformers, the PHY and its parts; about 179 connections, the RGMII lines from the RK3566 among them). The line side of the transformers has to keep 1.5 kV from everything else, and the transplanted placement mixes line-side and PHY-side parts on both faces | Decide where the isolation boundary runs, re-place the head on either side of it, give its PHY side a ground plane; the router's isolation mask (which already guards the PoE primary) can then be extended to it. |
-| 3a | **The PoE primary is not connected** (31 connections, 2026-11-14 build). Its class clearance was 0.30 mm, more than the 0.20 mm between the TPS23754's own pins, so none of them could be left; it is 0.20 mm now (IPC-2221B: 0.13 mm at 57 V). What still blocks it: the row packer puts R511 and D31 0.45 mm in front of the controller's pin rows, and the primary area is too full to keep a band free there (tried: 1.0-1.4 mm, two parts no longer fit) | Place the PoE primary by hand (the TI layout for this chip is the model), or give the primary area more room; then the router connects it. Tried on 2026-11-14 (PoE region only, on copies): a free band round the controller (0.6-1.4 mm) and tighter spacing (0.30-0.40 mm): 20-34 open, and with a band one or two parts no longer fit; the controller's small parts placed beside their own pins (`SATELLITES` in `gen_pcb.py`, now on): 29 open with everything placed. The area (14 x 31.6 mm, nine SMA diodes, a 6.3 mm electrolytic) is the limit: smaller bridge diodes (SOD-123F) or a larger area would help most. |
+| 2 | **The Ethernet head is placed for isolation and mostly routed** (2026-11-15, branch `ram-routing`). You arranged the head by hand (PHY in the middle, chokes under it, transformers above); `tools/head_place.py` keeps that and moves only what broke the 2 mm line / low-voltage gap: the four transformers in one row on the bottom face, line pins towards the jack; the Bob Smith resistors under the jack's pads; ONE 1 nF / 2 kV cap (C60) by the left shield pin - **the netlist now joins BS0..BS3 into one node BS and C65, C59, C16 are gone** (only three cap spots exist 2 mm from everything next to the HDMI tab; one node with one cap is Bob Smith's own topology); C400 / R400 by the same shield pin; the centre-tap caps beside the transformers; the PHY's top row of straps 0.65 mm down, R84 / C114 under the PHY; R22 0201 -> 0402. **The eight unpopulated line-side TVS D9..D23 are removed** from netlist and board: even unfitted, their pads put line and chassis 0.38 mm apart. The ground planes (In1, In4) now cover the head, kept 2 mm off the line side by rule areas. The router (`CP_HEAD=1`, region `head`) keeps the line side inside per-layer areas (`HEAD_LINE_AREA` in `route.py`); the 48 V centre taps run down an In2 corridor (x 9-12) to the bridges. `tools/check_head_isolation.py` measures copper to copper on every layer: **0 pairs under 2 mm**. Model / schematic / board consistent; DRC errors 290 -> 286. Still open in the head: about 45 links, almost all where the PHY's 0.4 mm pin rows meet the 0201 straps and decoupling (supplies VCCIO / VCC3V3 / VDD10, RXD straps, crystal, REG_OUT, RSET), four RJ45-to-transformer lines, three centre taps (TR1/2/3 to their bridges or resistors), one Bob Smith link, five chip-side MDI links; plus the RGMII lines to the RK3566 and the HDMI connector nets that were open before | Finish the rest in KiCad's interactive router (push-and-shove copes with the QFN rows): keep the line-side nets (PHY_MDI*, TR?_48V, BS) under the RJ45 body / in the In2 corridor, at least 2 mm from everything else, and re-run `check_head_isolation.py`. |
+| 3a | **The PoE primary is placed by hand and nearly connected** (2026-11-14, branch `ram-routing`): `POE_HAND` in `gen_pcb.py` fixes all 33 parts - the four bridges in two rows per face under the RJ45, the controller below them with its small parts at their own pins, the switch, sense resistor, bias diode and clamp beside the transformer's primary pins. Routed (PoE region, then only the primary copper grafted onto the board, every other item untouched): 30 open links -> 9. Still open: POE_RTN x3, POE_VB x2, POE_CS, POE_VC, POE_ISNS round the controller's bottom pin row (a few mm each, by hand in KiCad), plus three TRn_48V links between the bridges / Bob Smith resistors and the transformers' centre taps (TR0 is done; see blocker 2). A thinner class for the controller's signal nets was tried and made no difference. History: was 31 open. Its class clearance was 0.30 mm, more than the 0.20 mm between the TPS23754's own pins, so none of them could be left; it is 0.20 mm now (IPC-2221B: 0.13 mm at 57 V). What still blocks it: the row packer puts R511 and D31 0.45 mm in front of the controller's pin rows, and the primary area is too full to keep a band free there (tried: 1.0-1.4 mm, two parts no longer fit) | Place the PoE primary by hand (the TI layout for this chip is the model), or give the primary area more room; then the router connects it. Tried on 2026-11-14 (PoE region only, on copies): a free band round the controller (0.6-1.4 mm) and tighter spacing (0.30-0.40 mm): 20-34 open, and with a band one or two parts no longer fit; the controller's small parts placed beside their own pins (`SATELLITES` in `gen_pcb.py`, now on): 29 open with everything placed. The area (14 x 31.6 mm, nine SMA diodes, a 6.3 mm electrolytic) is the limit: smaller bridge diodes (SOD-123F) or a larger area would help most. |
 | 3 | **About 530 other connections are open** in the areas that are routed: 174 ground pads without a via, the supply balls and capacitors under the RK3566 that the pours did not reach, the mux chips of bays 1-4, and what is listed in `build/routing_report.txt` | Hand routing in KiCad, or first loosening the placement where the report shows a cluster. |
 | 4 | **The eMMC cannot be connected where it is**: it sits on the top face directly over the PMIC, so the vias its inner balls need would land in the PMIC's pads (17 eMMC connections open) | Move it to a place whose other face is free, or build the prototype with the microSD socket only. |
 | 5 | **Everything that is routed is script output, not reviewed by a layout engineer.** Differential pairs run as coupled tracks at the class geometry, but nobody has checked impedance against the real stack-up, and nothing is length-tuned (the differences are in `build/usb_report.txt`). The supply rails of the core are joined by pours placed by a simple rule and by 0.09 mm links between ball vias. The PoE primary is connected, its switching loop is not optimised | A review by someone who lays out boards of this class; a power-integrity look at the core rails; a bench validation of the PoE converter. |
@@ -340,7 +340,8 @@ result of the last run is in `build/routing_report.txt`; `build/open_report.txt`
 | In4.Cu | GND plane | poured |
 | B.Cu | signal + parts | 3,237 mm |
 
-941 vias. KiCad's ratsnest count went from 2,322 (nothing routed) to 784 (2026-11-14 build, with the power button).
+941 vias. KiCad's ratsnest count went from 2,322 (nothing routed) to 784 (2026-11-14 build, with the power button), and to 754 with the
+PoE primary placed by hand.
 
 **The USB links** (what you asked for on 2026-11-13). 57 of the 110 USB nets are complete end to end; 14 pair
 sections run as a coupled trunk (two parallel tracks at the class geometry, 0.11 / 0.13 mm for USB 2.0 and
@@ -392,10 +393,9 @@ along the strip - so its two wires change layer several times and differ in leng
 
 **What is not routed, on purpose**
 - **The memory bus** (class DDR): see 5.2a.
-- **The Ethernet head** (box x > 10.6, y < 8.0 in the board's design coordinates): see blocker 2 in section 0. The HDMI
-  connector beside it is routed.
-- **Planes under the PoE primary and the Ethernet head.** Nothing is poured there, so the isolation barrier is not
-  compromised by a script.
+- **The Ethernet head** is routed since 2026-11-15 (blocker 2), the line side inside its own areas.
+- **Planes under the PoE primary and the Ethernet head's line side.** Nothing is poured there (rule areas 2 mm
+  round the line areas on In1 / In4), so the isolation barrier is not compromised by a script.
 
 **Read this before trusting the routed part**
 - It is maze-router output: electrically connected and checked against the design rules, not hand-optimised.
@@ -436,8 +436,8 @@ cross. The head of the column is now laid out in three lanes (decision of 2026-1
   do that before trusting it at full load.
 - The isolation barrier is drawn on the board and measured by `tools/check_isolation.py`, but not yet
   enforced by KiCad rule areas — add them before hand-routing the head of the column.
-- The Ethernet head itself (RJ45, magnetics, Bob-Smith network, PHY) keeps Radxa's arrangement, where the
-  PHY sits on top above line-side parts on the bottom. With PoE that stack-through deserves its own review.
+- The Ethernet head (RJ45, magnetics, Bob Smith network, PHY) was re-placed for isolation on 2026-11-15 (blocker 2);
+  `tools/check_head_isolation.py` is its check. The PHY sits on top over the chokes on the bottom (both low-voltage).
 
 ### 5.2a The memory bus: tried, and not good enough
 You asked for the RK3566-to-LPDDR4 connections with one simple rule, every path the same length. I tried it
@@ -458,6 +458,28 @@ This is the one part of the board where the honest answer is that a script is th
 publishes a reference layout for exactly this interface because it is easier to copy than to re-derive,
 and Radxa's board is such a copy. The way to a working core is a layout engineer placing that template
 (mirrored, since the core is on the bottom face), not a longer run of this router.
+
+### 5.2a-2 The memory bus, one group per layer (2026-11-14, branch `ram-routing`)
+The method of the usual DDR layout lessons: split each channel into the command / address / clock group and two
+data bytes (DQ, DM and the DQS pair), give every group one signal layer next to a ground plane, the same number of
+vias, and match lengths inside the group. `tools/route_ddr_groups.py` does this on copies only; the project's board
+file has none of it. Results, nets connected end to end out of 73:
+
+| plan | result |
+|---|---|
+| top face over the memory cleared (its decoupling moved), through vias: byte 0 on F, command on In2, byte 1 on In3 | 35 |
+| blind vias from B.Cu (HDI), top face as it is: byte 0 and byte 1 on In3, command on In2 | 38 |
+| the same, the strobe and clock pairs routed first in each group | **40** |
+| byte 0 on B.Cu with no via at all | 36 (the 0.4 mm ball pitch of the RK3566 lets no track pass between balls) |
+| byte 1 first on In3, byte 0 fitted in after | 36 (byte 1 alone on In3 reaches 18 of 22, but byte 0 is then shut out) |
+
+For these runs the other nets' tracks on In2, In3 and B.Cu under the two chips were taken out (24 nets, the eMMC
+and power-key lines among them, would have to go round the field). What limits it: the two packages are less than
+1 mm apart, byte 1 lands on the memory's far rows and has to cross under byte 0, and the board has two inner signal
+layers for three groups per channel. The unconstrained run of 5.2a reached 52 of 73, so the one-layer-per-group
+rule costs connections on this floorplan. Ways forward: move the memory 3-4 mm away and turn it so its bytes face
+the processor; or an 8-layer stack-up; or free the top face for byte 0. Either way the result still needs length
+tuning and a layout engineer's review (5.2a).
 
 ### 5.2b The battery port is a provisional interface
 - The battery module does not exist yet. CC, SBU and data wiring are a reasonable guess at what it needs.
@@ -492,7 +514,8 @@ Replace with manufacturer land patterns. The four LAN transformers and chokes ha
 designators in Radxa's drawings, so their positions are estimates.
 
 ### 5.6 Smaller items
-- Line-side TVS diodes D9–D23 are DNP: with PoE the line floats to 57 V and Radxa's part value could not be verified.
+- Line-side TVS diodes D9–D23 are removed (2026-11-15): with PoE the line side must stand 1.5 kV off chassis, and
+  even unfitted their pads put the two 0.38 mm apart. Line surges are taken by the PD's own TVS (D39, SMAJ58A).
 - eMMC wiring follows the usual RK356x pattern but is not on the 3E schematic; check it against Rockchip's hardware guide.
 - USB5744 has no SPI flash and runs on ROM defaults (its SMBus links R606/R607 to I2C3 are DNP); USB2517 uses CFG_SEL = 110 with strap options off. Changing either configuration means rework.
 - The RK817 audio codec is powered but unused.
