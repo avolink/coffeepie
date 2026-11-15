@@ -1,0 +1,26 @@
+# NEW (branch m2-hub): the bays, both hubs and the microSD slot moved to their own board (project commander_hub),
+# which plugs into this mainboard through an M.2 Key M socket: card-edge fingers on the hub board, no plug part.
+# The pinout is in tools/hub_link.py (one source for both boards).  This sheet keeps what stays on the mainboard.
+SHEET hub_link
+# SuperSpeed SoC -> hub: AC coupling at the transmitter, i.e. here (the hub board couples its own transmitter)
+C601 100nF USB3_HOST1_SSTXP HUB3_UP_RXP
+C602 100nF USB3_HOST1_SSTXN HUB3_UP_RXN
+J41 M2_SOCKET_M 1=GND 2=VCC5V_BUS 3=GND 4=VCC5V_BUS 5=HUB3_UP_RXN 6=VCC5V_BUS 7=HUB3_UP_RXP 8=VCC5V_BUS 9=GND 10=VCC5V_BUS 11=USB3_HOST1_SSRXN 12=VCC5V_BUS
+P J41 13=USB3_HOST1_SSRXP 14=VCC5V_BUS 15=GND 16=VCC5V_BUS 17=USB3_HOST1_DM 18=VCC5V_BUS 19=USB3_HOST1_DP 20=VCC5V_BUS 21=GND 22=VCC5V_BUS 23=USB2_HOST2_DM 24=VCC5V_BUS
+P J41 25=USB2_HOST2_DP 26=GND 27=GND 28=GND 29=USB_AUX_DM 30=GND 31=USB_AUX_DP 32=GND 33=GND 34=GND 35=SDMMC0_CLK 36=GND
+P J41 37=GND 38=VCC_SYS 39=SDMMC0_CMD 40=VCC_SYS 41=SDMMC0_D0 42=GND 43=SDMMC0_D1 44=VCC3V3_SYS 45=GND 46=VCC3V3_SYS 47=SDMMC0_D2 48=GND
+P J41 49=SDMMC0_D3 50=GND 51=GND 52=GND 53=SDMMC0_DET_L 54=GND 55=HUB_RESET_SOC_N 56=GND 57=GND 58=GND 67=I2C3_SCL_M1 68=GND
+P J41 69=I2C3_SDA_M1 70=GND 71=GND 72=GND 73=GND 74=GND 75=GND
+P J41 MP=GND
+# --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub.
+#     Standard USB-C receptacle (USB 2.0) on the inner edge of the column, facing the keyboard.
+#     The board is the host: Rp on both CC pins, 5 V through a resettable fuse. ---
+P U1 Y2=USB2_HOST3_DP Y1=USB2_HOST3_DM
+J20 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_KB A9=VBUS_KB B4=VBUS_KB B9=VBUS_KB
+P J20 A5=CC1_KB B5=CC2_KB A6=USB2_HOST3_DP B6=USB2_HOST3_DP A7=USB2_HOST3_DM B7=USB2_HOST3_DM
+NC J20 A8 B8
+R706 56K VBUS_KB CC1_KB
+R707 56K VBUS_KB CC2_KB
+F1 PTC:500mA VCC5V_BUS VBUS_KB
+C713 10uF VBUS_KB GND
+U51 USBLC6-2SC6 1=USB2_HOST3_DP 6=USB2_HOST3_DP 3=USB2_HOST3_DM 4=USB2_HOST3_DM 2=GND 5=VBUS_KB

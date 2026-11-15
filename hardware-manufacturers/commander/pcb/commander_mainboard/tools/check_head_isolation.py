@@ -18,7 +18,9 @@ import cpmodel                      # noqa: E402
 OX, OY = 40.0, 70.0
 LIMIT = 2.0
 BOX = (-1.0, -21.0, 31.0, 17.0)                 # the head and the top of the PoE block (design mm)
-BRIDGES = {"L15", "L23", "L25", "L27", "C60"}
+if os.environ.get("CP_ISO_BOX"):                # e.g. "-1,-21,35,60": the head, the whole PoE block and socket J41
+    BOX = tuple(float(v) for v in os.environ["CP_ISO_BOX"].split(","))
+BRIDGES = {"L15", "L23", "L25", "L27", "C60", "T1", "U31", "C518"}
 
 
 def line(n):

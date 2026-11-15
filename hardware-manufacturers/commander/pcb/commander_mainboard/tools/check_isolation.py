@@ -35,7 +35,7 @@ def gap(a, b):
 
 
 def main():
-    b = pcbnew.LoadBoard(os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb"))
+    b = pcbnew.LoadBoard(sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb"))
     pri, selv = [], []
     for fp in b.GetFootprints():
         for p in fp.Pads():

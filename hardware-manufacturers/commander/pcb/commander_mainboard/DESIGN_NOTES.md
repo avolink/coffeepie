@@ -16,10 +16,35 @@ re-floorplanned (HDMI left, PoE centre, low-voltage corridor right).
 
 Do not order this board yet. A quote from JLCPCB would succeed and the boards would not work.
 
-**Where it stands.** The scripted router now covers the whole board except the memory bus, which is left out on purpose.
-It has made **1,699 of the 2,335 connections (72.8 %)**; 636 are still open (KiCad's count after the Ethernet head was
-placed for isolation and routed, 2026-11-15; `build/open_report.txt` lists them net by net, `build/usb_report.txt` the USB links). In KiCad the open ones are
-the thin ratsnest lines that remain.
+**Branch `m2-hub` (2026-11-15): the bay strip is its own board now.** The nine bays, both USB hubs, the bay muxes,
+switches and ESD, and the microSD slot moved to `../commander_hub` (0.8 mm, 201 parts), which plugs into this board
+through an **M.2 Key M socket, J41** (LOTES APCI0146-P002A, top mount, 2.06 mm tall, 0.5 A per contact, 25 cycles)
+with gold fingers on its own edge - no connector part on the hub. Pinout: `tools/hub_link.py`, one source for both
+boards (12 x VCC5V_BUS, VCC_SYS, VCC3V3_SYS, 31 grounds; the USB 3 link, the USB2517 link, the battery port's USB 2
+pair, the microSD bus, I2C3, the hub reset). The card rests 0.3 mm above this board, so everything on the hub stands
+1.1 mm higher than on the old strip (the rear of the case has room for that). What changed here:
+- outline: the column plus a tab to board x 73.9 (y 80.3-104.0) under the socket; the strip is gone;
+- J41 sits at the column's right edge: its signal row starts at board x 64.28, where the low-voltage corridor starts
+  (the PoE primary zone ends at 62.3); its signals leave inwards, under the socket body (`tools/j41_fanout.py`);
+- the two parts that bridge the isolation barrier inside the socket's place moved down the barrier, still bridging
+  it: optocoupler U31 below the clamp diode (D42 0.35 mm up for it), Y capacitor C518 beside the transformer's
+  primary pins; C601 / C602 (USB 3 coupling) are on this board now, under the socket;
+- the keyboard port J20 stays here (sheet hub_link); `tools/main_cut.py` did the cut on the routed board, the
+  router (`CP_LINK=1`, region `link`, then `poe`) joined the socket. **Isolation: 0 pairs under 2 mm** over the
+  head, the PoE block and the socket (`CP_ISO_BOX=-1,-21,35,60 tools/check_head_isolation.py`); DRC has nothing new
+  (228 errors, every one of them in a category and place the board had before; 58 strip-edge errors left with the strip).
+The hub board (`tools/hub_board.py` cut it out of the routed strip, then `route.py` with the hub's own outline): model /
+schematic / board consistent, ERC clean, DRC only the 58 edge items the strip already had (the bays' rear pad row);
+**215 links open, 137 of them at its new left end** (card edge, USB5744, bay 1), where seven parts were moved out of
+the tongue's way (U40 2.2 mm right, crystal Y40 and three caps to the bottom face, L41 beside its buck) - that corner
+wants a hand placement pass and KiCad's interactive router.
+Still open at the socket: the long runs from J41 down to the RK3566 for the microSD bus (it was open before the split
+too), I2C3, the hub reset, card detect and the USB 3 hub's USB 2 pair - for KiCad's interactive router. Backup of the
+board before the cut: `build/commander_mainboard.before_m2.kicad_pcb`.
+
+**Where it stands.** The scripted router covers the whole board except the memory bus, which is left out on purpose.
+After the split **486 connections are open** on this board (636 before, the strip's own included; KiCad's count,
+2026-11-15). In KiCad the open ones are the thin ratsnest lines that remain.
 
 | # | What stands between this file and an order | What it takes |
 |---|---|---|
@@ -31,7 +56,7 @@ the thin ratsnest lines that remain.
 | 5 | **Everything that is routed is script output, not reviewed by a layout engineer.** Differential pairs run as coupled tracks at the class geometry, but nobody has checked impedance against the real stack-up, and nothing is length-tuned (the differences are in `build/usb_report.txt`). The supply rails of the core are joined by pours placed by a simple rule and by 0.09 mm links between ball vias. The PoE primary is connected, its switching loop is not optimised | A review by someone who lays out boards of this class; a power-integrity look at the core rails; a bench validation of the PoE converter. |
 | 6 | **The rear USB-C sockets are hard to route and not stocked** (JAE 24-pin, two rows of surface-mount pads, the rear row 1 mm from the board edge) | Swap for a common hybrid 24-pin socket (one row through-hole): easier to route, and available. Your decision, see the cost table. |
 | 7 | **Provisional footprints**: RJ45 and the four LAN transformers | Replace with manufacturer land patterns. The flyback transformer footprint is from the Bourns data sheet; check it against the current revision before ordering. |
-| 8 | **USB-C receptacles stand 3.2-3.3 mm on a face with about 3 mm of room.** The nine bays are at the rear, where the case is taller; the three in the column (service J2, keyboard J20, battery J40) are under the keyboard | Decide per port: a sunk (mid-mount) receptacle in a board cut-out stands about 1.6-2.4 mm above the board, or the port moves to the bottom face, where there is room. |
+| 8 | **USB-C receptacles stand 3.2-3.3 mm on a face with about 3 mm of room.** The nine bays are at the rear, where the case is taller (on the hub board, since branch `m2-hub`, they stand 1.1 mm higher still: about 4.4 mm above this board's top face - the user confirmed the rear has room); the three in the column (service J2, keyboard J20, battery J40) are under the keyboard | Decide per port: a sunk (mid-mount) receptacle in a board cut-out stands about 1.6-2.4 mm above the board, or the port moves to the bottom face, where there is room. |
 | 9 | **The schematic transcription has not had a second pair of eyes** (sheets 4-19 against the Radxa PDF) | One careful review; an error here costs a whole batch. |
 | 10 | **The BOM has no manufacturer or LCSC part numbers**; the Gerbers in `fabrication/` are marked QUOTE-ONLY | Filled in once 1-6 are done; RK3566, LPDDR4 and RK817 will likely have to be consigned or globally sourced. |
 | 11 | **Mechanical assumptions A1-A9 are unconfirmed**, mounting holes are provisional, there are no fiducials | Check against the chassis. |

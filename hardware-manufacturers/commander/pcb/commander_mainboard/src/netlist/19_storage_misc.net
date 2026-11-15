@@ -1,18 +1,8 @@
 # microSD + status LED from Radxa ZERO 3E V1.2 sheet 19; the 40-pin header is NOT carried over.
 # NEW for the Commander: eMMC (the 3E leaves the eMMC bank unpopulated), ID EEPROM, service header, buttons.
 SHEET storage
-# --- microSD (boot / recovery media) ---
-J6 MICROSD 1=SDMMC0_D2 2=SDMMC0_D3 3=SDMMC0_CMD 4=VCC3V3_SD 5=SDMMC0_CLK 6=GND 7=SDMMC0_D0 8=SDMMC0_D1 CD=SD_CD SH=GND
-R90723 0R VCC3V3_SYS VCC3V3_SD
-C227 100nF VCC3V3_SD GND
-R137 0R SD_CD SDMMC0_DET_L
-D13 ESD:BTR04G02 SD_CD GND
-D14 ESD:BTR04G02 SDMMC0_D1 GND
-D15 ESD:BTR04G02 SDMMC0_D0 GND
-D16 ESD:BTR04G02 SDMMC0_CLK GND
-D17 ESD:BTR04G02 SDMMC0_CMD GND
-D18 ESD:BTR04G02 SDMMC0_D3 GND
-D19 ESD:BTR04G02 SDMMC0_D2 GND
+# --- microSD (boot / recovery media): branch m2-hub moved the slot, its ESD diodes and supply parts to the hub
+#     board (../commander_hub/src/netlist/35_microsd.net); the bus reaches it through the M.2 socket J41 ---
 # --- eMMC 5.1, 153-ball (16 GB on the Commander Basic). Standard RK356x hook-up, HS200 at 1.8 V IO.
 #     AUDIT: not present on the 3E schematic - check against the Rockchip RK3566 hardware design guide. ---
 P U1 A32=EMMC_D0 B27=EMMC_D1 B32=EMMC_D2 B29=EMMC_D3 B33=EMMC_D4 A30=EMMC_D5 B30=EMMC_D6 A33=EMMC_D7

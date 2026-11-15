@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generates src/netlist/31_usb3_hub.net and 32_usb2_hub.net.
+"""Generates src/netlist/31_usb3_hub.net and 32_usb2_hub.net (hub board, strip test board) and, for the mainboard,
+34_hub_link.net (the M.2 socket to the hub board, plus the keyboard port that stays on the mainboard).
 
 The nine rear bays are repetitive, so they are produced from one template each
 (SuperSpeed bay / Hi-Speed bay) instead of being typed out nine times.
@@ -17,6 +18,9 @@ import cpmodel          # noqa: E402
 
 OUT = cpmodel.NETDIR
 STRIP = cpmodel.VARIANT == "strip"
+HUB = cpmodel.VARIANT == "hub"          # the hub board of branch m2-hub: the bays, both hubs and the microSD slot
+MAIN = cpmodel.VARIANT == "main"        # the mainboard keeps only the keyboard port and the M.2 socket to the hub board
+import hub_link                         # noqa: E402  (the socket / card-edge position list, one source for both boards)
 
 
 def ss_bay(k):
@@ -188,6 +192,37 @@ if STRIP:
     USB3 = USB3.replace("C601 100nF USB3_HOST1_SSTXP HUB3_UP_RXP", "C601 0R USB3_HOST1_SSTXP HUB3_UP_RXP")
     USB3 = USB3.replace("C602 100nF USB3_HOST1_SSTXN HUB3_UP_RXN", "C602 0R USB3_HOST1_SSTXN HUB3_UP_RXN")
     assert USB3.count(" 0R USB3_HOST1_SSTX") == 2
+
+LINK_MAIN = """# NEW (branch m2-hub): the bays, both hubs and the microSD slot moved to their own board (project commander_hub),
+# which plugs into this mainboard through an M.2 Key M socket: card-edge fingers on the hub board, no plug part.
+# The pinout is in tools/hub_link.py (one source for both boards).  This sheet keeps what stays on the mainboard.
+SHEET hub_link
+# SuperSpeed SoC -> hub: AC coupling at the transmitter, i.e. here (the hub board couples its own transmitter)
+C601 100nF USB3_HOST1_SSTXP HUB3_UP_RXP
+C602 100nF USB3_HOST1_SSTXN HUB3_UP_RXN
+""" + hub_link.statement("J41", "M2_SOCKET_M") + "P J41 MP=GND\n"
+
+EDGE = """# The hub board's card edge: M.2 Key M fingers on a 0.8 mm board, into socket J41 of the mainboard.
+# Pinout: tools/hub_link.py (one source for both boards).  Same net names on both sides.
+SHEET hub_link
+""" + hub_link.statement("J90", "M2_EDGE_M")
+
+if HUB:
+    # the SoC's transmit pair arrives already AC-coupled from the mainboard (C601 / C602 are there)
+    for line in ("C601 100nF USB3_HOST1_SSTXP HUB3_UP_RXP\n", "C602 100nF USB3_HOST1_SSTXN HUB3_UP_RXN\n"):
+        assert line in USB3
+        USB3 = USB3.replace(line, "")
+    KEYBOARD = ""                       # the keyboard port stays on the mainboard
+    with open(os.path.join(OUT, "40_hub_edge.net"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(EDGE)
+if MAIN:
+    with open(os.path.join(OUT, "34_hub_link.net"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(LINK_MAIN + KEYBOARD)
+    for name in ("31_usb3_hub.net", "32_usb2_hub.net"):
+        if os.path.exists(os.path.join(OUT, name)):
+            os.remove(os.path.join(OUT, name))
+    print("wrote 34_hub_link.net (the hub sheets are on the hub board now: ../commander_hub)")
+    sys.exit(0)
 
 with open(os.path.join(OUT, "31_usb3_hub.net"), "w", encoding="utf-8", newline="\n") as f:
     f.write(USB3 + "".join(ss_bay(k) for k in range(1, 5)) + "\n")

@@ -27,9 +27,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.environ.get("CP_ROOT") or os.path.join(HERE, ".."))
 PRJ = os.path.basename(ROOT)                    # project name = directory name = KiCad file stem
 VARIANT = ("strip" if PRJ.endswith("strip_test") else "kbmcu" if PRJ.endswith("keyboard_mcu")
+           else "hub" if PRJ.endswith("commander_hub")
            else "kbd" if PRJ.endswith("commander_keyboard")
            else "hat" if PRJ.endswith("poe_hat") else "main")
-REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0"}.get(VARIANT, "revA1")
+REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0", "hub": "revU0"}.get(VARIANT, "revA1")
 NETDIR = os.path.join(ROOT, "src", "netlist")
 MAIN_NETDIR = os.path.normpath(os.path.join(HERE, "..", "src", "netlist"))
 
@@ -231,6 +232,14 @@ PARTS = {
     "JST_SH4_UART": dict(fp="Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal", desc="JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",
                          pins=named("1:GND 2:TX 3:RX 4:3V3")),
     "HDR1x4": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:GND 2:TX 3:RX 4:3V3")),
+    # --- mainboard <-> hub board link (branch m2-hub, pinout in tools/hub_link.py) ---
+    "M2_SOCKET_M": dict(fp="commander:M2_Socket_KeyM_LOTES_APCI0146", padmap={"MP": ["MP"]},
+                        desc="M.2 Key M socket, top mount, 2.06 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0146-P002A "
+                             "(10u\" gold; -P001A = LCSC C841645). Carries the hub board link (tools/hub_link.py), not an M.2 slot",
+                        pins=None),
+    "M2_EDGE_M": dict(fp="commander:M2_CardEdge_KeyM_Tongue",
+                      desc="M.2 Key M card-edge fingers, 0.8 mm board, ENIG, bevelled (the hub board's plug into J41 on the mainboard)",
+                      pins=None),
     # --- two-terminal parts with an explicit part name ---
     "ESD": dict(fp="Diode_SMD:D_0402_1005Metric", two="tvs", desc="ESD diode, bidirectional, 0402"),
     "TVS": dict(fp="Diode_SMD:D_SOD-123F", two="tvs", desc="TVS, bidirectional"),

@@ -80,6 +80,27 @@ def main():
         os.makedirs(os.path.join(COMMANDER, sub), exist_ok=True)
 
     sch_only = cpmodel.VARIANT in ("kbmcu", "hat")    # schematic only: a block for another PCB / a board not laid out yet
+    if cpmodel.VARIANT == "hub":
+        # The hub board (branch m2-hub): its board is NOT generated - tools/hub_board.py cuts it out of the routed
+        # mainboard strip.  This builds the schematic and, when the board exists, checks it against the schematic.
+        run("USB bay netlists + card edge", py("gen_usb_netlists.py"))
+        run("design model check", py("cpmodel.py"))
+        run("project file", py("gen_project.py"))
+        run("custom footprints", py("gen_footprints.py"))
+        run("symbols + schematic", py("gen_schematic.py"))
+        run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", PRJ + ".kicad_sch"], ok_codes=(0, 5))
+        run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", PRJ + ".kicad_sch"])
+        if os.path.exists(os.path.join(ROOT, PRJ + ".kicad_pcb")):
+            run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)
+            # (the pours are refilled by KiCad itself and saved: fills left over from the cut are stale)
+            run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all",
+                        "-o", "build/drc.rpt", PRJ + ".kicad_pcb"], ok_codes=(0, 5))
+            print("DRC:", summarize("build/drc.rpt") or "clean")
+        run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), PRJ + ".kicad_sch"])
+        print("ERC:", summarize("build/erc.rpt") or "clean")
+        if FINDINGS:
+            raise SystemExit("CHECKS WITH FINDINGS: " + "; ".join(FINDINGS))
+        return
     if sch_only:
         run("design model check", py("cpmodel.py"))
         run("project file", py("gen_project.py"))

@@ -57,6 +57,16 @@ REGIONS = [   # name, x0, y0, x1, y1 (design mm); each window overlaps the real 
     # so there the region runs to the rear edge and takes in the tap header)
     ("poe", -1.0, -1.0 if STRIP else 8.6, CFG["COL_W"], 60.3),
 ]
+if cpmodel.VARIANT == "hub":
+    # The hub board (branch m2-hub): the strip from the socket's front face (board x 73.0) to its far end, plus the
+    # part of the M.2 tongue that sits in the socket's slot (from x 71.6), without the key notch.  The fingers
+    # themselves (x 69.5-71.5) are joined to that by straight stubs drawn by tools/hub_board.py.  Design mm.
+    _HUB = [(73.0, 81.3), (361.73, 81.3), (364.73, 84.3), (364.73, 100.02), (361.73, 103.02), (73.0, 103.02),
+            (73.0, 102.08), (71.6, 102.08), (71.6, 86.8), (72.9, 86.8), (72.9, 85.3), (71.6, 85.3), (71.6, 82.24),
+            (73.0, 82.24)]
+
+    def outline_pts():                          # noqa: F811
+        return [(x - OX, y - OY) for x, y in _HUB]
 _OUT = outline_pts()
 # the whole codec column, head to front edge: the stage that joins what the local windows could not
 COLUMN = ("column", -1.0, math.floor(min(p_[1] for p_ in _OUT)) - 1.0, CFG["COL_W"] + 1.0, math.ceil(CFG["COL_L"]) + 1.0)
@@ -119,6 +129,18 @@ if HEAD:
     REGIONS.append(("head", -1.0, -20.6, CFG["COL_W"] + 1.0, 17.0))      # down to the bridges' centre-tap pads
     PLANES["GND"] = PLANES["GND"] + ("head",)    # (the head's own ground pours, cut back 2 mm from the line areas)
     SKIP_NETS.discard("CHASSIS")                # (the Bob Smith cap and the 4.7 nF / 1 M to the jack's shield)
+# Branch m2-hub (CP_LINK=1, region "link"): the bay strip became its own board, plugged into socket J41 at the column's
+# right edge (tools/main_cut.py).  The window covers the socket and the barrier parts moved out of its way; the two
+# extra primary areas hold the primary pads of the optocoupler U31 (now below the clamp diode, 0.7 mm past the zone's
+# lower edge) and of the Y capacitor C518 (in the bump beside the transformer's primary pins).
+LINK = os.environ.get("CP_LINK") == "1"
+if LINK:
+    PRIMARY_AREA += [(18.6, 40.6, 21.2, 43.0), (22.0, 34.5, 24.2, 37.8)]
+    # (x to 33.3: the tab's edge is at 33.9 and the router still knows the old L outline; down to y 85: the link
+    #  nets run on to the RK3566's balls)
+    REGIONS.append(("link", 21.5, 4.0, 33.3, 85.0))
+    PLANES["GND"] = PLANES["GND"] + ("link",)
+    PLANES["VCC5V_BUS"] = PLANES["VCC5V_BUS"] + ("link",)     # (In3 plane under the socket's front row)
 
 CLS ={c["name"]: c for c in gen_project.CLASSES}
 
