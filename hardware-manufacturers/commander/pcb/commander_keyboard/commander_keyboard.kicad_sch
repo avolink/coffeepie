@@ -15,7 +15,7 @@
     (property "Sheetfile" "sheets/kbd_mcu.kicad_sch" (at 20.32 76.8 0) (effects (font (size 1.27 1.27)) (justify left top)))
     (instances (project "commander_keyboard" (path "/6f5323c3-fd11-5368-8f15-e0edcac530c2" (page "2"))))
   )
-  (text "Keyboard: ATmega32U4 core (the Arduino Micro circuit, bus-powered, USB-C)\n21 parts, A3" (exclude_from_sim no) (at 22.86 60.96 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "2e3ca547-6071-59af-81c5-9d7c65cc6e3c"))
+  (text "Keyboard: ATmega32U4 core (the Arduino Micro circuit, bus-powered, USB-C)\n16 parts, A3" (exclude_from_sim no) (at 22.86 60.96 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "2e3ca547-6071-59af-81c5-9d7c65cc6e3c"))
   (sheet (at 116.84 55.88) (size 86.36 20.32) (fields_autoplaced yes)
     (stroke (width 0.1524) (type solid)) (fill (color 255 255 220 1.0))
     (uuid "56773e04-7e18-57a7-ae42-420e8075245b")

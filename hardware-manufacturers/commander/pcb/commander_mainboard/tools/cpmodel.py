@@ -29,8 +29,14 @@ PRJ = os.path.basename(ROOT)                    # project name = directory name 
 VARIANT = ("strip" if PRJ.endswith("strip_test") else "kbmcu" if PRJ.endswith("keyboard_mcu")
            else "hub" if PRJ.endswith("commander_hub")
            else "kbd" if PRJ.endswith("commander_keyboard")
-           else "hat" if PRJ.endswith("poe_hat") else "main")
-REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0", "hub": "revU0"}.get(VARIANT, "revA1")
+           else "hat" if PRJ.endswith("poe_hat")
+           else "batt" if PRJ.endswith("commander_battery")
+           else "numpad" if PRJ.endswith("commander_numpad")
+           else "touch" if PRJ.endswith("commander_touchpad")
+           else "tray" if PRJ.endswith("commander_tray") else "main")
+REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0", "hub": "revU0",
+       "batt": "revB0", "numpad": "revN0", "touch": "revP0", "tray": "revR0"}.get(VARIANT, "revA1")
+SMALL = VARIANT in ("batt", "numpad", "touch", "tray")  # two-layer module boards built by tools/small_board.py
 NETDIR = os.path.join(ROOT, "src", "netlist")
 MAIN_NETDIR = os.path.normpath(os.path.join(HERE, "..", "src", "netlist"))
 
@@ -121,10 +127,11 @@ def named(spec):
 # --------------------------------------------------------------------------
 PARTS = {
     "RK3566": dict(fp="commander:RK3566_FCCSP-565_15.5x14.4mm", pins=None, desc="Rockchip RK3566 SoC, FCCSP-565"),
-    "LPDDR4_200": dict(fp="Package_BGA:BGA-200_10x14.5mm_Layout12x22_P0.8x0.65mm", pins=None,
-                       desc="LPDDR4 SDRAM 200-ball FBGA, 2 GB (16 Gb) e.g. K4F6E3S4HM / NT6AN512T32"),
-    "EMMC153": dict(fp="Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm", pins=None, fill_nc=True,
-                    desc="eMMC 5.1 153-ball, 16 GB"),
+    # 1 GB / 8 GB since 2026-11-15 (cost target; the 2 GB K4F6E3S4HM and the 16 GB KLMAG1JETD-B041 fit the same footprints)
+    "LPDDR4_200": dict(fp="Package_BGA:BGA-200_10x14.5mm_Layout12x22_P0.8x0.65mm", pins=None, lcsc="C2920231",
+                       desc="LPDDR4 SDRAM 200-ball FBGA, 1 GB (8 Gb, x32 dual channel): Samsung K4F8E3S4HD-MGCL"),
+    "EMMC153": dict(fp="Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm", pins=None, fill_nc=True, lcsc="C499918",
+                    desc="eMMC 5.1 153-ball, 8 GB: Samsung KLM8G1GETF-B041"),
     "RK817": dict(fp="Package_DFN_QFN:ArtInChip_QFN-68-1EP_7x7mm_P0.35mm_EP5.49x5.49mm", desc="Rockchip RK817-5 PMIC + codec, QFN-68", pins=named(
         "1:SCL 2:SDA 3:LDO7 4:VCC7 5:LDO8 6:LDO9 7:INT 8:FB2 9:SW2 10:VCC2 11:VCC1 12:SW1 13:FB1 14:LRCLK 15:BCLK 16:MCLK 17:SDI "
         "18:SDO/PDMDATA 19:PDMCLK 20:LDO3 21:LDO2 22:VCC5 23:LDO1 24:VCC3 25:SW3 26:VBUCK3 27:FB3 28:LDO4 29:LDO5 30:VCC6 31:LDO6 "
@@ -152,10 +159,14 @@ PARTS = {
     "MICROSD": dict(fp="Connector_Card:microSD_HC_Molex_104031-0811", desc="microSD push-push socket",
                     padmap={"CD": ["9"], "SH": ["SH", "10"]},
                     pins=named("1:DAT2 2:CD/DAT3 3:CMD 4:VDD 5:CLK 6:VSS 7:DAT0 8:DAT1 CD:DET SH:SHIELD")),
-    "USBC16": dict(fp="Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12", desc="USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)",
+    # HOAUC HYCW498-USBC16-735B is a TYPE-C-31-M-12 clone: same land pattern (pad row 1.45 mm behind the locating holes,
+    # shell slots 0.53 / 3.65 mm from them, outer pads 0.05 mm further in) - the HRO footprint stays
+    "USBC16": dict(fp="Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12", lcsc="C42400252",
+                   desc="USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",
                    padmap={"SH": ["SH"]},
                    pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
-    "USBC24": dict(fp="Connector_USB:USB_C_Receptacle_JAE_DX07S024WJ1R350", desc="USB-C receptacle, full-featured 24-pin (JAE DX07S024WJ1R350)",
+    "USBC24": dict(fp="commander:USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B", lcsc="C42400261",
+                   desc="USB-C receptacle, full-featured 24-pin, right angle, top mount (HOAUC HYCW275-USBC24-050B)",
                    padmap={"SH": ["SH"]},
                    pins=named("A1:GND A2:TX1+ A3:TX1- A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A10:RX2- A11:RX2+ A12:GND "
                               "B1:GND B2:TX2+ B3:TX2- B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B10:RX1- B11:RX1+ B12:GND SH:SHIELD")),
@@ -216,6 +227,13 @@ PARTS = {
         "14:VCC 34:VCC 2:UVCC 7:VBUS 24:AVCC 44:AVCC 42:AREF 6:UCAP 3:D- 4:D+ 13:RESET_N 33:HWB/PE2 17:XTAL1 16:XTAL2 "
         "8:PB0 9:PB1 10:PB2 11:PB3 28:PB4 29:PB5 30:PB6 12:PB7 31:PC6 32:PC7 18:PD0 19:PD1 20:PD2 21:PD3 25:PD4 22:PD5 26:PD6 27:PD7 "
         "1:PE6 41:PF0 40:PF1 39:PF4 38:PF5 37:PF6 36:PF7 5:UGND 15:GND 23:GND 35:GND 43:GND 45:EP")),
+    # since 2026-11-15 (cost): STC8H8K64U, 5 V, crystal-less full-speed USB with its own USB boot loader (P3.2 low at
+    # power-up), LQFP-32; pinout from the JLCEDA/EasyEDA Official Library symbol of C5210757 (https://easyeda.com)
+    "STC8H_LQFP32": dict(fp="Package_QFP:LQFP-32_7x7mm_P0.8mm", lcsc="C5210757",
+                         desc="STC STC8H8K64U-45I-LQFP32, 8051 MCU, 5 V, crystal-less USB 2.0 full speed, USB boot loader", pins=named(
+        "1:P1.0 2:P1.1 3:P1.4 4:P1.5 5:P1.6 6:P1.7 7:P1.3 8:UCAP 9:P5.4 10:VCC 11:VREF 12:GND 13:P3.0/D- 14:P3.1/D+ 15:P3.2/BOOT "
+        "16:P3.3 17:P3.4 18:P3.5 19:P3.6 20:P3.7 21:P2.0 22:P2.1 23:P2.2 24:P2.3 25:P2.4 26:P2.5 27:P2.6 28:P2.7 29:P0.0 30:P0.1 "
+        "31:P0.2 32:P0.3")),
     "ISP2x3_PADS": dict(fp="commander:ISP_2x3_P2.54mm_Pads", desc="AVR ISP, six bare pads on the 2 x 3, 2.54 mm grid (for a pogo-pin adapter)",
                        pins=named("1:MISO 2:VCC 3:SCK 4:MOSI 5:RESET 6:GND")),
     # footprint taken over from the Altium design; pin roles are inferred from the circuit around the switch
@@ -252,7 +270,61 @@ PARTS = {
     "TACT": dict(fp="Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2", two="sw", desc="tact switch"),
     "TACT_SIDE": dict(fp="Button_Switch_SMD:SW_SPST_EVQP7A", two="sw", desc="tact switch, side-operated (Panasonic EVQ-P7A, 3.5 x 2.9 x 1.35 mm)"),
     "XTAL2": dict(fp="Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm", two="xtal", desc="32.768 kHz crystal, 3215"),
+    # --- battery module (project commander_battery) and tray modules (commander_numpad, commander_touchpad), 2026-11-16;
+    #     pinouts from the JLCEDA/EasyEDA Official Library symbols of the LCSC parts named (https://easyeda.com) ---
+    "MT3608": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C84817", desc="Aerosemi MT3608 boost converter 2 A switch, 1.2 MHz, SOT-23-6",
+                   pins=named("1:SW 2:GND 3:FB 4:EN 5:IN 6:NC")),
+    "TPS563201": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C116592", desc="TI TPS563201 synchronous buck 4.5-17 V, 3 A, Eco-mode (no sinking at light load), SOT-23-6",
+                      pins=named("1:GND 2:SW 3:VIN 4:VFB 5:EN 6:VBST")),
+    "HT7333": dict(fp="Package_TO_SOT_SMD:SOT-89-3", lcsc="C347191", desc="HT7333-A 3.3 V LDO, 12 V in, 4 uA quiescent, SOT-89",
+                   pins=named("1:GND 2:VIN 3:VOUT")),
+    "INA181A1": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C2058943", desc="TI INA181A1 bidirectional current-sense amplifier, gain 20, SOT-23-6",
+                     pins=named("1:OUT 2:GND 3:IN+ 4:IN- 5:REF 6:VS")),
+    "BAT54C": dict(fp="Package_TO_SOT_SMD:SOT-23", desc="BAT54C dual Schottky, common cathode, SOT-23", pins=named("1:A1 2:A2 3:K")),
+    "IQS550": dict(fp="Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm", lcsc="C5271144",
+                   desc="Azoteq IQS550-B000 projected-capacitance trackpad controller, 15 Tx x 10 Rx, I2C, QFN-48", pins=named(
+        "1:Tx14 2:PGM 3:SW_IN 4:NC4 5:SDA 6:SCL 7:VDDHI 8:VSS 9:VREG 10:NRST 11:RDY 12:NC12 13:Rx0A 14:Rx0B 15:Rx1A 16:Rx1B "
+        "17:Rx2A 18:Rx2B 19:Rx3A 20:Rx3B 21:Rx4A 22:Rx4B 23:Rx5A 24:Rx5B 25:Rx6A 26:Rx6B 27:Rx7A 28:Rx7B 29:Rx8A 30:Rx8B "
+        "31:Rx9A 32:Rx9B 33:Tx0 34:Tx1 35:Tx2 36:Tx3 37:VSSIO 38:VDDIO 39:Tx4 40:Tx5 41:Tx6 42:Tx7 43:Tx8 44:Tx9 45:Tx10 "
+        "46:Tx11 47:Tx12 48:Tx13 49:EP")),
+    "PTC1812": dict(fp="Fuse:Fuse_1812_4532Metric", two="r", desc="resettable fuse, 1812"),
+    "TACT12": dict(fp="Button_Switch_THT:SW_PUSH-12mm", two="sw", lcsc="C10861",
+                   desc="tactile switch 12 x 12 mm, through-hole (12x12x4.3 or x5 body for the 8 mm module; 12X12X7.3 = C10861 is the same footprint)"),
+    "DOME12": dict(fp="commander:Dome_12mm_4Leg", two="sw",
+                   desc="12 mm four-leg metal snap dome on gold pads (dome sheet, not soldered): centre = key, legs = ground"),
+    "JST_PH4": dict(fp="Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical", lcsc="C131334", desc="JST PH 4-pin 2.0 mm, vertical (2 A per contact)",
+                    pins=named("1:P1 2:P2 3:P3 4:P4")),
+    "JST_PH2": dict(fp="Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical", desc="JST PH 2-pin 2.0 mm, vertical (B2B-PH-K-S)",
+                    pins=named("1:P1 2:P2")),
+    # --- tray carrier for two Framework Laptop 16 B-size input modules (project commander_tray), 2026-11-16 ---
+    "CH334P": dict(fp="Package_DFN_QFN:QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm", lcsc="C5373042",
+                   desc="WCH CH334P 4-port USB 2.0 hub (MTT), internal 3.3 V regulator and crystal load capacitors, QFN-16 3 x 3",
+                   pins=named("1:XO 2:XI 3:DM4 4:DP4 5:DM3 6:DP3 7:DM2 8:DP2 9:DM1 10:DP1 11:DMU 12:DPU 13:RESET#/CDP "
+                              "14:PGANG 15:V5 16:VDD33 17:GND")),
+    "SY6280": dict(fp="Package_TO_SOT_SMD:SOT-23-5", lcsc="C55136",
+                   desc="Silergy SY6280AAC power distribution switch 2.4-5.5 V, current limit 6800 / R_ISET (A, ohm), 0.4-2 A, SOT-23-5",
+                   pins=named("1:OUT 2:GND 3:ISET 4:EN 5:IN")),
+    "ME6211": dict(fp="Package_TO_SOT_SMD:SOT-23-5", lcsc="C82942", desc="Microne ME6211C33M5G 3.3 V LDO 500 mA, SOT-23-5",
+                   pins=named("1:VIN 2:VSS 3:CE 4:NC 5:VOUT")),
+    # the system side of the Framework input-module interface (pinout of github.com/FrameworkComputer/InputModules);
+    # footprint after Framework's Input Module Adapter (CC BY 4.0), CFE BP33242-08200H0-FS
+    "POGO_FW8": dict(fp="commander:Pogo_CFE_BP33242-08200H0-FS_2x4_P2.0mm",
+                     desc="pogo-pin connector 2 x 4, 2.0 mm, 1.6 mm working height, 1 A per pin (CFE BP33242-08200H0-FS), "
+                          "mates the pads of a Framework Laptop 16 input module",
+                     pins=named("1:GND 2:VCC_5V 3:USB_DN 4:BOARD_ID 5:USB_DP 6:SLEEP_N 7:GND 8:VCC_3V3")),
 }
+# LCSC / JLCPCB part numbers (checked on lcsc.com / JLC's BOM matcher, 2026-11-15) -> the 'lcsc' column of the BOM and the
+# "LCSC Part #" column of the JLC parts list.  Passives are left to JLC's matcher (it picks Basic parts once the package
+# is written as "0402" etc., see make_quote_package.py); parts without a stocked LCSC number are not listed here.
+LCSC = {
+    "RK3566": "C2943786", "RK817": "C5179490", "RK860": "C19188628", "RTL8211F": "C187932", "TPS23754": "C181651",
+    "TPS2121": "C485916", "FUSB302B": "C132291", "XFMR_FLYBACK": "C24570980", "USB5744": "C633621", "USB2517": "C1521556",
+    "HD3SS3220": "C701817", "TPD4E05U06": "C2827646", "USBLC6-2SC6": "C2827654", "PWRSW": "C3001659",   # AP22804AW5-7
+    "BUCK_SOT235": "C141836",                                                                           # TLV62569DBVR
+}
+for _k, _v in LCSC.items():
+    if _k in PARTS:
+        PARTS[_k].setdefault("lcsc", _v)
 # small-signal Schottky / service-port parts that are not SMA
 FP_OVERRIDE = {
     "D6": "Diode_SMD:D_SOD-523",      # 1N5819WT

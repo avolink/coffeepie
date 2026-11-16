@@ -27,6 +27,7 @@ PITCH = 2 * G             # pin pitch
 CHAR = 1.02               # estimated width of one label character (mm) at 1.27 mm text
 MAXROWS = 50              # pins per side before an IC is split into another unit
 
+BOARD_NAME = cpmodel.PRJ.replace("_", " ").capitalize()       # "Commander mainboard", "Commander battery", ...
 SHEET_TITLES = {
     "soc_misc": "RK3566 - SARADC, VCCIO4, VCCIO7",
     "soc_usb": "RK3566 - USB PHYs, VCCIO2",
@@ -56,6 +57,14 @@ SHEET_TITLES = {
     "kbd_row1": "Keyboard matrix, row 1 (Arduino pin A0)", "kbd_row2": "Keyboard matrix, row 2 (A1)",
     "kbd_row3": "Keyboard matrix, row 3 (A2)", "kbd_row4": "Keyboard matrix, row 4 (A3)",
     "kbd_row5": "Keyboard matrix, row 5 (A4)", "kbd_row6": "Keyboard matrix, row 6 (A5)",
+    "batt_power": "Battery module: 6 x AAA NiMH, protection, charger (boost from the port), 5 V output (buck), current sense",
+    "batt_mcu": "Battery module: STC8H8K64U gauge / charge controller, USB-C port to the mainboard (J40)",
+    "np_mcu": "Numpad module: STC8H8K64U, USB-C",
+    "np_keys": "Numpad module: 24 keys, each on its own pin (no matrix, no diodes)",
+    "tp_mcu": "Touchpad module: STC8H8K64U (I2C to USB HID bridge), 3.3 V, USB-C",
+    "tp_sensor": "Touchpad module: IQS550 trackpad controller, 15 Tx x 10 Rx electrodes (drawn by tools/small_board.py)",
+    "tr_hub": "Tray carrier: USB-C upstream, CH334P hub, 3.3 V for the bays",
+    "tr_ports": "Tray carrier: the two Framework input-module bays (pogo contacts, presence-switched power)",
 }
 
 
@@ -422,7 +431,7 @@ def build_sheet(d, sheet, syms, unit_of, root_uuid, sheet_uuid, page, npages):
     title = SHEET_TITLES.get(sheet, sheet)
     head = (f'(kicad_sch (version 20231120) (generator "eeschema") (generator_version "8.0")\n'
             f'  (uuid {q(sheet_uuid)})\n  (paper {q(paper)})\n'
-            f'  (title_block (title {q("Commander mainboard - " + title)}) (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")\n'
+            f'  (title_block (title {q(BOARD_NAME + " - " + title)}) (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")\n'
             f'    (comment 1 "Codec Terminal, model Commander: RK3566 + PoE PD + USB hubs on one PCB")\n'
             f'    (comment 2 "Generated from src/netlist - edit there and re-run tools/build.py")\n'
             f'    (comment 3 "CERN-OHL-S v2 + Coffee Pie Circular Economy Addendum"))\n')
@@ -480,7 +489,7 @@ def main():
     # ---- root ----
     s = (f'(kicad_sch (version 20231120) (generator "eeschema") (generator_version "8.0")\n'
          f'  (uuid {q(root_uuid)})\n  (paper "A3")\n'
-         f'  (title_block (title "Commander mainboard - index") (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")\n'
+         f'  (title_block (title {q(BOARD_NAME + " - index")}) (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")\n'
          f'    (comment 1 "Codec Terminal, model Commander: RK3566 + PoE PD + USB hubs on one PCB")\n'
          f'    (comment 2 "Reference design: Radxa ZERO 3E V1.2 (sheets marked NEW are Commander additions)")\n'
          f'    (comment 3 "CERN-OHL-S v2 + Coffee Pie Circular Economy Addendum"))\n'

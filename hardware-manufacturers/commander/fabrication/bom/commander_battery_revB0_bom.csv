@@ -1,0 +1,43 @@
+qty,value,footprint,description,populate,origin,references,lcsc
+9,100nF,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C1 C2 C3 C22 C32 C33 C34 C41 C42,
+1,10uF_10V,C_0603_1608Metric,,,"Commander (new design, 2026-11-16)",C10,
+2,22uF_16V,C_0805_2012Metric,,,"Commander (new design, 2026-11-16)",C11 C12,
+2,1uF,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C13 C40,
+2,10uF_16V,C_0603_1608Metric,,,"Commander (new design, 2026-11-16)",C20 C21,
+2,22uF_10V,C_0805_2012Metric,,,"Commander (new design, 2026-11-16)",C23 C24,
+1,1uF_16V,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C30,
+2,4.7uF,C_0603_1608Metric,,,"Commander (new design, 2026-11-16)",C31 C43,
+1,SS34,D_SMA,Schottky diode,,"Commander (new design, 2026-11-16)",D1,
+3,GREEN,LED_0603_1608Metric,LED 0603,,"Commander (new design, 2026-11-16)",D50 D51 D52,
+1,PTC1812:2A,Fuse_1206_3216Metric,,,"Commander (new design, 2026-11-16)",F1,
+1,CELLS,JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical,"JST PH 4-pin 2.0 mm, vertical (2 A per contact)",,"Commander (new design, 2026-11-16)",J1,C131334
+1,NTC_CELLS,JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical,"JST PH 2-pin 2.0 mm, vertical (B2B-PH-K-S)",,"Commander (new design, 2026-11-16)",J2,
+1,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",,"Commander (new design, 2026-11-16)",J3,C42400252
+1,10uH_2A,L_Sunlord_SWPA4030S,,,"Commander (new design, 2026-11-16)",L1,
+1,4.7uH_5A,L_Coilcraft_XAL4020-XXX,,,"Commander (new design, 2026-11-16)",L2,
+1,AO3401A,SOT-23,P-MOSFET SOT-23,,"Commander (new design, 2026-11-16)",Q1,
+3,2N7002,SOT-23,N-MOSFET SOT-23,,"Commander (new design, 2026-11-16)",Q2 Q3 Q4,
+5,10K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R1 R21 R34 R36 R40,
+1,0R02_1206,R_1206_3216Metric,,,"Commander (new design, 2026-11-16)",R2,
+1,10R,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R3,
+8,100K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R4 R5 R14 R23 R24 R30 R32 R47,
+1,1M,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R10,
+1,75K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R11,
+1,680K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R12,
+2,68K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R13 R33,
+1,54.9K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R20,
+1,390K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R22,
+1,33K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R31,
+1,NTC10K_B3950,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R35,
+2,22R,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R41 R42,
+2,36K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R43 R44,
+2,5.1K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R45 R46,
+3,1K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R50 R51 R52,
+1,BTN,SW_Push_1P1T_NO_CK_KMR2,tact switch,,"Commander (new design, 2026-11-16)",SW1,
+1,STC8H8K64U,LQFP-32_7x7mm_P0.8mm,"STC STC8H8K64U-45I-LQFP32, 8051 MCU, 5 V, crystal-less USB 2.0 full speed, USB boot loader",,"Commander (new design, 2026-11-16)",U1,C5210757
+1,USBLC6-2SC6,SOT-23-6,ST USBLC6-2SC6 USB ESD,,"Commander (new design, 2026-11-16)",U2,C2827654
+1,INA181A1,SOT-23-6,"TI INA181A1 bidirectional current-sense amplifier, gain 20, SOT-23-6",,"Commander (new design, 2026-11-16)",U3,C2058943
+1,MT3608,SOT-23-6,"Aerosemi MT3608 boost converter 2 A switch, 1.2 MHz, SOT-23-6",,"Commander (new design, 2026-11-16)",U4,C84817
+1,TPS563201,SOT-23-6,"TI TPS563201 synchronous buck 4.5-17 V, 3 A, Eco-mode (no sinking at light load), SOT-23-6",,"Commander (new design, 2026-11-16)",U5,C116592
+1,BAT54C,SOT-23,"BAT54C dual Schottky, common cathode, SOT-23",,"Commander (new design, 2026-11-16)",U6,
+1,HT7333,SOT-89-3,"HT7333-A 3.3 V LDO, 12 V in, 4 uA quiescent, SOT-89",,"Commander (new design, 2026-11-16)",U7,C347191

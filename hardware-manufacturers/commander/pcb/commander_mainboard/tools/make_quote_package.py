@@ -44,6 +44,17 @@ def run(cmd):
         raise SystemExit("FAILED: " + " ".join(cmd) + NL + r.stdout[-800:] + r.stderr[-800:])
 
 
+def jlc_package(fp):
+    """KiCad footprint name -> what JLC's BOM matcher understands.  'C_0402_1005Metric' is read by it as the imperial
+    01005 (it takes '1005' for the size), so chip parts get their imperial code alone ('0402'); others stay as they are."""
+    m = re.match(r"^(?:C|R|L|D|LED|Fuse|FB)_(\d{4})_\d{4}Metric", fp)
+    if m:
+        return m.group(1)
+    if fp.startswith("Res "):                   # (the keyboard's Altium names: "Res 0805")
+        return fp.split()[-1]
+    return fp
+
+
 def board_facts(txt):
     """(thickness mm, outline width, outline height) read from the board file: no pcbnew needed.  Only the board's
     own Edge.Cuts drawings count (an outline drawn inside a footprint, like the hub's card tongue, does not)."""
@@ -104,7 +115,7 @@ def main():
             if (row.get("populate") or "").strip().upper() == "DNP":
                 continue
             refs = row["references"].split()
-            w.writerow([row["value"], ",".join(refs), row["footprint"], "", row.get("description", "")])
+            w.writerow([row["value"], ",".join(refs), jlc_package(row["footprint"]), row.get("lcsc", ""), row.get("description", "")])
             lines += 1
             parts += len(refs)
     pos_in = os.path.join(COMMANDER, "fabrication", "position", f"{PRJ}_{REV}_placement.csv")

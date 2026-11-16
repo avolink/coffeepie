@@ -54,7 +54,7 @@ After the split **486 connections are open** on this board (636 before, the stri
 | 3 | **About 530 other connections are open** in the areas that are routed: 174 ground pads without a via, the supply balls and capacitors under the RK3566 that the pours did not reach, the mux chips of bays 1-4, and what is listed in `build/routing_report.txt` | Hand routing in KiCad, or first loosening the placement where the report shows a cluster. |
 | 4 | **The eMMC cannot be connected where it is**: it sits on the top face directly over the PMIC, so the vias its inner balls need would land in the PMIC's pads (17 eMMC connections open) | Move it to a place whose other face is free, or build the prototype with the microSD socket only. |
 | 5 | **Everything that is routed is script output, not reviewed by a layout engineer.** Differential pairs run as coupled tracks at the class geometry, but nobody has checked impedance against the real stack-up, and nothing is length-tuned (the differences are in `build/usb_report.txt`). The supply rails of the core are joined by pours placed by a simple rule and by 0.09 mm links between ball vias. The PoE primary is connected, its switching loop is not optimised | A review by someone who lays out boards of this class; a power-integrity look at the core rails; a bench validation of the PoE converter. |
-| 6 | **The rear USB-C sockets are hard to route and not stocked** (JAE 24-pin, two rows of surface-mount pads, the rear row 1 mm from the board edge) | Swap for a common hybrid 24-pin socket (one row through-hole): easier to route, and available. Your decision, see the cost table. |
+| 6 | ~~The rear USB-C sockets are hard to route and not stocked~~ **Done 2026-11-15 on the hub board**: HOAUC HYCW275-USBC24-050B (C42400261, hybrid, in stock, a tenth of the JAE's price), `tools/hub_usbc24_swap.py`; the copper round them is to be re-routed (hub README) | - |
 | 7 | **Provisional footprints**: RJ45 and the four LAN transformers | Replace with manufacturer land patterns. The flyback transformer footprint is from the Bourns data sheet; check it against the current revision before ordering. |
 | 8 | **USB-C receptacles stand 3.2-3.3 mm on a face with about 3 mm of room.** The nine bays are at the rear, where the case is taller (on the hub board, since branch `m2-hub`, they stand 1.1 mm higher still: about 4.4 mm above this board's top face - the user confirmed the rear has room); the three in the column (service J2, keyboard J20, battery J40) are under the keyboard | Decide per port: a sunk (mid-mount) receptacle in a board cut-out stands about 1.6-2.4 mm above the board, or the port moves to the bottom face, where there is room. |
 | 9 | **The schematic transcription has not had a second pair of eyes** (sheets 4-19 against the Radxa PDF) | One careful review; an error here costs a whole batch. |
@@ -553,6 +553,34 @@ chip pair placed and adapted by a layout engineer, or KiCad's interactive router
 - 5 V only. A source that goes above 6.0 V is locked out by U81, but D80 and U83 are 5 V parts: do not
   enable USB-PD voltages in software.
 - Charging takes its current from the same 21 W PoE budget as the SoC and nine bays. Advertise 1.5 A at most.
+
+### 5.2c Fit in the chassis (2026-11-16, SketchUp model COMMANDER_Z3E.skp)
+
+The three boards were exported in 3D (`tools/export_3d.py`: KiCad's own models where they exist, plain boxes of the
+right height for the rest - RJ45 8.0 mm and LAN transformers 2.2 mm are estimates; `tools/glb_to_dae.py` turns the
+GLB into a Collada file SketchUp imports) and placed in the model on tag `KICAD_PCBS`; the old approximations
+(`KEYBOARD_PCB#18`, `BACK_IO_PANEL_PCB#1`, `RADXA_ZERO_3E.stl`) are on the hidden tag `OLD_PCB_APPROX`. STEP / STL /
+GLB / DAE of each board are in `3d-models/pcb_exports/`. Clearances were measured by casting rays up and down from a
+1 mm grid on each board against the chassis, and compared with the boards' own part heights. (Note: KiCad's GLB has
+z 0 at the board's bottom face - the first placement assumed the middle plane and was corrected on 2026-11-16.)
+
+| Finding | Change made | Still open |
+|---|---|---|
+| Bay receptacles (HYCW275, top mount) 1.1 mm above the cards' plugs, touching the back-I/O profile by 0.72 mm | hub **and** mainboard lowered together (they mate through J41): hub underside z 17.37, mainboard underside 15.87 / top 17.07; receptacles' axis at z 19.8 = the plugs' axis, clear of the profile | shorter standoffs; three hub parts at the rear edge reach into the profile's slot (hub README) |
+| The RK3566 (bottom face, chassis X 85-100, Y 14-29) sits just past the end of the heatsink extrusion (Y 28.9): nothing under it but air | **heatsink update**: `SOC_THERMAL_BLOCK`, a 17 x 30.5 x 7.5 mm block of 6063 (the extrusion's alloy) from the chip (0.5 mm pad) to the extrusion's top plate, two M2.5 into the plate (tag `HEATSINK_UPDATES`; 0.9 mm clear of the board's other parts, 5 mm under the keyboard) | the plate is 2.4-4.3 mm thick: through-holes with nuts, or inserts; the RAM beside the SoC could share the block (0.6 mm pad) |
+| RJ45 J12 (8 mm box, an estimate) reaches into `Group#311` by up to 3.8 mm; with the boards at their final height it is clear of the back-I/O profile | - | see `Group#311` below; confirm the jack's real height |
+| M.2 socket J41 overlaps the profile by 1.5 mm where the hub's tongue enters it | - | a pocket at the profile's left end |
+| Bottom parts T1 / C504 (2.7 mm) and the RJ45 overlap `Group#311` (an unnamed 62 x 22 x 18 mm open box at the left end, z 7.4-25.4, crossing the board's plane) | - | it looks like a left-over volume of the old codec unit; confirm and remove it from the model |
+| Keyboard: the switch boxes of the rows nearest the back panel (6 mm, an estimate) reach up to 5.4 mm into the back-I/O profile | the keyboard sits exactly on the old keyboard model's plane (top face), as the model had it | the model's own switches stand there too: either the profile is lower than the keyboard design assumes, or the real switch is much lower - check on the prototype |
+
+The three module boards of 2026-11-16 (`pcb/commander_battery`, `commander_numpad`, `commander_touchpad`, built by
+`tools/small_board.py`) are in the model too, at the places of the model's placeholders:
+
+| Board | Fit |
+|---|---|
+| Battery (48 x 88.8 mm, beside the six AAA cells, x 93.3-141.3 / y 77.3-166.1, underside z 8.1) | clear above (2.5 mm min, the PH connectors included); the board rests on the cell tray's floor; the PH connectors' pins stand 1.8 mm under the board - trim them or use the SMD PH versions |
+| Numpad (131 x 68 mm at the NUMPAD_MODULE, underside z 8.0) | the model's keycaps start right on the board, so the keys are snap domes (0.4 mm); the tray's floor plate (z 7.4-10.2, sloped) overlaps the module placeholders in the model by up to 0.7 mm - the tray / module stack heights are still to be settled |
+| Touchpad (131 x 68 mm at the TOUCHPAD_MODULE, underside z 9.24) | same tray-floor overlap; its USB-C touches the tray's side rail (0.4 mm) |
 
 ### 5.3 Framework cards that will not work
 The **HDMI and DisplayPort cards need DisplayPort alt mode**, which a USB hub cannot provide.

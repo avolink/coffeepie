@@ -65,6 +65,10 @@ KBD_CLASSES = [
     cls("PWR", 0.15, 0.40, via_d=0.8, via_drill=0.4, color="rgb(194, 0, 0)"),
 ]
 KBD_PATTERNS = [("VCC5", "PWR"), ("VBUS_USB", "PWR")]
+# the two-layer module boards (battery, numpad, touchpad): the keyboard's rules; the battery's power path is wide
+SMALL_CLASSES = KBD_CLASSES + [cls("HIPWR", 0.2, 1.0, via_d=0.8, via_drill=0.4, color="rgb(255, 120, 0)")]     # 2-3 A of the battery
+SMALL_PATTERNS = KBD_PATTERNS + [("VBUS", "HIPWR"), ("VBAT", "HIPWR"), ("B_*", "HIPWR"), ("*_SW", "HIPWR"), ("VCC3V3", "PWR"),
+                                 ("LDO_IN", "PWR"), ("VCC5_M*", "PWR"), ("VCC3V3_M*", "PWR")]
 KBD_RULES = {
     "min_clearance": 0.15, "min_copper_edge_clearance": 0.2, "min_track_width": 0.15,
     "min_via_diameter": 0.5, "min_through_hole_diameter": 0.3, "min_via_annular_width": 0.1,      # the vias beside the chip's pins are 0.5 / 0.3
@@ -78,8 +82,8 @@ ERC_OFF = ["footprint_link_issues", "lib_symbol_issues", "lib_symbol_mismatch", 
 
 
 def main():
-    kbd = cpmodel.VARIANT == "kbd"
-    classes, patterns = (KBD_CLASSES, KBD_PATTERNS) if kbd else (CLASSES, PATTERNS)
+    kbd = cpmodel.VARIANT == "kbd" or cpmodel.SMALL
+    classes, patterns = ((SMALL_CLASSES, SMALL_PATTERNS) if cpmodel.SMALL else (KBD_CLASSES, KBD_PATTERNS)) if kbd else (CLASSES, PATTERNS)
     pro = {
         "board": {
             "design_settings": {
@@ -99,7 +103,7 @@ def main():
             "layer_presets": [], "viewports": [],
         },
         "boards": [],
-        "erc": {"rule_severities": {k: "ignore" for k in ERC_OFF}},
+        "erc": {"rule_severities": {k: "ignore" for k in ERC_OFF + (["isolated_pin_label"] if cpmodel.VARIANT == "touch" else [])}},
         "libraries": {"pinned_footprint_libs": ["commander"], "pinned_symbol_libs": ["commander"]},
         "meta": {"filename": cpmodel.PRJ + ".kicad_pro", "version": 1},
         "net_settings": {
@@ -117,6 +121,8 @@ def main():
     }
     if kbd:
         pro["board"]["design_settings"]["rules"] = KBD_RULES
+    if cpmodel.VARIANT == "touch":      # the electrode diamonds hang on necks and bridges, not on pads: by design
+        pro["board"]["design_settings"]["rule_severities"]["isolated_copper"] = "ignore"
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         json.dump(pro, f, indent=2)
         f.write("\n")

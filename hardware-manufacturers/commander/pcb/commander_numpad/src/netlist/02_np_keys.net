@@ -1,0 +1,56 @@
+# Commander numpad module (rev N0) - the 24 keys, 6 columns x 4 rows as on NUMPAD_MODULE of the chassis model
+# (key pitch 17.0 mm across, 17.5 / 17.5 / 18.0 mm down; 12 x 12 mm caps).  Each key is a 12 mm four-leg metal snap
+# dome on gold pads (the model's caps start right on the board: nothing taller fits; domes last 1-5 million presses).  Every key has its own pin (internal
+# pull-ups of the microcontroller, key to ground): no matrix, no diodes, no ghosting, any number of keys at once.
+# Key SW_r_c = row r (1 = nearest the touchpad module), column c (1 = rear).  The key on P3.2 (SW_1_1) doubles as
+# the boot-loader key: hold it while plugging the cable in.
+SHEET np_keys
+
+SW_1_1 DOME12:KEY 1=KEY_1_1 2=GND
+P U1 15=KEY_1_1     # P3.2
+SW_2_1 DOME12:KEY 1=KEY_2_1 2=GND
+P U1 1=KEY_2_1     # P1.0
+SW_3_1 DOME12:KEY 1=KEY_3_1 2=GND
+P U1 2=KEY_3_1     # P1.1
+SW_4_1 DOME12:KEY 1=KEY_4_1 2=GND
+P U1 3=KEY_4_1     # P1.4
+SW_1_2 DOME12:KEY 1=KEY_1_2 2=GND
+P U1 4=KEY_1_2     # P1.5
+SW_2_2 DOME12:KEY 1=KEY_2_2 2=GND
+P U1 5=KEY_2_2     # P1.6
+SW_3_2 DOME12:KEY 1=KEY_3_2 2=GND
+P U1 6=KEY_3_2     # P1.7
+SW_4_2 DOME12:KEY 1=KEY_4_2 2=GND
+P U1 7=KEY_4_2     # P1.3
+SW_1_3 DOME12:KEY 1=KEY_1_3 2=GND
+P U1 9=KEY_1_3     # P5.4
+SW_2_3 DOME12:KEY 1=KEY_2_3 2=GND
+P U1 16=KEY_2_3     # P3.3
+SW_3_3 DOME12:KEY 1=KEY_3_3 2=GND
+P U1 17=KEY_3_3     # P3.4
+SW_4_3 DOME12:KEY 1=KEY_4_3 2=GND
+P U1 18=KEY_4_3     # P3.5
+SW_1_4 DOME12:KEY 1=KEY_1_4 2=GND
+P U1 19=KEY_1_4     # P3.6
+SW_2_4 DOME12:KEY 1=KEY_2_4 2=GND
+P U1 20=KEY_2_4     # P3.7
+SW_3_4 DOME12:KEY 1=KEY_3_4 2=GND
+P U1 21=KEY_3_4     # P2.0
+SW_4_4 DOME12:KEY 1=KEY_4_4 2=GND
+P U1 22=KEY_4_4     # P2.1
+SW_1_5 DOME12:KEY 1=KEY_1_5 2=GND
+P U1 23=KEY_1_5     # P2.2
+SW_2_5 DOME12:KEY 1=KEY_2_5 2=GND
+P U1 24=KEY_2_5     # P2.3
+SW_3_5 DOME12:KEY 1=KEY_3_5 2=GND
+P U1 25=KEY_3_5     # P2.4
+SW_4_5 DOME12:KEY 1=KEY_4_5 2=GND
+P U1 26=KEY_4_5     # P2.5
+SW_1_6 DOME12:KEY 1=KEY_1_6 2=GND
+P U1 27=KEY_1_6     # P2.6
+SW_2_6 DOME12:KEY 1=KEY_2_6 2=GND
+P U1 28=KEY_2_6     # P2.7
+SW_3_6 DOME12:KEY 1=KEY_3_6 2=GND
+P U1 29=KEY_3_6     # P0.0
+SW_4_6 DOME12:KEY 1=KEY_4_6 2=GND
+P U1 30=KEY_4_6     # P0.1

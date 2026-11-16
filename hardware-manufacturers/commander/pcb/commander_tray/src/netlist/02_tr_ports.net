@@ -1,0 +1,40 @@
+# The two bays.  Each has the Framework input-module contacts (J2 = bay 1, inner one; J3 = bay 2, outer one):
+#   1 GND, 2 VCC_5V (up to 500 mA), 3 USB D-, 4 BOARD_ID (pulled to ground in the module), 5 USB D+,
+#   6 SLEEP# (3.3 V = host awake), 7 GND, 8 VCC_3V3 (up to 100 mA)
+# A bay is powered only while a module sits in it, as on the Framework Laptop 16 (whose input deck stays off until
+# every pogo connector is covered): BOARD_ID is pulled up by 2.2 M; with a module in place its resistor (68 k - 560 k)
+# holds the pin below 0.7 V, the 2N7002 turns off and the bay's enable line charges through 1 M into 1 uF - both
+# switches come on about 0.6 s later.  So pins that are uncovered (an empty bay, a module sliding in or out over the
+# contacts) carry no power.  Pull the module: BOARD_ID rises, the FET discharges the enable line at once.
+# Current limits: 5 V 0.62 A (11 k), 3.3 V 0.40 A (17 k; the switch's smallest limit).
+SHEET tr_ports
+
+# --- bay 1 ---
+J2 POGO_FW8 1=GND 7=GND 2=VCC5_M1 8=VCC3V3_M1 3=M1_DN 5=M1_DP 4=M1_ID 6=M1_SLEEP_N
+U4 SY6280:SY6280AAC 5=VCC5 4=M1_EN 3=M1_ISET5 2=GND 1=VCC5_M1
+R3 11K M1_ISET5 GND
+U5 SY6280:SY6280AAC 5=VCC3V3 4=M1_EN 3=M1_ISET3 2=GND 1=VCC3V3_M1
+R4 17K M1_ISET3 GND
+C9 1uF VCC5_M1 GND
+C10 1uF VCC3V3_M1 GND
+R5 2.2M VCC3V3 M1_ID
+Q1 NMOS_GSD:2N7002 G=M1_ID S=GND D=M1_EN
+R6 1M VCC3V3 M1_EN
+C11 1uF M1_EN GND
+R7 10K VCC3V3_M1 M1_SLEEP_N
+U6 USBLC6-2SC6 1=M1_DP 6=M1_DP 3=M1_DN 4=M1_DN 2=GND 5=VCC5
+
+# --- bay 2 ---
+J3 POGO_FW8 1=GND 7=GND 2=VCC5_M2 8=VCC3V3_M2 3=M2_DN 5=M2_DP 4=M2_ID 6=M2_SLEEP_N
+U7 SY6280:SY6280AAC 5=VCC5 4=M2_EN 3=M2_ISET5 2=GND 1=VCC5_M2
+R8 11K M2_ISET5 GND
+U8 SY6280:SY6280AAC 5=VCC3V3 4=M2_EN 3=M2_ISET3 2=GND 1=VCC3V3_M2
+R9 17K M2_ISET3 GND
+C12 1uF VCC5_M2 GND
+C13 1uF VCC3V3_M2 GND
+R10 2.2M VCC3V3 M2_ID
+Q2 NMOS_GSD:2N7002 G=M2_ID S=GND D=M2_EN
+R11 1M VCC3V3 M2_EN
+C14 1uF M2_EN GND
+R12 10K VCC3V3_M2 M2_SLEEP_N
+U9 USBLC6-2SC6 1=M2_DP 6=M2_DP 3=M2_DN 4=M2_DN 2=GND 5=VCC5

@@ -43,19 +43,19 @@ MODULE = (106.0, 136.0, 152.5, 154.2)       # the footprint of the Arduino Micro
 USB_Y = 160.0                               # USB-C receptacle on the left edge, in the bay beside the codec column
 USB_OVERHANG = 0.9                          # how far its front stands out over the board edge
 # The chip sits in the right half of the module's area, the only place where the TOP layer carries no matrix tracks
-# (x 134..146.4, y 142..157), so its pins can change layer right beside it.  It is turned so that
-#   north: A0..A5          (their lines end at the old upper pin row, to the north-west)
-#   west : D4..D13         (lower pin row, to the west)
-#   south: D0, D2, D3, crystal, reset
-#   east : USB, SPI        (the SPI lines end at the east end of both rows; the ISP pads sit east of the chip)
+# (x 134..146.4, y 142..157), so its pins can change layer right beside it.  Since 2026-11-15 it is the STC8H8K64U
+# (LQFP-32, 5 V, USB without crystal; was the ATmega32U4), turned 270 deg on the bottom face so that
+#   north (pins 1-8)  : A0..A5, MOSI, UCAP   (the row lines end at the old upper pin row, to the north-west)
+#   east  (pins 9-16) : SCK, supply, USB, BOOT, MISO
+#   south (pins 17-24): SS_RXLED, D0, D2..D5
+#   west  (pins 25-32): D6..D13               (the column lines end to the west)
 # FIXED: reference -> (x, y, rotation): exactly there (planned by hand; the prepare stage reports any overlap).
 FIXED = {
-    "U201": (140.7, 147.4, 180),
-    "Y201": (140.95, 154.55, 0), "C208": (138.0, 154.4, 270), "C209": (145.2, 152.9, 0),
-    "C204": (149.0, 142.8, 0), "R204": (149.0, 144.4, 180), "R203": (149.0, 146.0, 180), "C201": (149.0, 147.6, 0),
-    "J202": (154.0, 147.4, 0), "R206": (149.2, 150.6, 0), "SW201": (152.8, 153.3, 0),
-    "C203": (136.3, 142.4, 180), "C205": (133.1, 142.4, 180), "R207": (133.4, 144.3, 180),
-    "C206": (142.4, 139.2, 180),
+    "U201": (140.7, 147.4, 270),
+    "C204": (149.0, 144.4, 0), "C206": (149.0, 146.0, 0), "R204": (149.0, 147.6, 180), "R203": (149.0, 149.2, 180),
+    "R206": (147.4, 152.2, 0), "SW201": (152.8, 153.3, 0),
+    "C203": (152.2, 144.4, 0), "C205": (152.2, 146.4, 0),
+    "C201": (145.2, 139.6, 180),
 }
 # Old copper that is removed besides the module's own stubs: (net, box) - the tracks with both ends in the box and the
 # vias in it.  Here: the top-layer piece that brought +5 V from the module's supply pin to R156; R156 is fed from the
@@ -72,9 +72,9 @@ TARGETS = {
 }
 # the chip's pins: a straight piece of track outwards and a via at its end, in two staggered rows (measured from the
 # chip's centre), on the three sides where the top layer is free.  Not on these nets (they stay on the bottom layer):
-FAN_SHORT, FAN_LONG = 4.45, 5.15
+FAN_SHORT, FAN_LONG = 5.45, 6.15          # (LQFP-32: pad centres 4.17 mm from the chip's centre, pads 1.5 mm long)
 FAN_NO_VIA = ("XTAL1", "XTAL2")
-EARLY_PINS = ("24",)                        # chip pins linked right after the escape, before every other net (see route_pass)
+EARLY_PINS = ()                             # chip pins linked right after the escape, before every other net (see route_pass)
 KBD_W, KBD_CL = 0.15, 0.15                  # new copper: tracks and gaps (0.127 gains nothing on the router's 0.05 mm grid)
 USB_LOOP = 1.1                              # mm from the middle of the receptacle's data pads to the loops that join them
 WISH_K = 4                                  # cells either side of a net's trial route that others pay to enter (0.2 mm)
@@ -603,6 +603,7 @@ def escape_chip(board, r, reg, code, ref="U201"):
     gnd = code["GND"]
     Dv = reg.D[rc.Kv]
     plan, notes, ngnd = [], [], 0
+    has_ep = any(pd["ref"] == ref and max(abs(pd["cx"] - cx), abs(pd["cy"] - cy)) < 3.0 for pads in reg.pads.values() for pd in pads)
     for net, pads in reg.pads.items():
         for pd in pads:
             if pd["ref"] != ref:
@@ -611,7 +612,7 @@ def escape_chip(board, r, reg, code, ref="U201"):
             if max(abs(dx), abs(dy)) < 3.0:
                 continue                                    # the exposed pad
             ux, uy = ((1 if dx > 0 else -1), 0) if abs(dx) > abs(dy) else (0, (1 if dy > 0 else -1))
-            if net == gnd:
+            if net == gnd and has_ep:                       # (a chip without an exposed pad: its ground pin escapes outwards)
                 r.add_track(reg, net, 2, (pd["cx"], pd["cy"]), (pd["cx"] - ux * 1.2, pd["cy"] - uy * 1.2), 0.2)
                 pd["fanned"] = True
                 ngnd += 1

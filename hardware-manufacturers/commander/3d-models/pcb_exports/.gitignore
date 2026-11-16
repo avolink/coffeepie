@@ -1,0 +1,6 @@
+# working files of tools/export_3d.py (board copies with box models, logs)
+_*
+*_done.txt
+# GLB / STL are regenerated with the DAE (tools/glb_to_dae.py); STEP (CAD exchange) and DAE (SketchUp) are kept
+*.glb
+*.stl

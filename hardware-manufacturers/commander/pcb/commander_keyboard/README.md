@@ -2,17 +2,22 @@
 
 The keyboard of the Commander terminal as a KiCad project: the prototyped Altium design **Teclado_V2**
 (84 Keychron low-profile optical switches, 6 x 16 matrix) converted to KiCad, with the hand-soldered
-**Arduino Micro module replaced by an ATmega32U4 circuit soldered on the board**.
+**Arduino Micro module replaced by a microcontroller soldered on the board** - since 2026-11-15 an **STC8H8K64U**
+(5 V, USB without crystal, about 0.35 USD in volume) instead of the ATmega32U4 (about 3.30 USD), for the cost target.
+**The firmware has to be rewritten for it** (8051 core; see *Firmware* below).
 
-**Status (2026-11-14): every connection made.** Ready for a prototype order once the assumptions at the end of
-this file are confirmed (board thickness, USB-C position) and someone has looked over the new copper.
+**Status (2026-11-15, STC8H8K64U rebuild): every connection made.** Ready for a prototype order once the
+assumptions at the end of this file are confirmed (board thickness, USB-C position), someone has looked over the new
+copper, and the new firmware exists.
 
 | Check | Result |
 |---|---|
 | ERC | clean |
-| Model / schematic / board | identical, pad by pad (989 pads) |
+| Model / schematic / board | identical, pad by pad (960 pads) |
 | KiCad DRC: unconnected | **0** |
-| KiCad DRC: other remarks | none on the new copper except 15 vias beside the chip that connect on one layer only (harmless); the rest are in the prototype's own copper (see *Found in the prototype's design*) |
+| KiCad DRC: other remarks | on the new copper: 2 "starved thermal" (C204 / C206 reach the pour with one spoke - they also have a track) and a few dangling stubs / single-layer vias beside the chip (harmless); the rest are in the prototype's own copper - 3 hole clearances and 10 copper-to-edge (see *Found in the prototype's design*) |
+
+(The 2026-11-14 build with the ATmega32U4 had 989 pads; that board is in git history.)
 
 The fabrication files are in `../../fabrication/gerber/commander_keyboard_revK1_PROTOTYPE/` (+ BOM and placement
 in `../../fabrication/bom` and `/position`).
@@ -38,45 +43,37 @@ kbd_fix_net.py    <in> <out> MOSI 146 160 SS_RXLED,RESET_N,D0_RX,D7,MISO,SCK
 | **Unchanged from the prototype** | outline (315.05 x 135.01 mm, 188 cut-outs: two 6 x 1.6 mm slots per switch and 20 stabiliser openings), the 84 switches and their 168 resistors, 16 column pull-ups, the LED switch (Q1, R185, jumper J1), every track and copper zone of the matrix. Nothing was moved or re-routed. |
 | **Removed** | the Arduino Micro module (U1, bottom face) and the 58 short tracks (165 mm) that led from its pads to the first via; the west part of the +5 V track that fed its supply pin |
 | **Corrected** | the 113 mechanical holes of the switches (84 x 4.0 mm, 29 x 2.0 mm) came out of the conversion as vias without a copper ring, 42 of them carrying the net of a track that passes nearby; they are now non-plated holes without a net |
-| **New, bottom face, where the module was** | ATmega32U4-MU (QFN-44), 16 MHz crystal with 2 x 15 pF, 22 ohm USB series resistors, 1 uF on UCAP, 3 x 100 nF + 4.7 uF decoupling, reset pull-up and button, HWB pull-down, six ISP pads |
+| **New, bottom face, where the module was** | STC8H8K64U-45I-LQFP32 (LCSC C5210757), 22 ohm USB series resistors, 1 uF on UCAP, 3 x 100 nF + 4.7 uF decoupling, BOOT button with pull-up (no crystal, no reset circuit, no ISP pads: the chip is programmed over the USB-C) |
 | **New, bottom face, left edge** | USB-C receptacle (16-pin, USB 2.0, 5.1 k on both CC pins), USBLC6-2 ESD array, 750 mA resettable fuse, 4.7 uF |
 
 The matrix nets carry the **Arduino pin names** the prototype used (`A0`..`A5` rows, `D2`..`D13`, `MISO`, `SCK`,
-`MOSI`, `SS` columns, `D0` LED enable), and each goes to the ATmega32U4 pin that the Arduino Micro wires to that name -
-except four columns, which are swapped in pairs (next section). The firmware needs that one change. `src/keymap.csv` lists which switch (T1..T84) sits on which
-row and column.
+`MOSI`, `SS` columns, `D0` LED enable): they name the lines of the matrix; which STC pin each one reaches is in the
+table below. `src/keymap.csv` lists which switch (T1..T84) sits on which row and column.
 
-Left out from the Arduino Micro: both regulators and the VIN path (the keyboard is USB-powered), the four
-LEDs, the pin headers, the AREF capacitor (no analogue input is used) and the 1 M resistor across the crystal
-(the oscillator does not need it).
+## Firmware: the pin table of the STC8H8K64U
 
-## Firmware: four columns are read on swapped pins
+The Arduino sketch of the prototype does not run on the STC8H8K64U (8051 core, programmed in C with SDCC or Keil;
+STC publishes USB HID keyboard examples). The new firmware drives the six rows, reads the sixteen columns, switches
+the infra-red LEDs with `D0`, and is a USB HID keyboard at full speed (the chip's USB needs no crystal: its clock
+locks to the bus). The chip runs from the same +5 V as the matrix, as the ATmega did.
 
-The ATmega32U4 sends its column lines out of its west side in an order that did not match the order in which they
-reach the matrix; two of them could not be routed without crossing the others. With the owner's agreement two pairs
-of columns are swapped at the chip:
-
-| Column (switches T..) | Net name (Arduino pin on the prototype) | Read on the new board by Arduino pin | Chip pin |
+| Matrix line (net) | Role | STC pin | Port |
 |---|---|---|---|
-| 4 (T4, T20, T35, T50, T64, T78) | D12 | **D5** | 31 (PC6) |
-| 11 (T11, T27, T42, T57, T71, T81) | D5 | **D12** | 26 (PD6) |
-| 6 (T6, T22, T37, T52, T66) | D10 | **D8** | 28 (PB4) |
-| 8 (T8, T24, T39, T54, T68) | D8 | **D10** | 30 (PB6) |
+| A0, A1, A2, A3, A4, A5 | rows (outputs) | 1, 2, 3, 4, 5, 6 | P1.0, P1.1, P1.4, P1.5, P1.6, P1.7 |
+| MOSI | column | 7 | P1.3 |
+| SCK | column | 9 | P5.4 |
+| MISO | column | 16 | P3.3 |
+| SS_RXLED | column | 17 | P3.4 |
+| D2_SDA, D3_SCL, D4, D5 | columns | 19, 20, 21, 22 | P3.6, P3.7, P2.0, P2.1 |
+| D6, D7, D8, D9 | columns | 25, 26, 27, 28 | P2.4, P2.5, P2.6, P2.7 |
+| D10, D11, D12, D13 | columns | 29, 30, 31, 32 | P0.0, P0.1, P0.2, P0.3 |
+| D0_RX | infra-red LED enable (to Q1 through J1) | 18 | P3.5 |
+| USB D- / D+ | USB | 13 / 14 | P3.0 / P3.1 |
+| BOOT_N | boot button, 10 k pull-up | 15 | P3.2 |
 
-All other rows and columns stay on the pins the prototype used. In the firmware this is one line - the list of
-column pins. If it reads, for example,
-
-```
-const uint8_t colPins[16] = {SCK, MISO, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 17, MOSI};
-```
-
-then for this board it becomes
-
-```
-const uint8_t colPins[16] = {SCK, MISO, 13, 5, 11, 8, 9, 10, 7, 6, 12, 4, 3, 2, 17, MOSI};
-```
-
-(the switch references per column are in `src/keymap.csv`; check them against the firmware's own column order).
+Spare: pins 23, 24 (P2.2, P2.3). The column inputs keep the prototype's 10 k pull-ups (R169..R184). The STC pins
+start in quasi-bidirectional mode (strong low, weak high): the firmware sets the six rows and `D0` to push-pull
+outputs, as the ATmega's were, so that they can source current when high.
 
 ## How the project is built
 
@@ -91,7 +88,7 @@ python ../commander_mainboard/tools/make_quote_package.py --variant keyboard   #
 | Source | What it is |
 |---|---|
 | `src/altium_import.kicad_pcb` | the Altium board as KiCad converts it (`kicad-cli pcb import --format altium`); the base of the board |
-| `src/netlist/01_kbd_mcu.net` | the ATmega32U4 circuit - **edit this to change the new circuit** |
+| `src/netlist/01_kbd_mcu.net` | the microcontroller circuit (STC8H8K64U) - **edit this to change the new circuit** |
 | `src/netlist/02..08_*.net` | the matrix, written by `tools/kbd_extract.py` from the Altium board (generated, do not edit) |
 | `src/altium_net_map.json`, `src/keymap.csv` | Altium net name -> name used here; the key matrix as a table |
 | `lib/commander.pretty/` | the switch footprint (from the Altium board) and the ISP pads |
@@ -119,22 +116,18 @@ stop regenerating the board (`--keep-board`) and use *Update PCB from Schematic*
   500 mA. The LEDs are switched together by Q1 from pin `D0`; whether the firmware keeps them on all the time
   or pulses them decides the real consumption. A USB 2.0 port guarantees 0.5 A; the mainboard's keyboard port
   must be allowed to give more, or the firmware must pulse the LEDs.
-- AVCC (both pins) is tied straight to +5 V, as on the Arduino Micro: no analogue input is used (A0..A5 drive
-  the rows as digital outputs, and port F, which they belong to, is supplied from AVCC). A ferrite in front of
-  AVCC was tried first; on this board it cost a connection that could not be routed and bought nothing.
-- Clock: 16 MHz, as on the Arduino (bootloader and firmware assume it).
+- The ADC reference pin (11) is tied to +5 V with its own 100 nF: no analogue input is used.
+- UCAP (pin 8): 1 uF to ground for the chip's USB regulator (STC asks for 0.1 - 10 uF).
+- Clock: the chip's internal oscillator; USB locks it to the host. No crystal.
 - USB: device, full speed. 22 ohm in series at the chip, ESD array at the receptacle.
-- `HWB` is pulled low, as on the Arduino, so the bootloader runs after an external reset.
-- Reset: button SW201 on the bottom face; RESET and GND are also neighbouring ISP pads.
+- No reset circuit: the chip resets itself at power-up (P5.4 is used as an ordinary pin, for `SCK`).
 
-## Bootloader: once per board
+## Programming: over the USB-C, no adapter
 
-A new ATmega32U4 comes with Atmel's DFU bootloader, not with the Arduino one. Each assembled board has to be
-programmed **once** through the six ISP pads J202 on the bottom face (standard AVR ISP order, 2.54 mm grid,
-for a 2 x 3 pogo-pin adapter; pad 1 is marked): *Arduino IDE -> Tools -> Board: Arduino Micro -> Burn
-Bootloader* with any ISP programmer (USBasp, another Arduino as ISP). That sets the fuses and installs the
-bootloader; from then on the keyboard is programmed over USB exactly like the module was.
-Alternatively the assembler can deliver the chips pre-programmed.
+The STC8H8K64U has a USB boot loader in ROM. Hold the BOOT button SW201 (bottom face; P3.2 to ground) while
+plugging the USB cable in, release it: the keyboard appears as "STC USB Writer (HID1)", and STC's free tool
+STC-ISP loads the firmware. Firmware updates later work the same way - which also keeps the keyboard repairable
+in the field.
 
 ## Assumptions to confirm before ordering
 

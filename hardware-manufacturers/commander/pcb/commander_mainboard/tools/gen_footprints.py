@@ -173,6 +173,39 @@ def main():
         s += rect("F.CrtYd", -11.25, 0.0, 11.25, 4.25, 0.05)     # (stops at the board body: parts may start there)
         write(name, s)
     m2_socket()
+    usbc24_hoauc()
+
+
+def usbc24_hoauc():
+    """HOAUC HYCW275-USBC24-050B (LCSC C42400261): USB-C 24-pin receptacle, right angle, top mount, two staggered
+    rows of SMD pads at the back, 3.26 mm tall.  Land pattern from the JLCEDA/EasyEDA Official Library footprint
+    "USB-C-SMD_HYCW275-USBC24-050B" (https://lceda.cn/, https://easyeda.com), checked against HOAUC drawing
+    HYC-2109011553 (holes 6.80 apart and 5.90 behind the front, front legs 8.64 apart and 2.70 behind it).
+    Origin: centre of the mating face, which is flush with the board edge ("product edge"); the body runs
+    towards -y.  The four rear hold-down slots pair up into an L on each side."""
+    name = "USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B"
+    s = header(name, "HOAUC HYCW275-USBC24-050B USB-C 24P receptacle, right angle, top mount, 3.26 mm tall (LCSC C42400261). "
+                     "Footprint source: JLCEDA/EasyEDA Official Library (https://lceda.cn/, https://easyeda.com), "
+                     "checked against HOAUC drawing HYC-2109011553", "USB C Type-C receptacle 24P HOAUC", smd=False)
+    for i in range(12):                                  # A1..A12 left to right, B12..B1 left to right, 0.5 mm, staggered
+        s += smd("A%d" % (i + 1), "rect", -2.63 + 0.5 * i, -7.82, 0.25, 0.95)
+        s += smd("B%d" % (12 - i), "rect", -2.88 + 0.5 * i, -6.57, 0.25, 0.95)
+    for sx in (-1, 1):
+        s += (f'  (pad "SH" thru_hole oval (at {3.84 * sx:.2f} -6.85) (size 1.5 1.0) (drill oval 1.3 0.6) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+        s += (f'  (pad "SH" thru_hole oval (at {4.34 * sx:.2f} -7.35) (size 1.0 2.0) (drill oval 0.6 1.6) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+        s += (f'  (pad "SH" thru_hole oval (at {4.32 * sx:.2f} -2.70) (size 1.3 2.5) (drill oval 0.9 2.1) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+        s += (f'  (pad "" np_thru_hole circle (at {3.40 * sx:.2f} -5.90) (size 0.6 0.6) (drill 0.6) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+    s += rect("F.Fab", -4.47, -7.90, 4.47, 0.0)
+    s += rect("F.CrtYd", -5.25, -8.60, 5.25, 0.25, 0.05)
+    s += line("F.SilkS", -4.62, -5.00, -4.62, -4.15) + line("F.SilkS", 4.62, -5.00, 4.62, -4.15)
+    s += line("F.SilkS", -4.62, -1.25, -4.62, 0.0) + line("F.SilkS", 4.62, -1.25, 4.62, 0.0)
+    s += text("F.Fab", "mating face / board edge", 0, 0.8, 0.5)
+    s += f'  (fp_circle (center -2.63 -8.75) (end -2.48 -8.75) (stroke (width 0.15) (type solid)) (fill solid) (layer "F.SilkS"))\n'
+    write(name, s)
 
 
 def m2_socket():

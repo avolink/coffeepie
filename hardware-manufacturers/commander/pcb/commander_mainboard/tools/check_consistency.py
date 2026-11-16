@@ -90,7 +90,7 @@ def main():
     else:
         print("model vs schematic  : skipped (no netlist file given)")
 
-    if "U1" not in d.comps:                 # a variant without the codec core
+    if "U1" not in d.comps or d.comps["U1"].part != "RK3566":      # a variant without the codec core
         print("CONSISTENT" if total == 0 else f"INCONSISTENT ({total})")
         raise SystemExit(0 if total == 0 else 1)
 
