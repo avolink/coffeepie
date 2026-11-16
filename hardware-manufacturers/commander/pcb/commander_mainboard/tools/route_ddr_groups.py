@@ -37,8 +37,10 @@ import route                                    # noqa: E402
 NL = chr(10)
 ROOT = cpmodel.ROOT
 SRC = os.environ.get("CP_DDR_SRC") or os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb")
-DST = os.path.join(ROOT, "build", "ddr_groups.kicad_pcb")
-REGION = ("ddr", 4.5, 60.8, 27.0, 90.6)         # the two packages and the gap between them (design mm)
+DST = os.environ.get("CP_DDR_DST") or os.path.join(ROOT, "build", "ddr_groups.kicad_pcb")
+REPORT = DST.replace(".kicad_pcb", "_report.txt")
+REGION = ("ddr",) + tuple(float(v) for v in (os.environ.get("CP_DDR_REGION") or "4.5,60.8,27.0,90.6").split(","))
+                                                # the two packages and the gap between them (design mm)
 F, MID, B = 0, 1, 2
 
 
@@ -84,6 +86,18 @@ PLAN_BLIND2 = [         # the far-row byte first on its own layer, then the comm
     ("data byte 0, the rest, on In2.Cu (blind via B-In2)", ("data0",), pcbnew.In2_Cu, {MID, B}),
     ("the rest (reset, ZQ) on In2.Cu (blind via B-In2)", ("RESETN", "ZQ0", "ZQ1"), pcbnew.In2_Cu, {MID, B}),
 ]
+PLAN_BLIND8 = [         # 8 layers (tools/to_8_layers.py): every group on an inner layer of its own, blind vias from B.Cu
+    ("data byte 0 on In5.Cu (blind via B-In5)", ("data0",), pcbnew.In5_Cu, {MID, B}),
+    ("data byte 1 on In3.Cu (blind via B-In3)", ("data1",), pcbnew.In3_Cu, {MID, B}),
+    ("command / address / clock on In2.Cu (blind via B-In2)", ("cmd",), pcbnew.In2_Cu, {MID, B}),
+    ("the rest (reset, ZQ) on In2.Cu (blind via B-In2)", ("RESETN", "ZQ0", "ZQ1"), pcbnew.In2_Cu, {MID, B}),
+]
+PLAN_THROUGH8 = [       # the same layers with plain through vias (no HDI): a via blocks every layer
+    ("data byte 0 on In5.Cu (through vias)", ("data0",), pcbnew.In5_Cu, {MID, B}),
+    ("data byte 1 on In3.Cu (through vias)", ("data1",), pcbnew.In3_Cu, {MID, B}),
+    ("command / address / clock on In2.Cu (through vias)", ("cmd",), pcbnew.In2_Cu, {MID, B}),
+    ("the rest (reset, ZQ) on In2.Cu (through vias)", ("RESETN", "ZQ0", "ZQ1"), pcbnew.In2_Cu, {MID, B}),
+]
 PLAN = [
     ("data byte 0 on B.Cu", ("data0",), pcbnew.In2_Cu, {B}),
     ("command / address / clock on In2.Cu", ("cmd",), pcbnew.In2_Cu, {MID, B}),
@@ -104,7 +118,9 @@ def main():
     route.SKIP_CLASSES.discard("DDR")
     log = []
     mode = os.environ.get("CP_DDR_PLAN", "")
-    for title, kinds, middle, allowed in {"open": PLAN_OPEN, "blind": PLAN_BLIND, "blind1": PLAN_BLIND1, "blind2": PLAN_BLIND2}.get(mode, PLAN):
+    plans = {"open": PLAN_OPEN, "blind": PLAN_BLIND, "blind1": PLAN_BLIND1, "blind2": PLAN_BLIND2,
+             "blind8": PLAN_BLIND8, "through8": PLAN_THROUGH8}
+    for title, kinds, middle, allowed in plans.get(mode, PLAN):
         board = pcbnew.LoadBoard(DST)
         if mode.startswith("blind"):            # a via joins the middle layer and B.Cu only
             route.VIA_L = [1, 2]
@@ -183,7 +199,7 @@ def main():
     groups = collections.defaultdict(list)
     for n in pads:
         groups[group_of(n)].append(n)
-    lines = ["Memory bus, routed group by group (" + cpmodel.PRJ + ") - on a copy: build/ddr_groups.kicad_pcb", ""] + log + [""]
+    lines = ["Memory bus, routed group by group (" + cpmodel.PRJ + ") - on a copy: " + DST, ""] + log + [""]
     lines.append("nets complete end to end (KiCad's connectivity): %d of %d" % (len(complete), len(pads)))
     lines.append("")
     lines.append("group                         complete   length of the complete nets      spread   vias  layers")
@@ -202,7 +218,7 @@ def main():
         for n in sorted(groups[key]):
             lines.append("  %-22s %-9s %7.2f mm  %d via  %s%s" % (n, key[1], length[n], vias[n], " ".join(sorted(layers[n])),
                                                               "" if n in complete else "   NOT COMPLETE"))
-    open(os.path.join(ROOT, "build", "ddr_groups_report.txt"), "w", encoding="utf-8").write(NL.join(lines) + NL)
+    open(REPORT, "w", encoding="utf-8").write(NL.join(lines) + NL)
     print(NL.join(lines[:24]))
 
 

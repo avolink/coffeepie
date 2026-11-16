@@ -96,6 +96,15 @@ def main():
             run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all",
                         "-o", "build/drc.rpt", PRJ + ".kicad_pcb"], ok_codes=(0, 5))
             print("DRC:", summarize("build/drc.rpt") or "clean")
+            pcb, pos = PRJ + ".kicad_pcb", os.path.join(COMMANDER, "fabrication", "position")
+            run("placement file", [KCLI, "pcb", "export", "pos", "--format", "csv", "--units", "mm", "--side", "both",
+                                   "-o", os.path.join(pos, f"{PRJ}_{REV}_placement.csv"), pcb])
+            run("assembly drawing, top", [KCLI, "pcb", "export", "pdf", "--mode-single",
+                                          "--layers", "F.Cu,F.SilkS,F.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_top.pdf"), pcb])
+            run("assembly drawing, bottom", [KCLI, "pcb", "export", "pdf", "--mode-single", "--mirror",
+                                             "--layers", "B.Cu,B.SilkS,B.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
+            run("BOM", py("gen_bom.py"))
+            run("the boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
         run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), PRJ + ".kicad_sch"])
         print("ERC:", summarize("build/erc.rpt") or "clean")
         if FINDINGS:
@@ -143,7 +152,7 @@ def main():
         run("assembly drawing, bottom", [KCLI, "pcb", "export", "pdf", "--mode-single", "--mirror",
                                          "--layers", "B.Cu,B.SilkS,B.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
         run("BOM", py("gen_bom.py"))
-        run("both boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
+        run("the boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
         print()
         print("ERC:", summarize("build/erc.rpt") or "clean")
         print("DRC:", summarize("build/drc.rpt") or "clean")
@@ -196,6 +205,8 @@ def main():
                                      "--layers", "B.Cu,B.SilkS,B.Fab,B.CrtYd,Edge.Cuts,Dwgs.User",
                                      "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
     run("BOM", py("gen_bom.py"))
+    if cpmodel.VARIANT == "main":
+        run("the boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
 
     print()
     print("ERC:", summarize("build/erc.rpt") or "clean")

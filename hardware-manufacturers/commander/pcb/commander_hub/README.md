@@ -7,7 +7,7 @@ fingers, no connector part).  The pinout is `../commander_mainboard/tools/hub_li
 
 | | |
 |---|---|
-| Size | 288.7 x 21.72 mm body (board x 73.0 to 361.7) + the 19.85 mm card tongue, 4 mm long |
+| Size | 291.7 x 21.72 mm body (board x 73.0 to 364.7) + the 19.85 mm card tongue, 4 mm long |
 | Thickness | **0.8 mm** (M.2 cards are 0.8 +-0.08 mm) |
 | Layers | 6 for now (the strip's routing came over as it was); 4 layers is the cost step for later |
 | Finish | ENIG; fingers bevelled 20 deg; no copper or mask in the key notch |

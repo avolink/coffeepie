@@ -506,6 +506,40 @@ rule costs connections on this floorplan. Ways forward: move the memory 3-4 mm a
 the processor; or an 8-layer stack-up; or free the top face for byte 0. Either way the result still needs length
 tuning and a layout engineer's review (5.2a).
 
+**8 layers tried (2026-11-15, branch `m2-hub`): no gain.** `tools/to_8_layers.py` made a copy with In5 (signal,
+between the In4 and In6 ground planes) and In6 (ground, a copy of In4's pour; the Ethernet "no ground pour" areas
+widened to it), existing copper untouched. Each group then had an inner layer of its own (byte 0 on In5, byte 1 on
+In3, command on In2; `CP_DDR_PLAN=blind8` / `through8`, room opened as for the 6-layer runs):
+
+| plan | result |
+|---|---|
+| 8 layers, blind vias from B.Cu | 38 |
+| 8 layers, through vias | 30 |
+
+The limit is not the number of layers but getting out of the two ball fields: every net needs a via between
+0.4 mm-pitch balls, and the packages are less than 1 mm apart, so the vias of all groups compete for the same few
+places whatever layer they go to. (The router counts a via as an obstacle on all its layers; a blind via does not
+block layers beyond its span, so the blind result is somewhat pessimistic, but not by 33 nets.) So the board stays
+at 6 layers.
+
+**The memory moved and turned (2026-11-15): no real gain either.** `tools/ddr_move_mem.py` moves U10 on a copy (its
+ball vias with it; bottom-face parts in its new place taken off the copy), then the same 6-layer blind-via plan
+(`CP_DDR_PLAN=blind`, `CP_DDR_REGION=1,60.8,27,96`):
+
+| U10 | parts it displaces | result |
+|---|---|---|
+| where it is (baseline today) | - | 38 |
+| 3 mm down | 20 (VDD_LOGIC / GPU caps, L17, L19, ...) | 36 |
+| 3 mm down, 2.5 mm left (under the processor's memory corner) | 18 | **43** |
+| turned 90 deg, 4 mm down | 30, the PMIC U9 among them | 34 |
+| turned -90 deg, 4 mm down | the same | 37 |
+
+The column has no free length below the memory (parts reach the bottom edge, y 118.7), so any move down pushes the
+regulator block, the PMIC and the eMMC. Five more nets for that is not worth it: a memory bus is useful only when
+complete, and the hard groups stay hard everywhere (channel B byte 1: 0-4 of 11, the command groups 4-8 of 13).
+Not applied: U10 stays where it is. What is left is a person: Rockchip's / Radxa's reference layout for this exact
+chip pair placed and adapted by a layout engineer, or KiCad's interactive router with length tuning by hand.
+
 ### 5.2b The battery port is a provisional interface
 - The battery module does not exist yet. CC, SBU and data wiring are a reasonable guess at what it needs.
 - **Switch-over is seamless only towards a source that is already on the port.** While the board is
