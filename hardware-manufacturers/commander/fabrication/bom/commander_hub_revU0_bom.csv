@@ -11,8 +11,7 @@ qty,value,footprint,description,populate,origin,references,lcsc
 2,18pF,C_0402_1005Metric,,,Commander,C701 C702,
 7,BTR04G02,D_0402_1005Metric,"ESD diode, bidirectional, 0402",,Radxa ZERO 3E V1.2,D13 D14 D15 D16 D17 D18 D19,
 1,MICROSD,microSD_HC_Molex_104031-0811,microSD push-push socket,,Radxa ZERO 3E V1.2,J6,
-4,USBC24,USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B,"USB-C receptacle, full-featured 24-pin, right angle, top mount (HOAUC HYCW275-USBC24-050B)",,Commander,J31 J32 J33 J34,C42400261
-5,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",,Commander,J35 J36 J37 J38 J39,C42400252
+9,USBC24_SINK,USB_C_Receptacle_Amphenol_12402072E512A,"USB-C receptacle, full-featured 24-pin, sink (mid) mount in a board notch, centre height -0.10 mm on a 0.8 mm board (Amphenol 12402072E512A, USB4 Gen3)",,Commander,J31 J32 J33 J34 J35 J36 J37 J38 J39,
 1,M2_EDGE_M,M2_CardEdge_KeyM_Tongue,"M.2 Key M card-edge fingers, 0.8 mm board, ENIG, bevelled (the hub board's plug into J41 on the mainboard)",,Radxa ZERO 3E V1.2,J90,
 2,2.2uH_2520,L_1008_2520Metric,,,Commander,L41 L42,
 2,0R,R_0201_0603Metric,,,Radxa ZERO 3E V1.2,R137 R90723,

@@ -170,6 +170,14 @@ PARTS = {
                    padmap={"SH": ["SH"]},
                    pins=named("A1:GND A2:TX1+ A3:TX1- A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A10:RX2- A11:RX2+ A12:GND "
                               "B1:GND B2:TX2+ B3:TX2- B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B10:RX1- B11:RX1+ B12:GND SH:SHIELD")),
+    # hub bays since 2026-11-16: sink (mid) mount, so the hub board can sit 2 mm higher on the H4.2 M.2 socket while the
+    # receptacles stay on the expansion cards' plug axis; not stocked at LCSC (consigned)
+    "USBC24_SINK": dict(fp="commander:USB_C_Receptacle_Amphenol_12402072E512A",
+                        desc="USB-C receptacle, full-featured 24-pin, sink (mid) mount in a board notch, centre height -0.10 mm on a "
+                             "0.8 mm board (Amphenol 12402072E512A, USB4 Gen3)",
+                        padmap={"SH": ["SH"]},
+                        pins=named("A1:GND A2:TX1+ A3:TX1- A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A10:RX2- A11:RX2+ A12:GND "
+                                   "B1:GND B2:TX2+ B3:TX2- B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B10:RX1- B11:RX1+ B12:GND SH:SHIELD")),
     "USB5744": dict(fp="Package_DFN_QFN:QFN-56-1EP_7x7mm_P0.4mm_EP5.6x5.6mm", desc="Microchip USB5744 4-port USB 3.2 Gen 1 hub, VQFN-56", pins=named(
         "1:USB2DN_DP1 2:USB2DN_DM1 3:USB3DN_TXDP1 4:USB3DN_TXDM1 5:VDD12 6:USB3DN_RXDP1 7:USB3DN_RXDM1 8:USB2DN_DP2 9:USB2DN_DM2 "
         "10:USB3DN_TXDP2 11:USB3DN_TXDM2 12:VDD12 13:USB3DN_RXDP2 14:USB3DN_RXDM2 15:VDD12 16:VDD33 17:USB2DN_DP3 18:USB2DN_DM3 "
@@ -251,9 +259,11 @@ PARTS = {
                          pins=named("1:GND 2:TX 3:RX 4:3V3")),
     "HDR1x4": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:GND 2:TX 3:RX 4:3V3")),
     # --- mainboard <-> hub board link (branch m2-hub, pinout in tools/hub_link.py) ---
-    "M2_SOCKET_M": dict(fp="commander:M2_Socket_KeyM_LOTES_APCI0146", padmap={"MP": ["MP"]},
-                        desc="M.2 Key M socket, top mount, 2.06 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0146-P002A "
-                             "(10u\" gold; -P001A = LCSC C841645). Carries the hub board link (tools/hub_link.py), not an M.2 slot",
+    # H4.2 since 2026-11-16 (was APCI0146 H2.3, same land pattern): the hub's card edge sits about 2.4 mm above the
+    # mainboard instead of 0.3, which puts the hub board where the chassis' slot is
+    "M2_SOCKET_M": dict(fp="commander:M2_Socket_KeyM_LOTES_APCI0146", padmap={"MP": ["MP"]}, lcsc="C841661",
+                        desc="M.2 Key M socket H4.2, top mount, 4.05 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0107-P001A "
+                             "(LCSC C841661; land pattern identical to APCI0146). Carries the hub board link (tools/hub_link.py), not an M.2 slot",
                         pins=None),
     "M2_EDGE_M": dict(fp="commander:M2_CardEdge_KeyM_Tongue",
                       desc="M.2 Key M card-edge fingers, 0.8 mm board, ENIG, bevelled (the hub board's plug into J41 on the mainboard)",

@@ -2,7 +2,7 @@
 
 The nine Framework bays, both USB hubs (USB5744, USB2517), the bays' Type-C muxes, power switches and ESD, and the
 microSD slot, on their own board.  It plugs into the mainboard (`../commander_mainboard`) through an **M.2 Key M
-socket** (J41 there, LOTES APCI0146-P002A, top mount, 2.06 mm): this board's left end is the card edge (J90, gold
+socket** (J41 there, LOTES APCI0107-P001A H4.2, top mount, 4.05 mm; was APCI0146 H2.3): this board's left end is the card edge (J90, gold
 fingers, no connector part).  The pinout is `../commander_mainboard/tools/hub_link.py`, one source for both boards.
 
 | | |
@@ -11,7 +11,7 @@ fingers, no connector part).  The pinout is `../commander_mainboard/tools/hub_li
 | Thickness | **0.8 mm** (M.2 cards are 0.8 +-0.08 mm) |
 | Layers | 6 for now (the strip's routing came over as it was); 4 layers is the cost step for later |
 | Finish | ENIG; fingers bevelled 20 deg; no copper or mask in the key notch |
-| Height | the card rests 0.3 mm above the mainboard: everything on this board stands 1.1 mm higher than on the old strip |
+| Height | the card rests about 2.4 mm above the mainboard (H4.2 socket); the bay receptacles are sink-mount (see below) |
 | Coordinates | the mainboard's own, so `route.py`'s strip region applies unchanged |
 
 Build: `python ../commander_mainboard/tools/build.py --variant hub` (schematic, ERC, and the checks if the board
@@ -46,6 +46,31 @@ shorter than the boards the model had there.  What still touches: the profile ho
 edge in a low slot over the last 1.5 mm, and three parts reach into it - L42 (0.5 mm), the
 microSD slot J6 (0.3 mm; its card also needs an opening in the profile) and C712 (0.1 mm).  Next layout pass: keep
 the rear 2 mm free of parts, and agree the microSD opening with the profile drawing.
+
+**2026-11-16 (later): the hub sits 2 mm higher, in the chassis' slot, on a taller socket; the bays are sink-mount.**
+The user placed the hub where the profile's slot holds it (underside 2.3 mm above the mainboard's top). Two changes:
+
+- **J41 on the mainboard: LOTES APCI0107-P001A, H4.2** (LCSC C841661, 4.05 mm tall), same land pattern as the
+  APCI0146: the card rests about 2.4-2.47 mm above the mainboard (LOTES stack-up drawing) instead of 0.3 mm.
+- **J31-J39: Amphenol 12402072E512A**, USB-C 24-pin, USB4 Gen3, *sink (mid) mount*, centre 0.10 mm *under* the
+  board's top face (Amphenol drawing C-12402072 rev 7) - instead of 1.63 mm above it for a top-mount part. All nine
+  bays use it (same centre height everywhere; on bays 5-9 the SuperSpeed pins stay unconnected). Not stocked at LCSC:
+  about $1.50 (5,500) / $1.68 (1,100 reel) / $2.75 (1) from Amphenol's distributors - consigned to JLC.
+  Footprint `lib/commander.pretty/USB_C_Receptacle_Amphenol_12402072E512A` (from the drawing's recommended layout;
+  check it against the drawing once more before ordering). 3D model `lib/3d/Amphenol_12402072E512A.step` = Amphenol's
+  STEP turned into the footprint's frame; it is Amphenol's file and stays out of git - download `sc12402072.zip` from
+  amphenol-cs.com and run `tools/amph_model.py` on it if it is missing.
+- Each receptacle sits in a **notch of the rear edge**, 9.42 mm wide and 7.6 mm deep behind the mouth, R0.5 reliefs at
+  the inner corners (`tools/hub_midmount_swap.py`, which also put the mouths exactly where the old ones were, so the
+  cards mate as before). Parts in the way moved to the nearest free spot of their bay (`tools/hub_make_room.py`, 48
+  parts, the bottom-face ones off the receptacles' through-slots too); copper touching another net's pad removed
+  (`tools/hub_clean_copper.py`).
+- Heights in `COMMANDER_Z3E.skp`: mainboard 0.39 mm lower than before (underside 15.48, top 16.68), hub underside
+  19.12 / top 19.92, receptacle centres at 19.82 = the expansion cards' plug axis. The hub ends 0.25 mm lower than
+  where it was placed by hand (no standard socket height in between: H3.2 holds the card at about 1.47 mm).
+
+Board now: consistent with the schematic (1054 pads), ERC clean, DRC: the 2 inherited J6 edge items, dangling
+stubs from the rip-ups, **499 unconnected items** (was 213) - the bay areas need the router again.
 
 Fabrication notes for the order: 0.8 mm, ENIG, "gold finger bevel 20 deg" on the left end, the key notch milled.
 Mount it to the chassis with a screw near the socket end and between the bays (a 292 mm board at 0.8 mm is floppy;

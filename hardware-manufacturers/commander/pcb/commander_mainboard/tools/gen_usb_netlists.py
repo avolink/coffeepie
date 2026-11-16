@@ -21,6 +21,11 @@ STRIP = cpmodel.VARIANT == "strip"
 HUB = cpmodel.VARIANT == "hub"          # the hub board of branch m2-hub: the bays, both hubs and the microSD slot
 MAIN = cpmodel.VARIANT == "main"        # the mainboard keeps only the keyboard port and the M.2 socket to the hub board
 import hub_link                         # noqa: E402  (the socket / card-edge position list, one source for both boards)
+# the hub board's bays are sink-mount 24-pin receptacles since 2026-11-16 (tools/hub_midmount_swap.py); the strip test
+# board keeps its top-mount ones
+RC_SS = "USBC24_SINK" if HUB else "USBC24"
+RC_HS = "USBC24_SINK" if HUB else "USBC16"
+HS_NC = " A2 A3 A10 A11 B2 B3 B10 B11" if HUB else ""
 
 
 def ss_bay(k):
@@ -29,7 +34,7 @@ def ss_bay(k):
     q = 1000 + k * 10         # second block for the Type-C controller / mux: 101x .. 104x
     return f"""
 # ---- bay {k}: USB 3.2 Gen 1 (USB5744 port {k}) ----
-J3{k} USBC24 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
+J3{k} {RC_SS} A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
 P J3{k} A5=CC1_P{k} B5=CC2_P{k} A6=USB_P{k}_DP B6=USB_P{k}_DP A7=USB_P{k}_DM B7=USB_P{k}_DM
 P J3{k} A2=SSTX1P_P{k} A3=SSTX1N_P{k} B11=SSRX1P_P{k} B10=SSRX1N_P{k} B2=SSTX2P_P{k} B3=SSTX2N_P{k} A11=SSRX2P_P{k} A10=SSRX2N_P{k}
 NC J3{k} A8 B8
@@ -75,9 +80,9 @@ def hs_bay(k):
     b = 700 + k * 10          # reference block: 75x .. 79x
     return f"""
 # ---- bay {k}: USB 2.0 (USB2517 port {n}) ----
-J3{k} USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
+J3{k} {RC_HS} A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
 P J3{k} A5=CC1_P{k} B5=CC2_P{k} A6=USB_P{k}_DP B6=USB_P{k}_DP A7=USB_P{k}_DM B7=USB_P{k}_DM
-NC J3{k} A8 B8
+NC J3{k} A8 B8{HS_NC}
 U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5=VBUS_P{k}
 R{b+5} 56K VBUS_P{k} CC1_P{k}
 R{b+6} 56K VBUS_P{k} CC2_P{k}

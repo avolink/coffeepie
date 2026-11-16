@@ -30,7 +30,7 @@ HEIGHT = [
     (r"RJ45", 8.0, (0.75, 0.75, 0.78), "ESTIMATE (sunk RJ45, height above the board)"),
     (r"XFMR_Bourns_PLN", 8.0, (0.1, 0.1, 0.1), ""),
     (r"XFMR_LAN", 2.2, (0.1, 0.1, 0.1), "ESTIMATE"),
-    (r"M2_Socket", 2.06, (0.1, 0.1, 0.1), ""),
+    (r"M2_Socket", 4.05, (0.1, 0.1, 0.1), "LOTES APCI0107 H4.2 (since 2026-11-16)"),
     (r"M2_CardEdge", 0.0, None, ""),
     (r"HDMI_Micro", 3.0, (0.75, 0.75, 0.78), "ESTIMATE"),
     (r"WLCSP|_CSP", 0.6, (0.15, 0.15, 0.15), ""),

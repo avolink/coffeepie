@@ -1,7 +1,7 @@
 (kicad_sch (version 20231120) (generator "eeschema") (generator_version "8.0")
   (uuid "6f5323c3-fd11-5368-8f15-e0edcac530c2")
   (paper "A3")
-  (title_block (title "Commander mainboard - index") (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")
+  (title_block (title "Commander hub - index") (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")
     (comment 1 "Codec Terminal, model Commander: RK3566 + PoE PD + USB hubs on one PCB")
     (comment 2 "Reference design: Radxa ZERO 3E V1.2 (sheets marked NEW are Commander additions)")
     (comment 3 "CERN-OHL-S v2 + Coffee Pie Circular Economy Addendum"))
