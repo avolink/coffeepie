@@ -1,0 +1,136 @@
+﻿line,category,description / purchasing spec,design value,package,manufacturer,manufacturer part number,notes,LCSC reference,qty per board,designators
+1,IC,"I2C EEPROM 2 kbit (AT24C02 / AT24CS02), SOT-23-5",AT24C02,SOT-23-5,"multi-source (Microchip AT24C02, ...)",AT24C02 SOT-23-5,,,1,U21
+2,IC,"LPDDR4 SDRAM 200-ball FBGA, 1 GB (8 Gb, x32 dual channel): Samsung K4F8E3S4HD-MGCL",LPDDR4_200,BGA-200_10x14.5mm_Layout12x22_P0.8x0.65mm,Samsung,K4F8E3S4HD-MGCL,1 GB; K4F6E3S4HM (2 GB) fits the same footprint,C2920231,1,U10
+3,IC,"Realtek RTL8211F-CG GbE PHY, QFN-40",RTL8211F,QFN-40-1EP_5x5mm_P0.4mm_EP3.8x3.8mm,Realtek,RTL8211F-CG,,C187932,1,U2
+4,IC,"Rockchip RK3566 SoC, FCCSP-565",RK3566,RK3566_FCCSP-565_15.5x14.4mm,Rockchip,RK3566,,C2943786,1,U1
+5,IC,"Rockchip RK817-5 PMIC + codec, QFN-68",RK817,ArtInChip_QFN-68-1EP_7x7mm_P0.35mm_EP5.49x5.49mm,Rockchip,RK817-5,,C5179490,1,U9
+6,IC,"Rockchip RK860-0 buck (VDD_CPU), WLCSP-20",RK860,Anpec_WLCSP-20_1.76x2.03mm_Layout4x5_P0.4mm,Rockchip,RK860-0,,C19188628,1,U3
+7,IC,ST USBLC6-2SC6 USB ESD,USBLC6-2SC6,SOT-23-6,STMicroelectronics,USBLC6-2SC6,,C2827654,2,U51 U83
+8,IC,"TI TPD4E05U06 4-ch ESD, flow-through",TPD4E05U06,USON-10_2.5x1.0mm_P0.5mm,Texas Instruments,TPD4E05U06DQAR,,C2827646,2,U16 U17
+9,IC,"TI TPS2121 power mux 2.8-22 V 4.5 A, fast switch-over, VQFN-HR-12",TPS2121,Texas_VQFN-HR-12_2x2.5mm_P0.5mm,Texas Instruments,TPS2121RUXR,,C485916,1,U81
+10,IC,"TI TPS23754 PoE PD + DC/DC controller, HTSSOP-20",TPS23754,HTSSOP-20-1EP_4.4x6.5mm_P0.65mm_EP3.4x6.5mm,Texas Instruments,TPS23754PWP,,C181651,1,U30
+11,IC,"TL431 shunt reference, SOT-23 (DBZ pinout)",TL431,SOT-23,multi-source,"TL431 (SOT-23, DBZ pinout: 1 = REF, 2 = K, 3 = A)",,,1,U32
+12,IC,USB power switch with fault flag,AP22804AW5,SOT-23-5,Diodes Inc.,AP22804AW5-7,,C3001659,1,U82
+13,IC,"Union UM3204H 4-ch level shifter (HDMI DDC/CEC), WLCSP-12",UM3204H,WLCSP-12_3x4_P0.5mm,Union Semiconductor,UM3204H,,,1,U15
+14,IC,"eMMC 5.1 153-ball, 8 GB: Samsung KLM8G1GETF-B041",EMMC153,LFBGA-153_11.5x13mm_Layout14x14_P0.5mm,Samsung,KLM8G1GETF-B041,8 GB; KLMAG1JETD-B041 (16 GB) fits the same footprint,C499918,1,U20
+15,IC,"onsemi FUSB302B USB-C port controller (or ET7301B), WQFN-14",FUSB302B,WQFN-14-1EP_2.5x2.5mm_P0.5mm_EP1.45x1.45mm,onsemi,FUSB302BMPX,alternative: Etek ET7301B,C132291,1,U80
+16,IC,"optocoupler, 4-pin mini-flat SOP, 2.1 mm tall, 5 mm creepage (TLP291 / EL3H7 / LTV-217)",TLP291,SOP-4_4.4x2.6mm_P1.27mm,Toshiba,"TLP291(GB-TP,SE","alternatives: Everlight EL3H7, Lite-On LTV-217",,1,U31
+17,Transistor,"150 V N-MOSFET, PowerPAK 1212-8",150V_60mR,Vishay_PowerPAK_1212-8_Single,(to be chosen: e.g. Vishay SiS 150 V series),,"N-MOSFET 150 V, 60 mΩ, PowerPAK 1212-8",,1,Q30
+18,Transistor,N-MOSFET SOT-23,2SK3018,SOT-23,multi-source (Rohm origin),2SK3018,N-MOSFET 30 V,,2,Q1 Q2
+19,Transistor,P-MOSFET SOT-23,WPM2341,SOT-23,WillSemi,WPM2341-3/TR,P-MOSFET 20 V,,2,Q7 Q8
+20,Transistor,P-MOSFET SOT-23,WPM3407,SOT-23,WillSemi,WPM3407-3/TR,P-MOSFET 30 V,,1,Q5
+21,Diode,"ESD diode, bidirectional, 0402",BTR04G02,D_0402_1005Metric,(see LCSC listing),BTR04G02,ESD diode bidirectional 0402,,8,D4 D5 ED1 ED2 ED9 ED10 ED11 ED12
+22,Diode,Schottky diode,1N5819WT,D_SOD-523,multi-source,1N5819WT,"Schottky 40 V 1 A, SOD-523",,1,D6
+23,Diode,Schottky diode,SS34,D_SMA,"multi-source (MDD, MCC, onsemi, ...)",SS34,Schottky 40 V 3 A,,1,D30
+24,Diode,Schottky diode,SS110,D_SMA,multi-source,SS110,Schottky 100 V 1 A,,8,D31 D32 D33 D34 D35 D36 D37 D38
+25,Diode,Schottky rectifier 10 A,PDS1040,D_PowerDI-5,Diodes Inc.,PDS1040-13,"Schottky 40 V 10 A, PowerDI-5",,1,D41
+26,Diode,"TVS, bidirectional",AZ5825-01F,D_0402_1005Metric,Amazing Microelectronic,AZ5825-01F.R7GR,TVS / ESD 0402,,1,ED6
+27,Diode,"TVS, bidirectional",SMF5.0CA,D_SOD-123F,multi-source,SMF5.0CA,"TVS 5 V bidirectional, SOD-123F",,2,D3 D80
+28,Diode,"TVS, unidirectional, SMA",SMAJ58A,D_SMA,multi-source,SMAJ58A,"TVS 58 V unidirectional, SMA",,1,D39
+29,Diode,diode,BAV21W,D_SOD-123,multi-source (Diodes Inc. BAV21W-7-F),BAV21W,switching diode 200 V,,1,D40
+30,Diode,diode,ES1D,D_SOD-123,multi-source,ES1D,fast rectifier 200 V 1 A,,1,D42
+31,LED,"LED green, 0603, 20 mA class",GREEN,0603,multi-source,,,,1,LED1
+32,Crystal,"crystal 24MHz, 3.2 x 2.5 mm 4-pad, ±20 ppm, load capacitance to suit the board's capacitors (see schematic)",24MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,multi-source,,,,1,Y1
+33,Crystal,"crystal 25MHz, 3.2 x 2.5 mm 4-pad, ±20 ppm, load capacitance to suit the board's capacitors (see schematic)",25MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,multi-source,,,,1,Y2
+34,Crystal,"crystal 32.768kHz, 3.2 x 1.5 mm, ±20 ppm, load capacitance to suit the board's capacitors (see schematic)",32.768kHz,Crystal_SMD_3215-2Pin_3.2x1.5mm,multi-source,,,,1,Y6
+35,Transformer,"Bourns PLN060-ER20A05S planar PoE flyback transformer, 5 V out, 1 : 0.25 : 0.5, 40 uH, 200 kHz, 1500 Vrms, 8.0 mm tall",PLN060-ER20A05S,XFMR_Bourns_PLN0xx-ER20,Bourns,PLN060-ER20A05S,,C24570980,1,T1
+36,Transformer,single-channel LAN transformer 1:1 with centre taps (Radxa: GB020G00),GB020G00,XFMR_LAN_1CH_6P,(Radxa's part; see LCSC listing),GB020G00,LAN transformer 1:1 with centre taps,,4,L15 L23 L25 L27
+37,Inductor,"common-mode choke, 4-pad 0805",BCMF062P120T,CMC_0504_4P,(see LCSC listing),BCMF062P120T,"common-mode choke, 0504",,4,L13 L14 L16 L29
+38,Inductor,"common-mode choke, 4-pad 0805",CC2012A-801,L_CommonModeChoke_Coilank_ACM2012,(see LCSC listing),CC2012A-801,"common-mode choke, 0805",,4,L22 L24 L26 L28
+39,Inductor,"common-mode choke, 4-pad 0805",BCMF122P900H,L_CommonModeChoke_Coilank_ACM2012,(see LCSC listing),BCMF122P900H,"common-mode choke, 0805",,1,L9
+40,Inductor,"power inductor 1 µH ±20 %, Isat >= 5 A, 4.0 x 4.0 x 2.1 mm max, shielded, molded",1uH_5A,"4.0 x 4.0 x 2.1 mm max, shielded, molded",any (to spec),,,,1,L30
+41,Inductor,"power inductor 2.2 µH ±20 %, 0805 (2012 metric)",2.2uH,0805 (2012 metric),any (to spec),,,,1,L7
+42,Inductor,"power inductor 240 nH ±20 %, 2.5 x 2.0 mm (1008), shielded",0.24uH_2520,"2.5 x 2.0 mm (1008), shielded",any (to spec),,,,1,L2
+43,Inductor,"power inductor 470 nH ±20 %, 2.5 x 2.0 mm (1008), shielded",470nH_2520,"2.5 x 2.0 mm (1008), shielded",any (to spec),,,,5,L17 L18 L19 L20 L21
+44,Ferrite bead,"ferrite bead 120 Ω at 100 MHz, 0402 (1005 metric)",FB120R,0402,any (to spec),,,,2,R105 R114
+45,Ferrite bead,"ferrite bead 120 Ω at 100 MHz, 0603 (1608 metric)",FB120R,0603,any (to spec),,,,1,FB9
+46,Ferrite bead,"ferrite bead 120 Ω at 100 MHz, rated >= 3 A, 0805 (2012 metric)",FB120R_3A,0805,any (to spec),,,,1,R107
+47,Fuse,"PTC resettable fuse, hold 500 mA, Vmax >= 6 V, 1206 (3216 metric)",PTC:500mA,1206,any (to spec),,,,1,F1
+48,Capacitor,"MLCC 1 nF 2 kV X7R, high voltage ±10 %, 1808 (4520 metric)",1nF_2kV,1808,any (to spec),,,,1,C60
+49,Capacitor,"MLCC 1 nF 50 V C0G / NP0 ±10 %, 0201 (0603 metric)",1nF,0201,any (to spec),,,,1,C55
+50,Capacitor,"MLCC 1 nF 50 V C0G / NP0 ±10 %, 0402 (1005 metric)",1nF,0402,any (to spec),,,,2,C503 C510
+51,Capacitor,"MLCC 1 µF 16 V X5R or X7R ±10 %, 0201 (0603 metric)",1uF,0201,any (to spec),,,,26,C31 C35 C38 C41 C64 C73 C85 C86 C87 C106 C163 C183 C240 C310 C313 C315 C322 C323 C326 C327 C333 C340 C341 C344 C346 C348
+52,Capacitor,"MLCC 1 µF 16 V X5R or X7R ±10 %, 0402 (1005 metric)",1uF,0402,any (to spec),,,,6,C33 C314 C324 C334 C405 C803
+53,Capacitor,"MLCC 1 µF 16 V X5R or X7R ±10 %, 0805 (2012 metric)",1uF,0805,any (to spec),,,,1,C342
+54,Capacitor,"MLCC 1 µF 25 V X5R or X7R ±10 %, 0402 (1005 metric)",1uF_25V,0402,any (to spec),,,,1,C508
+55,Capacitor,"MLCC 10 nF 100 V X7R ±10 %, 0805 (2012 metric)",10nF_100V,0805,any (to spec),,,,1,C516
+56,Capacitor,"MLCC 10 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",10uF,0603,any (to spec),,,,5,C204 C312 C345 C713 C812
+57,Capacitor,"MLCC 100 nF 100 V X7R ±10 %, 0805 (2012 metric)",100nF_100V,0805,any (to spec),,,,1,C501
+58,Capacitor,"MLCC 100 nF 16 V X7R ±10 %, 0201 (0603 metric)",100nF,0201,any (to spec),,,,99,C5 C10 C14 C17 C18 C19 C22 C23 C24 C27 C30 C32 C34 C36 C39 C40 C42 C43 C44 C45 C46 C47 C51 C52 C53 C54 C56 C57 C58 C61 C62 C63 C66 C67 C68 C71 C72 C75 C76 C77 C79 C82 C91 C94 C95 C97 C98 C107 C108 C109 C110 C113 C115 C116 C120 C149 C150 C152 C164 C165 C166 C167 C168 C169 C170 C171 C172 C173 C174 C175 C176 C177 C178 C179 C184 C185 C186 C187 C188 C189 C190 C191 C193 C194 C195 C196 C197 C198 C199 C200 C201 C205 C206 C232 C316 C328 C350 C351 C352
+59,Capacitor,"MLCC 100 nF 16 V X7R ±10 %, 0402 (1005 metric)",100nF,0402,any (to spec),,,,17,C37 C112 C192 C207 C402 C404 C406 C502 C517 C601 C602 C801 C802 C806 C807 C811 C815
+60,Capacitor,"MLCC 100 pF 50 V C0G / NP0 ±10 %, 0402 (1005 metric)",100pF,0402,any (to spec),,,,1,C509
+61,Capacitor,"MLCC 18 pF 50 V C0G / NP0 ±10 %, 0201 (0603 metric)",18pF,0201,any (to spec),,,,2,C28 C29
+62,Capacitor,"MLCC 2.2 nF 50 V X7R ±10 %, 0201 (0603 metric)",2.2nF,0201,any (to spec),,,,1,C15
+63,Capacitor,"MLCC 2.2 µF 10 V X5R or X7R ±10 %, 0402 (1005 metric)",2.2uF,0402,any (to spec),,,,3,C343 C401 C403
+64,Capacitor,"MLCC 2.2 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",2.2uF,0603,any (to spec),,,,1,C337
+65,Capacitor,"MLCC 2.2 µF 100 V X5R or X7R ±10 %, 1210 (3225 metric)",2.2uF_100V,1210,any (to spec),,,,2,C505 C506
+66,Capacitor,"MLCC 22 pF 50 V C0G / NP0 ±10 %, 0402 (1005 metric)",22pF,0402,any (to spec),,,,2,C347 C349
+67,Capacitor,"MLCC 22 µF 10 V X5R or X7R ±10 %, 0402 (1005 metric)",22uF,0402,any (to spec),,,,3,C2 C6 C12
+68,Capacitor,"MLCC 22 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",22uF,0603,any (to spec),,,,25,C13 C78 C80 C81 C89 C90 C151 C160 C161 C180 C181 C311 C317 C318 C319 C320 C325 C329 C330 C331 C332 C335 C336 C338 C339
+69,Capacitor,"MLCC 22 µF 10 V X5R or X7R ±10 %, 0805 (2012 metric)",22uF,0805,any (to spec),,,,2,C515 C814
+70,Capacitor,"MLCC 22 µF 25 V X5R or X7R ±10 %, 0805 (2012 metric)",22uF_25V,0805,any (to spec),,,,1,C507
+71,Capacitor,"MLCC 220 pF 50 V C0G / NP0 ±10 %, 0402 (1005 metric)",220pF,0402,any (to spec),,,,2,C804 C805
+72,Capacitor,"MLCC 4.7 nF 2 kV X7R, high voltage ±10 %, 1808 (4520 metric)",4.7nF_2kV,1808,any (to spec),,,,1,C400
+73,Capacitor,"MLCC 4.7 µF 10 V X5R or X7R ±10 %, 0201 (0603 metric)",4.7uF,0201,any (to spec),,,,4,C1 C26 C111 C140
+74,Capacitor,"MLCC 4.7 µF 10 V X5R or X7R ±10 %, 0402 (1005 metric)",4.7uF,0402,any (to spec),,,,11,C4 C8 C11 C20 C21 C25 C74 C105 C114 C119 C321
+75,Capacitor,"MLCC 4.7 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",4.7uF,0603,any (to spec),,,,2,C9 C813
+76,Capacitor,"MLCC 47 µF 10 V X5R or X7R ±10 %, 1206 (3216 metric)",47uF_10V,1206,any (to spec),,,,3,C511 C512 C513
+77,Capacitor,"MLCC 8.2 pF 50 V C0G / NP0 ±10 %, 0201 (0603 metric)",8.2pF,0201,any (to spec),,,,2,C3 C7
+78,Capacitor,"aluminium electrolytic capacitor 22 µF 100 V, SMD 6.3 x 7.7 mm, 105 °C",22uF_100V_ALU,6.3x7.7,any (to spec),,,,1,C504
+79,Capacitor,"polymer tantalum capacitor 220 µF 6.3 V, EIA 7343 (D case), max 2.0 mm tall, low ESR",220uF_6.3V_POLY,7343,any (to spec),,,,1,C514
+80,Capacitor,"safety capacitor class Y2 (or Y1) 2.2 nF, 2 kV rated, SMD 1808 (4520 metric)",2.2nF_2kV_Y,1808,any (to spec),,,,1,C518
+81,Resistor,"0 Ω jumper, 0201 (0603 metric)",0R,0201,any (to spec),,,,7,R2 R5 R6 R21 R88 R152 R90728
+82,Resistor,"0 Ω jumper, 0402 (1005 metric)",0R,0402,any (to spec),,,,6,R10 R58 R59 R60 R69 R123
+83,Resistor,"0 Ω jumper, 0603 (1608 metric)",0R,0603,any (to spec),,,,1,R122
+84,Resistor,"chip resistor 1 MΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",1M,0402,any (to spec),,,,1,R400
+85,Resistor,"chip resistor 1 MΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",1M,0201,any (to spec),,,,3,R4 R150 R151
+86,Resistor,"chip resistor 1 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",1K,0402,any (to spec),,,,2,R509 R513
+87,Resistor,"chip resistor 1 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",1K,0201,any (to spec),,,,1,R140
+88,Resistor,"chip resistor 1 Ω ±1 % 1/20 W, 0201 (0603 metric), thick film",1R_1%,0201,any (to spec),,,,3,R19 R20 R40
+89,Resistor,"chip resistor 1.5 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",1.5K,0201,any (to spec),,,,1,R115
+90,Resistor,"chip resistor 1.62 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",1.62K_1%,0201,any (to spec),,,,1,R49
+91,Resistor,"chip resistor 10 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",10K,0402,any (to spec),,,,10,R402 R403 R405 R507 R514 R805 R812 R814 R816 R818
+92,Resistor,"chip resistor 10 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",10K_1%,0201,any (to spec),,,,9,R11 R14 R25 R28 R66 R67 R104 R153 R191
+93,Resistor,"chip resistor 10 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",10R,0402,any (to spec),,,,2,R506 R510
+94,Resistor,"chip resistor 100 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",100K,0402,any (to spec),,,,1,R804
+95,Resistor,"chip resistor 100 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",100K,0201,any (to spec),,,,2,R65 R141
+96,Resistor,"chip resistor 100 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",100R,0402,any (to spec),,,,1,R72
+97,Resistor,"chip resistor 100 Ω ±1 % 1/20 W, 0201 (0603 metric), thick film",100R,0201,any (to spec),,,,6,R13 R16 R57 R74 R135 R139
+98,Resistor,"chip resistor 120 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",120K_1%,0201,any (to spec),,,,1,R149
+99,Resistor,"chip resistor 2 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",2K,0402,any (to spec),,,,2,R504 R516
+100,Resistor,"chip resistor 2.2 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",2.2K,0402,any (to spec),,,,1,R801
+101,Resistor,"chip resistor 2.2 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",2.2K,0201,any (to spec),,,,8,R7 R8 R35 R36 R42 R52 R53 R111
+102,Resistor,"chip resistor 2.49 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",2.49K_1%,0402,any (to spec),,,,1,R84
+103,Resistor,"chip resistor 20 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",20K_1%,0402,any (to spec),,,,1,R811
+104,Resistor,"chip resistor 22 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",22K,0201,any (to spec),,,,2,R12 R15
+105,Resistor,"chip resistor 22 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",22R,0402,any (to spec),,,,3,R31 R401 R505
+106,Resistor,"chip resistor 22 Ω ±1 % 1/20 W, 0201 (0603 metric), thick film",22R,0201,any (to spec),,,,4,R3 R18 R110 R116
+107,Resistor,"chip resistor 22.1 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",22.1K_1%,0402,any (to spec),,,,1,R817
+108,Resistor,"chip resistor 24.9 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",24.9K_1%,0402,any (to spec),,,,1,R501
+109,Resistor,"chip resistor 240 Ω ±1 % 1/20 W, 0201 (0603 metric), thick film",240R_1%,0201,any (to spec),,,,3,R1 R120 R121
+110,Resistor,"chip resistor 27 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",27K_1%,0402,any (to spec),,,,1,R813
+111,Resistor,"chip resistor 36 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",36K_1%,0201,any (to spec),,,,1,R29
+112,Resistor,"chip resistor 39 kΩ ±1 % 1 W, 2512 (6332 metric), thick film",39K_1W,2512,any (to spec),,,,1,R511
+113,Resistor,"chip resistor 4.3 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",4.3K,0201,any (to spec),,,,1,R33
+114,Resistor,"chip resistor 4.7 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",4.7K,0402,any (to spec),,,,1,R87
+115,Resistor,"chip resistor 4.7 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",4.7K,0201,any (to spec),,,,8,R77 R78 R80 R89 R91 R97 R99 R103
+116,Resistor,"chip resistor 46.4 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",46.4K_1%,0402,any (to spec),,,,1,R815
+117,Resistor,"chip resistor 47 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",47K,0402,any (to spec),,,,1,R404
+118,Resistor,"chip resistor 47 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",47K_1%,0201,any (to spec),,,,1,R142
+119,Resistor,"chip resistor 499 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",499R,0402,any (to spec),,,,1,R512
+120,Resistor,"chip resistor 5.1 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",5.1K,0201,any (to spec),,,,3,R41 R909 R910
+121,Resistor,"chip resistor 51 kΩ ±1 % 1/20 W, 0201 (0603 metric), thick film",51K_1%,0201,any (to spec),,,,2,R27 R56
+122,Resistor,"chip resistor 56 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",56K,0402,any (to spec),,,,2,R706 R707
+123,Resistor,"chip resistor 63.4 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",63.4R_1%,0402,any (to spec),,,,1,R502
+124,Resistor,"chip resistor 75 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",75K_1%,0402,any (to spec),,,,1,R503
+125,Resistor,"chip resistor 75 Ω ±1 % 1/10 W, 0603 (1608 metric), thick film",75R,0603,any (to spec),,,,3,R9 R17 R23
+126,Resistor,"chip resistor 75 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",75R,0402,any (to spec),,,,2,R22 R82
+127,Resistor,"chip resistor 9.09 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",9.09K_1%,0402,any (to spec),,,,1,R515
+128,Resistor,"current-sense resistor 150 mΩ ±1 % 1 W, 2512 (6332 metric), metal / low-TCR",0.15R_1%_1W,2512,any (to spec),,,,1,R508
+129,Connector,"JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",JST_SH4_UART,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB(LF)(SN),,,1,J21
+130,Connector,"M.2 Key M socket H4.2, top mount, 4.05 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0107-P001A (LCSC C841661; land pattern identical to APCI0146). Carries the hub board link (tools/hub_link.py), not an M.2 slot",M2_SOCKET_M,M2_Socket_KeyM_LOTES_APCI0146,LOTES,APCI0107-P001A,"M.2 Key M, H4.2",C841661,1,J41
+131,Connector,"RJ45 8P8C, no magnetics, low profile (Radxa: HanRun HR6042S-1188N15B-1R)",RJ45_8P,RJ45_HR6042S_8P8C_LowProfile,HanRun,HR6042S-1188N15B-1R,,,1,J12
+132,Connector,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,HOAUC,HYCW498-USBC16-735B,alternative: HRO TYPE-C-31-M-12,C42400252,3,J2 J20 J40
+133,Connector,micro HDMI (type D) receptacle,HDMI_MICRO_D,HDMI_Micro-D_Molex_46765-2xxx,Molex,46765-2xxx (see footprint),micro HDMI type D receptacle,,1,J10
+134,Switch,tact switch,RECOVERY,SW_Push_1P1T_NO_CK_KMR2,C&K,KMR221GLFS,or equivalent 4.2 x 2.8 mm tact switch,,2,SW1 SW2
+135,Switch,"tact switch, side-operated (Panasonic EVQ-P7A, 3.5 x 2.9 x 1.35 mm)",POWER,SW_SPST_EVQP7A,Panasonic,EVQ-P7A01P,"side-operated, 3.5 x 2.9 x 1.35 mm",,1,SW3

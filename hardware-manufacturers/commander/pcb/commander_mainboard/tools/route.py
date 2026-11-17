@@ -65,8 +65,28 @@ if cpmodel.VARIANT == "hub":
             (73.0, 102.08), (71.6, 102.08), (71.6, 86.8), (72.9, 86.8), (72.9, 85.3), (71.6, 85.3), (71.6, 82.24),
             (73.0, 82.24)]
 
+    # The bays' sink-mount receptacles sit in notches of the rear edge (tools/hub_midmount_swap.py): 9.42 mm wide,
+    # 7.6 mm deep behind the mouth, R0.5 reliefs at the inner corners (taken here as 0.5 x 1.0 mm steps).  The bay
+    # centres are read from the board file itself.
+    def _hub_notched():
+        import re as _re
+        from hub_make_room import MOUTH_Y, NOTCH_HW, NOTCH_END, RELIEF, Y_TOP
+        path = os.environ.get("CP_PCB") or os.path.join(cpmodel.ROOT, cpmodel.PRJ + ".kicad_pcb")
+        txt = open(path, encoding="utf-8").read()
+        cxs = sorted(float(m.group(1)) for m in _re.finditer(
+            r'\(at ([\d.\-]+) [\d.\-]+[^)]*\)\s*\(descr "[^"]*"\)\s*\(tags "[^"]*"\)\s*\(property "Reference" "J3[1-9]"', txt))
+        ye = MOUTH_Y + NOTCH_END
+        top = [(73.0, Y_TOP)]
+        for cx in cxs:
+            lft, rgt = cx - NOTCH_HW, cx + NOTCH_HW
+            top += [(lft, Y_TOP), (lft, ye - 2 * RELIEF), (lft - RELIEF, ye - 2 * RELIEF), (lft - RELIEF, ye),
+                    (rgt + RELIEF, ye), (rgt + RELIEF, ye - 2 * RELIEF), (rgt, ye - 2 * RELIEF), (rgt, Y_TOP)]
+        return top + _HUB[1:], len(cxs)
+
+    _HUB_N, HUB_NOTCHES = _hub_notched()
+
     def outline_pts():                          # noqa: F811
-        return [(x - OX, y - OY) for x, y in _HUB]
+        return [(x - OX, y - OY) for x, y in _HUB_N]
 _OUT = outline_pts()
 # the whole codec column, head to front edge: the stage that joins what the local windows could not
 COLUMN = ("column", -1.0, math.floor(min(p_[1] for p_ in _OUT)) - 1.0, CFG["COL_W"] + 1.0, math.ceil(CFG["COL_L"]) + 1.0)
@@ -2352,7 +2372,9 @@ def stage_prune(board, r):
                 d = t.GetWidth()
             vias.setdefault(code, []).append([t.GetPosition().x, t.GetPosition().y, d / 2, t, True])
         else:
-            tracks.setdefault(code, []).append([t.GetLayer(), t.GetStart().x, t.GetStart().y, t.GetEnd().x, t.GetEnd().y, t.GetWidth() / 2, t, True])
+            # (the hub's finger stubs, tools/hub_board.py, end at the card edge on purpose: kept, never dropped)
+            keep = cpmodel.VARIANT == "hub" and min(ToMM(t.GetStart().x), ToMM(t.GetEnd().x)) < 73.0
+            tracks.setdefault(code, []).append([t.GetLayer(), t.GetStart().x, t.GetStart().y, t.GetEnd().x, t.GetEnd().y, t.GetWidth() / 2, t, True, keep])
     drop = []
 
     def on_seg(px, py, s_):
@@ -2373,7 +2395,7 @@ def stage_prune(board, r):
         while changed:
             changed = False
             for s_ in tl:
-                if not s_[7]:
+                if not s_[7] or s_[8]:
                     continue
                 for px, py in ((s_[1], s_[2]), (s_[3], s_[4])):
                     ok = any(v[4] and (v[0] - px) ** 2 + (v[1] - py) ** 2 <= v[2] ** 2 for v in vl)

@@ -784,7 +784,7 @@
     (property "Value" "LPDDR4_200" (at 1.27 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Package_BGA:BGA-200_10x14.5mm_Layout12x22_P0.8x0.65mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "LPDDR4 SDRAM 200-ball FBGA, 2 GB (16 Gb) e.g. K4F6E3S4HM / NT6AN512T32" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "LPDDR4 SDRAM 200-ball FBGA, 1 GB (8 Gb, x32 dual channel): Samsung K4F8E3S4HD-MGCL" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (symbol "LPDDR4_200_1_1"
       (rectangle (start -11.43 0) (end 11.43 -129.54) (stroke (width 0.254) (type default)) (fill (type background)))
       (pin passive line (at -13.97 -2.54 0) (length 2.54) (name "DQ0_A" (effects (font (size 1.016 1.016)))) (number "B2" (effects (font (size 1.016 1.016)))))
@@ -1247,7 +1247,7 @@
     (property "Value" "USBC16" (at 5.08 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (symbol "USBC16_1_1"
       (rectangle (start -7.62 0) (end 7.62 -25.4) (stroke (width 0.254) (type default)) (fill (type background)))
       (pin passive line (at -10.16 -2.54 0) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "A1" (effects (font (size 1.016 1.016)))))
@@ -1304,7 +1304,7 @@
     (property "Value" "EMMC153" (at 0 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "eMMC 5.1 153-ball, 16 GB" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "eMMC 5.1 153-ball, 8 GB: Samsung KLM8G1GETF-B041" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (symbol "EMMC153_1_1"
       (rectangle (start -12.7 0) (end 12.7 -43.18) (stroke (width 0.254) (type default)) (fill (type background)))
       (pin passive line (at -15.24 -2.54 0) (length 2.54) (name "EMMC_D0" (effects (font (size 1.016 1.016)))) (number "A3" (effects (font (size 1.016 1.016)))))
@@ -1541,7 +1541,7 @@
     (property "Value" "M2_SOCKET_M" (at -5.08 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "commander:M2_Socket_KeyM_LOTES_APCI0146" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "M.2 Key M socket, top mount, 2.06 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0146-P002A (10u\" gold; -P001A = LCSC C841645). Carries the hub board link (tools/hub_link.py), not an M.2 slot" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "M.2 Key M socket H4.2, top mount, 4.05 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0107-P001A (LCSC C841661; land pattern identical to APCI0146). Carries the hub board link (tools/hub_link.py), not an M.2 slot" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (symbol "M2_SOCKET_M_1_1"
       (rectangle (start -17.78 0) (end 17.78 -88.9) (stroke (width 0.254) (type default)) (fill (type background)))
       (pin passive line (at -20.32 -2.54 0) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "1" (effects (font (size 1.016 1.016)))))

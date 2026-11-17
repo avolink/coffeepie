@@ -38,7 +38,7 @@
       (property "Value" "EMMC153" (at 0 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
       (property "Footprint" "Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
       (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-      (property "Description" "eMMC 5.1 153-ball, 16 GB" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Description" "eMMC 5.1 153-ball, 8 GB: Samsung KLM8G1GETF-B041" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
       (symbol "EMMC153_1_1"
         (rectangle (start -12.7 0) (end 12.7 -43.18) (stroke (width 0.254) (type default)) (fill (type background)))
         (pin passive line (at -15.24 -2.54 0) (length 2.54) (name "EMMC_D0" (effects (font (size 1.016 1.016)))) (number "A3" (effects (font (size 1.016 1.016)))))
@@ -753,7 +753,7 @@
     (property "Value" "EMMC153" (at 41.91 42.545 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm" (at 44.45 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 44.45 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "eMMC 5.1 153-ball, 16 GB" (at 44.45 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "eMMC 5.1 153-ball, 8 GB: Samsung KLM8G1GETF-B041" (at 44.45 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (pin "A3" (uuid "df5182f8-4134-5a2b-be7d-d0c384dea26f"))
     (pin "A4" (uuid "4f432d4f-b4ce-54f4-9551-31ee3c3c435e"))
     (pin "A5" (uuid "e9ecdbf8-9cf0-56b9-b52a-3a1c0d7d301f"))

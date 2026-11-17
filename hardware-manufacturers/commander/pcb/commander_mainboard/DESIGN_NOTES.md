@@ -173,6 +173,10 @@ column; a pogo-pin-to-USB-C adapter will dock the battery module there. It is a 
   pins can be linked to I2C2 with two 0 Ω parts (DNP) for a module that prefers I2C telemetry.
 
 The PoE set point moves from 5.05 V to 5.11 V to cover the drop in the mux (56 mΩ typical).
+**2026-11-16:** raised again to **5.24 V** (R515 9.53 k -> 9.09 k): every hub bay now feeds its connector through a 40 V
+Schottky that blocks back-feed from whatever is plugged in (see `../commander_hub/README.md`); the 0.35 V it drops at
+1 A comes out of this margin.  5.24 V is inside the USB range (4.75-5.5 V) and well below U81's 6.0 V lock-out; the
+maximum ratings of the parts on VCC5V_BUS / VCC_SYS are worth one look in the review (not re-checked one by one).
 No rear USB-C was added: the connector beside the RJ45 is the micro HDMI and stays.
 
 **Head of the column: HDMI left, PoE centre, low-voltage corridor right.** From the left edge:

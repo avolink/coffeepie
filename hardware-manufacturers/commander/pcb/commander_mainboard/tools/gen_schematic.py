@@ -65,6 +65,9 @@ SHEET_TITLES = {
     "tp_sensor": "Touchpad module: IQS550 trackpad controller, 15 Tx x 10 Rx electrodes (drawn by tools/small_board.py)",
     "tr_hub": "Tray carrier: USB-C upstream, CH334P hub, 3.3 V for the bays",
     "tr_ports": "Tray carrier: the two Framework input-module bays (pogo contacts, presence-switched power)",
+    "bar_power": "Front battery bar: 42 x AAA NiMH as three 14-cell strings, string switches, solar + port charger (boost), 5 V output (buck)",
+    "bar_mcu": "Front battery bar: STC8H8K64U gauge / charge controller, USB-C port and dock harness",
+    "barcon": "Front battery bar: cell-contact board (six lane pads, three thermistors)",
 }
 
 

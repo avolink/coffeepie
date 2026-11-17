@@ -33,10 +33,12 @@ VARIANT = ("strip" if PRJ.endswith("strip_test") else "kbmcu" if PRJ.endswith("k
            else "batt" if PRJ.endswith("commander_battery")
            else "numpad" if PRJ.endswith("commander_numpad")
            else "touch" if PRJ.endswith("commander_touchpad")
-           else "tray" if PRJ.endswith("commander_tray") else "main")
+           else "tray" if PRJ.endswith("commander_tray")
+           else "bar" if PRJ.endswith("commander_bar_bms")
+           else "barcon" if PRJ.endswith("commander_bar_contacts") else "main")
 REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0", "hub": "revU0",
-       "batt": "revB0", "numpad": "revN0", "touch": "revP0", "tray": "revR0"}.get(VARIANT, "revA1")
-SMALL = VARIANT in ("batt", "numpad", "touch", "tray")  # two-layer module boards built by tools/small_board.py
+       "batt": "revB0", "numpad": "revN0", "touch": "revP0", "tray": "revR0", "bar": "revS0", "barcon": "revS0"}.get(VARIANT, "revA1")
+SMALL = VARIANT in ("batt", "numpad", "touch", "tray", "bar", "barcon")  # two-layer module boards built by tools/small_board.py
 NETDIR = os.path.join(ROOT, "src", "netlist")
 MAIN_NETDIR = os.path.normpath(os.path.join(HERE, "..", "src", "netlist"))
 
@@ -274,6 +276,8 @@ PARTS = {
     "TVS_UNI": dict(fp="Diode_SMD:D_SMA", two="diode", desc="TVS, unidirectional, SMA", padmap={"A": ["2"], "K": ["1"]}),
     "SCHOTTKY": dict(fp="Diode_SMD:D_SMA", two="diode", desc="Schottky diode", padmap={"A": ["2"], "K": ["1"]}),
     "SCHOTTKY_PWR": dict(fp="Diode_SMD:D_PowerDI-5", two="diode", desc="Schottky rectifier 10 A", padmap={"A": ["2"], "K": ["1"]}),
+    "SCHOTTKY_123W": dict(fp="Diode_SMD:Nexperia_CFP3_SOD-123W", two="diode", lcsc="C5709679",
+                          desc="Nexperia PMEG4030ER-QX Schottky 40 V 3 A, SOD-123W (bay VBUS back-feed blocking)", padmap={"A": ["2"], "K": ["1"]}),
     "DIODE": dict(fp="Diode_SMD:D_SOD-123", two="diode", desc="diode", padmap={"A": ["2"], "K": ["1"]}),
     "LED": dict(fp="LED_SMD:LED_0603_1608Metric", two="led", desc="LED 0603", padmap={"A": ["2"], "K": ["1"]}),
     "PTC": dict(fp="Fuse:Fuse_1206_3216Metric", two="r", desc="resettable fuse"),
@@ -322,6 +326,22 @@ PARTS = {
                      desc="pogo-pin connector 2 x 4, 2.0 mm, 1.6 mm working height, 1 A per pin (CFE BP33242-08200H0-FS), "
                           "mates the pads of a Framework Laptop 16 input module",
                      pins=named("1:GND 2:VCC_5V 3:USB_DN 4:BOARD_ID 5:USB_DP 6:SLEEP_N 7:GND 8:VCC_3V3")),
+    # --- front battery bar: BMS board (commander_bar_bms) and its cell-contact board (commander_bar_contacts), 2026-11-16;
+    #     pinouts from the JLCEDA/EasyEDA Official Library symbols of the LCSC parts named (https://easyeda.com) ---
+    "TPS54302": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C311983",
+                     desc="TI TPS54302DDCR synchronous buck 4.5-28 V, 3 A, 400 kHz, Eco-mode (no sinking at light load), TSOT-23-6",
+                     pins=named("1:GND 2:SW 3:VIN 4:FB 5:EN 6:BOOT")),
+    "TPS709": dict(fp="Package_TO_SOT_SMD:SOT-23-5", lcsc="C89347", desc="TI TPS70933DBVR 3.3 V LDO 150 mA, 30 V input, 1 uA quiescent, SOT-23-5",
+                   pins=named("1:IN 2:GND 3:EN 4:NC 5:OUT")),
+    "JST_PH5": dict(fp="Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical", desc="JST PH 5-pin 2.0 mm, vertical (B5B-PH-K-S, 2 A per contact)",
+                    pins=named("1:P1 2:P2 3:P3 4:P4 5:P5")),
+    # the joint between the two bar boards: the contact board stands upright on the BMS board's rear edge, its 11
+    # castellated pads soldered to these 11 pads (no part of its own: DNP)
+    "BARJOINT": dict(fp="commander:BarContacts_Joint_11", desc="solder joint to the cell-contact board (11 pads, the contact board's castellations)",
+                     pins=named(" ".join("%d:J%d" % (i, i) for i in range(1, 12)))),
+    "BARJOINT_C": dict(fp="commander:BarContacts_Castellated_11", desc="castellated edge of the cell-contact board (11 half-holes), soldered to the BMS board",
+                       pins=named(" ".join("%d:J%d" % (i, i) for i in range(1, 12)))),
+    "BATT_PAD": dict(fp="commander:BattContact_Pad_D6.0mm", desc="cell contact: ENIG pad 6.0 mm on the board (no part: DNP)", pins=named("1:C")),
 }
 # LCSC / JLCPCB part numbers (checked on lcsc.com / JLC's BOM matcher, 2026-11-15) -> the 'lcsc' column of the BOM and the
 # "LCSC Part #" column of the JLC parts list.  Passives are left to JLC's matcher (it picks Basic parts once the package

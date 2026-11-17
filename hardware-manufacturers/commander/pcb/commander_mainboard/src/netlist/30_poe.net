@@ -64,13 +64,14 @@ C514 220uF_6.3V_POLY VOUT_5V GND
 C515 22uF VOUT_5V GND
 TP5 TP VOUT_5V
 TP6 TP GND
-# --- isolated feedback: TL431 + optocoupler, set point 5.11 V (covers the drop in the source selector U81) ---
+# --- isolated feedback: TL431 + optocoupler, set point 5.24 V = 2.495 V x (1 + 10 k / 9.09 k): covers the drop in the
+#     source selector U81 and in the bays' back-feed diodes on the hub board (about 0.35 V at 1 A; was 5.11 V with 9.53 k) ---
 U31 OPTO:TLP291 1=FB_LED_A 2=FB_K 3=POE_RTN 4=POE_CTL
 R512 499R VOUT_5V FB_LED_A
 R513 1K FB_LED_A FB_K
 U32 TL431 1=FB_K 2=FB_REF 3=GND
 R514 10K_1% VOUT_5V FB_REF
-R515 9.53K_1% FB_REF GND
+R515 9.09K_1% FB_REF GND
 C517 100nF FB_K FB_COMP
 R516 2K FB_COMP FB_REF
 # --- barrier capacitor (primary return to secondary ground) ---

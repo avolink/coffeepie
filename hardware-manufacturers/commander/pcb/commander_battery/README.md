@@ -38,7 +38,7 @@ the front battery bar of the model (42 AAA cells) is the long-runtime option and
 ### How the UPS works without a switch-over
 
 The buck that feeds the port runs all the time and is set to 4.98 V. It cannot sink current (Eco-mode). While the
-mainboard charges the module it holds the port at about 5.05-5.1 V; the buck then simply has nothing to do. When the
+mainboard charges the module it holds the port at about 5.15-5.2 V (PoE set point 5.24 V since 2026-11-16); the buck then simply has nothing to do. When the
 mainboard's PoE supply goes away, its own 5 V falls, the port voltage drops below 4.98 V and the buck carries the
 load from that instant - nothing has to be switched, and the mainboard's TPS2121 selects the port as it was designed
 to. The firmware stops charging as soon as it sees the cells' current reverse (the module would otherwise charge

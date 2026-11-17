@@ -43,6 +43,7 @@ HEIGHT = [
     (r"Pogo_CFE_BP33242", 2.25, (0.08, 0.08, 0.08), "pogo connector, plungers free (1.6 mm when a module sits on them)"),
     (r"KeySwitch|Keychron", 6.0, (0.35, 0.35, 0.4), "ESTIMATE (switch housing over its optical sensor)"),
     (r"ISP_|Pads|TestPoint|MountingHole|Fiducial", 0.0, None, ""),
+    (r"BarContacts_|BattContact_Pad", 0.0, None, "copper only (the bar's board-to-board joint, the cell pads)"),
     (r"CMC_0504", 0.5, (0.2, 0.2, 0.2), ""),
 ]
 DEFAULT = (1.0, (0.3, 0.3, 0.3), "ESTIMATE (default)")

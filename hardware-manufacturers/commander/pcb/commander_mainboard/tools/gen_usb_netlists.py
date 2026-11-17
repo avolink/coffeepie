@@ -28,10 +28,28 @@ RC_HS = "USBC24_SINK" if HUB else "USBC16"
 HS_NC = " A2 A3 A10 A11 B2 B3 B10 B11" if HUB else ""
 
 
+def vbus_guard(k, b):
+    """Hub board (2026-11-16): nothing a user plugs into a bay may push voltage back into the hub.  The switch's
+    output (VBUS_SW_Pk) reaches the receptacle (VBUS_Pk) through a 40 V Schottky, so a back-feeding device - a
+    charger or power bank on a C-to-C cable, a broken USB-PD source, a bench supply on an adapter, up to 40 V - is
+    simply blocked; a 24 V TVS takes ESD on the connector side and stays off at 20 V.  On the connector side only
+    20 V-safe parts remain (the TVS, a 50 V capacitor, the 909 k VBUS-detect resistor); the bulk capacitor, the ESD
+    array's supply pin and the Rp resistors moved to the supply side.  The diode drops about 0.35 V at 1 A: the PoE
+    supply's set point went up to 5.24 V for it (mainboard 30_poe.net, R515).
+    Returns (switch-output net, the guard's lines, the ESD array's supply net, the bulk capacitor's net)."""
+    if not HUB:
+        return f"VBUS_P{k}", "", f"VBUS_P{k}", f"VBUS_P{k}", "100nF"
+    lines = (f"\n# back-feed / over-voltage guard (see vbus_guard in tools/gen_usb_netlists.py)\n"
+             f"D{b+1} SCHOTTKY_123W:PMEG4030ER A=VBUS_SW_P{k} K=VBUS_P{k}\n"
+             f"D{b+2} TVS:SMF24CA VBUS_P{k} GND")
+    return f"VBUS_SW_P{k}", lines, "VCC5V_BUS", f"VBUS_SW_P{k}", "100nF_50V"
+
+
 def ss_bay(k):
     """SuperSpeed bay k (1..4) on USB5744 downstream port k."""
     b = 630 + k * 10          # reference block: 64x, 65x, 66x, 67x
     q = 1000 + k * 10         # second block for the Type-C controller / mux: 101x .. 104x
+    sw, guard, esd_v, bulk, c_out = vbus_guard(k, b)
     return f"""
 # ---- bay {k}: USB 3.2 Gen 1 (USB5744 port {k}) ----
 J3{k} {RC_SS} A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
@@ -65,31 +83,33 @@ C{q+2} 330nF SSRX2N_P{k} SSRX2CN_P{k}
 # ESD on the connector side, one part per lane
 U{b+1} TPD4E05U06 1=SSTX1P_P{k} 10=SSTX1P_P{k} 2=SSTX1N_P{k} 9=SSTX1N_P{k} 4=SSRX1P_P{k} 7=SSRX1P_P{k} 5=SSRX1N_P{k} 6=SSRX1N_P{k} 3=GND 8=GND
 U{q+2} TPD4E05U06 1=SSTX2P_P{k} 10=SSTX2P_P{k} 2=SSTX2N_P{k} 9=SSTX2N_P{k} 4=SSRX2P_P{k} 7=SSRX2P_P{k} 5=SSRX2N_P{k} 6=SSRX2N_P{k} 3=GND 8=GND
-U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5=VBUS_P{k}
+U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5={esd_v}
 # port power: PRT_CTLx is both the enable output and the over-current input on the USB5744.
 # The controller's ID output does not gate VBUS: the bay is powered whenever the hub enables the port.
-U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1=VBUS_P{k} 2=GND 4=HUB3_PRT_CTL{k} 3=HUB3_PRT_CTL{k}
+U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1={sw} 2=GND 4=HUB3_PRT_CTL{k} 3=HUB3_PRT_CTL{k}
 C{b+5} 100nF VCC5V_BUS GND
-C{b+6} 47uF VBUS_P{k} GND
-C{b+7} 100nF VBUS_P{k} GND"""
+C{b+6} 47uF {bulk} GND
+C{b+7} {c_out} VBUS_P{k} GND{guard}"""
 
 
 def hs_bay(k):
     """Hi-Speed bay k (5..9) on USB2517 downstream port k-4."""
     n = k - 4
     b = 700 + k * 10          # reference block: 75x .. 79x
+    sw, guard, esd_v, bulk, c_out = vbus_guard(k, b)
+    rp = "VCC5V_BUS" if HUB else f"VBUS_P{k}"      # Rp (56 k = default USB power) from the supply side
     return f"""
 # ---- bay {k}: USB 2.0 (USB2517 port {n}) ----
 J3{k} {RC_HS} A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_P{k} A9=VBUS_P{k} B4=VBUS_P{k} B9=VBUS_P{k}
 P J3{k} A5=CC1_P{k} B5=CC2_P{k} A6=USB_P{k}_DP B6=USB_P{k}_DP A7=USB_P{k}_DM B7=USB_P{k}_DM
 NC J3{k} A8 B8{HS_NC}
-U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5=VBUS_P{k}
-R{b+5} 56K VBUS_P{k} CC1_P{k}
-R{b+6} 56K VBUS_P{k} CC2_P{k}
-U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1=VBUS_P{k} 2=GND 4=HUB2_PRTPWR{n} 3=HUB2_OCS{n}_N
+U{b+2} USBLC6-2SC6 1=USB_P{k}_DP 6=USB_P{k}_DP 3=USB_P{k}_DM 4=USB_P{k}_DM 2=GND 5={esd_v}
+R{b+5} 56K {rp} CC1_P{k}
+R{b+6} 56K {rp} CC2_P{k}
+U{b+3} PWRSW:AP22804AW5 5=VCC5V_BUS 1={sw} 2=GND 4=HUB2_PRTPWR{n} 3=HUB2_OCS{n}_N
 C{b+5} 100nF VCC5V_BUS GND
-C{b+6} 47uF VBUS_P{k} GND
-C{b+7} 100nF VBUS_P{k} GND"""
+C{b+6} 47uF {bulk} GND
+C{b+7} {c_out} VBUS_P{k} GND{guard}"""
 
 
 USB3 = """# NEW for the Commander: USB 3.2 Gen 1 hub (Microchip USB5744) on the RK3566 USB3 HOST1 port.

@@ -1,0 +1,20 @@
+﻿line,category,description / purchasing spec,design value,package,manufacturer,manufacturer part number,notes,LCSC reference,qty per board,designators
+1,IC,"Microne ME6211C33M5G 3.3 V LDO 500 mA, SOT-23-5",ME6211C33M5G,SOT-23-5,Microne,ME6211C33M5G-N,,C82942,1,U3
+2,IC,ST USBLC6-2SC6 USB ESD,USBLC6-2SC6,SOT-23-6,STMicroelectronics,USBLC6-2SC6,,C2827654,3,U2 U6 U9
+3,IC,"Silergy SY6280AAC power distribution switch 2.4-5.5 V, current limit 6800 / R_ISET (A, ohm), 0.4-2 A, SOT-23-5",SY6280AAC,SOT-23-5,Silergy,SY6280AAC,,C55136,4,U4 U5 U7 U8
+4,IC,"WCH CH334P 4-port USB 2.0 hub (MTT), internal 3.3 V regulator and crystal load capacitors, QFN-16 3 x 3",CH334P,QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm,WCH,CH334P,,C5373042,1,U1
+5,Transistor,N-MOSFET SOT-23,2N7002,SOT-23,multi-source,2N7002,N-MOSFET 60 V,,2,Q1 Q2
+6,Crystal,"crystal 12MHz, 3.2 x 2.5 mm 4-pad, ±20 ppm, load capacitance to suit the board's capacitors (see schematic)",12MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,multi-source,,,,1,Y1
+7,Fuse,"PTC resettable fuse, hold 1.1 A, Vmax >= 6 V, 1206 (3216 metric)",PTC:1.1A,1206,any (to spec),,,,1,F1
+8,Capacitor,"MLCC 1 µF 16 V X5R or X7R ±10 %, 0402 (1005 metric)",1uF,0402,any (to spec),,,,8,C4 C7 C9 C10 C11 C12 C13 C14
+9,Capacitor,"MLCC 10 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",10uF,0603,any (to spec),,,,3,C2 C3 C6
+10,Capacitor,"MLCC 100 nF 16 V X7R ±10 %, 0402 (1005 metric)",100nF,0402,any (to spec),,,,1,C5
+11,Capacitor,"MLCC 4.7 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",4.7uF,0603,any (to spec),,,,2,C1 C8
+12,Resistor,"chip resistor 1 MΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",1M,0402,any (to spec),,,,2,R6 R11
+13,Resistor,"chip resistor 10 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",10K,0402,any (to spec),,,,2,R7 R12
+14,Resistor,"chip resistor 11 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",11K,0402,any (to spec),,,,2,R3 R8
+15,Resistor,"chip resistor 17 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",17K,0402,any (to spec),,,,2,R4 R9
+16,Resistor,"chip resistor 2.2 MΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",2.2M,0402,any (to spec),,,,2,R5 R10
+17,Resistor,"chip resistor 5.1 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",5.1K,0402,any (to spec),,,,2,R1 R2
+18,Connector,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,HOAUC,HYCW498-USBC16-735B,alternative: HRO TYPE-C-31-M-12,C42400252,1,J1
+19,Connector,"pogo-pin connector 2 x 4, 2.0 mm, 1.6 mm working height, 1 A per pin (CFE BP33242-08200H0-FS), mates the pads of a Framework Laptop 16 input module",POGO_FW8,Pogo_CFE_BP33242-08200H0-FS_2x4_P2.0mm,CFE,BP33242-08200H0-FS,,,2,J2 J3

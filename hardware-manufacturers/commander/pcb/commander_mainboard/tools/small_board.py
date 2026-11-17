@@ -111,6 +111,42 @@ SPEC = {
         keepout=[(-1.0, -1.0, 6.0, 155.2)], gap=0.45, hole_gap=1.0, edge_gap=0.9,
         # the two supplies run the strip's length on the bottom face, in the lane under the modules' body
         trunks=[("VCC5", "B", 1.4, 33.0, 141.0, 0.5), ("VCC3V3", "B", 3.2, 33.0, 106.0, 0.5)]),
+    # the front battery bar's BMS board: flat on the floor plate of the bar's LEFT end cap (chassis Y 2.2-32.2), in front
+    # of the cells (they start at Y 23.6).  Board X 160.6-236.4, Y 3.6-22.0, bottom face at z 5.1 (floor 3.6), top
+    # face at z 6.7; the cap leaves about 8.5 mm above it (less under the grub screw at X 152-165, Y 6-9: 5 mm).
+    # Board y = 0 is the rear edge (toward the cells): the cell-contact board stands there on joint J3; y = 18.4 is the
+    # bar's left end face (wall Y 2.2-3.2), where the USB-C port, the button and the LEDs are.
+    # (Raised 1.5 mm on spacers at its two screws: that clears the floor's step, so the board spans X 160.6-236.4, and
+    # leaves 1.5 mm under it for passives, SOT-23 and SOD-123 parts on the bottom face - one face was not enough.)
+    "bar": dict(
+        w=75.8, h=18.4, r=1.0, t=1.6, X0=160.6, Y0=3.6, Z0=5.1, bottom=True, layers=4,      # F, In1 GND, In2, B
+        keepout_b=[(70.0, -1.0, 77.0, 19.4)],                  # (under the board: no parts over the floor step)
+        holes=[(2.4, 9.5, 1.1), (73.4, 15.6, 1.1)],             # M2 self-tapping screws into the cap's floor plate
+        fixed={"J3": (36.835, 1.6, 0, "F"),
+               "J1": ("edge", "bottom", 42.0, 1.2),            # mouth 0.2 mm inside the end face
+               "U2": (42.0, 7.6, 0, "F"),
+               "J4": (10.0, 6.4, 0, "F"),                      # dock harness, toward the bar's rear face (terminal side)
+               "U1": (22.0, 11.2, 0, "F"),
+               "U5": (33.5, 15.4, 0, "F"), "L2": (33.5, 9.4, 0, "F"),
+               "U4": (52.0, 13.6, 0, "F"), "L1": (52.0, 8.0, 0, "F"), "D1": (57.6, 10.6, 90, "F"),
+               "J5": (64.4, 7.6, 90, "F"),                     # solar panel lead
+               "SW1": (60.0, 16.9, 0, "F"),
+               "D50": (64.6, 17.5, 0, "F"), "D51": (67.7, 17.5, 0, "F"), "D52": (70.8, 17.5, 0, "F")},
+        keepout=[], gap=0.45, hole_gap=0.4, edge_gap=0.4),
+    # the cell-contact board: stands upright on the BMS board's rear edge (chassis Y 21.0-22.0, its face toward the
+    # cells at Y 22.0; cells from Y 23.6, pushed forward by the rear springs), X 160.6-236.4, z 6.7-15.3.  Board x
+    # along chassis X, board y DOWN from its top edge (y = 8.6 = the castellated bottom edge on the BMS board).  The
+    # lane pads sit on the cells' axes (the extrusion tilts them: z 11.45 at lane 1 to 9.96 at lane 6).  No copper
+    # pour on the face toward the cells: a cell can with a damaged wrapper must not find ground there.  With board x
+    # along +X (the joint must match the BMS board), the F face looks FORWARD (-Y, at the BMS board) and the B face at
+    # the cells: so the lane pads and the thermistors are on B, the ground pour on F only.
+    "barcon": dict(
+        w=75.8, h=8.6, r=0.5, t=1.0, X0=160.6, Y0=21.0, Z0=6.7, holes=[],
+        fixed=dict({"J1": (36.835, 8.6, 0, "F"),
+                    "R1": (13.9, 7.4, 90, "B"), "R2": (39.9, 7.4, 90, "B"), "R3": (65.9, 7.4, 90, "B")},
+                   **{"BT%d" % (k + 1): (x_, y_, 0, "B") for k, (x_, y_) in enumerate(
+                       [(5.17, 3.85), (18.16, 4.12), (31.16, 4.40), (44.16, 4.79), (57.16, 5.06), (70.16, 5.34)])}),
+        keepout=[], pours="F"),
 }[V]
 
 
@@ -364,7 +400,7 @@ def stage_place():
     if d.errors:
         raise SystemExit("\n".join(d.errors))
     board = pcbnew.BOARD()
-    board.SetCopperLayerCount(2)
+    board.SetCopperLayerCount(SPEC.get("layers", 2))
     ds = board.GetDesignSettings()
     ds.m_TrackMinWidth = FromMM(0.15)
     ds.m_MinClearance = FromMM(0.15)
@@ -416,10 +452,13 @@ def stage_place():
     supply = ("GND", "VCC5", "VCC3V3", "VBUS", "VBUS_USB", "VBAT")
     w, h = SPEC["w"], SPEC["h"]
     keep = [tuple(k) for k in SPEC["keepout"]]
+    keep_b = [tuple(k) for k in SPEC.get("keepout_b", [])]
     rest = sorted((c for c in d.comps.values() if c.ref not in big),
                   key=lambda c: (-len(c.pins), c.ref))
     unplaced = []
     placed = set(r_ for r_ in SPEC["fixed"] if r_ in fps)
+    # bottom-face obstacles: the fixed parts with through-hole pads (their pins come out there)
+    boxes_b = [court(fps[r_]) for r_ in placed if any(p.HasHole() for p in fps[r_].Pads())]
     for c in rest:
         fp = fps[c.ref]
         targets = []                                # (x, y, weight): pads of placed parts on this part's nets
@@ -438,42 +477,52 @@ def stage_place():
             ty = sum(t[1] * t[2] for t in targets) / sw
         else:
             tx, ty = w / 2, h / 2
-        best = None
-        for rot in (0, 90):
-            put(fp, 0, 0, rot, "F")
-            c0 = court(fp)
-            hw, hh = (c0[2] - c0[0]) / 2, (c0[3] - c0[1]) / 2
-            step = 0.25
-            for ring in range(0, 160):
-                found = False
-                rr = ring * step
-                n = max(1, int(2 * math.pi * rr / step)) if ring else 1
-                for k in range(n):
-                    ang = 2 * math.pi * k / n
-                    x, y = tx + rr * math.cos(ang), ty + rr * math.sin(ang)
-                    bb = (x - hw, y - hh, x + hw, y + hh)
-                    em = SPEC.get("edge_gap", 0.5)
-                    if bb[0] < em or bb[1] < em or bb[2] > w - em or bb[3] > h - em:
-                        continue
-                    if any(overlaps(bb, k_) for k_ in keep):
-                        continue
-                    if any(math.hypot(x - ho[0], y - ho[1]) < (ho[2] if len(ho) == 3 else 1.35) + max(hw, hh) + SPEC.get("hole_gap", 0.3)
-                           for ho in SPEC["holes"]):
-                        continue
-                    if any(overlaps(bb, b_, SPEC.get("gap", 0.25)) for b_ in boxes):
-                        continue
-                    if best is None or rr < best[0]:
-                        best = (rr, x, y, rot)
-                    found = True
-                    break
-                if found:
-                    break
+        def search(face, obstacles):
+            best = None
+            for rot in (0, 90):
+                put(fp, 0, 0, rot, face)
+                c0 = court(fp)
+                hw, hh = (c0[2] - c0[0]) / 2, (c0[3] - c0[1]) / 2
+                step = 0.25
+                for ring in range(0, 160):
+                    found = False
+                    rr = ring * step
+                    n = max(1, int(2 * math.pi * rr / step)) if ring else 1
+                    for k in range(n):
+                        ang = 2 * math.pi * k / n
+                        x, y = tx + rr * math.cos(ang), ty + rr * math.sin(ang)
+                        bb = (x - hw, y - hh, x + hw, y + hh)
+                        em = SPEC.get("edge_gap", 0.5)
+                        if bb[0] < em or bb[1] < em or bb[2] > w - em or bb[3] > h - em:
+                            continue
+                        if any(overlaps(bb, k_) for k_ in (keep if face == "F" else keep + keep_b)):
+                            continue
+                        if any(math.hypot(x - ho[0], y - ho[1]) < (ho[2] if len(ho) == 3 else 1.35) + max(hw, hh) + SPEC.get("hole_gap", 0.3)
+                               for ho in SPEC["holes"]):
+                            continue
+                        if any(overlaps(bb, b_, SPEC.get("gap", 0.25)) for b_ in obstacles):
+                            continue
+                        if best is None or rr < best[0]:
+                            best = (rr, x, y, rot)
+                        found = True
+                        break
+                    if found:
+                        break
+            return best
+        best, face = search("F", boxes), "F"
+        # boards with room under them (SPEC bottom=True: the bar BMS board, 1.5 mm): small resistors and capacitors,
+        # SOT-23 transistors and SOD-123 diodes may go on the bottom face when that puts them nearer their connections
+        low = (c.kind in ("R", "C") and any(s in c.fp for s in ("0402", "0603", "0805"))) or c.fp.endswith(("SOT-23", "D_SOD-123"))
+        if SPEC.get("bottom") and low:
+            bb_ = search("B", boxes_b)
+            if bb_ is not None and (best is None or bb_[0] + 0.5 < best[0]):
+                best, face = bb_, "B"
         if best is None:
             unplaced.append(c.ref)
             put(fp, w + 10, h / 2, 0, "F")
             continue
-        put(fp, best[1], best[2], best[3], "F")
-        boxes.append(court(fp))
+        put(fp, best[1], best[2], best[3], face)
+        (boxes if face == "F" else boxes_b).append(court(fp))
         placed.add(c.ref)
     # pre-drawn supply trunks (net, layer, x, y0, y1, width): the router only has to reach them
     for tn, tl, tx, ty0, ty1, tw in SPEC.get("trunks", []):
@@ -484,7 +533,8 @@ def stage_place():
         x0, y0, x1, y1 = TP_AREA
         note(board, "touch area: no parts, no pours", 2.0, y1 + 1.4, 0.8, pcbnew.Cmts_User)
     nx_, ny_, nl_ = {"batt": (8.0, SPEC["h"] - 2.5, pcbnew.F_SilkS), "numpad": (111.5, SPEC["h"] - 1.8, pcbnew.F_SilkS),
-                     "touch": (119.0, 1.6, pcbnew.B_SilkS), "tray": (6.6, 19.0, pcbnew.F_SilkS)}[V]
+                     "touch": (119.0, 1.6, pcbnew.B_SilkS), "tray": (6.6, 19.0, pcbnew.F_SilkS),
+                     "bar": (40.0, 9.0, pcbnew.B_SilkS), "barcon": (40.0, 3.0, pcbnew.F_SilkS)}[V]
     note(board, "Commander %s %s" % (PRJ.split("_", 1)[1], cpmodel.REV), nx_, ny_, {"numpad": 0.8, "tray": 0.7}.get(V, 1.0), nl_)
     os.makedirs(os.path.dirname(PLACED), exist_ok=True)
     pcbnew.SaveBoard(PLACED, board)
@@ -508,7 +558,7 @@ def make_router(board):
     import route as R
     import gen_project
     R.STRIP = True
-    R.VIA_L = [0, 2]
+    R.VIA_L = [0, 1, 2] if SPEC.get("layers", 2) == 4 else [0, 2]      # (4 layers: In2 routes, In1 is a ground plane)
     R.BASE_CL = 0.15
     R.RCS.clear()
     R.RCS.update({"Default": R.RC("Default", 0.15, 0.15, 0.60, 0.30), "PWR": R.RC("PWR", 0.40, 0.15, 0.80, 0.40),
@@ -549,6 +599,9 @@ def make_router(board):
                 break
     x0 = TP_AREA[2] + 0.4 if V == "touch" else -1.0
     reg = R.Region("small", x0, -1.0, SPEC["w"] + 1.0, SPEC["h"] + 1.0)
+    if SPEC.get("layers", 2) == 4:                  # the router keeps its middle layer (In2) for routing here
+        for D_ in reg.D.values():
+            D_[1] = R.FREE
     r.regs = [reg]
     r.build()
     r.items, r.failed = [], []
@@ -559,10 +612,16 @@ def make_router(board):
         i0, j0 = max(0, int((xa - reg.x0) / G)), max(0, int((ya - reg.y0) / G))
         i1, j1 = min(reg.nx - 1, R.ceil_((xb - reg.x0) / G)), min(reg.ny - 1, R.ceil_((yb - reg.y0) / G))
         if i0 <= i1 and j0 <= j1:
-            for l in (0, 2):
+            for l in ((0, 1, 2) if SPEC.get("layers", 2) == 4 else (0, 2)):
                 reg.stamp(l, i0, j0, np.ones((j1 - j0 + 1, i1 - i0 + 1), bool), R.MULTI)
             reg.novia[max(0, j0 - 8):j1 + 9, max(0, i0 - 8):i1 + 9] = True
     return r, reg, code
+
+
+def pour_layers():
+    """The faces that get a ground pour: both, unless SPEC says otherwise (the bar's contact board: the back only)."""
+    out = [{"F": pcbnew.F_Cu, "B": pcbnew.B_Cu}[c] for c in SPEC.get("pours", "FB")]
+    return out + ([pcbnew.In1_Cu] if SPEC.get("layers", 2) == 4 else [])      # 4 layers: In1 = ground plane
 
 
 def add_zone(board, net, layer, pts, prio=0):
@@ -600,7 +659,7 @@ def route_pass(prio, variant):
             continue
         pads = reg.pads.get(net, [])
         span = (max(q["cx"] for q in pads) - min(q["cx"] for q in pads) + max(q["cy"] for q in pads) - min(q["cy"] for q in pads)) if pads else 0.0
-        hi = r.rc_of[net].name in (("HIPWR", "PWR") if V == "tray" else ("HIPWR",))     # (the tray: supplies first)
+        hi = r.rc_of[net].name in (("HIPWR", "PWR") if V in ("tray", "bar") else ("HIPWR",))     # (tray, bar: supplies first)
         key = span if variant == 0 else -span if variant == 1 else rnd.random()
         order.append((-prio.get(name, 0), 0 if hi else 1, key, name, net))
     done, part = [], []
@@ -809,7 +868,7 @@ def stage_finish():
     board = pcbnew.LoadBoard(ROUTED)
     w, h = SPEC["w"], SPEC["h"]
     area = [(0, 0), (w, 0), (w, h), (0, h)] if V != "touch" else [(TP_AREA[2] + 0.9, 0), (w, 0), (w, h), (TP_AREA[2] + 0.9, h)]
-    for layer in (pcbnew.F_Cu, pcbnew.B_Cu):
+    for layer in pour_layers():
         add_zone(board, board.FindNet("GND"), layer, area)
     nst = stitch_pours(board)
     board.BuildConnectivity()
@@ -841,7 +900,7 @@ def stage_route():
     # ground pours, both faces; on the touchpad only in the electronics strip
     w, h = SPEC["w"], SPEC["h"]
     area = [(0, 0), (w, 0), (w, h), (0, h)] if V != "touch" else [(TP_AREA[2] + 0.9, 0), (w, 0), (w, h), (TP_AREA[2] + 0.9, h)]
-    for layer in (pcbnew.F_Cu, pcbnew.B_Cu):
+    for layer in pour_layers():
         add_zone(board, board.FindNet("GND"), layer, area)
     nst = stitch_pours(board)
     print("ground stitching: %d vias" % nst, flush=True)

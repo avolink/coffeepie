@@ -1,0 +1,149 @@
+# Commander front battery bar (rev S0) - BMS board, power path.
+#
+# The bar holds 42 standard AAA NiMH cells in six lanes of seven (the extrusion's pockets, chassis model
+# COMMANDER_Z3E.skp).  Two neighbouring lanes make one STRING of 14 cells in series (16.8 V nominal, 14.0 V empty,
+# about 21.7 V at the end of a charge): lane 1 + lane 2, lane 3 + lane 4, lane 5 + lane 6.  The strings' links are at
+# the bar's rear end (three straps with long springs, in the rear end cap); both ends of every string come to the
+# front, to the cell-contact board standing on this board's rear edge (joint J3).  The three strings share their
+# negative (B_NEG) and are NEVER put in parallel:
+#
+#   discharge: each string's plus -> its own Schottky (D11-D13) -> VBAT, so the fullest string carries the load and a
+#              weaker or older string cannot be charged by the others;
+#   charge:    ONE charger (boost, U4) whose output is switched to one string at a time (P-MOSFETs Q11-Q13 + diodes
+#              D21-D23), time-sliced by the microcontroller, so every string gets its own end-of-charge detection.
+#
+#   VBAT -> TPS54302 buck -> 4.96 V on VBUS (the USB-C port J1 and the dock connector J4) -> the terminal's battery
+#   port J40.  Same UPS behaviour as the internal battery module (commander_battery): the buck is on by default, set
+#   just under the terminal's own 5 V, never sinks current, and takes over the moment the terminal's supply goes away.
+#
+#   Charging sources: VBUS (only when the microcontroller switches it in: Q5, so the bar never charges itself from
+#   its own output) and the solar panel of the top cover (J5).  Both feed the boost through diodes (D3, D4).  With the
+#   sun only, the firmware tracks the panel's maximum power by maximising the charge current (perturb and observe).
+SHEET bar_power
+
+# Capacitor values carry their voltage rating where the rail goes above 5 V (strings up to 22 V).
+
+# --- joint to the cell-contact board (pads only; the contact board's castellations solder onto them) ---
+J3 BARJOINT:DNP 1=STR1_P 2=NTC1 3=B_NEG 4=GND 5=STR2_P 6=NTC2 7=B_NEG 8=GND 9=STR3_P 10=NTC3 11=B_NEG
+
+# --- the strings' negative: resettable fuse, then the 20 mOhm shunt to ground; INA181A1 (gain 20) with its reference
+#     at half supply, both directions: discharge -> output above REF, charge -> below.  +-4 A full scale ---
+F1 PTC1812:2A_30V B_NEG B_NEG_F
+R2 0R02_0805 GND B_NEG_F
+R3 10R B_NEG_F ISNS_N
+C1 100nF ISNS_N GND
+U3 INA181A1 1=IPACK 2=GND 3=GND 4=ISNS_N 5=ISNS_REF 6=VCC3V3
+C2 100nF VCC3V3 GND
+R4 10K VCC3V3 ISNS_REF
+R5 10K ISNS_REF GND
+C3 100nF ISNS_REF GND
+
+# --- string 1 (lanes 1 + 2) ---
+D11 SCHOTTKY:SS34 A=STR1_P K=VBAT
+Q11 PMOS_GSD:AO3407A S=VCHG_S D=CHG1_D G=CHG1_G
+R111 100K VCHG_S CHG1_G
+R121 100K CHG1_G CHG1_GD
+Q21 NMOS_GSD:2N7002 D=CHG1_GD S=GND G=CHG1_EN
+R131 100K CHG1_EN GND
+D21 DIODE:B5819W A=CHG1_D K=STR1_P
+R141 1M STR1_P VSTR1_ADC
+R151 150K VSTR1_ADC GND
+C141 100nF VSTR1_ADC GND
+R161 10K VCC3V3 NTC1
+C161 100nF NTC1 GND
+
+# --- string 2 (lanes 3 + 4) ---
+D12 SCHOTTKY:SS34 A=STR2_P K=VBAT
+Q12 PMOS_GSD:AO3407A S=VCHG_S D=CHG2_D G=CHG2_G
+R112 100K VCHG_S CHG2_G
+R122 100K CHG2_G CHG2_GD
+Q22 NMOS_GSD:2N7002 D=CHG2_GD S=GND G=CHG2_EN
+R132 100K CHG2_EN GND
+D22 DIODE:B5819W A=CHG2_D K=STR2_P
+R142 1M STR2_P VSTR2_ADC
+R152 150K VSTR2_ADC GND
+C142 100nF VSTR2_ADC GND
+R162 10K VCC3V3 NTC2
+C162 100nF NTC2 GND
+
+# --- string 3 (lanes 5 + 6) ---
+D13 SCHOTTKY:SS34 A=STR3_P K=VBAT
+Q13 PMOS_GSD:AO3407A S=VCHG_S D=CHG3_D G=CHG3_G
+R113 100K VCHG_S CHG3_G
+R123 100K CHG3_G CHG3_GD
+Q23 NMOS_GSD:2N7002 D=CHG3_GD S=GND G=CHG3_EN
+R133 100K CHG3_EN GND
+D23 DIODE:B5819W A=CHG3_D K=STR3_P
+R143 1M STR3_P VSTR3_ADC
+R153 150K VSTR3_ADC GND
+C143 100nF VSTR3_ADC GND
+R163 10K VCC3V3 NTC3
+C163 100nF NTC3 GND
+
+# --- charge sources: VBUS through Q5 (off unless the microcontroller asks: 100 k pull-ups / pull-downs), the solar
+#     panel on J5 (5-7 V class panel, open-circuit voltage below 13 V) ---
+Q5 PMOS_GSD:AO3401A S=VBUS D=VUSB_SW G=USB_G
+R7 100K VBUS USB_G
+Q6 NMOS_GSD:2N7002 D=USB_G S=GND G=USB_CHG_EN
+R8 100K USB_CHG_EN GND
+D3 SCHOTTKY:SS34 A=VUSB_SW K=CHG_IN
+J5 JST_PH2:SOLAR 1=SOLAR 2=GND
+D4 SCHOTTKY:SS34 A=SOLAR K=CHG_IN
+C6 10uF_16V SOLAR GND
+R9 100K SOLAR SOLAR_ADC
+R25 33K SOLAR_ADC GND
+C7 100nF SOLAR_ADC GND
+
+# --- charger: boost to the strings (MT3608, 2 A switch, output up to 28 V).  The microcontroller trims the set point
+#     with a filtered PWM injected into the feedback node and regulates the current it measures on R6 / U8:
+#   VCHG = 0.6 V * (1 + R10/R11) + R10 * (0.6 V - Vpwm) / (R12 + R13)
+#        = 21.8 V at Vpwm = 0 (ceiling: 1.53 V per cell after Q1x / D2x),  11.8 V at Vpwm = 3.3 V (below any string)
+#   EN pulled low: no charging without the microcontroller; each string's switch is off by default as well ---
+C10 10uF_16V CHG_IN GND
+C15 10uF_16V CHG_IN GND
+U4 MT3608 5=CHG_IN 4=CHG_EN 2=GND 1=CHG_SW 3=CHG_FB
+NC U4 6
+L1 10uH_2A CHG_IN CHG_SW
+D1 SCHOTTKY:SS34 A=CHG_SW K=VCHG
+R10 1M VCHG CHG_FB
+R11 30.9K CHG_FB GND
+R12 300K CHG_ISET CHG_FB
+R13 30K CHG_PWM CHG_ISET
+C13 1uF CHG_ISET GND
+R14 100K CHG_EN GND
+C11 10uF_35V_1206 VCHG GND
+C12 10uF_35V_1206 VCHG GND
+# charge current: 50 mOhm high side (0805, 0.13 W at 1.6 A) + INA181A1 with REF at ground, 1 V/A (one string at a time)
+R6 0R05_0805 VCHG VCHG_S
+U8 INA181A1 1=ICHG 2=GND 3=VCHG 4=VCHG_S 5=GND 6=VCC3V3
+C5 100nF VCC3V3 GND
+
+# --- 5 V output: buck from the strings to the port (TPS54302, 4.5-28 V in, 3 A) ---
+#   VOUT = 0.596 V * (1 + 73.2 / 10) = 4.96 V;  EN: about 13.3 V rising (1 M / 100 k; 0.95 V per cell), the firmware
+#   switches the output off earlier (Q2) when every string is empty
+C20 10uF_35V_1206 VBAT GND
+C21 10uF_35V_1206 VBAT GND
+U5 TPS54302 3=VBAT 1=GND 2=OUT_SW 4=OUT_FB 5=OUT_EN 6=OUT_BST
+C22 100nF OUT_BST OUT_SW
+L2 10uH_5A OUT_SW VBUS
+R20 73.2K VBUS OUT_FB
+R21 10K OUT_FB GND
+R22 1M VBAT OUT_EN
+R23 100K OUT_EN GND
+Q2 NMOS_GSD:2N7002 D=OUT_EN S=GND G=OUT_OFF
+R24 100K OUT_OFF GND
+C23 22uF_10V VBUS GND
+C24 22uF_10V VBUS GND
+
+# --- 3.3 V for the microcontroller and the sense amplifiers: from the strings, or from the port when every string is
+#     flat (the bar still enumerates and can be charged back from empty) ---
+U6 BAT54C 1=VBAT 2=VBUS 3=LDO_IN
+C30 1uF_35V_0603 LDO_IN GND
+U7 TPS709 1=LDO_IN 2=GND 3=LDO_IN 5=VCC3V3
+NC U7 4
+C31 2.2uF VCC3V3 GND
+
+# --- port voltage for the ADC ---
+R32 100K VBUS VBUS_ADC
+R33 68K VBUS_ADC GND
+C33 100nF VBUS_ADC GND

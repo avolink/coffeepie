@@ -68,7 +68,10 @@ KBD_PATTERNS = [("VCC5", "PWR"), ("VBUS_USB", "PWR")]
 # the two-layer module boards (battery, numpad, touchpad): the keyboard's rules; the battery's power path is wide
 SMALL_CLASSES = KBD_CLASSES + [cls("HIPWR", 0.2, 1.0, via_d=0.8, via_drill=0.4, color="rgb(255, 120, 0)")]     # 2-3 A of the battery
 SMALL_PATTERNS = KBD_PATTERNS + [("VBUS", "HIPWR"), ("VBAT", "HIPWR"), ("B_*", "HIPWR"), ("*_SW", "HIPWR"), ("VCC3V3", "PWR"),
-                                 ("LDO_IN", "PWR"), ("VCC5_M*", "PWR"), ("VCC3V3_M*", "PWR")]
+                                 ("LDO_IN", "PWR"), ("VCC5_M*", "PWR"), ("VCC3V3_M*", "PWR"),
+                                 # the front battery bar: strings and charger 0.4 mm (up to 1.2 A), charger input wide
+                                 ("STR?_P", "PWR"), ("CHG?_D", "PWR"), ("VCHG*", "PWR"), ("SOLAR", "PWR"),
+                                 ("CHG_IN", "HIPWR"), ("VUSB_SW", "HIPWR")]
 KBD_RULES = {
     "min_clearance": 0.15, "min_copper_edge_clearance": 0.2, "min_track_width": 0.15,
     "min_via_diameter": 0.5, "min_through_hole_diameter": 0.3, "min_via_annular_width": 0.1,      # the vias beside the chip's pins are 0.5 / 0.3

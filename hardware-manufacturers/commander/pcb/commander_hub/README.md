@@ -72,6 +72,38 @@ The user placed the hub where the profile's slot holds it (underside 2.3 mm abov
 Board now: consistent with the schematic (1054 pads), ERC clean, DRC: the 2 inherited J6 edge items, dangling
 stubs from the rip-ups, **499 unconnected items** (was 213) - the bay areas need the router again.
 
+**2026-11-16 (evening): nothing plugged into a bay can push voltage back into the hub.**  A charger or power bank on
+a C-to-C cable, a broken USB-PD source, a bench supply on an adapter: every bay's VBUS now leaves its power switch
+through a **40 V Schottky** (Nexperia PMEG4030ER-QX, SOD-123W, LCSC C5709679, about $0.09) and has a **24 V TVS**
+(SMF24CA) on the connector side for ESD.  Back-feed up to 40 V is blocked; the TVS does not conduct at 20 V.  On the
+connector side only 20 V-safe parts remain (TVS, a 50 V 100 nF capacitor, the 909 k VBUS-detect resistor of the
+SuperSpeed bays); the 47 uF bulk capacitor, the USBLC6's supply pin and the Hi-Speed bays' 56 k Rp resistors moved to
+the supply side.  The diode drops about 0.35 V at 1 A, so the PoE supply's set point went from 5.11 to **5.24 V**
+(mainboard R515 9.53 k -> 9.09 k): a bay gives about 4.85 V at 1 A.  Netlist: `vbus_guard()` in
+`tools/gen_usb_netlists.py`; board: `tools/hub_vbus_guard.py` (18 parts added beside the bays' switches, 37 pads
+moved to their new nets, 19 tracks removed) then `hub_clean_copper.py`.  Still consistent with the schematic (1090
+pads), ERC clean, DRC no shorts or clearance errors; the open links (499) are for the router as before.
+
+What this does **not** cover: a short of 20 V onto the data or CC pins (a damaged cable or plug).  The ESD arrays
+clamp spikes, not a sustained 20 V; the USB5744 / USB2517 / HD3SS3220 pins are 3.3-5 V parts.  Full protection
+there needs a Type-C port protector per bay (e.g. TI TPD6S300A / ST TCPP03-M20, about $0.40-0.60 each, CC and SBU
+20 V-tolerant) - an option if the bays must survive abuse with broken cables too.
+
+**2026-11-17: re-routed.**  `route.py` now knows the receptacle notches (its hub outline takes the bay centres from
+the board file and cuts the 9.42 x 7.6 mm notches with their reliefs), and its prune keeps the finger stubs (x < 73).
+Run on the board: prune (1119 loose tracks / vias from the rip-ups removed), `--stage local` with
+`CP_REGIONS=strip` (4 passes, best kept), prune again (48), zones refilled.  Note: the router takes the net classes
+from the project file - run it on the board in this folder (or with the `.kicad_pro` copied beside a copy), otherwise
+every net is routed as Default (0.15 mm VBUS, wrong clearances).  Result: consistent (1090 pads), ERC clean, DRC no
+clearance errors or shorts, **308 unconnected** (was 499); `build/commander_hub.before_reroute.kicad_pcb` is the
+board before.  For the hand pass:
+
+- the open links (`build/drc.rpt`), most of them at the left end (USB5744, card edge) as before;
+- VBUS neck-downs: the router used 0.15 mm where the 0.4 mm class width did not fit into the receptacles' fine-pitch
+  pins - 6-16 mm per bay, pieces up to 4 mm long (one 3.6 mm piece of VBUS_SW_P1 on In2).  Fine for short necks at
+  1.5 A, but widen the longer ones where there is room;
+- the dangling-track items are mostly the finger stubs (by design) and GND / VCC5V_BUS stubs that end on a pour.
+
 Fabrication notes for the order: 0.8 mm, ENIG, "gold finger bevel 20 deg" on the left end, the key notch milled.
 Mount it to the chassis with a screw near the socket end and between the bays (a 292 mm board at 0.8 mm is floppy;
 every Framework card pushed in loads it).  The socket is rated 25 mating cycles.
