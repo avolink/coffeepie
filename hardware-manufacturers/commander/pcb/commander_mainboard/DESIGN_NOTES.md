@@ -48,6 +48,21 @@ Still open at the socket: the long runs from J41 down to the RK3566 for the micr
 too), I2C3, the hub reset, card detect and the USB 3 hub's USB 2 pair - for KiCad's interactive router. Backup of the
 board before the cut: `build/commander_mainboard.before_m2.kicad_pcb`.
 
+**2026-11-18: J41 and the hub's card edge 4 mm further left** (the user moved the PoE primary block by hand, about
+4.65 mm left / 0.5 mm up, to make room).  J41 now sits with its front face at board x 69.0 (centre line y 92.16), its
+signal row from x 60.2; C601 / C602 moved with it.  The tab is gone (it would end at x 69.9, inside the column's edge
+at x 70), so the column edge runs straight; the planes' cut-out edge beside the socket (In1 / In4 GND hole, In3 5 V)
+moved from x 64.2 to 60.2 for y up to 102.65.  Done by `tools/j41_shift.py SRC DST -4`, then `tools/j41_fanout.py`
+(via columns now follow J41) and `route.py` with `CP_LINK=1 CP_REGIONS=link CP_LINK_DX=-4 CP_PRI_SHIFT=-4.65,-0.5
+CP_PRI_FROM_BOARD=1 CP_SKIP_CLASSES=POE_PRIMARY` (the router's primary keep-out follows the moved block and every
+primary pad / track on the board; the primary copper itself is left alone).  The hub: `tools/hub_shift.py` (J90, the
+fingers' stubs 4 mm longer, body edge x 73.0 -> 69.0, tongue to 65.0); `route.py`'s `HUB_FACE` = 69.0.
+The PoE move itself still breaks the 2 mm barrier on the LEFT side (HDMI_TX_HPDIN, PMIC_PWRON, HDMI_TXCLKN_PORT,
+SW3 and the In1 / In4 GND planes run through the moved block): that is not resolved by the J41 move.  Chassis: the
+back-I/O profile starts at board x 65.0; J41 (4.05 mm tall) still reaches 4.05 mm under the profile's lower lip along
+the bay-side edge (y 101.5-103.6, 0.9 mm free above the board there), half of what it was (8.05 mm).
+Backup: `build/commander_mainboard.before_j41_shift.kicad_pcb` (the user's file of 17:28).
+
 **Where it stands.** The scripted router covers the whole board except the memory bus, which is left out on purpose.
 After the split **486 connections are open** on this board (636 before, the strip's own included; KiCad's count,
 2026-11-15). In KiCad the open ones are the thin ratsnest lines that remain.

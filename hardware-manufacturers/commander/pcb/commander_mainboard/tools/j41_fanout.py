@@ -66,7 +66,8 @@ def main():
         x_in, y = ToMM(bb.GetRight()), ToMM(p.GetPosition().y)          # the pad's inner end (towards the front row)
         start_x = ToMM(p.GetPosition().x)
         placed = None
-        cols = [66.35, 67.05, 67.75, 68.45, 69.15]
+        sx = ToMM(j41.GetPosition().x) - 73.0      # (columns follow the socket: tools/j41_shift.py moves it along x)
+        cols = [c + sx for c in (66.35, 67.05, 67.75, 68.45, 69.15)]
         order = cols[col_i % 3:] + cols[:col_i % 3]
         for vx in order:
             stub = (start_x, y, vx, y)

@@ -4,16 +4,9 @@ SHEET storage
 # --- microSD (boot / recovery media): branch m2-hub moved the slot, its ESD diodes and supply parts to the hub
 #     board (../commander_hub/src/netlist/35_microsd.net); the bus reaches it through the M.2 socket J41 ---
 # --- eMMC 5.1: moved to 21_emmc.net (same sheet), shared with commander_cpu_ram ---
-# --- status LED ---
-R41 5.1K VCC3V3_SYS LED1_A
-R42 2.2K USER_LED2 LED1_A
-LED1 LED:GREEN A=LED1_A K=GND
+# --- status LED, service header (debug UART), recovery / reset buttons: moved to 23_service.net (same sheet) ---
 # --- identity EEPROM (serial / MAC / OEM record, website requirement 15) on I2C2_M1 ---
 U21 AT24C02 1=I2C2_SCL_M1 2=GND 3=I2C2_SDA_M1 4=VCC_3V3 5=EEPROM_WP
 R405 10K VCC_3V3 EEPROM_WP
 TP4 TP EEPROM_WP
 C406 100nF VCC_3V3 GND
-# --- service header (3.3 V debug UART) and buttons ---
-J21 JST_SH4_UART 1=GND 2=UART2_TX 3=UART2_RX 4=VCC3V3_SYS
-SW1 TACT:RECOVERY 1=SARADC_VIN0_KEY_RECOVERY 2=GND
-SW2 TACT:RESET 1=RESETN 2=GND

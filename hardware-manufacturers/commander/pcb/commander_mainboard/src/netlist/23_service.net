@@ -1,0 +1,12 @@
+# Service parts of the processor core, in a file of their own (2026-11-18) so that commander_cpu_ram can share them:
+# status LED, 3.3 V debug UART header, recovery and reset buttons.  Moved here unchanged from 19_storage_misc.net
+# (same sheet "storage").
+SHEET storage
+# --- status LED ---
+R41 5.1K VCC3V3_SYS LED1_A
+R42 2.2K USER_LED2 LED1_A
+LED1 LED:GREEN A=LED1_A K=GND
+# --- service header (3.3 V debug UART) and buttons ---
+J21 JST_SH4_UART 1=GND 2=UART2_TX 3=UART2_RX 4=VCC3V3_SYS
+SW1 TACT:RECOVERY 1=SARADC_VIN0_KEY_RECOVERY 2=GND
+SW2 TACT:RESET 1=RESETN 2=GND

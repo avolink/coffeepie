@@ -1,5 +1,15 @@
-# The processor and its memory, taken unchanged from the mainboard (one source for both boards)
+# The processor core, taken unchanged from the mainboard (one source for both boards)
+04_soc_adc_gpio.net # RK3566 SARADC (recovery key), VCCIO4 / VCCIO7 supplies
+05_soc_usb_emmc.net # RK3566 USB OTG0 (flashing) / HOST2 (the host port), USB PHY supplies
+06_soc_osc_pmu.net  # RK3566 24 MHz crystal, PLL / PMU supplies, FLASH_VOL_SEL, debug UART level shifters
+07_soc_gmac_csi.net # RK3566 VCCIO6 / MIPI supplies (the Ethernet MAC pins stay unused here)
+08_soc_video.net    # RK3566 HDMI TX (+ its chokes), video PHY supplies
+09_soc_gpio.net     # RK3566 VCCIO5 / VCCIO1 / VCCIO3 supplies
 11_soc_ddr.net      # RK3566 DDR PHY: the bus, RZQ, the PHY's VCC_DDR / VCC0V6_DDR decoupling
 12_soc_power.net    # RK3566 supply and ground balls, core rail decoupling
 13_lpddr4.net       # the LPDDR4 (U10), ZQ, decoupling, VDD1 1.8 V
+15_hdmi.net         # micro-HDMI J10, its ESD, DDC level shifter, 5 V
+17_pmic.net         # RK817 PMIC
 21_emmc.net         # eMMC (U20), its pull-ups / series resistor, the processor's VCCIO_FLASH domain
+22_power_core.net   # 5 V into VCC_SYS, flashing USB-C J2, VCC_3V3 switch, RK860 (VDD_CPU)
+23_service.net      # status LED, debug UART header, recovery / reset buttons

@@ -44,7 +44,10 @@ ROOT, PRJ = cpmodel.ROOT, cpmodel.PRJ
 OX, OY = GP.OX, GP.OY
 BUILD = os.path.join(ROOT, "build")
 PLACED = os.path.join(BUILD, PRJ + "_placed.kicad_pcb")
-ROUTED = os.path.join(BUILD, PRJ + "_routed.kicad_pcb")
+ROUTED = os.path.join(BUILD, PRJ + "_routed.kicad_pcb")         # pass 1: memory bus, eMMC
+PLACED2 = os.path.join(BUILD, PRJ + "_placed2.kicad_pcb")       # + the power section and everything else placed
+WIDED = os.path.join(BUILD, PRJ + "_wide.kicad_pcb")            # + the 5 V paths and switch nodes (0.25 mm)
+ROUTED2 = os.path.join(BUILD, PRJ + "_routed2.kicad_pcb")       # + the rest (0.09 mm)
 FINAL = os.path.join(ROOT, PRJ + ".kicad_pcb")
 REPORT = os.path.join(BUILD, "ddr_report.txt")
 NL = chr(10)
@@ -85,7 +88,14 @@ MEM_X, MEM_Y = q(SOC_X + MEM_DX), q(SOC_Y - SOC_H / 2 - GAP - MEM_H / 2)
 EMMC_W, EMMC_H = 13.0, 11.5
 EMMC_X, EMMC_Y = q(MEM_X + MEM_W / 2 + env("CR_EMMC_GAP", 2.0) + EMMC_W / 2), MEM_Y
 BW = math.ceil((max(SOC_X + SOC_W / 2, MEM_X + MEM_W / 2, EMMC_X + EMMC_W / 2) + MARGIN) * 2) / 2
-BH = math.ceil((SOC_Y + SOC_H / 2 + MARGIN) * 2) / 2
+# the power and IO section below the processor (2026-11-18, the board boots on its own): the RK817 centred under the
+# processor, turned 270 so its buck 1 / buck 2 outputs (VDD_LOGIC, VDD_GPU_NPU) face up into the processor's centre and
+# buck 3 (VCC_DDR) faces left; RK860 (VDD_CPU) to its right; the USB-C ports along the bottom edge
+POWER_H = 24.1
+BH = math.ceil((SOC_Y + SOC_H / 2 + POWER_H) * 2) / 2
+PMIC_X, PMIC_Y = SOC_X, q(SOC_Y + SOC_H / 2 + 8.2)    # (courtyards: RK817 7.74 square, 1008 inductor 2.8 x 4.0)
+VDDR_R = q(PMIC_X - 5.25)       # In5: VCC_DDR comes down the left side, x below this
+VSYS_R = q(PMIC_X + 9.75)       # In5: VCC_SYS from VDDR_R + 0.5 to here, VDD_CPU comes down the right side beyond
 CORNER_R = 1.0
 
 # ---------------------------------------------------------------------------------------------------- layers
@@ -109,30 +119,32 @@ def plane_polys():
     mb = MEM_Y + MEM_H / 2 + 0.5
     mr = max(SOC_X - 0.33, MEM_X + MEM_W / 2 + 0.5)
     ddr = [(x0, y0), (mr, y0), (mr, mb), (SOC_X - 0.33, mb), (SOC_X - 0.33, SOC_Y - 1.3), (x0, SOC_Y - 1.3)]
-    # the eMMC area: its 3.3 V on In5, its 1.8 V IO (VCCIO_FLASH) on In6 with a strip down to the processor's
-    # VCCIO_FLASH ball 1C13 (package (1.625, -4.225))
+    # In5: VCC_DDR also comes down the left side to the RK817's buck 3 inductor (L20); VCC_SYS (5 V) fills the power
+    # section between; VDD_CPU comes down the right side to the RK860
+    vddr = ddr[:-1] + [(VDDR_R, SOC_Y - 1.3), (VDDR_R, y1), (x0, y1)]
+    ps = SOC_Y + SOC_H / 2 + 0.5
+    vsys = [(VDDR_R + 0.5, ps), (VSYS_R, ps), (VSYS_R, y1), (VDDR_R + 0.5, y1)]
     eb = EMMC_Y + EMMC_H / 2 + 0.3
-    el = max(mr + 0.6, EMMC_X - EMMC_W / 2 - 0.5)
-    emmc = [(el, y0), (x1, y0), (x1, eb), (el, eb)]
-    fb = SOC_Y - SOC_H / 2 - 0.6            # (on In6 the 1.8 V reaches down to the processor: the pull-ups sit there)
-    flash = [(el, y0), (x1, y0), (x1, fb), (SOC_X + 2.6, fb), soc(2.6, -3.6), soc(0.6, -3.6), (SOC_X + 0.6, eb), (el, eb)]
     ct = max(mb, eb) + 0.6
     cr = min(x1, SOC_X + 5.5)
-    # VDD_CPU: its corner of the processor, and out to the right edge above the GPU rail's reach for its capacitors
-    cpu = [(SOC_X, ct), (x1, ct), (x1, SOC_Y - 4.5), (cr, SOC_Y - 4.5), (cr, SOC_Y - 1.3), (SOC_X, SOC_Y - 1.3)]
+    cpu = [(SOC_X, ct), (x1, ct), (x1, PMIC_Y + 6.0), (VSYS_R + 0.5, PMIC_Y + 6.0), (VSYS_R + 0.5, SOC_Y - 4.5),
+           (cr, SOC_Y - 4.5), (cr, SOC_Y - 1.3), (SOC_X, SOC_Y - 1.3)]
+    # In6: VDD_LOGIC from the processor's centre down through the power section (buck 1, L17, sits above the RK817)
     logic = [soc(-2.7, -1.25), soc(0.0, -1.25), soc(0.0, SOC_H / 2), soc(3.0, SOC_H / 2), (SOC_X + 3.0, y1),
              (SOC_X - 6.0, y1), soc(-6.0, SOC_H / 2), soc(-2.7, SOC_H / 2)]
-    gpu = [soc(-2.7, -2.0), soc(3.3, -2.0), soc(3.3, -4.0), (x1, SOC_Y - 4.0), (x1, SOC_Y + 4.0),
-           soc(3.3, 4.0), soc(3.3, 2.0), soc(-2.7, 2.0)]
+    # In7 (a routing layer, kept out of the router there): VDD_GPU_NPU under the processor, out to the right edge for
+    # its capacitors, and down to buck 2 (L19) above the RK817
+    gpu = [soc(-2.7, -2.0), soc(3.3, -2.0), soc(3.3, -4.0), (x1, SOC_Y - 4.0), (x1, SOC_Y + 4.0), soc(3.3, 4.0),
+           (SOC_X + 3.3, PMIC_Y - 3.9), (SOC_X + 0.3, PMIC_Y - 3.9), soc(0.3, 2.0), soc(-2.7, 2.0)]
     return [("GND", pcbnew.In1_Cu, full, 0), ("GND", pcbnew.In3_Cu, full, 0), ("GND", pcbnew.In8_Cu, full, 0),
-            ("VCC_DDR", pcbnew.In5_Cu, ddr, 0), ("VDD_CPU", pcbnew.In5_Cu, cpu, 0),
+            ("VCC_DDR", pcbnew.In5_Cu, vddr, 0), ("VDD_CPU", pcbnew.In5_Cu, cpu, 0), ("VCC_SYS", pcbnew.In5_Cu, vsys, 0),
             ("VCC0V6_DDR", pcbnew.In6_Cu, ddr, 0), ("VDD_LOGIC", pcbnew.In6_Cu, logic, 0),
-            ("VDD_GPU_NPU", pcbnew.In7_Cu, gpu, 0),
-            ("VCC_3V3", pcbnew.In5_Cu, emmc, 0), ("VCCIO_FLASH", pcbnew.In6_Cu, flash, 0)]
+            ("VDD_GPU_NPU", pcbnew.In7_Cu, gpu, 0)]
 
 
-PLANE_NETS = ("GND", "VCC_DDR", "VCC0V6_DDR", "VDD_CPU", "VDD_LOGIC", "VDD_GPU_NPU", "VCC_3V3", "VCCIO_FLASH")
+PLANE_NETS = ("GND", "VCC_DDR", "VCC0V6_DDR", "VDD_CPU", "VDD_LOGIC", "VDD_GPU_NPU", "VCC_SYS")
 CHIPS = ("U1", "U10", "U20")
+POWER_CHIPS = ("U9", "U3")
 # routing layers that carry a plane piece: the router keeps out of it there
 RESERVED = [("VDD_GPU_NPU", 3)]
 # where each rail's decoupling capacitors go looking for room (bottom face)
@@ -140,15 +152,25 @@ CAP_TARGET = {"VDD_CPU": soc(SOC_W / 2 + 2.0, -5.8), "VDD_LOGIC": soc(-1.5, SOC_
               "VDD_GPU_NPU": soc(SOC_W / 2 + 1.8, 0.0)}
 
 # ---------------------------------------------------------------------------------------------------- rules
-W_TR, CL = 0.09, 0.09           # memory class: 0.09 mm track, 0.09 mm space (JLC multilayer minimum)
-VIA_D, VIA_H = 0.25, 0.15       # via in pad (filled, capped); the same via everywhere
+CL = 0.09                       # 0.09 mm space everywhere (JLC multilayer minimum)
 HCL, H2H, EDGE = 0.195, 0.25, 0.25
 EPS = 0.002
-R_TT = W_TR + CL + EPS                                                          # track centre <-> track centre
-R_TV = max(VIA_D / 2 + CL + W_TR / 2, VIA_H / 2 + HCL + W_TR / 2) + EPS         # track centre <-> via centre
-R_VV = max(VIA_D + CL, VIA_H + H2H, VIA_H / 2 + HCL + VIA_D / 2)               # via centre <-> via centre
-OFF_T = CL + W_TR / 2 + EPS                                                     # track centre <-> pad edge
-OFF_V = max(CL + VIA_D / 2, HCL + VIA_H / 2) + EPS                              # via centre <-> pad edge
+THIN = (0.09, 0.25, 0.15)       # signals and the small supplies: 0.09 mm track, via in pad 0.25 / 0.15 (filled, capped)
+WIDE = (0.25, 0.45, 0.2)        # the 5 V paths and the buck switch nodes: 0.25 mm (it still leaves a 0.35 mm-pitch pin)
+
+
+def set_class(cls):
+    """Track width and via of the routing pass that follows; the clearance distances the grid uses follow from them."""
+    global W_TR, VIA_D, VIA_H, R_TT, R_TV, R_VV, OFF_T, OFF_V
+    W_TR, VIA_D, VIA_H = cls
+    R_TT = W_TR + CL + EPS                                                      # track centre <-> track centre
+    R_TV = max(VIA_D / 2 + CL + W_TR / 2, VIA_H / 2 + HCL + W_TR / 2) + EPS     # track centre <-> via centre
+    R_VV = max(VIA_D + CL, VIA_H + H2H, VIA_H / 2 + HCL + VIA_D / 2)           # via centre <-> via centre
+    OFF_T = CL + W_TR / 2 + EPS                                                 # track centre <-> pad edge
+    OFF_V = max(CL + VIA_D / 2, HCL + VIA_H / 2) + EPS                          # via centre <-> pad edge
+
+
+set_class(THIN)
 FREE, MULTI = -1, -2
 
 
@@ -196,8 +218,9 @@ def add_via(board, xy, net):
     return v
 
 
-def add_track(board, a, b, net, layer, w=W_TR):
+def add_track(board, a, b, net, layer, w=None):
     t = pcbnew.PCB_TRACK(board)
+    w = W_TR if w is None else w
     t.SetStart(P(*a))
     t.SetEnd(P(*b))
     t.SetWidth(FromMM(w))
@@ -299,7 +322,7 @@ def pack_top(board, d, fixed):
         for net in c.pins.values():
             if net:
                 count[net] = count.get(net, 0) + 1
-    routed = {n for n, k in count.items() if k >= 2 and n not in PLANE_NETS}
+    routed = {n for n, k in count.items() if k >= 2 and n not in PLANE_NETS and core_net(n)}   # (pass 1 only)
     boxes = [GP.court(board.FindFootprintByReference(r)) for r in fixed]
     balls = {}
     for ref in CHIPS:
@@ -515,8 +538,10 @@ class Grid:
             m = dx * dx + dy * dy < off * off - 1e-9
         return i0, j0, i1, j1, m
 
-    def hard_shape(self, layers, shape, net, off_t=OFF_T, off_v=OFF_V):
+    def hard_shape(self, layers, shape, net, off_t=None, off_v=None):
         nid = self.nid(net) if net else MULTI
+        off_t = OFF_T if off_t is None else off_t
+        off_v = OFF_V if off_v is None else off_v
         if layers:
             i0, j0, i1, j1, m = self.shape_mask(shape, off_t)
             for l in layers:
@@ -524,15 +549,20 @@ class Grid:
         i0, j0, i1, j1, m = self.shape_mask(shape, off_v)
         self._merge(self.vho[j0:j1, i0:i1], m, nid)
 
-    def hard_via(self, x, y, net):
+    def hard_via(self, x, y, net, d=None, h=None):
+        """A via already there (d / h: its size, default the current class's) as an obstacle for this pass's tracks and vias."""
         nid = self.nid(net)
-        i0, j0, i1, j1, m = self.shape_mask(("circle", x, y, 0.0), R_TV)
+        d = VIA_D if d is None else d
+        h = VIA_H if h is None else h
+        rt = max(d / 2 + CL + W_TR / 2, h / 2 + HCL + W_TR / 2) + EPS
+        rv = max(d / 2 + VIA_D / 2 + CL, h / 2 + VIA_H / 2 + H2H, h / 2 + HCL + VIA_D / 2, VIA_H / 2 + HCL + d / 2)
+        i0, j0, i1, j1, m = self.shape_mask(("circle", x, y, 0.0), rt)
         for l in range(self.L):
             self._merge(self.tho[l, j0:j1, i0:i1], m, nid)
-        i0, j0, i1, j1, m = self.shape_mask(("circle", x, y, 0.0), R_VV - 1e-6)
+        i0, j0, i1, j1, m = self.shape_mask(("circle", x, y, 0.0), rv - 1e-6)
         self._merge(self.vho[j0:j1, i0:i1], m, MULTI)        # hole to hole holds between vias of one net too
 
-    def hard_segment(self, l, a, b, net, w=W_TR):
+    def hard_segment(self, l, a, b, net, w=0.09):
         nid = self.nid(net)
         for arr, r in ((self.tho[l], w / 2 + CL + W_TR / 2 + EPS), (self.vho, w / 2 + OFF_V)):
             i0, j0, i1, j1 = self._box(min(a[0], b[0]) - r, min(a[1], b[1]) - r, max(a[0], b[0]) + r, max(a[1], b[1]) + r)
@@ -563,7 +593,7 @@ class Grid:
         for dj in range(-k, k + 1):
             for di in range(-k, k + 1):
                 grown |= np.roll(np.roll(inside, dj, 0), di, 1)
-        self.tho[l, j0:j1, i0:i1][grown] = MULTI
+        (self.vho[j0:j1, i0:i1] if l is None else self.tho[l, j0:j1, i0:i1])[grown] = MULTI     # l None: the vias
 
     # ---- soft zones of a routed job ----
     def stamp_job(self, job, delta):
@@ -656,6 +686,8 @@ class Job:
 def pad_shape(p):
     x, y = pad_xy(p)
     sx, sy = ToMM(p.GetSize().x) / 2, ToMM(p.GetSize().y) / 2
+    if p.HasHole():                             # (a non-plated hole has no copper: its hole is the obstacle)
+        sx, sy = max(sx, ToMM(p.GetDrillSize().x) / 2), max(sy, ToMM(p.GetDrillSize().y) / 2)
     if p.GetShape() == pcbnew.PAD_SHAPE_CIRCLE:
         return ("circle", x, y, sx)
     ang = int(round(p.GetOrientationDegrees())) % 180
@@ -665,6 +697,8 @@ def pad_shape(p):
 
 
 def pad_layers(p):
+    if p.HasHole():                             # a through-hole pin (or a peg hole) is in the way on every layer
+        return list(range(len(RL)))
     out = []
     if p.IsOnLayer(pcbnew.F_Cu):
         out.append(F_IDX)
@@ -683,24 +717,55 @@ def build_grid(board, routed_as_hard=True):
     for fp in board.GetFootprints():
         for p in fp.Pads():
             x, y = pad_xy(p)
-            if not on_board(x, y):
+            if not on_board(x, y) or not pad_layers(p):
                 continue
-            grid.hard_shape(pad_layers(p), pad_shape(p), p.GetNetname() or None)
+            if p.HasHole():                     # copper clearance, or the hole's own clearance if that is more
+                grid.hard_shape(pad_layers(p), pad_shape(p), p.GetNetname() or None,
+                                max(OFF_T, HCL + W_TR / 2 + EPS), max(OFF_V, H2H + VIA_H / 2, HCL + VIA_D / 2) + EPS)
+            else:
+                grid.hard_shape(pad_layers(p), pad_shape(p), p.GetNetname() or None)
     if routed_as_hard:
         for t in board.GetTracks():
             if t.GetClass() == "PCB_VIA":
                 x, y = ToMM(t.GetPosition().x) - OX, ToMM(t.GetPosition().y) - OY
-                grid.hard_via(x, y, t.GetNetname())
+                grid.hard_via(x, y, t.GetNetname(), ToMM(t.GetWidth(pcbnew.F_Cu)), ToMM(t.GetDrill()))
             elif t.GetLayer() in RL:
                 a = (ToMM(t.GetStart().x) - OX, ToMM(t.GetStart().y) - OY)
                 b = (ToMM(t.GetEnd().x) - OX, ToMM(t.GetEnd().y) - OY)
                 grid.hard_segment(RL.index(t.GetLayer()), a, b, t.GetNetname(), ToMM(t.GetWidth()))
+    # keep-out areas (a connector's own, e.g. under the micro-HDMI jack): no track / via of this pass there
+    for pts, layers, no_v in rule_areas(board):
+        for l in layers:
+            grid.reserve(l, pts, grow=W_TR / 2 + EPS)
+        if no_v:
+            grid.reserve(None, pts, grow=VIA_D / 2 + EPS)
     polys = {(n, l): poly for n, l, poly, _ in plane_polys()}
     for net, l in RESERVED:
         for (n, lay), poly in polys.items():
             if n == net and lay == RL[l]:
                 grid.reserve(l, poly)
     return grid
+
+
+def rule_areas(board):
+    """Keep-out rule areas of the board and of its footprints: [(polygon, routing layers with no tracks, no vias)]."""
+    zones = list(board.Zones())
+    for fp in board.GetFootprints():
+        if is_placed(fp):
+            zones += list(fp.Zones())
+    out = []
+    for z in zones:
+        if not z.GetIsRuleArea():
+            continue
+        ls = z.GetLayerSet()
+        layers = [k for k, lay in enumerate(RL) if ls.Contains(lay)] if z.GetDoNotAllowTracks() else []
+        ol = z.Outline()
+        for oi in range(ol.OutlineCount()):
+            ch = ol.Outline(oi)
+            pts = [(ToMM(ch.CPoint(k).x) - OX, ToMM(ch.CPoint(k).y) - OY) for k in range(ch.PointCount())]
+            if len(pts) >= 3:
+                out.append((pts, layers, z.GetDoNotAllowVias()))
+    return out
 
 
 def plane_masks(grid):
@@ -732,11 +797,20 @@ def plane_masks(grid):
     return out
 
 
-def make_jobs(board, grid):
+def make_jobs(board, grid, select=None):
+    """The jobs of a routing pass.  select(net, kind) picks them; a net that already has copper (an earlier pass) is
+    done, and a supply / ground pad already joined to a via by copper needs nothing more."""
     vias_at = {}
+    has_copper = set()
     for t in board.GetTracks():
+        has_copper.add(t.GetNetname())
         if t.GetClass() == "PCB_VIA":
             vias_at[grid.cell(ToMM(t.GetPosition().x) - OX, ToMM(t.GetPosition().y) - OY)] = t.GetNetname()
+    board.BuildConnectivity()
+    conn = board.GetConnectivity()
+
+    def joined(p):
+        return any(it.GetClass() == "PCB_VIA" for it in conn.GetConnectedItems(p, 0))
     bynet = {}
     for fp in board.GetFootprints():
         for p in fp.Pads():
@@ -754,13 +828,16 @@ def make_jobs(board, grid):
             l = pad_layers(p)[0]
             terms.append((l, i, j, p.GetParentFootprint().GetReference() + "." + p.GetNumber()))
         if n in PLANE_NETS:
+            if select and not select(n, "stub"):
+                continue
             # one job per net for all its pads that still need a via: pads of one net never stand in each other's way
-            need = [t for t in terms if vias_at.get((t[1], t[2])) != n]
+            done = [vias_at.get((t[1], t[2])) == n or joined(p) for t, p in zip(terms, pads)]
+            need = [t for t, d_ in zip(terms, done) if not d_]
             if need:
                 jobs.append(Job(len(jobs), n, "stub", need))
                 # a pad may also reach a pad of its net that already has its via (a short track on the top face)
-                jobs[-1].anchors = [t[:3] for t in terms if vias_at.get((t[1], t[2])) == n]
-        elif len(terms) >= 2:
+                jobs[-1].anchors = [t[:3] for t, d_ in zip(terms, done) if d_]
+        elif len(terms) >= 2 and n not in has_copper and (not select or select(n, "tree")):
             jobs.append(Job(len(jobs), n, "tree", terms))
     # strobe and clock pairs: each half is drawn towards the other's route (see attract())
     byname = {j.net: j for j in jobs}
@@ -818,7 +895,7 @@ def route_job(grid, job, pres, margin=4.0):
         try:
             vmask = getattr(grid, "vmask", {}).get(job.net)
             for (l, i, j, name) in job.terms:
-                m = int(2.5 / G)
+                m = int(4.0 / G)
                 box = (max(0, i - m), max(0, j - m), min(grid.W, i + m), min(grid.H, j + m))
                 goals = [a[0] * N + a[2] * grid.W + a[1] for a in anchors
                          if box[0] <= a[1] < box[2] and box[1] <= a[2] < box[3] and (a[1], a[2]) != (i, j)]
@@ -933,16 +1010,43 @@ def group_of(n):
     return ch, base
 
 
+def core_net(n):
+    return n.startswith(("LPDDR4_", "EMMC_")) or n in ("DDR_RZQ", "VCC1V8_DDR")
+
+
+# the 5 V paths and the buck switch nodes: routed 0.25 mm wide, before everything else of the power section
+WIDE_NETS = {"PMIC_SW1", "PMIC_SW2", "PMIC_SW3", "PMIC_SW4", "PMIC_SW5", "RK860_SW", "VOUT_5V", "PWR_VBUS", "SVC_VBUS",
+             "VCC5V_BUS", "HOST_VBUS", "VCC3V3_SYS", "VCC5V_MIDU", "VCC5V0_HDMI", "VCC_SPK_HP", "VCC_BAT", "PMIC_VBUS"}
+
+
 def stage_route():
+    """Pass 1: the memory bus and the eMMC (and the supply / ground vias of the parts placed so far)."""
+    route_pass(PLACED, ROUTED, lambda n, kind: kind == "stub" or core_net(n), THIN, True)
+
+
+def stage_wide():
+    route_pass(PLACED2, WIDED, lambda n, kind: kind == "tree" and n in WIDE_NETS, WIDE, False)
+
+
+def stage_rest():
+    route_pass(WIDED, ROUTED2, None, THIN, False)
+
+
+def route_pass(src, dst, select, cls, full_report):
     t0 = time.time()
-    board = pcbnew.LoadBoard(PLACED)
+    set_class(cls)
+    board = pcbnew.LoadBoard(src)
     grid = build_grid(board)
     grid.vmask = plane_masks(grid)
-    jobs = make_jobs(board, grid)
+    jobs = make_jobs(board, grid, select)
     trees = [j for j in jobs if j.kind == "tree"]
     stubs = [j for j in jobs if j.kind == "stub"]
-    print("  %d nets to route (%d memory bus), %d ground / supply pads that need their via; grid %d x %d x %d layers"
-          % (len(trees), sum(1 for j in trees if j.net.startswith("LPDDR4_")), len(stubs), grid.W, grid.H, grid.L), flush=True)
+    print("  %d nets to route (%d memory bus), %d supply / ground pads that need their via; %.2f mm tracks, %.2f / %.2f vias; "
+          "grid %d x %d x %d layers" % (len(trees), sum(1 for j in trees if j.net.startswith("LPDDR4_")), sum(len(j.terms) for j in stubs),
+                                         W_TR, VIA_D, VIA_H, grid.W, grid.H, grid.L), flush=True)
+    if not jobs:
+        save(board, dst)
+        return
     iters = int(os.environ.get("CR_ITERS", "60"))
     pres, pf, hinc = 0.6, 1.35, 0.4
     best = None
@@ -975,7 +1079,8 @@ def stage_route():
             best = (nbad + unrouted, it)
         if nbad == 0 and unrouted == 0:
             break
-        pres *= pf
+        pres = min(pres * pf, 400.0)    # (beyond this every used cell is a wall and nothing trades any more:
+        #                                  the history cost keeps growing instead)
     # ---- clean-up: drop jobs until nothing is in conflict, then try each dropped one again with the others as walls
     dropped = []
     while True:
@@ -1056,16 +1161,34 @@ def stage_route():
         j.pts = raster_segments(grid, segs)
         grid.stamp_job(j, +1)
         net = nets[j.net]
+        # two vias of the job closer than the hole spacing (two branches dropping through side by side): keep one;
+        # the tracks that ended at the other get a short track to it on their layer
+        kept, moved = [], {}
+        rv2 = (R_VV / G) ** 2
+        for v in j.vias:
+            near = next((k for k in kept if (k[0] - v[0]) ** 2 + (k[1] - v[1]) ** 2 < rv2), None)
+            if near is None:
+                kept.append(v)
+            else:
+                moved[v] = near
         for (l, a, b) in segs:
             add_track(board, (a[0] * G, a[1] * G), (b[0] * G, b[1] * G), net, RL[l])
             ntr += 1
-        for (i, jj) in j.vias:
+            for e in (a, b):
+                if tuple(e) in moved:
+                    k = moved[tuple(e)]
+                    add_track(board, (e[0] * G, e[1] * G), (k[0] * G, k[1] * G), net, RL[l])
+        for (i, jj) in kept:
             add_via(board, (i * G, jj * G), net)
             nvia += 1
-    save(board, ROUTED)
-    rep = report(board, jobs, log, time.time() - t0)
-    print(rep, flush=True)
-    print("  %d tracks, %d vias -> %s" % (ntr, nvia, ROUTED))
+    save(board, dst)
+    if full_report:
+        rep = report(board, jobs, log, time.time() - t0)
+        print(rep, flush=True)
+    else:
+        with open(REPORT, "a", encoding="utf-8") as f:
+            f.write(NL + "pass %s (%.2f mm): " % (os.path.basename(dst), W_TR) + NL.join(log[-3:]) + NL)
+    print("  %d tracks, %d vias -> %s" % (ntr, nvia, dst))
 
 
 def raster_segments(grid, segs):
@@ -1224,93 +1347,290 @@ def inside(poly, x, y):
     return c
 
 
-def place_caps(board, grid):
-    """Every part still parked: on the bottom face as near its rail's balls as there is room, a via in each pad."""
-    polys = plane_polys()
-    rail_area = {}
-    for n, l, poly, _ in polys:
-        rail_area.setdefault(n, []).append(poly)
-    chip_of_sheet = {"soc_ddr": "U1", "soc_power": "U1", "lpddr4": "U10", "soc_usb": "U1", "storage": "U20"}
-    balls = {}
-    for ref in CHIPS:
-        for p in board.FindFootprintByReference(ref).Pads():
-            balls.setdefault((ref, p.GetNetname()), []).append(pad_xy(p))
-    nets = board.GetNetsByName()
-    placed_boxes = []
-    todo = []
-    for fp in board.GetFootprints():
-        x, y = ToMM(fp.GetPosition().x) - OX, ToMM(fp.GetPosition().y) - OY
-        if not on_board(x, y):
-            todo.append(fp)
-    # big parts first (they need the bigger holes)
-    todo.sort(key=lambda f: (-ToMM(f.GetBoundingBox(False).GetWidth()) * ToMM(f.GetBoundingBox(False).GetHeight()), f.GetReference()))
-    done, failed = 0, []
-    for fp in todo:
-        pads = list(fp.Pads())
-        names = [p.GetNetname() for p in pads if p.GetNetname() and p.GetNetname() != "GND"]
-        rail = next((n for n in names if n in PLANE_NETS), names[0] if names else "GND")
-        sheet = fp.GetSheetname().strip("/")
-        chip = chip_of_sheet.get(sheet, "U1")
-        if rail in CAP_TARGET:
-            tx, ty = CAP_TARGET[rail]
-        else:
-            pts = (balls.get((chip, rail)) or [xy for r in CHIPS for xy in balls.get((r, rail), [])] or [(SOC_X, SOC_Y)])
-            tx, ty = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
-        ok = False
-        for rr in np.arange(0.0, 16.0, 0.15):
-            nstep = max(1, int(2 * math.pi * rr / 0.15))
-            for k in range(nstep):
-                a = 2 * math.pi * k / nstep
-                cx, cy = q(tx + rr * math.cos(a)), q(ty + rr * math.sin(a))
-                for rot in (0, 90):
-                    if try_cap(board, grid, fp, cx, cy, rot, rail, rail_area, placed_boxes, nets):
-                        ok = True
-                        break
-                if ok:
-                    break
-            if ok:
-                break
-        if ok:
-            done += 1
-        else:
-            failed.append(fp.GetReference())
-    return done, failed
+# ---- placement of the parts that are not placed by hand: as near what they connect to as there is room ----
+HOME = {"pmic": "U9", "soc_ddr": "U1", "soc_power": "U1", "soc_usb": "U1", "soc_misc": "U1", "soc_pmu": "U1",
+        "soc_gmac": "U1", "soc_video": "U1", "soc_gpio": "U1", "lpddr4": "U10", "storage": "U20", "hdmi": "J10"}
 
 
-def try_cap(board, grid, fp, cx, cy, rot, rail, rail_area, boxes, nets):
-    GP.set_pose(fp, cx, cy, rot, True)
+def rail_areas():
+    out = {}
+    for n, l, poly, _ in plane_polys():
+        out.setdefault(n, []).append(poly)
+    return out
+
+
+def is_placed(fp):
+    return on_board(ToMM(fp.GetPosition().x) - OX, ToMM(fp.GetPosition().y) - OY)
+
+
+def try_place(board, grid, fp, cx, cy, rot, bottom, vias, areas, boxes):
+    """Put fp there if its courtyard is free on its face and its pads keep their clearance to the copper already on
+    the board; vias=True: a via in each supply / ground pad (it must land on that supply's plane)."""
+    GP.set_pose(fp, cx, cy, rot, bottom)
     cb = GP.court(fp)
     if cb[0] < 0.6 or cb[1] < 0.6 or cb[2] > BW - 0.6 or cb[3] > BH - 0.6:
         return False
-    for b in boxes:
+    for b in boxes["B" if bottom else "F"]:
         if not (cb[2] <= b[0] or b[2] <= cb[0] or cb[3] <= b[1] or b[3] <= cb[1]):
             return False
     for p in fp.Pads():
+        if not pad_layers(p):
+            continue
         shape = pad_shape(p)
         n = p.GetNetname()
         nid = grid.nid(n) if n else MULTI
-        i0, j0, i1, j1, m = grid.shape_mask(shape, OFF_T - W_TR / 2)       # the pad itself, grown by the clearance
-        sub = grid.tho[B_IDX, j0:j1, i0:i1]
-        if np.any(m & (sub != FREE) & (sub != nid)):
-            return False
-        x, y = pad_xy(p)
-        i, j = grid.cell(x, y)
-        if n in PLANE_NETS and grid.vho[j, i] not in (FREE, nid):
-            return False
-        if n != "GND" and n in PLANE_NETS and not any(inside(poly, x, y) for poly in rail_area.get(n, [])):
-            return False
-    # accept: vias in the pads on plane nets (a pad of a supply that comes from off the board - VCC_1V8 on R69 - stays
-    # a bare pad), obstacles for the next ones
+        i0, j0, i1, j1, m = grid.shape_mask(shape, CL + EPS)        # the pad itself, grown by the clearance
+        for l in pad_layers(p):
+            sub = grid.tho[l, j0:j1, i0:i1]
+            if np.any(m & (sub != FREE) & (sub != nid)):
+                return False
+        if vias and n in PLANE_NETS:
+            x, y = pad_xy(p)
+            i, j = grid.cell(x, y)
+            if grid.vho[j, i] not in (FREE, nid):
+                return False
+            if n != "GND" and not any(inside(poly, x, y) for poly in areas.get(n, [])):
+                return False
+    commit_part(board, grid, fp, vias, boxes)
+    return True
+
+
+def commit_part(board, grid, fp, vias, boxes):
+    bottom = fp.IsFlipped()
     for p in fp.Pads():
+        if not pad_layers(p):                   # (a paste opening, no copper)
+            continue
         x, y = pad_xy(p)
         n = p.GetNetname()
-        if n in PLANE_NETS:
+        if vias and n in PLANE_NETS:
             add_via(board, (q(x), q(y)), p.GetNet())
             grid.hard_via(q(x), q(y), n)
-        grid.hard_shape([B_IDX], pad_shape(p), n or None)
-    boxes.append(cb)
-    fp.Reference().SetLayer(pcbnew.B_Fab)      # 63 names do not fit on the silkscreen between the vias: assembly drawing
-    return True
+        grid.hard_shape(pad_layers(p), pad_shape(p), n or None)
+    boxes["B" if bottom else "F"].append(GP.court(fp))
+    if any(p.HasHole() for p in fp.Pads()):     # through-hole pins: nothing on the other face over them either
+        boxes["F" if bottom else "B"].append(GP.court(fp))
+    for z in fp.Zones():                        # its keep-out areas
+        if z.GetIsRuleArea():
+            ls = z.GetLayerSet()
+            ol = z.Outline()
+            for oi in range(ol.OutlineCount()):
+                ch = ol.Outline(oi)
+                pts = [(ToMM(ch.CPoint(k).x) - OX, ToMM(ch.CPoint(k).y) - OY) for k in range(ch.PointCount())]
+                if len(pts) < 3:
+                    continue
+                if z.GetDoNotAllowTracks():
+                    for k, lay in enumerate(RL):
+                        if ls.Contains(lay):
+                            grid.reserve(k, pts, grow=W_TR / 2 + EPS)
+                if z.GetDoNotAllowVias():
+                    grid.reserve(None, pts, grow=VIA_D / 2 + EPS)
+    if bottom:
+        fp.Reference().SetLayer(pcbnew.B_Fab)  # the bottom names do not fit on the silkscreen between the vias
+
+
+def spiral(board, grid, fp, tx, ty, bottom, vias, areas, boxes, rmax=16.0, step=0.2):
+    """Nearest free spot to (tx, ty).  The courtyard is tested first with plain box arithmetic (moving a KiCad
+    footprint is slow); only a spot with a free courtyard gets the full pad / copper test."""
+    rots = (0, 90) if bottom else (0, 90, 180, 270)
+    shape = {}
+    for rot in rots:
+        GP.set_pose(fp, 0.0, 0.0, rot, bottom)
+        c = GP.court(fp)
+        shape[rot] = c
+    occ = np.array(boxes["B" if bottom else "F"] or [(-9, -9, -8, -8)], float)
+    for rr in np.arange(0.0, rmax, step):
+        nstep = max(1, int(2 * math.pi * rr / step))
+        for k in range(nstep):
+            a = 2 * math.pi * k / nstep
+            cx, cy = q(tx + rr * math.cos(a)), q(ty + rr * math.sin(a))
+            for rot in rots:
+                c = shape[rot]
+                b = (c[0] + cx, c[1] + cy, c[2] + cx, c[3] + cy)
+                if b[0] < 0.6 or b[1] < 0.6 or b[2] > BW - 0.6 or b[3] > BH - 0.6:
+                    continue
+                if np.any((b[2] > occ[:, 0]) & (occ[:, 2] > b[0]) & (b[3] > occ[:, 1]) & (occ[:, 3] > b[1])):
+                    continue
+                if try_place(board, grid, fp, cx, cy, rot, bottom, vias, areas, boxes):
+                    return True
+    return False
+
+
+def pad_vias(board, grid, fp, areas, pitch=0.5, most=4):
+    """Several vias in each big supply / ground pad of a power part (an inductor's output, the RK817's exposed pad):
+    one 0.25 / 0.15 via is not enough for an ampere."""
+    added = 0
+    for p in fp.Pads():
+        n = p.GetNetname()
+        if n not in PLANE_NETS:
+            continue
+        sh = pad_shape(p)
+        if sh[0] == "rect":
+            _, x, y, a, b = sh
+        else:
+            _, x, y, a = sh
+            b = a
+        if 4 * a * b < 0.9:
+            continue
+        nx, ny = max(1, int((2 * a - 0.4) / pitch) + 1), max(1, int((2 * b - 0.4) / pitch) + 1)
+        cand = [(q(x + (ix - (nx - 1) / 2) * pitch), q(y + (iy - (ny - 1) / 2) * pitch)) for ix in range(nx) for iy in range(ny)]
+        cand.sort(key=lambda c: (c[0] - x) ** 2 + (c[1] - y) ** 2)
+        cap = 9 if (n == "GND" and len(cand) >= 9) else most
+        nid = grid.nid(n)
+        k = 0
+        for (vx, vy) in cand:
+            if k >= cap:
+                break
+            i, j = grid.cell(vx, vy)
+            if grid.vho[j, i] not in (FREE, nid):
+                continue
+            if n != "GND" and not any(inside(poly, vx, vy) for poly in areas.get(n, [])):
+                continue
+            add_via(board, (vx, vy), p.GetNet())
+            grid.hard_via(vx, vy, n)
+            k += 1
+        added += k
+    return added
+
+
+def target_of(board, fp, index):
+    """Where a part wants to be: the pads of placed parts on its nets (ground aside), its own sheet's chip first.
+    index: net -> [(ref, (x, y))] of the placed pads."""
+    nets = {p.GetNetname() for p in fp.Pads() if p.GetNetname() and p.GetNetname() != "GND"}
+    if not nets:
+        return None
+    sheet = fp.GetSheetname().strip("/")
+    if sheet == "soc_power":
+        for n in nets:
+            if n in CAP_TARGET:
+                return CAP_TARGET[n]
+    home = HOME.get(sheet)
+    pts = [xy for n in nets for (ref, xy) in index.get(n, ()) if ref != fp.GetReference()]
+    own = [xy for n in nets for (ref, xy) in index.get(n, ()) if ref == home]
+    pts = own or pts
+    if not pts:
+        return None
+    return sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
+
+
+def is_bottom_part(fp):
+    """Capacitors go to the bottom face (decoupling under the chips); everything else on top."""
+    return fp.GetReference().startswith("C")
+
+
+def place_rest(board, grid, areas, boxes):
+    placed = {fp.GetReference() for fp in board.GetFootprints() if is_placed(fp)}
+    todo = [fp for fp in board.GetFootprints() if fp.GetReference() not in placed]
+    index = {}
+
+    def add_index(f_):
+        for p in f_.Pads():
+            if p.GetNetname():
+                index.setdefault(p.GetNetname(), []).append((f_.GetReference(), pad_xy(p)))
+    for fp in board.GetFootprints():
+        if fp.GetReference() in placed:
+            add_index(fp)
+    done, failed = 0, []
+    while todo:
+        scored = []
+        for fp in todo:
+            t = target_of(board, fp, index)
+            if t is not None:
+                scored.append((-len(list(fp.Pads())), fp.GetReference(), fp, t))
+        if not scored:
+            failed += [fp.GetReference() for fp in todo]
+            break
+        scored.sort(key=lambda s_: (s_[0], s_[1]))
+        _, ref, fp, (tx, ty) = scored[0]
+        bottom = is_bottom_part(fp)
+        if (spiral(board, grid, fp, tx, ty, bottom, bottom, areas, boxes)
+                or spiral(board, grid, fp, tx, ty, not bottom, not bottom, areas, boxes)):
+            done += 1
+            placed.add(ref)
+            add_index(fp)
+        else:
+            GP.set_pose(fp, -20.0, 2.0, 0, False)
+            failed.append(ref)
+        todo = [f for f in todo if f.GetReference() != ref]
+    return done, failed
+
+
+def place_caps(board, grid):
+    """(Leftovers: every part still parked, as in place_rest.)"""
+    boxes = {"F": [], "B": []}
+    for fp in board.GetFootprints():
+        if is_placed(fp):
+            boxes["B" if fp.IsFlipped() else "F"].append(GP.court(fp))
+    return place_rest(board, grid, rail_areas(), boxes)
+
+
+def edge_mount(fp, side, along, overhang=0.0):
+    """Connector with its mouth on a board edge: 'top' (y = 0), 'bottom', 'left' (x = 0), 'right'."""
+    d = {"top": (0, -1), "bottom": (0, 1), "left": (-1, 0), "right": (1, 0)}[side]
+    GP.set_pose(fp, 0, 0)
+    GP.face_towards(fp, *d)
+    if d[0]:
+        GP.centre_on(fp, 0, along)
+        c = GP.court(fp)
+        dx = (BW + overhang) - c[2] if d[0] > 0 else -overhang - c[0]
+        fp.SetPosition(VECTOR2I(fp.GetPosition().x + FromMM(dx), fp.GetPosition().y))
+    else:
+        GP.centre_on(fp, along, 0)
+        c = GP.court(fp)
+        dy = (BH + overhang) - c[3] if d[1] > 0 else -overhang - c[1]
+        fp.SetPosition(VECTOR2I(fp.GetPosition().x, fp.GetPosition().y + FromMM(dy)))
+
+
+# the power section and the ports, by hand: (x, y, rotation) or ("edge", side, along)
+def power_parts():
+    return {
+        "U9": (PMIC_X, PMIC_Y, 270),                                 # RK817: bucks 1 / 2 up, buck 3 left, 4 / 5 right
+        "L17": (SOC_X - 1.6, PMIC_Y - 5.9, 90), "L19": (SOC_X + 1.4, PMIC_Y - 5.9, 90),     # VDD_LOGIC, VDD_GPU_NPU
+        "L20": (PMIC_X - 5.9, PMIC_Y - 0.35, 180),                   # VCC_DDR (its output in the In5 strip on the left)
+        "L18": (PMIC_X + 5.9, PMIC_Y - 1.75, 0), "L21": (PMIC_X + 5.9, PMIC_Y + 2.45, 0),    # VCC3V3_SYS, the 5 V boost
+        "U3": (VSYS_R + 0.15, PMIC_Y + 1.6, 0), "L2": (VSYS_R + 4.1, PMIC_Y + 1.6, 0),     # RK860 + its inductor
+        "J96": ("edge", "bottom", 6.1), "J95": ("edge", "bottom", 17.5), "J2": ("edge", "bottom", BW - 8.5),
+        "J10": ("edge", "right", SOC_Y + SOC_H / 2 + 2.5),
+        "J21": ("edge", "left", PMIC_Y - 3.6), "SW3": ("edge", "left", SOC_Y + 4.8),
+    }
+
+
+def stage_place2():
+    """The power section, the ports and every other part, around the memory bus and eMMC routed in pass 1."""
+    set_class(THIN)
+    board = pcbnew.LoadBoard(ROUTED)
+    grid = build_grid(board)
+    areas = rail_areas()
+    boxes = {"F": [], "B": []}
+    for fp in board.GetFootprints():
+        if is_placed(fp):
+            boxes["B" if fp.IsFlipped() else "F"].append(GP.court(fp))
+    clash = []
+    nvia = 0
+    for ref, how in power_parts().items():
+        fp = board.FindFootprintByReference(ref)
+        if how[0] == "edge":
+            edge_mount(fp, how[1], how[2])
+        else:
+            put(fp, *how)
+        cb = GP.court(fp)
+        if any(not (cb[2] <= b[0] or b[2] <= cb[0] or cb[3] <= b[1] or b[3] <= cb[1]) for b in boxes["F"]):
+            clash.append(ref)
+        commit_part(board, grid, fp, False, boxes)
+        nvia += pad_vias(board, grid, fp, areas)
+    for ref, grow in (("U9", 1.0), ("U3", 0.8)):     # their pins need the room to fan out: no packed part there
+        c = GP.court(board.FindFootprintByReference(ref))
+        ring = (c[0] - grow, c[1] - grow, c[2] + grow, c[3] + grow)
+        boxes["F"].append(ring)
+        boxes["B"].append(ring)
+    u9 = board.FindFootprintByReference("U9")
+    pins = {p.GetNumber(): pad_xy(p) for p in u9.Pads()}
+    print("  RK817 at (%.2f, %.2f): SW1 pin 12 %s, SW2 pin 9 %s, SW3 pin 25 %s, SW4 pin 65 %s, SW5 pin 53 %s" % (
+        PMIC_X, PMIC_Y, *["(%.2f, %.2f)" % pins[k] for k in ("12", "9", "25", "65", "53")]))
+    done, failed = place_rest(board, grid, areas, boxes)
+    save(board, PLACED2)
+    print("  power section + ports placed by hand%s; %d vias in the big supply pads; %d more parts placed%s -> %s"
+          % ((" (courtyard clash: " + " ".join(clash) + ")") if clash else "", nvia, done,
+             (", NOT placed: " + " ".join(failed)) if failed else "", PLACED2))
 
 
 def add_zone(board, net, layer, pts, prio=0):
@@ -1331,7 +1651,8 @@ def add_zone(board, net, layer, pts, prio=0):
 
 
 def stage_finish():
-    board = pcbnew.LoadBoard(ROUTED)
+    set_class(THIN)
+    board = pcbnew.LoadBoard(ROUTED2)
     grid = build_grid(board)
     done, failed = place_caps(board, grid)
     nets = board.GetNetsByName()
@@ -1348,10 +1669,12 @@ def stage_finish():
 
 def main():
     stage = sys.argv[sys.argv.index("--stage") + 1] if "--stage" in sys.argv else "all"
-    for s in ("netlist", "place", "route", "finish"):
+    stages = {"netlist": stage_netlist, "place": stage_place, "route": stage_route, "place2": stage_place2,
+              "wide": stage_wide, "rest": stage_rest, "finish": stage_finish}
+    for s in stages:
         if stage in (s, "all"):
             print("--- " + s, flush=True)
-            {"netlist": stage_netlist, "place": stage_place, "route": stage_route, "finish": stage_finish}[s]()
+            stages[s]()
 
 
 if __name__ == "__main__":

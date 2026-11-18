@@ -129,6 +129,13 @@ def main():
         # the module boards' feed lanes and electrode bridges use 0.5 / 0.25 vias (tools/small_board.py), JLCPCB's
         # standard 2-layer process (0.15 mm hole min; no surcharge for a 0.25 hole with a 0.45 mm or larger via)
         pro["board"]["design_settings"]["rules"]["min_through_hole_diameter"] = 0.25
+    if cpmodel.VARIANT == "cpuram":
+        # commander_cpu_ram (2026-11-18): its router (tools/cpu_ram_board.py) keeps 0.09 mm between all nets; 0.15 mm
+        # around 5 V and 0.10 mm around the USB / HDMI / supply classes buy nothing at these voltages (the pairs keep
+        # their own pair gap), so the classes here say 0.09 too
+        for c in pro["net_settings"]["classes"]:
+            if c["name"] not in ("POE_PRIMARY", "ETH_MDI"):
+                c["clearance"] = 0.09
     if cpmodel.VARIANT == "touch":      # the electrode diamonds hang on necks and bridges, not on pads: by design
         pro["board"]["design_settings"]["rule_severities"]["isolated_copper"] = "ignore"
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:

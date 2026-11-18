@@ -160,8 +160,11 @@ def main():
         run("symbols + schematic", py("gen_schematic.py"))
         if "--keep-board" not in sys.argv:
             run("board: outline, the two packages, supply vias", kpy("cpu_ram_board.py", "--stage", "place"))
-            run("board: the memory bus (negotiated routing, 10-30 minutes)", kpy("cpu_ram_board.py", "--stage", "route"))
-            run("board: decoupling, planes", kpy("cpu_ram_board.py", "--stage", "finish"))
+            run("board: pass 1, the memory bus and the eMMC (negotiated routing)", kpy("cpu_ram_board.py", "--stage", "route"))
+            run("board: the power section, the ports and every other part", kpy("cpu_ram_board.py", "--stage", "place2"))
+            run("board: pass 2, the 5 V paths and the switch nodes (0.25 mm)", kpy("cpu_ram_board.py", "--stage", "wide"))
+            run("board: pass 3, everything else (0.09 mm)", kpy("cpu_ram_board.py", "--stage", "rest"))
+            run("board: planes", kpy("cpu_ram_board.py", "--stage", "finish"))
         run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", sch], ok_codes=(0, 5))
         run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", sch])
         run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)

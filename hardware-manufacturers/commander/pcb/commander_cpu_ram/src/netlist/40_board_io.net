@@ -1,0 +1,33 @@
+# commander_cpu_ram only (2026-11-18): what makes the processor core a board that boots on its own bench - its power
+# port, one USB host port (keyboard + mouse through a splitter / hub), the Maskrom button.  Everything else (PMIC,
+# RK860, crystal, IO supplies, flashing port J2, micro-HDMI, debug header, buttons) is the mainboard's circuit,
+# shared through src/netlist/shared.txt.
+SHEET board_io
+# --- power USB-C (sink, 5 V, USB 2.0 data not used): Rd on both CC lines, so any USB-C charger gives 5 V.  It feeds
+#     VOUT_5V through a Schottky, like the flashing port J2 (D30): either port powers the board.
+J95 USBC16 A4=PWR_VBUS A9=PWR_VBUS B4=PWR_VBUS B9=PWR_VBUS A5=PWR_CC1 B5=PWR_CC2 A1=GND A12=GND B1=GND B12=GND SH=GND
+NC J95 A6 A7 B6 B7 A8 B8
+R951 5.1K PWR_CC1 GND
+R952 5.1K PWR_CC2 GND
+D951 TVS:SMF5.0CA PWR_VBUS GND
+C951 10uF PWR_VBUS GND
+D952 SCHOTTKY:SS34 A=PWR_VBUS K=VOUT_5V
+C952 22uF VOUT_5V GND
+R953 0R VOUT_5V VCC5V_BUS
+# --- USB host port (USB-C source, USB 2.0 on the processor's HOST2): 56K Rp on both CC lines (default USB power),
+#     VBUS through a 1.0 A current-limited switch, always on while the board runs
+J96 USBC16 A4=HOST_VBUS A9=HOST_VBUS B4=HOST_VBUS B9=HOST_VBUS A5=HOST_CC1 B5=HOST_CC2 A7=USB2_HOST2_DM B7=USB2_HOST2_DM A6=USB2_HOST2_DP B6=USB2_HOST2_DP A1=GND A12=GND B1=GND B12=GND SH=GND
+NC J96 A8 B8
+R954 56K VCC_SYS HOST_CC1
+R955 56K VCC_SYS HOST_CC2
+U95 SY6280:SY6280AAC 5=VCC_SYS 4=HOST_VBUS_EN 3=HOST_VBUS_ISET 2=GND 1=HOST_VBUS
+R956 6.8K HOST_VBUS_ISET GND
+R957 10K VCC3V3_SYS HOST_VBUS_EN
+C953 1uF VCC_SYS GND
+C954 10uF HOST_VBUS GND
+D953 ESD:BTR04G02 USB2_HOST2_DP GND
+D954 ESD:BTR04G02 USB2_HOST2_DM GND
+# --- Maskrom: held while the board powers up, the eMMC's clock is grounded, the eMMC does not answer and the boot ROM
+#     falls back to USB (rockusb on J2) - for re-flashing an eMMC whose image does not boot
+SW95 TACT:MASKROM 1=MASKROM_K 2=GND
+R958 100R EMMC_CLK MASKROM_K

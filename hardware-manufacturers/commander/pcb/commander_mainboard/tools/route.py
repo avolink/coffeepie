@@ -48,6 +48,7 @@ PAIR_CLASSES = ("USB2", "USB3_SS", "HDMI", "ETH_MDI")      # routed as coupled p
 POWER_PREFIX = ("VCC", "VDD", "VBUS", "VOUT", "MIPI_AVDD", "SVC_VBUS")
 SKIP_NETS = {"CHASSIS"}
 SY = CFG["STRIP_Y"]
+HUB_FACE = 69.0         # hub board: left edge of its body = the socket's front face (board mm; 73.0 before 2026-11-18)
 REGIONS = [   # name, x0, y0, x1, y1 (design mm); each window overlaps the real board edge by 1 mm
     # (the strip window starts in the right-hand corridor of the column: the USB 3 hub sits at the junction, and the
     #  pins on its left side need room to turn round)
@@ -61,9 +62,12 @@ if cpmodel.VARIANT == "hub":
     # The hub board (branch m2-hub): the strip from the socket's front face (board x 73.0) to its far end, plus the
     # part of the M.2 tongue that sits in the socket's slot (from x 71.6), without the key notch.  The fingers
     # themselves (x 69.5-71.5) are joined to that by straight stubs drawn by tools/hub_board.py.  Design mm.
-    _HUB = [(73.0, 81.3), (361.73, 81.3), (364.73, 84.3), (364.73, 100.02), (361.73, 103.02), (73.0, 103.02),
-            (73.0, 102.08), (71.6, 102.08), (71.6, 86.8), (72.9, 86.8), (72.9, 85.3), (71.6, 85.3), (71.6, 82.24),
-            (73.0, 82.24)]
+    # (2026-11-18: socket and card edge 4 mm further left, tools/j41_shift.py + tools/hub_shift.py: the body now starts
+    #  at HUB_FACE = 69.0, it was 73.0)
+    _F = HUB_FACE
+    _HUB = [(_F, 81.3), (361.73, 81.3), (364.73, 84.3), (364.73, 100.02), (361.73, 103.02), (_F, 103.02),
+            (_F, 102.08), (_F - 1.4, 102.08), (_F - 1.4, 86.8), (_F - 0.1, 86.8), (_F - 0.1, 85.3), (_F - 1.4, 85.3),
+            (_F - 1.4, 82.24), (_F, 82.24)]
 
     # The bays' sink-mount receptacles sit in notches of the rear edge (tools/hub_midmount_swap.py): 9.42 mm wide,
     # 7.6 mm deep behind the mouth, R0.5 reliefs at the inner corners (taken here as 0.5 x 1.0 mm steps).  The bay
@@ -76,7 +80,7 @@ if cpmodel.VARIANT == "hub":
         cxs = sorted(float(m.group(1)) for m in _re.finditer(
             r'\(at ([\d.\-]+) [\d.\-]+[^)]*\)\s*\(descr "[^"]*"\)\s*\(tags "[^"]*"\)\s*\(property "Reference" "J3[1-9]"', txt))
         ye = MOUTH_Y + NOTCH_END
-        top = [(73.0, Y_TOP)]
+        top = [(HUB_FACE, Y_TOP)]
         for cx in cxs:
             lft, rgt = cx - NOTCH_HW, cx + NOTCH_HW
             top += [(lft, Y_TOP), (lft, ye - 2 * RELIEF), (lft - RELIEF, ye - 2 * RELIEF), (lft - RELIEF, ye),
@@ -154,11 +158,46 @@ if HEAD:
 # extra primary areas hold the primary pads of the optocoupler U31 (now below the clamp diode, 0.7 mm past the zone's
 # lower edge) and of the Y capacitor C518 (in the bump beside the transformer's primary pins).
 LINK = os.environ.get("CP_LINK") == "1"
+# (2026-11-18) The user moved the PoE primary block by hand (its parts, not the transformer T1 nor the barrier parts
+# U31 / C518), and socket J41 went 4 mm left with tools/j41_shift.py:
+#   CP_PRI_SHIFT=dx,dy  shifts the primary zone's rectangle (PRIMARY_AREA[0]) by that much (design mm);
+#   CP_PRI_FROM_BOARD=1 adds every primary pad / track / via already on the board (CP_PCB) as an area of its own,
+#                       so that hand-moved primary copper outside the rectangles is still kept 2 mm off;
+#   CP_LINK_DX=dx       moves the link window's left edge with the socket (its right edge then stops at the column's
+#                       edge: the tab is gone);
+#   CP_SKIP_CLASSES=A,B net classes this run leaves alone (e.g. POE_PRIMARY: the hand-placed primary copper).
+if os.environ.get("CP_PRI_SHIFT"):
+    _sx, _sy = (float(v_) for v_ in os.environ["CP_PRI_SHIFT"].split(","))
+    PRIMARY_AREA[0] = (PRIMARY_AREA[0][0] + _sx, PRIMARY_AREA[0][1] + _sy, PRIMARY_AREA[0][2] + _sx,
+                       PRIMARY_AREA[0][3] + _sy) + tuple(PRIMARY_AREA[0][4:])
+if os.environ.get("CP_PRI_FROM_BOARD") == "1":
+    def _pri_from_board():
+        bd = pcbnew.LoadBoard(os.environ.get("CP_PCB") or os.path.join(cpmodel.ROOT, cpmodel.PRJ + ".kicad_pcb"))
+        pri_cls = {c_["name"]: c_ for c_ in gen_project.CLASSES}.get("POE_PRIMARY", {})
+        pats = pri_cls.get("nets", []) if isinstance(pri_cls, dict) else []
+        out_ = []
+
+        def is_pri(n_):
+            return any(fnmatch.fnmatch(n_, p_) for p_ in pats) if pats else (
+                n_.startswith("POE_") and n_ not in ("POE_SEC", "POE_SNUB")) or fnmatch.fnmatch(n_, "TR?_48V")
+        items_ = [p_ for fp_ in bd.GetFootprints() for p_ in fp_.Pads()] + list(bd.GetTracks())
+        for it_ in items_:
+            if it_.GetNetname() and is_pri(it_.GetNetname()):
+                bb_ = it_.GetBoundingBox()
+                out_.append((ToMM(bb_.GetLeft()) - OX, ToMM(bb_.GetTop()) - OY, ToMM(bb_.GetRight()) - OX,
+                             ToMM(bb_.GetBottom()) - OY))
+        return out_
+    PRIMARY_AREA += _pri_from_board()
+if os.environ.get("CP_SKIP_CLASSES"):
+    SKIP_CLASSES.update(x_ for x_ in os.environ["CP_SKIP_CLASSES"].split(",") if x_)
 if LINK:
     PRIMARY_AREA += [(18.6, 40.6, 21.2, 43.0), (22.0, 34.5, 24.2, 37.8)]
     # (x to 33.3: the tab's edge is at 33.9 and the router still knows the old L outline; down to y 85: the link
     #  nets run on to the RK3566's balls)
-    REGIONS.append(("link", 21.5, 4.0, 33.3, 85.0))
+    _ldx = float(os.environ.get("CP_LINK_DX", "0"))
+    # (the router still takes the old L outline for the board edge, so with the tab gone the window itself has to stop
+    #  short of the column's edge: 0.7 mm leaves a 0.45 mm via 0.25 mm from it)
+    REGIONS.append(("link", 21.5 + _ldx, 4.0, 33.3 if _ldx == 0 else CFG["COL_W"] - 0.7, 85.0))
     PLANES["GND"] = PLANES["GND"] + ("link",)
     PLANES["VCC5V_BUS"] = PLANES["VCC5V_BUS"] + ("link",)     # (In3 plane under the socket's front row)
 
@@ -2373,7 +2412,7 @@ def stage_prune(board, r):
             vias.setdefault(code, []).append([t.GetPosition().x, t.GetPosition().y, d / 2, t, True])
         else:
             # (the hub's finger stubs, tools/hub_board.py, end at the card edge on purpose: kept, never dropped)
-            keep = cpmodel.VARIANT == "hub" and min(ToMM(t.GetStart().x), ToMM(t.GetEnd().x)) < 73.0
+            keep = cpmodel.VARIANT == "hub" and min(ToMM(t.GetStart().x), ToMM(t.GetEnd().x)) < HUB_FACE
             tracks.setdefault(code, []).append([t.GetLayer(), t.GetStart().x, t.GetStart().y, t.GetEnd().x, t.GetEnd().y, t.GetWidth() / 2, t, True, keep])
     drop = []
 
