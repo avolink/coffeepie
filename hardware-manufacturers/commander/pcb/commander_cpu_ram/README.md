@@ -1,6 +1,7 @@
-# commander_cpu_ram — the RK3566 and its LPDDR4 on a board of their own
+# commander_cpu_ram — the RK3566, its LPDDR4 and its eMMC on a board of their own
 
-Status (2026-11-18, revC0): **the memory bus is fully routed and KiCad's DRC is clean** (0 violations, 0 unconnected),
+Status (2026-11-18, revC0): **the memory bus and the eMMC are fully routed and KiCad's DRC is clean** (0 violations,
+0 unconnected),
 but the board is a **routing study, not ready to order**: lengths are not matched yet, the strobe / clock pairs are only
 partly coupled, and the board has no way in for its supplies (see "Not done" below).
 
@@ -16,16 +17,21 @@ there are only two inner signal layers for it. Here the two chips get the room a
 | R1, R120, R121 | DDR PHY RZQ, memory ZQ0 / ZQ1 (240R 1 %) |
 | R123, C204-C207 | the memory's VDD1 (1.8 V) from VCCA1V8_PMU, along the memory's far side |
 | C159 (DNP) | on the memory's RESET_n |
-| 57 capacitors, R122 | decoupling of VCC_DDR, VCC0V6_DDR and the core rails, on the bottom face, a filled-and-capped via in every pad |
+| U20 | eMMC 5.1, 153-ball FBGA 0.5 mm (Samsung KLM8G1GETF-B041, 8 GB — the mainboard's part; no eMCP: LCSC has none), turned 90° beside the memory |
+| R401 (by the processor's clock ball), R402-R404, C405, TP3 | eMMC clock series 22R, CMD / RST_n pull-ups, DS pull-down, VDDI, clock test point |
+| 65 capacitors, R68 (DNP), R69, R122 | decoupling of VCC_DDR, VCC0V6_DDR, the core rails, VCC_3V3 and VCCIO_FLASH, on the bottom face, a filled-and-capped via in every pad |
 
-The circuit is the mainboard's own: sheets 11 (DDR PHY), 12 (processor supplies) and 13 (LPDDR4) come in unchanged
-through `src/netlist/shared.txt`, so a change there reaches both boards.
+The circuit is the mainboard's own: sheets 11 (DDR PHY), 12 (processor supplies), 13 (LPDDR4) and `21_emmc.net` (eMMC
++ the processor's VCCIO_FLASH domain) come in unchanged through `src/netlist/shared.txt`, so a change there reaches both
+boards. (`21_emmc.net` was split out of the mainboard's 05 / 19 for this; the parts keep their sheets there, and the
+mainboard's design model is byte-for-byte the same.)
 
 ## Board
 
-- 32.0 × 39.5 mm, 10 layers, 1.6 mm (JLC 10-layer class).
+- 39.5 × 39.5 mm, 10 layers, 1.6 mm (JLC 10-layer class).
 - Processor at (19.25, 27.2), memory centre at (12.25, 10.0); 5 mm between the memory's long side and the processor's top
-  edge (`CR_GAP`, `CR_MEM_DX` in the environment move them for experiments).
+  edge; eMMC centre at (28.0, 10.0), 2 mm right of the memory, its signal corner facing the processor's eMMC balls
+  (right half of its top edge). `CR_GAP`, `CR_MEM_DX`, `CR_EMMC_GAP` in the environment move them for experiments.
 - Stack-up:
 
   | layer | use |
@@ -35,8 +41,8 @@ through `src/netlist/shared.txt`, so a change there reaches both boards.
   | In2 | signal |
   | In3 | GND |
   | In4 | signal |
-  | In5 | VCC_DDR (memory + DDR corner of the processor) · VDD_CPU |
-  | In6 | VCC0V6_DDR (same area) · VDD_LOGIC |
+  | In5 | VCC_DDR (memory + DDR corner of the processor) · VDD_CPU · VCC_3V3 (eMMC) |
+  | In6 | VCC0V6_DDR (same area) · VDD_LOGIC · VCCIO_FLASH (eMMC, down to the processor's ball 1C13) |
   | In7 | signal · VDD_GPU_NPU under the processor (kept out of the router) |
   | In8 | GND |
   | B.Cu | signal · decoupling capacitors |
@@ -71,7 +77,15 @@ Result (`build/ddr_report.txt`):
 | B byte 1 | 11 / 11 | 13.08 – 16.45 | 3.38 | 0–3 |
 | B command / address / clock | 13 / 13 | 6.99 – 16.33 | 9.33 | 0–2 |
 
-Pair skew (P vs N): DQS0_A 0.03, DQS0_B 0.08, DQS1_A 0.54, DQS1_B 0.78, CLK_A 1.41, CLK_B 2.74 mm.
+| eMMC (D0-D7, CMD, CLK, DS, RST_n, VDDI) | 14 / 14 | 1.6 – 18.7 | — | 0–4 |
+
+Pair skew (P vs N) varies a little from build to build (the router's result is deterministic for a given input, but any
+change of input moves it): about 0.2–0.6 mm for the strobes, 1.4–1.5 mm for the clocks — see `build/ddr_report.txt`.
+The eMMC (HS200, 200 MHz) is far less sensitive than the memory; its data lines are 8.5–10.4 mm, CMD 19 mm, CLK 18 mm
+(it also feeds TP3).
+
+A supply pad's via may only land inside its own plane piece (the router checks), and a series resistor goes next to the
+pin that drives it.
 
 ## Not done (next steps, in order)
 
@@ -82,8 +96,9 @@ Pair skew (P vs N): DQS0_A 0.03, DQS0_B 0.08, DQS1_A 0.54, DQS1_B 0.78, CLK_A 1.
    re-route them as coupled pairs (KiCad's differential-pair router) once the lengths are set.
 3. **Impedance.** 0.09 mm is the fabricator's minimum, not a calculated width: derive the 40 Ω / 80 Ω widths from JLC's
    10-layer stack-up calculator and widen where it asks.
-4. **Supplies.** The board has no connector: VCC_DDR, VCC0V6_DDR, VCCA1V8_PMU (the one ERC warning: its label has only
-   R123 on it), VDD_CPU, VDD_LOGIC, VDD_GPU_NPU come from the PMIC / RK860 on the mainboard. To make it a real module it
+4. **Supplies.** The board has no connector: VCC_DDR, VCC0V6_DDR, VCCA1V8_PMU and VCC_1V8 (the two ERC warnings: their
+   labels have only R123 / R69 on them), VDD_CPU, VDD_LOGIC, VDD_GPU_NPU, VCC_3V3 come from the PMIC / RK860 on the
+   mainboard. The eMMC's matching (CMD / data to CLK) is also still to do. To make it a real module it
    needs a board-to-board connector (or the PMIC on board) and the processor's other interfaces brought out — a design
    decision for later.
 5. Silkscreen: the bottom capacitors' names are on B.Fab only (no room between the vias).

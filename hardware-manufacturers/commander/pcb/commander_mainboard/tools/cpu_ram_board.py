@@ -80,7 +80,11 @@ MEM_W, MEM_H = 14.5, 10.0       # the memory turned 90 degrees: its channel A ha
 SOC_X = q(max(MARGIN + SOC_W / 2, MARGIN + MEM_W / 2 - MEM_DX))
 SOC_Y = q(MARGIN + MEM_H + GAP + SOC_H / 2)
 MEM_X, MEM_Y = q(SOC_X + MEM_DX), q(SOC_Y - SOC_H / 2 - GAP - MEM_H / 2)
-BW = math.ceil((max(SOC_X + SOC_W / 2, MEM_X + MEM_W / 2) + MARGIN) * 2) / 2
+# the eMMC (11.5 x 13 mm, turned 90 so its signal corner - columns 2-6 - faces down at the processor's eMMC balls,
+# which sit on the right half of its top edge): beside the memory, level with it
+EMMC_W, EMMC_H = 13.0, 11.5
+EMMC_X, EMMC_Y = q(MEM_X + MEM_W / 2 + env("CR_EMMC_GAP", 2.0) + EMMC_W / 2), MEM_Y
+BW = math.ceil((max(SOC_X + SOC_W / 2, MEM_X + MEM_W / 2, EMMC_X + EMMC_W / 2) + MARGIN) * 2) / 2
 BH = math.ceil((SOC_Y + SOC_H / 2 + MARGIN) * 2) / 2
 CORNER_R = 1.0
 
@@ -105,7 +109,17 @@ def plane_polys():
     mb = MEM_Y + MEM_H / 2 + 0.5
     mr = max(SOC_X - 0.33, MEM_X + MEM_W / 2 + 0.5)
     ddr = [(x0, y0), (mr, y0), (mr, mb), (SOC_X - 0.33, mb), (SOC_X - 0.33, SOC_Y - 1.3), (x0, SOC_Y - 1.3)]
-    cpu = [(SOC_X, mb + 0.5), (min(x1, SOC_X + 5.5), mb + 0.5), (min(x1, SOC_X + 5.5), SOC_Y - 1.3), (SOC_X, SOC_Y - 1.3)]
+    # the eMMC area: its 3.3 V on In5, its 1.8 V IO (VCCIO_FLASH) on In6 with a strip down to the processor's
+    # VCCIO_FLASH ball 1C13 (package (1.625, -4.225))
+    eb = EMMC_Y + EMMC_H / 2 + 0.3
+    el = max(mr + 0.6, EMMC_X - EMMC_W / 2 - 0.5)
+    emmc = [(el, y0), (x1, y0), (x1, eb), (el, eb)]
+    fb = SOC_Y - SOC_H / 2 - 0.6            # (on In6 the 1.8 V reaches down to the processor: the pull-ups sit there)
+    flash = [(el, y0), (x1, y0), (x1, fb), (SOC_X + 2.6, fb), soc(2.6, -3.6), soc(0.6, -3.6), (SOC_X + 0.6, eb), (el, eb)]
+    ct = max(mb, eb) + 0.6
+    cr = min(x1, SOC_X + 5.5)
+    # VDD_CPU: its corner of the processor, and out to the right edge above the GPU rail's reach for its capacitors
+    cpu = [(SOC_X, ct), (x1, ct), (x1, SOC_Y - 4.5), (cr, SOC_Y - 4.5), (cr, SOC_Y - 1.3), (SOC_X, SOC_Y - 1.3)]
     logic = [soc(-2.7, -1.25), soc(0.0, -1.25), soc(0.0, SOC_H / 2), soc(3.0, SOC_H / 2), (SOC_X + 3.0, y1),
              (SOC_X - 6.0, y1), soc(-6.0, SOC_H / 2), soc(-2.7, SOC_H / 2)]
     gpu = [soc(-2.7, -2.0), soc(3.3, -2.0), soc(3.3, -4.0), (x1, SOC_Y - 4.0), (x1, SOC_Y + 4.0),
@@ -113,14 +127,16 @@ def plane_polys():
     return [("GND", pcbnew.In1_Cu, full, 0), ("GND", pcbnew.In3_Cu, full, 0), ("GND", pcbnew.In8_Cu, full, 0),
             ("VCC_DDR", pcbnew.In5_Cu, ddr, 0), ("VDD_CPU", pcbnew.In5_Cu, cpu, 0),
             ("VCC0V6_DDR", pcbnew.In6_Cu, ddr, 0), ("VDD_LOGIC", pcbnew.In6_Cu, logic, 0),
-            ("VDD_GPU_NPU", pcbnew.In7_Cu, gpu, 0)]
+            ("VDD_GPU_NPU", pcbnew.In7_Cu, gpu, 0),
+            ("VCC_3V3", pcbnew.In5_Cu, emmc, 0), ("VCCIO_FLASH", pcbnew.In6_Cu, flash, 0)]
 
 
-PLANE_NETS = ("GND", "VCC_DDR", "VCC0V6_DDR", "VDD_CPU", "VDD_LOGIC", "VDD_GPU_NPU")
+PLANE_NETS = ("GND", "VCC_DDR", "VCC0V6_DDR", "VDD_CPU", "VDD_LOGIC", "VDD_GPU_NPU", "VCC_3V3", "VCCIO_FLASH")
+CHIPS = ("U1", "U10", "U20")
 # routing layers that carry a plane piece: the router keeps out of it there
 RESERVED = [("VDD_GPU_NPU", 3)]
 # where each rail's decoupling capacitors go looking for room (bottom face)
-CAP_TARGET = {"VDD_CPU": soc(2.75, -SOC_H / 2 - 0.9), "VDD_LOGIC": soc(-1.5, SOC_H / 2 + 1.6),
+CAP_TARGET = {"VDD_CPU": soc(SOC_W / 2 + 2.0, -5.8), "VDD_LOGIC": soc(-1.5, SOC_H / 2 + 1.6),
               "VDD_GPU_NPU": soc(SOC_W / 2 + 1.8, 0.0)}
 
 # ---------------------------------------------------------------------------------------------------- rules
@@ -245,7 +261,7 @@ def fixed_parts():
     left = MEM_X - MEM_W / 2 - 1.3
     up, out = (0, -1), (-1, 0)
     return {
-        "U1": (SOC_X, SOC_Y, 0, None), "U10": (MEM_X, MEM_Y, 90, None),
+        "U1": (SOC_X, SOC_Y, 0, None), "U10": (MEM_X, MEM_Y, 90, None), "U20": (EMMC_X, EMMC_Y, 90, None),
         # ZQ resistors beside the memory's ZQ balls (A5, A8: the left short side once the memory is turned)
         "R121": (left, MEM_Y + 1.2, 0, out), "R120": (left, MEM_Y - 1.2, 0, out),
         # the memory's 1.8 V (VDD1): series 0R and its capacitors along the far side
@@ -260,7 +276,7 @@ def fixed_parts():
 def clear_of(board, fixed):
     """Move each hand-placed passive along its direction until its courtyard is clear of the packages' and of the
     passives already done (0.05 mm steps, then rounded onto the routing grid)."""
-    chips = [GP.court(board.FindFootprintByReference(r)) for r in ("U1", "U10")]
+    chips = [GP.court(board.FindFootprintByReference(r)) for r in CHIPS]
     done = []
     for ref, (x, y, rot, d) in fixed.items():
         if d is None:
@@ -273,6 +289,58 @@ def clear_of(board, fixed):
             if not any(not (cb[2] <= b[0] or b[2] <= cb[0] or cb[3] <= b[1] or b[3] <= cb[1]) for b in chips + done):
                 break
         done.append(GP.court(fp))
+
+
+def pack_top(board, d, fixed):
+    """The other parts that sit on a routed signal (the eMMC's series resistor, pull-ups, VDDI capacitor, test point):
+    on the top face, as near the chip balls of that signal as their courtyard is free (spiral search)."""
+    count = {}
+    for c in d.comps.values():
+        for net in c.pins.values():
+            if net:
+                count[net] = count.get(net, 0) + 1
+    routed = {n for n, k in count.items() if k >= 2 and n not in PLANE_NETS}
+    boxes = [GP.court(board.FindFootprintByReference(r)) for r in fixed]
+    balls = {}
+    for ref in CHIPS:
+        for p in board.FindFootprintByReference(ref).Pads():
+            balls.setdefault(p.GetNetname(), []).append((ref, pad_xy(p)))
+    n = 0
+    for c in sorted(d.comps.values(), key=lambda c_: c_.ref):
+        if c.ref in fixed or c.ref in CHIPS or not any(net in routed for net in c.pins.values()):
+            continue
+        pts = [xy for net in c.pins.values() if net in routed for (ref, xy) in balls.get(net, [])]
+        near = [xy for net in c.pins.values() if net in routed for (ref, xy) in balls.get(net, []) if ref == "U20"]
+        # a series resistor (one side only on the processor - EMMC_CLK_SOC) sits at the driver
+        src = [xy for net in c.pins.values() if net in routed and balls.get(net)
+               and all(ref == "U1" for ref, _ in balls[net]) for (ref, xy) in balls[net]]
+        pts = src or near or pts or [(BW / 2, BH / 2)]
+        tx, ty = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
+        fp = board.FindFootprintByReference(c.ref)
+        found = None
+        for rr in np.arange(0.0, 12.0, 0.1):
+            for k in range(max(1, int(2 * math.pi * rr / 0.1))):
+                a = 2 * math.pi * k / max(1, int(2 * math.pi * rr / 0.1))
+                x, y = q(tx + rr * math.cos(a)), q(ty + rr * math.sin(a))
+                for rot in (0, 90):
+                    put(fp, x, y, rot)
+                    cb = GP.court(fp)
+                    if cb[0] < 0.6 or cb[1] < 0.6 or cb[2] > BW - 0.6 or cb[3] > BH - 0.6:
+                        continue
+                    if any(not (cb[2] + 0.1 <= b[0] or b[2] + 0.1 <= cb[0] or cb[3] + 0.1 <= b[1] or b[3] + 0.1 <= cb[1]) for b in boxes):
+                        continue
+                    found = cb
+                    break
+                if found:
+                    break
+            if found:
+                break
+        if found:
+            boxes.append(found)
+            n += 1
+        else:
+            put(fp, -20.0, 2.0 + 1.5 * n, 0)        # (no room: left for the finish stage, which then reports it)
+    return n
 
 
 def stage_place():
@@ -321,10 +389,12 @@ def stage_place():
             put(fp, -10.0 - 3 * (park // 30), 2.0 + 1.5 * (park % 30), 0)
             park += 1
     clear_of(board, fixed)
+    npack = pack_top(board, d, fixed)
+    park -= npack
     # a via in every supply / ground ball (except the ground balls of the processor's outer ring: those may leave on
     # the top face through the ring's gaps, the router decides)
     nvia = 0
-    for ref in ("U1", "U10"):
+    for ref in CHIPS:
         fp = board.FindFootprintByReference(ref)
         for p in fp.Pads():
             n = p.GetNetname()
@@ -332,7 +402,7 @@ def stage_place():
                 continue
             if ref == "U1" and not p.GetNumber().startswith("1") and n == "GND":
                 x, y = pad_xy(p)
-                if x < SOC_X + 1.0 and y < SOC_Y + 1.0:       # the memory quadrant of the ring
+                if x < SOC_X + 6.5 and y < SOC_Y + 1.0:       # the ring's memory and eMMC stretches
                     continue
             add_via(board, pad_xy(p), p.GetNet())
             nvia += 1
@@ -633,6 +703,35 @@ def build_grid(board, routed_as_hard=True):
     return grid
 
 
+def plane_masks(grid):
+    """net -> cells where a via of that supply reaches its plane: inside its polygons, 0.3 mm in from their edges."""
+    X = np.arange(grid.W)[None, :] * G
+    Y = np.arange(grid.H)[:, None] * G
+    out = {}
+    for net, _, poly, _ in plane_polys():
+        if net == "GND":
+            continue
+        inside_ = np.zeros((grid.H, grid.W), bool)
+        n = len(poly)
+        for k in range(n):
+            (xa, ya), (xb, yb) = poly[k], poly[(k + 1) % n]
+            if ya == yb:
+                continue
+            cond = (ya > Y) != (yb > Y)
+            xint = xa + (Y - ya) * (xb - xa) / (yb - ya)
+            inside_ ^= cond & (X < xint)
+        out[net] = out.get(net, np.zeros_like(inside_)) | inside_
+    k = int(round(0.3 / G))
+    for net, m in out.items():
+        e = m.copy()
+        e[k:, :] &= m[:-k, :]
+        e[:-k, :] &= m[k:, :]
+        e[:, k:] &= m[:, :-k]
+        e[:, :-k] &= m[:, k:]
+        out[net] = e
+    return out
+
+
 def make_jobs(board, grid):
     vias_at = {}
     for t in board.GetTracks():
@@ -717,12 +816,21 @@ def route_job(grid, job, pres, margin=4.0):
         kv = int(math.ceil(R_VV / G))
         anchors = list(getattr(job, "anchors", []))
         try:
+            vmask = getattr(grid, "vmask", {}).get(job.net)
             for (l, i, j, name) in job.terms:
                 m = int(2.5 / G)
                 box = (max(0, i - m), max(0, j - m), min(grid.W, i + m), min(grid.H, j + m))
                 goals = [a[0] * N + a[2] * grid.W + a[1] for a in anchors
                          if box[0] <= a[1] < box[2] and box[1] <= a[2] < box[3] and (a[1], a[2]) != (i, j)]
-                res = grid.search(job.net, [l * N + j * grid.W + i], goals or None, True, box, pres, VIA_COST)
+                if vmask is not None:           # a supply's via must land on its own plane
+                    sl = (slice(box[1], box[3]), slice(box[0], box[2]))
+                    keep_v = grid.vho[sl].copy()
+                    grid.vho[sl][~vmask[sl]] = MULTI
+                try:
+                    res = grid.search(job.net, [l * N + j * grid.W + i], goals or None, True, box, pres, VIA_COST)
+                finally:
+                    if vmask is not None:
+                        grid.vho[sl] = keep_v
                 if isinstance(res, int):
                     job.open.append(name)
                     continue
@@ -808,6 +916,8 @@ def conflicts(grid, job):
 
 
 def group_of(n):
+    if n.startswith("EMMC_"):
+        return "E", "emmc"
     if not n.startswith("LPDDR4_"):
         return "-", n
     s = n[len("LPDDR4_"):]
@@ -827,6 +937,7 @@ def stage_route():
     t0 = time.time()
     board = pcbnew.LoadBoard(PLACED)
     grid = build_grid(board)
+    grid.vmask = plane_masks(grid)
     jobs = make_jobs(board, grid)
     trees = [j for j in jobs if j.kind == "tree"]
     stubs = [j for j in jobs if j.kind == "stub"]
@@ -1056,7 +1167,7 @@ def report(board, jobs, log, secs):
     pads = {}
     for fp in board.GetFootprints():
         for p in fp.Pads():
-            if p.GetNetname().startswith("LPDDR4_") or p.GetNetname() in ("DDR_RZQ", "VCC1V8_DDR"):
+            if p.GetNetname().startswith(("LPDDR4_", "EMMC_")) or p.GetNetname() in ("DDR_RZQ", "VCC1V8_DDR"):
                 pads.setdefault(p.GetNetname(), []).append(p)
     complete = set()
     for n, ps in pads.items():
@@ -1119,9 +1230,9 @@ def place_caps(board, grid):
     rail_area = {}
     for n, l, poly, _ in polys:
         rail_area.setdefault(n, []).append(poly)
-    chip_of_sheet = {"soc_ddr": "U1", "soc_power": "U1", "lpddr4": "U10"}
+    chip_of_sheet = {"soc_ddr": "U1", "soc_power": "U1", "lpddr4": "U10", "soc_usb": "U1", "storage": "U20"}
     balls = {}
-    for ref in ("U1", "U10"):
+    for ref in CHIPS:
         for p in board.FindFootprintByReference(ref).Pads():
             balls.setdefault((ref, p.GetNetname()), []).append(pad_xy(p))
     nets = board.GetNetsByName()
@@ -1136,13 +1247,14 @@ def place_caps(board, grid):
     done, failed = 0, []
     for fp in todo:
         pads = list(fp.Pads())
-        rail = next((p.GetNetname() for p in pads if p.GetNetname() and p.GetNetname() != "GND"), "GND")
+        names = [p.GetNetname() for p in pads if p.GetNetname() and p.GetNetname() != "GND"]
+        rail = next((n for n in names if n in PLANE_NETS), names[0] if names else "GND")
         sheet = fp.GetSheetname().strip("/")
         chip = chip_of_sheet.get(sheet, "U1")
         if rail in CAP_TARGET:
             tx, ty = CAP_TARGET[rail]
         else:
-            pts = balls.get((chip, rail)) or balls.get(("U10", rail)) or [(SOC_X, SOC_Y)]
+            pts = (balls.get((chip, rail)) or [xy for r in CHIPS for xy in balls.get((r, rail), [])] or [(SOC_X, SOC_Y)])
             tx, ty = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
         ok = False
         for rr in np.arange(0.0, 16.0, 0.15):
@@ -1183,15 +1295,16 @@ def try_cap(board, grid, fp, cx, cy, rot, rail, rail_area, boxes, nets):
             return False
         x, y = pad_xy(p)
         i, j = grid.cell(x, y)
-        if grid.vho[j, i] not in (FREE, nid):
+        if n in PLANE_NETS and grid.vho[j, i] not in (FREE, nid):
             return False
         if n != "GND" and n in PLANE_NETS and not any(inside(poly, x, y) for poly in rail_area.get(n, [])):
             return False
-    # accept: vias in the pads, obstacles for the next ones
+    # accept: vias in the pads on plane nets (a pad of a supply that comes from off the board - VCC_1V8 on R69 - stays
+    # a bare pad), obstacles for the next ones
     for p in fp.Pads():
         x, y = pad_xy(p)
         n = p.GetNetname()
-        if n:
+        if n in PLANE_NETS:
             add_via(board, (q(x), q(y)), p.GetNet())
             grid.hard_via(q(x), q(y), n)
         grid.hard_shape([B_IDX], pad_shape(p), n or None)

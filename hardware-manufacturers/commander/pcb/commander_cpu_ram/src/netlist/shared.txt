@@ -2,3 +2,4 @@
 11_soc_ddr.net      # RK3566 DDR PHY: the bus, RZQ, the PHY's VCC_DDR / VCC0V6_DDR decoupling
 12_soc_power.net    # RK3566 supply and ground balls, core rail decoupling
 13_lpddr4.net       # the LPDDR4 (U10), ZQ, decoupling, VDD1 1.8 V
+21_emmc.net         # eMMC (U20), its pull-ups / series resistor, the processor's VCCIO_FLASH domain
