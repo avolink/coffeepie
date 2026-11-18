@@ -15,7 +15,7 @@
     (property "Sheetfile" "sheets/np_mcu.kicad_sch" (at 20.32 76.8 0) (effects (font (size 1.27 1.27)) (justify left top)))
     (instances (project "commander_numpad" (path "/6f5323c3-fd11-5368-8f15-e0edcac530c2" (page "2"))))
   )
-  (text "Numpad module: STC8H8K64U, USB-C\n15 parts, A3" (exclude_from_sim no) (at 22.86 60.96 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "0ebf53c9-44cc-5fec-a5ff-3977bf834287"))
+  (text "Numpad module: STC8H8K64U, USB-C\n19 parts, A3" (exclude_from_sim no) (at 22.86 60.96 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "0ebf53c9-44cc-5fec-a5ff-3977bf834287"))
   (sheet (at 116.84 55.88) (size 86.36 20.32) (fields_autoplaced yes)
     (stroke (width 0.1524) (type solid)) (fill (color 255 255 220 1.0))
     (uuid "e8f545dc-e281-5b95-9847-154cd0fabf20")

@@ -95,7 +95,10 @@ def main():
         raise SystemExit(0 if total == 0 else 1)
 
     # RK3566 footprint vs Radxa pad drawing
-    ref = json.load(open(os.path.join(ROOT, "src", "reference", "radxa_zero3e_placement.json")))
+    rpath = os.path.join(ROOT, "src", "reference", "radxa_zero3e_placement.json")
+    if not os.path.exists(rpath):           # another project with the processor (commander_cpu_ram): the mainboard's copy
+        rpath = os.path.join(cpmodel.MAIN_NETDIR, "..", "reference", "radxa_zero3e_placement.json")
+    ref = json.load(open(rpath))
     dots = [(p[0], p[1]) for p in ref["top"]["pads"] if len(p) == 3 and abs(p[2] - 0.356) < 0.004]
     cx, cy = 28.194, 12.7
     hit = 0

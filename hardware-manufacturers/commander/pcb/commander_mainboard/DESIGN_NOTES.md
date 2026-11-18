@@ -12,9 +12,15 @@ Changes in A1: front battery port (USB-C) with a PoE / battery 5 V selector; fir
 PoE output raised to 5.11 V; the chassis bleed network moved next to the RJ45; the head of the column
 re-floorplanned (HDMI left, PoE centre, low-voltage corridor right).
 
-## 0. Fabrication readiness (reviewed 2026-11-14): not ready
+## 0. Fabrication readiness (reviewed 2026-11-14, DRC review 2026-11-18): not ready
 
 Do not order this board yet. A quote from JLCPCB would succeed and the boards would not work.
+
+**DRC review 2026-11-18: `REVIEW_2026-11-18.md`.** Every DRC item classified. Fixed: 218 via-to-plane shorts from a
+stale plane fill (refill before every Gerber export!), three part near-misses; documented as rules
+(`commander_mainboard.kicad_dru`): the pin spacing of the RK817 and the TPS23754. Still open: 23 parts that physically
+collide (11 of them in the eMMC's place), 486 unconnected (80 of them the memory bus), 2 hole-clearance and 2
+RJ45-edge items. The review ends with the way to a prototype that works the first time.
 
 **Branch `m2-hub` (2026-11-15): the bay strip is its own board now.** The nine bays, both USB hubs, the bay muxes,
 switches and ESD, and the microSD slot moved to `../commander_hub` (0.8 mm, 201 parts), which plugs into this board

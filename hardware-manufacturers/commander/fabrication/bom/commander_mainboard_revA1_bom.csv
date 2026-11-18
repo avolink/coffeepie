@@ -115,7 +115,7 @@ qty,value,footprint,description,populate,origin,references,lcsc
 1,39K_1W,R_2512_6332Metric,,,Commander,R511,
 1,499R,R_0402_1005Metric,,,Commander,R512,
 4,10K_1%,R_0402_1005Metric,,,Commander,R514 R812 R814 R816,
-1,9.53K_1%,R_0402_1005Metric,,,Commander,R515,
+1,9.09K_1%,R_0402_1005Metric,,,Commander,R515,
 2,56K,R_0402_1005Metric,,,Radxa ZERO 3E V1.2,R706 R707,
 1,2.2K,R_0402_1005Metric,,,Commander,R801,
 1,100K,R_0402_1005Metric,,,Commander,R804,

@@ -7,12 +7,11 @@ with Framework's spring (pogo) contacts and the magnets that hold the modules. U
 USB-C receptacle at the tray's inner end - in the Commander the hub board's free port (see *The Commander side*), on its
 own any computer: the tray is then simply a USB device with two Framework modules on it.
 
-**Status (2026-11-16): first generated layout, not reviewed by a person.** Schematic complete (ERC clean); model /
-schematic / board identical pad by pad (157 pads); 42 parts, 27 of 30 signal nets routed on two layers, the 5 V and
-3.3 V trunks pre-drawn along the bottom face, ground pours on both faces. KiCad DRC: **3 nets open** - `USB_UP_DM`
-(the last 4 mm into the hub's pin 11), `VCC5` (the fuse F1 and the bay-1 switches U4 / U6 to the 5 V trunk) and
-`VCC5_M2` (bay 2's capacitor C12 to its contact 2) - and a few ground pads / pour slivers without a stitching via;
-a dangling track and via (trunk ends). Some minutes in KiCad.
+**Status (2026-11-17): generated layout, not reviewed by a person; strip 12 mm longer (see *Mechanics*).** Schematic
+complete (ERC clean); model / schematic / board identical pad by pad (157 pads); 42 parts, 26 of 29 nets routed on two
+layers, the 5 V and 3.3 V trunks pre-drawn along the bottom face, ground pours on both faces. KiCad DRC: **3 nets
+open** - `M2_SLEEP_N`, `VCC3V3` and `VCC5` (15 unconnected items with the ground pads that have no stitching via yet),
+2 starved thermals. Some minutes in KiCad. (Before the extension: `USB_UP_DM`, `VCC5`, `VCC5_M2` were open.)
 
 Rebuild (from the mainboard folder): `python tools/build.py --variant tray` (board: `tools/small_board.py`).
 
@@ -43,19 +42,28 @@ module slides in or out over the contacts, the pins carry no power. Pulling the 
 
 ## Mechanics (from Framework's B-size drawing and STEP, checked in COMMANDER_Z3E.skp)
 
-- **Where.** The modules lie as in the laptop: contact edge toward the user, i.e. at the tray's front (chassis
-  X 143.9); Framework's drawings show the contact block and the plate tongue at that edge, on the module's left half.
-  The contact block sits 7.0 mm in from the edge (X 136.9) and 16.91 mm from the module's left edge seen from the front
-  (Framework's firmware expects the board-ID contacts "at the very left of the module"). The strip runs along the tray
-  (chassis Y) at X 123-141: the parts in its 12 mm under the contact edge, only tracks in the 6 mm under the module's
-  body (which rests on the floor) - the 5 V and 3.3 V trunks run there.
+- **Where.** The modules lie as in the laptop: contact edge toward the user, i.e. toward the tray's front. A module
+  rests with its rear lip under the tray's rear rail: module at chassis X 8.95-139.97 (the floor ends 1.5 mm further,
+  at the front ramp, X 141.5). Framework's drawing and STEP put one contact block per module, 7.0 mm in from the
+  contact edge (X 132.97) and 16.96 mm from the module's left edge seen from the front (Framework's firmware expects
+  the board-ID contacts "at the very left of the module"); the module's steel plate has a 10.6 mm window over the pads
+  and a second, empty one at the mirrored place (no contacts there). The strip runs along the tray (chassis Y) at
+  X 119.07-137.07: the parts in its 12 mm under the module's thinner contact zone, only tracks in the 6 mm under the
+  module's body (which rests on the floor) - the 5 V and 3.3 V trunks run there. Checked in COMMANDER_Z3E.skp
+  (2026-11-17) against Framework's module models in both bays: pogo arrays within 0.05 mm of the pad blocks; the
+  magnets 7.9 mm either side of each block, on the steel next to the window. (Until then the strip was 3.93 mm further
+  forward, X 123-141, for a module pushed against the front ramp, where it does not fit.)
 - **Heights.** The module's contact edge is 1.5 mm thinner than its body (Framework leaves that step for the
   connector). The strip's top is 0.1 mm below the tray floor and the plungers work at 1.6 mm, so they meet the pads at
   the module's contact plane. Everything on the strip is under 1.2 mm except the USB-C receptacle, which sits at the
   inner end where no module is.
+- **Length (2026-11-17).** The strip is 166.2 mm long (was 154.2): in the model the USB-C receptacle at the inner end
+  hit the tray's dust barrier, so the strip grew 12 mm at that end and the receptacle moved with the edge; everything
+  else stayed where it was (the outer end is still at chassis Y 476.5, the inner end is now at Y 310.3, 12 mm past
+  the drawer's inner end at Y 322.3). The case needs room for that 12 mm when the drawer is closed.
 - **The floor slopes.** The tray floor of the model falls toward the front by about 0.7 deg (Z 10.2 at the rear rail,
   8.6 at the front one); modules and strip follow it.
-- **Floor channel.** The tray floor needs a channel 18.2 mm wide and 0.9 mm deep along its length (X 122.9-141.1). The
+- **Floor channel.** The tray floor needs a channel 18.2 mm wide and 0.9 mm deep along its length (X 118.97-137.17). The
   tray is an extrusion along Y, so the channel comes with the profile at no cost - but the model's floor is only
   1.2 mm thick (Z 7.5-8.7 at the front), which would leave 0.3 mm under the channel: the profile wants a thicker floor
   (about 2 mm) along that band, or the strip sits on the floor and the modules on 0.9 mm shims.

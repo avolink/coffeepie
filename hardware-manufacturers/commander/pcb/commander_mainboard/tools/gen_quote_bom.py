@@ -43,7 +43,7 @@ BOARDS = [
     ("commander_bar_bms", "Battery bar BMS", 0, "ENIG"),
     ("commander_bar_contacts", "Battery bar contacts", 0, "ENIG (cell contact pads), castellated edge"),
 ]
-NO_PART = {"BATT_PAD", "BARJOINT", "BARJOINT_C", "M2_EDGE_M"}       # copper only, nothing to buy
+NO_PART = {"BATT_PAD", "BARJOINT", "BARJOINT_C", "M2_EDGE_M", "FW_PADS"}       # copper only, nothing to buy
 
 # ------------------------------------------------------------------------------------------------ dump (per project)
 
@@ -275,6 +275,7 @@ MPN = {
     "HDMI_MICRO_D": ("Molex", "46765-2xxx (see footprint)", "micro HDMI type D receptacle"),
     "MICROSD": ("Molex", "104031-0811", ""),
     "USBC16": ("HOAUC", "HYCW498-USBC16-735B", "alternative: HRO TYPE-C-31-M-12"),
+    "USBC16_MID": ("HCTL", "HC-TYPE-C-16P-CB1.6", "mid mount for a 1.6 mm board; needs the board notch of the footprint"),
     "USBC24": ("HOAUC", "HYCW275-USBC24-050B", ""),
     "USBC24_SINK": ("Amphenol", "12402072E512A", "not stocked at LCSC: from Amphenol's distributors"),
     "JST_PH2": ("JST", "B2B-PH-K-S(LF)(SN)", ""),

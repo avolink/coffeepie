@@ -35,9 +35,11 @@ VARIANT = ("strip" if PRJ.endswith("strip_test") else "kbmcu" if PRJ.endswith("k
            else "touch" if PRJ.endswith("commander_touchpad")
            else "tray" if PRJ.endswith("commander_tray")
            else "bar" if PRJ.endswith("commander_bar_bms")
-           else "barcon" if PRJ.endswith("commander_bar_contacts") else "main")
+           else "barcon" if PRJ.endswith("commander_bar_contacts")
+           else "cpuram" if PRJ.endswith("commander_cpu_ram") else "main")
 REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0", "hub": "revU0",
-       "batt": "revB0", "numpad": "revN0", "touch": "revP0", "tray": "revR0", "bar": "revS0", "barcon": "revS0"}.get(VARIANT, "revA1")
+       "batt": "revB0", "numpad": "revN0", "touch": "revP0", "tray": "revR0", "bar": "revS0", "barcon": "revS0",
+       "cpuram": "revC0"}.get(VARIANT, "revA1")
 SMALL = VARIANT in ("batt", "numpad", "touch", "tray", "bar", "barcon")  # two-layer module boards built by tools/small_board.py
 NETDIR = os.path.join(ROOT, "src", "netlist")
 MAIN_NETDIR = os.path.normpath(os.path.join(HERE, "..", "src", "netlist"))
@@ -167,6 +169,12 @@ PARTS = {
                    desc="USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",
                    padmap={"SH": ["SH"]},
                    pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
+    # numpad / touchpad since 2026-11-18: mid mount in a notch of the front edge, centred, for a USB-C to USB-C cable
+    # (footprint and box model by tools/usbc_mid_fp.py; 1.6 mm board, the body flush with the underside)
+    "USBC16_MID": dict(fp="commander:USB_C_Receptacle_HCTL_HC-TYPE-C-16P-CB1.6", lcsc="C2894902",
+                       desc="USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 1.6 mm board (HCTL HC-TYPE-C-16P-CB1.6)",
+                       padmap={"SH": ["SH"]},
+                       pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
     "USBC24": dict(fp="commander:USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B", lcsc="C42400261",
                    desc="USB-C receptacle, full-featured 24-pin, right angle, top mount (HOAUC HYCW275-USBC24-050B)",
                    padmap={"SH": ["SH"]},
@@ -341,6 +349,10 @@ PARTS = {
                      pins=named(" ".join("%d:J%d" % (i, i) for i in range(1, 12)))),
     "BARJOINT_C": dict(fp="commander:BarContacts_Castellated_11", desc="castellated edge of the cell-contact board (11 half-holes), soldered to the BMS board",
                        pins=named(" ".join("%d:J%d" % (i, i) for i in range(1, 12)))),
+    # module side of the same interface (numpad, touchpad, 2026-11-17): gold pads only, no part to buy
+    "FW_PADS": dict(fp="commander:FW_InputModule_Pads_2x4",
+                    desc="Framework input-module contacts, module side: 2 x 4 gold pads on the underside (no part: pads only)",
+                    pins=named("1:GND 2:VCC_5V 3:USB_DN 4:BOARD_ID 5:USB_DP 6:SLEEP_N 7:GND 8:VCC_3V3")),
     "BATT_PAD": dict(fp="commander:BattContact_Pad_D6.0mm", desc="cell contact: ENIG pad 6.0 mm on the board (no part: DNP)", pins=named("1:C")),
 }
 # LCSC / JLCPCB part numbers (checked on lcsc.com / JLC's BOM matcher, 2026-11-15) -> the 'lcsc' column of the BOM and the

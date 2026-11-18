@@ -11,7 +11,7 @@
         "min_copper_edge_clearance": 0.2,
         "min_track_width": 0.15,
         "min_via_diameter": 0.5,
-        "min_through_hole_diameter": 0.3,
+        "min_through_hole_diameter": 0.25,
         "min_via_annular_width": 0.1,
         "min_hole_clearance": 0.2,
         "min_hole_to_hole": 0.25,
@@ -157,6 +157,38 @@
       {
         "netclass": "PWR",
         "pattern": "LDO_IN"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VCC5_M*"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VCC3V3_M*"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "STR?_P"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "CHG?_D"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VCHG*"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "SOLAR"
+      },
+      {
+        "netclass": "HIPWR",
+        "pattern": "CHG_IN"
+      },
+      {
+        "netclass": "HIPWR",
+        "pattern": "VUSB_SW"
       }
     ]
   },

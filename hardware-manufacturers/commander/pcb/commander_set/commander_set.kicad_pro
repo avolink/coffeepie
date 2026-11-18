@@ -286,7 +286,7 @@
     ]
   },
   "meta": {
-    "filename": "commander_mainboard.kicad_pro",
+    "filename": "commander_set.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -683,8 +683,8 @@
     "legacy_lib_list": [],
     "top_level_sheets": [
       {
-        "filename": "commander_mainboard.kicad_sch",
-        "name": "commander_mainboard",
+        "filename": "commander_set.kicad_sch",
+        "name": "commander_set",
         "uuid": "00000000-0000-0000-0000-000000000000"
       }
     ]

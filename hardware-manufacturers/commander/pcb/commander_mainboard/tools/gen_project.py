@@ -94,7 +94,8 @@ def main():
                 "rules": {
                     "min_clearance": 0.09, "min_copper_edge_clearance": 0.25, "min_track_width": 0.09,
                     "min_via_diameter": 0.25, "min_through_hole_diameter": 0.15, "min_via_annular_width": 0.05,      # the vias in the BGA pads (0.25 / 0.15, filled and capped); everything else uses 0.45 / 0.20 or larger
-                    "min_hole_clearance": 0.195,     # 0.20 nominal; a via in a 0.4 mm-pitch ball is exactly 0.200 from the next ball "min_hole_to_hole": 0.25, "min_silk_clearance": 0.0,
+                    "min_hole_clearance": 0.195,     # 0.20 nominal; a via in a 0.4 mm-pitch ball is exactly 0.200 from the next ball
+                    "min_hole_to_hole": 0.25, "min_silk_clearance": 0.0,     # (were inside the comment above until 2026-11-18; same as KiCad's defaults)
                     "solder_mask_to_copper_clearance": 0.0, "min_microvia_diameter": 0.2, "min_microvia_drill": 0.1,
                 },
                 "rule_severities": {
@@ -123,7 +124,11 @@ def main():
         "text_variables": {},
     }
     if kbd:
-        pro["board"]["design_settings"]["rules"] = KBD_RULES
+        pro["board"]["design_settings"]["rules"] = dict(KBD_RULES)
+    if cpmodel.SMALL:
+        # the module boards' feed lanes and electrode bridges use 0.5 / 0.25 vias (tools/small_board.py), JLCPCB's
+        # standard 2-layer process (0.15 mm hole min; no surcharge for a 0.25 hole with a 0.45 mm or larger via)
+        pro["board"]["design_settings"]["rules"]["min_through_hole_diameter"] = 0.25
     if cpmodel.VARIANT == "touch":      # the electrode diamonds hang on necks and bridges, not on pads: by design
         pro["board"]["design_settings"]["rule_severities"]["isolated_copper"] = "ignore"
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:

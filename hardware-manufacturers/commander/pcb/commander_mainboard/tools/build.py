@@ -149,6 +149,35 @@ def main():
             print("CHECKS WITH FINDINGS: " + "; ".join(FINDINGS))
             raise SystemExit(1)
         return
+    if cpmodel.VARIANT == "cpuram":
+        # The processor and its memory on a board of their own (2026-11-18): sheets 11-13 of the mainboard unchanged
+        # (src/netlist/shared.txt), the other balls NC; 10 layers, the memory bus routed by tools/cpu_ram_board.py.
+        sch, pcb = PRJ + ".kicad_sch", PRJ + ".kicad_pcb"
+        run("the processor's unused balls (src/netlist/90_soc_unused.net)", kpy("cpu_ram_board.py", "--stage", "netlist"))
+        run("design model check", py("cpmodel.py"))
+        run("project file", py("gen_project.py"))
+        run("custom footprints", py("gen_footprints.py"))
+        run("symbols + schematic", py("gen_schematic.py"))
+        if "--keep-board" not in sys.argv:
+            run("board: outline, the two packages, supply vias", kpy("cpu_ram_board.py", "--stage", "place"))
+            run("board: the memory bus (negotiated routing, 10-30 minutes)", kpy("cpu_ram_board.py", "--stage", "route"))
+            run("board: decoupling, planes", kpy("cpu_ram_board.py", "--stage", "finish"))
+        run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", sch], ok_codes=(0, 5))
+        run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", sch])
+        run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)
+        run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all", "-o", "build/drc.rpt", pcb], ok_codes=(0, 5))
+        run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), sch])
+        pos = os.path.join(COMMANDER, "fabrication", "position")
+        run("placement file", [KCLI, "pcb", "export", "pos", "--format", "csv", "--units", "mm", "--side", "both",
+                               "-o", os.path.join(pos, f"{PRJ}_{REV}_placement.csv"), pcb])
+        run("BOM", py("gen_bom.py"))
+        print()
+        print("ERC:", summarize("build/erc.rpt") or "clean")
+        print("DRC:", summarize("build/drc.rpt") or "clean")
+        if FINDINGS:
+            print("CHECKS WITH FINDINGS: " + "; ".join(FINDINGS))
+            raise SystemExit(1)
+        return
     if cpmodel.VARIANT == "kbd":
         # The keyboard: its board is the Altium design converted to KiCad, with the Arduino Micro module replaced by
         # the parts of sheet kbd_mcu (tools/kbd_board.py).  --keep-board: only checks and exports.

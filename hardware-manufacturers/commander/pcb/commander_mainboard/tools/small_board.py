@@ -20,6 +20,7 @@ import fnmatch
 import json
 import math
 import os
+import re
 import sys
 
 import pcbnew
@@ -70,29 +71,47 @@ SPEC = {
             "U3": (21.0, 20.8, 0, "F"),
         },
         keepout=[]),
+    # numpad and touchpad, 2026-11-17: Framework B-size outline (131.02 x 67.95) and seat (rear edge at chassis X 8.95,
+    # under the tray's rear rail), with Framework's contact pads J40 on the underside (7.0 mm from the front edge,
+    # 16.96 mm from the left edge seen from the front: board (124.02, 50.99)), so they drop into the tray like a
+    # Framework module.  Y0 = the tray pogo array's centre (closed drawer) - 16.96.  The module needs 1.5 mm feet under
+    # its body (Framework's contact zone is 1.5 mm above the floor) and a thin steel plate for the tray's magnets.
     "numpad": dict(
-        w=131.07, h=68.0, r=1.5, holes=[(3.0, 3.0), (3.0, 65.0), (128.07, 3.0), (128.07, 65.0)], X0=12.91, Y0=251.44, Z0=8.0,
-        fixed=dict({"J1": ("edge", "right", 34.0, 0.0), "U1": (119.5, 16.0, 0, "F"), "D1": (126.0, 60.0, 0, "F")},
+        w=131.02, h=67.95, r=1.5, holes=[(3.0, 3.0), (3.0, 64.95), (128.02, 3.0), (128.02, 64.95)], X0=8.95, Y0=251.40, Z0=8.0,
+        # J1 since 2026-11-18: the mid-mount HCTL receptacle, centred on the front edge, in a notch (usbc_mid_fp.py)
+        fixed=dict({"J1": ("edge", "right", 67.95 / 2, 0.0), "U1": (119.5, 16.0, 0, "F"), "D1": (126.0, 60.0, 0, "F"),
+                    "J40": (124.02, 50.99, 0, "F")},
                    **{"SW_%d_%d" % (r + 1, c + 1): (KEYS_X[c], KEYS_Y[r], 0, "F") for r in range(4) for c in range(6)}),
+        notch=[(67.95 / 2, 4.75, 6.60, 0.5)],
         keepout=[]),
     "touch": dict(
-        w=131.02, h=68.03, r=1.5, holes=[(129.0, 2.0), (129.0, 66.0)], X0=12.89, Y0=179.96, Z0=9.24,
-        # strip, top to bottom: USB-C, microcontroller, regulator and button, then the IQS550 right above the Tx lanes
-        # (turned 180 deg: its Tx pins face down to them, its Rx pins face the Rx lanes' ends on the left / top)
-        fixed={"J1": ("edge", "right", 9.0, 0.0), "U1": (122.5, 24.0, 0, "F"), "U3": (127.0, 36.0, 0, "F"),
-               "SW1": (127.6, 43.0, 0, "F"), "U4": (122.8, 55.6, 180, "F")},
+        w=131.02, h=67.95, r=1.5, holes=[(129.0, 2.0), (129.0, 65.95)], X0=8.95, Y0=179.95, Z0=9.24,
+        # strip, top to bottom: button, regulator, microcontroller, the USB-C (since 2026-11-18 the mid-mount HCTL
+        # receptacle, centred on the front edge in a notch), then the IQS550 right above the Tx lanes (turned 180 deg:
+        # its Tx pins face down to them, its Rx pins face the Rx lanes' ends on the left / top)
+        fixed={"J1": ("edge", "right", 67.95 / 2, 0.0), "U1": (123.0, 45.9, 0, "F"), "U3": (126.0, 10.5, 0, "F"),
+               "SW1": (124.5, 4.6, 0, "F"), "U4": (122.8, 55.6, 180, "F"), "J40": (124.02, 50.99, 0, "F")},
+        notch=[(67.95 / 2, 4.75, 6.60, 0.5)],
+        # (2026-11-18: U4 tried 1.7 mm lower, off J40's bottom-copper pads: 12 nets open instead of 10 - kept here)
         # parts stay out of the touch area and off the Rx feed lanes (bottom copper, x 113.25-115.95, y 3-47)
         keepout=[(-1.0, -1.0, 113.0, 69.0), (-1.0, -1.0, 117.8, 48.0), (115.0, 61.5, 124.0, 69.0)]),
     # the tray carrier: an 18 mm strip, 0.8 mm thick, in a channel of the tray floor under the two module bays'
     # contact edge, which is the bays' FRONT end (the modules lie as in the laptop: contacts toward the user, chassis
     # X 129.9-143.9); parts only in the 12 mm under the contact edge (x 6-18), tracks in the 6 mm under the modules' body
     # (x 0-6).  The model's tray is pulled out (TRAY at Y 322.3-491.9); the strip is placed for that position.
+    # 2026-11-17: 12 mm longer at the inner end (154.2 -> 166.2 mm, chassis Y 310.3 instead of 322.3; the outer end and
+    # every part but the USB-C stay where they were): in the model the USB-C hit the tray's dust barrier, now it sits
+    # past it.  Only J1 moved (it follows the inner edge); positions here are measured from the outer end (y = 0).
     # Framework B-size modules (67.95 x 131.02 x 3.75 mm) in the bays at chassis Y 335.0-402.95 (bay 1) and
     # 406.45-474.4 (bay 2); contact block 16.91 mm from the module's left edge seen from the front and 7.0 mm from its
     # contact edge (X 136.9); magnets (5 x 2 mm discs, glued into the holes, resting on the channel floor) under both
     # halves of each module's steel contact plate, 7.9 mm either side of the half's centre; two M2 screws hold the strip.
+    # 2026-11-17 (later): the strip sits 3.93 mm further back (X0 123.0 -> 119.07; board positions unchanged).  A
+    # Framework module rests with its rear lip under the tray's rear rail (module X 8.95-139.97; the floor ends at the
+    # front ramp, X 141.5), so its contact block is at X 132.97, not 136.9 (Framework's STEP / drawing: 7.0 mm from the
+    # contact edge, 16.96 mm from the left edge).  Checked in COMMANDER_Z3E.skp against the module models.
     "tray": dict(
-        w=18.0, h=154.2, r=1.0, t=0.8, X0=123.0, Y0=322.3, Z0=7.5,
+        w=18.0, h=166.2, r=1.0, t=0.8, X0=119.07, Y0=310.3, Z0=7.5,
         holes=[(13.9, y_, 2.6) for y_ in (132.49, 116.69, 98.66, 82.86, 61.04, 45.24, 27.21, 11.41)]
               + [(8.7, 71.8, 1.1), (13.9, 2.0, 1.1)],
         # the free stretches between magnets, from the inner end: USB-C and its fuse / ESD (y 135-146), bay 1's
@@ -108,7 +127,7 @@ SPEC = {
                "U2": (15.1, 140.6, 0, "F"), "F1": (9.5, 140.6, 90, "F")},
         # x < 6 (chassis X < 129) lies under the modules' body, which rests on the tray floor: tracks only, no parts;
         # (passives keep 1 mm from the magnet holes and the edges, so their pads can be reached)
-        keepout=[(-1.0, -1.0, 6.0, 155.2)], gap=0.45, hole_gap=1.0, edge_gap=0.9,
+        keepout=[(-1.0, -1.0, 6.0, 167.2)], gap=0.45, hole_gap=1.0, edge_gap=0.9,
         # the two supplies run the strip's length on the bottom face, in the lane under the modules' body
         trunks=[("VCC5", "B", 1.4, 33.0, 141.0, 0.5), ("VCC3V3", "B", 3.2, 33.0, 106.0, 0.5)]),
     # the front battery bar's BMS board: flat on the floor plate of the bar's LEFT end cap (chassis Y 2.2-32.2), in front
@@ -209,9 +228,29 @@ def outline(board):
         s.SetWidth(FromMM(0.1))
         board.Add(s)
 
+    def arc3(a, m, b):
+        s = pcbnew.PCB_SHAPE(board)
+        s.SetShape(pcbnew.SHAPE_T_ARC)
+        s.SetArcGeometry(P(*a), P(*m), P(*b))
+        s.SetLayer(pcbnew.Edge_Cuts)
+        s.SetWidth(FromMM(0.1))
+        board.Add(s)
+
     seg((r, 0), (w - r, 0))
     arc((w - r, r), (w - r, 0), (w, r))
-    seg((w, r), (w, h - r))
+    # the right edge, with the notches of mid-mount connectors (SPEC "notch": (along, half width, depth, inner corner
+    # radius), walls square to the edge, rounded inner corners as the router leaves them)
+    y = r
+    k = 1 - math.sqrt(0.5)
+    for (a, hw, d, rr) in sorted(SPEC.get("notch", [])):
+        seg((w, y), (w, a - hw))
+        seg((w, a - hw), (w - d + rr, a - hw))
+        arc3((w - d + rr, a - hw), (w - d + rr * k, a - hw + rr * k), (w - d, a - hw + rr))
+        seg((w - d, a - hw + rr), (w - d, a + hw - rr))
+        arc3((w - d, a + hw - rr), (w - d + rr * k, a + hw - rr * k), (w - d + rr, a + hw))
+        seg((w - d + rr, a + hw), (w, a + hw))
+        y = a + hw
+    seg((w, y), (w, h - r))
     arc((w - r, h - r), (w, h - r), (w - r, h))
     seg((w - r, h), (r, h))
     arc((r, h - r), (r, h), (0, h - r))
@@ -354,7 +393,11 @@ def electrodes(board, nets):
         # feed: out of the area along the row centre line, down a via, then a lane of its own on the bottom copper
         # down the strip's left edge (the upper rows take the lanes further right, so no two cross), ending in a
         # staggered row just above the controller
-        lx = TP_RX_LANE0 + 0.30 * (TP_NRX - 1 - k)
+        # the rows below the lane ends (their lane runs UP to its end) take the leftmost lanes, lowest row furthest
+        # right: so neither their entry nor their exit crosses another lane (2026-11-18: rows 7-9 had the lanes in
+        # the down-rows' order and RX7's entry crossed RX8's and RX9's lanes - a short)
+        up = [kk for kk in range(TP_NRX) if y0 + py * (kk + 0.5) > TP_RX_END - 0.6 * (TP_NRX - 1 - kk)]
+        lx = TP_RX_LANE0 + 0.30 * (up.index(k) if k in up else TP_NRX - 1 - k)
         vx = x1 + 0.65
         track(board, (x1 - 1.0, cy), (vx, cy), 0.2, net, pcbnew.F_Cu)
         via(board, (vx, cy), net, 0.5, 0.25)
@@ -679,6 +722,13 @@ def open_nets(board):
         if name in ("", "GND"):
             continue
         pads = [p for fp in board.GetFootprints() for p in fp.Pads() if p.GetNetCode() == net]
+        if V == "touch" and re.fullmatch(r"[TR]X\d+", name) and len(pads) == 1:
+            # an electrode net has one pad (the IQS550's): it is joined when that pad reaches copper of its net in the
+            # touch area (the electrodes, their necks / bridges and the pre-drawn feed)
+            xa = FromMM(OX + TP_AREA[2])
+            if not any(it.GetBoundingBox().GetCenter().x < xa for it in conn.GetConnectedItems(pads[0], 0)):
+                out.add(name)
+            continue
         if len(pads) < 2:
             continue
         first = pads[0]
@@ -697,6 +747,12 @@ def repair_round(k):
     other net within a circle round its pads is taken out, the open net is routed first, then the nets taken out.  The
     file is overwritten only when the round left fewer nets open (or the same number without that net).
     Exit code 0: nothing open (any more), 1: still open."""
+    # the copper drawn before routing (supply trunks, the touchpad's electrodes and feed lanes) is never taken out:
+    # the router does not draw it again (2026-11-18: rip-ups had removed 15 of the touchpad's 25 sensor feeds)
+    def key(t):
+        a, b = t.GetStart(), t.GetEnd()
+        return (t.GetLayer(), t.GetClass(), tuple(sorted(((a.x, a.y), (b.x, b.y)))))
+    predrawn = {key(t) for t in pcbnew.LoadBoard(PLACED).GetTracks()}
     board = pcbnew.LoadBoard(ROUTED)
     openn = open_nets(board)
     if not openn:
@@ -722,7 +778,7 @@ def repair_round(k):
                 u = 0.0 if L2 == 0 else max(0.0, min(1.0, ((px_ - ax) * vx + (py_ - ay) * vy) / L2))
                 if math.hypot(ax + u * vx - px_, ay + u * vy - py_) < rip_r:
                     rip.add(n)
-    kill = [t for t in board.GetTracks() if t.GetNetname() in rip or t.GetNetname() == name]
+    kill = [t for t in board.GetTracks() if (t.GetNetname() in rip or t.GetNetname() == name) and key(t) not in predrawn]
     for t in kill:
         board.Remove(t)
     r, reg, code_of = make_router(board)

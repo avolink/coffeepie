@@ -1,0 +1,22 @@
+(version 1)
+# Commander mainboard - custom DRC rules (2026-11-18).  Only exceptions that come from a chip's own pin spacing, where
+# a net class asks for more room than the package has between its pins.  Each one is checked against the part's data
+# sheet land pattern and JLCPCB's limits (0.09 mm copper-to-copper on 6 layers); nothing else is relaxed.
+
+# RK817-5 PMIC (U9), QFN-68 0.35 mm pitch: 0.10 mm between neighbouring pads is the package itself.  The PWR_5V class
+# (0.15 mm) applies between pads of different chips and to tracks; between two pins of U9 the package decides.
+(rule "U9 RK817 own pin pitch"
+  (condition "A.Parent == 'U9' && B.Parent == 'U9' && A.Type == 'Pad' && B.Type == 'Pad'")
+  (constraint clearance (min 0.09mm)))
+
+# TPS23754 PoE controller (U30), HTSSOP-20 0.65 mm pitch: 0.19 mm between its own pads; the footprint's 0.20 mm
+# clearance is meant for everything around it.  IPC-2221B asks 0.13 mm at 57 V (internal / coated), so 0.19 is fine.
+(rule "U30 TPS23754 own pin pitch"
+  (condition "A.Parent == 'U30' && B.Parent == 'U30' && A.Type == 'Pad' && B.Type == 'Pad'")
+  (constraint clearance (min 0.18mm)))
+
+# ... and 0.20 mm from U30's pads to everything else (this was a clearance override on the footprint, which also
+# applied between its own pins; moved here 2026-11-18 so that it covers only the surroundings)
+(rule "U30 TPS23754 surroundings"
+  (condition "A.Parent == 'U30' && A.Type == 'Pad' && B.Parent != 'U30'")
+  (constraint clearance (min 0.2mm)))

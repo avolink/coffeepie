@@ -17,13 +17,25 @@ R1 1K VCC5 LED_A
 D1 LED:GREEN A=LED_A K=LED_K
 
 # --- USB-C, device side (5.1 k on both CC lines), 500 mA resettable fuse ---
-J1 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
+J1 USBC16_MID A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
 P J1 A5=NP_CC1 B5=NP_CC2 A6=USB_CON_DP B6=USB_CON_DP A7=USB_CON_DM B7=USB_CON_DM
 NC J1 A8 B8
 R2 5.1K NP_CC1 GND
 R3 5.1K NP_CC2 GND
 U2 USBLC6-2SC6 1=USB_CON_DP 6=USB_CON_DP 3=USB_CON_DM 4=USB_CON_DM 2=GND 5=VBUS_USB
-F1 PTC:500mA VBUS_USB VCC5
+F1 PTC:500mA VBUS_IN VCC5
+
+# --- Framework input-module contacts (2026-11-17): eight gold pads on the underside where a Framework B-size module has
+#     them (7.0 mm from the front edge, 16.96 mm from the left edge seen from the front), so the module also drops into
+#     the tray like a Framework module - no cable.  Pads only (no part).  Pinout (Framework): 1, 7 GND - 2 VCC_5V -
+#     3 USB D- - 4 BOARD_ID - 5 USB D+ - 6 SLEEP# (not used) - 8 VCC_3V3 (not used).  The data lines join the USB-C's
+#     on the connector side of the ESD array; 180 k on BOARD_ID (Framework's reference value for a generic module) tells
+#     the tray a module is there.  The two supplies are OR-ed (D40), so the USB-C cable and the tray never feed each other ---
+J40 FW_PADS:DNP 1=GND 7=GND 2=VBUS_FW 3=USB_CON_DM 5=USB_CON_DP 4=FW_ID
+NC J40 6 8
+R40 180K FW_ID GND
+D40 BAT54C 1=VBUS_USB 2=VBUS_FW 3=VBUS_IN
+C40 1uF VBUS_FW GND
 C5 4.7uF VBUS_USB GND
 R4 22R USB_CON_DP USB_MCU_DP
 R5 22R USB_CON_DM USB_MCU_DM
