@@ -7,11 +7,14 @@ with Framework's spring (pogo) contacts and the magnets that hold the modules. U
 USB-C receptacle at the tray's inner end - in the Commander the hub board's free port (see *The Commander side*), on its
 own any computer: the tray is then simply a USB device with two Framework modules on it.
 
-**Status (2026-11-17): generated layout, not reviewed by a person; strip 12 mm longer (see *Mechanics*).** Schematic
-complete (ERC clean); model / schematic / board identical pad by pad (157 pads); 42 parts, 26 of 29 nets routed on two
-layers, the 5 V and 3.3 V trunks pre-drawn along the bottom face, ground pours on both faces. KiCad DRC: **3 nets
-open** - `M2_SLEEP_N`, `VCC3V3` and `VCC5` (15 unconnected items with the ground pads that have no stitching via yet),
-2 starved thermals. Some minutes in KiCad. (Before the extension: `USB_UP_DM`, `VCC5`, `VCC5_M2` were open.)
+**Status (2026-11-19): generated layout, not reviewed by a person; mid-mount USB-C centred on the strip (see
+*Mechanics*).** Schematic complete (ERC clean); model / schematic / board identical pad by pad (157 pads); 42 parts,
+24 of 28 routed nets on two layers, the 5 V and 3.3 V trunks pre-drawn along the bottom face, the USB data pairs'
+crossing at J1 pre-drawn (D+ through two 0.5 / 0.3 vias behind the pad row), ground pours on both faces. KiCad DRC:
+**4 nets open, all supplies of the bays** - `VCC3V3`, `VCC3V3_M2`, `VCC5`, `VCC5_M1` (14 unconnected items; the two
+trunks show as "dangling" until they are joined), 3 starved thermals; 20 extra rip-up rounds did not close them. Some
+minutes in KiCad. (Before the USB-C change: `M2_SLEEP_N`, `VCC3V3`, `VCC5` open, 15 unconnected; that board is kept as
+`build/tray_before_midmount.kicad_pcb`.)
 
 Rebuild (from the mainboard folder): `python tools/build.py --variant tray` (board: `tools/small_board.py`).
 
@@ -57,6 +60,12 @@ module slides in or out over the contacts, the pins carry no power. Pulling the 
   connector). The strip's top is 0.1 mm below the tray floor and the plungers work at 1.6 mm, so they meet the pads at
   the module's contact plane. Everything on the strip is under 1.2 mm except the USB-C receptacle, which sits at the
   inner end where no module is.
+- **USB-C (2026-11-19).** J1 is a mid-mount receptacle made for 0.8 mm boards (BXCONN UC01-0B16F08011), centred across
+  the strip in a notch of its inner end (9.50 x 6.54 mm, R0.5 inner corners; footprint and box model by
+  `tools/usbc_mid_fp.py --part bx08`). Its shell centre is 0.78 mm above the strip's top face: it stands 2.06 mm above
+  the strip (the top-mount one stood about 3.2 mm) and reaches 0.5 mm into the notch, not below the strip. The cable
+  plug's centre is now on the strip's centre line, 0.78 mm above its top face. The pad row ends 0.16 mm from the
+  notch's end, as in the maker's layout: `commander_tray.kicad_dru` allows J1's pads 0.15 mm to the board edge.
 - **Length (2026-11-17).** The strip is 166.2 mm long (was 154.2): in the model the USB-C receptacle at the inner end
   hit the tray's dust barrier, so the strip grew 12 mm at that end and the receptacle moved with the edge; everything
   else stayed where it was (the outer end is still at chassis Y 476.5, the inner end is now at Y 310.3, 12 mm past
@@ -115,7 +124,8 @@ would halve it). Not designed yet.
 
 ## Parts (LCSC)
 
-CH334P C5373042, SY6280AAC C55136, ME6211C33M5G C82942, USBLC6-2SC6 C2827654, HOAUC HYCW498 USB-C C42400252;
+CH334P C5373042, SY6280AAC C55136, ME6211C33M5G C82942, USBLC6-2SC6 C2827654, mid-mount USB-C for a 0.8 mm board BXCONN
+UC01-0B16F08011 C36936521 (2026-11-19; was the top-mount HOAUC HYCW498 C42400252);
 12 MHz 3225 crystal, 2N7002, 1206 PTC and passives by JLC's BOM matcher. Pogo connector: CFE BP33242-08200H0-FS (not at
 LCSC). Magnets: 8 x N52 5 x 2 mm. BOM: `../../fabrication/bom/commander_tray_revR0_bom.csv`.
 

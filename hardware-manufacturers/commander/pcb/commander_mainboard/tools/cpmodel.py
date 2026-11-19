@@ -176,6 +176,11 @@ PARTS = {
                        desc="USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 1.6 mm board (HCTL HC-TYPE-C-16P-CB1.6)",
                        padmap={"SH": ["SH"]},
                        pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
+    # tray carrier since 2026-11-19: the same mid mount for a 0.8 mm board, centred in a notch of the strip's inner end
+    "USBC16_MID08": dict(fp="commander:USB_C_Receptacle_BXCONN_UC01-0B16F08011", lcsc="C36936521",
+                         desc="USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 0.8 mm board (BXCONN UC01-0B16F08011)",
+                         padmap={"SH": ["SH"]},
+                         pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
     "USBC24": dict(fp="commander:USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B", lcsc="C42400261",
                    desc="USB-C receptacle, full-featured 24-pin, right angle, top mount (HOAUC HYCW275-USBC24-050B)",
                    padmap={"SH": ["SH"]},

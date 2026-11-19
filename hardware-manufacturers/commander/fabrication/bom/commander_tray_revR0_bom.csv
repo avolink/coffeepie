@@ -4,7 +4,7 @@ qty,value,footprint,description,populate,origin,references,lcsc
 8,1uF,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C4 C7 C9 C10 C11 C12 C13 C14,
 1,100nF,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C5,
 1,PTC:1.1A,Fuse_1206_3216Metric,,,"Commander (new design, 2026-11-16)",F1,
-1,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",,"Commander (new design, 2026-11-16)",J1,C42400252
+1,USBC16_MID08,USB_C_Receptacle_BXCONN_UC01-0B16F08011,"USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 0.8 mm board (BXCONN UC01-0B16F08011)",,"Commander (new design, 2026-11-16)",J1,C36936521
 2,POGO_FW8,Pogo_CFE_BP33242-08200H0-FS_2x4_P2.0mm,"pogo-pin connector 2 x 4, 2.0 mm, 1.6 mm working height, 1 A per pin (CFE BP33242-08200H0-FS), mates the pads of a Framework Laptop 16 input module",,"Commander (new design, 2026-11-16)",J2 J3,
 2,2N7002,SOT-23,N-MOSFET SOT-23,,"Commander (new design, 2026-11-16)",Q1 Q2,
 2,5.1K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R1 R2,

@@ -49,8 +49,11 @@ HEIGHT = [
 DEFAULT = (1.0, (0.3, 0.3, 0.3), "ESTIMATE (default)")
 
 
+BOARD_DIR = ""          # the project folder of the board being exported (for ${KIPRJMOD}: the project's own models)
+
+
 def expand(path):
-    p = path.replace("${KICAD10_3DMODEL_DIR}", MODELS).replace("${KICAD9_3DMODEL_DIR}", MODELS) \
+    p = path.replace("${KIPRJMOD}", BOARD_DIR).replace("${KICAD10_3DMODEL_DIR}", MODELS).replace("${KICAD9_3DMODEL_DIR}", MODELS) \
             .replace("${KICAD8_3DMODEL_DIR}", MODELS).replace("${KISYS3DMOD}", MODELS)
     return p
 
@@ -108,7 +111,9 @@ def box_wrl(path, x0, y0, x1, y1, h, col):
 
 
 def main():
+    global BOARD_DIR
     board_path, outdir, name = sys.argv[1], sys.argv[2], sys.argv[3]
+    BOARD_DIR = os.path.dirname(os.path.abspath(board_path)).replace("\\", "/")
     fmts = [a for a in sys.argv[4:] if a in ("glb", "step", "stl")] or ["glb"]
     os.makedirs(os.path.join(outdir, "_boxes"), exist_ok=True)
     b = pcbnew.LoadBoard(board_path)
@@ -118,10 +123,16 @@ def main():
         models = fp.Models()
         good = [m for m in models if model_ok(m.m_Filename)]
         if good:
-            for m in good:
-                m.m_Filename = expand(m.m_Filename)
-            # drop the unresolvable ones
-            keep = [m for m in models if model_ok(m.m_Filename)]
+            # drop the unresolvable ones; the others with their path expanded (kicad-cli runs on a copy of the board
+            # in OUTDIR, where ${KIPRJMOD} would point to OUTDIR, not to the project)
+            keep = []
+            for m in models:
+                if model_ok(m.m_Filename):
+                    m2 = pcbnew.FP_3DMODEL()
+                    for a in ("m_Scale", "m_Rotation", "m_Offset", "m_Opacity", "m_Show"):
+                        setattr(m2, a, getattr(m, a))
+                    m2.m_Filename = expand(m.m_Filename)
+                    keep.append(m2)
             while models.size():
                 models.pop_back()
             for m in keep:

@@ -276,6 +276,7 @@ MPN = {
     "MICROSD": ("Molex", "104031-0811", ""),
     "USBC16": ("HOAUC", "HYCW498-USBC16-735B", "alternative: HRO TYPE-C-31-M-12"),
     "USBC16_MID": ("HCTL", "HC-TYPE-C-16P-CB1.6", "mid mount for a 1.6 mm board; needs the board notch of the footprint"),
+    "USBC16_MID08": ("BXCONN", "UC01-0B16F08011", "mid mount for a 0.8 mm board; needs the board notch of the footprint"),
     "USBC24": ("HOAUC", "HYCW275-USBC24-050B", ""),
     "USBC24_SINK": ("Amphenol", "12402072E512A", "not stocked at LCSC: from Amphenol's distributors"),
     "JST_PH2": ("JST", "B2B-PH-K-S(LF)(SN)", ""),

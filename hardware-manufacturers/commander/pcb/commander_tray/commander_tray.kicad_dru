@@ -1,0 +1,7 @@
+(version 1)
+# J1, the mid-mount USB-C (BXCONN UC01-0B16F08011, 0.8 mm board): its pad row ends 0.16 mm from the end of its board
+# notch, as in the maker's recommended layout (tools/usbc_mid_fp.py --part bx08); everything else keeps the board's
+# 0.20 mm.
+(rule "J1 mid-mount pads to its notch"
+  (condition "A.Parent == 'J1' && A.Type == 'Pad'")
+  (constraint edge_clearance (min 0.15mm)))

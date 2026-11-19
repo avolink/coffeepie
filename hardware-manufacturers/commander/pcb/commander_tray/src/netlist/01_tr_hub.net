@@ -7,7 +7,8 @@
 SHEET tr_hub
 
 # --- USB-C, device side (5.1 k on both CC lines), resettable fuse, ESD ---
-J1 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
+# (since 2026-11-19 a mid-mount receptacle for the 0.8 mm strip, centred in a notch of its inner end)
+J1 USBC16_MID08 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
 P J1 A5=TR_CC1 B5=TR_CC2 A6=USB_UP_DP B6=USB_UP_DP A7=USB_UP_DM B7=USB_UP_DM
 NC J1 A8 B8
 R1 5.1K TR_CC1 GND

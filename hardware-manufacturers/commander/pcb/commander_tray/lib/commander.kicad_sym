@@ -70,13 +70,13 @@
       (pin passive line (at -2.54 0 0) (length 2.54) (name "1" (effects (font (size 1.016 1.016)))) (number "1" (effects (font (size 1.016 1.016)))))
     )
   )
-  (symbol "USBC16" (pin_names (offset 0.762)) (exclude_from_sim no) (in_bom yes) (on_board yes)
+  (symbol "USBC16_MID08" (pin_names (offset 0.762)) (exclude_from_sim no) (in_bom yes) (on_board yes)
     (property "Reference" "J" (at -7.62 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
-    (property "Value" "USBC16" (at 5.08 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
-    (property "Footprint" "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Value" "USBC16_MID08" (at 5.08 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
+    (property "Footprint" "commander:USB_C_Receptacle_BXCONN_UC01-0B16F08011" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (symbol "USBC16_1_1"
+    (property "Description" "USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 0.8 mm board (BXCONN UC01-0B16F08011)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (symbol "USBC16_MID08_1_1"
       (rectangle (start -7.62 0) (end 7.62 -25.4) (stroke (width 0.254) (type default)) (fill (type background)))
       (pin passive line (at -10.16 -2.54 0) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "A1" (effects (font (size 1.016 1.016)))))
       (pin passive line (at -10.16 -5.08 0) (length 2.54) (name "VBUS" (effects (font (size 1.016 1.016)))) (number "A4" (effects (font (size 1.016 1.016)))))

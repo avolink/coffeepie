@@ -118,7 +118,10 @@ SPEC = {
         # switches and presence detector (101-114), the hub and its crystal (85-96), the 3.3 V regulator (73-80),
         # bay 2's detector (64-70), bay 2's switches (30-42).  Contacts turned 90 deg: pin 1 on the row nearer the
         # module's edge, on the module's left (chassis +X / -Y)
-        fixed={"J1": ("edge", "bottom", 12.6, 0.0), "J2": (13.9, 124.59, 90, "F"), "J3": (13.9, 53.14, 90, "F"),
+        # 2026-11-19: J1 is the mid-mount BXCONN UC01-0B16F08011 (0.8 mm board), centred across the strip in a notch of
+        # its inner end (was a top-mount HRO TYPE-C-31-M-12 at x 12.6)
+        usb_cross=dict(ref="J1", dp=("A6", "B6"), dm=("B7", "A7")),
+        fixed={"J1": ("edge", "bottom", 9.0, 0.0, True), "J2": (13.9, 124.59, 90, "F"), "J3": (13.9, 53.14, 90, "F"),
                "U4": (15.1, 110.9, 0, "F"), "U5": (15.1, 104.6, 0, "F"), "U6": (10.1, 111.2, 0, "F"), "Q1": (10.1, 104.8, 0, "F"),
                # U1 turned 270 deg: XI / XO face the crystal above it, the USB pins face bay 1 and the USB-C
                "U1": (14.5, 91.6, 270, "F"), "Y1": (14.5, 87.3, 0, "F"),
@@ -127,6 +130,7 @@ SPEC = {
                "U2": (15.1, 140.6, 0, "F"), "F1": (9.5, 140.6, 90, "F")},
         # x < 6 (chassis X < 129) lies under the modules' body, which rests on the tray floor: tracks only, no parts;
         # (passives keep 1 mm from the magnet holes and the edges, so their pads can be reached)
+        notch_bottom=[(9.0, 4.75, 6.54, 0.5)],
         keepout=[(-1.0, -1.0, 6.0, 167.2)], gap=0.45, hole_gap=1.0, edge_gap=0.9,
         # the two supplies run the strip's length on the bottom face, in the lane under the modules' body
         trunks=[("VCC5", "B", 1.4, 33.0, 141.0, 0.5), ("VCC3V3", "B", 3.2, 33.0, 106.0, 0.5)]),
@@ -252,7 +256,17 @@ def outline(board):
         y = a + hw
     seg((w, y), (w, h - r))
     arc((w - r, h - r), (w, h - r), (w - r, h))
-    seg((w - r, h), (r, h))
+    # the bottom edge (y = h), right to left, with its notches (SPEC "notch_bottom", same tuples, "along" = x)
+    x = w - r
+    for (a, hw, d, rr) in sorted(SPEC.get("notch_bottom", []), reverse=True):
+        seg((x, h), (a + hw, h))
+        seg((a + hw, h), (a + hw, h - d + rr))
+        arc3((a + hw, h - d + rr), (a + hw - rr * k, h - d + rr * k), (a + hw - rr, h - d))
+        seg((a + hw - rr, h - d), (a - hw + rr, h - d))
+        arc3((a - hw + rr, h - d), (a - hw + rr * k, h - d + rr * k), (a - hw, h - d + rr))
+        seg((a - hw, h - d + rr), (a - hw, h))
+        x = a - hw
+    seg((x, h), (r, h))
     arc((r, h - r), (r, h), (0, h - r))
     seg((0, h - r), (0, r))
     arc((r, r), (0, r), (r, 0))
@@ -437,6 +451,45 @@ def electrodes(board, nets):
     return n
 
 
+def usb_cross(board, fps, nets):
+    """SPEC "usb_cross": dict(ref, dp=(pad, pad), dm=(pad, pad)).  A 16-pin USB-C row interleaves the data pins
+    (B7 D-, A6 D+, A7 D-, B6 D+): the two pairs cross.  Drawn before the router (as pre-drawn copper it is never ripped
+    up): each D+ pad runs 0.75 mm straight back from its far end to a 0.5 / 0.3 via, the two vias joined on the bottom
+    face; the two D- pads run 1.4 mm back and are joined on the top face behind the vias.  Returns the area it takes
+    (for the packer), or None."""
+    cs = SPEC.get("usb_cross")
+    if not cs or cs["ref"] not in fps:
+        return None
+    fp = fps[cs["ref"]]
+    pads = {p.GetNumber(): p for p in fp.Pads()}
+    ox, oy = ToMM(fp.GetPosition().x) - OX, ToMM(fp.GetPosition().y) - OY
+    row = [pad_xy(pads[n]) for n in cs["dp"] + cs["dm"]]
+    cx, cy = sum(p[0] for p in row) / 4, sum(p[1] for p in row) / 4
+    d = math.hypot(cx - ox, cy - oy)
+    ux, uy = (cx - ox) / d, (cy - oy) / d                          # into the board, away from the mouth
+    L = max(ToMM(pads[cs["dp"][0]].GetSize().x), ToMM(pads[cs["dp"][0]].GetSize().y))
+
+    def back(n, k):
+        x, y = pad_xy(pads[n])
+        return (x + ux * (L / 2 + k), y + uy * (L / 2 + k))
+    pts = []
+    dp, dm = nets[pads[cs["dp"][0]].GetNetname()], nets[pads[cs["dm"][0]].GetNetname()]
+    for n in cs["dp"]:
+        v = back(n, 0.75)
+        track(board, pad_xy(pads[n]), v, 0.15, dp, pcbnew.F_Cu)
+        via(board, v, dp, 0.5, 0.3)
+        pts.append(v)
+    track(board, back(cs["dp"][0], 0.75), back(cs["dp"][1], 0.75), 0.15, dp, pcbnew.B_Cu)
+    for n in cs["dm"]:
+        b_ = back(n, 1.4)
+        track(board, pad_xy(pads[n]), b_, 0.15, dm, pcbnew.F_Cu)
+        pts.append(b_)
+    track(board, back(cs["dm"][0], 1.4), back(cs["dm"][1], 1.4), 0.15, dm, pcbnew.F_Cu)
+    pts += row
+    m = 0.35
+    return (min(p[0] for p in pts) - m, min(p[1] for p in pts) - m, max(p[0] for p in pts) + m, max(p[1] for p in pts) + m)
+
+
 # --------------------------------------------------------------------------------------------- stage: place
 def stage_place():
     d = cpmodel.load()
@@ -487,9 +540,18 @@ def stage_place():
             continue
         if how[0] == "edge":
             edge_mount(fps[ref], how[1], how[2], how[3])
+            if len(how) > 4 and how[4]:     # origin exactly on "along" (mid mount: the origin is the receptacle's centre line)
+                p_ = fps[ref].GetPosition()
+                if how[1] in ("top", "bottom"):
+                    fps[ref].SetPosition(VECTOR2I(FromMM(OX + how[2]), p_.y))
+                else:
+                    fps[ref].SetPosition(VECTOR2I(p_.x, FromMM(OY + how[2])))
         else:
             put(fps[ref], *how)
         boxes.append(court(fps[ref]))
+    xb = usb_cross(board, fps, nets)
+    if xb:
+        boxes.append(xb)
     # ---- the packer: every other part next to what it connects to (its first non-ground, non-supply net) ----
     big = set(SPEC["fixed"])
     supply = ("GND", "VCC5", "VCC3V3", "VBUS", "VBUS_USB", "VBAT")
