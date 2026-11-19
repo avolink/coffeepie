@@ -46,9 +46,10 @@ def copy(item):
     return d.Cast() if hasattr(d, "Cast") else d
 
 
-def merge(mb, src, prefix, off, out=None):
+def merge(mb, src, prefix, off, out=None, skip=None):
     """Copy every part, track, zone and drawing of board `src` into `mb`, moved by `off`, references and nets
-    prefixed so that they stay apart from the mainboard's.  The new items are appended to `out` if given."""
+    prefixed so that they stay apart from the mainboard's.  The new items are appended to `out` if given; drawings for
+    which skip(drawing) is true are left out."""
     out = [] if out is None else out
     nets = {}
     for name, ni in src.GetNetsByName().items():
@@ -91,6 +92,8 @@ def merge(mb, src, prefix, off, out=None):
         out.append(z2)
         nz += 1
     for d in src.GetDrawings():
+        if skip is not None and skip(d):
+            continue
         d2 = copy(d)
         mb.Add(d2)
         d2.Move(off)
@@ -138,6 +141,16 @@ def trim_hub_outline(mb, items, tab_right, clear=0.3):
           % (moved, cut, ToMM(xc), "" if len(ys) == 2 else "  (NOT closed: expected 2 edges, found %d)" % len(ys)))
 
 
+def hub_stale_note(d):
+    """Two User.Comments notes the hub project kept from the days it was part of the mainboard ("COMMANDER MAINBOARD
+    rev A1 ..." and the PoE "ISOLATION BARRIER" note): they sit off the hub's outline and describe the mainboard,
+    which has its own isolation note.  In this view they lay over the keyboard: left out here (the hub project keeps
+    them)."""
+    if d.GetLayer() != pcbnew.Cmts_User or not hasattr(d, "GetText"):
+        return False
+    return d.GetText().startswith(("COMMANDER MAINBOARD", "ISOLATION BARRIER"))
+
+
 def main():
     mb = pcbnew.LoadBoard(MAIN)
     hb = pcbnew.LoadBoard(HUB)
@@ -147,7 +160,7 @@ def main():
     kx0, ky0, kx1, ky1 = outline_bbox(kb)
     # the hub board is drawn in the mainboard's coordinates: it goes in unmoved, card edge in J41
     hub_items = []
-    n = merge(mb, hb, "HUB_", VECTOR2I(0, 0), hub_items)
+    n = merge(mb, hb, "HUB_", VECTOR2I(0, 0), hub_items, skip=hub_stale_note)
     print("hub board: %d parts, %d tracks / vias, %d zones, %d drawings" % n)
     trim_hub_outline(mb, hub_items, mx1)
     # keyboard: right edge as in the sketch; top edge GAP below the hub board (in the sketch the keyboard is 18 mm
@@ -205,18 +218,23 @@ def main():
 # rear -> front, Y = length left -> right, z up).  Board (x, y) -> chassis (X0 + x, Y0 + h - y); the mainboard frame of
 # this file is chassis X = y - 46.66, Y = x - 35.64.  So a module board goes in turned by 90 degrees:
 #     set x = Y0 + h - y + 35.64,   set y = X0 + x + 46.66
-# Boards that lie UNDER the top level (battery under the keyboard, the tray's modules, the tray drawn open) would hide
+# The tray carrier's SPEC is placed for the drawer pulled OUT (as the chassis model has it), the numpad / touchpad
+# modules for the drawer closed: here the carrier is drawn closed too (TRAY_TRAVEL toward -Y), so that its pogo
+# blocks J2 / J3 lie on the modules' contact pads J40 (touchpad / numpad, both at set (232.55 / 303.99, 179.63)).
+# Boards that lie UNDER the top level (battery under the keyboard, the tray's modules and carrier) would hide
 # each other in a top view: they are drawn in a row below the keyboard, at their true position along the case length
 # (set x), and their real place is marked by a dashed outline with a label.  The battery bar's BMS has its real place
 # free in this view (it clips to the front, left end) and goes in where it is.
 MOD_FRAME = (35.64, 46.66)
+TRAY_TRAVEL = 155.0     # mm, the drawer's travel (tray J2 open at chassis Y 351.91, touchpad J40 at 196.91)
+SHIFT_Y = {"commander_tray": -TRAY_TRAVEL}
 ROW_GAP = 20.0          # mm between the keyboard and the row of lower-level boards
 # project, prefix, label, where ("real" = in place, "row" = in the row + dashed outline), top-view outline override
 MODULES = [
     ("commander_battery", "BAT_", "BATTERY MODULE (6 x AAA) - under the keyboard, z 8.1", "row", None),
     ("commander_touchpad", "TCH_", "TOUCHPAD MODULE - in the tray, under the keyboard", "row", None),
     ("commander_numpad", "NUM_", "NUMPAD MODULE - in the tray, under the keyboard", "row", None),
-    ("commander_tray", "TRAY_", "TRAY CARRIER - drawer shown open", "row", None),
+    ("commander_tray", "TRAY_", "TRAY CARRIER - drawer closed, under the modules' contact edge", "row", None),
     ("commander_bar_bms", "BAR_", "FRONT BATTERY BAR - BMS board (left end cap)", "real", None),
     # the contact board stands upright at Y 21.0-22.0 (its 8.6 mm is height): laid flat in the row
     ("commander_bar_contacts", "BARC_", "BAR CONTACT BOARD - upright in the bar, laid flat here", "row", ("Y", 21.0, 1.0)),
@@ -306,6 +324,7 @@ def add_modules(mb, kb_bottom):
             print("%s: no board yet, skipped" % prj)
             continue
         s = spec_of(prj)
+        s["Y0"] += SHIFT_Y.get(prj, 0.0)
         src = pcbnew.LoadBoard(path)
         b0 = outline_bbox(src)
         items = merge_items(mb, src, prefix)

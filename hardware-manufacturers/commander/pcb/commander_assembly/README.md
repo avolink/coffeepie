@@ -7,13 +7,17 @@
   hub board (with 1 mm the 3D viewer did not show the keyboard). In the case the hub's card tongue rests in J41 above
   the mainboard's tab; KiCad puts all boards of this file in one plane and drops an outline that overlaps another, so
   in this view only the hub's outline starts just right of the tab (x 70.3, since the M.2 socket moved 4 mm left) and the tongue's outline is drawn on
-  Dwgs.User. The hub project itself is unchanged.
+  Dwgs.User. Two notes the hub project kept from when it was part of the mainboard ("COMMANDER MAINBOARD rev A1 ..."
+  and the PoE "ISOLATION BARRIER" note, both off the hub's outline) are left out here; they lay over the keyboard. The
+  hub project itself is unchanged.
 - **Front battery bar, BMS board**: in its real place (the bar's left end cap, in front of the case).
 - **Lower level**: the boards that lie under the keyboard / hub or in the tray - battery module, touchpad module, numpad
-  module, tray carrier (drawer shown open) and the bar's contact board (upright in the bar, laid flat here) - are drawn
-  in a row below the keyboard, at their true position along the case. A dashed outline with a label on Cmts.User marks
-  where each one really is. Their positions come from the chassis model (the X0 / Y0 / Z0 of each board in
-  `tools/small_board.py`); the label gives each board's height z.
+  module, tray carrier and the bar's contact board (upright in the bar, laid flat here) - are drawn in a row below the
+  keyboard, at their true position along the case. A dashed outline with a label on Cmts.User marks where each one
+  really is. Their positions come from the chassis model (the X0 / Y0 / Z0 of each board in `tools/small_board.py`);
+  the label gives each board's height z. The tray is drawn with the drawer **closed** (its SPEC is for the drawer
+  pulled out, 155 mm further right): the carrier then lies under the modules' contact edge, its pogo blocks J2 / J3
+  on the touchpad's and the numpad's contact pads J40.
 
 References and nets carry a prefix per board (`HUB_`, `KB_`, `BAT_`, `TCH_`, `NUM_`, `TRAY_`, `BAR_`, `BARC_`), so
 nothing is connected between the boards. KiCad's 3D viewer shows every board (flat, in one plane); for heights use the
