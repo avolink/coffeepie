@@ -15,8 +15,8 @@
 # about 6.8 mA x 100 us / 20 ms = ~35 uA.  (A0 then sinks T16's LED, ~6.8 mA, plus the row's photo-transistors.)
 SHEET kbd_powerkey
 OVERRIDE T16 6=A0
-# power-key output: open drain (the RK817 has its own pull-up on PWRON), off while the chip is in reset
-P U201 24=PWRKEY_DRV
+# power-key output: open drain (the RK817 has its own pull-up on PWRON), off while the chip is in reset (R207).  The
+# microcontroller's pin for PWRKEY_DRV is in the GPIO table of 01_kbd_mcu.net (since 2026-11-19, the RP2040).
 Q201 NMOS_GSD:2SK3018 G=PWRKEY_DRV S=GND D=PWR_KEY_N
 R207 100K_0603 PWRKEY_DRV GND
 ED201 ESD:BTR04G02 PWR_KEY_N GND

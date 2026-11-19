@@ -2,31 +2,34 @@
 
 The keyboard of the Commander terminal as a KiCad project: the prototyped Altium design **Teclado_V2**
 (84 Keychron low-profile optical switches, 6 x 16 matrix) converted to KiCad, with the hand-soldered
-**Arduino Micro module replaced by a microcontroller soldered on the board** - since 2026-11-15 an **STC8H8K64U**
-(5 V, USB without crystal, about 0.35 USD in volume) instead of the ATmega32U4 (about 3.30 USD), for the cost target.
-**The firmware has to be rewritten for it** (8051 core; see *Firmware* below).
+**Arduino Micro module replaced by a microcontroller soldered on the board** - since 2026-11-19 a **Raspberry Pi
+RP2040** (LCSC C2040) with a 2 MB QSPI flash (GD25Q16E), a 12 MHz crystal and a 3.3 V LDO (ME6211), so that the
+keyboard runs **QMK and VIA** as they are (`firmware/qmk/`, see *Firmware* below). Before: the STC8H8K64U
+(2026-11-15, needed a firmware of its own) and the ATmega32U4 of the Arduino (2026-11-14); both boards are in git
+history.
 
-**Status (2026-11-15, STC8H8K64U rebuild): every connection made.** Ready for a prototype order once the
-assumptions at the end of this file are confirmed (board thickness, USB-C position), someone has looked over the new
-copper, and the new firmware exists.
+**Status (2026-11-19, RP2040 rebuild): 3 connections still open - finish them by hand in KiCad before ordering.**
 
 | Check | Result |
 |---|---|
 | ERC | clean |
-| Model / schematic / board | identical, pad by pad (960 pads) |
-| KiCad DRC: unconnected | **0** |
-| KiCad DRC: other remarks | on the new copper: 2 "starved thermal" (C204 / C206 reach the pour with one spoke - they also have a track) and a few dangling stubs / single-layer vias beside the chip (harmless); the rest are in the prototype's own copper - 3 hole clearances and 10 copper-to-edge (see *Found in the prototype's design*) |
+| KiCad DRC: unconnected | **4**: `A1` (a short top-layer piece north-west of the chip not joined to its row), `D0_RX` (U201 pin 2), `QSPI_SD3` (U201 pin 51 to the flash's pin 7), and the ground pad 2 of SW201 (the BOOTSEL button) off the pour |
+| KiCad DRC: other remarks | 17 dangling tracks / 11 dangling vias (left-overs of the STC's copper, cut back at the edge of the area that was cleared: delete them with KiCad's *Cleanup Tracks & Vias*), 4 "starved thermal"; the rest are in the prototype's own copper - 3 hole clearances and 10 copper-to-edge (see *Found in the prototype's design*). No clearance violation, no short. |
 
-(The 2026-11-14 build with the ATmega32U4 had 989 pads; that board is in git history.)
+The routing round the RP2040 (QFN-56, 0.4 mm pitch, 24 matrix lines arriving from every side) was made by
+`../commander_mainboard/tools/kbd_rp2040_board.py` (stages plan / edit / route / repair / promote): *plan* picks the
+GPIO for each line so that nothing crosses (written into `src/netlist/01_kbd_mcu.net`), *edit* clears the STC's area
+and places the new parts, *route* and *repair* route it; every run leaves about three nets open, a different three
+each time. The board before it: `build/kbd_before_rp2040.kicad_pcb`.
 
 The fabrication files are in `../../fabrication/gerber/commander_keyboard_revK1_PROTOTYPE/` (+ BOM and placement
 in `../../fabrication/bom` and `/position`).
 
-**This board file is now the master.** The last three connections were made by targeted fixes after the routing
-run (below); a full rebuild would route again from scratch and need them again. For changes use
-`build.py --variant keyboard --keep-board` (checks and exports only) or KiCad itself.
+**This board file is the master.** For changes use `build.py --variant keyboard --keep-board` (checks and exports
+only) or KiCad itself.
 
-How the board was finished (KiCad's Python, `CP_ROOT` = this folder, tools in `../commander_mainboard/tools/`):
+How the STC8H8K64U board of 2026-11-15 was finished (KiCad's Python, `CP_ROOT` = this folder, tools in
+`../commander_mainboard/tools/`; history - the matrix copper outside the chip's area is still from it):
 
 ```
 kbd_board.py --stage route      (CP_VARIANT_FROM=12: orders 13..24; best: 36 of 37 nets)
@@ -43,38 +46,38 @@ kbd_fix_net.py    <in> <out> MOSI 146 160 SS_RXLED,RESET_N,D0_RX,D7,MISO,SCK
 | **Unchanged from the prototype** | outline (315.05 x 135.01 mm, 188 cut-outs: two 6 x 1.6 mm slots per switch and 20 stabiliser openings), the 84 switches and their 168 resistors, 16 column pull-ups, the LED switch (Q1, R185, jumper J1), every track and copper zone of the matrix. Nothing was moved or re-routed. |
 | **Removed** | the Arduino Micro module (U1, bottom face) and the 58 short tracks (165 mm) that led from its pads to the first via; the west part of the +5 V track that fed its supply pin |
 | **Corrected** | the 113 mechanical holes of the switches (84 x 4.0 mm, 29 x 2.0 mm) came out of the conversion as vias without a copper ring, 42 of them carrying the net of a track that passes nearby; they are now non-plated holes without a net |
-| **New, bottom face, where the module was** | STC8H8K64U-45I-LQFP32 (LCSC C5210757), 22 ohm USB series resistors, 1 uF on UCAP, 3 x 100 nF + 4.7 uF decoupling, BOOT button with pull-up (no crystal, no reset circuit, no ISP pads: the chip is programmed over the USB-C) |
+| **New, bottom face, where the module was** | RP2040 (QFN-56, LCSC C2040), GD25Q16E 2 MB QSPI flash (SOIC-8), 12 MHz crystal (C9002) with 1 k / 2 x 22 pF, ME6211 3.3 V LDO, 27 ohm USB series resistors, 100 nF / 1 uF / 4.7 uF decoupling, BOOTSEL button (1 k to the flash's chip select); no reset circuit, no SWD pads: the chip is programmed over the USB-C |
+| **Changed for 3.3 V** | the 16 column pull-ups (R169..R184) hang on the LDO's 3.3 V (their supply track cut off the 5 V bus); Q1's base resistor R185 is 330 ohm instead of 1 k, so that a 3.3 V output still drives Q1 hard |
 | **New, bottom face, left edge** | USB-C receptacle (16-pin, USB 2.0, 5.1 k on both CC pins), USBLC6-2 ESD array, 750 mA resettable fuse, 4.7 uF |
 
 The matrix nets carry the **Arduino pin names** the prototype used (`A0`..`A5` rows, `D2`..`D13`, `MISO`, `SCK`,
-`MOSI`, `SS` columns, `D0` LED enable): they name the lines of the matrix; which STC pin each one reaches is in the
-table below. `src/keymap.csv` lists which switch (T1..T84) sits on which row and column.
+`MOSI`, `SS` columns, `D0` LED enable): they name the lines of the matrix; which RP2040 pin each one reaches is in
+the table below. `src/keymap.csv` lists which switch (T1..T84) sits on which row and column.
 
-## Firmware: the pin table of the STC8H8K64U
+## Firmware: QMK / VIA on the RP2040
 
-The Arduino sketch of the prototype does not run on the STC8H8K64U (8051 core, programmed in C with SDCC or Keil;
-STC publishes USB HID keyboard examples). The new firmware drives the six rows, reads the sixteen columns, switches
-the infra-red LEDs with `D0`, and is a USB HID keyboard at full speed (the chip's USB needs no crystal: its clock
-locks to the bus). The chip runs from the same +5 V as the matrix, as the ATmega did.
+`firmware/qmk/coffeepie/commander/` is a QMK keyboard (copy it to `keyboards/coffeepie/commander` in a QMK checkout;
+`qmk compile -kb coffeepie/commander -km via`), written by `../commander_mainboard/tools/kbd_qmk.py` from the board
+(layout from the switch positions) and the pin table. `firmware/qmk/commander_via.json` is the VIA definition. The
+matrix is optical, so it is a custom "lite" matrix (`matrix.c`): drive a row low, wait ~30 us for the LEDs and
+photo-transistors to settle, read the columns. **Untested:** whether a lit (pressed) key reads low or high on its
+column - `OPTICAL_PRESSED_WHEN_LIT` in `config.h` flips it.
 
-| Matrix line (net) | Role | STC pin | Port |
+| Matrix line (net) | Role | RP2040 pin | GPIO |
 |---|---|---|---|
-| A0, A1, A2, A3, A4, A5 | rows (outputs) | 1, 2, 3, 4, 5, 6 | P1.0, P1.1, P1.4, P1.5, P1.6, P1.7 |
-| MOSI | column | 7 | P1.3 |
-| SCK | column | 9 | P5.4 |
-| MISO | column | 16 | P3.3 |
-| SS_RXLED | column | 17 | P3.4 |
-| D2_SDA, D3_SCL, D4, D5 | columns | 19, 20, 21, 22 | P3.6, P3.7, P2.0, P2.1 |
-| D6, D7, D8, D9 | columns | 25, 26, 27, 28 | P2.4, P2.5, P2.6, P2.7 |
-| D10, D11, D12, D13 | columns | 29, 30, 31, 32 | P0.0, P0.1, P0.2, P0.3 |
-| D0_RX | infra-red LED enable (to Q1 through J1) | 18 | P3.5 |
-| USB D- / D+ | USB | 13 / 14 | P3.0 / P3.1 |
-| BOOT_N | boot button, 10 k pull-up | 15 | P3.2 |
-| PWRKEY_DRV | power-key output (gate of Q201, 100 k pull-down) | 24 | P2.3 |
+| A0, A1, A2, A3, A4, A5 | rows (outputs) | 32, 34, 3, 36, 37, 38 | GP21, GP22, GP1, GP24, GP25, GP26 |
+| MOSI, SCK, MISO, SS_RXLED | columns | 13, 4, 5, 6 | GP10, GP2, GP3, GP4 |
+| D2_SDA, D3_SCL, D4, D5 | columns | 8, 9, 11, 12 | GP6, GP7, GP8, GP9 |
+| D6, D7, D8, D9 | columns | 17, 14, 27, 28 | GP14, GP11, GP16, GP17 |
+| D10, D11, D12, D13 | columns | 35, 29, 30, 31 | GP23, GP18, GP19, GP20 |
+| D0_RX | infra-red LED enable (to Q1 through J1) | 2 | GP0 |
+| PWRKEY_DRV | power-key output (gate of Q201, 100 k pull-down) | 15 | GP12 |
+| USB D- / D+ | USB | 46 / 47 | - |
+| QSPI | program flash U204 | 51..56 | - |
 
-Spare: pin 23 (P2.2). The column inputs keep the prototype's 10 k pull-ups (R169..R184). The STC pins
-start in quasi-bidirectional mode (strong low, weak high): the firmware sets the six rows and `D0` to push-pull
-outputs, as the ATmega's were, so that they can source current when high.
+The authoritative table is the one in `src/netlist/01_kbd_mcu.net` (written by `kbd_rp2040_board.py --stage plan`);
+QMK's column order follows the matrix (`src/keymap.csv`), not this table's grouping. Spare: GPIO5, 13, 15, 27, 28,
+29. The column inputs keep the prototype's 10 k pull-ups, now to 3.3 V: **the RP2040 takes no 5 V on any pin.**
 
 ### The power key (2026-11-18)
 
@@ -84,14 +87,14 @@ T16 - top row, last column (row `A0`, column `MOSI`), the orange power keycap - 
 - **T16's infra-red LED is on row A0, not on LED_K** (an `OVERRIDE` of the generated row file): it lights while `A0`
   is low and only then. In the normal scan nothing changes except that the firmware waits ~30 us after driving `A0`
   low before reading the columns (the LED and photo-transistor need that to settle).
-- **Power-key output:** while T16 is pressed, set `PWRKEY_DRV` (P2.3, push-pull) high: Q201 pulls `PWR_KEY_N`, which is
+- **Power-key output:** while T16 is pressed, set `PWRKEY_DRV` (GP12) high: Q201 pulls `PWR_KEY_N`, which is
   the mainboard's RK817 `PMIC_PWRON`, to ground. Mirror the key, debounced; don't time anything - the RK817 does
   (press: on; short press while on: power-key event for the OS; ~6 s held: off). Whether T16 also sends a keycode is a
   firmware choice (it should not, normally).
 - **Standby:** the keyboard stays powered while the board is off (its 5 V is the mainboard's VCC5V_BUS). When USB is
-  suspended / not configured: `D0` low (all other LEDs off), then sleep in power-down with the wake-up timer, every
-  ~20 ms: `A0` low for ~100 us, read `MOSI` exactly as the normal scan reads T16, `A0` back, sleep. About
-  35 uA on average. Keep the watchdog on: a hung keyboard means no power button (for service, short the two pins
+  suspended / not configured: `D0` low (all other LEDs off) and only T16 is read (`A0` low, read `MOSI`) - that is
+  what the QMK `matrix.c` does. (The RP2040 draws a few mA doing this, more than the STC's planned 35 uA
+  power-down; a deeper sleep would be a firmware improvement.) Keep the watchdog on: a hung keyboard means no power button (for service, short the two pins
   of the mainboard's J22).
 - **Power-key cable J202** (JST-SH 2, bottom face, next to the USB-C J201): 1 power key (`PWR_KEY_N`), 2 GND - to
   the mainboard's J22 (the same part), a 2-way JST-SH cable. **USB stays a standard USB-C** (J201, fitted), so that
@@ -126,7 +129,9 @@ python ../commander_mainboard/tools/make_quote_package.py --variant keyboard   #
 | Source | What it is |
 |---|---|
 | `src/altium_import.kicad_pcb` | the Altium board as KiCad converts it (`kicad-cli pcb import --format altium`); the base of the board |
-| `src/netlist/01_kbd_mcu.net` | the microcontroller circuit (STC8H8K64U) - **edit this to change the new circuit** |
+| `src/netlist/01_kbd_mcu.net` | the microcontroller circuit (RP2040) - **edit this to change the new circuit** |
+| `src/netlist/10_kbd_3v3.net` | the column pull-ups moved to 3.3 V, R185's new value (`OVERRIDE`s) |
+| `firmware/qmk/` | the QMK keyboard and the VIA definition (`tools/kbd_qmk.py`) |
 | `src/netlist/02..08_*.net` | the matrix, written by `tools/kbd_extract.py` from the Altium board (generated, do not edit) |
 | `src/altium_net_map.json`, `src/keymap.csv` | Altium net name -> name used here; the key matrix as a table |
 | `lib/commander.pretty/` | the switch footprint (from the Altium board) and the ISP pads |
@@ -154,20 +159,21 @@ stop regenerating the board (`--keep-board`) and use *Update PCB from Schematic*
   500 mA. The LEDs are switched together by Q1 from pin `D0`; whether the firmware keeps them on all the time
   or pulses them decides the real consumption. A USB 2.0 port guarantees 0.5 A; the mainboard's keyboard port
   must be allowed to give more, or the firmware must pulse the LEDs.
-- The ADC reference pin (11) is tied to +5 V with its own 100 nF: no analogue input is used.
-- UCAP (pin 8): 1 uF to ground for the chip's USB regulator (STC asks for 0.1 - 10 uF).
-- Clock: the chip's internal oscillator; USB locks it to the host. No crystal.
-- USB: device, full speed. 22 ohm in series at the chip, ESD array at the receptacle.
-- No reset circuit: the chip resets itself at power-up (P5.4 is used as an ordinary pin, for `SCK`).
+- 3.3 V: ME6211 LDO from `VCC5` (4.7 uF in and out) for the RP2040, the flash and the column pull-ups (about
+  35 mA). The LEDs stay on 5 V.
+- Core 1.1 V: the RP2040's own regulator (VREG_VOUT to both DVDD pins, 1 uF + 100 nF).
+- Clock: 12 MHz crystal, 1 k in series with XOUT and 22 pF each side, as on the Raspberry Pi Pico.
+- USB: device, full speed. 27 ohm in series at the chip, ESD array at the receptacle.
+- TESTEN to ground; RUN left to its internal pull-up (no reset circuit); SWD pins left open.
 
 ## Programming: over the USB-C, no adapter
 
 (Unchanged by the power key: J201 stays the keyboard's USB-C, to the mainboard in the Commander and to any PC later.)
 
-The STC8H8K64U has a USB boot loader in ROM. Hold the BOOT button SW201 (bottom face; P3.2 to ground) while
-plugging the USB cable in, release it: the keyboard appears as "STC USB Writer (HID1)", and STC's free tool
-STC-ISP loads the firmware. Firmware updates later work the same way - which also keeps the keyboard repairable
-in the field.
+The RP2040 has a USB boot loader in ROM. Hold the BOOTSEL button SW201 (bottom face; pulls the flash's chip select
+low through 1 k) while plugging the USB cable in: the keyboard appears as a USB drive "RPI-RP2"; copy the QMK `.uf2`
+file onto it. Once QMK runs, its `QK_BOOT` key (layer 1) does the same without the button. VIA changes the keymap
+live, no flashing. That also keeps the keyboard repairable in the field.
 
 ## Assumptions to confirm before ordering
 

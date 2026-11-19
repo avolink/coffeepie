@@ -1,51 +1,99 @@
 # Commander keyboard - the microcontroller circuit, soldered straight onto the keyboard PCB in place of the Arduino
 # Micro module (U1 of the Altium design).
 #
-# Since 2026-11-15 (cost target): STC8H8K64U-45I-LQFP32 (LCSC C5210757, about 0.35 USD in volume) instead of the
-# ATmega32U4 (about 3.30 USD).  It runs from the same 5 V, so the 84 infra-red LEDs and phototransistors of the matrix
-# see the same levels as on the prototype.  It needs no crystal (USB clock recovered from the bus), no reset circuit
-# and no ISP pads: firmware goes in over the USB-C itself, through STC's USB boot loader, entered by holding the BOOT
-# button (P3.2 to ground) while the cable is plugged in.  THE FIRMWARE IS NEW: the Arduino sketch of the prototype
-# does not run on this 8051-core chip; the pin table below is what it has to read and drive (see the README).
+# Since 2026-11-19 (user's request: QMK / VIA): a Raspberry Pi RP2040 (LCSC C2040) with its QSPI flash, 12 MHz crystal
+# and a 3.3 V LDO, instead of the STC8H8K64U of 2026-11-15 (which needed a firmware of its own).  QMK runs on the
+# RP2040 as it is, VIA with it; firmware goes in as a UF2 file over the USB-C: hold BOOTSEL while plugging the cable in
+# (or QMK's bootloader key / double tap of reset), the board shows up as a USB drive.  The QMK keyboard definition is
+# in ../../firmware/qmk/ (pin table below).
 #
-# Kept: USB-C (device side, 5.1 k on both CC pins), the ESD array, the 22 ohm series resistors, the resettable fuse
-# (750 mA: the 84 infra-red LEDs draw about 0.56 A when all are on), the decoupling.
+# 3.3 V: the RP2040's pins take NO 5 V.  The matrix (from the prototype) ran on 5 V; what changes for it:
+#   - the 16 column pull-ups (R169-R184) hang on VCC3V3 instead of VCC5 (OVERRIDE below; on the board their supply
+#     track is cut off the 5 V bus and fed from the LDO)
+#   - the rows are driven 0 / 3.3 V; the phototransistors' collectors (columns) then stay at or under 3.3 V
+#   - the infra-red LEDs keep their 5 V (560 ohm from VCC5 to LED_K, switched by Q1); R185, Q1's base resistor, is 330
+#     ohm instead of 1 k so that a 3.3 V output still drives Q1 hard (about 7 mA base current for 0.56 A)
+#   - T16's LED hangs between 5 V (560 ohm) and row A0: with A0 high (3.3 V) about 1 mA flows back into that pin, which
+#     the chip's own 3.3 V consumption takes; it is never above 3.3 V
+# Kept: USB-C (device side, 5.1 k on both CC pins), the ESD array, the series resistors (27 ohm now, the RP2040's
+# value), the resettable fuse (750 mA: the 84 infra-red LEDs draw about 0.56 A when all are on).
 # Net names are still the ARDUINO pin names (D0..D13, A0..A5, MISO / SCK / MOSI) the prototype used: they name the
 # matrix lines, not chip pins any more.  References are in a 200-block (no collision with the Altium parts).
 SHEET kbd_mcu
 
-# --- microcontroller ---
-# Chip sides on the board (U201 on the bottom face, turned so that): north pins 1-8, east 9-16, south 17-24, west 25-32
-#   north (west -> east): A0..A5 rows on pins 1-6, MOSI on 7      (the row lines end to the north-west)
-#   east  (north -> south): SCK, supply, USB, BOOT, MISO          (USB-C and the SPI line ends are to the east)
-#   south (east -> west): SS_RXLED, D0 (infra-red enable), D2, D3, D4, D5
-#   west  (south -> north): D6..D13                               (the column lines end to the west)
-U201 STC8H_LQFP32:STC8H8K64U 10=VCC5 11=VCC5 12=GND
-P U201 8=UCAP 13=USB_MCU_DM 14=USB_MCU_DP 15=BOOT_N
-# matrix rows (6), driven as outputs
-P U201 1=A0 2=A1 3=A2 4=A3 5=A4 6=A5
-# matrix columns (16), read as inputs
-P U201 7=MOSI 9=SCK 16=MISO 17=SS_RXLED 19=D2_SDA 20=D3_SCL 21=D4 22=D5
-P U201 25=D6 26=D7 27=D8 28=D9 29=D10 30=D11 31=D12 32=D13
-# infra-red LED enable (to Q1 through the jumper J1)
-P U201 18=D0_RX
-# spare
-NC U201 23
-# (pin 24: the power-key output, see 09_kbd_powerkey.net)
+# --- microcontroller: supply pins, the exposed pad is the only ground ---
+U201 RP2040 1=VCC3V3 10=VCC3V3 22=VCC3V3 33=VCC3V3 42=VCC3V3 49=VCC3V3 43=VCC3V3 44=VCC3V3 48=VCC3V3 57=GND
+# core supply (1.1 V) from the chip's own regulator: VREG_VOUT to both DVDD pins
+P U201 45=VDD11 23=VDD11 50=VDD11
+# TESTEN to ground (as on every RP2040 board); RUN has an internal pull-up; SWD left open (no debug pads)
+P U201 19=GND
+NC U201 24 25 26
+# crystal, USB, flash
+P U201 20=XIN 21=XOUT 46=USB_MCU_DM 47=USB_MCU_DP
+P U201 51=QSPI_SD3 52=QSPI_SCLK 53=QSPI_SD0 54=QSPI_SD2 55=QSPI_SD1 56=QSPI_SS
+# the matrix lines, the LED enable (D0_RX) and the power-key output (PWRKEY_DRV, see 09_kbd_powerkey.net) on the GPIOs
+# that face where each line arrives at the chip (no crossings):
+# >>> GPIO table (written by tools/kbd_rp2040_board.py --stage plan) >>>
+P U201 2=D0_RX 3=A2 4=SCK 5=MISO 6=SS_RXLED 8=D2_SDA 9=D3_SCL 11=D4 12=D5 13=MOSI 14=D7 15=PWRKEY_DRV 17=D6 27=D8 28=D9 29=D11 30=D12 31=D13 32=A0 34=A1 35=D10 36=A3 37=A4 38=A5
+NC U201 7 16 18 39 40 41    # spare GPIO: GPIO5 GPIO13 GPIO15 GPIO27 GPIO28 GPIO29
+# GPIO of each line (QMK pin names):
+#   D0_RX      GP0
+#   A2         GP1
+#   SCK        GP2
+#   MISO       GP3
+#   SS_RXLED   GP4
+#   D2_SDA     GP6
+#   D3_SCL     GP7
+#   D4         GP8
+#   D5         GP9
+#   MOSI       GP10
+#   D7         GP11
+#   PWRKEY_DRV GP12
+#   D6         GP14
+#   D8         GP16
+#   D9         GP17
+#   D11        GP18
+#   D12        GP19
+#   D13        GP20
+#   A0         GP21
+#   A1         GP22
+#   D10        GP23
+#   A3         GP24
+#   A4         GP25
+#   A5         GP26
+# <<< GPIO table <<<
+
+# --- decoupling: 100 nF at the I/O supply pins, 1 uF on the regulator's input and output, 100 nF at the core pins ---
+C203 100nF_0603 VCC3V3 GND
+C204 100nF_0603 VCC3V3 GND
+C206 100nF_0603 VCC3V3 GND
+C207 100nF_0603 VCC3V3 GND
+C208 1uF_0603 VCC3V3 GND
+C201 1uF_0603 VDD11 GND
+C202 100nF_0603 VDD11 GND
+
+# --- 3.3 V: LDO from the USB 5 V (the RP2040 and the flash take about 30 mA, the pull-ups 5 mA) ---
+U203 ME6211:ME6211C33M5G 1=VCC5 3=VCC5 2=GND 5=VCC3V3
+NC U203 4
+C209 4.7uF_0603 VCC5 GND
+C205 4.7uF_0603 VCC3V3 GND
+
+# --- 12 MHz crystal (YXC X322512MSB4SI, C9002, 20 pF load): 1 k in XOUT as on the Raspberry Pi Pico, 22 pF each side ---
+Y201 XTAL4:12MHz 1=XIN 3=XTAL_O 2=GND 4=GND
+R208 1K_0402 XOUT XTAL_O
+C212 22pF_0402 XIN GND
+C213 22pF_0402 XTAL_O GND
+
+# --- program flash: 2 MB, quad SPI ---
+U204 QSPI_FLASH_SO8:GD25Q16ESIGR 1=QSPI_SS 2=QSPI_SD1 3=QSPI_SD2 4=GND 5=QSPI_SD0 6=QSPI_SCLK 7=QSPI_SD3 8=VCC3V3
+C211 100nF_0603 VCC3V3 GND
+
+# --- BOOTSEL: hold while plugging in USB -> the RP2040's USB boot ROM (a "RPI-RP2" drive for the UF2 file) ---
+R206 1K_0603 QSPI_SS BOOTSEL_N
+SW201 TACT:BOOTSEL 1=BOOTSEL_N 2=GND
 
 # --- supply: USB bus power only ---
 F201 PTC:750mA VBUS_USB VCC5
-# UCAP: the chip's USB regulator (0.1 - 10 uF to ground)
-C201 1uF_0603 UCAP GND
-C203 100nF_0603 VCC5 GND
-C204 100nF_0603 VCC5 GND
-C205 4.7uF_0603 VCC5 GND
-# ADC reference pin tied to +5 V (no analogue input is used), with its own capacitor
-C206 100nF_0603 VCC5 GND
-
-# --- boot: hold while plugging in USB -> STC USB boot loader ("STC USB Writer (HID1)" in STC-ISP) ---
-R206 10K_0603 VCC5 BOOT_N
-SW201 TACT:BOOT 1=BOOT_N 2=GND
 
 # --- USB-C, device side, on the left edge of the board (the free bay beside the codec column), MID-MOUNT in a notch
 #     of the edge, pads on the bottom face (2026-11-19: flush with the top, 1.6 mm below the bottom; HCTL
@@ -58,6 +106,6 @@ R201 5.1K_0603 KB_CC1 GND
 R202 5.1K_0603 KB_CC2 GND
 U202 USBLC6-2SC6 1=USB_CON_DP 6=USB_CON_DP 3=USB_CON_DM 4=USB_CON_DM 2=GND 5=VBUS_USB
 C210 4.7uF_0603 VBUS_USB GND
-# series resistors at the MCU end of the two data lines
-R203 22R_0603 USB_CON_DP USB_MCU_DP
-R204 22R_0603 USB_CON_DM USB_MCU_DM
+# series resistors at the MCU end of the two data lines (27 ohm: the RP2040's USB, as on the Pico)
+R203 27R_0603 USB_CON_DP USB_MCU_DP
+R204 27R_0603 USB_CON_DM USB_MCU_DM

@@ -12,7 +12,8 @@ Netlist syntax (one statement per line, '#' starts a comment):
   P <REF> pin=net ...               more pin assignments for an existing part
   N <REF> <net> pin pin ...         same, written net-first (handy for supplies)
   NC <REF> pin pin ...              pins deliberately left unconnected
-  OVERRIDE <REF> pin=net ...        re-point a pin a GENERATED file assigned (a later file; listed in the check)
+  OVERRIDE <REF> pin=net ...        re-point a pin a GENERATED file assigned (a later file; listed in the check);
+                                    value=<VALUE> gives such a part a new value (same footprint)
   CAPS C<a>-C<b> <VALUE> <n1> <n2>  a run of identical two-pin parts
   TP<n> TP <net>                    test point
 Value "DNP" (or PART:DNP) marks a part as not populated.
@@ -258,6 +259,19 @@ PARTS = {
         "1:P1.0 2:P1.1 3:P1.4 4:P1.5 5:P1.6 6:P1.7 7:P1.3 8:UCAP 9:P5.4 10:VCC 11:VREF 12:GND 13:P3.0/D- 14:P3.1/D+ 15:P3.2/BOOT "
         "16:P3.3 17:P3.4 18:P3.5 19:P3.6 20:P3.7 21:P2.0 22:P2.1 23:P2.2 24:P2.3 25:P2.4 26:P2.5 27:P2.6 28:P2.7 29:P0.0 30:P0.1 "
         "31:P0.2 32:P0.3")),
+    # since 2026-11-19 (QMK / VIA): Raspberry Pi RP2040, QFN-56 7 x 7 mm, 3.3 V I/O (NOT 5 V tolerant); pin table of
+    # KiCad's own RP2040 symbol (MCU_RaspberryPi), the exposed pad 57 is the chip's only ground
+    "RP2040": dict(fp="Package_DFN_QFN:QFN-56-1EP_7x7mm_P0.4mm_EP3.2x3.2mm", lcsc="C2040",
+                   desc="Raspberry Pi RP2040, dual Cortex-M0+ 133 MHz, 264 kB SRAM, external QSPI flash, USB 1.1 device, QFN-56 7 x 7", pins=named(
+        "1:IOVDD1 2:GPIO0 3:GPIO1 4:GPIO2 5:GPIO3 6:GPIO4 7:GPIO5 8:GPIO6 9:GPIO7 10:IOVDD2 11:GPIO8 12:GPIO9 13:GPIO10 "
+        "14:GPIO11 15:GPIO12 16:GPIO13 17:GPIO14 18:GPIO15 19:TESTEN 20:XIN 21:XOUT 22:IOVDD3 23:DVDD1 24:SWCLK 25:SWDIO "
+        "26:RUN 27:GPIO16 28:GPIO17 29:GPIO18 30:GPIO19 31:GPIO20 32:GPIO21 33:IOVDD4 34:GPIO22 35:GPIO23 36:GPIO24 "
+        "37:GPIO25 38:GPIO26/ADC0 39:GPIO27/ADC1 40:GPIO28/ADC2 41:GPIO29/ADC3 42:IOVDD5 43:ADC_AVDD 44:VREG_VIN "
+        "45:VREG_VOUT 46:USB_DM 47:USB_DP 48:USB_VDD 49:IOVDD6 50:DVDD2 51:QSPI_SD3 52:QSPI_SCLK 53:QSPI_SD0 54:QSPI_SD2 "
+        "55:QSPI_SD1 56:QSPI_SS 57:GND")),
+    "QSPI_FLASH_SO8": dict(fp="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", lcsc="C2922792",
+                           desc="GigaDevice GD25Q16ESIGR 16 Mbit (2 MB) quad SPI NOR flash, 3.3 V, SOP-8 150 mil", pins=named(
+        "1:CS# 2:SO/IO1 3:WP#/IO2 4:VSS 5:SI/IO0 6:SCLK 7:HOLD#/IO3 8:VCC")),
     "ISP2x3_PADS": dict(fp="commander:ISP_2x3_P2.54mm_Pads", desc="AVR ISP, six bare pads on the 2 x 3, 2.54 mm grid (for a pogo-pin adapter)",
                        pins=named("1:MISO 2:VCC 3:SCK 4:MOSI 5:RESET 6:GND")),
     # footprint taken over from the Altium design; pin roles are inferred from the circuit around the switch
@@ -491,6 +505,10 @@ def load(netdir=NETDIR):
                         continue
                     c = d.comps[ref]
                     for pr in (t.split("=", 1) for t in tok[2:]):
+                        if len(pr) == 2 and pr[0] == "value":       # OVERRIDE <REF> value=...: a new value, same footprint
+                            d.overrides.append((ref, "value", c.value, pr[1], src))
+                            c.value = pr[1]
+                            continue
                         if len(pr) != 2 or pr[0] not in c.pins:
                             d.err(src, f"OVERRIDE {ref}: {pr} is not an assigned pin")
                             continue

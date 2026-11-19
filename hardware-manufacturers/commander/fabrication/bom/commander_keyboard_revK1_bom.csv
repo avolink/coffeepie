@@ -1,19 +1,28 @@
 qty,value,footprint,description,populate,origin,references,lcsc
-1,1uF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C201,
-3,100nF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C203 C204 C206,
-2,4.7uF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C205 C210,
+2,1uF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C201 C208,
+6,100nF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C202 C203 C204 C206 C207 C211,
+3,4.7uF_0603,C_0603_1608Metric,,,Arduino Micro circuit (new on this board),C205 C209 C210,
+2,22pF_0402,C_0402_1005Metric,,,Arduino Micro circuit (new on this board),C212 C213,
+1,BTR04G02,D_0402_1005Metric,"ESD diode, bidirectional, 0402",,Teclado_V2 (Altium design),ED201,
 1,PTC:750mA,Fuse_1206_3216Metric,,,Arduino Micro circuit (new on this board),F201,
 1,JUMPER2,2P,"2-pin header / jumper, 2.54 mm",,Teclado_V2 (Altium design),J1,
-1,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",,Arduino Micro circuit (new on this board),J201,C42400252
+1,USBC16_MID,USB_C_Receptacle_HCTL_HC-TYPE-C-16P-CB1.6,"USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 1.6 mm board (HCTL HC-TYPE-C-16P-CB1.6)",,Arduino Micro circuit (new on this board),J201,C2894902
+1,JST_SH2_PWR,JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal,"JST-SH 2-pin 1.0 mm, horizontal, 2.95 mm tall: the keyboard's power key (1 power key, 2 GND), the same part on the keyboard (J202) and the mainboard (J22)",,Teclado_V2 (Altium design),J202,
 1,MMBT2222A,MMBT2222A,NPN transistor SOT-23,,Teclado_V2 (Altium design),Q1,
+1,2SK3018,SOT-23,N-MOSFET SOT-23,,Teclado_V2 (Altium design),Q201,
 84,500R_0805,Res 0805,,,Teclado_V2 (Altium design),R1 R3 R5 R7 R9 R11 R13 R15 R17 R19 R21 R23 R25 R27 R29 R31 R33 R35 R37 R39 R41 R43 R45 R47 R49 R51 R53 R55 R57 R59 R61 R63 R65 R67 R69 R71 R73 R75 R77 R79 R81 R83 R85 R87 R89 R91 R93 R95 R97 R99 R101 R103 R105 R107 R109 R111 R113 R115 R117 R119 R121 R123 R125 R127 R129 R131 R133 R135 R137 R139 R141 R143 R145 R147 R149 R151 R153 R155 R157 R159 R161 R163 R165 R167,
 84,560R_0805,Res 0805,,,Teclado_V2 (Altium design),R2 R4 R6 R8 R10 R12 R14 R16 R18 R20 R22 R24 R26 R28 R30 R32 R34 R36 R38 R40 R42 R44 R46 R48 R50 R52 R54 R56 R58 R60 R62 R64 R66 R68 R70 R72 R74 R76 R78 R80 R82 R84 R86 R88 R90 R92 R94 R96 R98 R100 R102 R104 R106 R108 R110 R112 R114 R116 R118 R120 R122 R124 R126 R128 R130 R132 R134 R136 R138 R140 R142 R144 R146 R148 R150 R152 R154 R156 R158 R160 R162 R164 R166 R168,
 16,10K_0805,Res 0805,,,Teclado_V2 (Altium design),R169 R170 R171 R172 R173 R174 R175 R176 R177 R178 R179 R180 R181 R182 R183 R184,
-1,1K_0805,Res 0805,,,Teclado_V2 (Altium design),R185,
+1,330R_0805,Res 0805,,,Teclado_V2 (Altium design),R185,
 2,5.1K_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R201 R202,
-2,22R_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R203 R204,
-1,10K_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R206,
-1,BOOT,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Arduino Micro circuit (new on this board),SW201,
+2,27R_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R203 R204,
+1,1K_0603,R_0603_1608Metric,,,Arduino Micro circuit (new on this board),R206,
+1,100K_0603,R_0603_1608Metric,,,Teclado_V2 (Altium design),R207,
+1,1K_0402,R_0402_1005Metric,,,Arduino Micro circuit (new on this board),R208,
+1,BOOTSEL,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Arduino Micro circuit (new on this board),SW201,
 84,KEYSW_OPT,Interruptor óptico Keychron de bajo perfil,Keychron low-profile optical key switch,,Teclado_V2 (Altium design),T1 T2 T3 T4 T5 T6 T7 T8 T9 T10 T11 T12 T13 T14 T15 T16 T17 T18 T19 T20 T21 T22 T23 T24 T25 T26 T27 T28 T29 T30 T31 T32 T33 T34 T35 T36 T37 T38 T39 T40 T41 T42 T43 T44 T45 T46 T47 T48 T49 T50 T51 T52 T53 T54 T55 T56 T57 T58 T59 T60 T61 T62 T63 T64 T65 T66 T67 T68 T69 T70 T71 T72 T73 T74 T75 T76 T77 T78 T79 T80 T81 T82 T83 T84,
-1,STC8H8K64U,LQFP-32_7x7mm_P0.8mm,"STC STC8H8K64U-45I-LQFP32, 8051 MCU, 5 V, crystal-less USB 2.0 full speed, USB boot loader",,Arduino Micro circuit (new on this board),U201,C5210757
+1,RP2040,QFN-56-1EP_7x7mm_P0.4mm_EP3.2x3.2mm,"Raspberry Pi RP2040, dual Cortex-M0+ 133 MHz, 264 kB SRAM, external QSPI flash, USB 1.1 device, QFN-56 7 x 7",,Arduino Micro circuit (new on this board),U201,C2040
 1,USBLC6-2SC6,SOT-23-6,ST USBLC6-2SC6 USB ESD,,Arduino Micro circuit (new on this board),U202,C2827654
+1,ME6211C33M5G,SOT-23-5,"Microne ME6211C33M5G 3.3 V LDO 500 mA, SOT-23-5",,Arduino Micro circuit (new on this board),U203,C82942
+1,GD25Q16ESIGR,SOIC-8_3.9x4.9mm_P1.27mm,"GigaDevice GD25Q16ESIGR 16 Mbit (2 MB) quad SPI NOR flash, 3.3 V, SOP-8 150 mil",,Arduino Micro circuit (new on this board),U204,C2922792
+1,12MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,Arduino Micro circuit (new on this board),Y201,
