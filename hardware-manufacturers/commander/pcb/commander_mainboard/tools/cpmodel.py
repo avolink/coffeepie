@@ -268,12 +268,9 @@ PARTS = {
                                "21:P21 22:P22 23:P23 24:P24 25:GND 26:P26 27:P27 28:P28 29:P29 30:GND 31:P31 32:P32 33:P33 34:GND 35:P35 36:P36 37:P37 38:P38 39:GND 40:P40")),
     "JST_SH4_UART": dict(fp="Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal", desc="JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",
                          pins=named("1:GND 2:TX 3:RX 4:3V3")),
-    "JST_SH6_KBD": dict(fp="Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal",
-                        desc="JST-SH 6-pin 1.0 mm, horizontal, 2.95 mm tall: the keyboard harness (1 +5 V, 2 D-, 3 D+, 4 GND, 5 power key, 6 GND); the same part on both boards",
-                        pins=named("1:VBUS 2:DM 3:DP 4:GND 5:PWRKEY 6:GND")),
-    "JST_PH4_BTN": dict(fp="Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal",
-                        desc="JST-PH 4-pin 2.0 mm, horizontal SMD (bottom face): the panel power button's harness, the button's own terminal is PH2.0 too (1-2 contact, 3 LED+, 4 LED-)",
-                        pins=named("1:SW_A 2:SW_B 3:LED_A 4:LED_K")),
+    "JST_SH2_PWR": dict(fp="Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal",
+                        desc="JST-SH 2-pin 1.0 mm, horizontal, 2.95 mm tall: the keyboard's power key (1 power key, 2 GND), the same part on the keyboard (J202) and the mainboard (J22)",
+                        pins=named("1:PWRKEY 2:GND")),
     "HDR1x4": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:GND 2:TX 3:RX 4:3V3")),
     # --- mainboard <-> hub board link (branch m2-hub, pinout in tools/hub_link.py) ---
     # H4.2 since 2026-11-16 (was APCI0146 H2.3, same land pattern): the hub's card edge sits about 2.4 mm above the

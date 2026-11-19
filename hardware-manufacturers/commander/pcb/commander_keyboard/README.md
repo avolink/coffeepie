@@ -91,15 +91,27 @@ T16 - top row, last column (row `A0`, column `MOSI`), the orange power keycap - 
 - **Standby:** the keyboard stays powered while the board is off (its 5 V is the mainboard's VCC5V_BUS). When USB is
   suspended / not configured: `D0` low (all other LEDs off), then sleep in power-down with the wake-up timer, every
   ~20 ms: `A0` low for ~100 us, read `MOSI` exactly as the normal scan reads T16, `A0` back, sleep. About
-  35 uA on average. Keep the watchdog on: a hung keyboard means no power button (the mainboard has a not-fitted
-  service switch, SW3).
-- **Harness J202** (JST-SH 6, bottom face, next to J201): 1 +5 V, 2 D-, 3 D+, 4 GND, 5 power key, 6 GND - the
-  mainboard's J20 is the same part, the cable is 6-way JST-SH straight through. **The USB-C J201 (and its CC resistors
-  R201 / R202) is now not fitted**: fit it for flashing / testing from a PC, and then never connect the harness at the
-  same time (two 5 V sources).
+  35 uA on average. Keep the watchdog on: a hung keyboard means no power button (for service, short the two pins
+  of the mainboard's J22).
+- **Power-key cable J202** (JST-SH 2, bottom face, next to the USB-C J201): 1 power key (`PWR_KEY_N`), 2 GND - to
+  the mainboard's J22 (the same part), a 2-way JST-SH cable. **USB stays a standard USB-C** (J201, fitted), so that
+  after the Commander's life the keyboard can be reused on its own as a plain USB keyboard: J202 then stays empty and
+  the firmware treats T16 as an ordinary key (detect it: no host activity on the power key, or a firmware setting).
 
-The board file still has to take this in (it carries hand-made fixes: KiCad's *Update PCB from Schematic*): cut
-T16 pad 6 from the LED_K copper and join it to A0 (R31's A0 pad is right there), place Q201 / R207 / ED201 / J202.
+**USB-C mid-mount (2026-11-19):** J201 is now the HCTL HC-TYPE-C-16P-CB1.6 (LCSC C2894902, as on the numpad /
+touchpad), sunk in a notch of the left edge with its pads on the bottom face: flush with the top face (the keycaps),
+1.6 mm below the bottom (the old top-mount stood 3.2 mm below). Notch 9.50 x 6.60 mm, R0.5 inner corners, centred on
+the receptacle (y 160, edge at x -0.39); its pad row sits 7.35 mm in from the edge. `commander_keyboard.kicad_dru`
+lets those pads come to 0.15 mm of the notch (the maker's layout). The area was checked: only J201's own fan-out
+copper and the ground pours are there.
+
+**On the board (2026-11-19, `tools/kbd_powerkey_board.py`, stages edit / route / route_more / promote; the board
+before it: `build/kbd_before_powerkey.kicad_pcb`):** T16 pad 6 off LED_K onto A0 (routed to R31); U201 pin 24 on
+PWRKEY_DRV; J201 swapped for the mid-mount (bottom face, notch cut, old fan-out re-routed; A6 (D+) changes layers
+through a 0.5 / 0.3 via right behind its pad, as D+ / D- alternate along the row; J201's pads have mask margin 0 and
+solid ground joints: the board's 0.1 mm mask opening leaves no web on a 0.5 mm row); Q201 / R207 by the
+microcontroller (136.5, 154.5), J202 at the left edge above J201 (2.6, 144.5), ED201 beside it; PWR_KEY_N runs the
+135 mm from Q201 to J202. DRC: 0 unconnected, the same 45 violations as before (none new).
 
 ## How the project is built
 
@@ -150,8 +162,7 @@ stop regenerating the board (`--keep-board`) and use *Update PCB from Schematic*
 
 ## Programming: over the USB-C, no adapter
 
-(Since 2026-11-18 the USB-C J201 is not fitted in the product - the keyboard talks to the mainboard over the harness
-J202. For programming, fit J201 with R201 / R202 on the development boards, or program the chip before assembly.)
+(Unchanged by the power key: J201 stays the keyboard's USB-C, to the mainboard in the Commander and to any PC later.)
 
 The STC8H8K64U has a USB boot loader in ROM. Hold the BOOT button SW201 (bottom face; P3.2 to ground) while
 plugging the USB cable in, release it: the keyboard appears as "STC USB Writer (HID1)", and STC's free tool

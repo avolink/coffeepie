@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-"""Every board in one KiCad file, as they sit in the case:  ../commander_set/commander_set.kicad_pcb
+"""Every board in one KiCad file, as they sit in the case:  ../commander_assembly/commander_assembly.kicad_pcb
 
 The module boards (battery, touchpad, numpad, tray, battery bar) are added by add_modules() below: see the note
-there.  Set CP_SET_OUT to write somewhere else (for trying things out).
+there.  Set CP_ASSEMBLY_OUT to write somewhere else (for trying things out).
 
-    "C:/Program Files/KiCad/10.0/bin/python.exe" tools/make_set_view.py
+    "C:/Program Files/KiCad/10.0/bin/python.exe" tools/make_assembly_view.py
 
 The mainboard (the codec column with the M.2 socket J41) is the base.  The hub board (../commander_hub) keeps the
 mainboard's coordinates, so it goes in where it is: its card edge in J41.  The keyboard is put to the right of the
@@ -28,8 +28,8 @@ PCB = os.path.normpath(os.path.join(HERE, "..", ".."))
 MAIN = os.path.join(PCB, "commander_mainboard", "commander_mainboard.kicad_pcb")
 HUB = os.path.join(PCB, "commander_hub", "commander_hub.kicad_pcb")
 KBD =os.environ.get("CP_KBD_PCB") or os.path.join(PCB, "commander_keyboard", "commander_keyboard.kicad_pcb")
-OUT_DIR = os.path.join(PCB, "commander_set")
-OUT = os.environ.get("CP_SET_OUT") or os.path.join(OUT_DIR, "commander_set.kicad_pcb")
+OUT_DIR = os.path.join(PCB, "commander_assembly")
+OUT = os.environ.get("CP_ASSEMBLY_OUT") or os.path.join(OUT_DIR, "commander_assembly.kicad_pcb")
 OVERALL = (346.98, 170.05)          # mm, the user's layout sketch (only the width is kept: see above)
 GAP = float(os.environ.get("CP_SET_GAP", "11.0"))     # mm between the hub board and the keyboard (was 1: 10 mm more room)
 
@@ -170,7 +170,7 @@ def main():
     ext = add_modules(mb, ky1 + dy)
     os.makedirs(OUT_DIR, exist_ok=True)
     pcbnew.SaveBoard(OUT, mb, True)
-    shutil.copyfile(os.path.splitext(MAIN)[0] + ".kicad_pro", os.path.join(OUT_DIR, "commander_set.kicad_pro"))
+    shutil.copyfile(os.path.splitext(MAIN)[0] + ".kicad_pro", os.path.join(OUT_DIR, "commander_assembly.kicad_pro"))
     for lib in ("fp-lib-table", "sym-lib-table"):
         src = os.path.join(PCB, "commander_mainboard", lib)
         if os.path.exists(src):
@@ -181,7 +181,21 @@ def main():
                     os.path.join(OUT_DIR, "lib", "commander.pretty"))
         shutil.copy(os.path.join(PCB, "commander_keyboard", "lib", "commander.pretty", "ISP_2x3_P2.54mm_Pads.kicad_mod"),
                     os.path.join(OUT_DIR, "lib", "commander.pretty"))
-    x0, y0 = min(mx0, hx0, kx0 + dx), min(my0, hy0, ky0 + dy)
+    # 3D bodies the boards find at ${KIPRJMOD}/lib/3d: our own small .wrl models (mid-mount USB-C, pogo pins) are
+    # copied so that they resolve here too.  Vendor STEP files (the hub's Amphenol bays) are kept out of git and
+    # are not copied: those parts show without a body in this view.
+    wrl = 0
+    for prj in sorted(os.listdir(PCB)):
+        d3 = os.path.join(PCB, prj, "lib", "3d")
+        if prj == os.path.basename(OUT_DIR) or not os.path.isdir(d3):
+            continue
+        for f in os.listdir(d3):
+            if f.lower().endswith(".wrl"):
+                os.makedirs(os.path.join(OUT_DIR, "lib", "3d"), exist_ok=True)
+                shutil.copyfile(os.path.join(d3, f), os.path.join(OUT_DIR, "lib", "3d", f))
+                wrl += 1
+    print("3D models copied to lib/3d: %d" % wrl)
+    x0, y0 =min(mx0, hx0, kx0 + dx), min(my0, hy0, ky0 + dy)
     x1, y1 = max([mx1, hx1, kx1 + dx] + [e[2] for e in ext]), max([my1, hy1, ky1 + dy] + [e[3] for e in ext])
     print("together: %.2f x %.2f mm  ->  %s" % (x1 - x0, y1 - y0, OUT))
 

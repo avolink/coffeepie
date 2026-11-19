@@ -143,6 +143,6 @@
     (property "Sheetfile" "sheets/hub_link.kicad_sch" (at 20.32 219.04 0) (effects (font (size 1.27 1.27)) (justify left top)))
     (instances (project "commander_mainboard" (path "/6f5323c3-fd11-5368-8f15-e0edcac530c2" (page "18"))))
   )
-  (text "Link to the hub board: M.2 Key M socket / card edge (pinout tools/hub_link.py), keyboard port\n8 parts, A3" (exclude_from_sim no) (at 22.86 203.2 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "53626552-9002-57ba-beb2-3a5eafbae20f"))
+  (text "Link to the hub board: M.2 Key M socket / card edge (pinout tools/hub_link.py), keyboard port\n10 parts, A3" (exclude_from_sim no) (at 22.86 203.2 0) (effects (font (size 1.27 1.27)) (justify left top)) (uuid "53626552-9002-57ba-beb2-3a5eafbae20f"))
   (sheet_instances (path "/" (page "1")))
 )

@@ -345,17 +345,22 @@ microSD socket had under the PMIC (bottom side); the socket moves to the strip b
 passives were recovered from Radxa's placement drawings and rotated into the column, so the
 proven DDR and power floorplan is the starting point rather than a guess.
 
-**Power button = the keyboard's power key; keyboard on a harness (2026-11-18, user's request).** The keyboard's T16
-(top row, last column, orange power keycap) is the power button: the keyboard microcontroller reads it and pulls
-PMIC_PWRON low over the keyboard harness, like a PC front panel; the RK817's power-key logic is unchanged. The keyboard
-link J20 is now a JST-SH 6 (1 +5 V, 2 D-, 3 D+, 4 GND, 5 PMIC_PWRON, 6 GND; the keyboard's J202 is the same) instead
-of the USB-C (a plug did not fit in the ~9 mm to the keyboard); the CC resistors R706 / R707 are gone. The keyboard is
-fed from VCC5V_BUS (on whenever the device has power), so it can watch the key while the board is off; F1 is now
-750 mA (the keyboard's 84 infra-red LEDs draw ~0.56 A: 500 mA would trip). ESD ED13 on PMIC_PWRON at the connector;
-SW3 (the old side tact switch) stays as a NOT FITTED service fallback. A panel-mount metal button in the codec cover
-was looked at first: none fits (12 mm of room under the cover; 12-19 mm buttons need 13-15 mm with their nut).
+**Power button = the keyboard's power key (2026-11-18/19, user's request).** The keyboard's T16 (top row, last
+column, orange power keycap) is the power button: the keyboard microcontroller reads it and pulls PMIC_PWRON low over
+a 2-wire cable from the keyboard's J202 to **J22 (JST-SH 2: 1 PMIC_PWRON, 2 GND)**, like a PC front panel; the RK817's
+power-key logic is unchanged. J22 replaces the side tact switch SW3 (short its pins for bring-up / service); ESD ED13
+at the connector. The keyboard keeps its **standard USB-C** (J20 here, unchanged) so that it can be reused on its own
+after the device's life (the user plans to donate them). The keyboard is fed from VCC5V_BUS (on whenever the device
+has power), so it watches the key while the board is off; F1 is now 750 mA (the keyboard's 84 infra-red LEDs draw
+~0.56 A: 500 mA would trip). The wish was J22 beside J20 on the column's inner edge, but that edge is full on both
+faces from J2 to J21 (J2, J20, H2, SW1 / SW2, J21 and the parts under them), so **J22 sits on the outer (left) edge,
+top face, at y 144 (board mm), mouth outwards** - SW3's old edge, ~20 mm from J20 along the column; ED13 beside it;
+PMIC_PWRON re-routed from J22 to the RK817 (U9.52 / C352), SW3's old track up the column taken out. The cable goes
+round the column's end or over it to the keyboard: check the path (and its length) in the chassis model.
+Rejected on the way: a panel-mount metal button in the codec cover (none fits: 12 mm of room under the cover);
+the power key on the USB-C's SBU pins (needs a full-featured cable - a cheap one would silently lose the power key).
 `src/netlist/24_power_button.net`, `34_hub_link.net`; keyboard: `commander_keyboard/src/netlist/09_kbd_powerkey.net`.
-The board file still has the USB-C J20 until it is updated from the schematic (hand edits: *Update PCB from Schematic*).
+Board edit: `tools/mb_powerkey_board.py` (2026-11-19; the board before it: `build/mb_before_powerkey.kicad_pcb`).
 
 ## 4. Assumptions you should confirm
 

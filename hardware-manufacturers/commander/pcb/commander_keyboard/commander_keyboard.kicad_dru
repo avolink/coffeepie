@@ -1,0 +1,6 @@
+(version 1)
+# J201, the mid-mount USB-C (HCTL HC-TYPE-C-16P-CB1.6, 2026-11-19): its pad row ends 0.17 mm from the end of its board
+# notch, as in the maker's recommended layout (tools/usbc_mid_fp.py); everything else keeps the board's clearance.
+(rule "J201 mid-mount pads to its notch"
+  (condition "A.Parent == 'J201' && A.Type == 'Pad'")
+  (constraint edge_clearance (min 0.15mm)))

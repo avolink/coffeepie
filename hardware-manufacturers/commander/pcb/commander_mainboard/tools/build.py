@@ -104,7 +104,7 @@ def main():
             run("assembly drawing, bottom", [KCLI, "pcb", "export", "pdf", "--mode-single", "--mirror",
                                              "--layers", "B.Cu,B.SilkS,B.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
             run("BOM", py("gen_bom.py"))
-            run("the boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
+            run("the boards in one view, for looking at only (pcb/commander_assembly)", kpy("make_assembly_view.py"), report_only=True)
         run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), PRJ + ".kicad_sch"])
         print("ERC:", summarize("build/erc.rpt") or "clean")
         if FINDINGS:
@@ -212,7 +212,7 @@ def main():
         run("assembly drawing, bottom", [KCLI, "pcb", "export", "pdf", "--mode-single", "--mirror",
                                          "--layers", "B.Cu,B.SilkS,B.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
         run("BOM", py("gen_bom.py"))
-        run("the boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
+        run("the boards in one view, for looking at only (pcb/commander_assembly)", kpy("make_assembly_view.py"), report_only=True)
         print()
         print("ERC:", summarize("build/erc.rpt") or "clean")
         print("DRC:", summarize("build/drc.rpt") or "clean")
@@ -266,7 +266,7 @@ def main():
                                      "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
     run("BOM", py("gen_bom.py"))
     if cpmodel.VARIANT == "main":
-        run("the boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
+        run("the boards in one view, for looking at only (pcb/commander_assembly)", kpy("make_assembly_view.py"), report_only=True)
 
     print()
     print("ERC:", summarize("build/erc.rpt") or "clean")
