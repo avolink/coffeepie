@@ -30,7 +30,8 @@ P U201 25=D6 26=D7 27=D8 28=D9 29=D10 30=D11 31=D12 32=D13
 # infra-red LED enable (to Q1 through the jumper J1)
 P U201 18=D0_RX
 # spare
-NC U201 23 24
+NC U201 23
+# (pin 24: the power-key output, see 09_kbd_powerkey.net)
 
 # --- supply: USB bus power only ---
 F201 PTC:750mA VBUS_USB VCC5
@@ -46,12 +47,13 @@ C206 100nF_0603 VCC5 GND
 R206 10K_0603 VCC5 BOOT_N
 SW201 TACT:BOOT 1=BOOT_N 2=GND
 
-# --- USB-C, device side, on the left edge of the board (the free bay beside the codec column) ---
-J201 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
+# --- USB-C, device side, on the left edge of the board: NOT FITTED since 2026-11-18 (the keyboard reaches the
+#     mainboard over the harness J202, 09_kbd_powerkey.net); kept for flashing / testing from a PC, never with J202 ---
+J201 USBC16:DNP A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
 P J201 A5=KB_CC1 B5=KB_CC2 A6=USB_CON_DP B6=USB_CON_DP A7=USB_CON_DM B7=USB_CON_DM
 NC J201 A8 B8
-R201 5.1K_0603 KB_CC1 GND
-R202 5.1K_0603 KB_CC2 GND
+R201 DNP KB_CC1 GND
+R202 DNP KB_CC2 GND
 U202 USBLC6-2SC6 1=USB_CON_DP 6=USB_CON_DP 3=USB_CON_DM 4=USB_CON_DM 2=GND 5=VBUS_USB
 C210 4.7uF_0603 VBUS_USB GND
 # series resistors at the MCU end of the two data lines

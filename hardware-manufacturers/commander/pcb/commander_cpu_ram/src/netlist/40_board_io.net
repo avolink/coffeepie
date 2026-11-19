@@ -27,6 +27,11 @@ C953 1uF VCC_SYS GND
 C954 10uF HOST_VBUS GND
 D953 ESD:BTR04G02 USB2_HOST2_DP GND
 D954 ESD:BTR04G02 USB2_HOST2_DM GND
+# --- power button: the side-operated tact switch on the left edge (it used to be in the shared 17_pmic.net; the mainboard
+#     now has a panel-mount button on a connector instead).  Same sheet as before.
+SHEET pmic
+SW3 TACT_SIDE:POWER 1=PMIC_PWRON 2=GND
+SHEET board_io
 # --- Maskrom: held while the board powers up, the eMMC's clock is grounded, the eMMC does not answer and the boot ROM
 #     falls back to USB (rockusb on J2) - for re-flashing an eMMC whose image does not boot
 SW95 TACT:MASKROM 1=MASKROM_K 2=GND

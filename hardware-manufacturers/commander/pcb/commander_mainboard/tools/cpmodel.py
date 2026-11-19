@@ -12,6 +12,7 @@ Netlist syntax (one statement per line, '#' starts a comment):
   P <REF> pin=net ...               more pin assignments for an existing part
   N <REF> <net> pin pin ...         same, written net-first (handy for supplies)
   NC <REF> pin pin ...              pins deliberately left unconnected
+  OVERRIDE <REF> pin=net ...        re-point a pin a GENERATED file assigned (a later file; listed in the check)
   CAPS C<a>-C<b> <VALUE> <n1> <n2>  a run of identical two-pin parts
   TP<n> TP <net>                    test point
 Value "DNP" (or PART:DNP) marks a part as not populated.
@@ -267,6 +268,12 @@ PARTS = {
                                "21:P21 22:P22 23:P23 24:P24 25:GND 26:P26 27:P27 28:P28 29:P29 30:GND 31:P31 32:P32 33:P33 34:GND 35:P35 36:P36 37:P37 38:P38 39:GND 40:P40")),
     "JST_SH4_UART": dict(fp="Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal", desc="JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",
                          pins=named("1:GND 2:TX 3:RX 4:3V3")),
+    "JST_SH6_KBD": dict(fp="Connector_JST:JST_SH_SM06B-SRSS-TB_1x06-1MP_P1.00mm_Horizontal",
+                        desc="JST-SH 6-pin 1.0 mm, horizontal, 2.95 mm tall: the keyboard harness (1 +5 V, 2 D-, 3 D+, 4 GND, 5 power key, 6 GND); the same part on both boards",
+                        pins=named("1:VBUS 2:DM 3:DP 4:GND 5:PWRKEY 6:GND")),
+    "JST_PH4_BTN": dict(fp="Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal",
+                        desc="JST-PH 4-pin 2.0 mm, horizontal SMD (bottom face): the panel power button's harness, the button's own terminal is PH2.0 too (1-2 contact, 3 LED+, 4 LED-)",
+                        pins=named("1:SW_A 2:SW_B 3:LED_A 4:LED_K")),
     "HDR1x4": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:GND 2:TX 3:RX 4:3V3")),
     # --- mainboard <-> hub board link (branch m2-hub, pinout in tools/hub_link.py) ---
     # H4.2 since 2026-11-16 (was APCI0146 H2.3, same land pattern): the hub's card edge sits about 2.4 mm above the
@@ -400,6 +407,7 @@ class Design:
         self.warnings = []
         self.sheets = []
         self.sheet_title = {}
+        self.overrides = []         # (ref, pin, old net, new net, source) from OVERRIDE statements
 
     # ---- helpers ----
     def err(self, src, msg):
@@ -471,6 +479,21 @@ def load(netdir=NETDIR):
                             d.err(src, f"bad pin assignment {pr}")
                             continue
                         _assign(d, c, pr[0], pr[1], sheet, src)
+                    continue
+                if head == "OVERRIDE":
+                    # OVERRIDE <REF> pin=net ...: a deliberate change to a pin that a GENERATED file assigned (the
+                    # keyboard's matrix files come from the Altium design); the file must come after it (sorted by name)
+                    ref = tok[1]
+                    if ref not in d.comps:
+                        d.err(src, f"OVERRIDE for unknown part {ref}")
+                        continue
+                    c = d.comps[ref]
+                    for pr in (t.split("=", 1) for t in tok[2:]):
+                        if len(pr) != 2 or pr[0] not in c.pins:
+                            d.err(src, f"OVERRIDE {ref}: {pr} is not an assigned pin")
+                            continue
+                        d.overrides.append((ref, pr[0], c.pins[pr[0]], pr[1], src))
+                        c.pins[pr[0]] = pr[1]
                     continue
                 if head == "CAPS":
                     m = re.match(r"^C(\d+)-C(\d+)$", tok[1])
@@ -629,6 +652,8 @@ def report(d):
             lines.append(f"  {ref} {c.part}: {len(c.pins)} pins assigned ({nc} NC)")
     single = sorted(n for n, pins in nets.items() if len(pins) == 1)
     lines.append(f"single-pin nets ({len(single)}): " + ", ".join(single))
+    for ref, pin, old, new, src in d.overrides:
+        lines.append(f"OVERRIDE {ref}.{pin}: {old} -> {new}  ({os.path.basename(src.split(':')[0])})")
     return "\n".join(lines)
 
 

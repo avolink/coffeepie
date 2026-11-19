@@ -70,10 +70,9 @@ C345 10uF VCC_BAT GND
 C350 100nF PMIC_SNSP GND
 R152 0R PMIC_SNSP GND
 C352 100nF PMIC_PWRON GND
-# power button, side-operated, on the left edge of the column (the RK817's own power-key logic, as on a laptop):
-# a press switches the board on; while it runs, a short press is a power-key event for the OS (orderly shutdown /
-# sleep), a long press (about 6 s) cuts the power
-SW3 TACT_SIDE:POWER 1=PMIC_PWRON 2=GND
+# the power button itself is each board's own (the RK817's power-key logic, as on a laptop: a press switches the board
+# on; while it runs, a short press is a power-key event for the OS, a long press (about 6 s) cuts the power):
+# mainboard 24_power_button.net (panel-mount button in the cover, on a connector), commander_cpu_ram 40_board_io.net
 Q7 PMOS_GSD:WPM2341 G=PMIC_Q7G S=VCC_SYS D=PMIC_VBUS
 R150 1M VCC_SYS PMIC_Q7G
 C342 1uF PMIC_Q7G GND

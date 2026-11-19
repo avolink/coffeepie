@@ -282,6 +282,8 @@ MPN = {
     "JST_PH4": ("JST", "B4B-PH-K-S(LF)(SN)", ""),
     "JST_PH5": ("JST", "B5B-PH-K-S(LF)(SN)", ""),
     "JST_SH4_UART": ("JST", "SM04B-SRSS-TB(LF)(SN)", ""),
+    "JST_SH6_KBD": ("JST", "SM06B-SRSS-TB(LF)(SN)", "keyboard harness, one on each board; cable: 6-way JST-SH, both ends"),
+    "JST_PH4_BTN": ("JST", "S4B-PH-SM4-TB(LF)(SN)", "power button harness (PH-PH cable); the button itself: anti-vandal, white ring LED 3-6 V, momentary, PH2.0 terminal (off-board)"),
     "TACT": ("C&K", "KMR221GLFS", "or equivalent 4.2 x 2.8 mm tact switch"),
     "TACT_SIDE": ("Panasonic", "EVQ-P7A01P", "side-operated, 3.5 x 2.9 x 1.35 mm"),
     "POGO_FW8": ("CFE", "BP33242-08200H0-FS", ""),

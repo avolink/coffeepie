@@ -1,7 +1,7 @@
 (kicad_sch (version 20231120) (generator "eeschema") (generator_version "8.0")
   (uuid "8098fd06-5fbe-5518-9bdf-dddd09d3a3fb")
   (paper "A3")
-  (title_block (title "Commander mainboard - Keyboard matrix, row 6 (A5)") (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")
+  (title_block (title "Commander keyboard - Keyboard matrix, row 6 (A5)") (rev "A0") (company "Coffee Pie / Grupo 3P1 Colombia")
     (comment 1 "Codec Terminal, model Commander: RK3566 + PoE PD + USB hubs on one PCB")
     (comment 2 "Generated from src/netlist - edit there and re-run tools/build.py")
     (comment 3 "CERN-OHL-S v2 + Coffee Pie Circular Economy Addendum"))

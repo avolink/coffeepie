@@ -345,6 +345,18 @@ microSD socket had under the PMIC (bottom side); the socket moves to the strip b
 passives were recovered from Radxa's placement drawings and rotated into the column, so the
 proven DDR and power floorplan is the starting point rather than a guess.
 
+**Power button = the keyboard's power key; keyboard on a harness (2026-11-18, user's request).** The keyboard's T16
+(top row, last column, orange power keycap) is the power button: the keyboard microcontroller reads it and pulls
+PMIC_PWRON low over the keyboard harness, like a PC front panel; the RK817's power-key logic is unchanged. The keyboard
+link J20 is now a JST-SH 6 (1 +5 V, 2 D-, 3 D+, 4 GND, 5 PMIC_PWRON, 6 GND; the keyboard's J202 is the same) instead
+of the USB-C (a plug did not fit in the ~9 mm to the keyboard); the CC resistors R706 / R707 are gone. The keyboard is
+fed from VCC5V_BUS (on whenever the device has power), so it can watch the key while the board is off; F1 is now
+750 mA (the keyboard's 84 infra-red LEDs draw ~0.56 A: 500 mA would trip). ESD ED13 on PMIC_PWRON at the connector;
+SW3 (the old side tact switch) stays as a NOT FITTED service fallback. A panel-mount metal button in the codec cover
+was looked at first: none fits (12 mm of room under the cover; 12-19 mm buttons need 13-15 mm with their nut).
+`src/netlist/24_power_button.net`, `34_hub_link.net`; keyboard: `commander_keyboard/src/netlist/09_kbd_powerkey.net`.
+The board file still has the USB-C J20 until it is updated from the schematic (hand edits: *Update PCB from Schematic*).
+
 ## 4. Assumptions you should confirm
 
 Mechanical values not on the drawing were derived; each is a named constant in `tools/gen_pcb.py`.

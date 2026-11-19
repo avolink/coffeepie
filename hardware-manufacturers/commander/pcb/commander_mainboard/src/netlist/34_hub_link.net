@@ -13,14 +13,14 @@ P J41 49=SDMMC0_D3 50=GND 51=GND 52=GND 53=SDMMC0_DET_L 54=GND 55=HUB_RESET_SOC_
 P J41 69=I2C3_SDA_M1 70=GND 71=GND 72=GND 73=GND 74=GND 75=GND
 P J41 MP=GND
 # --- keyboard link: straight from the SoC (USB2 HOST3), not through a hub.
-#     Standard USB-C receptacle (USB 2.0) on the inner edge of the column, facing the keyboard.
-#     The board is the host: Rp on both CC pins, 5 V through a resettable fuse. ---
+#     2026-11-18: a harness instead of the USB-C (a USB-C plug does not fit in the ~9 mm between the column and the
+#     keyboard): JST-SH 6 on the inner edge of the column, the keyboard's J202 is the same.  It also carries the
+#     power key: the keyboard's T16 (top row, last column) pulls PMIC_PWRON low (see 24_power_button.net).
+#     5 V through a resettable fuse, from VCC5V_BUS: on whenever the device has power, so the keyboard can watch the
+#     power key while the board is off.  750 mA like the keyboard's own fuse (its 84 infra-red LEDs draw ~0.56 A,
+#     the 500 mA this had would trip). ---
 P U1 Y2=USB2_HOST3_DP Y1=USB2_HOST3_DM
-J20 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_KB A9=VBUS_KB B4=VBUS_KB B9=VBUS_KB
-P J20 A5=CC1_KB B5=CC2_KB A6=USB2_HOST3_DP B6=USB2_HOST3_DP A7=USB2_HOST3_DM B7=USB2_HOST3_DM
-NC J20 A8 B8
-R706 56K VBUS_KB CC1_KB
-R707 56K VBUS_KB CC2_KB
-F1 PTC:500mA VCC5V_BUS VBUS_KB
+J20 JST_SH6_KBD 1=VBUS_KB 2=USB2_HOST3_DM 3=USB2_HOST3_DP 4=GND 5=PMIC_PWRON 6=GND
+F1 PTC:750mA VCC5V_BUS VBUS_KB
 C713 10uF VBUS_KB GND
 U51 USBLC6-2SC6 1=USB2_HOST3_DP 6=USB2_HOST3_DP 3=USB2_HOST3_DM 4=USB2_HOST3_DM 2=GND 5=VBUS_KB

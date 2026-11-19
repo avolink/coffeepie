@@ -70,10 +70,36 @@ locks to the bus). The chip runs from the same +5 V as the matrix, as the ATmega
 | D0_RX | infra-red LED enable (to Q1 through J1) | 18 | P3.5 |
 | USB D- / D+ | USB | 13 / 14 | P3.0 / P3.1 |
 | BOOT_N | boot button, 10 k pull-up | 15 | P3.2 |
+| PWRKEY_DRV | power-key output (gate of Q201, 100 k pull-down) | 24 | P2.3 |
 
-Spare: pins 23, 24 (P2.2, P2.3). The column inputs keep the prototype's 10 k pull-ups (R169..R184). The STC pins
+Spare: pin 23 (P2.2). The column inputs keep the prototype's 10 k pull-ups (R169..R184). The STC pins
 start in quasi-bidirectional mode (strong low, weak high): the firmware sets the six rows and `D0` to push-pull
 outputs, as the ATmega's were, so that they can source current when high.
+
+### The power key (2026-11-18)
+
+T16 - top row, last column (row `A0`, column `MOSI`), the orange power keycap - is the Commander's power button.
+`src/netlist/09_kbd_powerkey.net`:
+
+- **T16's infra-red LED is on row A0, not on LED_K** (an `OVERRIDE` of the generated row file): it lights while `A0`
+  is low and only then. In the normal scan nothing changes except that the firmware waits ~30 us after driving `A0`
+  low before reading the columns (the LED and photo-transistor need that to settle).
+- **Power-key output:** while T16 is pressed, set `PWRKEY_DRV` (P2.3, push-pull) high: Q201 pulls `PWR_KEY_N`, which is
+  the mainboard's RK817 `PMIC_PWRON`, to ground. Mirror the key, debounced; don't time anything - the RK817 does
+  (press: on; short press while on: power-key event for the OS; ~6 s held: off). Whether T16 also sends a keycode is a
+  firmware choice (it should not, normally).
+- **Standby:** the keyboard stays powered while the board is off (its 5 V is the mainboard's VCC5V_BUS). When USB is
+  suspended / not configured: `D0` low (all other LEDs off), then sleep in power-down with the wake-up timer, every
+  ~20 ms: `A0` low for ~100 us, read `MOSI` exactly as the normal scan reads T16, `A0` back, sleep. About
+  35 uA on average. Keep the watchdog on: a hung keyboard means no power button (the mainboard has a not-fitted
+  service switch, SW3).
+- **Harness J202** (JST-SH 6, bottom face, next to J201): 1 +5 V, 2 D-, 3 D+, 4 GND, 5 power key, 6 GND - the
+  mainboard's J20 is the same part, the cable is 6-way JST-SH straight through. **The USB-C J201 (and its CC resistors
+  R201 / R202) is now not fitted**: fit it for flashing / testing from a PC, and then never connect the harness at the
+  same time (two 5 V sources).
+
+The board file still has to take this in (it carries hand-made fixes: KiCad's *Update PCB from Schematic*): cut
+T16 pad 6 from the LED_K copper and join it to A0 (R31's A0 pad is right there), place Q201 / R207 / ED201 / J202.
 
 ## How the project is built
 
@@ -123,6 +149,9 @@ stop regenerating the board (`--keep-board`) and use *Update PCB from Schematic*
 - No reset circuit: the chip resets itself at power-up (P5.4 is used as an ordinary pin, for `SCK`).
 
 ## Programming: over the USB-C, no adapter
+
+(Since 2026-11-18 the USB-C J201 is not fitted in the product - the keyboard talks to the mainboard over the harness
+J202. For programming, fit J201 with R201 / R202 on the development boards, or program the chip before assembly.)
 
 The STC8H8K64U has a USB boot loader in ROM. Hold the BOOT button SW201 (bottom face; P3.2 to ground) while
 plugging the USB cable in, release it: the keyboard appears as "STC USB Writer (HID1)", and STC's free tool

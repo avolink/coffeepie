@@ -1,0 +1,23 @@
+# Power key and the harness to the mainboard (2026-11-18, user's request).
+#
+# T16 - top row, last column, the orange power keycap - is the Commander's power button.  The keyboard microcontroller
+# reads it and pulls the mainboard's RK817 power-key line (PMIC_PWRON) low through Q201, the way a PC's front-panel
+# button reaches its motherboard; the RK817's own logic does the rest (press: on; short press while on: power-key
+# event; about 6 s held: off).  The keyboard is powered while the board is off: its 5 V comes from the mainboard's
+# VCC5V_BUS (behind the PoE / battery selector), not from a rail the PMIC switches.
+#
+# Standby: the 84 infra-red LEDs are all switched by Q1 (about 0.56 A); for the power key alone that is far too much.
+# T16's LED is therefore taken off the shared LED_K and hung on its own row line A0: it lights exactly while row 1 is
+# driven low - during the normal scan of row 1, which is when T16 is read anyway (wait ~30 us after driving the row) -
+# and in standby the firmware wakes every ~20 ms, drives A0 low for ~100 us with Q1 off, reads T16 on MOSI and sleeps:
+# about 6.8 mA x 100 us / 20 ms = ~35 uA.  (A0 then sinks T16's LED, ~6.8 mA, plus the row's photo-transistors.)
+SHEET kbd_powerkey
+OVERRIDE T16 6=A0
+# power-key output: open drain (the RK817 has its own pull-up on PWRON), off while the chip is in reset
+P U201 24=PWRKEY_DRV
+Q201 NMOS_GSD:2SK3018 G=PWRKEY_DRV S=GND D=PWR_KEY_N
+R207 100K_0603 PWRKEY_DRV GND
+ED201 ESD:BTR04G02 PWR_KEY_N GND
+# the harness to the mainboard (JST-SH 6, the mainboard's J20 is the same): USB 2.0 full speed, 5 V, the power key.
+# It replaces the USB-C link (J201 stays on the board, not fitted: for flashing / testing from a PC - never both)
+J202 JST_SH6_KBD 1=VBUS_USB 2=USB_CON_DM 3=USB_CON_DP 4=GND 5=PWR_KEY_N 6=GND
