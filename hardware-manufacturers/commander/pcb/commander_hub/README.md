@@ -7,7 +7,7 @@ fingers, no connector part).  The pinout is `../commander_mainboard/tools/hub_li
 
 | | |
 |---|---|
-| Size | 295.7 x 21.72 mm body (board x 69.0 to 364.7) + the 19.85 mm card tongue, 4 mm long (2026-11-18: 4 mm longer at the card end, socket J41 moved 4 mm left; `tools/hub_shift.py`) |
+| Size | 300.7 x 21.72 mm body (board x 64.0 to 364.7) + the 19.85 mm card tongue, 4 mm long (2026-11-18: 4 mm longer at the card end, socket J41 moved 4 mm left; `tools/hub_shift.py`. **2026-11-21: 5 mm longer again at the card end**, J90 now at x 64.0, `tools/hub_extend.py`: in the chassis model the mainboard stands 4.98 mm further left of the hub than the two boards' common coordinates assumed - the bays have to stay on the Framework cards -, and the card tip stood 0.26 mm outside the socket. The routing was not touched: every finger has a straight track back over its old place. **At the socket the hub's page coordinates are now 5 mm off the mainboard's**: a view that draws both boards on one page has to shift the hub 5 mm right.) |
 | Thickness | **0.8 mm** (M.2 cards are 0.8 +-0.08 mm) |
 | Layers | 6 for now (the strip's routing came over as it was); 4 layers is the cost step for later |
 | Finish | ENIG; fingers bevelled 20 deg; no copper or mask in the key notch |
