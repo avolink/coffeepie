@@ -102,7 +102,8 @@ CORNER_R = 1.0
 LAYER_COUNT = 10
 RL = [pcbnew.F_Cu, pcbnew.In2_Cu, pcbnew.In4_Cu, pcbnew.In7_Cu, pcbnew.B_Cu]        # routing layers
 RL_NAME = ["F.Cu", "In2.Cu", "In4.Cu", "In7.Cu", "B.Cu"]
-LCOST = [1.15, 1.0, 1.0, 1.0, 1.1]
+# CR_LCOST "f,in2,in4,in7,b": other cost factors, e.g. a dear bottom face when the decoupling there is to keep its room
+LCOST = [float(v) for v in os.environ.get("CR_LCOST", "1.15,1.0,1.0,1.0,1.1").split(",")]
 F_IDX, B_IDX = 0, 4
 
 

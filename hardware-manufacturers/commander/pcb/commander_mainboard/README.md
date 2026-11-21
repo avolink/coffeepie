@@ -1,8 +1,9 @@
 # Commander mainboard (KiCad 10)
 
 RK3566 codec core + PoE powered device + USB hubs for nine Framework expansion-card bays, on one
-L-shaped PCB, with a front USB-C battery port. Revision **A1: schematic complete, board placed, routed by
-script except for the memory bus and the Ethernet head, with open connections left — for audit, not for order.**
+L-shaped PCB, with a front USB-C battery port. Revision **A1: schematic complete, board placed and routed by
+script on TEN layers (since 2026-11-21: memory bus, Ethernet head, PoE and HDMI connected), 83 connections still
+open in the processor core — for audit, not for order.**
 
 Read [DESIGN_NOTES.md](DESIGN_NOTES.md) first: it lists every decision, assumption and open item.
 
@@ -37,6 +38,15 @@ placement files into `commander/schematics` and `commander/fabrication`.
 | `tools/report_overlaps.py` | where the first placement still collides |
 | `tools/check_routing.py`, `tools/check_isolation.py` | DRC split into routed copper vs placement; gap between PoE primary and everything else |
 | `tools/gen_bom.py`, `tools/gen_project.py` | BOM, project file with net classes |
+| `tools/pf_route.py` | the negotiating router that finished the boards (any board file, JSON configuration: window, layers, classes, kept copper, isolation barrier) |
+| `tools/mb10_convert.py`, `tools/mb10_bus_import.py`, `tools/plane_plan.py` | six to ten layers; the memory bus brought over from the `commander_cpu_ram` router; supply planes on In3 / In4, one region per rail |
+| `tools/mb_phy_support_move.py`, `tools/seat_part.py`, `tools/padclear.py`, `tools/via_swap.py`, `tools/clear_around.py` | parts moved by script and the copper cleared round them (one pass, whole items) |
+| `tools/cap_align.py`, `tools/force_vias.py` | capacitors under a BGA set exactly over ball pairs, vias in the pads - written and tried, NOT applied to the board yet (DESIGN_NOTES section 0) |
+| `tools/check_head_isolation.py` | the 2 mm isolation proof, copper shape to copper shape on every layer (`CP_ISO_BOX=-1,-21,35,60`) |
+
+**The board on disk was finished by hand-run steps on top of the generated one (ten layers, moved parts, imported
+memory bus). `python tools/build.py` without `--keep-board` would regenerate the six-layer board and lose all of
+that.** The fabrication exports in `commander/fabrication` are still those of the six-layer board.
 
 Licence: CERN-OHL-S v2 + Coffee Pie Circular Economy Addendum (see `hardware-manufacturers/LICENSE`).
 The codec core is transcribed from the Radxa ZERO 3E V1.2 reference schematic.

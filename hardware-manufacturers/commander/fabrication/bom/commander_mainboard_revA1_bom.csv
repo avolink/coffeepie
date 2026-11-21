@@ -38,7 +38,7 @@ qty,value,footprint,description,populate,origin,references,lcsc
 1,10uF,C_0603_1608Metric,,,Commander,C812,
 1,4.7uF,C_0603_1608Metric,,,Commander,C813,
 1,SMF5.0CA,D_SOD-123F,"TVS, bidirectional",,Radxa ZERO 3E V1.2,D3,
-8,BTR04G02,D_0402_1005Metric,"ESD diode, bidirectional, 0402",,Radxa ZERO 3E V1.2,D4 D5 ED1 ED2 ED9 ED10 ED11 ED12,
+9,BTR04G02,D_0402_1005Metric,"ESD diode, bidirectional, 0402",,Radxa ZERO 3E V1.2,D4 D5 ED1 ED2 ED9 ED10 ED11 ED12 ED13,
 1,1N5819WT,D_SOD-523,Schottky diode,,Radxa ZERO 3E V1.2,D6,
 1,SS34,D_SMA,Schottky diode,,Commander,D30,
 8,SS110,D_SMA,Schottky diode,,Commander,D31 D32 D33 D34 D35 D36 D37 D38,
@@ -54,6 +54,7 @@ qty,value,footprint,description,populate,origin,references,lcsc
 1,HDMI_MICRO_D,HDMI_Micro-D_Molex_46765-2xxx,micro HDMI (type D) receptacle,,Radxa ZERO 3E V1.2,J10,
 1,RJ45_8P,RJ45_HR6042S_8P8C_LowProfile,"RJ45 8P8C, no magnetics, low profile (Radxa: HanRun HR6042S-1188N15B-1R)",,Radxa ZERO 3E V1.2,J12,
 1,JST_SH4_UART,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,"JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",,Commander,J21,
+1,JST_SH2_PWR,JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal,"JST-SH 2-pin 1.0 mm, horizontal, 2.95 mm tall: the keyboard's power key (1 power key, 2 GND), the same part on the keyboard (J202) and the mainboard (J22)",,Radxa ZERO 3E V1.2,J22,
 1,USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",,Commander,J40,C42400252
 1,M2_SOCKET_M,M2_Socket_KeyM_LOTES_APCI0146,"M.2 Key M socket H4.2, top mount, 4.05 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0107-P001A (LCSC C841661; land pattern identical to APCI0146). Carries the hub board link (tools/hub_link.py), not an M.2 slot",,Radxa ZERO 3E V1.2,J41,C841661
 1,0.24uH_2520,L_1008_2520Metric,,,Radxa ZERO 3E V1.2,L2,
@@ -125,7 +126,6 @@ qty,value,footprint,description,populate,origin,references,lcsc
 1,22.1K_1%,R_0402_1005Metric,,,Commander,R817,
 1,RECOVERY,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Commander,SW1,
 1,RESET,SW_Push_1P1T_NO_CK_KMR2,tact switch,,Commander,SW2,
-1,POWER,SW_SPST_EVQP7A,"tact switch, side-operated (Panasonic EVQ-P7A, 3.5 x 2.9 x 1.35 mm)",,Commander,SW3,
 1,PLN060-ER20A05S,XFMR_Bourns_PLN0xx-ER20,"Bourns PLN060-ER20A05S planar PoE flyback transformer, 5 V out, 1 : 0.25 : 0.5, 40 uH, 200 kHz, 1500 Vrms, 8.0 mm tall",,Commander,T1,C24570980
 1,RK3566,RK3566_FCCSP-565_15.5x14.4mm,"Rockchip RK3566 SoC, FCCSP-565",,Radxa ZERO 3E V1.2,U1,C2943786
 1,RTL8211F,QFN-40-1EP_5x5mm_P0.4mm_EP3.8x3.8mm,"Realtek RTL8211F-CG GbE PHY, QFN-40",,Radxa ZERO 3E V1.2,U2,C187932

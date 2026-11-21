@@ -16,6 +16,127 @@ re-floorplanned (HDMI left, PoE centre, low-voltage corridor right).
 
 Do not order this board yet. A quote from JLCPCB would succeed and the boards would not work.
 
+**Ten layers, 2026-11-21: 83 links open, was 185 on six layers. The memory bus, the Ethernet head, the PoE
+block and the HDMI jack are closed; what is left is in the core (76) and 7 long links from the head to the
+processor. Still not ready to order - see "what is still open" below.** The six-layer board before this step is kept
+as `build/mainboard_6layer_pf_mbQ5.kicad_pcb`. DRC (`kicad-cli`, planes refilled): no shorts, no clearance,
+hole-clearance or crossing errors; the placement's own items as before (courtyard overlaps - the 0201 rows under the
+BGAs -, 2 RJ45-edge items), 70 dead-end stubs, 36 pour islands. `tools/check_head_isolation.py` with
+`CP_ISO_BOX=-1,-21,35,60`: **0 pairs under 2 mm**.
+
+Stack-up (from the top; the board stays 1.2 mm - JLCPCB lists 1.2 mm and ten layers, but confirm the combination and
+the stack-up in their quote tool before ordering):
+
+| Layer | Use |
+|---|---|
+| F.Cu | signals; eMMC, capacitors of the core, connectors |
+| In1.Cu | ground plane |
+| In2.Cu | signals |
+| In3.Cu | supply planes (60 zones, one region per rail, laid out by `tools/plane_plan.py`) |
+| In4.Cu | supply planes (66 zones) - new |
+| In5.Cu | signals - new |
+| In6.Cu | ground plane - new |
+| In7.Cu | signals - new |
+| In8.Cu | ground plane (the old In4; it still carries 0.38 m of old tracks) |
+| B.Cu | signals; processor, memory, PMIC |
+
+What was done, in the order it happened (`tools/` names in brackets; every step ran on a copy in `build/`):
+- **Six to ten layers** (`mb10_convert.py`): the old In4 becomes In8, a second and third ground plane, a second
+  supply layer, three more signal layers; the isolation keep-outs of the head now cover every inner layer.
+- **The memory bus: 73 of 73 nets, taken from the `commander_cpu_ram` router.** That board's generator
+  (`cpu_ram_board.py`) was run on a scratch copy of its project with the processor-to-memory spacing of THIS board
+  (`CR_GAP=2.15 CR_MEM_DX=-2.85 CR_EMMC_GAP=12`, bottom face made dear with `CR_LCOST=1.15,1,1,1,30` so that the bus
+  stays off the capacitor face); the bus copper was then brought over by mirroring about the processor
+  (`mb10_bus_import.py`: cpu_ram F / In2 / In4 / In7 / B -> mainboard B / In7 / In5 / In2 / F). The memory did NOT
+  have to move (U10 shifted 0.014 mm). 32 two-pad parts under the processor and the memory that the new copper hit
+  were set down again 0.2 to 6 mm away (C317 and R122 on the other face). Everything that touched the bus was taken
+  out in one pass (`clear_around.py`) and routed again. **The bus is connected, not tuned: no length matching, no
+  coupled pairs, no impedance widths** (5.2a still applies to signal integrity).
+- **Supply planes on two layers** (`plane_plan.py`): each rail gets one of In3 / In4 and a region grown from where
+  its pads and vias are, instead of one bounding box per rail with priorities.
+- **eMMC lands 0.24 -> 0.22 mm** (U20; IPC's range for a 0.30 mm ball is 0.20 to 0.25): between 0.24 mm lands at
+  0.5 mm a 0.09 mm track with 0.09 mm clearance did not fit, and the eMMC's inner balls sit over the PMIC where no
+  via can stand. A regenerated board gets 0.24 again - the footprint in the generator is the library's.
+- **PMIC inductors L19 / L17 0.7 mm towards the memory**: the strip between the PMIC's top pin row and the
+  inductor pads is the only place for the vias of the eMMC's inner balls and of the PMIC's top pins; it is now 2.0 mm
+  deep instead of 1.3.
+- **The Ethernet PHY's 17 strap resistors and small capacitors** (R72 R74 R76 R77 R78 R87 R88 R90 R97 R98 R99 R100
+  R102 R103, C106 C107 C113) **moved from the strip north of the PHY to the bottom face south of it**
+  (`mb_phy_support_move.py`, then `seat_part.py`). The strip lies over the line side of the transformers: no
+  secondary via may stand there, so they could only be joined on the top face, with their ground chained from pad to
+  pad - that never closed. C106 / C107 / C113 are now 10 to 14 mm from their pins; the rails' main capacitors (C105,
+  C109, C110, C112, C116, C119, C120) are where they were.
+- Two of the PHY's three 0.6 mm thermal vias stood between the transformers' secondary pads and the common-mode
+  chokes on the bottom face: replaced by two 0.45 / 0.20 mm ones further in (`via_swap.py`). Several of the PHY's
+  pins (top row and pin 4) have a 0.25 / 0.15 mm via in the pad. C114 moved 0.2 mm.
+- **Four links at the PHY were laid by hand** (coordinates in the session's `phy_last2.json` / `phy_fan.json`,
+  applied with a script): MDI1_P from pin 4, and the fan of RXD0 / RXD1 / RXD2 / RXD3 with the 1.0 V pin's track from
+  the top row to the via cluster east of the PHY - five tracks between a via and pin 20 with 0.10 mm to spare
+  nowhere. Look at that corner (x 62..66, y 69..71.2) before anything else when you audit.
+- **PoE controller U30**: POE_VB, POE_ISNS and one POE_RTN pin are joined; short stretches are 0.15 mm wide instead
+  of the class's 0.30 (POE_CS 2.7 mm, POE_ISNS 4.7 mm, POE_VB 2.6 mm, POE_RTN 1.8 mm at pin 4 - pins 8 and 9 carry the
+  current). The 0.20 mm clearance of the class is kept.
+- **Micro-HDMI J10**: the two port-side pair halves that were open (HDMI_TX0P_PORT, HDMI_TX1N_PORT) are joined;
+  the nets on the jack may use a 0.25 / 0.15 mm via in its inner pin row.
+- **Power-key socket J22 turned 180 degrees** (2026-11-21, found by the user in the 3D view): its opening faced the
+  outer board edge, the cable comes from inside the case. Same place (43.275, 144.0), opening now towards the
+  board; the signal pads are on the edge side, the mounting pads took the place of six vias, which were laid
+  again. The line's ESD diode ED13 stood 1 mm in front of the new opening: it is now on the BOTTOM face right
+  under the socket (42.63, 146.60), its PMIC_PWRON pad on the line's track, its ground pad with a via. The plug
+  slides in over x 46..51, y 142..146 on the top face: only 0201 capacitors stand there (C46, R1, R19) - check
+  that the JST SH plug clears them, or keep that strip free. The six-layer board had the same fault.
+- Nets on the PMIC, the eMMC, the PHY and J10 use the 0.25 / 0.15 mm via everywhere (961 of the board's 1427 vias
+  are that size now). All vias in pads are meant to be filled and capped (JLCPCB: "POFV"), as before.
+- 84 footprints stand elsewhere than on the six-layer board, 39 of them by 1 mm or more (the list:
+  `MOVED_PARTS_2026-11-21.txt`). Nothing bigger than an 0603, except L19 / L17.
+
+What is still open, and why:
+- **76 in the core**, about 55 of them supply and ground links. The cause is now known exactly: for nearly every
+  stranded pad the rail's own plane lies right under it and only the via is missing - and the via cannot be set
+  because **the capacitors on the top face are not on the ball grid of the BGAs on the bottom face**: a ball's via
+  comes up inside a foreign capacitor's pad, a capacitor's via comes down on a foreign ball. The cure is the usual
+  one: every 0201 exactly over a ball pair of its own rail and ground, one via through both. `tools/cap_align.py`
+  does that (49 of the 118 small parts under the two BGAs find such a pair) and `tools/force_vias.py` sets the vias;
+  tried on a copy this night, the result was worse than before (the planes on In3 / In4 have to be designed together
+  with it - 33 rails on two layers - and four bus nets were cut), so it is NOT in this board. That is the next step.
+- 5 ground balls of the processor's row B and two of the memory (V8, AB5): bus tracks pass under them on an inner
+  layer. The bus was generated before the ground balls had their vias; it should be generated again with those
+  balls reserved.
+- The eMMC over the PMIC: EMMC_CLK, D1, D2, D7, RSTN, VDDI and the eMMC's supply balls, and the PMIC's top-row pins
+  2, 3, 4, 5, 7, 10, 16 (I2C0_SDA, VCC_1V8_P, VCC_SYS, VCC1V8_DVP, PMIC_INT_L, I2S1_MCLK). Three more passes with
+  the wider strip joined some and broke others; they share about twenty legal via sites.
+- **7 long links**: SDMMC0_D1 / D3 / DET_L and USB2_HOST2_DP (processor to the hub socket J41), USB_AUX_DP,
+  PHY1_RXD0 (PHY to processor) and VCC5V_MIDU (the HDMI 5 V, 111 mm). Their processor ends are balls with no way
+  out between their neighbours' escapes. SDMMC0_D2 too (counted in the core).
+
+*The paragraphs below describe the six-layer board of the day before; they are kept for the record.*
+
+**Routing pass 2026-11-20 (negotiating router `tools/pf_route.py`): 185 links open, was 485 + 17 shorts.** The board
+on disk is the result; the board before it is `build/mainboard_before_pf.kicad_pcb`. DRC (`kicad-cli`, planes
+refilled): no shorts, no clearance, hole-clearance or crossing errors left (were 17 / 5 / 4 / 3); what remains is the
+placement's own (199 courtyard overlaps, 2 RJ45-edge items) plus 22 dead-end stubs and 5 pour islands.
+`tools/check_head_isolation.py` with `CP_ISO_BOX=-1,-21,35,60`: **0 pairs under 2 mm** (the board before: 57); 27
+plane keep-outs were added round line-side vias (`tools/iso_remove.py --keepouts`). `tools/check_isolation.py` (the
+older check on bounding boxes, blind to layers) reports pairs on both boards and is superseded by the shape check.
+What is still open, and why - none of it is a matter of more router time:
+- **74: the memory bus** (`LPDDR4_*`), the exception of 5.2a. Left out of every pass.
+- **57: supply links in the core** (VDD_CPU, VDD_GPU_NPU, VCCA_1V8, VCC_3V3, VCC_SYS at the PMIC ...). The pours
+  on In3 are one bounding box per net with priorities; several rails get next to no copper (VDD_GPU_NPU 0.3 mm2,
+  VCC_3V3 1.5 mm2 in 21 islands, VCC_DDR 2.7 mm2 in 31 islands, VCCIO_FLASH 0.8 mm2). A supply ball's via finds no
+  copper of its net below it, and tracks cannot do the job between the escapes. In3 needs a real partition (one
+  connected region per rail from its regulator to its balls). Passes that let signals onto In3 in the core were
+  undone: they cut the pours to pieces (VDD_CPU from 1 island to 18).
+- **15: signals in the core** - the eMMC (CLK, CMD/D1, D7, RSTN, VDDI) sits over the PMIC and its inner balls have no
+  way out between 0.24 mm pads at 0.5 mm; four PMIC pins (0.35 mm pitch); RESETN; USB_OTG0.
+- **31: the Ethernet head and the PoE block** - the PHY's strap resistors and capacitors stand in the 2 mm shadow of
+  the magnetics' line-side pads on the back, where no through via may stand: front-layer-only routing in a 3 mm band.
+- **8: long links between the head and the processor** (two PHY straps, three microSD lines, USB2_HOST2_DP, USB_AUX_DP).
+Things this pass did that you should know: supply links were laid 0.10-0.15 mm wide where they leave fine-pitch
+pins and widened afterwards wherever the room allowed (`fatten.py`). Of 1.86 m of supply track, 0.76 m is now
+0.2-0.4 mm wide and **1.09 m stays 0.09-0.15 mm** - too thin for the currents of several rails; this goes away with
+the In3 partition, not with more widening; C510 and R818 were moved (45.85, 112.9) / (41.4, 112.0); In3 carries tracks
+only in the head outside the 5 V pour.
+
 **DRC review 2026-11-18: `REVIEW_2026-11-18.md`.** Every DRC item classified. Fixed: 218 via-to-plane shorts from a
 stale plane fill (refill before every Gerber export!), three part near-misses; documented as rules
 (`commander_mainboard.kicad_dru`): the pin spacing of the RK817 and the TPS23754. Still open: 23 parts that physically

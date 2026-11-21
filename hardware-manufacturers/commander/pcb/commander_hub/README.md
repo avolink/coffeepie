@@ -104,6 +104,32 @@ board before.  For the hand pass:
   1.5 A, but widen the longer ones where there is room;
 - the dangling-track items are mostly the finger stubs (by design) and GND / VCC5V_BUS stubs that end on a pour.
 
+**2026-11-20: fully routed - 0 unconnected.**  Consistent with the schematic (1090 pads), ERC clean, DRC: the 2
+inherited J6 edge items and 32 dangling-stub remarks (the finger stubs by design, supply stubs that end on a pour).
+`build/hub_Z2_as_saved_by_user.kicad_pcb` is the routed board before the last clean-up (stubs pruned, supply tracks
+widened); git HEAD has the 308-open board.  What changed on the way:
+
+- **U40 (USB5744) stands 2.0 mm further left** (centre 75.575 / 86.4): it was 1 mm from J31's shell tabs.
+- **26 of the USB5744's support parts moved next to the pin they serve** (`../commander_mainboard/tools/hub_support_move.py`):
+  the twelve decoupling capacitors C608-C611 / C613-C620 (bottom face, round U40), the crystal's load capacitors
+  C605 / C606 (beside Y40), both regulators' feedback dividers R610-R613 (beside U41 / U42), the straps R602 / R603,
+  the unpopulated SMBus links R606 / R607, the VBUS-detect divider R604 / R605, and the upstream coupling capacitors
+  C603 / C604 (top face, at the card edge).  They had come over from the strip in a grid under the microSD slot,
+  25-35 mm from U40 and beyond bay 1; every one of their nets crossed bay 1's break-out area.  The reset parts
+  R608 / R609 / C607 stayed there.
+- Routing rules used (`../commander_mainboard/tools/pf_route.py`, the negotiating router): signal vias 0.25 / 0.15,
+  supply vias 0.3-0.45 / 0.15-0.2; the 5 V plane layer In3 carries signal tracks only in the band beside the hub
+  controller (x 71.5..100, y < 97.4); bay 1's break-out area (x 82.6..98.9) is left to bay 1's own nets on the outer
+  layers - the hub's traffic to bays 2-4 crosses it on the inner layers.
+- **Vias in pads: U40 (23, mostly its own pins' escapes and the belly pad), U642 pads 1 / 6, U643 pad 1.**  Order the
+  board with filled and capped vias (JLC "via in pad / POFV"), like the mainboard.
+- Supply track widths: the bays' VBUS paths are 0.4 mm where there is room and 0.2-0.25 mm in the necks at the
+  receptacles and through bay 1 (VBUS_P1: 24 of 26 mm under 0.3 mm; VBUS_SW_P4: 26 of 39 mm at 0.25 mm);
+  VCC3V3_HUB is a 282 mm tree, 121 mm of it 0.15 mm wide.  Fine for a prototype at USB currents; widen by hand where
+  the layout is later relaxed.
+- The routing looks machine-made (tree-like, 45-degree staircases smoothed only partly): electrically it is what the
+  DRC says, but no length matching or pair coupling was attempted beyond what the router's classes do.
+
 Fabrication notes for the order: 0.8 mm, ENIG, "gold finger bevel 20 deg" on the left end, the key notch milled.
 Mount it to the chassis with a screw near the socket end and between the bays (a 292 mm board at 0.8 mm is floppy;
 every Framework card pushed in loads it).  The socket is rated 25 mating cycles.

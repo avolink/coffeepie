@@ -2019,7 +2019,7 @@
     (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no)
     (uuid "5e7ce8ac-a825-588f-bd1c-d1b5b943d55e")
     (property "Reference" "F1" (at 33.528 236.22 0) (effects (font (size 1.27 1.27)) (justify right)))
-    (property "Value" "PTC:750mA" (at 35.052 236.22 0) (effects (font (size 1.27 1.27)) (justify left)))
+    (property "Value" "PTC:500mA" (at 35.052 236.22 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 34.29 238.76 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 34.29 238.76 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Description" "F" (at 34.29 238.76 0) (effects (font (size 1.27 1.27)) (hide yes)))
