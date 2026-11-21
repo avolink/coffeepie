@@ -9,12 +9,12 @@ def fetch_my_vms(token: str, base_url: str ):
     Returns:
         dict or None: The response JSON if successful, or None if failed.
     """
-    url = f"{base_url}/vms/me?token={token}"
+    url = f"{base_url}/vms/me"
     headers = {
         "accept": "application/json"
     }
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     
@@ -32,11 +32,11 @@ def get_console_url(token, vmid, base_url: str ):
     Returns:
         dict: {"success": True, ...} on success, {"success": False, "detail": ...} on error.
     """
-    url = f"{base_url}/vms/{vmid}/console-url?token={token}"
+    url = f"{base_url}/vms/{vmid}/console-url"
     print(url)
     headers = {"accept": "application/json"}
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         data = response.json()
         
@@ -65,10 +65,10 @@ def delete_vm(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/{vmid}?token={token}"
+    url = f"{base_url}/vms/{vmid}"
     headers = {"accept": "application/json"}
     try:
-        response = requests.delete(url, headers=headers)
+        response = requests.delete(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -84,10 +84,10 @@ def get_vm_status(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/{vmid}/status?token={token}"
+    url = f"{base_url}/vms/{vmid}/status"
     headers = {"accept": "application/json"}
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -103,10 +103,10 @@ def stop_vm(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/{vmid}/stop?token={token}"
+    url = f"{base_url}/vms/{vmid}/stop"
     headers = {"accept": "application/json"}
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -122,10 +122,10 @@ def start_my_vm(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/{vmid}/start?token={token}"
+    url = f"{base_url}/vms/{vmid}/start"
     headers = {"accept": "application/json"}
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         print(response.text)
         return True
@@ -142,10 +142,10 @@ def shutdown_vm(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/{vmid}/shutdown?token={token}"
+    url = f"{base_url}/vms/{vmid}/shutdown"
     headers = {"accept": "application/json"}
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -161,10 +161,10 @@ def reboot_vm(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/{vmid}/reboot?token={token}"
+    url = f"{base_url}/vms/{vmid}/reboot"
     headers = {"accept": "application/json"}
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -180,10 +180,10 @@ def clone_vm(token, vmid, base_url: str):
     Returns:
         dict: The response JSON.
     """
-    url = f"{base_url}/vms/clone/{vmid}?token={token}"
+    url = f"{base_url}/vms/clone/{vmid}"
     headers = {"accept": "application/json"}
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -199,13 +199,13 @@ def clone_vm_with_specs(token, specs, base_url: str):
     Returns:
         dict: The response JSON from the backend.
     """
-    url = f"{base_url}/vms/clone-with-specs?token={token}"
+    url = f"{base_url}/vms/clone-with-specs"
     headers = {
         "accept": "application/json",
         "Content-Type": "application/json"
     }
     try:
-        response = requests.post(url, headers=headers, json=specs)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"}, json=specs)
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:
@@ -221,12 +221,12 @@ def create_snapshot(token, vm_id, description, base_url: str):
     Returns:
         dict: The response JSON from the backend.
     """
-    url = f"{base_url}/snapshots/Snapshot/create?vm_id={vm_id}&description={description}&token={token}"
+    url = f"{base_url}/snapshots/Snapshot/create?vm_id={vm_id}&description={description}"
     headers = {
         "accept": "application/json"
     }
     try:
-        response = requests.post(url, headers=headers)
+        response = requests.post(url, headers={**headers, "Authorization": f"Bearer {token}"})
         response.raise_for_status()
         return response.json()
     except requests.RequestException as e:

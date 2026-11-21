@@ -1,0 +1,37 @@
+# Commander tray carrier (rev R0) - the strip under the sliding tray's two module bays.  It takes two Framework Laptop 16
+# B-size input modules (numpad, RGB macropad, or any module built to github.com/FrameworkComputer/InputModules) on
+# spring (pogo) contacts, and holds them with magnets.  Upstream: one USB 2.0 port on a USB-C receptacle at the tray's
+# inner end (in the Commander: the hub board's free USB2517 port 7; on its own: any computer).
+# A WCH CH334P hub gives each module its own downstream port; each bay's 5 V and 3.3 V are switched on only while a
+# module sits in it (see 02_tr_ports.net).
+SHEET tr_hub
+
+# --- USB-C, device side (5.1 k on both CC lines), resettable fuse, ESD ---
+# (since 2026-11-19 a mid-mount receptacle for the 0.8 mm strip, centred in a notch of its inner end)
+J1 USBC16_MID08 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
+P J1 A5=TR_CC1 B5=TR_CC2 A6=USB_UP_DP B6=USB_UP_DP A7=USB_UP_DM B7=USB_UP_DM
+NC J1 A8 B8
+R1 5.1K TR_CC1 GND
+R2 5.1K TR_CC2 GND
+U2 USBLC6-2SC6 1=USB_UP_DP 6=USB_UP_DP 3=USB_UP_DM 4=USB_UP_DM 2=GND 5=VBUS_USB
+C1 4.7uF VBUS_USB GND
+F1 PTC:1.1A VBUS_USB VCC5
+C2 10uF VCC5 GND
+C3 10uF VCC5 GND
+
+# --- the hub: CH334P, 12 MHz crystal (load capacitors are inside the chip), ports 1 and 2 to the bays ---
+# RESET#/CDP has an internal pull-up and is left open (WCH: "leave floating when not resetting"); PGANG (status LED /
+# gang mode strap) is left open: individual mode, no LED.  Ports 3 and 4 are not used.
+U1 CH334P 15=VCC5 16=VDD33_HUB 17=GND
+P U1 12=USB_UP_DP 11=USB_UP_DM 10=M1_DP 9=M1_DN 8=M2_DP 7=M2_DN 2=HUB_XI 1=HUB_XO
+NC U1 3 4 5 6 13 14
+C4 1uF VCC5 GND
+C5 100nF VDD33_HUB GND
+C6 10uF VDD33_HUB GND
+Y1 XTAL4:12MHz 1=HUB_XI 3=HUB_XO 2=GND 4=GND
+
+# --- 3.3 V for the bays (Framework: up to 100 mA per module on VCC_3V3) ---
+U3 ME6211:ME6211C33M5G 1=VCC5 3=VCC5 2=GND 5=VCC3V3
+NC U3 4
+C7 1uF VCC5 GND
+C8 4.7uF VCC3V3 GND

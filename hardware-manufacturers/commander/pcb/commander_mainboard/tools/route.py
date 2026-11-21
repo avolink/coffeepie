@@ -39,6 +39,7 @@ G = float(os.environ.get("CP_GRID", "0.05"))     # routing grid, mm (0.025 for w
 TOL = G / 2                 # copper never extends more than this beyond a marked cell centre
 FREE, MULTI = -1, -2
 RLAYERS = [pcbnew.F_Cu, pcbnew.In2_Cu, pcbnew.B_Cu]
+VIA_KIND = None     # (via type, top layer, bottom layer) for a run with blind vias (the memory field); None = through
 # NOT routed by this script, for the reason given in DESIGN_NOTES.md: the memory bus (it needs the vendor's
 # length-matched reference layout; a maze-routed copy of it would look finished and not work).
 SKIP_CLASSES = {"DDR"}
@@ -47,6 +48,7 @@ PAIR_CLASSES = ("USB2", "USB3_SS", "HDMI", "ETH_MDI")      # routed as coupled p
 POWER_PREFIX = ("VCC", "VDD", "VBUS", "VOUT", "MIPI_AVDD", "SVC_VBUS")
 SKIP_NETS = {"CHASSIS"}
 SY = CFG["STRIP_Y"]
+HUB_FACE = 69.0         # hub board: left edge of its body = the socket's front face (board mm; 73.0 before 2026-11-18)
 REGIONS = [   # name, x0, y0, x1, y1 (design mm); each window overlaps the real board edge by 1 mm
     # (the strip window starts in the right-hand corridor of the column: the USB 3 hub sits at the junction, and the
     #  pins on its left side need room to turn round)
@@ -56,6 +58,39 @@ REGIONS = [   # name, x0, y0, x1, y1 (design mm); each window overlaps the real 
     # so there the region runs to the rear edge and takes in the tap header)
     ("poe", -1.0, -1.0 if STRIP else 8.6, CFG["COL_W"], 60.3),
 ]
+if cpmodel.VARIANT == "hub":
+    # The hub board (branch m2-hub): the strip from the socket's front face (board x 73.0) to its far end, plus the
+    # part of the M.2 tongue that sits in the socket's slot (from x 71.6), without the key notch.  The fingers
+    # themselves (x 69.5-71.5) are joined to that by straight stubs drawn by tools/hub_board.py.  Design mm.
+    # (2026-11-18: socket and card edge 4 mm further left, tools/j41_shift.py + tools/hub_shift.py: the body now starts
+    #  at HUB_FACE = 69.0, it was 73.0)
+    _F = HUB_FACE
+    _HUB = [(_F, 81.3), (361.73, 81.3), (364.73, 84.3), (364.73, 100.02), (361.73, 103.02), (_F, 103.02),
+            (_F, 102.08), (_F - 1.4, 102.08), (_F - 1.4, 86.8), (_F - 0.1, 86.8), (_F - 0.1, 85.3), (_F - 1.4, 85.3),
+            (_F - 1.4, 82.24), (_F, 82.24)]
+
+    # The bays' sink-mount receptacles sit in notches of the rear edge (tools/hub_midmount_swap.py): 9.42 mm wide,
+    # 7.6 mm deep behind the mouth, R0.5 reliefs at the inner corners (taken here as 0.5 x 1.0 mm steps).  The bay
+    # centres are read from the board file itself.
+    def _hub_notched():
+        import re as _re
+        from hub_make_room import MOUTH_Y, NOTCH_HW, NOTCH_END, RELIEF, Y_TOP
+        path = os.environ.get("CP_PCB") or os.path.join(cpmodel.ROOT, cpmodel.PRJ + ".kicad_pcb")
+        txt = open(path, encoding="utf-8").read()
+        cxs = sorted(float(m.group(1)) for m in _re.finditer(
+            r'\(at ([\d.\-]+) [\d.\-]+[^)]*\)\s*\(descr "[^"]*"\)\s*\(tags "[^"]*"\)\s*\(property "Reference" "J3[1-9]"', txt))
+        ye = MOUTH_Y + NOTCH_END
+        top = [(HUB_FACE, Y_TOP)]
+        for cx in cxs:
+            lft, rgt = cx - NOTCH_HW, cx + NOTCH_HW
+            top += [(lft, Y_TOP), (lft, ye - 2 * RELIEF), (lft - RELIEF, ye - 2 * RELIEF), (lft - RELIEF, ye),
+                    (rgt + RELIEF, ye), (rgt + RELIEF, ye - 2 * RELIEF), (rgt, ye - 2 * RELIEF), (rgt, Y_TOP)]
+        return top + _HUB[1:], len(cxs)
+
+    _HUB_N, HUB_NOTCHES = _hub_notched()
+
+    def outline_pts():                          # noqa: F811
+        return [(x - OX, y - OY) for x, y in _HUB_N]
 _OUT = outline_pts()
 # the whole codec column, head to front edge: the stage that joins what the local windows could not
 COLUMN = ("column", -1.0, math.floor(min(p_[1] for p_ in _OUT)) - 1.0, CFG["COL_W"] + 1.0, math.ceil(CFG["COL_L"]) + 1.0)
@@ -94,8 +129,79 @@ PRIMARY_AREA = [(CFG["PRI_X0"] - 0.3, CFG["PRI_Y0"] - 0.3, CFG["PRI_X1"] + 0.3, 
                 (CFG["NOTCH_XL"] + BARRIER, _ROW - 1.5, CFG["NOTCH_XR"] - BARRIER, _ROW + 1.5)]
 if STRIP:
     PRIMARY_AREA.append((CFG["PRI_X0"] + 1.0, 1.0, CFG["PRI_X1"] - 1.0, CFG["PRI_Y0"]))
+# The Ethernet head, routed once its placement was settled by hand (2026-11-14; CP_HEAD=1, region "head").
+# Its LINE side - the RJ45 pairs up to the transformers (PHY_MDI*), the centre taps (TR?_48V, already POE_PRIMARY)
+# and the Bob Smith nodes (BS?) - is the same isolated domain as the PoE primary: it gets areas of its own, here PER
+# LAYER (layer indices into RLAYERS: 0 F, 1 In2, 2 B), so that the centre-tap lines can run down an In2 corridor
+# under the low-voltage side to the bridges.  A via needs the area on all three layers.
+#   band: B / In2 under the RJ45 body, from the jack's pads down to the transformers' line pins (row at y -1.0),
+#         with the Bob Smith resistors under the jack's pads and the 2 kV cap C60 by the left shield pin
+#   jack: F under the RJ45 body (its pads and the vias down to the band)
+#   corridor: In2, from the band down to the PoE primary zone
+HEAD = os.environ.get("CP_HEAD") == "1"
+LINE_NETS = ("PHY_MDI?_[PN]", "BS", "BS?")
+HEAD_LINE_AREA = [
+    (10.4, -5.7, 30.0, -1.8, (1, 2)),        # band (from C60's 2.3 mm wide BS pad)
+    (14.9, -8.2, 27.0, -5.7, (1, 2)),        # band, under the jack's pads (Bob Smith resistors, jack vias)
+    (11.0, -8.2, 29.6, -4.2, (0,)),          # jack (top face; nothing else under the RJ45 body)
+    (9.0, -1.8, 12.2, 10.7, (1,)),           # centre-tap corridor
+]
+if HEAD:
+    PRIMARY_AREA[0] = (PRIMARY_AREA[0][0], 10.2) + PRIMARY_AREA[0][2:]      # (the real primary copper starts at y 10.6)
+    PRIMARY_AREA += HEAD_LINE_AREA
+    HEAD_BOX = (0.0, 0.0, -1.0, -1.0)           # (nothing is kept out any more)
+    REGIONS.append(("head", -1.0, -20.6, CFG["COL_W"] + 1.0, 17.0))      # down to the bridges' centre-tap pads
+    PLANES["GND"] = PLANES["GND"] + ("head",)    # (the head's own ground pours, cut back 2 mm from the line areas)
+    SKIP_NETS.discard("CHASSIS")                # (the Bob Smith cap and the 4.7 nF / 1 M to the jack's shield)
+# Branch m2-hub (CP_LINK=1, region "link"): the bay strip became its own board, plugged into socket J41 at the column's
+# right edge (tools/main_cut.py).  The window covers the socket and the barrier parts moved out of its way; the two
+# extra primary areas hold the primary pads of the optocoupler U31 (now below the clamp diode, 0.7 mm past the zone's
+# lower edge) and of the Y capacitor C518 (in the bump beside the transformer's primary pins).
+LINK = os.environ.get("CP_LINK") == "1"
+# (2026-11-18) The user moved the PoE primary block by hand (its parts, not the transformer T1 nor the barrier parts
+# U31 / C518), and socket J41 went 4 mm left with tools/j41_shift.py:
+#   CP_PRI_SHIFT=dx,dy  shifts the primary zone's rectangle (PRIMARY_AREA[0]) by that much (design mm);
+#   CP_PRI_FROM_BOARD=1 adds every primary pad / track / via already on the board (CP_PCB) as an area of its own,
+#                       so that hand-moved primary copper outside the rectangles is still kept 2 mm off;
+#   CP_LINK_DX=dx       moves the link window's left edge with the socket (its right edge then stops at the column's
+#                       edge: the tab is gone);
+#   CP_SKIP_CLASSES=A,B net classes this run leaves alone (e.g. POE_PRIMARY: the hand-placed primary copper).
+if os.environ.get("CP_PRI_SHIFT"):
+    _sx, _sy = (float(v_) for v_ in os.environ["CP_PRI_SHIFT"].split(","))
+    PRIMARY_AREA[0] = (PRIMARY_AREA[0][0] + _sx, PRIMARY_AREA[0][1] + _sy, PRIMARY_AREA[0][2] + _sx,
+                       PRIMARY_AREA[0][3] + _sy) + tuple(PRIMARY_AREA[0][4:])
+if os.environ.get("CP_PRI_FROM_BOARD") == "1":
+    def _pri_from_board():
+        bd = pcbnew.LoadBoard(os.environ.get("CP_PCB") or os.path.join(cpmodel.ROOT, cpmodel.PRJ + ".kicad_pcb"))
+        pri_cls = {c_["name"]: c_ for c_ in gen_project.CLASSES}.get("POE_PRIMARY", {})
+        pats = pri_cls.get("nets", []) if isinstance(pri_cls, dict) else []
+        out_ = []
 
-CLS = {c["name"]: c for c in gen_project.CLASSES}
+        def is_pri(n_):
+            return any(fnmatch.fnmatch(n_, p_) for p_ in pats) if pats else (
+                n_.startswith("POE_") and n_ not in ("POE_SEC", "POE_SNUB")) or fnmatch.fnmatch(n_, "TR?_48V")
+        items_ = [p_ for fp_ in bd.GetFootprints() for p_ in fp_.Pads()] + list(bd.GetTracks())
+        for it_ in items_:
+            if it_.GetNetname() and is_pri(it_.GetNetname()):
+                bb_ = it_.GetBoundingBox()
+                out_.append((ToMM(bb_.GetLeft()) - OX, ToMM(bb_.GetTop()) - OY, ToMM(bb_.GetRight()) - OX,
+                             ToMM(bb_.GetBottom()) - OY))
+        return out_
+    PRIMARY_AREA += _pri_from_board()
+if os.environ.get("CP_SKIP_CLASSES"):
+    SKIP_CLASSES.update(x_ for x_ in os.environ["CP_SKIP_CLASSES"].split(",") if x_)
+if LINK:
+    PRIMARY_AREA += [(18.6, 40.6, 21.2, 43.0), (22.0, 34.5, 24.2, 37.8)]
+    # (x to 33.3: the tab's edge is at 33.9 and the router still knows the old L outline; down to y 85: the link
+    #  nets run on to the RK3566's balls)
+    _ldx = float(os.environ.get("CP_LINK_DX", "0"))
+    # (the router still takes the old L outline for the board edge, so with the tab gone the window itself has to stop
+    #  short of the column's edge: 0.7 mm leaves a 0.45 mm via 0.25 mm from it)
+    REGIONS.append(("link", 21.5 + _ldx, 4.0, 33.3 if _ldx == 0 else CFG["COL_W"] - 0.7, 85.0))
+    PLANES["GND"] = PLANES["GND"] + ("link",)
+    PLANES["VCC5V_BUS"] = PLANES["VCC5V_BUS"] + ("link",)     # (In3 plane under the socket's front row)
+
+CLS ={c["name"]: c for c in gen_project.CLASSES}
 
 
 def ceil_(v):
@@ -232,26 +338,37 @@ class Region:
         self.novia = np.zeros((self.ny, self.nx), bool)
         self.soft = np.full((3, self.ny, self.nx), FREE, np.int16)      # whose exit zone a cell is in
         self.pri = self.nopri = None        # isolation: where primary copper may be / where other copper may not
-        pri = np.zeros((self.ny, self.nx), bool)
-        for xa, ya, xb, yb in PRIMARY_AREA:
+        # (both masks per routing layer: an area may hold on some layers only, see HEAD_LINE_AREA)
+        pri = np.zeros((3, self.ny, self.nx), bool)
+        for area in PRIMARY_AREA:
+            xa, ya, xb, yb = area[:4]
+            lays = list(area[4]) if len(area) > 4 else [0, 1, 2]
             i0, j0 = max(0, ceil_((xa - x0) / G)), max(0, ceil_((ya - y0) / G))
             i1, j1 = min(self.nx - 1, int((xb - x0) / G)), min(self.ny - 1, int((yb - y0) / G))
             if i0 <= i1 and j0 <= j1:
-                pri[j0:j1 + 1, i0:i1 + 1] = True
+                pri[lays, j0:j1 + 1, i0:i1 + 1] = True
         if pri.any() or (x0 < CFG["PRI_X1"] + BARRIER + 1 and y0 < CFG["PRI_Y1"] + BARRIER + 1 and y1 > 0):
             # a track or via of a primary net has its CENTRE at least 0.5 mm inside the area: with the largest via
             # (0.8 mm) its copper then ends where the area ends, 2 mm from the planes and from everything else
             ke = ceil_(0.5 / G)
-            big = np.zeros((self.ny + 2 * ke, self.nx + 2 * ke), bool)
-            big[ke:-ke, ke:-ke] = ~pri
-            self.pri = ~dilate(big, ke)[ke:-ke, ke:-ke]
-            big = np.zeros((self.ny + 2 * (kb := ceil_((BARRIER + 0.25) / G)), self.nx + 2 * kb), bool)     # + half the widest track and a grid step
-            for xa, ya, xb, yb in PRIMARY_AREA:         # (rasterised again with a border, so a primary area just outside the window counts)
-                i0, j0 = max(0, ceil_((xa - x0) / G) + kb), max(0, ceil_((ya - y0) / G) + kb)
-                i1, j1 = min(big.shape[1] - 1, int((xb - x0) / G) + kb), min(big.shape[0] - 1, int((yb - y0) / G) + kb)
-                if i0 <= i1 and j0 <= j1:
-                    big[j0:j1 + 1, i0:i1 + 1] = True
-            self.nopri = dilate(big, kb)[kb:-kb, kb:-kb]
+            self.pri = np.zeros((3, self.ny, self.nx), bool)
+            for l in range(3):
+                big = np.zeros((self.ny + 2 * ke, self.nx + 2 * ke), bool)
+                big[ke:-ke, ke:-ke] = ~pri[l]
+                self.pri[l] = ~dilate(big, ke)[ke:-ke, ke:-ke]
+            kb = ceil_((BARRIER + 0.25) / G)     # + half the widest track and a grid step
+            self.nopri = np.zeros((3, self.ny, self.nx), bool)
+            for l in range(3):
+                big = np.zeros((self.ny + 2 * kb, self.nx + 2 * kb), bool)
+                for area in PRIMARY_AREA:       # (rasterised again with a border, so a primary area just outside the window counts)
+                    if len(area) > 4 and l not in area[4]:
+                        continue
+                    xa, ya, xb, yb = area[:4]
+                    i0, j0 = max(0, ceil_((xa - x0) / G) + kb), max(0, ceil_((ya - y0) / G) + kb)
+                    i1, j1 = min(big.shape[1] - 1, int((xb - x0) / G) + kb), min(big.shape[0] - 1, int((yb - y0) / G) + kb)
+                    if i0 <= i1 and j0 <= j1:
+                        big[j0:j1 + 1, i0:i1 + 1] = True
+                self.nopri[l] = dilate(big, kb)[kb:-kb, kb:-kb]
         self.pads = {}          # netcode -> [dict(pad=, cells=[(l,i,j)], cx=, cy=, layers=, node=)]
         self.padcell = {}       # netcode -> {(l,i,j): index into pads[netcode]}
         self.tree = {}          # netcode -> {(l,i,j): node} centre-line cells of routed copper
@@ -770,6 +887,8 @@ class Router:
                         for l in layers:
                             reg.stamp(l, i0 - grow, j0 - grow, mm, net)
                     k = 0 if (self.bga and fp.GetPadCount() >= 100) else K_NOVIA      # BGA: via-in-pad and dog-bones are the only way out
+                    if VIA_KIND and layers == [0]:  # a blind via from B.Cu never reaches a top-face pad
+                        k = 0
                     big = np.zeros((m.shape[0] + 2 * k, m.shape[1] + 2 * k), bool)
                     big[k:k + m.shape[0], k:k + m.shape[1]] = m
                     big = dilate(big, k) if k else np.zeros_like(big)
@@ -1009,8 +1128,8 @@ class Router:
             else:
                 _, net, xy, d, drill = it
                 v = pcbnew.PCB_VIA(self.board)
-                v.SetViaType(pcbnew.VIATYPE_THROUGH)
-                v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
+                v.SetViaType(VIA_KIND[0] if VIA_KIND else pcbnew.VIATYPE_THROUGH)
+                v.SetLayerPair(*(VIA_KIND[1:] if VIA_KIND else (pcbnew.F_Cu, pcbnew.B_Cu)))
                 v.SetPosition(P(*xy))
                 v.SetDrill(FromMM(drill))
                 try:
@@ -1081,7 +1200,7 @@ class Router:
         Dk = reg.D[rc.Kt][:, j0:j1 + 1, i0:i1 + 1]
         ok = (Dk == FREE) | (Dk == net)
         if reg.pri is not None:             # the isolation barrier is not negotiable
-            ok &= (reg.pri if self.cls_of[net] == "POE_PRIMARY" else ~reg.nopri)[j0:j1 + 1, i0:i1 + 1]
+            ok &= (reg.pri if self.is_line(net) else ~reg.nopri)[:, j0:j1 + 1, i0:i1 + 1]
         Dv = reg.D[rc.Kv][:, j0:j1 + 1, i0:i1 + 1]
         vok = ((Dv == FREE) | (Dv == net))[VIA_L].all(axis=0) & ~reg.novia[j0:j1 + 1, i0:i1 + 1] & ok[VIA_L].all(axis=0)
         if K_HOLE is not None and rc.hx:    # a small via: its hole, too, must be clear of what is already there
@@ -1105,6 +1224,10 @@ class Router:
         return i0, j0, W, H, ok, vok
 
     # ---- a signal / power net: join everything of it that sits in this region ----
+    def is_line(self, net):
+        """PoE primary, or (in the Ethernet head run) the line side of the magnetics: kept inside PRIMARY_AREA."""
+        return self.cls_of[net] == "POE_PRIMARY" or (HEAD and any(fnmatch.fnmatch(self.name_of[net], p_) for p_ in LINE_NETS))
+
     def groups(self, reg, net):
         """The islands of a net: {root: (pad indices, centre-line cells)}."""
         g = {}
@@ -1455,7 +1578,7 @@ class Router:
             j1 = min(reg.ny - 1, int((box[3] - reg.y0) / G) + margin)
             ok = reg.D[prc.K][:, j0:j1 + 1, i0:i1 + 1] == FREE
             if reg.pri is not None:
-                ok &= ~reg.nopri[j0:j1 + 1, i0:i1 + 1]
+                ok &= ~reg.nopri[:, j0:j1 + 1, i0:i1 + 1]
             vok = ((reg.D[prc.Kv][:, j0:j1 + 1, i0:i1 + 1] == FREE)[VIA_L].all(axis=0) & ok[VIA_L].all(axis=0)
                    & ~dilate(reg.novia[j0:j1 + 1, i0:i1 + 1], ceil_((PAIR_VIA_OFF + 0.05) / G)))
             # the trunk is searched on every second cell (0.1 mm): a cell counts when its eight neighbours are free too,
@@ -1749,7 +1872,7 @@ class Router:
                 continue
             xs = [p["cx"] for p in pads] + [reg.x0 + c[1] * G for c in list(reg.tree.get(net, {}))[::50]]
             ys = [p["cy"] for p in pads] + [reg.y0 + c[2] * G for c in list(reg.tree.get(net, {}))[::50]]
-            if self.cls_of[net] in PAIR_CLASSES:
+            if self.cls_of[net] in PAIR_CLASSES and not self.is_line(net):     # (the jack's pairs: a few mm, single)
                 pcand.append((0 if name in prio_nets else 1, max(xs) - min(xs) + max(ys) - min(ys), name, net))
                 continue
             if name in prio_nets:
@@ -2288,7 +2411,9 @@ def stage_prune(board, r):
                 d = t.GetWidth()
             vias.setdefault(code, []).append([t.GetPosition().x, t.GetPosition().y, d / 2, t, True])
         else:
-            tracks.setdefault(code, []).append([t.GetLayer(), t.GetStart().x, t.GetStart().y, t.GetEnd().x, t.GetEnd().y, t.GetWidth() / 2, t, True])
+            # (the hub's finger stubs, tools/hub_board.py, end at the card edge on purpose: kept, never dropped)
+            keep = cpmodel.VARIANT == "hub" and min(ToMM(t.GetStart().x), ToMM(t.GetEnd().x)) < HUB_FACE
+            tracks.setdefault(code, []).append([t.GetLayer(), t.GetStart().x, t.GetStart().y, t.GetEnd().x, t.GetEnd().y, t.GetWidth() / 2, t, True, keep])
     drop = []
 
     def on_seg(px, py, s_):
@@ -2309,7 +2434,7 @@ def stage_prune(board, r):
         while changed:
             changed = False
             for s_ in tl:
-                if not s_[7]:
+                if not s_[7] or s_[8]:
                     continue
                 for px, py in ((s_[1], s_[2]), (s_[3], s_[4])):
                     ok = any(v[4] and (v[0] - px) ** 2 + (v[1] - py) ** 2 <= v[2] ** 2 for v in vl)

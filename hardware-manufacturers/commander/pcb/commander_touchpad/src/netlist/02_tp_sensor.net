@@ -1,0 +1,18 @@
+# Commander touchpad module (rev P0) - the trackpad controller.
+# IQS550-B000 (15 Tx x 10 Rx = 150 nodes, I2C, mainline Linux driver iqs5xx if it is ever wired to a host directly).
+# The electrodes are the board itself: a diamond pattern on the top copper (tools/small_board.py draws it), Tx as
+# 15 columns of 7.85 mm across the 117.8 mm width, Rx as 10 rows of 6.8 mm along the 68 mm depth; the Rx diamonds are
+# joined by short bridges on the bottom copper.  Each Rx has two pins (A and B) on the chip; only A is used.
+SHEET tp_sensor
+
+U4 IQS550 7=VCC3V3 38=VCC3V3 8=GND 37=GND 49=GND 9=TP_VREG 10=TP_NRST 11=TP_RDY 5=TP_SDA 6=TP_SCL
+P U4 33=TX0 34=TX1 35=TX2 36=TX3 39=TX4 40=TX5 41=TX6 42=TX7 43=TX8 44=TX9 45=TX10 46=TX11 47=TX12 48=TX13 1=TX14
+P U4 13=RX0 15=RX1 17=RX2 19=RX3 21=RX4 23=RX5 25=RX6 27=RX7 29=RX8 31=RX9
+NC U4 14 16 18 20 22 24 26 28 30 32 2 3 4 12
+C10 1uF TP_VREG GND
+C11 1uF VCC3V3 GND
+C12 100nF VCC3V3 GND
+C13 100nF VCC3V3 GND
+R10 4.7K VCC3V3 TP_SDA
+R11 4.7K VCC3V3 TP_SCL
+R12 10K VCC3V3 TP_NRST

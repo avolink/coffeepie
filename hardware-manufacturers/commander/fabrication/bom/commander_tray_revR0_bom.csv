@@ -1,0 +1,20 @@
+qty,value,footprint,description,populate,origin,references,lcsc
+2,4.7uF,C_0603_1608Metric,,,"Commander (new design, 2026-11-16)",C1 C8,
+3,10uF,C_0603_1608Metric,,,"Commander (new design, 2026-11-16)",C2 C3 C6,
+8,1uF,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C4 C7 C9 C10 C11 C12 C13 C14,
+1,100nF,C_0402_1005Metric,,,"Commander (new design, 2026-11-16)",C5,
+1,PTC:1.1A,Fuse_1206_3216Metric,,,"Commander (new design, 2026-11-16)",F1,
+1,USBC16_MID08,USB_C_Receptacle_BXCONN_UC01-0B16F08011,"USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 0.8 mm board (BXCONN UC01-0B16F08011)",,"Commander (new design, 2026-11-16)",J1,C36936521
+2,POGO_FW8,Pogo_CFE_BP33242-08200H0-FS_2x4_P2.0mm,"pogo-pin connector 2 x 4, 2.0 mm, 1.6 mm working height, 1 A per pin (CFE BP33242-08200H0-FS), mates the pads of a Framework Laptop 16 input module",,"Commander (new design, 2026-11-16)",J2 J3,
+2,2N7002,SOT-23,N-MOSFET SOT-23,,"Commander (new design, 2026-11-16)",Q1 Q2,
+2,5.1K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R1 R2,
+2,11K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R3 R8,
+2,17K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R4 R9,
+2,2.2M,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R5 R10,
+2,1M,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R6 R11,
+2,10K,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R7 R12,
+1,CH334P,QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm,"WCH CH334P 4-port USB 2.0 hub (MTT), internal 3.3 V regulator and crystal load capacitors, QFN-16 3 x 3",,"Commander (new design, 2026-11-16)",U1,C5373042
+3,USBLC6-2SC6,SOT-23-6,ST USBLC6-2SC6 USB ESD,,"Commander (new design, 2026-11-16)",U2 U6 U9,C2827654
+1,ME6211C33M5G,SOT-23-5,"Microne ME6211C33M5G 3.3 V LDO 500 mA, SOT-23-5",,"Commander (new design, 2026-11-16)",U3,C82942
+4,SY6280AAC,SOT-23-5,"Silergy SY6280AAC power distribution switch 2.4-5.5 V, current limit 6800 / R_ISET (A, ohm), 0.4-2 A, SOT-23-5",,"Commander (new design, 2026-11-16)",U4 U5 U7 U8,C55136
+1,12MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,"crystal, 4-pad 3225",,"Commander (new design, 2026-11-16)",Y1,

@@ -1,0 +1,52 @@
+# Commander battery module (rev B0) - microcontroller and the port to the mainboard.
+#
+# STC8H8K64U (the keyboard's chip: one part number, one tool chain), at 3.3 V.  It is the module's gauge and charge
+# controller, and a USB HID "Power Device" (UPS class) towards the mainboard: Linux reads charge, voltage, current
+# and time-to-empty from it with the stock usbhid-ups / upower stack.  Firmware is new - pin table in README.md.
+#
+# The port: a USB-C receptacle (16-pin, USB 2.0) cabled to the mainboard's battery port J40.
+#   - The module offers power: Rp (36 k to 3.3 V = "default USB power") on both CC lines from pin CC_RP.
+#   - When the mainboard asks for a charge (a HID feature report), the firmware drops Rp and switches Rd (5.1 k) in
+#     (CC_RD), so the mainboard's FUSB302 sees a sink and may raise BATT_VBUS_EN.  The buck stays enabled meanwhile
+#     (it idles under the mainboard's slightly higher voltage) so a PoE drop never interrupts the 5 V.
+SHEET batt_mcu
+
+U1 STC8H_LQFP32:STC8H8K64U 10=VCC3V3 11=VCC3V3 12=GND
+P U1 8=UCAP 13=USB_MCU_DM 14=USB_MCU_DP 15=BTN_N
+# analogue inputs (ADC0, ADC1, ADC4, ADC5, ADC6, ADC7)
+P U1 1=VBAT_ADC 2=ISENSE 3=NTC_EXT 4=VBUS_ADC 5=NTC_BRD 6=ISNS_REF
+# control: charger enable, charge current (PWM6 of PWMB on P2.1), buck off, port role, fuel LEDs
+P U1 21=CHG_EN 22=CHG_PWM 23=OUT_OFF 24=CC_RD 25=CC_RP 26=LED1_K 27=LED2_K 28=LED3_K
+NC U1 7 9 16 17 18 19 20 29 30 31 32
+C40 1uF UCAP GND
+C41 100nF VCC3V3 GND
+C42 100nF VCC3V3 GND
+C43 4.7uF VCC3V3 GND
+
+# button: press = show the charge on the three LEDs; held while the cable is plugged in = STC USB boot loader
+SW1 TACT:BTN 1=BTN_N 2=GND
+R40 10K VCC3V3 BTN_N
+
+# fuel LEDs (25 / 50 / 75 %), sunk by the microcontroller
+R50 1K VCC3V3 LED1_A
+D50 LED:GREEN A=LED1_A K=LED1_K
+R51 1K VCC3V3 LED2_A
+D51 LED:GREEN A=LED2_A K=LED2_K
+R52 1K VCC3V3 LED3_A
+D52 LED:GREEN A=LED3_A K=LED3_K
+
+# --- USB-C port (to the mainboard's J40) ---
+J3 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS A9=VBUS B4=VBUS B9=VBUS
+P J3 A5=CC1 B5=CC2 A6=USB_CON_DP B6=USB_CON_DP A7=USB_CON_DM B7=USB_CON_DM
+NC J3 A8 B8
+U2 USBLC6-2SC6 1=USB_CON_DP 6=USB_CON_DP 3=USB_CON_DM 4=USB_CON_DM 2=GND 5=VBUS
+R41 22R USB_CON_DP USB_MCU_DP
+R42 22R USB_CON_DM USB_MCU_DM
+# role: Rp from CC_RP (driven high = source), Rd switched in by CC_RD (sink); both off with the microcontroller off
+R43 36K CC_RP CC1
+R44 36K CC_RP CC2
+R45 5.1K CC1 CC1_RD
+Q3 NMOS_GSD:2N7002 D=CC1_RD S=GND G=CC_RD
+R46 5.1K CC2 CC2_RD
+Q4 NMOS_GSD:2N7002 D=CC2_RD S=GND G=CC_RD
+R47 100K CC_RD GND

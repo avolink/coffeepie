@@ -8,18 +8,6 @@ from app import config
 security_scheme = HTTPBearer()
 
 
-def get_proxmox_auth_headers():
-    ticket, csrf = authenticate()
-    return {
-        "headers": {"CSRFPreventionToken": csrf},
-        "cookies": {"PVEAuthCookie": ticket}
-    }
-
-
-def get_auth_headers():
-    return get_proxmox_auth_headers()
-
-
 def verify_bearer_token(credentials: HTTPAuthorizationCredentials = Security(security_scheme)):
     """
     Validates a Firebase ID token from the Authorization: Bearer header.
@@ -41,3 +29,21 @@ def verify_bearer_token(credentials: HTTPAuthorizationCredentials = Security(sec
             detail="Invalid or expired authentication token",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+
+def get_proxmox_auth_headers(_caller=Security(verify_bearer_token)):
+    """Proxmox ticket for the service account.
+
+    Depends on verify_bearer_token so the caller is authenticated BEFORE the
+    service logs in to Proxmox: an anonymous request must not cost a Proxmox
+    login or surface its errors.
+    """
+    ticket, csrf = authenticate()
+    return {
+        "headers": {"CSRFPreventionToken": csrf},
+        "cookies": {"PVEAuthCookie": ticket}
+    }
+
+
+def get_auth_headers():
+    return get_proxmox_auth_headers()

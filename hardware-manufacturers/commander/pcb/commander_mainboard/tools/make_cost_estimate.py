@@ -89,6 +89,7 @@ KEY = {
     "22uF_100V_ALU": ("22 uF 100 V, 6.3 x 7.7 mm", "many", "", "GOOD", NC, NC, ladder(0.10), "estimate", ""),
     "MICROSD": ("microSD push-push socket", "Molex 104031-0811 and compatibles", "", "GOOD", NC, NC, ladder(0.30), "estimate", "Footprint-compatible Chinese sockets are common."),
     "JST_SH4_UART": ("SM04B-SRSS-TB", "JST", "", "GOOD", NC, NC, ladder(0.08), "estimate", ""),
+    "JST_SH2_PWR": ("SM02B-SRSS-TB", "JST", "", "GOOD", NC, NC, ladder(0.06), "estimate", ""),
 }
 
 

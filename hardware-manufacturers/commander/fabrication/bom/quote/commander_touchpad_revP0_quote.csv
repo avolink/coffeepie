@@ -1,0 +1,17 @@
+﻿line,category,description / purchasing spec,design value,package,manufacturer,manufacturer part number,notes,LCSC reference,qty per board,designators
+1,IC,"Azoteq IQS550-B000 projected-capacitance trackpad controller, 15 Tx x 10 Rx, I2C, QFN-48",IQS550,QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm,Azoteq,IQS550-B000-QNR,,C5271144,1,U4
+2,IC,"HT7333-A 3.3 V LDO, 12 V in, 4 uA quiescent, SOT-89",HT7333,SOT-89-3,Holtek,HT7333-A (SOT-89),,C347191,1,U3
+3,IC,ST USBLC6-2SC6 USB ESD,USBLC6-2SC6,SOT-23-6,STMicroelectronics,USBLC6-2SC6,,C2827654,1,U2
+4,IC,"STC STC8H8K64U-45I-LQFP32, 8051 MCU, 5 V, crystal-less USB 2.0 full speed, USB boot loader",STC8H8K64U,LQFP-32_7x7mm_P0.8mm,STC Micro,STC8H8K64U-45I-LQFP32,,C5210757,1,U1
+5,Diode,"BAT54C dual Schottky, common cathode, SOT-23",BAT54C,SOT-23,multi-source,BAT54C,"dual Schottky, common cathode",,1,D40
+6,Fuse,"PTC resettable fuse, hold 500 mA, Vmax >= 6 V, 1206 (3216 metric)",PTC:500mA,1206,any (to spec),,,,1,F1
+7,Capacitor,"MLCC 1 µF 16 V X5R or X7R ±10 %, 0402 (1005 metric)",1uF,0402,any (to spec),,,,5,C1 C4 C10 C11 C40
+8,Capacitor,"MLCC 100 nF 16 V X7R ±10 %, 0402 (1005 metric)",100nF,0402,any (to spec),,,,3,C2 C12 C13
+9,Capacitor,"MLCC 4.7 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",4.7uF,0603,any (to spec),,,,3,C3 C5 C6
+10,Resistor,"chip resistor 10 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",10K,0402,any (to spec),,,,2,R1 R12
+11,Resistor,"chip resistor 180 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",180K,0402,any (to spec),,,,1,R40
+12,Resistor,"chip resistor 22 Ω ±1 % 1/16 W, 0402 (1005 metric), thick film",22R,0402,any (to spec),,,,2,R4 R5
+13,Resistor,"chip resistor 4.7 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",4.7K,0402,any (to spec),,,,2,R10 R11
+14,Resistor,"chip resistor 5.1 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",5.1K,0402,any (to spec),,,,2,R2 R3
+15,Connector,"USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",USBC16,USB_C_Receptacle_HRO_TYPE-C-31-M-12,HOAUC,HYCW498-USBC16-735B,alternative: HRO TYPE-C-31-M-12,C42400252,1,J1
+16,Switch,tact switch,BOOT,SW_Push_1P1T_NO_CK_KMR2,C&K,KMR221GLFS,or equivalent 4.2 x 2.8 mm tact switch,,1,SW1

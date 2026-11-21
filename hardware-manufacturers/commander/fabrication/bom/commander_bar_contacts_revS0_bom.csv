@@ -1,0 +1,4 @@
+qty,value,footprint,description,populate,origin,references,lcsc
+3,NTC10K_B3950,R_0402_1005Metric,,,"Commander (new design, 2026-11-16)",R1 R2 R3,
+6,DNP,BattContact_Pad_D6.0mm,cell contact: ENIG pad 6.0 mm on the board (no part: DNP),DNP,"Commander (new design, 2026-11-16)",BT1 BT2 BT3 BT4 BT5 BT6,
+1,DNP,BarContacts_Castellated_11,"castellated edge of the cell-contact board (11 half-holes), soldered to the BMS board",DNP,"Commander (new design, 2026-11-16)",J1,

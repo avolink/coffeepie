@@ -13,8 +13,22 @@ BASE_DIR = '/'.join(
     os.path.dirname(os.path.abspath(__file__)).split('/')[:-1]
 )  # If used 'relpath' instead of abspath, returns path of "enterprise" instead of "openuds"
 
-DEBUG = True
+def _env(name, default=None):
+    return os.environ.get(name, default)
+
+
+# Production-safe by default: DEBUG must be switched ON explicitly (UDS_DEBUG=1)
+# and only ever on a developer machine.
+DEBUG = _env('UDS_DEBUG', '0') == '1'
 PROFILING = False
+
+
+def _require(name, why):
+    """Read a mandatory secret from the environment, or refuse to start."""
+    value = _env(name, '')
+    if not value:
+        raise RuntimeError(f'{name} is not set: {why}')
+    return value
 
 # USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = (
@@ -33,7 +47,7 @@ DATABASES = {
         },
         'NAME': 'dbuds',  # Or path to database file if using sqlite3.
         'USER': 'dbuds',  # Not used with sqlite3.
-        'PASSWORD': 'PASSWORD',  # Not used with sqlite3.
+        'PASSWORD': _require('UDS_DB_PASSWORD', 'database password (never commit it)'),  # Not used with sqlite3.
         'HOST': 'localhost',  # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',  # Set to empty string for default. Not used with sqlite3.
         # 'CONN_MAX_AGE': 600,		     # Enable DB Pooling, 10 minutes max connection duration
@@ -48,7 +62,16 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['*']
+# Explicit host list, comma-separated (UDS_ALLOWED_HOSTS=uds.example.com,10.0.0.5).
+# A wildcard would accept any Host header (cache poisoning, password-reset
+# poisoning); it is only tolerated while DEBUG is on.
+ALLOWED_HOSTS = [h.strip() for h in _env('UDS_ALLOWED_HOSTS', '').split(',') if h.strip()]
+if not ALLOWED_HOSTS:
+    if not DEBUG:
+        raise RuntimeError('UDS_ALLOWED_HOSTS is not set: list the host names this server answers to')
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if '*' in ALLOWED_HOSTS and not DEBUG:
+    raise RuntimeError("UDS_ALLOWED_HOSTS must not contain '*' outside DEBUG")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Local time zone for this installation. Choices can be found here:
@@ -182,13 +205,24 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o750
 FILE_UPLOAD_MAX_MEMORY_SIZE = 512 * 1024  # 512 Kb
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 's5ky!7b5f#s35!e38xv%e-+iey6yi-#630x)kk3kk5_j8rie2*'  # nosec: sample key, Remember to change it on production!!
-# **** NOTE!: The provided RSA Key is a Sample, a very old generated one and probably will not be accepted by your implementation  of criptography ****
-# **** You MUST change this key to a new one, generated with the following command: ****
-# openssl genrsa -out private.pem 2048
-# **** And then, you must copy the contents of the file private.pem into the following variable ****
-RSA_KEY = '-----BEGIN RSA PRIVATE KEY-----\nMIICXgIBAAKBgQC0qe1GlriQbHFYdKYRPBFDSS8Ne/TEKI2mtPKJf36XZTy6rIyH\nvUpT1gMScVjHjOISLNJQqktyv0G+ZGzLDmfkCUBev6JBlFwNeX3Dv/97Q0BsEzJX\noYHiDANUkuB30ukmGvG0sg1v4ccl+xs2Su6pFSc5bGINBcQ5tO0ZI6Q1nQIDAQAB\nAoGBAKA7Octqb+T/mQOX6ZXNjY38wXOXJb44LXHWeGnEnvUNf/Aci0L0epCidfUM\nfG33oKX4BMwwTVxHDrsa/HaXn0FZtbQeBVywZqMqWpkfL/Ho8XJ8Rsq8OfElrwek\nOCPXgxMzQYxoNHw8V97k5qhfupQ+h878BseN367xSyQ8plahAkEAuPgAi6aobwZ5\nFZhx/+6rmQ8sM8FOuzzm6bclrvfuRAUFa9+kMM2K48NAneAtLPphofqI8wDPCYgQ\nTl7O96GXVQJBAPoKtWIMuBHJXKCdUNOISmeEvEzJMPKduvyqnUYv17tM0JTV0uzO\nuDpJoNIwVPq5c3LJaORKeCZnt3dBrdH1FSkCQQC3DK+1hIvhvB0uUvxWlIL7aTmM\nSny47Y9zsc04N6JzbCiuVdeueGs/9eXHl6f9gBgI7eCD48QAocfJVygphqA1AkEA\nrvzZjcIK+9+pJHqUO0XxlFrPkQloaRK77uHUaW9IEjui6dZu4+2T/q7SjubmQgWR\nZy7Pap03UuFZA2wCoqJbaQJAUG0FVrnyUORUnMQvdDjAWps2sXoPvA8sbQY1W8dh\nR2k4TCFl2wD7LutvsdgdkiH0gWdh5tc1c4dRmSX1eQ27nA==\n-----END RSA PRIVATE KEY-----'
+# Signing secret: unique per installation, never committed.
+#   python -c "import secrets; print(secrets.token_urlsafe(64))"
+SECRET_KEY = _require('UDS_SECRET_KEY', 'generate a random value, e.g. with the command above')
+if len(SECRET_KEY) < 50 or SECRET_KEY.startswith('s5ky!'):
+    raise RuntimeError('UDS_SECRET_KEY is too short or is the published sample key')
+
+# RSA private key (PEM). This file used to embed a sample key that is public in
+# git history, so any deployment that kept it was using a known key. Generate
+# your own and supply it as UDS_RSA_KEY (PEM text, newlines may be written as
+# \n) or UDS_RSA_KEY_FILE (path, mode 0600):
+#   openssl genrsa -out private.pem 2048
+if _env('UDS_RSA_KEY_FILE'):
+    with open(_env('UDS_RSA_KEY_FILE'), 'r') as _f:
+        RSA_KEY = _f.read()
+else:
+    RSA_KEY = _require('UDS_RSA_KEY', 'PEM private key, or set UDS_RSA_KEY_FILE').replace('\\n', '\n')
+if 'MIICXgIBAAKBgQC0qe1GlriQbHFYdKYRPBFDSS8Ne' in RSA_KEY:
+    raise RuntimeError('UDS_RSA_KEY is the published sample key; generate your own')
 
 # Trusted cyphers
 SECURE_CIPHERS = (
@@ -257,7 +291,20 @@ MIDDLEWARE = [
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # SESSION_COOKIE_AGE = 3600
-SESSION_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = True
+# Cookies and HSTS only make sense over HTTPS, so they follow DEBUG: on in
+# production, off for a plain-HTTP developer machine.
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_HTTPONLY = False  # the web client reads the CSRF token
+SECURE_HSTS_SECONDS = 0 if DEBUG else 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+# Redirect plain HTTP to HTTPS (set UDS_SSL_REDIRECT=0 if the reverse proxy
+# already does it and health checks hit this server over HTTP).
+SECURE_SSL_REDIRECT = (not DEBUG) and _env('UDS_SSL_REDIRECT', '1') == '1'
 SESSION_SERIALIZER = 'uds.core.util.session_serializer.SessionSerializer'
 SESSION_COOKIE_SAMESITE = 'Lax'
 

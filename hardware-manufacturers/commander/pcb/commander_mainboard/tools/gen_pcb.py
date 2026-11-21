@@ -230,7 +230,38 @@ def face_towards(fp, dx, dy):
     fp.SetOrientationDegrees(best[1])
 
 
-FINE_BAND = 0.0     # mm kept free round a fine-pitch chip that the packer places (its pins' way out).  1.0-1.4 frees the
+# small parts that belong to one pin of a chip: placed beside that pin right after the chip, before the large parts
+# take the room (host -> [(part, pin)]).  The PoE controller TPS23754: DEN, CLS, FRS, VB, CTL, CS, GATE, VC.
+# The PoE primary, placed by hand (courtyard centre x, y in design mm, rotation, face).  The flow runs down the zone:
+# the four bridges under the RJ45 (two rows per face, TRn in the middle of each row, VSS on the left, VDD on the
+# right), the controller below them with its small parts at their own pins (DEN / CLS / FRS above, CTL / CS / GATE /
+# VC / VB below), then the bulk capacitors, the switch with its sense resistor, the bias diode and the clamp next to
+# the transformer's primary pins (T1 on the bottom face, its primary row at y 35.8).  CP_POE_HAND=0: the packer.
+POE_HAND = {
+    # bridges: data pairs (TR0, TR1) on the top face, spare pairs (TR2, TR3) underneath
+    "D32": (11.45, 11.75, 180, "F"), "D31": (18.55, 11.75, 180, "F"),
+    "D34": (11.45, 15.40, 180, "F"), "D33": (18.55, 15.40, 180, "F"),
+    "D36": (11.45, 11.75, 180, "B"), "D35": (18.55, 11.75, 180, "B"),
+    "D38": (11.45, 15.40, 180, "B"), "D37": (18.55, 15.40, 180, "B"),
+    "D39": (18.45, 19.20, 180, "B"), "C501": (11.60, 18.50, 0, "B"),
+    # controller; pins 11-20 face the bridges, 1-10 face the transformer
+    "U30": (15.00, 23.50, 90, "F"),
+    "R501": (16.62, 18.45, 270, "F"), "R502": (15.33, 18.45, 90, "F"), "R503": (12.73, 18.45, 90, "F"),
+    "C503": (12.08, 28.50, 270, "F"), "R509": (13.38, 28.50, 90, "F"), "R506": (14.67, 28.50, 270, "F"),
+    "C508": (15.97, 28.50, 270, "F"),
+    "R504": (11.43, 30.60, 270, "F"), "C502": (12.73, 30.60, 270, "F"), "C509": (14.03, 30.60, 270, "F"),
+    "C507": (16.80, 30.60, 0, "F"),
+    # input bulk, bias, clamp (top face, above the transformer)
+    "C505": (10.50, 33.60, 0, "F"), "C506": (15.40, 33.60, 0, "F"),
+    "R505": (18.60, 33.40, 90, "F"), "D40": (20.60, 34.20, 270, "F"),
+    "C516": (14.60, 36.30, 0, "F"), "R511": (12.10, 39.35, 0, "F"), "D42": (19.40, 39.40, 0, "F"),
+    # switch and sense resistor beside the primary switch pin (bottom face, above T1), the electrolytic beside them
+    "R508": (20.00, 26.40, 90, "B"), "Q30": (19.70, 32.40, 0, "B"), "R507": (16.60, 32.00, 90, "B"),
+    "C504": (11.70, 29.55, 90, "B"),
+}
+SATELLITES = {"U30": [("R501", "13"), ("R502", "15"), ("R503", "19"), ("C502", "16"), ("R504", "2"), ("C503", "1"),
+                      ("R509", "3"), ("C509", "3"), ("R506", "5"), ("C508", "6"), ("C507", "6")]}
+FINE_BAND = float(os.environ.get("CP_FINE_BAND", "0.0"))     # mm kept free round a fine-pitch chip that the packer places (its pins' way out).  1.0-1.4 frees the
                     # TPS23754's pins, but the PoE primary area is then too small for the rest (C516, D42 left over): off
 
 
@@ -273,6 +304,30 @@ class Packer:
                     bx[(edge + 2) % 4] = c[edge]
                     self.blocked[side].append(tuple(min(bx[k], bx[k + 2]) if k < 2 else max(bx[k - 2], bx[k]) for k in range(4)))
         return ok
+
+    def place_near(self, fp, side, px, py, ux, uy):
+        """A small part beside a pin at (px, py) of a chip, outwards along (ux, uy): its long axis along that direction,
+        as close to the pin as the free space allows, sliding sideways if the spot is taken."""
+        set_pose(fp, 0, 0, 0, bottom=(side == "B"))
+        fp.SetOrientationDegrees(90 if uy else 0)
+        c = court(fp)
+        w, h = c[2] - c[0], c[3] - c[1]
+        x0, y0, x1, y1 = self.r
+        g = self.gap
+        taken = self.used[side] + self.blocked[side]
+        for k in range(0, 40):
+            d = 0.6 + k * 0.2 + (h if uy else w) / 2
+            for lat in (0, 0.5, -0.5, 1.0, -1.0, 1.5, -1.5, 2.0, -2.0, 2.5, -2.5, 3.0, -3.0):
+                cx, cy = px + ux * d + (lat if uy else 0), py + uy * d + (0 if uy else lat)
+                bx = (cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2)
+                if bx[0] < x0 or bx[1] < y0 or bx[2] > x1 or bx[3] > y1:
+                    continue
+                if any(not (bx[2] + g <= t[0] or bx[0] - g >= t[2] or bx[3] + g <= t[1] or bx[1] - g >= t[3]) for t in taken):
+                    continue
+                centre_on(fp, cx, cy)
+                self.used[side].append(bx)
+                return True
+        return False
 
     def _place(self, fp, first=None):
         x0, y0, x1, y1 = self.r
@@ -593,7 +648,8 @@ def main():
     Z = {
         "HDMI": Packer("HDMI", 0.6, -10.5, 11.6, 8.8),
         # (57 V between neighbours here: the gap leaves room for a 0.4 mm track with 0.3 mm either side)
-        "POE_PRI": Packer("POE_PRI", C["PRI_X0"], C["PRI_Y0"], C["PRI_X1"], C["PRI_Y1"], turn_wide=True, gap=0.45),
+        "POE_PRI": Packer("POE_PRI", C["PRI_X0"], C["PRI_Y0"], C["PRI_X1"], C["PRI_Y1"], turn_wide=True,
+                          gap=float(os.environ.get("CP_POE_GAP", "0.45"))),
         "POE_SEC": Packer("POE_SEC", 23.5, 43.5, 29.4, 59.4),          # secondary side, right of the transformer
         "POE_SEC2": Packer("POE_SEC2", 0.8, 55.6, 23.0, 59.5),         # ... below it
         "POE_SEC3": Packer("POE_SEC3", 0.8, 41.5, C["HDMI_COR"], 55.2), # ... and left of it (HDMI passes underneath on B.Cu)
@@ -620,6 +676,13 @@ def main():
     put("T1", (C["PRI_X0"] + C["PRI_X1"]) / 2, C["T1_Y"], 180, bottom=True)   # bottom face (tallest part, about 12.7 mm); 180 deg keeps the primary pins towards the rear
     put("U31", (C["PRI_X1"] + C["SELV_COR"]) / 2, 29.6, 180)      # optocoupler and Y capacitor straddle the right barrier
     put("C518", (C["PRI_X1"] + C["SELV_COR"]) / 2, 25.6, 0)
+    hand = []
+    if not STRIP and os.environ.get("CP_POE_HAND", "1") != "0":
+        for r_, (hx, hy, hr, hs) in POE_HAND.items():
+            if r_ in fps:
+                put(r_, 0, 0, hr, bottom=(hs == "B"))
+                centre_on(fps[r_], hx, hy)
+                hand.append(r_)
     put("U40", 35.4, sy + 5.6, 0)
     put("U50", (bay_x(5) + bay_x(6)) / 2, sy + 11.0, 0)
     edge_mount("J40", C["BATT_X"], C["COL_L"], 0.9, (0, 1))      # front "TO BATT" USB-C
@@ -633,7 +696,7 @@ def main():
         put("U20", C["EMMC_X"] if CORE_ON_BOTTOM else 15.0, 96.0, 0, bottom=not CORE_ON_BOTTOM)     # the eMMC sits opposite the PMIC, where Radxa has the microSD
         edge_mount("J21", 22.5, C["COL_L"], -0.6, (0, 1))        # debug UART, low-profile JST-SH, opening towards the front
         edge_mount("J6", 66.0, sy + C["STRIP_H"], 0.3, (0, 1))
-    fixed = [r_ for r_ in ("U40", "U50", "J6", "U20", "U31", "C518", "T1", "J21", "J40", "J2", "J20", "J50", "J51", "J52", "J53", "J54", "SW3") if r_ in fps]
+    fixed = [r_ for r_ in ("U40", "U50", "J6", "U20", "U31", "C518", "T1", "J21", "J40", "J2", "J20", "J50", "J51", "J52", "J53", "J54", "SW3") if r_ in fps] + hand
     for name in ("HUB3", "MID12", "MID23", "HUB2", "EMMC", "POE_PRI", "POE_SEC", "POE_SEC2", "POE_SEC3", "POE_SEC4", "CHAS", "FRONT", "BAY1", "BAY2", "BAY3", "SVC", "KBZ"):
         for r_ in fixed:
             fp = fps[r_]
@@ -715,6 +778,8 @@ def main():
 
     todo = sorted([c for c in d.comps.values() if c.ref not in placed], key=lambda c: -area(c))
     for c in todo:
+        if c.ref in placed:                 # (a satellite, placed beside its chip's pin already)
+            continue
         z = zone_of(c)
         # nothing on the top face may stand taller than the bay connectors (3.3 mm): the one part without a
         # low-profile equivalent, the 100 V electrolytic of the PoE input, goes underneath
@@ -728,6 +793,20 @@ def main():
                 z = z2
         if ok:
             placed[c.ref] = "zone " + z
+            for sref, pin in SATELLITES.get(c.ref, ()):
+                if sref not in fps or sref in placed:
+                    continue
+                host = fps[c.ref]
+                hp = next(p_ for p_ in host.Pads() if p_.GetNumber() == pin)
+                hx, hy = ToMM(host.GetPosition().x) - OX, ToMM(host.GetPosition().y) - OY
+                px_, py_ = ToMM(hp.GetPosition().x) - OX, ToMM(hp.GetPosition().y) - OY
+                dx_, dy_ = px_ - hx, py_ - hy
+                ux_, uy_ = ((1 if dx_ > 0 else -1), 0) if abs(dx_) > abs(dy_) else (0, (1 if dy_ > 0 else -1))
+                side_ = "B" if host.IsFlipped() else "F"
+                if Z[z].place_near(fps[sref], side_, px_, py_, ux_, uy_):
+                    placed[sref] = "beside %s.%s" % (c.ref, pin)
+        elif c.ref in placed:
+            pass
         else:
             parked.append((c.ref, z))
     px, py, rowh = 40.0, 45.0, 0.0          # park what did not fit, in rows below the strip

@@ -1,0 +1,20 @@
+# Commander front battery bar (rev S0) - cell-contact board.
+#
+# Stands upright on the BMS board's rear edge (commander_bar_bms, joint J3), facing the front ends of the six cell
+# lanes.  The cells touch plain ENIG pads (no part: the rear springs push every lane against them); the three
+# thermistors sit beside the negative pads, the cells' cans, which are the best thermal path to the cells on this side.
+# Lanes, left to right seen from the front (chassis -Y): 1 = string 1 plus, 2 = string 1 minus, 3 = string 2 plus,
+# 4 = string 2 minus, 5 = string 3 plus, 6 = string 3 minus.  The three minus pads are joined here (B_NEG).
+SHEET barcon
+
+J1 BARJOINT_C:DNP 1=STR1_P 2=NTC1 3=B_NEG 4=GND 5=STR2_P 6=NTC2 7=B_NEG 8=GND 9=STR3_P 10=NTC3 11=B_NEG
+BT1 BATT_PAD:DNP 1=STR1_P
+BT2 BATT_PAD:DNP 1=B_NEG
+BT3 BATT_PAD:DNP 1=STR2_P
+BT4 BATT_PAD:DNP 1=B_NEG
+BT5 BATT_PAD:DNP 1=STR3_P
+BT6 BATT_PAD:DNP 1=B_NEG
+# 10 k B3950 thermistors, 0402, beside the minus pads of lanes 2, 4 and 6
+R1 NTC10K_B3950 NTC1 GND
+R2 NTC10K_B3950 NTC2 GND
+R3 NTC10K_B3950 NTC3 GND

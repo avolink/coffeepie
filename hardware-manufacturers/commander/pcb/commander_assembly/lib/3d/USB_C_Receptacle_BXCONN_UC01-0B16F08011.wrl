@@ -1,0 +1,8 @@
+#VRML V2.0 utf8
+# USB_C_Receptacle_BXCONN_UC01-0B16F08011 - plain box model written by usbc_mid_fp.py
+Shape { appearance Appearance { material Material { diffuseColor 0.75 0.75 0.78 specularColor 0.5 0.5 0.5 } }
+  geometry IndexedFaceSet { coord Coordinate { point [ -1.7598 0.0000 -0.1969, 1.7598 0.0000 -0.1969, -1.7598 2.5591 -0.1969, 1.7598 2.5591 -0.1969, -1.7598 0.0000 0.8110, 1.7598 0.0000 0.8110, -1.7598 2.5591 0.8110, 1.7598 2.5591 0.8110 ] } coordIndex [ 0,2,3,1,-1, 4,5,7,6,-1, 0,1,5,4,-1, 2,6,7,3,-1, 0,4,6,2,-1, 1,3,7,5,-1 ] } }
+Shape { appearance Appearance { material Material { diffuseColor 0.75 0.75 0.78 specularColor 0.5 0.5 0.5 } }
+  geometry IndexedFaceSet { coord Coordinate { point [ -2.3307 0.4724 0.0000, -1.7598 0.4724 0.0000, -2.3307 2.7165 0.0000, -1.7598 2.7165 0.0000, -2.3307 0.4724 0.1181, -1.7598 0.4724 0.1181, -2.3307 2.7165 0.1181, -1.7598 2.7165 0.1181 ] } coordIndex [ 0,2,3,1,-1, 4,5,7,6,-1, 0,1,5,4,-1, 2,6,7,3,-1, 0,4,6,2,-1, 1,3,7,5,-1 ] } }
+Shape { appearance Appearance { material Material { diffuseColor 0.75 0.75 0.78 specularColor 0.5 0.5 0.5 } }
+  geometry IndexedFaceSet { coord Coordinate { point [ 1.7598 0.4724 0.0000, 2.3307 0.4724 0.0000, 1.7598 2.7165 0.0000, 2.3307 2.7165 0.0000, 1.7598 0.4724 0.1181, 2.3307 0.4724 0.1181, 1.7598 2.7165 0.1181, 2.3307 2.7165 0.1181 ] } coordIndex [ 0,2,3,1,-1, 4,5,7,6,-1, 0,1,5,4,-1, 2,6,7,3,-1, 0,4,6,2,-1, 1,3,7,5,-1 ] } }

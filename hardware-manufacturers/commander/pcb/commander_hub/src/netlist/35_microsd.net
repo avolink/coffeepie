@@ -1,0 +1,15 @@
+# microSD (boot / recovery media), from Radxa ZERO 3E V1.2 sheet 19.  On the hub board since branch m2-hub: the
+# slot sits at the front edge of the bay strip, where the case has its opening.  The SDMMC0 bus, the card-detect
+# line and the 3.3 V supply come from the mainboard through the M.2 link (tools/hub_link.py).
+SHEET microsd
+J6 MICROSD 1=SDMMC0_D2 2=SDMMC0_D3 3=SDMMC0_CMD 4=VCC3V3_SD 5=SDMMC0_CLK 6=GND 7=SDMMC0_D0 8=SDMMC0_D1 CD=SD_CD SH=GND
+R90723 0R VCC3V3_SYS VCC3V3_SD
+C227 100nF VCC3V3_SD GND
+R137 0R SD_CD SDMMC0_DET_L
+D13 ESD:BTR04G02 SD_CD GND
+D14 ESD:BTR04G02 SDMMC0_D1 GND
+D15 ESD:BTR04G02 SDMMC0_D0 GND
+D16 ESD:BTR04G02 SDMMC0_CLK GND
+D17 ESD:BTR04G02 SDMMC0_CMD GND
+D18 ESD:BTR04G02 SDMMC0_D3 GND
+D19 ESD:BTR04G02 SDMMC0_D2 GND

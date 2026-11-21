@@ -1,0 +1,98 @@
+# Commander battery module (rev B0) - power path.
+#
+# Six standard AAA NiMH cells (rechargeable, user-replaceable, sold everywhere; 6S = 7.2 V nominal, 6.0 - 9.4 V) in
+# the tray of the chassis model (Group#56: 3 columns x 2 cells, x 57-93, y 77-166).  The cells sit in a plastic
+# holder with spring contacts; the holder's harness plugs into J1 (B+ twice, B- twice: 2 A per PH contact).
+#
+#   cells -> PTC F1 -> P-MOSFET Q1 (reverse polarity: a cell put in the wrong way round cannot hurt anything)
+#         -> VBAT -> TPS563201 buck -> 5.0 V on the USB-C port (VBUS) -> mainboard battery port J40
+#   VBUS (5 V from the mainboard, when it charges the module) -> MT3608 boost -> D1 -> VBAT -> cells
+#
+# The buck is ON by default (EN divider = hardware under-voltage cut-off at about 5.8 V = 0.97 V per cell); the
+# microcontroller can switch it off (Q2).  It runs in Eco-mode, so it never sinks current: while the mainboard
+# pushes 5.05-5.1 V into the port to charge the module, the buck (set to 4.98 V) simply idles, and it takes over
+# by itself the moment that voltage goes away - a UPS without a switch-over.  See README.md, "How it works".
+#
+# Charging is constant-current, controlled by the microcontroller: it measures the cell current (shunt R2 + INA181)
+# and trims the boost's set point by a filtered PWM injected into its feedback node.  Hardware ceiling with the PWM
+# pin low: 9.4 V (1.56 V per cell); with the pin released (microcontroller off or reset) the boost sits at 4 V,
+# below the cells, and EN is pulled low - it cannot charge without the microcontroller.
+SHEET batt_power
+
+# Capacitor values carry their voltage rating where the rail goes above 5 V (cells: up to 9.4 V), so JLC's matcher
+# cannot pick a 6.3 V part.
+
+# --- cells, protection ---
+J1 JST_PH4:CELLS 1=B_POS 2=B_POS 3=B_NEG 4=B_NEG
+J2 JST_PH2:NTC_CELLS 1=NTC_EXT 2=GND
+F1 PTC1812:2A B_POS B_FUSED
+Q1 PMOS_GSD:AO3401A D=B_FUSED S=VBAT G=Q1_G
+R1 10K Q1_G GND
+TP1 TP VBAT
+TP2 TP B_NEG
+
+# --- current sense, low side: 20 mOhm between the cells' minus and ground; INA181A1 (gain 20) with its reference at
+#     half supply, so both directions are measured: discharge -> output above REF, charge -> below. +-4 A full scale ---
+R2 0R02_1206 GND B_NEG
+R3 10R B_NEG ISNS_N
+C1 100nF ISNS_N GND
+U3 INA181A1 1=ISENSE 2=GND 3=GND 4=ISNS_N 5=ISNS_REF 6=VCC3V3
+C2 100nF VCC3V3 GND
+R4 100K VCC3V3 ISNS_REF
+R5 100K ISNS_REF GND
+C3 100nF ISNS_REF GND
+
+# --- charger: boost from VBUS to the cells (MT3608, 2 A switch) ---
+#   Vcells(max) = 0.6 V * (1 + R10/R11) + R10 * (0.6 V - Vpwm) / (R12 + R13)
+#   = 9.4 V at Vpwm = 0 (ceiling),  5.0 V at Vpwm = 3.3 V (below the cells: no current)
+C10 10uF_10V VBUS GND
+U4 MT3608 5=VBUS 4=CHG_EN 2=GND 1=CHG_SW 3=CHG_FB
+NC U4 6
+L1 10uH_2A VBUS CHG_SW
+D1 SCHOTTKY:SS34 A=CHG_SW K=VBAT
+R10 1M VBAT CHG_FB
+R11 75K CHG_FB GND
+R12 680K CHG_ISET CHG_FB
+R13 68K CHG_PWM CHG_ISET
+C13 1uF CHG_ISET GND
+R14 100K CHG_EN GND
+C11 22uF_16V VBAT GND
+C12 22uF_16V VBAT GND
+
+# --- 5 V output: buck from the cells to the port (TPS563201, 3 A) ---
+#   VOUT = 0.768 V * (1 + 54.9 / 10) = 4.98 V;  EN: rises past 1.2 V at VBAT = 5.8 V (390k / 100k)
+C20 10uF_16V VBAT GND
+C21 10uF_16V VBAT GND
+U5 TPS563201 3=VBAT 1=GND 2=OUT_SW 4=OUT_FB 5=OUT_EN 6=OUT_BST
+C22 100nF OUT_BST OUT_SW
+L2 4.7uH_5A OUT_SW VBUS
+R20 54.9K VBUS OUT_FB
+R21 10K OUT_FB GND
+R22 390K VBAT OUT_EN
+R23 100K OUT_EN GND
+Q2 NMOS_GSD:2N7002 D=OUT_EN S=GND G=OUT_OFF
+R24 100K OUT_OFF GND
+C23 22uF_10V VBUS GND
+C24 22uF_10V VBUS GND
+TP3 TP VBUS
+TP4 TP GND
+
+# --- 3.3 V for the microcontroller and the sense amplifier: from the cells, or from the port when the cells are flat
+#     or out (so the module still enumerates and can report "no battery" / be charged back from empty) ---
+U6 BAT54C 1=VBAT 2=VBUS 3=LDO_IN
+C30 1uF_16V LDO_IN GND
+U7 HT7333 2=LDO_IN 1=GND 3=VCC3V3
+C31 4.7uF VCC3V3 GND
+
+# --- measurements for the microcontroller's ADC (reference = VCC3V3) ---
+R30 100K VBAT VBAT_ADC
+R31 33K VBAT_ADC GND
+C32 100nF VBAT_ADC GND
+R32 100K VBUS VBUS_ADC
+R33 68K VBUS_ADC GND
+C33 100nF VBUS_ADC GND
+# cell temperature: 10 k B3950 thermistor glued to the middle cell, on J2; a second one on the board edge beside the cells
+R34 10K VCC3V3 NTC_EXT
+C34 100nF NTC_EXT GND
+R35 NTC10K_B3950 NTC_BRD GND
+R36 10K VCC3V3 NTC_BRD

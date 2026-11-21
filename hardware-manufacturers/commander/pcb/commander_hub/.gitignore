@@ -1,0 +1,9 @@
+build/
+*-backups/
+*.kicad_prl
+fp-info-cache
+*.lck
+~*
+__pycache__/
+# vendor 3D model (Amphenol's file, downloaded and converted by tools/amph_model.py)
+lib/3d/Amphenol_*.step

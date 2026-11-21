@@ -1,8 +1,15 @@
 import requests
 
+def _auth_headers(token, extra=None):
+    """Headers for the backend; the /nodes routes now require the user's JWT."""
+    h = dict(extra or {})
+    if token:
+        h["Authorization"] = f"Bearer {token}"
+    return h
+
 BASE_URL = "http://127.0.0.1:8000"  # Default, can be overridden by argument
 
-def fetch_vm_ip(node, vmId, base_url=BASE_URL):
+def fetch_vm_ip(node, vmId, base_url=BASE_URL, token=None):
     """
     Fetches the IP address of a VM using the provided node and VM ID.
     Args:
@@ -19,7 +26,7 @@ def fetch_vm_ip(node, vmId, base_url=BASE_URL):
     try:
         print(url)
         print(f"Fetching IP address for VM {vmId} on node {node}...")
-        response = requests.get(url, headers={"accept": "application/json"})
+        response = requests.get(url, headers=_auth_headers(token, {"accept": "application/json"}))
         if response.status_code == 200:
             data = response.json()
             ip_addresses = data.get("ip_addresses", [])
@@ -37,7 +44,7 @@ def fetch_vm_ip(node, vmId, base_url=BASE_URL):
         print(f"Error fetching IP address for VM {vmId}: {e}")
         return ""
 
-def start_vm(node, vmId, base_url=BASE_URL):
+def start_vm(node, vmId, base_url=BASE_URL, token=None):
     """
     Starts a VM using the provided node and VM ID.
     Args:
@@ -50,7 +57,7 @@ def start_vm(node, vmId, base_url=BASE_URL):
     url = f"{base_url}/nodes/{node}/vms/{vmId}/start"
     try:
         print(f"Starting VM {vmId} on node {node}...")
-        response = requests.post(url, headers={"accept": "application/json"}, data="")
+        response = requests.post(url, headers=_auth_headers(token, {"accept": "application/json"}), data="")
         if response.status_code == 200:
             print(f"VM {vmId} started successfully.")
             return True
@@ -61,7 +68,7 @@ def start_vm(node, vmId, base_url=BASE_URL):
         print(f"Error starting VM {vmId}: {e}")
         return False
 
-def fetch_vm_list(node, base_url=BASE_URL):
+def fetch_vm_list(node, base_url=BASE_URL, token=None):
     """
     Fetches the list of VMs from the endpoint and filters numeric IDs.
     Args:
@@ -72,7 +79,7 @@ def fetch_vm_list(node, base_url=BASE_URL):
     """
     url = f"{base_url}/nodes/{node}/vms"
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=_auth_headers(token))
         if response.status_code == 200:
             vms = response.json().get("vms", [])
             print(vms)

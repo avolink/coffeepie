@@ -9,7 +9,13 @@ import hmac
 import secrets
 
 
-def hash_password(password: str, iterations: int = 100000) -> str:
+# OWASP Password Storage Cheat Sheet (2023+): 600,000 iterations for
+# PBKDF2-HMAC-SHA256. The count is stored in each hash, so hashes made with
+# the old 100,000 keep verifying; new and re-set passwords get the new cost.
+PBKDF2_ITERATIONS = 600_000
+
+
+def hash_password(password: str, iterations: int = PBKDF2_ITERATIONS) -> str:
     """Return pbkdf2_sha256$<iterations>$<salt_hex>$<hash_hex> for storage."""
     salt = secrets.token_bytes(16)
     dk = hashlib.pbkdf2_hmac("sha256", password.encode(), salt, iterations)
@@ -31,3 +37,11 @@ def verify_password(password: str, encoded: str) -> bool:
         return False
     dk = hashlib.pbkdf2_hmac("sha256", password.encode(), salt, iterations)
     return hmac.compare_digest(dk, expected)  # constant-time
+
+
+def needs_rehash(encoded: str) -> bool:
+    """True when a stored hash uses fewer iterations than today's policy."""
+    try:
+        return int(encoded.split("$")[1]) < PBKDF2_ITERATIONS
+    except (IndexError, ValueError):
+        return True

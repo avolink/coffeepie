@@ -1,0 +1,38 @@
+﻿line,category,description / purchasing spec,design value,package,manufacturer,manufacturer part number,notes,LCSC reference,qty per board,designators
+1,IC,"Microchip USB2517 7-port USB 2.0 hub, QFN-64",USB2517,QFN-64-1EP_9x9mm_P0.5mm_EP7.3x7.3mm,Microchip,USB2517-JZX,,C1521556,1,U50
+2,IC,"Microchip USB5744 4-port USB 3.2 Gen 1 hub, VQFN-56",USB5744,QFN-56-1EP_7x7mm_P0.4mm_EP5.6x5.6mm,Microchip,USB5744-I/2G,,C633621,1,U40
+3,IC,ST USBLC6-2SC6 USB ESD,USBLC6-2SC6,SOT-23-6,STMicroelectronics,USBLC6-2SC6,,C2827654,9,U642 U652 U662 U672 U752 U762 U772 U782 U792
+4,IC,"TI HD3SS3220 USB Type-C port controller with SuperSpeed 2:1 mux, VQFN-30 (RNH)",HD3SS3220,Texas_RNH0030A_WQFN-30-1EP_2.5x4.5mm_P0.4mm_EP1.2x3.2mm,Texas Instruments,HD3SS3220RNHR,,C701817,4,U1011 U1021 U1031 U1041
+5,IC,"TI TPD4E05U06 4-ch ESD, flow-through",TPD4E05U06,USON-10_2.5x1.0mm_P0.5mm,Texas Instruments,TPD4E05U06DQAR,,C2827646,8,U641 U651 U661 U671 U1012 U1022 U1032 U1042
+6,IC,USB power switch with fault flag,AP22804AW5,SOT-23-5,Diodes Inc.,AP22804AW5-7,,C3001659,9,U643 U653 U663 U673 U753 U763 U773 U783 U793
+7,IC,"synchronous buck 2 A, SOT-23-5",TLV62569,SOT-23-5,Texas Instruments,TLV62569DBVR,,C141836,2,U41 U42
+8,Diode,"ESD diode, bidirectional, 0402",BTR04G02,D_0402_1005Metric,(see LCSC listing),BTR04G02,ESD diode bidirectional 0402,,7,D13 D14 D15 D16 D17 D18 D19
+9,Diode,"Nexperia PMEG4030ER-QX Schottky 40 V 3 A, SOD-123W (bay VBUS back-feed blocking)",PMEG4030ER,Nexperia_CFP3_SOD-123W,Nexperia,PMEG4030ER-QX,"Schottky 40 V 3 A, SOD-123W",C5709679,9,D641 D651 D661 D671 D751 D761 D771 D781 D791
+10,Diode,"TVS, bidirectional",SMF24CA,D_SOD-123F,"multi-source (Littelfuse, ...)",SMF24CA,"TVS 24 V bidirectional, SOD-123F",,9,D642 D652 D662 D672 D752 D762 D772 D782 D792
+11,Crystal,"crystal 24MHz, 3.2 x 2.5 mm 4-pad, ±20 ppm, load capacitance to suit the board's capacitors (see schematic)",24MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,multi-source,,,,1,Y50
+12,Crystal,"crystal 25MHz, 3.2 x 2.5 mm 4-pad, ±20 ppm, load capacitance to suit the board's capacitors (see schematic)",25MHz,Crystal_SMD_3225-4Pin_3.2x2.5mm,multi-source,,,,1,Y40
+13,Inductor,"power inductor 2.2 µH ±20 %, 2.5 x 2.0 mm (1008), shielded",2.2uH_2520,"2.5 x 2.0 mm (1008), shielded",any (to spec),,,,2,L41 L42
+14,Capacitor,"MLCC 1 µF 16 V X5R or X7R ±10 %, 0402 (1005 metric)",1uF,0402,any (to spec),,,,3,C607 C703 C704
+15,Capacitor,"MLCC 10 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",10uF,0603,any (to spec),,,,7,C621 C622 C624 C1014 C1024 C1034 C1044
+16,Capacitor,"MLCC 100 nF 16 V X7R ±10 %, 0201 (0603 metric)",100nF,0201,any (to spec),,,,1,C227
+17,Capacitor,"MLCC 100 nF 16 V X7R ±10 %, 0402 (1005 metric)",100nF,0402,any (to spec),,,,46,C603 C604 C608 C609 C610 C611 C613 C614 C615 C616 C617 C618 C619 C620 C641 C642 C645 C651 C652 C655 C661 C662 C665 C671 C672 C675 C705 C706 C707 C708 C709 C710 C711 C755 C765 C775 C785 C795 C1013 C1015 C1023 C1025 C1033 C1035 C1043 C1045
+18,Capacitor,"MLCC 100 nF 50 V X7R ±10 %, 0402 (1005 metric)",100nF_50V,0402,any (to spec),,,,9,C647 C657 C667 C677 C757 C767 C777 C787 C797
+19,Capacitor,"MLCC 12 pF 50 V C0G / NP0 ±10 %, 0402 (1005 metric)",12pF,0402,any (to spec),,,,2,C605 C606
+20,Capacitor,"MLCC 18 pF 50 V C0G / NP0 ±10 %, 0402 (1005 metric)",18pF,0402,any (to spec),,,,2,C701 C702
+21,Capacitor,"MLCC 22 µF 10 V X5R or X7R ±10 %, 0805 (2012 metric)",22uF,0805,any (to spec),,,,2,C623 C625
+22,Capacitor,"MLCC 330 nF 16 V X7R ±10 %, 0402 (1005 metric)",330nF,0402,any (to spec),,,,16,C643 C644 C653 C654 C663 C664 C673 C674 C1011 C1012 C1021 C1022 C1031 C1032 C1041 C1042
+23,Capacitor,"MLCC 4.7 µF 10 V X5R or X7R ±10 %, 0603 (1608 metric)",4.7uF,0603,any (to spec),,,,2,C612 C712
+24,Capacitor,"MLCC 47 µF 10 V X5R or X7R ±10 %, 1206 (3216 metric)",47uF,1206,any (to spec),,,,9,C646 C656 C666 C676 C756 C766 C776 C786 C796
+25,Resistor,"0 Ω jumper, 0201 (0603 metric)",0R,0201,any (to spec),,,,2,R137 R90723
+26,Resistor,"0 Ω jumper, 0402 (1005 metric)",0R,0402,any (to spec),,,,1,R609
+27,Resistor,"chip resistor 10 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",10K,0402,any (to spec),,,,8,R702 R703 R704 R705 R1012 R1022 R1032 R1042
+28,Resistor,"chip resistor 100 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",100K_1%,0402,any (to spec),,,,4,R605 R611 R612 R613
+29,Resistor,"chip resistor 12 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",12K_1%,0402,any (to spec),,,,2,R601 R701
+30,Resistor,"chip resistor 200 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",200K,0402,any (to spec),,,,10,R602 R603 R1013 R1014 R1023 R1024 R1033 R1034 R1043 R1044
+31,Resistor,"chip resistor 4.7 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",4.7K,0402,any (to spec),,,,1,R608
+32,Resistor,"chip resistor 453 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",453K_1%,0402,any (to spec),,,,1,R610
+33,Resistor,"chip resistor 49.9 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",49.9K_1%,0402,any (to spec),,,,1,R604
+34,Resistor,"chip resistor 56 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",56K,0402,any (to spec),,,,10,R755 R756 R765 R766 R775 R776 R785 R786 R795 R796
+35,Resistor,"chip resistor 909 kΩ ±1 % 1/16 W, 0402 (1005 metric), thick film",909K_1%,0402,any (to spec),,,,4,R1011 R1021 R1031 R1041
+36,Connector,"USB-C receptacle, full-featured 24-pin, sink (mid) mount in a board notch, centre height -0.10 mm on a 0.8 mm board (Amphenol 12402072E512A, USB4 Gen3)",USBC24_SINK,USB_C_Receptacle_Amphenol_12402072E512A,Amphenol,12402072E512A,not stocked at LCSC: from Amphenol's distributors,,9,J31 J32 J33 J34 J35 J36 J37 J38 J39
+37,Connector,microSD push-push socket,MICROSD,microSD_HC_Molex_104031-0811,Molex,104031-0811,,,1,J6

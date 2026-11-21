@@ -55,15 +55,16 @@ jobs:
       - name: Copy Django settings
         run: cp src/server/settings.py.sample src/server/settings.py
 
-      - name: Generate RSA key and set as environment variable
+      - name: Generate throwaway test secrets
+        # settings.py.sample refuses to start without these (no embedded keys).
         run: |
           openssl genrsa 2048 > private.pem
           RSA_KEY=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' private.pem)
-          echo "RSA_KEY=$RSA_KEY" >> $GITHUB_ENV
-
-      - name: Patch settings.py with generated RSA key
-        run: |
-          sed -i "s|^RSA_KEY = .*|RSA_KEY = '''$RSA_KEY'''|" src/server/settings.py
+          echo "UDS_RSA_KEY=$RSA_KEY" >> $GITHUB_ENV
+          echo "UDS_SECRET_KEY=$(openssl rand -base64 64 | tr -d '\n')" >> $GITHUB_ENV
+          echo "UDS_DB_PASSWORD=$(openssl rand -hex 16)" >> $GITHUB_ENV
+          echo "UDS_ALLOWED_HOSTS=localhost,127.0.0.1" >> $GITHUB_ENV
+          echo "UDS_DEBUG=1" >> $GITHUB_ENV
 
       - name: Create log directory
         run: mkdir -p src/log

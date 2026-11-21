@@ -17,6 +17,8 @@ Reference: https://www.pse.com.co
 """
 
 import hashlib
+import hmac
+import json
 import time
 from typing import Optional
 
@@ -60,6 +62,7 @@ class PSEBackend(PaymentBackend):
         self.merchant_id = merchant_id or os.getenv("PSE_MERCHANT_ID", "")
         self.api_key = api_key or os.getenv("PSE_API_KEY", "")
         self.test_mode = test_mode or os.getenv("PSE_TEST_MODE", "true").lower() == "true"
+        self.webhook_secret = os.getenv("PSE_WEBHOOK_SECRET", "")
         self.timeout = 30
 
     @property
@@ -134,7 +137,23 @@ class PSEBackend(PaymentBackend):
             )
 
     def handle_webhook(self, payload: dict) -> PaymentResult:
-        """Process PSE notification (POST from PSE to our webhook URL)."""
+        """Process PSE notification (POST from PSE to our webhook URL).
+
+        Fails closed: a webhook without a valid HMAC-SHA256 signature is
+        rejected, and so is every webhook while PSE_WEBHOOK_SECRET is unset.
+        The signed message is the canonical JSON of the payload (sorted keys,
+        no spaces) without the "signature" field. Align this with the
+        gateway's real signing contract before going live.
+        """
+        payload = dict(payload)
+        sig = payload.pop("signature", "")
+        if not self.webhook_secret or not sig:
+            return PaymentResult(success=False, error_message="Invalid webhook signature")
+        message = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+        expected = hmac.new(self.webhook_secret.encode(), message, hashlib.sha256).hexdigest()
+        if not hmac.compare_digest(expected, str(sig)):
+            return PaymentResult(success=False, error_message="Invalid webhook signature")
+
         tx_id = payload.get("transaction_id", "")
         status = self._map_status(payload.get("status", "PENDING"))
 

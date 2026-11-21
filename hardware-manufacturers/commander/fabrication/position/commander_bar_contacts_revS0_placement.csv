@@ -1,0 +1,11 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"BT1","DNP","BattContact_Pad_D6.0mm",45.171232,-73.850000,0.000000,bottom
+"BT2","DNP","BattContact_Pad_D6.0mm",58.161232,-74.120000,0.000000,bottom
+"BT3","DNP","BattContact_Pad_D6.0mm",71.161232,-74.400000,0.000000,bottom
+"BT4","DNP","BattContact_Pad_D6.0mm",84.161232,-74.790000,0.000000,bottom
+"BT5","DNP","BattContact_Pad_D6.0mm",97.161232,-75.060000,0.000000,bottom
+"BT6","DNP","BattContact_Pad_D6.0mm",110.161232,-75.340000,0.000000,bottom
+"R1","NTC10K_B3950","R_0402_1005Metric",53.900000,-77.400000,90.000000,bottom
+"R2","NTC10K_B3950","R_0402_1005Metric",79.900000,-77.400000,90.000000,bottom
+"R3","NTC10K_B3950","R_0402_1005Metric",105.900000,-77.400000,90.000000,bottom
+"J1","DNP","BarContacts_Castellated_11",76.810000,-78.600000,0.000000,top

@@ -15,6 +15,7 @@ the package says so in its name and in its read-me.
 """
 import csv
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -31,6 +32,10 @@ COMMANDER = os.path.normpath(os.path.join(ROOT, "..", ".."))
 KBIN = os.environ.get("KICAD_BIN", r"C:/Program Files/KiCad/10.0/bin")
 KCLI = os.path.join(KBIN, "kicad-cli" + (".exe" if os.name == "nt" else ""))
 NL = chr(10)
+COPPER = {2: "F.Cu / B.Cu",
+          4: "F.Cu sig / In1 GND / In2 5 V / B.Cu sig",
+          6: "F.Cu sig / In1 GND / In2 sig / In3 power / In4 GND / B.Cu sig",
+          8: "F.Cu sig / In1 GND / In2 sig / In3 power / In4 GND / In5 sig / In6 GND / B.Cu sig"}
 
 
 def run(cmd):
@@ -39,11 +44,39 @@ def run(cmd):
         raise SystemExit("FAILED: " + " ".join(cmd) + NL + r.stdout[-800:] + r.stderr[-800:])
 
 
+def jlc_package(fp):
+    """KiCad footprint name -> what JLC's BOM matcher understands.  'C_0402_1005Metric' is read by it as the imperial
+    01005 (it takes '1005' for the size), so chip parts get their imperial code alone ('0402'); others stay as they are."""
+    m = re.match(r"^(?:C|R|L|D|LED|Fuse|FB)_(\d{4})_\d{4}Metric", fp)
+    if m:
+        return m.group(1)
+    if fp.startswith("Res "):                   # (the keyboard's Altium names: "Res 0805")
+        return fp.split()[-1]
+    return fp
+
+
+def board_facts(txt):
+    """(thickness mm, outline width, outline height) read from the board file: no pcbnew needed.  Only the board's
+    own Edge.Cuts drawings count (an outline drawn inside a footprint, like the hub's card tongue, does not)."""
+    import re
+    m = re.search(r"\(thickness ([0-9.]+)\)", txt)
+    xs, ys = [], []
+    for item in txt.split(NL + "\t("):          # top-level items only
+        if not item.startswith(("gr_line", "gr_arc", "gr_rect")) or '(layer "Edge.Cuts")' not in item:
+            continue
+        for p in re.finditer(r"\((?:start|mid|end) ([-0-9.]+) ([-0-9.]+)\)", item):
+            xs.append(float(p.group(1)))
+            ys.append(float(p.group(2)))
+    return (float(m.group(1)) if m else None), (max(xs) - min(xs) if xs else 0), (max(ys) - min(ys) if ys else 0)
+
+
 def main():
     pcb = PRJ + ".kicad_pcb"
     txt = open(os.path.join(ROOT, pcb), encoding="utf-8").read()
+    thick, out_w, out_h = board_facts(txt)
+    hub = cpmodel.VARIANT == "hub"
     kbd = cpmodel.VARIANT == "kbd"
-    layers = 2 if kbd else 4 if cpmodel.VARIANT == "strip" else 6
+    layers = 2 + len(set(re.findall(r'"In(\d+)\.Cu" (?:signal|power|mixed|jumper)', txt)))   # as the board file has them
     cu = ["F.Cu"] + [f"In{i}.Cu" for i in range(1, layers - 1)] + ["B.Cu"]
     kbd_open = kbd_drc = None
     if kbd:                                     # complete or not: read from what the build left behind
@@ -82,7 +115,7 @@ def main():
             if (row.get("populate") or "").strip().upper() == "DNP":
                 continue
             refs = row["references"].split()
-            w.writerow([row["value"], ",".join(refs), row["footprint"], "", row.get("description", "")])
+            w.writerow([row["value"], ",".join(refs), jlc_package(row["footprint"]), row.get("lcsc", ""), row.get("description", "")])
             lines += 1
             parts += len(refs)
     pos_in = os.path.join(COMMANDER, "fabrication", "position", f"{PRJ}_{REV}_placement.csv")
@@ -103,24 +136,39 @@ def main():
     if os.path.exists(rep_path):
         head = open(rep_path, encoding="utf-8").read().split("nets:")[0].strip().splitlines()
         still_open = NL.join("  " + ln for ln in head)
-    main_only = "" if cpmodel.VARIANT == "strip" else """  - the memory bus (RK3566 to LPDDR4) is NOT routed: it needs the chip vendor's length-matched layout
+    main_only = "" if cpmodel.VARIANT in ("strip", "hub") else """  - the memory bus (RK3566 to LPDDR4) is NOT routed: it needs the chip vendor's length-matched layout
   - the Ethernet head (RJ45, magnetics, PHY) is NOT routed: its isolation boundary has to be drawn by a person
 """
+    if hub:
+        outline = (f"a strip, {out_w:.1f} x {out_h:.1f} mm, plus an M.2 card tongue (19.85 mm wide, 4 mm long, Key M\n"
+                   "                    notch) on its left end; milled")
+        extra = """  card edge         M.2 Key M gold fingers on the left end: ENIG (hard gold if offered), fingers bevelled
+                    20 deg, no copper or solder mask in the key notch - the card plugs into an M.2 socket
+"""
+    elif cpmodel.VARIANT == "strip":
+        outline = f"a strip, about {out_w:.1f} x {out_h:.1f} mm, milled"
+        extra = ""
+    else:
+        outline = (f"a column, about {out_w:.1f} x {out_h:.1f} mm (rounded corners), milled, with a small tab under\n"
+                   "                    the M.2 socket; one RJ45 notch")
+        extra = ""
+    finest = ("USB5744 / USB2517 QFN (0.4 / 0.5 mm), 0.5 mm-pitch Type-C muxes, nine USB-C receptacles"
+              if hub else "FCCSP-565 with 0.40 mm ball pitch, BGA-200 (0.65 x 0.8 mm), BGA-153 (0.5 mm), QFN 0.35 mm")
     readme = f"""{PRJ} {REV} - QUOTATION PACKAGE - NOT FOR MANUFACTURE
 
 These files are for getting a PRICE. Do not let a fabricator build from them: the routing is not finished.
 
 Board
-  layers            {layers}, 1.2 mm, FR-4
-  outline           L-shaped, about 324.8 x 138.4 mm (rounded corners), milled; one RJ45 notch
-  copper            {"F.Cu sig / In1 GND / In2 5 V / B.Cu sig" if layers == 4 else "F.Cu sig / In1 GND / In2 sig / In3 power / In4 GND / B.Cu sig"}
+  layers            {layers}, {thick if thick else "?"} mm, FR-4
+  outline           {outline}
+  copper            {COPPER[layers]}
   what to quote     smallest track / gap 0.09 / 0.09 mm, smallest via 0.25 mm pad / 0.15 mm hole,
-                    via-in-pad (filled, capped) under the 0.4 mm-pitch BGA, impedance-controlled stack-up
-                    (the fine features are used under the BGA packages only; elsewhere tracks are 0.10 mm or
+                    {"impedance-controlled stack-up (USB 3 pairs)" if hub else "via-in-pad (filled, capped) under the 0.4 mm-pitch BGA, impedance-controlled stack-up"}
+                    (the fine features are used under the {"QFN hubs" if hub else "BGA packages"} only; elsewhere tracks are 0.10 mm or
                     wider and vias 0.45 / 0.20 mm or larger)
-Assembly
+{extra}Assembly
   parts placed      {parts} on {lines} BOM lines, both sides ({top} top, {bottom} bottom) - including DNP positions in the CPL
-  finest packages   FCCSP-565 with 0.40 mm ball pitch, BGA-200 (0.65 x 0.8 mm), BGA-153 (0.5 mm), QFN 0.35 mm
+  finest packages   {finest}
   not in the BOM    manufacturer part numbers / LCSC numbers: values and packages only, so the assembler's
                     price for parts is an estimate until they are filled in
 Files

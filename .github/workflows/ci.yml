@@ -294,3 +294,46 @@ jobs:
             exit 1
           fi
           echo "All dot-directories are either tracked or ignored."
+
+  # ═══ Security regression tests ══════════════════════════
+  # Guards the Phase 0 fixes: authentication on every backend route, no
+  # password-less login, no leaked reset links, the Sunshine SSRF guard,
+  # fail-closed payment webhooks and the COFP 48-hour timelock.
+
+  security-tests:
+    name: Security regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi httpx requests python-dotenv pydantic email-validator \
+            python-multipart motor "passlib[bcrypt]" python-jose pymongo "web3[tester]"
+          mkdir -p "$RUNNER_TEMP/sol" && cd "$RUNNER_TEMP/sol" && npm init -y >/dev/null && npm i --silent solc@0.8.28
+
+      - name: Payment webhooks fail closed
+        run: python -m unittest tests.unit.test_payment_webhooks
+
+      - name: Root backend authentication and authorisation
+        working-directory: coffeepie_backend
+        run: python -m unittest tests.test_security
+
+      - name: Proxmox backend login, reset and SSRF guard
+        working-directory: coffeepie_backend/proxmox_backend
+        run: python -m unittest tests.test_auth_routes
+
+      - name: COFP token governance
+        run: |
+          NODE_PATH="$RUNNER_TEMP/sol/node_modules" node blockchain/tests/compile.js \
+            blockchain/COFP_Token.sol "$RUNNER_TEMP/cofp.json"
+          COFP_ARTIFACT="$RUNNER_TEMP/cofp.json" python -m unittest blockchain.tests.test_cofp_timelock

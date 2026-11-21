@@ -1,0 +1,11 @@
+# Power button (2026-11-18/19, user's request): the keyboard's T16 - top row, last column, the orange power keycap.
+# The keyboard microcontroller reads that optical key (also while the board is off: the keyboard is fed from
+# VCC5V_BUS over its USB-C) and pulls PMIC_PWRON low over a 2-wire cable from the keyboard's J202 to J22 here, the way
+# a PC's front-panel button reaches its motherboard.  The RK817's power-key logic is unchanged: a press switches the
+# board on; while it runs a short press is a power-key event for the OS, about 6 s held cuts the power.
+# J22 replaces the side-operated tact switch SW3; for bring-up or service, short J22's two pins (tweezers).
+# (A panel-mount button in the codec cover was looked at first: no 12-19 mm one fits - 12 mm of room under the cover.)
+SHEET pmic
+J22 JST_SH2_PWR 1=PMIC_PWRON 2=GND
+# the line leaves the board: ESD at the connector
+ED13 ESD:BTR04G02 PMIC_PWRON GND

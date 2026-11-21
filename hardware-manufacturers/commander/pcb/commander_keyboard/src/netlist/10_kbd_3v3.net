@@ -1,0 +1,22 @@
+# The matrix on the RP2040's 3.3 V (2026-11-19, see 01_kbd_mcu.net): changes to parts the Altium design's generated
+# files (02-08) declare.
+SHEET kbd_mcu
+# the 16 column pull-ups: 10 k to VCC3V3 instead of VCC5 (the RP2040's inputs take no more than 3.3 V)
+OVERRIDE R169 1=VCC3V3
+OVERRIDE R170 1=VCC3V3
+OVERRIDE R171 1=VCC3V3
+OVERRIDE R172 1=VCC3V3
+OVERRIDE R173 1=VCC3V3
+OVERRIDE R174 1=VCC3V3
+OVERRIDE R175 1=VCC3V3
+OVERRIDE R176 1=VCC3V3
+OVERRIDE R177 1=VCC3V3
+OVERRIDE R178 1=VCC3V3
+OVERRIDE R179 1=VCC3V3
+OVERRIDE R180 1=VCC3V3
+OVERRIDE R181 1=VCC3V3
+OVERRIDE R182 1=VCC3V3
+OVERRIDE R183 1=VCC3V3
+OVERRIDE R184 1=VCC3V3
+# Q1's base resistor: a 3.3 V output through 1 k gives about 2.5 mA, too little for the 0.56 A of the 84 LEDs
+OVERRIDE R185 value=330R_0805

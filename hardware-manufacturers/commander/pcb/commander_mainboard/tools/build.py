@@ -80,6 +80,36 @@ def main():
         os.makedirs(os.path.join(COMMANDER, sub), exist_ok=True)
 
     sch_only = cpmodel.VARIANT in ("kbmcu", "hat")    # schematic only: a block for another PCB / a board not laid out yet
+    if cpmodel.VARIANT == "hub":
+        # The hub board (branch m2-hub): its board is NOT generated - tools/hub_board.py cuts it out of the routed
+        # mainboard strip.  This builds the schematic and, when the board exists, checks it against the schematic.
+        run("USB bay netlists + card edge", py("gen_usb_netlists.py"))
+        run("design model check", py("cpmodel.py"))
+        run("project file", py("gen_project.py"))
+        run("custom footprints", py("gen_footprints.py"))
+        run("symbols + schematic", py("gen_schematic.py"))
+        run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", PRJ + ".kicad_sch"], ok_codes=(0, 5))
+        run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", PRJ + ".kicad_sch"])
+        if os.path.exists(os.path.join(ROOT, PRJ + ".kicad_pcb")):
+            run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)
+            # (the pours are refilled by KiCad itself and saved: fills left over from the cut are stale)
+            run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all",
+                        "-o", "build/drc.rpt", PRJ + ".kicad_pcb"], ok_codes=(0, 5))
+            print("DRC:", summarize("build/drc.rpt") or "clean")
+            pcb, pos = PRJ + ".kicad_pcb", os.path.join(COMMANDER, "fabrication", "position")
+            run("placement file", [KCLI, "pcb", "export", "pos", "--format", "csv", "--units", "mm", "--side", "both",
+                                   "-o", os.path.join(pos, f"{PRJ}_{REV}_placement.csv"), pcb])
+            run("assembly drawing, top", [KCLI, "pcb", "export", "pdf", "--mode-single",
+                                          "--layers", "F.Cu,F.SilkS,F.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_top.pdf"), pcb])
+            run("assembly drawing, bottom", [KCLI, "pcb", "export", "pdf", "--mode-single", "--mirror",
+                                             "--layers", "B.Cu,B.SilkS,B.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
+            run("BOM", py("gen_bom.py"))
+            run("the boards in one view, for looking at only (pcb/commander_assembly)", kpy("make_assembly_view.py"), report_only=True)
+        run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), PRJ + ".kicad_sch"])
+        print("ERC:", summarize("build/erc.rpt") or "clean")
+        if FINDINGS:
+            raise SystemExit("CHECKS WITH FINDINGS: " + "; ".join(FINDINGS))
+        return
     if sch_only:
         run("design model check", py("cpmodel.py"))
         run("project file", py("gen_project.py"))
@@ -90,6 +120,66 @@ def main():
         if cpmodel.VARIANT == "hat":
             run("BOM", py("gen_bom.py"))
         print("ERC:", summarize("build/erc.rpt") or "clean")
+        return
+    if cpmodel.SMALL:
+        # The two-layer module boards (battery, numpad, touchpad, 2026-11-16): schematic from src/netlist, board from
+        # tools/small_board.py (outline from the chassis model, placement, touchpad electrodes, routing, ground pours).
+        sch, pcb = PRJ + ".kicad_sch", PRJ + ".kicad_pcb"
+        run("design model check", py("cpmodel.py"))
+        run("project file", py("gen_project.py"))
+        run("symbols + schematic", py("gen_schematic.py"))
+        if "--keep-board" not in sys.argv:
+            run("board: outline, placement" + (", electrodes" if cpmodel.VARIANT == "touch" else ""), kpy("small_board.py", "--stage", "place"))
+            run("board: routing, ground pours", kpy("small_board.py", "--stage", "route"))
+        run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", sch], ok_codes=(0, 5))
+        run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", sch])
+        run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)
+        run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all", "-o", "build/drc.rpt", pcb], ok_codes=(0, 5))
+        run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), sch])
+        pos = os.path.join(COMMANDER, "fabrication", "position")
+        run("placement file", [KCLI, "pcb", "export", "pos", "--format", "csv", "--units", "mm", "--side", "both",
+                               "-o", os.path.join(pos, f"{PRJ}_{REV}_placement.csv"), pcb])
+        run("assembly drawing, top", [KCLI, "pcb", "export", "pdf", "--mode-single",
+                                      "--layers", "F.Cu,F.SilkS,F.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_top.pdf"), pcb])
+        run("BOM", py("gen_bom.py"))
+        print()
+        print("ERC:", summarize("build/erc.rpt") or "clean")
+        print("DRC:", summarize("build/drc.rpt") or "clean")
+        if FINDINGS:
+            print("CHECKS WITH FINDINGS: " + "; ".join(FINDINGS))
+            raise SystemExit(1)
+        return
+    if cpmodel.VARIANT == "cpuram":
+        # The processor and its memory on a board of their own (2026-11-18): sheets 11-13 of the mainboard unchanged
+        # (src/netlist/shared.txt), the other balls NC; 10 layers, the memory bus routed by tools/cpu_ram_board.py.
+        sch, pcb = PRJ + ".kicad_sch", PRJ + ".kicad_pcb"
+        run("the processor's unused balls (src/netlist/90_soc_unused.net)", kpy("cpu_ram_board.py", "--stage", "netlist"))
+        run("design model check", py("cpmodel.py"))
+        run("project file", py("gen_project.py"))
+        run("custom footprints", py("gen_footprints.py"))
+        run("symbols + schematic", py("gen_schematic.py"))
+        if "--keep-board" not in sys.argv:
+            run("board: outline, the two packages, supply vias", kpy("cpu_ram_board.py", "--stage", "place"))
+            run("board: pass 1, the memory bus and the eMMC (negotiated routing)", kpy("cpu_ram_board.py", "--stage", "route"))
+            run("board: the power section, the ports and every other part", kpy("cpu_ram_board.py", "--stage", "place2"))
+            run("board: pass 2, the 5 V paths and the switch nodes (0.25 mm)", kpy("cpu_ram_board.py", "--stage", "wide"))
+            run("board: pass 3, everything else (0.09 mm)", kpy("cpu_ram_board.py", "--stage", "rest"))
+            run("board: planes", kpy("cpu_ram_board.py", "--stage", "finish"))
+        run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", sch], ok_codes=(0, 5))
+        run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", sch])
+        run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)
+        run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all", "-o", "build/drc.rpt", pcb], ok_codes=(0, 5))
+        run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), sch])
+        pos = os.path.join(COMMANDER, "fabrication", "position")
+        run("placement file", [KCLI, "pcb", "export", "pos", "--format", "csv", "--units", "mm", "--side", "both",
+                               "-o", os.path.join(pos, f"{PRJ}_{REV}_placement.csv"), pcb])
+        run("BOM", py("gen_bom.py"))
+        print()
+        print("ERC:", summarize("build/erc.rpt") or "clean")
+        print("DRC:", summarize("build/drc.rpt") or "clean")
+        if FINDINGS:
+            print("CHECKS WITH FINDINGS: " + "; ".join(FINDINGS))
+            raise SystemExit(1)
         return
     if cpmodel.VARIANT == "kbd":
         # The keyboard: its board is the Altium design converted to KiCad, with the Arduino Micro module replaced by
@@ -110,7 +200,8 @@ def main():
         run("ERC", [KCLI, "sch", "erc", "--format", "report", "--severity-all", "-o", "build/erc.rpt", sch], ok_codes=(0, 5))
         run("netlist export", [KCLI, "sch", "export", "netlist", "-o", "build/netlist.net", sch])
         run("cross-check model / schematic / board", kpy("check_consistency.py", "build/netlist.net"), report_only=True)
-        run("DRC", [KCLI, "pcb", "drc", "--format", "report", "--severity-all", "-o", "build/drc.rpt", pcb], ok_codes=(0, 5))
+        # (the pours are refilled by KiCad itself and saved: fills computed by the scripts can differ in detail)
+        run("DRC", [KCLI, "pcb", "drc", "--refill-zones", "--save-board", "--format", "report", "--severity-all", "-o", "build/drc.rpt", pcb], ok_codes=(0, 5))
         run("DRC (json)", [KCLI, "pcb", "drc", "--format", "json", "--severity-all", "-o", "build/drc.json", pcb], ok_codes=(0, 5))
         run("schematic PDF", [KCLI, "sch", "export", "pdf", "-o", os.path.join(COMMANDER, "schematics", f"{PRJ}_{REV}_schematic.pdf"), sch])
         pos = os.path.join(COMMANDER, "fabrication", "position")
@@ -121,7 +212,7 @@ def main():
         run("assembly drawing, bottom", [KCLI, "pcb", "export", "pdf", "--mode-single", "--mirror",
                                          "--layers", "B.Cu,B.SilkS,B.Fab,Edge.Cuts", "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
         run("BOM", py("gen_bom.py"))
-        run("both boards in one view, for looking at only (pcb/commander_set)", kpy("make_set_view.py"), report_only=True)
+        run("the boards in one view, for looking at only (pcb/commander_assembly)", kpy("make_assembly_view.py"), report_only=True)
         print()
         print("ERC:", summarize("build/erc.rpt") or "clean")
         print("DRC:", summarize("build/drc.rpt") or "clean")
@@ -174,6 +265,8 @@ def main():
                                      "--layers", "B.Cu,B.SilkS,B.Fab,B.CrtYd,Edge.Cuts,Dwgs.User",
                                      "-o", os.path.join(pos, f"{PRJ}_{REV}_bottom.pdf"), pcb])
     run("BOM", py("gen_bom.py"))
+    if cpmodel.VARIANT == "main":
+        run("the boards in one view, for looking at only (pcb/commander_assembly)", kpy("make_assembly_view.py"), report_only=True)
 
     print()
     print("ERC:", summarize("build/erc.rpt") or "clean")

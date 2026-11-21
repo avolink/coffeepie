@@ -131,14 +131,47 @@ MONGO_INITDB_ROOT_PASSWORD=password
 MONGO_URI=mongodb://root:password@mongo:27017
 MONGO_DB_NAME=serverproxmoxdb
 
-# JWT Configuration
-JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+# JWT Configuration. The service REFUSES TO START if the key is missing, shorter
+# than 32 characters or looks like a placeholder. Generate one:
+#   python3 -c "import secrets; print(secrets.token_urlsafe(48))"
+JWT_SECRET_KEY=<generated-value>
 JWT_ALGORITHM=HS256
 JWT_EXPIRE_MINUTES=30
 
-# Documentation API Key
-DOCS_API_KEY=prx_doc_key_9bL4kM2wP7nR5vX3yC8qT1jF6sD0aE2lH
+# Documentation API key (>= 16 chars; the service refuses to start without it)
+DOCS_API_KEY=<generated-value>
+
+# Administrators: comma-separated user ids and/or e-mails. Only they can list
+# users, manage companies, edit credits (portions), use the raw Proxmox routes
+# (clone/delete/stop/console/send-pin) and the raw snapshot CRUD.
+ADMIN_EMAILS=admin@example.com
+ADMIN_USER_IDS=
+
+# Sunshine PIN pairing. Credentials must be unique per deployment; the target
+# must be a literal IP inside one of these networks (comma-separated CIDRs) or
+# the request is refused. Optional SUNSHINE_CA_BUNDLE enables TLS verification.
+SUNSHINE_USERNAME=<generated-value>
+SUNSHINE_PASSWORD=<generated-value>
+SUNSHINE_ALLOWED_NETWORKS=10.0.0.0/24
 ```
+
+> **Never use `root@pam` for `PROXMOX_USER`.** Create a dedicated API user whose
+> role carries only the privileges this service needs (VM.Allocate, VM.Clone,
+> VM.PowerMgmt, VM.Audit, VM.Console, Datastore.AllocateSpace).
+
+### Access model
+
+| Route group | Who |
+|---|---|
+| `/auth/*`, `POST /users/` (self-registration) | anyone (a new account can never be placed in a company by an anonymous caller) |
+| `/vms/*`, `/users/me*`, `/nodes` (list), `/nodes/.../ip`, `/nodes/.../start`, `/console-url` | any authenticated user (VM routes also check ownership) |
+| `PUT/DELETE /users/{id}` | the user themself (name, age, city, occupation only) or an admin |
+| `GET /companies/{id}`, `/companies/{id}/users` | members of that company or an admin |
+| everything else under `/users`, `/companies`, `/snapshots`, `/terminals` (list), and `/clone-by-name`, `DELETE`/`stop`/`vnc`/`spice`/`config` under `/nodes`, `/sunshine/send-pin` | admins |
+
+The JWT may be sent as `Authorization: Bearer <token>` (preferred) or as the
+legacy `?token=` query parameter the Qt terminal still uses; URLs are logged, so
+new clients should use the header.
 
 ### Environment Variables Explanation
 

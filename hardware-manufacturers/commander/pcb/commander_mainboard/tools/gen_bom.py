@@ -47,19 +47,22 @@ def main():
         origin = "Commander" if (c.sheet in NEW_SHEETS or NEW_REFS.match(c.ref)) else "Radxa ZERO 3E V1.2"
         if cpmodel.VARIANT == "kbd":
             origin = "Arduino Micro circuit (new on this board)" if c.sheet == "kbd_mcu" else "Teclado_V2 (Altium design)"
+        if cpmodel.SMALL:
+            origin = "Commander (new design, 2026-11-16)"
         value = c.value if not c.dnp else "DNP"
-        key = (value, fp, c.desc if c.kind in ("ic", "two") else "", c.dnp, origin)
+        lcsc = cpmodel.PARTS.get(getattr(c, "part", None), {}).get("lcsc", "") if not c.dnp else ""
+        key = (value, fp, c.desc if c.kind in ("ic", "two") else "", c.dnp, origin, lcsc)
         groups.setdefault(key, []).append(c.ref)
     os.makedirs(OUTDIR, exist_ok=True)
     out = os.path.join(OUTDIR, f"{cpmodel.PRJ}_{cpmodel.REV}_bom.csv")
     rows = []
-    for (value, fp, desc, dnp, origin), refs in groups.items():
+    for (value, fp, desc, dnp, origin, lcsc), refs in groups.items():
         refs.sort(key=natural)
-        rows.append([len(refs), value, fp.split(":", 1)[-1], desc, "DNP" if dnp else "", origin, " ".join(refs)])
+        rows.append([len(refs), value, fp.split(":", 1)[-1], desc, "DNP" if dnp else "", origin, " ".join(refs), lcsc])
     rows.sort(key=lambda r: (r[4] == "DNP", natural(r[6].split()[0])))
     with open(out, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["qty", "value", "footprint", "description", "populate", "origin", "references"])
+        w.writerow(["qty", "value", "footprint", "description", "populate", "origin", "references", "lcsc"])
         w.writerows(rows)
     fitted = sum(r[0] for r in rows if r[4] != "DNP")
     dnp = sum(r[0] for r in rows if r[4] == "DNP")

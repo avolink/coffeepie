@@ -12,6 +12,8 @@ Netlist syntax (one statement per line, '#' starts a comment):
   P <REF> pin=net ...               more pin assignments for an existing part
   N <REF> <net> pin pin ...         same, written net-first (handy for supplies)
   NC <REF> pin pin ...              pins deliberately left unconnected
+  OVERRIDE <REF> pin=net ...        re-point a pin a GENERATED file assigned (a later file; listed in the check);
+                                    value=<VALUE> gives such a part a new value (same footprint)
   CAPS C<a>-C<b> <VALUE> <n1> <n2>  a run of identical two-pin parts
   TP<n> TP <net>                    test point
 Value "DNP" (or PART:DNP) marks a part as not populated.
@@ -27,9 +29,20 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.environ.get("CP_ROOT") or os.path.join(HERE, ".."))
 PRJ = os.path.basename(ROOT)                    # project name = directory name = KiCad file stem
 VARIANT = ("strip" if PRJ.endswith("strip_test") else "kbmcu" if PRJ.endswith("keyboard_mcu")
+           else "hub" if PRJ.endswith("commander_hub")
            else "kbd" if PRJ.endswith("commander_keyboard")
-           else "hat" if PRJ.endswith("poe_hat") else "main")
-REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0"}.get(VARIANT, "revA1")
+           else "hat" if PRJ.endswith("poe_hat")
+           else "batt" if PRJ.endswith("commander_battery")
+           else "numpad" if PRJ.endswith("commander_numpad")
+           else "touch" if PRJ.endswith("commander_touchpad")
+           else "tray" if PRJ.endswith("commander_tray")
+           else "bar" if PRJ.endswith("commander_bar_bms")
+           else "barcon" if PRJ.endswith("commander_bar_contacts")
+           else "cpuram" if PRJ.endswith("commander_cpu_ram") else "main")
+REV = {"strip": "revT0", "kbmcu": "revK0", "kbd": "revK1", "hat": "revH0", "hub": "revU0",
+       "batt": "revB0", "numpad": "revN0", "touch": "revP0", "tray": "revR0", "bar": "revS0", "barcon": "revS0",
+       "cpuram": "revC0"}.get(VARIANT, "revA1")
+SMALL = VARIANT in ("batt", "numpad", "touch", "tray", "bar", "barcon")  # two-layer module boards built by tools/small_board.py
 NETDIR = os.path.join(ROOT, "src", "netlist")
 MAIN_NETDIR = os.path.normpath(os.path.join(HERE, "..", "src", "netlist"))
 
@@ -120,10 +133,11 @@ def named(spec):
 # --------------------------------------------------------------------------
 PARTS = {
     "RK3566": dict(fp="commander:RK3566_FCCSP-565_15.5x14.4mm", pins=None, desc="Rockchip RK3566 SoC, FCCSP-565"),
-    "LPDDR4_200": dict(fp="Package_BGA:BGA-200_10x14.5mm_Layout12x22_P0.8x0.65mm", pins=None,
-                       desc="LPDDR4 SDRAM 200-ball FBGA, 2 GB (16 Gb) e.g. K4F6E3S4HM / NT6AN512T32"),
-    "EMMC153": dict(fp="Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm", pins=None, fill_nc=True,
-                    desc="eMMC 5.1 153-ball, 16 GB"),
+    # 1 GB / 8 GB since 2026-11-15 (cost target; the 2 GB K4F6E3S4HM and the 16 GB KLMAG1JETD-B041 fit the same footprints)
+    "LPDDR4_200": dict(fp="Package_BGA:BGA-200_10x14.5mm_Layout12x22_P0.8x0.65mm", pins=None, lcsc="C2920231",
+                       desc="LPDDR4 SDRAM 200-ball FBGA, 1 GB (8 Gb, x32 dual channel): Samsung K4F8E3S4HD-MGCL"),
+    "EMMC153": dict(fp="Package_BGA:LFBGA-153_11.5x13mm_Layout14x14_P0.5mm", pins=None, fill_nc=True, lcsc="C499918",
+                    desc="eMMC 5.1 153-ball, 8 GB: Samsung KLM8G1GETF-B041"),
     "RK817": dict(fp="Package_DFN_QFN:ArtInChip_QFN-68-1EP_7x7mm_P0.35mm_EP5.49x5.49mm", desc="Rockchip RK817-5 PMIC + codec, QFN-68", pins=named(
         "1:SCL 2:SDA 3:LDO7 4:VCC7 5:LDO8 6:LDO9 7:INT 8:FB2 9:SW2 10:VCC2 11:VCC1 12:SW1 13:FB1 14:LRCLK 15:BCLK 16:MCLK 17:SDI "
         "18:SDO/PDMDATA 19:PDMCLK 20:LDO3 21:LDO2 22:VCC5 23:LDO1 24:VCC3 25:SW3 26:VBUCK3 27:FB3 28:LDO4 29:LDO5 30:VCC6 31:LDO6 "
@@ -151,13 +165,36 @@ PARTS = {
     "MICROSD": dict(fp="Connector_Card:microSD_HC_Molex_104031-0811", desc="microSD push-push socket",
                     padmap={"CD": ["9"], "SH": ["SH", "10"]},
                     pins=named("1:DAT2 2:CD/DAT3 3:CMD 4:VDD 5:CLK 6:VSS 7:DAT0 8:DAT1 CD:DET SH:SHIELD")),
-    "USBC16": dict(fp="Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12", desc="USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)",
+    # HOAUC HYCW498-USBC16-735B is a TYPE-C-31-M-12 clone: same land pattern (pad row 1.45 mm behind the locating holes,
+    # shell slots 0.53 / 3.65 mm from them, outer pads 0.05 mm further in) - the HRO footprint stays
+    "USBC16": dict(fp="Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12", lcsc="C42400252",
+                   desc="USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)",
                    padmap={"SH": ["SH"]},
                    pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
-    "USBC24": dict(fp="Connector_USB:USB_C_Receptacle_JAE_DX07S024WJ1R350", desc="USB-C receptacle, full-featured 24-pin (JAE DX07S024WJ1R350)",
+    # numpad / touchpad since 2026-11-18: mid mount in a notch of the front edge, centred, for a USB-C to USB-C cable
+    # (footprint and box model by tools/usbc_mid_fp.py; 1.6 mm board, the body flush with the underside)
+    "USBC16_MID": dict(fp="commander:USB_C_Receptacle_HCTL_HC-TYPE-C-16P-CB1.6", lcsc="C2894902",
+                       desc="USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 1.6 mm board (HCTL HC-TYPE-C-16P-CB1.6)",
+                       padmap={"SH": ["SH"]},
+                       pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
+    # tray carrier since 2026-11-19: the same mid mount for a 0.8 mm board, centred in a notch of the strip's inner end
+    "USBC16_MID08": dict(fp="commander:USB_C_Receptacle_BXCONN_UC01-0B16F08011", lcsc="C36936521",
+                         desc="USB-C receptacle, USB 2.0, 16-pin, mid mount in a board notch, 0.8 mm board (BXCONN UC01-0B16F08011)",
+                         padmap={"SH": ["SH"]},
+                         pins=named("A1:GND A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A12:GND B1:GND B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B12:GND SH:SHIELD")),
+    "USBC24": dict(fp="commander:USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B", lcsc="C42400261",
+                   desc="USB-C receptacle, full-featured 24-pin, right angle, top mount (HOAUC HYCW275-USBC24-050B)",
                    padmap={"SH": ["SH"]},
                    pins=named("A1:GND A2:TX1+ A3:TX1- A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A10:RX2- A11:RX2+ A12:GND "
                               "B1:GND B2:TX2+ B3:TX2- B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B10:RX1- B11:RX1+ B12:GND SH:SHIELD")),
+    # hub bays since 2026-11-16: sink (mid) mount, so the hub board can sit 2 mm higher on the H4.2 M.2 socket while the
+    # receptacles stay on the expansion cards' plug axis; not stocked at LCSC (consigned)
+    "USBC24_SINK": dict(fp="commander:USB_C_Receptacle_Amphenol_12402072E512A",
+                        desc="USB-C receptacle, full-featured 24-pin, sink (mid) mount in a board notch, centre height -0.10 mm on a "
+                             "0.8 mm board (Amphenol 12402072E512A, USB4 Gen3)",
+                        padmap={"SH": ["SH"]},
+                        pins=named("A1:GND A2:TX1+ A3:TX1- A4:VBUS A5:CC1 A6:D+ A7:D- A8:SBU1 A9:VBUS A10:RX2- A11:RX2+ A12:GND "
+                                   "B1:GND B2:TX2+ B3:TX2- B4:VBUS B5:CC2 B6:D+ B7:D- B8:SBU2 B9:VBUS B10:RX1- B11:RX1+ B12:GND SH:SHIELD")),
     "USB5744": dict(fp="Package_DFN_QFN:QFN-56-1EP_7x7mm_P0.4mm_EP5.6x5.6mm", desc="Microchip USB5744 4-port USB 3.2 Gen 1 hub, VQFN-56", pins=named(
         "1:USB2DN_DP1 2:USB2DN_DM1 3:USB3DN_TXDP1 4:USB3DN_TXDM1 5:VDD12 6:USB3DN_RXDP1 7:USB3DN_RXDM1 8:USB2DN_DP2 9:USB2DN_DM2 "
         "10:USB3DN_TXDP2 11:USB3DN_TXDM2 12:VDD12 13:USB3DN_RXDP2 14:USB3DN_RXDM2 15:VDD12 16:VDD33 17:USB2DN_DP3 18:USB2DN_DM3 "
@@ -215,6 +252,26 @@ PARTS = {
         "14:VCC 34:VCC 2:UVCC 7:VBUS 24:AVCC 44:AVCC 42:AREF 6:UCAP 3:D- 4:D+ 13:RESET_N 33:HWB/PE2 17:XTAL1 16:XTAL2 "
         "8:PB0 9:PB1 10:PB2 11:PB3 28:PB4 29:PB5 30:PB6 12:PB7 31:PC6 32:PC7 18:PD0 19:PD1 20:PD2 21:PD3 25:PD4 22:PD5 26:PD6 27:PD7 "
         "1:PE6 41:PF0 40:PF1 39:PF4 38:PF5 37:PF6 36:PF7 5:UGND 15:GND 23:GND 35:GND 43:GND 45:EP")),
+    # since 2026-11-15 (cost): STC8H8K64U, 5 V, crystal-less full-speed USB with its own USB boot loader (P3.2 low at
+    # power-up), LQFP-32; pinout from the JLCEDA/EasyEDA Official Library symbol of C5210757 (https://easyeda.com)
+    "STC8H_LQFP32": dict(fp="Package_QFP:LQFP-32_7x7mm_P0.8mm", lcsc="C5210757",
+                         desc="STC STC8H8K64U-45I-LQFP32, 8051 MCU, 5 V, crystal-less USB 2.0 full speed, USB boot loader", pins=named(
+        "1:P1.0 2:P1.1 3:P1.4 4:P1.5 5:P1.6 6:P1.7 7:P1.3 8:UCAP 9:P5.4 10:VCC 11:VREF 12:GND 13:P3.0/D- 14:P3.1/D+ 15:P3.2/BOOT "
+        "16:P3.3 17:P3.4 18:P3.5 19:P3.6 20:P3.7 21:P2.0 22:P2.1 23:P2.2 24:P2.3 25:P2.4 26:P2.5 27:P2.6 28:P2.7 29:P0.0 30:P0.1 "
+        "31:P0.2 32:P0.3")),
+    # since 2026-11-19 (QMK / VIA): Raspberry Pi RP2040, QFN-56 7 x 7 mm, 3.3 V I/O (NOT 5 V tolerant); pin table of
+    # KiCad's own RP2040 symbol (MCU_RaspberryPi), the exposed pad 57 is the chip's only ground
+    "RP2040": dict(fp="Package_DFN_QFN:QFN-56-1EP_7x7mm_P0.4mm_EP3.2x3.2mm", lcsc="C2040",
+                   desc="Raspberry Pi RP2040, dual Cortex-M0+ 133 MHz, 264 kB SRAM, external QSPI flash, USB 1.1 device, QFN-56 7 x 7", pins=named(
+        "1:IOVDD1 2:GPIO0 3:GPIO1 4:GPIO2 5:GPIO3 6:GPIO4 7:GPIO5 8:GPIO6 9:GPIO7 10:IOVDD2 11:GPIO8 12:GPIO9 13:GPIO10 "
+        "14:GPIO11 15:GPIO12 16:GPIO13 17:GPIO14 18:GPIO15 19:TESTEN 20:XIN 21:XOUT 22:IOVDD3 23:DVDD1 24:SWCLK 25:SWDIO "
+        "26:RUN 27:GPIO16 28:GPIO17 29:GPIO18 30:GPIO19 31:GPIO20 32:GPIO21 33:IOVDD4 34:GPIO22 35:GPIO23 36:GPIO24 "
+        "37:GPIO25 38:GPIO26/ADC0 39:GPIO27/ADC1 40:GPIO28/ADC2 41:GPIO29/ADC3 42:IOVDD5 43:ADC_AVDD 44:VREG_VIN "
+        "45:VREG_VOUT 46:USB_DM 47:USB_DP 48:USB_VDD 49:IOVDD6 50:DVDD2 51:QSPI_SD3 52:QSPI_SCLK 53:QSPI_SD0 54:QSPI_SD2 "
+        "55:QSPI_SD1 56:QSPI_SS 57:GND")),
+    "QSPI_FLASH_SO8": dict(fp="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", lcsc="C2922792",
+                           desc="GigaDevice GD25Q16ESIGR 16 Mbit (2 MB) quad SPI NOR flash, 3.3 V, SOP-8 150 mil", pins=named(
+        "1:CS# 2:SO/IO1 3:WP#/IO2 4:VSS 5:SI/IO0 6:SCLK 7:HOLD#/IO3 8:VCC")),
     "ISP2x3_PADS": dict(fp="commander:ISP_2x3_P2.54mm_Pads", desc="AVR ISP, six bare pads on the 2 x 3, 2.54 mm grid (for a pogo-pin adapter)",
                        pins=named("1:MISO 2:VCC 3:SCK 4:MOSI 5:RESET 6:GND")),
     # footprint taken over from the Altium design; pin roles are inferred from the circuit around the switch
@@ -230,20 +287,109 @@ PARTS = {
                                "21:P21 22:P22 23:P23 24:P24 25:GND 26:P26 27:P27 28:P28 29:P29 30:GND 31:P31 32:P32 33:P33 34:GND 35:P35 36:P36 37:P37 38:P38 39:GND 40:P40")),
     "JST_SH4_UART": dict(fp="Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal", desc="JST-SH 4-pin 1.0 mm, horizontal, 2.95 mm tall (debug UART)",
                          pins=named("1:GND 2:TX 3:RX 4:3V3")),
+    "JST_SH2_PWR": dict(fp="Connector_JST:JST_SH_SM02B-SRSS-TB_1x02-1MP_P1.00mm_Horizontal",
+                        desc="JST-SH 2-pin 1.0 mm, horizontal, 2.95 mm tall: the keyboard's power key (1 power key, 2 GND), the same part on the keyboard (J202) and the mainboard (J22)",
+                        pins=named("1:PWRKEY 2:GND")),
     "HDR1x4": dict(fp="Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical", desc="pin header 1x4 2.54 mm", pins=named("1:GND 2:TX 3:RX 4:3V3")),
+    # --- mainboard <-> hub board link (branch m2-hub, pinout in tools/hub_link.py) ---
+    # H4.2 since 2026-11-16 (was APCI0146 H2.3, same land pattern): the hub's card edge sits about 2.4 mm above the
+    # mainboard instead of 0.3, which puts the hub board where the chassis' slot is
+    "M2_SOCKET_M": dict(fp="commander:M2_Socket_KeyM_LOTES_APCI0146", padmap={"MP": ["MP"]}, lcsc="C841661",
+                        desc="M.2 Key M socket H4.2, top mount, 4.05 mm, 67 contacts 0.5 mm, 0.5 A each, 25 cycles: LOTES APCI0107-P001A "
+                             "(LCSC C841661; land pattern identical to APCI0146). Carries the hub board link (tools/hub_link.py), not an M.2 slot",
+                        pins=None),
+    "M2_EDGE_M": dict(fp="commander:M2_CardEdge_KeyM_Tongue",
+                      desc="M.2 Key M card-edge fingers, 0.8 mm board, ENIG, bevelled (the hub board's plug into J41 on the mainboard)",
+                      pins=None),
     # --- two-terminal parts with an explicit part name ---
     "ESD": dict(fp="Diode_SMD:D_0402_1005Metric", two="tvs", desc="ESD diode, bidirectional, 0402"),
     "TVS": dict(fp="Diode_SMD:D_SOD-123F", two="tvs", desc="TVS, bidirectional"),
     "TVS_UNI": dict(fp="Diode_SMD:D_SMA", two="diode", desc="TVS, unidirectional, SMA", padmap={"A": ["2"], "K": ["1"]}),
     "SCHOTTKY": dict(fp="Diode_SMD:D_SMA", two="diode", desc="Schottky diode", padmap={"A": ["2"], "K": ["1"]}),
     "SCHOTTKY_PWR": dict(fp="Diode_SMD:D_PowerDI-5", two="diode", desc="Schottky rectifier 10 A", padmap={"A": ["2"], "K": ["1"]}),
+    "SCHOTTKY_123W": dict(fp="Diode_SMD:Nexperia_CFP3_SOD-123W", two="diode", lcsc="C5709679",
+                          desc="Nexperia PMEG4030ER-QX Schottky 40 V 3 A, SOD-123W (bay VBUS back-feed blocking)", padmap={"A": ["2"], "K": ["1"]}),
     "DIODE": dict(fp="Diode_SMD:D_SOD-123", two="diode", desc="diode", padmap={"A": ["2"], "K": ["1"]}),
     "LED": dict(fp="LED_SMD:LED_0603_1608Metric", two="led", desc="LED 0603", padmap={"A": ["2"], "K": ["1"]}),
     "PTC": dict(fp="Fuse:Fuse_1206_3216Metric", two="r", desc="resettable fuse"),
     "TACT": dict(fp="Button_Switch_SMD:SW_Push_1P1T_NO_CK_KMR2", two="sw", desc="tact switch"),
     "TACT_SIDE": dict(fp="Button_Switch_SMD:SW_SPST_EVQP7A", two="sw", desc="tact switch, side-operated (Panasonic EVQ-P7A, 3.5 x 2.9 x 1.35 mm)"),
     "XTAL2": dict(fp="Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm", two="xtal", desc="32.768 kHz crystal, 3215"),
+    # --- battery module (project commander_battery) and tray modules (commander_numpad, commander_touchpad), 2026-11-16;
+    #     pinouts from the JLCEDA/EasyEDA Official Library symbols of the LCSC parts named (https://easyeda.com) ---
+    "MT3608": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C84817", desc="Aerosemi MT3608 boost converter 2 A switch, 1.2 MHz, SOT-23-6",
+                   pins=named("1:SW 2:GND 3:FB 4:EN 5:IN 6:NC")),
+    "TPS563201": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C116592", desc="TI TPS563201 synchronous buck 4.5-17 V, 3 A, Eco-mode (no sinking at light load), SOT-23-6",
+                      pins=named("1:GND 2:SW 3:VIN 4:VFB 5:EN 6:VBST")),
+    "HT7333": dict(fp="Package_TO_SOT_SMD:SOT-89-3", lcsc="C347191", desc="HT7333-A 3.3 V LDO, 12 V in, 4 uA quiescent, SOT-89",
+                   pins=named("1:GND 2:VIN 3:VOUT")),
+    "INA181A1": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C2058943", desc="TI INA181A1 bidirectional current-sense amplifier, gain 20, SOT-23-6",
+                     pins=named("1:OUT 2:GND 3:IN+ 4:IN- 5:REF 6:VS")),
+    "BAT54C": dict(fp="Package_TO_SOT_SMD:SOT-23", desc="BAT54C dual Schottky, common cathode, SOT-23", pins=named("1:A1 2:A2 3:K")),
+    "IQS550": dict(fp="Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm", lcsc="C5271144",
+                   desc="Azoteq IQS550-B000 projected-capacitance trackpad controller, 15 Tx x 10 Rx, I2C, QFN-48", pins=named(
+        "1:Tx14 2:PGM 3:SW_IN 4:NC4 5:SDA 6:SCL 7:VDDHI 8:VSS 9:VREG 10:NRST 11:RDY 12:NC12 13:Rx0A 14:Rx0B 15:Rx1A 16:Rx1B "
+        "17:Rx2A 18:Rx2B 19:Rx3A 20:Rx3B 21:Rx4A 22:Rx4B 23:Rx5A 24:Rx5B 25:Rx6A 26:Rx6B 27:Rx7A 28:Rx7B 29:Rx8A 30:Rx8B "
+        "31:Rx9A 32:Rx9B 33:Tx0 34:Tx1 35:Tx2 36:Tx3 37:VSSIO 38:VDDIO 39:Tx4 40:Tx5 41:Tx6 42:Tx7 43:Tx8 44:Tx9 45:Tx10 "
+        "46:Tx11 47:Tx12 48:Tx13 49:EP")),
+    "PTC1812": dict(fp="Fuse:Fuse_1812_4532Metric", two="r", desc="resettable fuse, 1812"),
+    "TACT12": dict(fp="Button_Switch_THT:SW_PUSH-12mm", two="sw", lcsc="C10861",
+                   desc="tactile switch 12 x 12 mm, through-hole (12x12x4.3 or x5 body for the 8 mm module; 12X12X7.3 = C10861 is the same footprint)"),
+    "DOME12": dict(fp="commander:Dome_12mm_4Leg", two="sw",
+                   desc="12 mm four-leg metal snap dome on gold pads (dome sheet, not soldered): centre = key, legs = ground"),
+    "JST_PH4": dict(fp="Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical", lcsc="C131334", desc="JST PH 4-pin 2.0 mm, vertical (2 A per contact)",
+                    pins=named("1:P1 2:P2 3:P3 4:P4")),
+    "JST_PH2": dict(fp="Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical", desc="JST PH 2-pin 2.0 mm, vertical (B2B-PH-K-S)",
+                    pins=named("1:P1 2:P2")),
+    # --- tray carrier for two Framework Laptop 16 B-size input modules (project commander_tray), 2026-11-16 ---
+    "CH334P": dict(fp="Package_DFN_QFN:QFN-16-1EP_3x3mm_P0.5mm_EP1.7x1.7mm", lcsc="C5373042",
+                   desc="WCH CH334P 4-port USB 2.0 hub (MTT), internal 3.3 V regulator and crystal load capacitors, QFN-16 3 x 3",
+                   pins=named("1:XO 2:XI 3:DM4 4:DP4 5:DM3 6:DP3 7:DM2 8:DP2 9:DM1 10:DP1 11:DMU 12:DPU 13:RESET#/CDP "
+                              "14:PGANG 15:V5 16:VDD33 17:GND")),
+    "SY6280": dict(fp="Package_TO_SOT_SMD:SOT-23-5", lcsc="C55136",
+                   desc="Silergy SY6280AAC power distribution switch 2.4-5.5 V, current limit 6800 / R_ISET (A, ohm), 0.4-2 A, SOT-23-5",
+                   pins=named("1:OUT 2:GND 3:ISET 4:EN 5:IN")),
+    "ME6211": dict(fp="Package_TO_SOT_SMD:SOT-23-5", lcsc="C82942", desc="Microne ME6211C33M5G 3.3 V LDO 500 mA, SOT-23-5",
+                   pins=named("1:VIN 2:VSS 3:CE 4:NC 5:VOUT")),
+    # the system side of the Framework input-module interface (pinout of github.com/FrameworkComputer/InputModules);
+    # footprint after Framework's Input Module Adapter (CC BY 4.0), CFE BP33242-08200H0-FS
+    "POGO_FW8": dict(fp="commander:Pogo_CFE_BP33242-08200H0-FS_2x4_P2.0mm",
+                     desc="pogo-pin connector 2 x 4, 2.0 mm, 1.6 mm working height, 1 A per pin (CFE BP33242-08200H0-FS), "
+                          "mates the pads of a Framework Laptop 16 input module",
+                     pins=named("1:GND 2:VCC_5V 3:USB_DN 4:BOARD_ID 5:USB_DP 6:SLEEP_N 7:GND 8:VCC_3V3")),
+    # --- front battery bar: BMS board (commander_bar_bms) and its cell-contact board (commander_bar_contacts), 2026-11-16;
+    #     pinouts from the JLCEDA/EasyEDA Official Library symbols of the LCSC parts named (https://easyeda.com) ---
+    "TPS54302": dict(fp="Package_TO_SOT_SMD:SOT-23-6", lcsc="C311983",
+                     desc="TI TPS54302DDCR synchronous buck 4.5-28 V, 3 A, 400 kHz, Eco-mode (no sinking at light load), TSOT-23-6",
+                     pins=named("1:GND 2:SW 3:VIN 4:FB 5:EN 6:BOOT")),
+    "TPS709": dict(fp="Package_TO_SOT_SMD:SOT-23-5", lcsc="C89347", desc="TI TPS70933DBVR 3.3 V LDO 150 mA, 30 V input, 1 uA quiescent, SOT-23-5",
+                   pins=named("1:IN 2:GND 3:EN 4:NC 5:OUT")),
+    "JST_PH5": dict(fp="Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical", desc="JST PH 5-pin 2.0 mm, vertical (B5B-PH-K-S, 2 A per contact)",
+                    pins=named("1:P1 2:P2 3:P3 4:P4 5:P5")),
+    # the joint between the two bar boards: the contact board stands upright on the BMS board's rear edge, its 11
+    # castellated pads soldered to these 11 pads (no part of its own: DNP)
+    "BARJOINT": dict(fp="commander:BarContacts_Joint_11", desc="solder joint to the cell-contact board (11 pads, the contact board's castellations)",
+                     pins=named(" ".join("%d:J%d" % (i, i) for i in range(1, 12)))),
+    "BARJOINT_C": dict(fp="commander:BarContacts_Castellated_11", desc="castellated edge of the cell-contact board (11 half-holes), soldered to the BMS board",
+                       pins=named(" ".join("%d:J%d" % (i, i) for i in range(1, 12)))),
+    # module side of the same interface (numpad, touchpad, 2026-11-17): gold pads only, no part to buy
+    "FW_PADS": dict(fp="commander:FW_InputModule_Pads_2x4",
+                    desc="Framework input-module contacts, module side: 2 x 4 gold pads on the underside (no part: pads only)",
+                    pins=named("1:GND 2:VCC_5V 3:USB_DN 4:BOARD_ID 5:USB_DP 6:SLEEP_N 7:GND 8:VCC_3V3")),
+    "BATT_PAD": dict(fp="commander:BattContact_Pad_D6.0mm", desc="cell contact: ENIG pad 6.0 mm on the board (no part: DNP)", pins=named("1:C")),
 }
+# LCSC / JLCPCB part numbers (checked on lcsc.com / JLC's BOM matcher, 2026-11-15) -> the 'lcsc' column of the BOM and the
+# "LCSC Part #" column of the JLC parts list.  Passives are left to JLC's matcher (it picks Basic parts once the package
+# is written as "0402" etc., see make_quote_package.py); parts without a stocked LCSC number are not listed here.
+LCSC = {
+    "RK3566": "C2943786", "RK817": "C5179490", "RK860": "C19188628", "RTL8211F": "C187932", "TPS23754": "C181651",
+    "TPS2121": "C485916", "FUSB302B": "C132291", "XFMR_FLYBACK": "C24570980", "USB5744": "C633621", "USB2517": "C1521556",
+    "HD3SS3220": "C701817", "TPD4E05U06": "C2827646", "USBLC6-2SC6": "C2827654", "PWRSW": "C3001659",   # AP22804AW5-7
+    "BUCK_SOT235": "C141836",                                                                           # TLV62569DBVR
+}
+for _k, _v in LCSC.items():
+    if _k in PARTS:
+        PARTS[_k].setdefault("lcsc", _v)
 # small-signal Schottky / service-port parts that are not SMA
 FP_OVERRIDE = {
     "D6": "Diode_SMD:D_SOD-523",      # 1N5819WT
@@ -277,6 +423,7 @@ class Design:
         self.warnings = []
         self.sheets = []
         self.sheet_title = {}
+        self.overrides = []         # (ref, pin, old net, new net, source) from OVERRIDE statements
 
     # ---- helpers ----
     def err(self, src, msg):
@@ -348,6 +495,25 @@ def load(netdir=NETDIR):
                             d.err(src, f"bad pin assignment {pr}")
                             continue
                         _assign(d, c, pr[0], pr[1], sheet, src)
+                    continue
+                if head == "OVERRIDE":
+                    # OVERRIDE <REF> pin=net ...: a deliberate change to a pin that a GENERATED file assigned (the
+                    # keyboard's matrix files come from the Altium design); the file must come after it (sorted by name)
+                    ref = tok[1]
+                    if ref not in d.comps:
+                        d.err(src, f"OVERRIDE for unknown part {ref}")
+                        continue
+                    c = d.comps[ref]
+                    for pr in (t.split("=", 1) for t in tok[2:]):
+                        if len(pr) == 2 and pr[0] == "value":       # OVERRIDE <REF> value=...: a new value, same footprint
+                            d.overrides.append((ref, "value", c.value, pr[1], src))
+                            c.value = pr[1]
+                            continue
+                        if len(pr) != 2 or pr[0] not in c.pins:
+                            d.err(src, f"OVERRIDE {ref}: {pr} is not an assigned pin")
+                            continue
+                        d.overrides.append((ref, pr[0], c.pins[pr[0]], pr[1], src))
+                        c.pins[pr[0]] = pr[1]
                     continue
                 if head == "CAPS":
                     m = re.match(r"^C(\d+)-C(\d+)$", tok[1])
@@ -506,6 +672,8 @@ def report(d):
             lines.append(f"  {ref} {c.part}: {len(c.pins)} pins assigned ({nc} NC)")
     single = sorted(n for n, pins in nets.items() if len(pins) == 1)
     lines.append(f"single-pin nets ({len(single)}): " + ", ".join(single))
+    for ref, pin, old, new, src in d.overrides:
+        lines.append(f"OVERRIDE {ref}.{pin}: {old} -> {new}  ({os.path.basename(src.split(':')[0])})")
     return "\n".join(lines)
 
 

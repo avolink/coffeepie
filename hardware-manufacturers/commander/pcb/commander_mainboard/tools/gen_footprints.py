@@ -149,6 +149,127 @@ def main():
     s += text("F.Fab", "PRI 2-3 / AUX 1-4", 0, -6.0, 1.0) + text("F.Fab", "SEC 5-6", 0, 5.5, 1.0)
     write(name, s)
 
+    # ---- M.2 Key M card edge (the hub board's plug, branch m2-hub) ----
+    # Taken from KiCad's own Connector_PCBEdge:M.2_2230-xx-M (PCI-SIG M.2 Electromechanical Spec 1.0): its 67 finger
+    # pads and the tongue part of its outline (y >= 0: the key notch and the two lead-in corners).  The card body
+    # outline of a 2230 module is left out; the hub board draws its own, meeting the tongue at x = +-11, y = 0.
+    # Local frame as in KiCad's footprint: the card's mating edge at y = 4, the card body towards -y.
+    name = "M2_CardEdge_KeyM_Tongue"
+    src = stock_footprint("Connector_PCBEdge.pretty", "M.2_2230-xx-M.kicad_mod")
+    if src:
+        s = header(name, "M.2 Key M card-edge fingers (67), 0.8 mm board, from KiCad M.2_2230-xx-M without the card body outline. "
+                         "Fab notes: ENIG on the fingers, 20 deg bevel on the mating edge, no copper or mask in the key notch",
+                   "M.2 card edge Key M")
+        for blk in sexpr_blocks(src, "pad"):
+            s += "  " + blk + "\n"
+        for blk in sexpr_blocks(src, "fp_line") + sexpr_blocks(src, "fp_arc"):
+            ys = [float(v) for v in re.findall(r"\((?:start|mid|end) [-\d.]+ ([-\d.]+)\)", blk)]
+            # (the two shoulder lines along y = 0 are the 22 mm card body: the hub board's own outline meets the
+            #  lead-in arcs at x = +-10.425 instead, its body being the strip's 21.72 mm)
+            # (the key notch's rounded end dips to y -0.1: keep everything that reaches into the tongue, y > 0)
+            if '"Edge.Cuts"' in blk and ys and min(ys) > -1.0 and max(ys) > 0:
+                s += "  " + blk + "\n"
+        s += text("Dwgs.User", "ENIG, 20deg bevel, 0.8 mm", 0, -1.5, 0.8)
+        s += rect("F.CrtYd", -11.25, 0.0, 11.25, 4.25, 0.05)     # (stops at the board body: parts may start there)
+        write(name, s)
+    m2_socket()
+    usbc24_hoauc()
+
+
+def usbc24_hoauc():
+    """HOAUC HYCW275-USBC24-050B (LCSC C42400261): USB-C 24-pin receptacle, right angle, top mount, two staggered
+    rows of SMD pads at the back, 3.26 mm tall.  Land pattern from the JLCEDA/EasyEDA Official Library footprint
+    "USB-C-SMD_HYCW275-USBC24-050B" (https://lceda.cn/, https://easyeda.com), checked against HOAUC drawing
+    HYC-2109011553 (holes 6.80 apart and 5.90 behind the front, front legs 8.64 apart and 2.70 behind it).
+    Origin: centre of the mating face, which is flush with the board edge ("product edge"); the body runs
+    towards -y.  The four rear hold-down slots pair up into an L on each side."""
+    name = "USB_C_Receptacle_HOAUC_HYCW275-USBC24-050B"
+    s = header(name, "HOAUC HYCW275-USBC24-050B USB-C 24P receptacle, right angle, top mount, 3.26 mm tall (LCSC C42400261). "
+                     "Footprint source: JLCEDA/EasyEDA Official Library (https://lceda.cn/, https://easyeda.com), "
+                     "checked against HOAUC drawing HYC-2109011553", "USB C Type-C receptacle 24P HOAUC", smd=False)
+    for i in range(12):                                  # A1..A12 left to right, B12..B1 left to right, 0.5 mm, staggered
+        s += smd("A%d" % (i + 1), "rect", -2.63 + 0.5 * i, -7.82, 0.25, 0.95)
+        s += smd("B%d" % (12 - i), "rect", -2.88 + 0.5 * i, -6.57, 0.25, 0.95)
+    for sx in (-1, 1):
+        s += (f'  (pad "SH" thru_hole oval (at {3.84 * sx:.2f} -6.85) (size 1.5 1.0) (drill oval 1.3 0.6) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+        s += (f'  (pad "SH" thru_hole oval (at {4.34 * sx:.2f} -7.35) (size 1.0 2.0) (drill oval 0.6 1.6) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+        s += (f'  (pad "SH" thru_hole oval (at {4.32 * sx:.2f} -2.70) (size 1.3 2.5) (drill oval 0.9 2.1) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+        s += (f'  (pad "" np_thru_hole circle (at {3.40 * sx:.2f} -5.90) (size 0.6 0.6) (drill 0.6) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+    s += rect("F.Fab", -4.47, -7.90, 4.47, 0.0)
+    s += rect("F.CrtYd", -5.25, -8.60, 5.25, 0.25, 0.05)
+    s += line("F.SilkS", -4.62, -5.00, -4.62, -4.15) + line("F.SilkS", 4.62, -5.00, 4.62, -4.15)
+    s += line("F.SilkS", -4.62, -1.25, -4.62, 0.0) + line("F.SilkS", 4.62, -1.25, 4.62, 0.0)
+    s += text("F.Fab", "mating face / board edge", 0, 0.8, 0.5)
+    s += f'  (fp_circle (center -2.63 -8.75) (end -2.48 -8.75) (stroke (width 0.15) (type solid)) (fill solid) (layer "F.SilkS"))\n'
+    write(name, s)
+
+
+def m2_socket():
+    """LOTES APCI0146-P00xA, M.2 Key M socket, top mount, H 2.06 mm (drawing AP-APCI0146-P rev A, sheet 3,
+    "recommended PCB layout").  Origin: centre of the slot on the housing's front face (where the card enters);
+    the card comes from +y.  Rows measured from the back row's outer pad edge (yb): back (odd) row 0-1.55,
+    hold-down pads 0-2.75, locating posts at 6.05, front (even) row 7.55-9.10; front face at 8.72 (post 2.67
+    behind it, side view on sheet 1)."""
+    name = "M2_Socket_KeyM_LOTES_APCI0146"
+    f = 8.72                                   # yb of the front face
+    s = header(name, "LOTES APCI0146-P001A/-P002A M.2 Key M socket, 0.5 mm, top mount, 2.06 mm tall, card 0.3 mm above "
+                     "the board (LCSC C841645). Land pattern from drawing AP-APCI0146-P sheet 3", "M.2 socket Key M LOTES")
+    for n in range(1, 76):
+        if 59 <= n <= 66:
+            continue
+        if n % 2:
+            s += smd(str(n), "rect", -9.25 + (n - 1) * 0.25, 0.775 - f, 0.30, 1.55)
+        else:
+            s += smd(str(n), "rect", -9.0 + (n - 2) * 0.25, 8.325 - f, 0.30, 1.55)
+    for x in (-10.35, 10.35):
+        s += smd("MP", "rect", x, 1.375 - f, 1.20, 2.75)
+    for x, d in ((-10.0, 1.10), (10.0, 1.60)):
+        s += (f'  (pad "" np_thru_hole circle (at {x} {6.05 - f:.3f}) (size {d} {d}) (drill {d}) '
+              f'(layers "*.Cu" "*.Mask"))\n')
+    s += rect("F.Fab", -10.925, -6.60, 10.925, 0.0)
+    s += rect("F.CrtYd", -11.25, -9.0, 11.25, 0.6, 0.05)
+    s += line("F.SilkS", -10.925, 0.0, -9.6, 0.0) + line("F.SilkS", 9.6, 0.0, 10.925, 0.0)
+    s += text("F.Fab", "card enters here", 0, 1.2, 0.6)
+    s += f'  (fp_circle (center -9.25 {-f - 0.5:.3f}) (end -9.1 {-f - 0.5:.3f}) (stroke (width 0.15) (type solid)) (fill solid) (layer "F.SilkS"))\n'
+    write(name, s)
+
+
+def stock_footprint(lib, name):
+    """Text of a footprint from KiCad's own library (Windows install, also seen from WSL), or None."""
+    for base in (os.environ.get("KICAD_FOOTPRINT_DIR", ""), "C:/Program Files/KiCad/10.0/share/kicad/footprints",
+                 "/mnt/c/Program Files/KiCad/10.0/share/kicad/footprints"):
+        p = os.path.join(base, lib, name)
+        if base and os.path.exists(p):
+            return open(p, encoding="utf-8").read()
+    print("  (KiCad footprint library not found: %s/%s skipped)" % (lib, name))
+    return None
+
+
+def sexpr_blocks(text_, head):
+    """Every top-level '(head ...)' block inside a footprint, as one line each."""
+    out, i = [], 0
+    pat = re.compile(r"\(" + re.escape(head) + r"\s")
+    while True:
+        m = pat.search(text_, i)
+        if not m:
+            return out
+        i = m.start()
+        depth, j = 0, i
+        while True:
+            if text_[j] == "(":
+                depth += 1
+            elif text_[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        out.append(" ".join(text_[i:j + 1].split()))
+        i = j + 1
+
 
 if __name__ == "__main__":
     main()

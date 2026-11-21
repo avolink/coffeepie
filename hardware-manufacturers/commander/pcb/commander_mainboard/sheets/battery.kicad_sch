@@ -120,7 +120,7 @@
       (property "Value" "USBC16" (at 5.08 1.905 0) (effects (font (size 1.27 1.27)) (justify left)))
       (property "Footprint" "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
       (property "Datasheet" "" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
-      (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
+      (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)" (at 0 0 0) (effects (font (size 1.27 1.27)) (hide yes)))
       (symbol "USBC16_1_1"
         (rectangle (start -7.62 0) (end 7.62 -25.4) (stroke (width 0.254) (type default)) (fill (type background)))
         (pin passive line (at -10.16 -2.54 0) (length 2.54) (name "GND" (effects (font (size 1.016 1.016)))) (number "A1" (effects (font (size 1.016 1.016)))))
@@ -168,7 +168,7 @@
     (property "Value" "USBC16" (at 43.18 55.245 0) (effects (font (size 1.27 1.27)) (justify left)))
     (property "Footprint" "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12" (at 40.64 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (property "Datasheet" "" (at 40.64 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
-    (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HRO TYPE-C-31-M-12)" (at 40.64 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Description" "USB-C receptacle, USB 2.0, 16-pin (HOAUC HYCW498-USBC16-735B, or HRO TYPE-C-31-M-12)" (at 40.64 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (pin "A1" (uuid "2d19f3f5-9b70-5351-9f9f-7ce9d3ad7c0e"))
     (pin "A4" (uuid "de95d6b6-ddb7-5b72-90cd-b199eea5f4b2"))
     (pin "A5" (uuid "b70b6162-a6c8-51dd-90bb-d363652ad8fa"))

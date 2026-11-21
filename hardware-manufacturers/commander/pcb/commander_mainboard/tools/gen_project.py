@@ -65,6 +65,13 @@ KBD_CLASSES = [
     cls("PWR", 0.15, 0.40, via_d=0.8, via_drill=0.4, color="rgb(194, 0, 0)"),
 ]
 KBD_PATTERNS = [("VCC5", "PWR"), ("VBUS_USB", "PWR")]
+# the two-layer module boards (battery, numpad, touchpad): the keyboard's rules; the battery's power path is wide
+SMALL_CLASSES = KBD_CLASSES + [cls("HIPWR", 0.2, 1.0, via_d=0.8, via_drill=0.4, color="rgb(255, 120, 0)")]     # 2-3 A of the battery
+SMALL_PATTERNS = KBD_PATTERNS + [("VBUS", "HIPWR"), ("VBAT", "HIPWR"), ("B_*", "HIPWR"), ("*_SW", "HIPWR"), ("VCC3V3", "PWR"),
+                                 ("LDO_IN", "PWR"), ("VCC5_M*", "PWR"), ("VCC3V3_M*", "PWR"),
+                                 # the front battery bar: strings and charger 0.4 mm (up to 1.2 A), charger input wide
+                                 ("STR?_P", "PWR"), ("CHG?_D", "PWR"), ("VCHG*", "PWR"), ("SOLAR", "PWR"),
+                                 ("CHG_IN", "HIPWR"), ("VUSB_SW", "HIPWR")]
 KBD_RULES = {
     "min_clearance": 0.15, "min_copper_edge_clearance": 0.2, "min_track_width": 0.15,
     "min_via_diameter": 0.5, "min_through_hole_diameter": 0.3, "min_via_annular_width": 0.1,      # the vias beside the chip's pins are 0.5 / 0.3
@@ -78,8 +85,8 @@ ERC_OFF = ["footprint_link_issues", "lib_symbol_issues", "lib_symbol_mismatch", 
 
 
 def main():
-    kbd = cpmodel.VARIANT == "kbd"
-    classes, patterns = (KBD_CLASSES, KBD_PATTERNS) if kbd else (CLASSES, PATTERNS)
+    kbd = cpmodel.VARIANT == "kbd" or cpmodel.SMALL
+    classes, patterns = ((SMALL_CLASSES, SMALL_PATTERNS) if cpmodel.SMALL else (KBD_CLASSES, KBD_PATTERNS)) if kbd else (CLASSES, PATTERNS)
     pro = {
         "board": {
             "design_settings": {
@@ -87,7 +94,8 @@ def main():
                 "rules": {
                     "min_clearance": 0.09, "min_copper_edge_clearance": 0.25, "min_track_width": 0.09,
                     "min_via_diameter": 0.25, "min_through_hole_diameter": 0.15, "min_via_annular_width": 0.05,      # the vias in the BGA pads (0.25 / 0.15, filled and capped); everything else uses 0.45 / 0.20 or larger
-                    "min_hole_clearance": 0.195,     # 0.20 nominal; a via in a 0.4 mm-pitch ball is exactly 0.200 from the next ball "min_hole_to_hole": 0.25, "min_silk_clearance": 0.0,
+                    "min_hole_clearance": 0.195,     # 0.20 nominal; a via in a 0.4 mm-pitch ball is exactly 0.200 from the next ball
+                    "min_hole_to_hole": 0.25, "min_silk_clearance": 0.0,     # (were inside the comment above until 2026-11-18; same as KiCad's defaults)
                     "solder_mask_to_copper_clearance": 0.0, "min_microvia_diameter": 0.2, "min_microvia_drill": 0.1,
                 },
                 "rule_severities": {
@@ -99,7 +107,7 @@ def main():
             "layer_presets": [], "viewports": [],
         },
         "boards": [],
-        "erc": {"rule_severities": {k: "ignore" for k in ERC_OFF}},
+        "erc": {"rule_severities": {k: "ignore" for k in ERC_OFF + (["isolated_pin_label"] if cpmodel.VARIANT == "touch" else [])}},
         "libraries": {"pinned_footprint_libs": ["commander"], "pinned_symbol_libs": ["commander"]},
         "meta": {"filename": cpmodel.PRJ + ".kicad_pro", "version": 1},
         "net_settings": {
@@ -116,7 +124,20 @@ def main():
         "text_variables": {},
     }
     if kbd:
-        pro["board"]["design_settings"]["rules"] = KBD_RULES
+        pro["board"]["design_settings"]["rules"] = dict(KBD_RULES)
+    if cpmodel.SMALL:
+        # the module boards' feed lanes and electrode bridges use 0.5 / 0.25 vias (tools/small_board.py), JLCPCB's
+        # standard 2-layer process (0.15 mm hole min; no surcharge for a 0.25 hole with a 0.45 mm or larger via)
+        pro["board"]["design_settings"]["rules"]["min_through_hole_diameter"] = 0.25
+    if cpmodel.VARIANT == "cpuram":
+        # commander_cpu_ram (2026-11-18): its router (tools/cpu_ram_board.py) keeps 0.09 mm between all nets; 0.15 mm
+        # around 5 V and 0.10 mm around the USB / HDMI / supply classes buy nothing at these voltages (the pairs keep
+        # their own pair gap), so the classes here say 0.09 too
+        for c in pro["net_settings"]["classes"]:
+            if c["name"] not in ("POE_PRIMARY", "ETH_MDI"):
+                c["clearance"] = 0.09
+    if cpmodel.VARIANT == "touch":      # the electrode diamonds hang on necks and bridges, not on pads: by design
+        pro["board"]["design_settings"]["rule_severities"]["isolated_copper"] = "ignore"
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         json.dump(pro, f, indent=2)
         f.write("\n")

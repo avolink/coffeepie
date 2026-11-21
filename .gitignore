@@ -73,3 +73,8 @@ cmake_install.cmake
 # Editor / backup files
 *.bak
 *.orig
+
+# SketchUp: the backup of the previous save, and autosaves (the .skp itself is the model, in LFS)
+*.skb
+AutoSave_*.skp
+~*.skp

@@ -12,26 +12,193 @@ Changes in A1: front battery port (USB-C) with a PoE / battery 5 V selector; fir
 PoE output raised to 5.11 V; the chassis bleed network moved next to the RJ45; the head of the column
 re-floorplanned (HDMI left, PoE centre, low-voltage corridor right).
 
-## 0. Fabrication readiness (reviewed 2026-11-14): not ready
+## 0. Fabrication readiness (reviewed 2026-11-14, DRC review 2026-11-18): not ready
 
 Do not order this board yet. A quote from JLCPCB would succeed and the boards would not work.
 
-**Where it stands.** The scripted router now covers the whole board except two areas that are left out on purpose.
-It has made **1,570 of the 2,354 connections (66.7 %)**; 784 are still open, on 375 of 526 nets
-(`build/open_report.txt` lists them net by net, `build/usb_report.txt` the USB links). In KiCad the open ones are
-the thin ratsnest lines that remain.
+**Ten layers, 2026-11-21: 83 links open, was 185 on six layers. The memory bus, the Ethernet head, the PoE
+block and the HDMI jack are closed; what is left is in the core (76) and 7 long links from the head to the
+processor. Still not ready to order - see "what is still open" below.** The six-layer board before this step is kept
+as `build/mainboard_6layer_pf_mbQ5.kicad_pcb`. DRC (`kicad-cli`, planes refilled): no shorts, no clearance,
+hole-clearance or crossing errors; the placement's own items as before (courtyard overlaps - the 0201 rows under the
+BGAs -, 2 RJ45-edge items), 70 dead-end stubs, 36 pour islands. `tools/check_head_isolation.py` with
+`CP_ISO_BOX=-1,-21,35,60`: **0 pairs under 2 mm**.
+
+Stack-up (from the top; the board stays 1.2 mm - JLCPCB lists 1.2 mm and ten layers, but confirm the combination and
+the stack-up in their quote tool before ordering):
+
+| Layer | Use |
+|---|---|
+| F.Cu | signals; eMMC, capacitors of the core, connectors |
+| In1.Cu | ground plane |
+| In2.Cu | signals |
+| In3.Cu | supply planes (60 zones, one region per rail, laid out by `tools/plane_plan.py`) |
+| In4.Cu | supply planes (66 zones) - new |
+| In5.Cu | signals - new |
+| In6.Cu | ground plane - new |
+| In7.Cu | signals - new |
+| In8.Cu | ground plane (the old In4; it still carries 0.38 m of old tracks) |
+| B.Cu | signals; processor, memory, PMIC |
+
+What was done, in the order it happened (`tools/` names in brackets; every step ran on a copy in `build/`):
+- **Six to ten layers** (`mb10_convert.py`): the old In4 becomes In8, a second and third ground plane, a second
+  supply layer, three more signal layers; the isolation keep-outs of the head now cover every inner layer.
+- **The memory bus: 73 of 73 nets, taken from the `commander_cpu_ram` router.** That board's generator
+  (`cpu_ram_board.py`) was run on a scratch copy of its project with the processor-to-memory spacing of THIS board
+  (`CR_GAP=2.15 CR_MEM_DX=-2.85 CR_EMMC_GAP=12`, bottom face made dear with `CR_LCOST=1.15,1,1,1,30` so that the bus
+  stays off the capacitor face); the bus copper was then brought over by mirroring about the processor
+  (`mb10_bus_import.py`: cpu_ram F / In2 / In4 / In7 / B -> mainboard B / In7 / In5 / In2 / F). The memory did NOT
+  have to move (U10 shifted 0.014 mm). 32 two-pad parts under the processor and the memory that the new copper hit
+  were set down again 0.2 to 6 mm away (C317 and R122 on the other face). Everything that touched the bus was taken
+  out in one pass (`clear_around.py`) and routed again. **The bus is connected, not tuned: no length matching, no
+  coupled pairs, no impedance widths** (5.2a still applies to signal integrity).
+- **Supply planes on two layers** (`plane_plan.py`): each rail gets one of In3 / In4 and a region grown from where
+  its pads and vias are, instead of one bounding box per rail with priorities.
+- **eMMC lands 0.24 -> 0.22 mm** (U20; IPC's range for a 0.30 mm ball is 0.20 to 0.25): between 0.24 mm lands at
+  0.5 mm a 0.09 mm track with 0.09 mm clearance did not fit, and the eMMC's inner balls sit over the PMIC where no
+  via can stand. A regenerated board gets 0.24 again - the footprint in the generator is the library's.
+- **PMIC inductors L19 / L17 0.7 mm towards the memory**: the strip between the PMIC's top pin row and the
+  inductor pads is the only place for the vias of the eMMC's inner balls and of the PMIC's top pins; it is now 2.0 mm
+  deep instead of 1.3.
+- **The Ethernet PHY's 17 strap resistors and small capacitors** (R72 R74 R76 R77 R78 R87 R88 R90 R97 R98 R99 R100
+  R102 R103, C106 C107 C113) **moved from the strip north of the PHY to the bottom face south of it**
+  (`mb_phy_support_move.py`, then `seat_part.py`). The strip lies over the line side of the transformers: no
+  secondary via may stand there, so they could only be joined on the top face, with their ground chained from pad to
+  pad - that never closed. C106 / C107 / C113 are now 10 to 14 mm from their pins; the rails' main capacitors (C105,
+  C109, C110, C112, C116, C119, C120) are where they were.
+- Two of the PHY's three 0.6 mm thermal vias stood between the transformers' secondary pads and the common-mode
+  chokes on the bottom face: replaced by two 0.45 / 0.20 mm ones further in (`via_swap.py`). Several of the PHY's
+  pins (top row and pin 4) have a 0.25 / 0.15 mm via in the pad. C114 moved 0.2 mm.
+- **Four links at the PHY were laid by hand** (coordinates in the session's `phy_last2.json` / `phy_fan.json`,
+  applied with a script): MDI1_P from pin 4, and the fan of RXD0 / RXD1 / RXD2 / RXD3 with the 1.0 V pin's track from
+  the top row to the via cluster east of the PHY - five tracks between a via and pin 20 with 0.10 mm to spare
+  nowhere. Look at that corner (x 62..66, y 69..71.2) before anything else when you audit.
+- **PoE controller U30**: POE_VB, POE_ISNS and one POE_RTN pin are joined; short stretches are 0.15 mm wide instead
+  of the class's 0.30 (POE_CS 2.7 mm, POE_ISNS 4.7 mm, POE_VB 2.6 mm, POE_RTN 1.8 mm at pin 4 - pins 8 and 9 carry the
+  current). The 0.20 mm clearance of the class is kept.
+- **Micro-HDMI J10**: the two port-side pair halves that were open (HDMI_TX0P_PORT, HDMI_TX1N_PORT) are joined;
+  the nets on the jack may use a 0.25 / 0.15 mm via in its inner pin row.
+- **Power-key socket J22 turned 180 degrees** (2026-11-21, found by the user in the 3D view): its opening faced the
+  outer board edge, the cable comes from inside the case. Same place (43.275, 144.0), opening now towards the
+  board; the signal pads are on the edge side, the mounting pads took the place of six vias, which were laid
+  again. The line's ESD diode ED13 stood 1 mm in front of the new opening: it is now on the BOTTOM face right
+  under the socket (42.63, 146.60), its PMIC_PWRON pad on the line's track, its ground pad with a via. The plug
+  slides in over x 46..51, y 142..146 on the top face: only 0201 capacitors stand there (C46, R1, R19) - check
+  that the JST SH plug clears them, or keep that strip free. The six-layer board had the same fault.
+- Nets on the PMIC, the eMMC, the PHY and J10 use the 0.25 / 0.15 mm via everywhere (961 of the board's 1427 vias
+  are that size now). All vias in pads are meant to be filled and capped (JLCPCB: "POFV"), as before.
+- 84 footprints stand elsewhere than on the six-layer board, 39 of them by 1 mm or more (the list:
+  `MOVED_PARTS_2026-11-21.txt`). Nothing bigger than an 0603, except L19 / L17.
+
+What is still open, and why:
+- **76 in the core**, about 55 of them supply and ground links. The cause is now known exactly: for nearly every
+  stranded pad the rail's own plane lies right under it and only the via is missing - and the via cannot be set
+  because **the capacitors on the top face are not on the ball grid of the BGAs on the bottom face**: a ball's via
+  comes up inside a foreign capacitor's pad, a capacitor's via comes down on a foreign ball. The cure is the usual
+  one: every 0201 exactly over a ball pair of its own rail and ground, one via through both. `tools/cap_align.py`
+  does that (49 of the 118 small parts under the two BGAs find such a pair) and `tools/force_vias.py` sets the vias;
+  tried on a copy this night, the result was worse than before (the planes on In3 / In4 have to be designed together
+  with it - 33 rails on two layers - and four bus nets were cut), so it is NOT in this board. That is the next step.
+- 5 ground balls of the processor's row B and two of the memory (V8, AB5): bus tracks pass under them on an inner
+  layer. The bus was generated before the ground balls had their vias; it should be generated again with those
+  balls reserved.
+- The eMMC over the PMIC: EMMC_CLK, D1, D2, D7, RSTN, VDDI and the eMMC's supply balls, and the PMIC's top-row pins
+  2, 3, 4, 5, 7, 10, 16 (I2C0_SDA, VCC_1V8_P, VCC_SYS, VCC1V8_DVP, PMIC_INT_L, I2S1_MCLK). Three more passes with
+  the wider strip joined some and broke others; they share about twenty legal via sites.
+- **7 long links**: SDMMC0_D1 / D3 / DET_L and USB2_HOST2_DP (processor to the hub socket J41), USB_AUX_DP,
+  PHY1_RXD0 (PHY to processor) and VCC5V_MIDU (the HDMI 5 V, 111 mm). Their processor ends are balls with no way
+  out between their neighbours' escapes. SDMMC0_D2 too (counted in the core).
+
+*The paragraphs below describe the six-layer board of the day before; they are kept for the record.*
+
+**Routing pass 2026-11-20 (negotiating router `tools/pf_route.py`): 185 links open, was 485 + 17 shorts.** The board
+on disk is the result; the board before it is `build/mainboard_before_pf.kicad_pcb`. DRC (`kicad-cli`, planes
+refilled): no shorts, no clearance, hole-clearance or crossing errors left (were 17 / 5 / 4 / 3); what remains is the
+placement's own (199 courtyard overlaps, 2 RJ45-edge items) plus 22 dead-end stubs and 5 pour islands.
+`tools/check_head_isolation.py` with `CP_ISO_BOX=-1,-21,35,60`: **0 pairs under 2 mm** (the board before: 57); 27
+plane keep-outs were added round line-side vias (`tools/iso_remove.py --keepouts`). `tools/check_isolation.py` (the
+older check on bounding boxes, blind to layers) reports pairs on both boards and is superseded by the shape check.
+What is still open, and why - none of it is a matter of more router time:
+- **74: the memory bus** (`LPDDR4_*`), the exception of 5.2a. Left out of every pass.
+- **57: supply links in the core** (VDD_CPU, VDD_GPU_NPU, VCCA_1V8, VCC_3V3, VCC_SYS at the PMIC ...). The pours
+  on In3 are one bounding box per net with priorities; several rails get next to no copper (VDD_GPU_NPU 0.3 mm2,
+  VCC_3V3 1.5 mm2 in 21 islands, VCC_DDR 2.7 mm2 in 31 islands, VCCIO_FLASH 0.8 mm2). A supply ball's via finds no
+  copper of its net below it, and tracks cannot do the job between the escapes. In3 needs a real partition (one
+  connected region per rail from its regulator to its balls). Passes that let signals onto In3 in the core were
+  undone: they cut the pours to pieces (VDD_CPU from 1 island to 18).
+- **15: signals in the core** - the eMMC (CLK, CMD/D1, D7, RSTN, VDDI) sits over the PMIC and its inner balls have no
+  way out between 0.24 mm pads at 0.5 mm; four PMIC pins (0.35 mm pitch); RESETN; USB_OTG0.
+- **31: the Ethernet head and the PoE block** - the PHY's strap resistors and capacitors stand in the 2 mm shadow of
+  the magnetics' line-side pads on the back, where no through via may stand: front-layer-only routing in a 3 mm band.
+- **8: long links between the head and the processor** (two PHY straps, three microSD lines, USB2_HOST2_DP, USB_AUX_DP).
+Things this pass did that you should know: supply links were laid 0.10-0.15 mm wide where they leave fine-pitch
+pins and widened afterwards wherever the room allowed (`fatten.py`). Of 1.86 m of supply track, 0.76 m is now
+0.2-0.4 mm wide and **1.09 m stays 0.09-0.15 mm** - too thin for the currents of several rails; this goes away with
+the In3 partition, not with more widening; C510 and R818 were moved (45.85, 112.9) / (41.4, 112.0); In3 carries tracks
+only in the head outside the 5 V pour.
+
+**DRC review 2026-11-18: `REVIEW_2026-11-18.md`.** Every DRC item classified. Fixed: 218 via-to-plane shorts from a
+stale plane fill (refill before every Gerber export!), three part near-misses; documented as rules
+(`commander_mainboard.kicad_dru`): the pin spacing of the RK817 and the TPS23754. Still open: 23 parts that physically
+collide (11 of them in the eMMC's place), 486 unconnected (80 of them the memory bus), 2 hole-clearance and 2
+RJ45-edge items. The review ends with the way to a prototype that works the first time.
+
+**Branch `m2-hub` (2026-11-15): the bay strip is its own board now.** The nine bays, both USB hubs, the bay muxes,
+switches and ESD, and the microSD slot moved to `../commander_hub` (0.8 mm, 201 parts), which plugs into this board
+through an **M.2 Key M socket, J41** (LOTES APCI0146-P002A, top mount, 2.06 mm tall, 0.5 A per contact, 25 cycles)
+with gold fingers on its own edge - no connector part on the hub. Pinout: `tools/hub_link.py`, one source for both
+boards (12 x VCC5V_BUS, VCC_SYS, VCC3V3_SYS, 31 grounds; the USB 3 link, the USB2517 link, the battery port's USB 2
+pair, the microSD bus, I2C3, the hub reset). The card rests 0.3 mm above this board, so everything on the hub stands
+1.1 mm higher than on the old strip (the rear of the case has room for that). What changed here:
+- outline: the column plus a tab to board x 73.9 (y 80.3-104.0) under the socket; the strip is gone;
+- J41 sits at the column's right edge: its signal row starts at board x 64.28, where the low-voltage corridor starts
+  (the PoE primary zone ends at 62.3); its signals leave inwards, under the socket body (`tools/j41_fanout.py`);
+- the two parts that bridge the isolation barrier inside the socket's place moved down the barrier, still bridging
+  it: optocoupler U31 below the clamp diode (D42 0.35 mm up for it), Y capacitor C518 beside the transformer's
+  primary pins; C601 / C602 (USB 3 coupling) are on this board now, under the socket;
+- the keyboard port J20 stays here (sheet hub_link); `tools/main_cut.py` did the cut on the routed board, the
+  router (`CP_LINK=1`, region `link`, then `poe`) joined the socket. **Isolation: 0 pairs under 2 mm** over the
+  head, the PoE block and the socket (`CP_ISO_BOX=-1,-21,35,60 tools/check_head_isolation.py`); DRC has nothing new
+  (228 errors, every one of them in a category and place the board had before; 58 strip-edge errors left with the strip).
+The hub board (`tools/hub_board.py` cut it out of the routed strip, then `route.py` with the hub's own outline): model /
+schematic / board consistent, ERC clean, DRC only the 58 edge items the strip already had (the bays' rear pad row);
+**215 links open, 137 of them at its new left end** (card edge, USB5744, bay 1), where seven parts were moved out of
+the tongue's way (U40 2.2 mm right, crystal Y40 and three caps to the bottom face, L41 beside its buck) - that corner
+wants a hand placement pass and KiCad's interactive router.
+Still open at the socket: the long runs from J41 down to the RK3566 for the microSD bus (it was open before the split
+too), I2C3, the hub reset, card detect and the USB 3 hub's USB 2 pair - for KiCad's interactive router. Backup of the
+board before the cut: `build/commander_mainboard.before_m2.kicad_pcb`.
+
+**2026-11-18: J41 and the hub's card edge 4 mm further left** (the user moved the PoE primary block by hand, about
+4.65 mm left / 0.5 mm up, to make room).  J41 now sits with its front face at board x 69.0 (centre line y 92.16), its
+signal row from x 60.2; C601 / C602 moved with it.  The tab is gone (it would end at x 69.9, inside the column's edge
+at x 70), so the column edge runs straight; the planes' cut-out edge beside the socket (In1 / In4 GND hole, In3 5 V)
+moved from x 64.2 to 60.2 for y up to 102.65.  Done by `tools/j41_shift.py SRC DST -4`, then `tools/j41_fanout.py`
+(via columns now follow J41) and `route.py` with `CP_LINK=1 CP_REGIONS=link CP_LINK_DX=-4 CP_PRI_SHIFT=-4.65,-0.5
+CP_PRI_FROM_BOARD=1 CP_SKIP_CLASSES=POE_PRIMARY` (the router's primary keep-out follows the moved block and every
+primary pad / track on the board; the primary copper itself is left alone).  The hub: `tools/hub_shift.py` (J90, the
+fingers' stubs 4 mm longer, body edge x 73.0 -> 69.0, tongue to 65.0); `route.py`'s `HUB_FACE` = 69.0.
+The PoE move itself still breaks the 2 mm barrier on the LEFT side (HDMI_TX_HPDIN, PMIC_PWRON, HDMI_TXCLKN_PORT,
+SW3 and the In1 / In4 GND planes run through the moved block): that is not resolved by the J41 move.  Chassis: the
+back-I/O profile starts at board x 65.0; J41 (4.05 mm tall) still reaches 4.05 mm under the profile's lower lip along
+the bay-side edge (y 101.5-103.6, 0.9 mm free above the board there), half of what it was (8.05 mm).
+Backup: `build/commander_mainboard.before_j41_shift.kicad_pcb` (the user's file of 17:28).
+
+**Where it stands.** The scripted router covers the whole board except the memory bus, which is left out on purpose.
+After the split **486 connections are open** on this board (636 before, the strip's own included; KiCad's count,
+2026-11-15). In KiCad the open ones are the thin ratsnest lines that remain.
 
 | # | What stands between this file and an order | What it takes |
 |---|---|---|
 | 1 | **The memory bus is not routed, on purpose** (74 connections, RK3566 to LPDDR4). A maze router can join these balls, and did in an experiment (5.2a), but a memory bus joined that way looks finished and does not work | A layout engineer places Rockchip's reference layout for this interface (mirrored: the core is on the bottom face) and tunes the lengths per byte lane. |
-| 2 | **The Ethernet head is not routed, on purpose** (RJ45, the four LAN transformers, the PHY and its parts; about 179 connections, the RGMII lines from the RK3566 among them). The line side of the transformers has to keep 1.5 kV from everything else, and the transplanted placement mixes line-side and PHY-side parts on both faces | Decide where the isolation boundary runs, re-place the head on either side of it, give its PHY side a ground plane; the router's isolation mask (which already guards the PoE primary) can then be extended to it. |
-| 3a | **The PoE primary is not connected** (31 connections, 2026-11-14 build). Its class clearance was 0.30 mm, more than the 0.20 mm between the TPS23754's own pins, so none of them could be left; it is 0.20 mm now (IPC-2221B: 0.13 mm at 57 V). What still blocks it: the row packer puts R511 and D31 0.45 mm in front of the controller's pin rows, and the primary area is too full to keep a band free there (tried: 1.0-1.4 mm, two parts no longer fit) | Place the PoE primary by hand (the TI layout for this chip is the model), or give the primary area more room; then the router connects it. |
+| 2 | **The Ethernet head is placed for isolation and mostly routed** (2026-11-15, branch `ram-routing`). You arranged the head by hand (PHY in the middle, chokes under it, transformers above); `tools/head_place.py` keeps that and moves only what broke the 2 mm line / low-voltage gap: the four transformers in one row on the bottom face, line pins towards the jack; the Bob Smith resistors under the jack's pads; ONE 1 nF / 2 kV cap (C60) by the left shield pin - **the netlist now joins BS0..BS3 into one node BS and C65, C59, C16 are gone** (only three cap spots exist 2 mm from everything next to the HDMI tab; one node with one cap is Bob Smith's own topology); C400 / R400 by the same shield pin; the centre-tap caps beside the transformers; the PHY's top row of straps 0.65 mm down, R84 / C114 under the PHY; R22 0201 -> 0402. **The eight unpopulated line-side TVS D9..D23 are removed** from netlist and board: even unfitted, their pads put line and chassis 0.38 mm apart. The ground planes (In1, In4) now cover the head, kept 2 mm off the line side by rule areas. The router (`CP_HEAD=1`, region `head`) keeps the line side inside per-layer areas (`HEAD_LINE_AREA` in `route.py`); the 48 V centre taps run down an In2 corridor (x 9-12) to the bridges. `tools/check_head_isolation.py` measures copper to copper on every layer: **0 pairs under 2 mm**. Model / schematic / board consistent; DRC errors 290 -> 286. Still open in the head: about 45 links, almost all where the PHY's 0.4 mm pin rows meet the 0201 straps and decoupling (supplies VCCIO / VCC3V3 / VDD10, RXD straps, crystal, REG_OUT, RSET), four RJ45-to-transformer lines, three centre taps (TR1/2/3 to their bridges or resistors), one Bob Smith link, five chip-side MDI links; plus the RGMII lines to the RK3566 and the HDMI connector nets that were open before | Finish the rest in KiCad's interactive router (push-and-shove copes with the QFN rows): keep the line-side nets (PHY_MDI*, TR?_48V, BS) under the RJ45 body / in the In2 corridor, at least 2 mm from everything else, and re-run `check_head_isolation.py`. |
+| 3a | **The PoE primary is placed by hand and nearly connected** (2026-11-14, branch `ram-routing`): `POE_HAND` in `gen_pcb.py` fixes all 33 parts - the four bridges in two rows per face under the RJ45, the controller below them with its small parts at their own pins, the switch, sense resistor, bias diode and clamp beside the transformer's primary pins. Routed (PoE region, then only the primary copper grafted onto the board, every other item untouched): 30 open links -> 9. Still open: POE_RTN x3, POE_VB x2, POE_CS, POE_VC, POE_ISNS round the controller's bottom pin row (a few mm each, by hand in KiCad), plus three TRn_48V links between the bridges / Bob Smith resistors and the transformers' centre taps (TR0 is done; see blocker 2). A thinner class for the controller's signal nets was tried and made no difference. History: was 31 open. Its class clearance was 0.30 mm, more than the 0.20 mm between the TPS23754's own pins, so none of them could be left; it is 0.20 mm now (IPC-2221B: 0.13 mm at 57 V). What still blocks it: the row packer puts R511 and D31 0.45 mm in front of the controller's pin rows, and the primary area is too full to keep a band free there (tried: 1.0-1.4 mm, two parts no longer fit) | Place the PoE primary by hand (the TI layout for this chip is the model), or give the primary area more room; then the router connects it. Tried on 2026-11-14 (PoE region only, on copies): a free band round the controller (0.6-1.4 mm) and tighter spacing (0.30-0.40 mm): 20-34 open, and with a band one or two parts no longer fit; the controller's small parts placed beside their own pins (`SATELLITES` in `gen_pcb.py`, now on): 29 open with everything placed. The area (14 x 31.6 mm, nine SMA diodes, a 6.3 mm electrolytic) is the limit: smaller bridge diodes (SOD-123F) or a larger area would help most. |
 | 3 | **About 530 other connections are open** in the areas that are routed: 174 ground pads without a via, the supply balls and capacitors under the RK3566 that the pours did not reach, the mux chips of bays 1-4, and what is listed in `build/routing_report.txt` | Hand routing in KiCad, or first loosening the placement where the report shows a cluster. |
 | 4 | **The eMMC cannot be connected where it is**: it sits on the top face directly over the PMIC, so the vias its inner balls need would land in the PMIC's pads (17 eMMC connections open) | Move it to a place whose other face is free, or build the prototype with the microSD socket only. |
 | 5 | **Everything that is routed is script output, not reviewed by a layout engineer.** Differential pairs run as coupled tracks at the class geometry, but nobody has checked impedance against the real stack-up, and nothing is length-tuned (the differences are in `build/usb_report.txt`). The supply rails of the core are joined by pours placed by a simple rule and by 0.09 mm links between ball vias. The PoE primary is connected, its switching loop is not optimised | A review by someone who lays out boards of this class; a power-integrity look at the core rails; a bench validation of the PoE converter. |
-| 6 | **The rear USB-C sockets are hard to route and not stocked** (JAE 24-pin, two rows of surface-mount pads, the rear row 1 mm from the board edge) | Swap for a common hybrid 24-pin socket (one row through-hole): easier to route, and available. Your decision, see the cost table. |
+| 6 | ~~The rear USB-C sockets are hard to route and not stocked~~ **Done 2026-11-15 on the hub board**: HOAUC HYCW275-USBC24-050B (C42400261, hybrid, in stock, a tenth of the JAE's price), `tools/hub_usbc24_swap.py`; the copper round them is to be re-routed (hub README) | - |
 | 7 | **Provisional footprints**: RJ45 and the four LAN transformers | Replace with manufacturer land patterns. The flyback transformer footprint is from the Bourns data sheet; check it against the current revision before ordering. |
-| 8 | **USB-C receptacles stand 3.2-3.3 mm on a face with about 3 mm of room.** The nine bays are at the rear, where the case is taller; the three in the column (service J2, keyboard J20, battery J40) are under the keyboard | Decide per port: a sunk (mid-mount) receptacle in a board cut-out stands about 1.6-2.4 mm above the board, or the port moves to the bottom face, where there is room. |
+| 8 | **USB-C receptacles stand 3.2-3.3 mm on a face with about 3 mm of room.** The nine bays are at the rear, where the case is taller (on the hub board, since branch `m2-hub`, they stand 1.1 mm higher still: about 4.4 mm above this board's top face - the user confirmed the rear has room); the three in the column (service J2, keyboard J20, battery J40) are under the keyboard | Decide per port: a sunk (mid-mount) receptacle in a board cut-out stands about 1.6-2.4 mm above the board, or the port moves to the bottom face, where there is room. |
 | 9 | **The schematic transcription has not had a second pair of eyes** (sheets 4-19 against the Radxa PDF) | One careful review; an error here costs a whole batch. |
 | 10 | **The BOM has no manufacturer or LCSC part numbers**; the Gerbers in `fabrication/` are marked QUOTE-ONLY | Filled in once 1-6 are done; RK3566, LPDDR4 and RK817 will likely have to be consigned or globally sourced. |
 | 11 | **Mechanical assumptions A1-A9 are unconfirmed**, mounting holes are provisional, there are no fiducials | Check against the chassis. |
@@ -148,6 +315,10 @@ column; a pogo-pin-to-USB-C adapter will dock the battery module there. It is a 
   pins can be linked to I2C2 with two 0 Ω parts (DNP) for a module that prefers I2C telemetry.
 
 The PoE set point moves from 5.05 V to 5.11 V to cover the drop in the mux (56 mΩ typical).
+**2026-11-16:** raised again to **5.24 V** (R515 9.53 k -> 9.09 k): every hub bay now feeds its connector through a 40 V
+Schottky that blocks back-feed from whatever is plugged in (see `../commander_hub/README.md`); the 0.35 V it drops at
+1 A comes out of this margin.  5.24 V is inside the USB range (4.75-5.5 V) and well below U81's 6.0 V lock-out; the
+maximum ratings of the parts on VCC5V_BUS / VCC_SYS are worth one look in the review (not re-checked one by one).
 No rear USB-C was added: the connector beside the RJ45 is the micro HDMI and stays.
 
 **Head of the column: HDMI left, PoE centre, low-voltage corridor right.** From the left edge:
@@ -295,6 +466,23 @@ microSD socket had under the PMIC (bottom side); the socket moves to the strip b
 passives were recovered from Radxa's placement drawings and rotated into the column, so the
 proven DDR and power floorplan is the starting point rather than a guess.
 
+**Power button = the keyboard's power key (2026-11-18/19, user's request).** The keyboard's T16 (top row, last
+column, orange power keycap) is the power button: the keyboard microcontroller reads it and pulls PMIC_PWRON low over
+a 2-wire cable from the keyboard's J202 to **J22 (JST-SH 2: 1 PMIC_PWRON, 2 GND)**, like a PC front panel; the RK817's
+power-key logic is unchanged. J22 replaces the side tact switch SW3 (short its pins for bring-up / service); ESD ED13
+at the connector. The keyboard keeps its **standard USB-C** (J20 here, unchanged) so that it can be reused on its own
+after the device's life (the user plans to donate them). The keyboard is fed from VCC5V_BUS (on whenever the device
+has power), so it watches the key while the board is off; F1 is now 750 mA (the keyboard's 84 infra-red LEDs draw
+~0.56 A: 500 mA would trip). The wish was J22 beside J20 on the column's inner edge, but that edge is full on both
+faces from J2 to J21 (J2, J20, H2, SW1 / SW2, J21 and the parts under them), so **J22 sits on the outer (left) edge,
+top face, at y 144 (board mm), mouth outwards** - SW3's old edge, ~20 mm from J20 along the column; ED13 beside it;
+PMIC_PWRON re-routed from J22 to the RK817 (U9.52 / C352), SW3's old track up the column taken out. The cable goes
+round the column's end or over it to the keyboard: check the path (and its length) in the chassis model.
+Rejected on the way: a panel-mount metal button in the codec cover (none fits: 12 mm of room under the cover);
+the power key on the USB-C's SBU pins (needs a full-featured cable - a cheap one would silently lose the power key).
+`src/netlist/24_power_button.net`, `34_hub_link.net`; keyboard: `commander_keyboard/src/netlist/09_kbd_powerkey.net`.
+Board edit: `tools/mb_powerkey_board.py` (2026-11-19; the board before it: `build/mb_before_powerkey.kicad_pcb`).
+
 ## 4. Assumptions you should confirm
 
 Mechanical values not on the drawing were derived; each is a named constant in `tools/gen_pcb.py`.
@@ -340,7 +528,8 @@ result of the last run is in `build/routing_report.txt`; `build/open_report.txt`
 | In4.Cu | GND plane | poured |
 | B.Cu | signal + parts | 3,237 mm |
 
-941 vias. KiCad's ratsnest count went from 2,322 (nothing routed) to 784 (2026-11-14 build, with the power button).
+941 vias. KiCad's ratsnest count went from 2,322 (nothing routed) to 784 (2026-11-14 build, with the power button), and to 754 with the
+PoE primary placed by hand.
 
 **The USB links** (what you asked for on 2026-11-13). 57 of the 110 USB nets are complete end to end; 14 pair
 sections run as a coupled trunk (two parallel tracks at the class geometry, 0.11 / 0.13 mm for USB 2.0 and
@@ -392,10 +581,9 @@ along the strip - so its two wires change layer several times and differ in leng
 
 **What is not routed, on purpose**
 - **The memory bus** (class DDR): see 5.2a.
-- **The Ethernet head** (box x > 10.6, y < 8.0 in the board's design coordinates): see blocker 2 in section 0. The HDMI
-  connector beside it is routed.
-- **Planes under the PoE primary and the Ethernet head.** Nothing is poured there, so the isolation barrier is not
-  compromised by a script.
+- **The Ethernet head** is routed since 2026-11-15 (blocker 2), the line side inside its own areas.
+- **Planes under the PoE primary and the Ethernet head's line side.** Nothing is poured there (rule areas 2 mm
+  round the line areas on In1 / In4), so the isolation barrier is not compromised by a script.
 
 **Read this before trusting the routed part**
 - It is maze-router output: electrically connected and checked against the design rules, not hand-optimised.
@@ -436,8 +624,8 @@ cross. The head of the column is now laid out in three lanes (decision of 2026-1
   do that before trusting it at full load.
 - The isolation barrier is drawn on the board and measured by `tools/check_isolation.py`, but not yet
   enforced by KiCad rule areas — add them before hand-routing the head of the column.
-- The Ethernet head itself (RJ45, magnetics, Bob-Smith network, PHY) keeps Radxa's arrangement, where the
-  PHY sits on top above line-side parts on the bottom. With PoE that stack-through deserves its own review.
+- The Ethernet head (RJ45, magnetics, Bob Smith network, PHY) was re-placed for isolation on 2026-11-15 (blocker 2);
+  `tools/check_head_isolation.py` is its check. The PHY sits on top over the chokes on the bottom (both low-voltage).
 
 ### 5.2a The memory bus: tried, and not good enough
 You asked for the RK3566-to-LPDDR4 connections with one simple rule, every path the same length. I tried it
@@ -459,6 +647,62 @@ publishes a reference layout for exactly this interface because it is easier to 
 and Radxa's board is such a copy. The way to a working core is a layout engineer placing that template
 (mirrored, since the core is on the bottom face), not a longer run of this router.
 
+### 5.2a-2 The memory bus, one group per layer (2026-11-14, branch `ram-routing`)
+The method of the usual DDR layout lessons: split each channel into the command / address / clock group and two
+data bytes (DQ, DM and the DQS pair), give every group one signal layer next to a ground plane, the same number of
+vias, and match lengths inside the group. `tools/route_ddr_groups.py` does this on copies only; the project's board
+file has none of it. Results, nets connected end to end out of 73:
+
+| plan | result |
+|---|---|
+| top face over the memory cleared (its decoupling moved), through vias: byte 0 on F, command on In2, byte 1 on In3 | 35 |
+| blind vias from B.Cu (HDI), top face as it is: byte 0 and byte 1 on In3, command on In2 | 38 |
+| the same, the strobe and clock pairs routed first in each group | **40** |
+| byte 0 on B.Cu with no via at all | 36 (the 0.4 mm ball pitch of the RK3566 lets no track pass between balls) |
+| byte 1 first on In3, byte 0 fitted in after | 36 (byte 1 alone on In3 reaches 18 of 22, but byte 0 is then shut out) |
+
+For these runs the other nets' tracks on In2, In3 and B.Cu under the two chips were taken out (24 nets, the eMMC
+and power-key lines among them, would have to go round the field). What limits it: the two packages are less than
+1 mm apart, byte 1 lands on the memory's far rows and has to cross under byte 0, and the board has two inner signal
+layers for three groups per channel. The unconstrained run of 5.2a reached 52 of 73, so the one-layer-per-group
+rule costs connections on this floorplan. Ways forward: move the memory 3-4 mm away and turn it so its bytes face
+the processor; or an 8-layer stack-up; or free the top face for byte 0. Either way the result still needs length
+tuning and a layout engineer's review (5.2a).
+
+**8 layers tried (2026-11-15, branch `m2-hub`): no gain.** `tools/to_8_layers.py` made a copy with In5 (signal,
+between the In4 and In6 ground planes) and In6 (ground, a copy of In4's pour; the Ethernet "no ground pour" areas
+widened to it), existing copper untouched. Each group then had an inner layer of its own (byte 0 on In5, byte 1 on
+In3, command on In2; `CP_DDR_PLAN=blind8` / `through8`, room opened as for the 6-layer runs):
+
+| plan | result |
+|---|---|
+| 8 layers, blind vias from B.Cu | 38 |
+| 8 layers, through vias | 30 |
+
+The limit is not the number of layers but getting out of the two ball fields: every net needs a via between
+0.4 mm-pitch balls, and the packages are less than 1 mm apart, so the vias of all groups compete for the same few
+places whatever layer they go to. (The router counts a via as an obstacle on all its layers; a blind via does not
+block layers beyond its span, so the blind result is somewhat pessimistic, but not by 33 nets.) So the board stays
+at 6 layers.
+
+**The memory moved and turned (2026-11-15): no real gain either.** `tools/ddr_move_mem.py` moves U10 on a copy (its
+ball vias with it; bottom-face parts in its new place taken off the copy), then the same 6-layer blind-via plan
+(`CP_DDR_PLAN=blind`, `CP_DDR_REGION=1,60.8,27,96`):
+
+| U10 | parts it displaces | result |
+|---|---|---|
+| where it is (baseline today) | - | 38 |
+| 3 mm down | 20 (VDD_LOGIC / GPU caps, L17, L19, ...) | 36 |
+| 3 mm down, 2.5 mm left (under the processor's memory corner) | 18 | **43** |
+| turned 90 deg, 4 mm down | 30, the PMIC U9 among them | 34 |
+| turned -90 deg, 4 mm down | the same | 37 |
+
+The column has no free length below the memory (parts reach the bottom edge, y 118.7), so any move down pushes the
+regulator block, the PMIC and the eMMC. Five more nets for that is not worth it: a memory bus is useful only when
+complete, and the hard groups stay hard everywhere (channel B byte 1: 0-4 of 11, the command groups 4-8 of 13).
+Not applied: U10 stays where it is. What is left is a person: Rockchip's / Radxa's reference layout for this exact
+chip pair placed and adapted by a layout engineer, or KiCad's interactive router with length tuning by hand.
+
 ### 5.2b The battery port is a provisional interface
 - The battery module does not exist yet. CC, SBU and data wiring are a reasonable guess at what it needs.
 - **Switch-over is seamless only towards a source that is already on the port.** While the board is
@@ -472,6 +716,35 @@ and Radxa's board is such a copy. The way to a working core is a layout engineer
 - 5 V only. A source that goes above 6.0 V is locked out by U81, but D80 and U83 are 5 V parts: do not
   enable USB-PD voltages in software.
 - Charging takes its current from the same 21 W PoE budget as the SoC and nine bays. Advertise 1.5 A at most.
+
+### 5.2c Fit in the chassis (2026-11-16, SketchUp model COMMANDER_Z3E.skp)
+
+The three boards were exported in 3D (`tools/export_3d.py`: KiCad's own models where they exist, plain boxes of the
+right height for the rest - RJ45 8.0 mm and LAN transformers 2.2 mm are estimates; `tools/glb_to_dae.py` turns the
+GLB into a Collada file SketchUp imports) and placed in the model on tag `KICAD_PCBS`; the old approximations
+(`KEYBOARD_PCB#18`, `BACK_IO_PANEL_PCB#1`, `RADXA_ZERO_3E.stl`) are on the hidden tag `OLD_PCB_APPROX`. STEP / STL /
+GLB / DAE of each board are in `3d-models/pcb_exports/`. Clearances were measured by casting rays up and down from a
+1 mm grid on each board against the chassis, and compared with the boards' own part heights. (Note: KiCad's GLB has
+z 0 at the board's bottom face - the first placement assumed the middle plane and was corrected on 2026-11-16.)
+
+| Finding | Change made | Still open |
+|---|---|---|
+| Bay receptacles (HYCW275, top mount) 1.1 mm above the cards' plugs, touching the back-I/O profile by 0.72 mm | hub **and** mainboard lowered together (they mate through J41): hub underside z 17.37, mainboard underside 15.87 / top 17.07; receptacles' axis at z 19.8 = the plugs' axis, clear of the profile | shorter standoffs; three hub parts at the rear edge reach into the profile's slot (hub README) |
+| The RK3566 (bottom face, chassis X 85-100, Y 14-29) sits just past the end of the heatsink extrusion (Y 28.9): nothing under it but air | **heatsink update**: `SOC_THERMAL_BLOCK`, a 17 x 30.5 x 7.5 mm block of 6063 (the extrusion's alloy) from the chip (0.5 mm pad) to the extrusion's top plate, two M2.5 into the plate (tag `HEATSINK_UPDATES`; 0.9 mm clear of the board's other parts, 5 mm under the keyboard) | the plate is 2.4-4.3 mm thick: through-holes with nuts, or inserts; the RAM beside the SoC could share the block (0.6 mm pad) |
+| RJ45 J12 (8 mm box, an estimate) reaches into `Group#311` by up to 3.8 mm; with the boards at their final height it is clear of the back-I/O profile | - | see `Group#311` below; confirm the jack's real height |
+| M.2 socket J41 overlaps the profile by 1.5 mm where the hub's tongue enters it | - | a pocket at the profile's left end |
+| (later on 2026-11-16) The hub belongs 2 mm higher, in the profile's slot | J41 becomes the LOTES APCI0107 H4.2 (card about 2.44 mm above the mainboard; same land pattern); the bays become sink-mount Amphenol 12402072E512A (centre 0.10 mm under the hub's top) in edge notches; mainboard 0.39 mm lower (underside 15.48, top 16.68), hub underside 19.12, receptacle centres at z 19.82 = the plugs' axis; all nine bays 0.95-1.70 mm under and 1.92 mm over the profile | **J41 (now 4.05 mm tall) reaches about 3.1 mm into the profile's end** (it was 1.5 mm): the pocket there must be about 3.3 mm deep; the SoC block's gap to the mainboard drops by 0.39 mm (0.53 mm left at the closest part); hub to re-route round the bays (commander_hub README) |
+| Bottom parts T1 / C504 (2.7 mm) and the RJ45 overlap `Group#311` (an unnamed 62 x 22 x 18 mm open box at the left end, z 7.4-25.4, crossing the board's plane) | - | it looks like a left-over volume of the old codec unit; confirm and remove it from the model |
+| Keyboard: the switch boxes of the rows nearest the back panel (6 mm, an estimate) reach up to 5.4 mm into the back-I/O profile | the keyboard sits exactly on the old keyboard model's plane (top face), as the model had it | the model's own switches stand there too: either the profile is lower than the keyboard design assumes, or the real switch is much lower - check on the prototype |
+
+The three module boards of 2026-11-16 (`pcb/commander_battery`, `commander_numpad`, `commander_touchpad`, built by
+`tools/small_board.py`) are in the model too, at the places of the model's placeholders:
+
+| Board | Fit |
+|---|---|
+| Battery (48 x 88.8 mm, beside the six AAA cells, x 93.3-141.3 / y 77.3-166.1, underside z 8.1) | clear above (2.5 mm min, the PH connectors included); the board rests on the cell tray's floor; the PH connectors' pins stand 1.8 mm under the board - trim them or use the SMD PH versions |
+| Numpad (131 x 68 mm at the NUMPAD_MODULE, underside z 8.0) | the model's keycaps start right on the board, so the keys are snap domes (0.4 mm); the tray's floor plate (z 7.4-10.2, sloped) overlaps the module placeholders in the model by up to 0.7 mm - the tray / module stack heights are still to be settled |
+| Touchpad (131 x 68 mm at the TOUCHPAD_MODULE, underside z 9.24) | same tray-floor overlap; its USB-C touches the tray's side rail (0.4 mm) |
 
 ### 5.3 Framework cards that will not work
 The **HDMI and DisplayPort cards need DisplayPort alt mode**, which a USB hub cannot provide.
@@ -492,7 +765,8 @@ Replace with manufacturer land patterns. The four LAN transformers and chokes ha
 designators in Radxa's drawings, so their positions are estimates.
 
 ### 5.6 Smaller items
-- Line-side TVS diodes D9–D23 are DNP: with PoE the line floats to 57 V and Radxa's part value could not be verified.
+- Line-side TVS diodes D9–D23 are removed (2026-11-15): with PoE the line side must stand 1.5 kV off chassis, and
+  even unfitted their pads put the two 0.38 mm apart. Line surges are taken by the PD's own TVS (D39, SMAJ58A).
 - eMMC wiring follows the usual RK356x pattern but is not on the 3E schematic; check it against Rockchip's hardware guide.
 - USB5744 has no SPI flash and runs on ROM defaults (its SMBus links R606/R607 to I2C3 are DNP); USB2517 uses CFG_SEL = 110 with strap options off. Changing either configuration means rework.
 - The RK817 audio codec is powered but unused.
