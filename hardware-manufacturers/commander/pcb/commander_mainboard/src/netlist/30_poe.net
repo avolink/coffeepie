@@ -3,7 +3,10 @@
 # application (SLVS885I, section 8.2) in its diode-rectified form (GAT2 unused, DT tied to VB).
 #
 # Everything on nets POE_* sits on the PRIMARY side of the isolation barrier. The only parts that
-# bridge the barrier are T1 (flyback transformer), U31 (optocoupler) and C518 (Y capacitor).
+# --- flyback transformer: Bourns PLN060-ER20A05S, planar, 8.0 mm tall (the case has 10 mm under the board).
+#     Primary 2 (dot) - 3, auxiliary 1 (dot) - 4, secondary 6 - 5 (dot); 1 : 0.25 : 0.5, 40 uH, 200 kHz.
+#     Dots: the supply goes to 2 and the switch to 3, so the rectifier sits on 6 and the bias diode on 4.
+#     It is a 60 W part: the smallest of the series, chosen for its height, not for its rating. ---
 # AUDIT: magnetics, current-sense, clamp and loop-compensation values are first-pass numbers and
 # must be validated on the bench (or replaced by the values of the chosen transformer's reference design).
 SHEET poe
@@ -24,7 +27,7 @@ P U30 9=POE_RTN 8=POE_RTN 4=POE_RTN 17=POE_RTN 18=POE_RTN 16=POE_VB 19=POE_FRS 2
 NC U30 7 20
 R501 24.9K_1% POE_VDD POE_DEN
 R502 63.4R_1% POE_CLS POE_VSS
-R503 69.8K_1% POE_FRS POE_RTN
+R503 75K_1% POE_FRS POE_RTN
 C502 100nF POE_VB POE_RTN
 R504 2K POE_VB POE_CTL
 C503 1nF POE_CTL POE_RTN
@@ -48,7 +51,7 @@ D42 DIODE:ES1D A=POE_SW K=POE_CLAMP
 R511 39K_1W POE_CLAMP POE_VDD
 C516 10nF_100V POE_CLAMP POE_VDD
 # --- flyback transformer, 30 W class, 5 V output (e.g. Coilcraft POE300F-50L); pin numbers per final part ---
-T1 XFMR_FLYBACK:POE300F-50L PA=POE_VDD PB=POE_SW XA=POE_AUX XB=POE_RTN SA=POE_SEC SB=GND
+T1 XFMR_FLYBACK:PLN060-ER20A05S 2=POE_VDD 3=POE_SW 4=POE_AUX 1=POE_RTN 6=POE_SEC 5=GND
 # --- secondary: rectifier, output filter ---
 D41 SCHOTTKY_PWR:PDS1040 A=POE_SEC K=VOUT_5V_PRE
 R510 10R POE_SEC POE_SNUB
@@ -61,13 +64,13 @@ C514 220uF_6.3V_POLY VOUT_5V GND
 C515 22uF VOUT_5V GND
 TP5 TP VOUT_5V
 TP6 TP GND
-# --- isolated feedback: TL431 + optocoupler, set point 5.05 V ---
-U31 OPTO:LTV-817S 1=FB_LED_A 2=FB_K 3=POE_RTN 4=POE_CTL
+# --- isolated feedback: TL431 + optocoupler, set point 5.11 V (covers the drop in the source selector U81) ---
+U31 OPTO:TLP291 1=FB_LED_A 2=FB_K 3=POE_RTN 4=POE_CTL
 R512 499R VOUT_5V FB_LED_A
 R513 1K FB_LED_A FB_K
 U32 TL431 1=FB_K 2=FB_REF 3=GND
 R514 10K_1% VOUT_5V FB_REF
-R515 9.76K_1% FB_REF GND
+R515 9.53K_1% FB_REF GND
 C517 100nF FB_K FB_COMP
 R516 2K FB_COMP FB_REF
 # --- barrier capacitor (primary return to secondary ground) ---

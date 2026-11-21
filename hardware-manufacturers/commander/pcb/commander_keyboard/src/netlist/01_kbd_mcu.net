@@ -1,0 +1,71 @@
+# Commander keyboard - the ATmega32U4 circuit of the Arduino Micro, reduced to what a bus-powered USB keyboard
+# needs, soldered straight onto the keyboard PCB in place of the Arduino Micro module (U1 of the Altium design).
+#
+# Kept from the Arduino Micro : the MCU and its pin assignment, 16 MHz crystal, 22 ohm USB series resistors,
+#                               UCAP capacitor, HWB pull-down, reset pull-up + button, a resettable fuse, ISP pins.
+# Left out                    : 5 V and 3.3 V regulators and the VIN path (the keyboard is powered by USB only),
+#                               the RX / TX / L / power LEDs, the pin headers, the 1 M resistor across the crystal
+#                               (the oscillator does not need it), the AREF capacitor (no analogue input
+#                               is used: A0..A5 are the six matrix rows, driven as digital outputs).
+# Changed                     : micro-USB -> USB-C (device side: 5.1 k on both CC pins), varistors -> one ESD array,
+#                               QFN-44 package (ATmega32U4-MU, same pin numbers as the
+#                               TQFP of the module), fuse 750 mA instead of 500 mA (see the README: the 84 infra-red
+#                               LEDs draw about 0.56 A when they are all switched on).
+# Net names are the ARDUINO pin names (D0..D13, A0..A5, MISO / SCK / MOSI) the prototype used: the matrix nets of the
+# Altium design were renamed to the pin of the module they went to.  Four columns are swapped at the chip (see below).
+# References are in a 200-block so they do not collide with the parts taken over from the Altium design.
+SHEET kbd_mcu
+
+# --- microcontroller ---
+U201 ATMEGA32U4_MU:ATmega32U4-MU 14=VCC5 34=VCC5 2=VCC5 7=VCC5 24=VCC5 44=VCC5 15=GND 23=GND 35=GND 43=GND 5=GND 45=GND
+P U201 6=UCAP 3=USB_MCU_DM 4=USB_MCU_DP 13=RESET_N 17=XTAL1 16=XTAL2 33=HWB
+# matrix columns (16).  The nets carry the name of the Arduino pin that read the column on the prototype.  Two pairs
+# are SWAPPED at the chip (agreed with the owner, 2026-11-14), so that the west row of pins sends its lines out in the
+# order in which they reach the matrix - otherwise they cannot be routed without crossing:
+#   column net D12 -> chip pin 31 (PC6, Arduino "D5")     column net D5  -> chip pin 26 (PD6, Arduino "D12")
+#   column net D10 -> chip pin 28 (PB4, Arduino "D8")     column net D8  -> chip pin 30 (PB6, Arduino "D10")
+# The firmware reads those four columns on the swapped pins (see the README).
+P U201 9=SCK 11=MISO 32=D13 31=D12 12=D11 28=D10 29=D9 30=D8 1=D7 27=D6 26=D5 25=D4 18=D3_SCL 19=D2_SDA 8=SS_RXLED 10=MOSI
+# matrix rows (6)
+P U201 36=A0 37=A1 38=A2 39=A3 40=A4 41=A5
+# infra-red LED enable (to Q1 through the jumper J1)
+P U201 20=D0_RX
+# not used by the keyboard: D1/TX (PD3), the TX LED pin (PD5), AREF
+NC U201 21 22 42
+
+# --- supply: USB bus power only ---
+F201 PTC:750mA VBUS_USB VCC5
+C201 1uF_0603 UCAP GND
+# (pin 14 has no capacitor of its own: the crystal sits below it; it is fed from C203 by a track under the chip)
+C203 100nF_0603 VCC5 GND
+C204 100nF_0603 VCC5 GND
+C205 4.7uF_0603 VCC5 GND
+# AVCC straight to +5 V, as on the Arduino Micro (no analogue input is used: A0..A5 are digital row drivers)
+C206 100nF_0603 VCC5 GND
+
+# --- clock: 16 MHz, as on the Arduino (the firmware and the bootloader assume it) ---
+# 15 pF suits a 3225 crystal with 10 pF load capacitance; use the value that matches the crystal bought
+Y201 XTAL4:16MHz 1=XTAL1 2=GND 3=XTAL2 4=GND
+C208 15pF_0603 XTAL1 GND
+C209 15pF_0603 XTAL2 GND
+
+# --- reset and boot ---
+R206 10K_0603 VCC5 RESET_N
+SW201 TACT:RESET 1=RESET_N 2=GND
+R207 10K_0603 HWB GND
+
+# --- USB-C, device side, on the left edge of the board (the free bay beside the codec column) ---
+J201 USBC16 A1=GND A12=GND B1=GND B12=GND SH=GND A4=VBUS_USB A9=VBUS_USB B4=VBUS_USB B9=VBUS_USB
+P J201 A5=KB_CC1 B5=KB_CC2 A6=USB_CON_DP B6=USB_CON_DP A7=USB_CON_DM B7=USB_CON_DM
+NC J201 A8 B8
+R201 5.1K_0603 KB_CC1 GND
+R202 5.1K_0603 KB_CC2 GND
+U202 USBLC6-2SC6 1=USB_CON_DP 6=USB_CON_DP 3=USB_CON_DM 4=USB_CON_DM 2=GND 5=VBUS_USB
+C210 4.7uF_0603 VBUS_USB GND
+# series resistors at the MCU end of the two data lines
+R203 22R_0603 USB_CON_DP USB_MCU_DP
+R204 22R_0603 USB_CON_DM USB_MCU_DM
+
+# --- in-system programming: needed once per board to load the Arduino bootloader (six bare pads for a 2 x 3
+#     pogo-pin adapter, in the pin order of the standard AVR ISP header; nothing is soldered) ---
+J202 ISP2x3_PADS:DNP 1=MISO 2=VCC5 3=SCK 4=MOSI 5=RESET_N 6=GND

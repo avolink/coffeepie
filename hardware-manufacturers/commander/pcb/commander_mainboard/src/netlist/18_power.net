@@ -3,8 +3,8 @@
 # instead of the USB-C power port. J2 stays as an internal SERVICE port: USB2 OTG for factory flashing
 # (rockusb / maskrom) and, through D30, a bench supply so the board can be flashed without a PoE switch.
 SHEET power
-# --- 5 V system rail ---
-R107 FB120R_3A VOUT_5V VCC_SYS
+# --- 5 V system rail (VCC5V_BUS = output of the PoE / battery selector U81, see 33_battery_port.net) ---
+R107 FB120R_3A VCC5V_BUS VCC_SYS
 ED6 TVS:AZ5825-01F VCC_SYS GND
 C151 22uF VCC_SYS GND
 C150 100nF VCC_SYS GND

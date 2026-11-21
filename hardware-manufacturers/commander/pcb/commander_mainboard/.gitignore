@@ -5,3 +5,7 @@ fp-info-cache
 *.lck
 ~*
 __pycache__/
+.history/
+/commander_mainboard-*.gbr
+/commander_mainboard-*.drl
+/commander_mainboard-job.gbrjob
