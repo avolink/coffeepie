@@ -105,7 +105,7 @@ class MyMachine(QObject):
          print("Error: vmId is empty. Cannot fetch IP address.")
          self.vmIpFetched.emit("")  # Emit an empty string if vmId is invalid
          return
-        ip = fetch_vm_ip(node, vmId, base_url=BASE_URL)
+        ip = fetch_vm_ip(node, vmId, base_url=BASE_URL, token=self.userToken)
         self.vmIpFetched.emit(ip)
 
     @pyqtSlot(str, str)
@@ -128,7 +128,7 @@ class MyMachine(QObject):
         Args:
             node (str): The node to fetch VMs from.
         """
-        numeric_vms = fetch_vm_list(node, base_url=BASE_URL)
+        numeric_vms = fetch_vm_list(node, base_url=BASE_URL, token=self.userToken)
         # Update vm_counter to be max of numeric_vms + 1
         if numeric_vms:
             max_vm = max(int(vm) for vm in numeric_vms)
@@ -155,7 +155,7 @@ class MyMachine(QObject):
         """
         try:
             print(f"Fetching console data for VM {vmid} on node {node} with name {vmname}...")
-            console_url, ticket, csrf_token = get_console_data(node, vmid, vmname)
+            console_url, ticket, csrf_token = get_console_data(node, vmid, vmname, token=self.userToken)
             print(f"Console data fetched successfully. Opening console at {console_url}...")
             open_console_with_tokens(console_url, ticket, csrf_token)
         except Exception as e:

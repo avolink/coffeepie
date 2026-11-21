@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 from app.utilities.vms.vms import ensure_vm_owned
-from app.core.security import get_current_user
+from app.core.security import get_current_user, require_admin
 from app.models.snapshot_models import SnapshotCreate, SnapshotUpdate, SnapshotOut
 from app.crud.snapshots import (
     create_snapshot as crud_create,
@@ -22,32 +22,32 @@ import re
 
 router = APIRouter(prefix="/snapshots", tags=["snapshots"])
 
-@router.post("/", response_model=SnapshotOut)
+@router.post("/", response_model=SnapshotOut, dependencies=[Depends(require_admin)])
 async def create_snapshot(snapshot: SnapshotCreate,current_user: dict = Depends(get_current_user)):
     data = snapshot.dict(exclude_unset=True)
     result = await crud_create(data)
     return SnapshotOut(**result, id=str(result["_id"]))
 
-@router.get("/", response_model=List[SnapshotOut])
+@router.get("/", response_model=List[SnapshotOut], dependencies=[Depends(require_admin)])
 async def read_snapshots():
     items = await crud_list()
     return [SnapshotOut(**s, id=str(s["_id"])) for s in items]
 
-@router.get("/{snapshot_id}", response_model=SnapshotOut)
+@router.get("/{snapshot_id}", response_model=SnapshotOut, dependencies=[Depends(require_admin)])
 async def read_snapshot(snapshot_id: str):
     s = await crud_get(snapshot_id)
     if not s:
         raise HTTPException(404, "Snapshot not found")
     return SnapshotOut(**s, id=str(s["_id"]))
 
-@router.put("/{snapshot_id}", response_model=SnapshotOut)
+@router.put("/{snapshot_id}", response_model=SnapshotOut, dependencies=[Depends(require_admin)])
 async def update_snapshot(snapshot_id: str, snapshot: SnapshotUpdate):
     updated = await crud_update(snapshot_id, snapshot.dict(exclude_unset=True))
     if not updated:
         raise HTTPException(404, "Snapshot not found or no changes")
     return SnapshotOut(**updated, id=str(updated["_id"]))
 
-@router.delete("/{snapshot_id}")
+@router.delete("/{snapshot_id}", dependencies=[Depends(require_admin)])
 async def delete_snapshot(snapshot_id: str):
     deleted = await crud_delete(snapshot_id)
     if not deleted:

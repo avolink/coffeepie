@@ -274,3 +274,48 @@ The audit identified **13 CRITICAL**, **8 HIGH**, and **14 MEDIUM** severity fin
 | **Month 1** | 5 | Sandbox JS `process.rs`, validate chpasswd input, add rate limiting to Proxmox API, fix SSRF in Sunshine endpoint, pin orchestrator deps |
 | **Quarter** | 7 | Replace `UnsafeCell` SessionRecoveryBuffer with safe abstraction, fix addin.rs transmute, migrate pqcrypto to Rust libcrux, sandbox boa_engine, add pickle safe alternative, fix TLS noverify scope hardening, add CSP report-only monitoring |
 | **Ongoing** | Remainder | Gradual elimination of `unwrap()` in network paths, lock poisoning hardening, channel DoS protection |
+
+---
+
+## 2026-11-20 — Phase 0 remediation (compliance work for Tecnoparque SENA)
+
+Status re-checked against the code, not the earlier audit text. Tests that
+guard each fix: `tests/unit/test_payment_webhooks.py`,
+`coffeepie_backend/tests/test_security.py`,
+`coffeepie_backend/proxmox_backend/tests/test_auth_routes.py`,
+`blockchain/tests/test_cofp_timelock.py` (all run in the `security-tests` CI job).
+
+### Fixed
+
+| Finding | Fix |
+|---|---|
+| VULN-PROX-001 `proxmox_backend` `/auth/login` issued a token for any known e-mail without a password | Password is verified by Firebase (`signInWithPassword`); token minted only for that account; uniform 401 |
+| VULN-PROX-002 `/auth/forgot-password` returned the reset link | Firebase e-mails it; response identical for every address. Root backend: route now inert and leak-free |
+| V-7 / C6 SSRF in `/sunshine/send-pin` (both backends) | `net_guard`: literal IPs only, inside `SUNSHINE_ALLOWED_NETWORKS`, fails closed; no redirects; timeout; enforced inside the service function |
+| `coffeepie_backend/app` routes without authentication (nodes, clone, delete, vnc, spice, config, companies, users, snapshots list/CRUD, terminal list) | Authentication on every route; `require_admin` (`ADMIN_EMAILS`/`ADMIN_USER_IDS`) for management routes |
+| `get_current_user` took `token` as a bare query parameter | Accepts `Authorization: Bearer` or legacy `?token=`; startup refuses a weak `JWT_SECRET_KEY` |
+| Any user could edit/delete any user, set their own credits (`portions`), `type` or `companyID` | Self-edit limited to name/age/city/occupation; anonymous registration can no longer join a company |
+| Company read/users exposed to any caller | Members of that company or admin only |
+| Built-in `/openapi.json` shadowed the key-protected one and published the route map | `openapi_url=None` |
+| `DOCS_API_KEY` default `your-docs-key` | No default; refuses to start; constant-time comparison |
+| Proxmox login happened before the caller's token was checked | Token verified first |
+| Hardcoded Sunshine credentials and request/credential printing in the root backend | Credentials from env, nothing printed |
+| Payment webhooks accepted unsigned payloads (PSE had no check; Bre-B/Bancolombia only checked when a signature was present) | Fail closed: signature and secret required; constant-time compare |
+| V-22 / V-23 orchestrator sample config (DEBUG, `ALLOWED_HOSTS=['*']`, embedded SECRET_KEY and RSA_KEY, non-HttpOnly cookie) | `settings.py.sample` reads secrets from the environment, refuses to start on defaults, secure cookies and HSTS outside DEBUG |
+| V-1 single-key mint and ownership; pause did not stop mint/burn | 48 h timelock on mint and ownership transfer, 14-day expiry, cancel, pause covers burn and mint |
+| `account_balance` view bypassed RLS | Migration `0006` (`security_invoker`, revoke from `anon`) |
+
+### Still open (deliberately not changed here)
+
+| Finding | Why |
+|---|---|
+| V-24 `pickle.loads()` at 23 sites in the orchestrator | Persistent state of every service deployment is pickled; moving to JSON needs a data migration and the orchestrator's full test suite, which was not run here. Interim option: HMAC-sign stored pickles |
+| V-25 `csrf_exempt` (9 uses) | The REST dispatcher is token-authenticated (CSRF does not apply to header tokens); the session-based web views (`auth.py`, `mfa.py`, `service.py`) need individual review |
+| Payment webhooks: amount/reference check against a stored pending payment, replay/idempotency | Crediting is not wired to the webhook yet; add when it is. Signing schemes must be aligned with each provider's real contract |
+| Terminal routes authenticate by `terminalID` header (a device identifier) | Needs a per-device secret |
+| Rust findings (C1–C5, H1–H3, H7), Qt kiosk escape, plaintext QML password | Not touched |
+| `verify=False` toward Sunshine unless `SUNSHINE_CA_BUNDLE` is set | Self-signed certificate; target is restricted to the allowed networks |
+
+### Follow-up, same day
+
+Fixed: auth rate limiting in both backends (V-10: login 5/min/IP, reset 3/15 min, register 3/h, 429 + Retry-After); QA PBKDF2 raised to 600,000 iterations with `needs_rehash()`; Qt terminal sends the JWT in the `Authorization` header instead of the URL; SAML metadata parsed with `defusedxml` (M14); `ldap3` git dependency pinned to a commit (H8); Dependabot for pip, cargo and GitHub Actions; working exploit payload removed from `EMERGENCY_PROTOCOL.md` and its CVD timelines deferred to `SECURITY.md`; safe-harbor clause (Ley 1273 de 2009) added to `SECURITY.md`. Website repo: cart/gallery XSS (V-17/V-18, M4), postMessage origin checks (VULN-WEB-002), backups and the QA login harness removed from the published tree, CSP shipped as Report-Only, chat logs keep only truncated IPs, `security.txt` published.

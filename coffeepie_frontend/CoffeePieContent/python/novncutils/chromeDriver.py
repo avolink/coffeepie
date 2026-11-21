@@ -25,10 +25,14 @@ host = os.environ.get("API_HOST", "127.0.0.1")
 API_ENDPOINT = "https://3e33-181-132-118-30.ngrok-free.app/console-url"
 #API_ENDPOINT = "http://127.0.0.1:8000/console-url"
 
-def get_console_data(node, vmid, vmname):
-    """Consulta el endpoint FastAPI para obtener la URL de la consola y los tokens"""
+def get_console_data(node, vmid, vmname, token=None):
+    """Consulta el endpoint FastAPI para obtener la URL de la consola y los tokens.
+
+    El endpoint exige el JWT del usuario; se envía en la cabecera Authorization.
+    """
     params = {"node": node, "vmid": vmid, "vmname": vmname}
-    response = requests.get(API_ENDPOINT, params=params)
+    headers = {"Authorization": f"Bearer {token}"} if token else {}
+    response = requests.get(API_ENDPOINT, params=params, headers=headers)
     response.raise_for_status()
     data = response.json()
     return data["console_url"], data["ticket"], data["csrf_token"]

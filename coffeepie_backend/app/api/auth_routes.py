@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from app.core.ratelimit import rate_limit
 from app.models.auth_models import CreateUserRequest, LoginRequest, ForgotPasswordRequest, Token
 from app.services import auth_service
 from app.services.auth_service import authenticate_user, create_access_token
@@ -6,7 +7,7 @@ from app.crud.terminals import get_terminal_by_deviceID, update_terminal_by_devi
 
 router = APIRouter()
 
-@router.post("/auth/create-user")
+@router.post("/auth/create-user", dependencies=[Depends(rate_limit("register", 3, 3600))])
 async def create_user(request: CreateUserRequest):
     try:
         # name, email, password args
@@ -15,7 +16,7 @@ async def create_user(request: CreateUserRequest):
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.post("/auth/login", response_model=Token)
+@router.post("/auth/login", response_model=Token, dependencies=[Depends(rate_limit("login", 5, 60))])
 async def login(request: LoginRequest):
     user = await auth_service.authenticate_user(request.email, request.password)
     if not user:
@@ -56,10 +57,14 @@ async def login(request: LoginRequest):
             await crud_create_terminal(create_data)
     return {"access_token": access_token, "token_type": "bearer", "user_id": str(user["_id"])}
 
-@router.post("/auth/forgot-password")
+@router.post("/auth/forgot-password", dependencies=[Depends(rate_limit("reset", 3, 900))])
 def forgot_password(request: ForgotPasswordRequest):
-    try:
-        reset_link = auth_service.generate_password_reset_link(request.email)
-        return {"message": "Password reset link sent successfully", "reset_link": reset_link}
-    except RuntimeError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    """Password reset is not offered by this service yet.
+
+    It used to call a function that does not exist here, and the Firebase
+    version of this route returned the reset link in the HTTP response, which
+    lets anyone take over any account. Until a real e-mail flow exists (single-
+    use token, short expiry, delivered only to the account's address) this
+    answers identically for every input and reveals nothing.
+    """
+    return {"message": "If that address is registered, you will receive reset instructions"}

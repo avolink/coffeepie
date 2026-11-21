@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from app.core.security import get_current_user, require_admin
 from app.dependencies import get_auth_headers
 from app.services.proxmox_service import get_nodes, clone_vm, get_vm_config
 from fastapi import Body
@@ -23,15 +24,15 @@ from app.models.sunshine_request import SunshineRequest  # Import SunshineReques
 
 router = APIRouter()
 
-@router.get("/nodes")
+@router.get("/nodes", dependencies=[Depends(get_current_user)])
 def fetch_nodes(auth=Depends(get_auth_headers)):
     return get_nodes(auth["headers"], auth["cookies"])
 
 
-@router.get("/nodes/{node}/vms")
+@router.get("/nodes/{node}/vms", dependencies=[Depends(get_current_user)])
 def fetch_vms(node: str, auth=Depends(get_auth_headers)):
     return {"vms": get_vms_on_node(node, auth["headers"], auth["cookies"])}
-@router.post("/clone-by-name")
+@router.post("/clone-by-name", dependencies=[Depends(require_admin)])
 def clone_by_name(request: CloneByNameRequest, auth=Depends(get_auth_headers)):
     try:
         # Validaciones
@@ -71,7 +72,7 @@ def clone_by_name(request: CloneByNameRequest, auth=Depends(get_auth_headers)):
         return {"error": str(ve)}
     except Exception as e:
         return {"error": f"Failed to clone VM: {str(e)}"}
-@router.get("/nodes/{node}/vms/{vm_name}/ip")
+@router.get("/nodes/{node}/vms/{vm_name}/ip", dependencies=[Depends(get_current_user)])
 def get_vm_ip(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
@@ -81,7 +82,7 @@ def get_vm_ip(node: str, vm_name: str, auth=Depends(get_auth_headers)):
         return {"error": str(e)}
     
     
-@router.delete("/nodes/{node}/vms/{vm_name}")
+@router.delete("/nodes/{node}/vms/{vm_name}", dependencies=[Depends(require_admin)])
 def delete_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
@@ -98,7 +99,7 @@ def delete_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
         return {"error": str(ve)}
     except Exception as e:
         return {"error": f"Failed to delete VM: {str(e)}"}
-@router.post("/nodes/{node}/vms/{vm_name}/stop")
+@router.post("/nodes/{node}/vms/{vm_name}/stop", dependencies=[Depends(require_admin)])
 def stop_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
@@ -116,7 +117,7 @@ def stop_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     except Exception as e:
         return {"error": f"Failed to stop VM: {str(e)}"}
 
-@router.post("/nodes/{node}/vms/{vm_name}/start")
+@router.post("/nodes/{node}/vms/{vm_name}/start", dependencies=[Depends(get_current_user)])
 def start_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     try:
         vmid = get_vmid_by_name(node, vm_name, auth["headers"], auth["cookies"])
@@ -133,7 +134,7 @@ def start_vm_by_name(node: str, vm_name: str, auth=Depends(get_auth_headers)):
         return {"error": str(ve)}
     except Exception as e:
         return {"error": f"Failed to start VM: {str(e)}"}
-@router.get("/nodes/{node}/vms/{vm_name}/vnc")
+@router.get("/nodes/{node}/vms/{vm_name}/vnc", dependencies=[Depends(require_admin)])
 def get_vnc_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     try:
         # Get the VMID from the VM name
@@ -174,7 +175,7 @@ def get_vnc_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     except Exception as e:
         return {"error": str(e)}
 
-@router.get("/nodes/{node}/vms/{vm_name}/spice")
+@router.get("/nodes/{node}/vms/{vm_name}/spice", dependencies=[Depends(require_admin)])
 def get_spice_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
     try:
         # Get the VMID from the VM name
@@ -194,7 +195,7 @@ def get_spice_console(node: str, vm_name: str, auth=Depends(get_auth_headers)):
         return {"error": str(e)}
     
 
-@router.post("/sunshine/send-pin")
+@router.post("/sunshine/send-pin", dependencies=[Depends(require_admin)])
 def sunshine_send_pin(request: SunshineRequest):
     """
     Endpoint to send a PIN to the Sunshine API.
@@ -212,7 +213,7 @@ def sunshine_send_pin(request: SunshineRequest):
         return {"message": "PIN sent successfully", "response": response}
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
-@router.get("/console-url")
+@router.get("/console-url", dependencies=[Depends(get_current_user)])
 def get_console_url(node: str, vmname: str, vmid: int = None, auth=Depends(get_auth_headers)):
     try:
 
@@ -236,7 +237,7 @@ def get_console_url(node: str, vmname: str, vmid: int = None, auth=Depends(get_a
 
     except Exception as e:
         return {"error": str(e)}
-@router.get("/nodes/{node}/vms/{vmid}/config")
+@router.get("/nodes/{node}/vms/{vmid}/config", dependencies=[Depends(require_admin)])
 def fetch_vm_config(node: str, vmid: int, auth=Depends(get_auth_headers)):
      """Fetch full VM configuration from Proxmox via service."""
      try:

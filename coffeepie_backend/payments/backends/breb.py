@@ -156,8 +156,10 @@ class BreBBackend(PaymentBackend):
         }
         """
         # Verify HMAC signature
+        # Fails closed: missing signature or unset secret is a rejection.
+        payload = dict(payload)
         sig = payload.pop("signature", "")
-        if sig and not self._verify_signature(payload, sig):
+        if not self.api_secret or not sig or not self._verify_signature(payload, str(sig)):
             return PaymentResult(success=False, error_message="Invalid webhook signature")
 
         return PaymentResult(

@@ -39,6 +39,17 @@ Please include:
 
 We follow **coordinated disclosure**. We will credit you in the release notes and `audits/SECURITY_AUDITS.md` unless you prefer to remain anonymous. A paid bug-bounty program (rewarded in COFP) is under construction and will launch once the COFP token is deployed to TRON mainnet. See `BOUNTIES.md` for the planned reward tiers. In the interim, high-impact reports may be rewarded in COFP at the maintainers' discretion once the token is live.
 
+## Safe Harbor
+
+We will not pursue or support legal action — including under Colombian Ley 1273 de 2009 (computer crimes) — against anyone who, in good faith:
+
+- reports privately through the channels above and gives us reasonable time to fix before disclosing;
+- tests only against their own accounts and data, or against a local copy of the code;
+- does not access, modify, keep or disclose other users' personal data beyond the minimum needed to show the issue, and stops and reports as soon as they encounter it;
+- does not degrade the service (no denial of service, spam or social engineering) and does not demand payment in exchange for the report.
+
+This waiver covers Coffee Pie's own systems only; we cannot grant permission on behalf of third parties (hosting providers, Firebase, payment gateways, node operators). If in doubt, ask first at `security@coffeepie.co`.
+
 ## Scope
 
 **In scope:** code in this repository — the orchestrator (Django/UDS fork), Rust actor/dc-agent/tunnel-server, FastAPI backend, Qt frontend, website, the `COFP_Token` smart contract, CLI tools, and hardware reference designs.

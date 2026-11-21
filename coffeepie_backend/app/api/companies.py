@@ -4,12 +4,12 @@ from app.crud.companies import create_company as crud_create, get_company as cru
 from app.models.company_models import CompanyCreate, CompanyUpdate, CompanyOut
 from app.models.user_models import UserOut
 from app.crud.users import list_users_by_company
-from app.core.security import get_current_user
+from app.core.security import get_current_user, require_admin, is_admin, same_company
 from datetime import datetime
 from app.crud.companies import update_company as crud_update_company
 router = APIRouter(prefix="/companies", tags=["companies"])
 
-@router.post("/", response_model=CompanyOut)
+@router.post("/", response_model=CompanyOut, dependencies=[Depends(require_admin)])
 async def create_company(company: CompanyCreate):
     try:
         data = company.dict(exclude_unset=True)
@@ -18,19 +18,21 @@ async def create_company(company: CompanyCreate):
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.get("/", response_model=List[CompanyOut])
+@router.get("/", response_model=List[CompanyOut], dependencies=[Depends(require_admin)])
 async def read_companies():
     items = await crud_list()
     return [CompanyOut(**c, id=str(c["_id"])) for c in items]
 
 @router.get("/{company_id}", response_model=CompanyOut)
-async def read_company(company_id: str):
+async def read_company(company_id: str, current=Depends(get_current_user)):
+    if not (is_admin(current) or same_company(current, company_id)):
+        raise HTTPException(403, "Not permitted")
     c = await crud_get(company_id)
     if not c:
         raise HTTPException(404, "Company not found")
     return CompanyOut(**c, id=str(c["_id"]))
 
-@router.put("/{company_id}", response_model=CompanyOut)
+@router.put("/{company_id}", response_model=CompanyOut, dependencies=[Depends(require_admin)])
 async def update_company(company_id: str, company: CompanyUpdate):
     try:
         updated = await crud_update(company_id, company.dict(exclude_unset=True))
@@ -40,7 +42,7 @@ async def update_company(company_id: str, company: CompanyUpdate):
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.patch("/{company_id}", response_model=CompanyOut)
+@router.patch("/{company_id}", response_model=CompanyOut, dependencies=[Depends(require_admin)])
 async def patch_company(
     company_id: str,
     company: CompanyUpdate
@@ -55,7 +57,7 @@ async def patch_company(
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.delete("/{company_id}")
+@router.delete("/{company_id}", dependencies=[Depends(require_admin)])
 async def delete_company(company_id: str):
     deleted = await crud_delete(company_id)
     if not deleted:
@@ -63,7 +65,9 @@ async def delete_company(company_id: str):
     return {"deleted": True}
 
 @router.get("/{company_id}/users", response_model=List[UserOut])
-async def read_company_users(company_id: str):
+async def read_company_users(company_id: str, current=Depends(get_current_user)):
+    if not (is_admin(current) or same_company(current, company_id)):
+        raise HTTPException(403, "Not permitted")
     # ensure the company exists
     company = await crud_get(company_id)
     if not company:
@@ -80,7 +84,7 @@ async def read_company_users(company_id: str):
         u.setdefault("updatedAt", datetime.utcnow())
         output.append(UserOut(**u, id=str(u["_id"])) )
     return output
-@router.patch("/company/{company_id}/portions")
+@router.patch("/company/{company_id}/portions", dependencies=[Depends(require_admin)])
 async def update_company_portions(company_id: str, portions: float):
     """Add the given 'portions' value to the company's current portions."""
     company = await crud_get(company_id)

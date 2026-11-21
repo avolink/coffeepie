@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.security import APIKeyHeader
 from fastapi.responses import HTMLResponse, RedirectResponse
 import os
+import secrets
 from dotenv import load_dotenv
 from app.api import proxmox_routes, auth_routes, users, companies, vms, terminals
 from app.api.snapshots import router as snapshots_router
@@ -9,11 +10,14 @@ from app.api.snapshots import router as snapshots_router
 load_dotenv()
 
 # API Key for docs protection
-API_KEY = os.getenv("DOCS_API_KEY", "your-docs-key")
+API_KEY = os.getenv("DOCS_API_KEY", "")
+# No default: a published fallback key is no key. Refuse to start without one.
+if not API_KEY or API_KEY in {"your-docs-key", "changeme"} or len(API_KEY) < 16:
+    raise RuntimeError("DOCS_API_KEY must be set to a random value of at least 16 characters")
 api_key_header = APIKeyHeader(name="X-API-Key")
 
 async def verify_api_key(api_key: str = Depends(api_key_header)):
-    if api_key != API_KEY:
+    if not secrets.compare_digest(api_key, API_KEY):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not authenticated"
@@ -24,7 +28,11 @@ async def verify_api_key(api_key: str = Depends(api_key_header)):
 app = FastAPI(
     title="Proxmox API Proxy",
     docs_url=None,  # Disable default docs
-    redoc_url=None
+    redoc_url=None,
+    # FastAPI registers its own /openapi.json at construction, ahead of the
+    # key-protected one defined below, so the built-in one would shadow it and
+    # publish the whole route map. Switch it off; ours is the only one.
+    openapi_url=None,
 )
 
 # Add custom docs endpoint with authentication
@@ -34,7 +42,7 @@ from fastapi.openapi.utils import get_openapi
 @app.get("/docs", include_in_schema=False, response_class=HTMLResponse)
 async def get_docs(key: str = None):
     """Show Swagger UI only if API key is provided"""
-    if not key or key != API_KEY:
+    if not key or not secrets.compare_digest(key, API_KEY):
         return RedirectResponse(url="/docs-login")
     
     return get_swagger_ui_html(
@@ -163,7 +171,7 @@ async def docs_login():
 @app.get("/openapi.json", include_in_schema=False)
 async def openapi_schema(key: str = None):
     """OpenAPI schema with query parameter authentication"""
-    if not key or key != API_KEY:
+    if not key or not secrets.compare_digest(key, API_KEY):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not authenticated"

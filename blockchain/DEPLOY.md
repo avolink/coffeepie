@@ -81,19 +81,24 @@ sub-unit granularity will be there from day one.
 ### Mint Mechanism
 
 ```
-mint(address _to, uint256 _value) — onlyOwner
+queueMint(address _to, uint256 _value, bytes32 _salt)   — onlyOwner, starts the 48 h clock
+executeMint(address _to, uint256 _value, bytes32 _salt) — onlyOwner, after 48 h, within 14 days
+cancelQueued(bytes32 id)                                — onlyOwner, withdraws a queued action
   └→ No supply cap — mints any amount
 ```
 
-The `mint()` function creates new COFP tokens. It is the **only** way new
-tokens enter circulation besides the initial 100M constructor mint.
+`queueMint()` + `executeMint()` create new COFP tokens. They are the **only** way
+new tokens enter circulation besides the initial 100M constructor mint. There is
+no instant `mint()`: every emission is announced on-chain (`ActionQueued`) 48
+hours before it can happen, so a stolen owner key cannot create tokens at once.
+Batch emissions accordingly (e.g. one monthly mint per provider).
 
 | Scenario | Action |
 |---|---|
-| Provider serves 4 Slices for 1 hour | `mint()` creates 240 new COFP |
-| Provider serves 1 Slice for 1 minute | `mint()` creates 1 new COFP |
+| Provider serves 4 Slices for 1 hour | a queued mint creates 240 new COFP |
+| Provider serves 1 Slice for 1 minute | a queued mint creates 1 new COFP |
 | Contributor reward from initial pool | `transfer()` from owner wallet (no mint needed) |
-| Initial pool runs low | `mint()` tops up the reward pool |
+| Initial pool runs low | a queued mint tops up the reward pool |
 
 The mint function is NOT arbitrary inflation — it is mechanically tied to
 compute provision at a fixed rate of 1 COFP per Slice·min. The owner can
@@ -161,8 +166,9 @@ balanceOf(address)         → read token balance
 transfer(address, uint256) → distribute tokens
 burn(uint256)              → contributor credit burning
 burnFrom(address, uint256) → provider fiat settlement
-mint(address, uint256)     → emit new tokens for Providers (owner only)
-transferOwnership(address) → admin rotation
+queueMint / executeMint    → emit new tokens for Providers (owner only, 48 h timelock)
+queueOwnershipTransfer / executeOwnershipTransfer → admin rotation (48 h timelock)
+pause() / unpause()        → immediate; pause also blocks transfer, burn and mint
 ```
 
 ## Step 6 — Post-Deployment Checklist
@@ -172,8 +178,9 @@ transferOwnership(address) → admin rotation
 - [ ] TronLink wallet private key stored securely (cold storage recommended)
 - [ ] Test burn + test mint on Shasta testnet before mainnet
 - [ ] **Transfer ownership to Gnosis Safe multi-sig wallet** (MANDATORY before BVC listing — minimum 4/7 signers: Core Dev Lead, Legal Counsel, Community Representative, CFO, Cold Storage Key, External Auditor, Emergency Trustee)
-- [ ] **Enable 48-hour timelock on all `onlyOwner` functions** — prevents single-key compromise from instantly draining the contract
+- [x] **48-hour timelock on mint and ownership transfer** — implemented in the contract (`TIMELOCK_DELAY`, tests in `blockchain/tests/`). `pause()` is deliberately instant. Verify the timelock behaves the same on Shasta before mainnet.
+- [ ] **Confirm the multi-sig mechanism for TRON.** Gnosis Safe is an EVM-chain product; check whether it is available on TRON before relying on it, otherwise use TRON's native multi-signature account permissions (or an audited multisig contract) with the same 4/7 policy.
 - [ ] **Document signer succession plan** — each signer designates a successor who inherits their key on verified death/incapacity (notarized letter + 30-day waiting period). The 4/7 threshold tolerates up to 3 lost keys before the contract freezes, providing decades of operational safety
-- [ ] Deploy monitoring: alert on every `mint()`, `burn()`, `pause()`, `transferOwnership()` event
+- [ ] Deploy monitoring: alert on every `ActionQueued`, `Mint`, `Burn`, `Paused` and `OwnershipTransferred` event (the `ActionQueued` alert is what makes the timelock useful)
 - [ ] Add contract address to Coffee Pie backend `.env`
 - [ ] Publish token info on https://coffeepie.co/token

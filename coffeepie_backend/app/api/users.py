@@ -5,12 +5,23 @@ from app.services.auth_service import create_user as auth_create_user
 from app.crud.users import get_user as crud_get_user, list_users as crud_list_users, update_user as crud_update_user, delete_user as crud_delete_user
 from app.models.user_models import UserCreate, UserUpdate, UserOut
 from app.crud.companies import add_user_to_company, get_company
-from app.core.security import get_current_user
+from app.core.ratelimit import rate_limit
+from app.core.security import get_current_user, get_optional_user, require_admin, is_admin
+
+# Fields an ordinary user may change on their own record. Everything else
+# (type, companyID, portions = credits, email) is administrator-only: letting
+# users set their own credits or company is a billing and tenancy bypass.
+SELF_EDITABLE = {"name", "age", "city", "occupation"}
 
 router = APIRouter(prefix="/users", tags=["users"])
 
-@router.post("/", response_model=UserOut)
-async def create_user(user: UserCreate):
+@router.post("/", response_model=UserOut, dependencies=[Depends(rate_limit("register", 3, 3600))])
+async def create_user(user: UserCreate, caller=Depends(get_optional_user)):
+    # Open self-registration (the terminal signs users up here), but only an
+    # administrator may place a new account inside a company: otherwise anyone
+    # could join any company and spend its credits.
+    if user.companyID and not (caller and is_admin(caller)):
+        user.companyID = None
     try:
         # Create user and hash password
         result = await auth_create_user(user.name, user.email, user.password)
@@ -44,7 +55,7 @@ async def create_user(user: UserCreate):
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-@router.get("/", response_model=List[UserOut])
+@router.get("/", response_model=List[UserOut], dependencies=[Depends(require_admin)])
 async def read_users():
     users = await crud_list_users()
     out = []
@@ -65,13 +76,26 @@ async def read_user(current_user: dict = Depends(get_current_user)):
 
 @router.put("/{user_id}", response_model=UserOut)
 async def update_user(user_id: str, user: UserUpdate, current=Depends(get_current_user)):
-    updated = await crud_update_user(user_id, user.dict(exclude_unset=True))
+    data = user.dict(exclude_unset=True)
+    if not is_admin(current):
+        if str(current["_id"]) != user_id:
+            raise HTTPException(403, "You can only modify your own account")
+        # A null for a protected field means "not changing it" (the model
+        # declares every field, so clients send them all), so drop those and
+        # only refuse a real attempt to set one.
+        data = {k: v for k, v in data.items() if k in SELF_EDITABLE or v is not None}
+        forbidden = set(data) - SELF_EDITABLE
+        if forbidden:
+            raise HTTPException(403, "Not permitted to change: " + ", ".join(sorted(forbidden)))
+    updated = await crud_update_user(user_id, data)
     if not updated:
         raise HTTPException(404, "User not found or no changes")
     return UserOut(**updated, id=str(updated["_id"]))
 
 @router.delete("/{user_id}")
 async def delete_user(user_id: str, current=Depends(get_current_user)):
+    if not is_admin(current) and str(current["_id"]) != user_id:
+        raise HTTPException(403, "You can only delete your own account")
     deleted = await crud_delete_user(user_id)
     if not deleted:
         raise HTTPException(404, "User not found")

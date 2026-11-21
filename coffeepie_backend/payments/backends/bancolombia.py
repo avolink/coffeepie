@@ -17,6 +17,7 @@ Reference: https://www.bancolombia.com/empresas/pagos/qr
 """
 
 import hashlib
+import hmac
 import json
 import time
 import base64
@@ -110,13 +111,14 @@ class BancolombiaQRBackend(PaymentBackend):
     def handle_webhook(self, payload: dict) -> PaymentResult:
         """Process Bancolombia payment confirmation webhook."""
         # Verify signature
+        # Fails closed: missing signature or unset secret is a rejection.
+        payload = dict(payload)
         firma = payload.pop("firma", "")
-        if firma:
-            expected = hashlib.sha256(
-                (str(payload) + self.api_secret).encode()
-            ).hexdigest()
-            if firma != expected:
-                return PaymentResult(success=False, error_message="Invalid webhook signature")
+        expected = hashlib.sha256(
+            (str(payload) + self.api_secret).encode()
+        ).hexdigest()
+        if not self.api_secret or not firma or not hmac.compare_digest(expected, str(firma)):
+            return PaymentResult(success=False, error_message="Invalid webhook signature")
 
         estado = payload.get("estado", "")
         status = PaymentStatus.COMPLETED if estado == "APROBADO" else PaymentStatus.FAILED

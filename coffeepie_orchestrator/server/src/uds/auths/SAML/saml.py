@@ -34,7 +34,10 @@ import datetime
 import logging
 import typing
 import collections.abc
-import xml.sax  # nosec: used to parse trusted xml provided only by administrators
+import xml.sax.handler
+# defusedxml blocks entity-expansion (billion laughs) and external-entity
+# (XXE) attacks; IdP metadata may be fetched from a URL, so do not trust it.
+import defusedxml.sax
 from urllib.parse import urlparse
 
 import requests
@@ -424,7 +427,7 @@ class SAMLAuthenticator(auths.Authenticator):
         # Try to parse it so we can check it is valid. Right now, it checks just that this is XML, will
         # correct it to check that is is valid idp metadata
         try:
-            xml.sax.parseString(idp_metadata, xml.sax.ContentHandler())
+            defusedxml.sax.parseString(idp_metadata, xml.sax.handler.ContentHandler())
         except Exception as e:
             msg = (gettext(' (obtained from URL)') if from_url else '') + str(e)
             raise exceptions.ui.ValidationError(gettext('XML does not seem valid for IDP Metadata ') + msg)
