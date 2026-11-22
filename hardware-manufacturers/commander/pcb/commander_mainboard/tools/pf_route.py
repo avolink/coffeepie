@@ -27,6 +27,7 @@ CONFIG (JSON):
   "mode": "rip" with "rip": {"nets": [...], "box": [x0, y0, x1, y1]}   tracks / vias of those nets inside the box go
           (a track that crosses the border is cut there)
 """
+import collections
 import ctypes
 import fnmatch
 import glob
@@ -854,6 +855,50 @@ def kept_views(ctx, grid, net, items):
     return views
 
 
+def item_hits(ctx, g, net, it, tcells, vcells):
+    """Does one kept item (a track / a via of net) keep class g out of any of the given cells?  tcells: {layer: sorted
+    cells of new track centres}, vcells: sorted cells of new via centres.  The same distances as kept_views()."""
+    W = g.W
+    cl = g.cl_with(net)
+    hcl, h2h = g.rules.hcl, g.rules.h2h
+
+    def any_in(i0, j0, m, cells):
+        if not m.size or not len(cells):
+            return False
+        jj, ii = np.nonzero(m)
+        return bool(len(jj)) and bool(_in(cells, (jj + j0).astype(np.int64) * W + (ii + i0)).any())
+    if it[0] == "trk":
+        _, ax, ay, bx, by, w, lname = it
+        l = ctx.names.index(lname)
+        tc = tcells.get(l)
+        if tc is not None and len(tc):
+            r = w / 2 + cl + g.w / 2 + EPS
+            i0, j0, i1, j1, d2 = g.seg_d2((ax, ay), (bx, by), r)
+            if any_in(i0, j0, d2 < r * r - 1e-9, tc):
+                return True
+        if len(vcells):
+            r = max(w / 2 + cl + g.vd / 2, w / 2 + hcl + g.vh / 2) + EPS
+            i0, j0, i1, j1, d2 = g.seg_d2((ax, ay), (bx, by), r)
+            if any_in(i0, j0, d2 < r * r - 1e-9, vcells):
+                return True
+        return False
+    _, x, y, d, h, top, bot = it
+    la, lb = ctx.names.index(top), ctx.names.index(bot)
+    sh = ("circle", x, y, 0.0, 0.0, 0, 0.0)
+    rt = max(d / 2 + cl + g.w / 2, h / 2 + hcl + g.w / 2) + EPS
+    i0, j0, i1, j1, dd = g.dist(sh, rt)
+    for l in range(min(la, lb), max(la, lb) + 1):
+        tc = tcells.get(l)
+        if tc is not None and len(tc) and any_in(i0, j0, dd < rt - 1e-9, tc):
+            return True
+    if len(vcells):
+        rv = max(d / 2 + g.vd / 2 + cl, h / 2 + g.vh / 2 + h2h, h / 2 + hcl + g.vd / 2, g.vh / 2 + hcl + d / 2) + EPS
+        i0, j0, i1, j1, dd = g.dist(sh, rv)
+        if any_in(i0, j0, dd < rv - 1e-9, vcells):
+            return True
+    return False
+
+
 class Side:
     """One board file's view of the nets: their pads / tracks / vias, their zones, KiCad's connectivity."""
 
@@ -1151,12 +1196,51 @@ def route_job(grid, job, pres, via_cost, margins=(3.0, 8.0), far=(4.0, 12.0)):
                     if bx not in boxes:
                         boxes.append(bx)
             res = 0
+            trace = []
             for bx in boxes:
                 size = (bx[2] - bx[0]) * (bx[3] - bx[1]) * grid.L
                 res = grid.search(job.net, starts, goals, bx, pres, via_cost, maxexp=min(size, 60000000))
+                trace.append((bx, size, res if isinstance(res, int) else len(res)))
                 if not isinstance(res, int):
                     break
+            if isinstance(res, int) and os.environ.get("PF_WHY") == "2":
+                sl = np.bincount(np.asarray(starts) // N, minlength=grid.L)
+                gl = np.bincount(np.asarray(goals) // N, minlength=grid.L)
+                print("  why2: %s starts per layer %s goals per layer %s boxes %s" % (job.net, list(sl), list(gl), trace), flush=True)
+                rev = {v: k for k, v in grid.netid.items()}
+                tf = grid.tho.reshape(-1)
+                st_ = np.asarray(starts)
+                for l_ in np.nonzero(sl)[0]:
+                    sc = st_[st_ // N == l_] % N
+                    own_ = collections.Counter(int(v) for v in tf[l_ * N + sc])
+                    ring = set()
+                    for c_ in sc:
+                        for dc in (1, -1, grid.W, -grid.W, 2, -2, 2 * grid.W, -2 * grid.W):
+                            ring.add(int(c_ + dc))
+                    ring -= set(int(c_) for c_ in sc)
+                    rv = collections.Counter(int(tf[l_ * N + c_]) for c_ in ring if 0 <= c_ < N)
+                    nm = lambda cnt: {("FREE" if k == FREE else "MULTI" if k == MULTI else rev.get(k, k)): v for k, v in cnt.items()}
+                    print("    layer %d: start cells %s; cells round them %s" % (l_, nm(own_), nm(rv)), flush=True)
+                    # how far the net gets on this layer alone (flood over the cells it may use)
+                    me = grid.nid(job.net)
+                    seen_ = set(int(c_) for c_ in sc)
+                    todo = list(seen_)
+                    while todo and len(seen_) < 400000:
+                        c_ = todo.pop()
+                        for dc in (1, -1, grid.W, -grid.W):
+                            n_ = c_ + dc
+                            if 0 <= n_ < N and n_ not in seen_ and tf[l_ * N + n_] in (FREE, me):
+                                seen_.add(n_)
+                                todo.append(n_)
+                    xs = [c_ % grid.W for c_ in seen_]
+                    ys = [c_ // grid.W for c_ in seen_]
+                    vfree = sum(1 for c_ in seen_ if grid.vho.reshape(-1)[c_] in (FREE, me))
+                    print("      reach on this layer: %d cells, x %.2f-%.2f y %.2f-%.2f; cells of it where a via may stand: %d" % (
+                        len(seen_), grid.x0 + min(xs) * grid.G, grid.x0 + max(xs) * grid.G, grid.y0 + min(ys) * grid.G, grid.y0 + max(ys) * grid.G, vfree), flush=True)
             if isinstance(res, int):
+                if os.environ.get("PF_WHY"):        # diagnosis: why an island found no way at all
+                    print("  why: %s [%s]: %d start cells, %d goal cells, %d boxes, last search returned %d" % (
+                        job.net, " ".join(nm for k in roots[r] for nm in job.cl[k].names[:2]), len(starts), len(goals), len(boxes), res), flush=True)
                 stuck.add(r)
                 continue
             job.paths.append(res)
@@ -1509,6 +1593,135 @@ def run_route(src, dst, cfg):
                     grid.stamp_job(o, +1)
                 else:
                     o.wmul = mul
+        # "repair_local": when the nets in the way find no new way from their pads, they step aside locally instead -
+        # each gives up only the kept tracks / vias the newcomer needs out of its way and joins the gap again, the
+        # rest of its copper staying where it is (a 0.3 mm step aside is often all that is needed where a net that
+        # is laid anew from its pads finds nothing).  All or nothing like the rest of the repair.
+        local_on = bool(cfg.get("repair_local")) and orig is not None
+        local_max = int(cfg.get("repair_local_max", 60))
+
+        def orig_take(pairs):
+            """Take (net, item) out of the board that still has the kept copper (its connectivity gives the islands).
+            KiCad's Python objects do not survive a Remove(): the tracks lose their net and are parked far off the
+            board instead -> [(object, net code, geometry)] to give them back with, or None if one was not found."""
+            idx = {}
+            for t in orig.GetTracks():
+                n = t.GetNetname()
+                if not n:
+                    continue
+                if t.GetClass() == "PCB_VIA":
+                    idx.setdefault(("via", n, round(ToMM(t.GetPosition().x), 4), round(ToMM(t.GetPosition().y), 4)), []).append(t)
+                elif t.GetClass() != "PCB_ARC":
+                    a = (round(ToMM(t.GetStart().x), 4), round(ToMM(t.GetStart().y), 4))
+                    b = (round(ToMM(t.GetEnd().x), 4), round(ToMM(t.GetEnd().y), 4))
+                    idx.setdefault(("trk", n, int(t.GetLayer()), min(a, b), max(a, b)), []).append(t)
+            gone = []
+            for n, it in pairs:
+                if it[0] == "trk":
+                    a, b = (round(it[1], 4), round(it[2], 4)), (round(it[3], 4), round(it[4], 4))
+                    k_ = ("trk", n, int(ctx.layer_ids[ctx.names.index(it[6])]), min(a, b), max(a, b))
+                else:
+                    k_ = ("via", n, round(it[1], 4), round(it[2], 4))
+                if not idx.get(k_):
+                    return None                 # (not all found: nothing is taken)
+                gone.append(idx[k_].pop())
+            held = []
+            for q, t in enumerate(gone):
+                park = VECTOR2I(FromMM(-900.0 - 0.5 * q), FromMM(-900.0))
+                if t.GetClass() == "PCB_VIA":
+                    held.append((t, t.GetNetCode(), VECTOR2I(t.GetPosition().x, t.GetPosition().y), None))
+                    t.SetPosition(park)
+                else:
+                    held.append((t, t.GetNetCode(), VECTOR2I(t.GetStart().x, t.GetStart().y), VECTOR2I(t.GetEnd().x, t.GetEnd().y)))
+                    t.SetStart(park)
+                    t.SetEnd(VECTOR2I(park.x + FromMM(0.2), park.y))
+                t.SetNetCode(0)
+            return held
+
+        def orig_give(held):
+            for t, code, a, b in held:
+                if b is None:
+                    t.SetPosition(a)
+                else:
+                    t.SetStart(a)
+                    t.SetEnd(b)
+                t.SetNetCode(code)
+
+        lwhy = [""]
+
+        def step_aside(j, before, n_open, cost):
+            route_job(j.g, j, cost, via_cost, far=(6.0, 16.0))
+            vs = [o for o in jobs if o is not j and o.ok and conflicts(o.g, o)[0]] if j.ok and len(j.open) < n_open else []
+            if not vs or any(o.pre is None for o in vs):
+                lwhy[0] = "no way of its own" if not vs else "in its way without kept copper: " + " ".join(o.net for o in vs if o.pre is None)
+                unstamp(j)
+                restore(j, before)
+                return None
+            W_ = grid.W
+            tc = {l: np.sort(pj.astype(np.int64) * W_ + pi) for l, (pi, pj) in j.pts.items()}
+            vc = np.array(sorted(vj * W_ + vi for (vi, vj) in j.vias), np.int64)
+            xs = [grid.x0 + float(v) * grid.G for (pi, _pj) in j.pts.values() if len(pi) for v in (pi.min(), pi.max())] + \
+                 [grid.x0 + vi * grid.G for (vi, _vj) in j.vias]
+            ys = [grid.y0 + float(v) * grid.G for (_pi, pj) in j.pts.values() if len(pj) for v in (pj.min(), pj.max())] + \
+                 [grid.y0 + vj * grid.G for (_vi, vj) in j.vias]
+            bx0, by0, bx1, by1 = min(xs) - 1.0, min(ys) - 1.0, max(xs) + 1.0, max(ys) + 1.0
+
+            def near(it):
+                if it[0] == "trk":
+                    return not (max(it[1], it[3]) < bx0 or min(it[1], it[3]) > bx1 or max(it[2], it[4]) < by0 or min(it[2], it[4]) > by1)
+                return bx0 <= it[1] <= bx1 and by0 <= it[2] <= by1
+            plan = {o.k: [it for it in o.pre["items"] if near(it) and item_hits(ctx, j.g, o.net, it, tc, vc)] for o in vs}
+            total = sum(len(v) for v in plan.values())
+            snap_ = {o.k: snapshot(o) for o in vs}
+            pairs = [(o.net, it) for o in vs for it in plan[o.k]]
+            ok = total <= local_max
+            lwhy[0] = "" if ok else "%d tracks / vias to give up" % total
+            held = None
+            if ok and pairs:
+                held = orig_take(pairs)
+                ok = held is not None
+                if not ok:
+                    lwhy[0] = "kept copper not found on the board"
+            if ok:
+                so = Side(orig, ctx) if pairs else None
+                for o in vs:
+                    if not plan[o.k]:
+                        continue                # only the links it added are in the way: they are laid again below
+                    grid.stamp_job(o, -1)
+                    out = {id(it) for it in plan[o.k]}
+                    items2 = [it for it in o.pre["items"] if id(it) not in out]
+                    live = net_islands(so, ctx, grids, o.g, o.net, cfg["window"])
+                    views = kept_views(ctx, grid, o.net, items2)
+                    o.paths, o.vias, o.pts, o.open, o.segs = [], [], {}, [], []
+                    o.pre = {"items": items2, "views": views, "weight": o.pre["weight"], "own_t": views[id(o.g)][0], "own_v": views[id(o.g)][1]}
+                    o.cl = live
+                    o.own = np.unique(np.concatenate([c.cells for c in live])) if live else np.zeros(0, np.int64)
+                    o.giveup, o.ok = False, True
+                    grid.stamp_job(o, +1)
+                for o in sorted(vs, key=lambda o_: -len(plan[o_.k])):
+                    if len(o.cl) > 1 or o.pts or o.vias:
+                        route_job(o.g, o, -1.0, via_cost, far=(6.0, 16.0))
+                    if not o.ok or conflicts(o.g, o)[0] or len(o.open) > len(snap_[o.k][4]):
+                        ok = False
+                        lwhy[0] = "%s (%d given up, %d islands) %s" % (o.net, len(plan[o.k]), len(o.cl), "does not join again: " + "; ".join(o.open) if o.open else "is still in the way")
+                        break
+                if ok and conflicts(j.g, j)[0]:
+                    ok = False
+                    lwhy[0] = "still in someone's way"
+            if not ok:
+                for o in vs + [j]:
+                    unstamp(o)
+                for o in vs:
+                    restore(o, snap_[o.k])
+                restore(j, before)
+                if held:
+                    orig_give(held)
+                return None
+            for o in vs:
+                if plan[o.k]:
+                    o.kept0 = (o.pre, o.cl, o.own)
+            return "%d nets in its way stepped aside (%d of their tracks / vias given up: %s)" % (
+                len(vs), total, " ".join("%s:%d" % (o.net, len(plan[o.k])) for o in vs))
         for rnd in range(int(cfg.get("repair", 40))):
             failed = [j for j in jobs if bad(j) and tried.get(j.k, 0) < int(cfg.get("repair_tries", 6))]
             if not failed:
@@ -1566,7 +1779,12 @@ def run_route(src, dst, cfg):
                 for o in victims:
                     restore(o, snap[o.k])
                 restore(j, before)
-                log.append("repair %d: %s - no way found (%d nets in its way), undone" % (rnd + 1, j.net, len(victims)))
+                res = step_aside(j, before, n_open, 30.0 if tried[j.k] % 2 else 4.0) if local_on else None
+                if res:
+                    log.append("repair %d: %s routed, %s" % (rnd + 1, j.net, res))
+                else:
+                    log.append("repair %d: %s - no way found (%d nets in its way), undone%s" % (
+                        rnd + 1, j.net, len(victims), " [local: %s]" % lwhy[0] if local_on else ""))
             print("  " + log[-1], flush=True)
         # safety net: a soft net that gave its copper up and then found no complete way gets the old copper back where
         # nothing new stands in its place, and its missing links are tried once more from there; it is kept if that

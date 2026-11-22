@@ -1,4 +1,4 @@
-"""cap_align.py SRC DST [--radius 1.6] [--chips U1,U10] [--report FILE]   (KiCad's Python)
+"""cap_align.py SRC DST [--radius 1.6] [--chips U1,U10] [--keep-vias REGEX] [--only REF,...] [--report FILE]   (KiCad's Python)
 
 The 0201 capacitors and resistors on the face opposite a BGA are set down exactly over a pair of neighbouring balls
 that carry their two nets (pad pitch 0.64 mm, ball pitch 0.65 mm): one through via then joins ball, capacitor pad and
@@ -12,6 +12,11 @@ the core).
   - places: pairs of neighbouring balls (0.65 apart) with those two nets, nearest first, at most --radius away, each
     ball used once; a place is refused if a pad of a part that stays would touch the new pads;
   - a part that stays but is hit by a newly placed one is reported (seat it with seat_part.py).
+  - --keep-vias REGEX: a place is also refused if a via of another net matching REGEX (the memory bus) stands within
+    the hole rule of one of the new pads, or a track of such a net runs on the part's face within 0.1 mm of them -
+    padclear.py would take that copper out afterwards (ten bus vias lost that way on 2026-11-21).
+
+--only REF,...: just these parts are moved, every other part stays and counts as fixed.
 
 Tracks are not touched here: padclear.py for the moved parts, force_vias.py --pads for the vias, then the router.
 The report (JSON) lists the moved parts, their pads ([ref, pad] for force_vias.py --pads) and the ones left."""
@@ -31,6 +36,8 @@ def main():
     opt = sys.argv[3:]
     radius = float(opt[opt.index("--radius") + 1]) if "--radius" in opt else 1.6
     chips = (opt[opt.index("--chips") + 1] if "--chips" in opt else "U1,U10").split(",")
+    keep_vias = re.compile(opt[opt.index("--keep-vias") + 1]) if "--keep-vias" in opt else None
+    only = set(opt[opt.index("--only") + 1].split(",")) if "--only" in opt else None     # move just these parts
     b = pcbnew.LoadBoard(src)
     pro = os.path.splitext(src)[0] + ".kicad_pro"
     pro_text = open(pro, encoding="utf-8").read() if os.path.exists(pro) else None
@@ -50,7 +57,7 @@ def main():
         ref = f.GetReference()
         pads = [p for p in f.Pads() if p.GetNumber()]
         x, y = ToMM(f.GetPosition().x), ToMM(f.GetPosition().y)
-        if re.fullmatch(r"[CR]\d+", ref) and len(pads) == 2 and pads[0].GetNetname() and pads[1].GetNetname():
+        if re.fullmatch(r"[CR]\d+", ref) and (only is None or ref in only) and len(pads) == 2 and pads[0].GetNetname() and pads[1].GetNetname():
             pitch = math.hypot(ToMM(pads[0].GetPosition().x - pads[1].GetPosition().x), ToMM(pads[0].GetPosition().y - pads[1].GetPosition().y))
             for c in chips:
                 r = field[c]
@@ -100,15 +107,54 @@ def main():
                 return rf
         return None
     stat_fixed = [s for s in static if s[3] not in movable]
+    kept = [(t.GetNetname(), ToMM(t.GetPosition().x), ToMM(t.GetPosition().y), ToMM(t.GetWidth(pcbnew.F_Cu)) / 2, ToMM(t.GetDrillValue()) / 2)
+            for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T and keep_vias is not None and keep_vias.fullmatch(t.GetNetname())]
+
+    kept_segs = [(t.GetNetname(), ToMM(t.GetStart().x), ToMM(t.GetStart().y), ToMM(t.GetEnd().x), ToMM(t.GetEnd().y), ToMM(t.GetWidth()) / 2,
+                 t.GetLayer()) for t in b.GetTracks() if t.Type() != pcbnew.PCB_VIA_T and keep_vias is not None
+                 and keep_vias.fullmatch(t.GetNetname()) and t.GetLayer() in face.values()]
+
+    def near_via(rect, net, layer):
+        """a kept via within the hole rule of the pad, or a kept track on the pad's face within 0.1 mm"""
+        for (vn, vx, vy, vr, vh) in kept:
+            if vn == net:
+                continue
+            d = math.hypot(max(rect[0] - vx, 0.0, vx - rect[2]), max(rect[1] - vy, 0.0, vy - rect[3]))
+            if d < max(vr + 0.1, vh + 0.2):
+                return True
+        for (sn, ax_, ay_, bx_, by_, hw, sl) in kept_segs:
+            if sn == net or sl != layer:
+                continue
+            if max(ax_, bx_) < rect[0] - 0.4 or min(ax_, bx_) > rect[2] + 0.4 or max(ay_, by_) < rect[1] - 0.4 or min(ay_, by_) > rect[3] + 0.4:
+                continue
+            n_ = max(1, int(math.hypot(bx_ - ax_, by_ - ay_) / 0.02))
+            for k_ in range(n_ + 1):
+                px, py = ax_ + (bx_ - ax_) * k_ / n_, ay_ + (by_ - ay_) * k_ / n_
+                if math.hypot(max(rect[0] - px, 0.0, px - rect[2]), max(rect[1] - py, 0.0, py - rect[3])) < hw + 0.1:
+                    return True
+        return False
+    refused = 0
     for (dist, ref, c, a_num, g_num, ax, ay, gx, gy) in cands:
         if ref in placed or (c, a_num) in used or (c, g_num) in used:
             continue
         (_r, _c, _x, _y, k1, n1, k2, n2, f) = by_ref[ref]
         l = face[c]
-        r1 = (ax - half, ay - half, ax + half, ay + half)
-        r2 = (gx - half, gy - half, gx + half, gy + half)
+        # the pads' real size (their bounding box where the part stands now, turned onto the new axis)
+        pp = [q for q in f.Pads() if q.GetNumber()]
+        bb = pp[0].GetBoundingBox()
+        w_, h_ = ToMM(bb.GetWidth()) / 2, ToMM(bb.GetHeight()) / 2
+        along_x = abs(ToMM(pp[0].GetPosition().x - pp[1].GetPosition().x)) > abs(ToMM(pp[0].GetPosition().y - pp[1].GetPosition().y))
+        if not (0.1 < w_ < 0.4 and 0.1 < h_ < 0.4) or f.GetOrientationDegrees() % 90:
+            w_ = h_ = max(half, min(w_, h_))                       # (a part standing at an odd angle: its box says little)
+        al, ac = (w_, h_) if along_x else (h_, w_)
+        hx, hy = (al, ac) if abs(gx - ax) > abs(gy - ay) else (ac, al)
+        r1 = (ax - hx, ay - hy, ax + hx, ay + hy)
+        r2 = (gx - hx, gy - hy, gx + hx, gy + hy)
         if hits(l, r1, n1, ref, stat_fixed, 0.1) or hits(l, r2, n2, ref, stat_fixed, 0.1) or \
                 hits(l, r1, n1, ref, new_pads, 0.1) or hits(l, r2, n2, ref, new_pads, 0.1):
+            continue
+        if near_via(r1, n1, l) or near_via(r2, n2, l):
+            refused += 1
             continue
         placed[ref] = (c, a_num, g_num, ax, ay, gx, gy, dist)
         used.add((c, a_num))
@@ -147,6 +193,8 @@ def main():
                 hit_list.append(ref)
                 break
     print("%d parts set over a ball pair, %d left where they were (%s)" % (len(placed), len(left), " ".join(sorted(left))))
+    if keep_vias is not None:
+        print("%d places refused: a kept via stands next to a pad there" % refused)
     if hit_list:
         print("left AND now under a placed part - seat them again:", " ".join(sorted(set(hit_list))))
     pcbnew.ZONE_FILLER(b).Fill(b.Zones())

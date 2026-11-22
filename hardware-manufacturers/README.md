@@ -23,12 +23,12 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 | Decoding | 4K@60Hz H.264 HW decode |
 | NPU | AI real-time upscaling (basic) |
 | Connectivity | Ethernet PoE (100 Mbps) |
-| RAM | 2 GB LPDDR4 |
+| RAM | 1 GB LPDDR4 |
 | Storage | 16 GB eMMC |
 | Display Output | HDMI 2.0 |
 | USB | 2x USB 2.0 (USB-IP peripherals) |
 | Reference SBC | Radxa Zero 3E |
-| Target Price (BOM) | < 25 USD |
+| Target Price (BOM) | < 50 USD |
 | Target Users | Home users, students, libraries, NGOs |
 
 ### Sentinel (Mid-Tier Codec Terminal)
@@ -38,12 +38,12 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 | Decoding | 4K@60Hz H.264 + AV1 HW decode |
 | NPU | AI real-time upscaling (enhanced) |
 | Connectivity | Gigabit Ethernet PoE + Wi-Fi 6 |
-| RAM | 4 GB LPDDR4X |
+| RAM | 2 GB LPDDR4X |
 | Storage | 32 GB eMMC |
 | Display Output | HDMI 2.1 |
 | USB | 2x USB 3.0 + 1x USB-C (USB-IP peripherals) |
 | Reference SBC | TBD |
-| Target Price (BOM) | < 45 USD |
+| Target Price (BOM) | < 75 USD |
 | Target Users | Professionals, SMEs, public sector |
 
 ### Ranger (Pro Codec Terminal)
@@ -53,12 +53,12 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 | Decoding | 4K@120Hz or 8K@60Hz AV1 HW decode |
 | NPU | AI real-time upscaling (advanced, zero added latency) |
 | Connectivity | Optical Fiber (1 Gbps) + Wi-Fi 6E |
-| RAM | 8 GB LPDDR5 |
+| RAM | 4 GB LPDDR5 |
 | Storage | 64 GB eMMC + NVMe slot |
 | Display Output | DisplayPort 2.0 + HDMI 2.1 |
 | USB | 4x USB 3.1 (USB-IP peripherals) |
 | Reference SBC | TBD |
-| Target Price (BOM) | < 98 USD |
+| Target Price (BOM) | < 100 USD |
 | Target Users | Engineers, designers, data scientists, gamers |
 
 ## Folder Structure

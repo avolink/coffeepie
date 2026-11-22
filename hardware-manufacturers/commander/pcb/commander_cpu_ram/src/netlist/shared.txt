@@ -10,6 +10,7 @@
 13_lpddr4.net       # the LPDDR4 (U10), ZQ, decoupling, VDD1 1.8 V
 15_hdmi.net         # micro-HDMI J10, its ESD, DDC level shifter, 5 V
 17_pmic.net         # RK817 PMIC
-21_emmc.net         # eMMC (U20), its pull-ups / series resistor, the processor's VCCIO_FLASH domain
+21_vccio_flash.net  # the processor's VCCIO_FLASH domain
+21_emmc.shared      # eMMC (U20), its pull-ups / series resistor (not on the mainboard since 2026-11-21)
 22_power_core.net   # 5 V into VCC_SYS, flashing USB-C J2, VCC_3V3 switch, RK860 (VDD_CPU)
 23_service.net      # status LED, debug UART header, recovery / reset buttons
