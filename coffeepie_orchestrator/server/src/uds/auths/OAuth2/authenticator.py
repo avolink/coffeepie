@@ -433,7 +433,7 @@ class OAuth2Authenticator(auths.Authenticator):
         for key in self.get_public_keys():
             logger.debug('Key = %s', key)
             try:
-                payload = jwt.decode(token, key=key, audience=self.client_id.value, algorithms=[info.get('alg', 'RSA256')])  # type: ignore
+                payload = jwt.decode(token_id, key=key, audience=self.client_id.value, algorithms=[info.get('alg', 'RSA256')])  # type: ignore
                 # If reaches here, token is valid, raises jwt.InvalidTokenError otherwise
                 logger.debug('Payload: %s', payload)
                 if payload.get('nonce') != nonce:

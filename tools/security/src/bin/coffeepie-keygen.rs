@@ -7,13 +7,13 @@
 // Designed for secure, reproducible deployments across datacenter nodes.
 
 use clap::Parser;
-use ed25519_dalek::{SigningKey, VerifyingKey};
+use ed25519_dalek::SigningKey;
 use rand::rngs::OsRng;
 use rand::RngCore;
 use std::fs;
 use std::io::Write;
 use std::os::unix::fs::PermissionsExt;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::time::SystemTime;
 
 #[derive(Parser)]
@@ -181,7 +181,7 @@ fn generate_keys(node_id: &str, purpose: &str, seed_override: Option<&str>, inde
     // Deterministic or random seed
     let mut seed = [0u8; 32];
     if let Some(phrase) = seed_override {
-        let input = format!("coffeepie:{}:{}:{}:ed25519", phrase, purpose, node_id, index);
+        let input = format!("coffeepie:{}:{}:{}:{}:ed25519", phrase, purpose, node_id, index);
         let hash = simple_hash64(&input);
         seed.copy_from_slice(&hash[..32]);
     } else {
@@ -218,7 +218,7 @@ fn generate_keys(node_id: &str, purpose: &str, seed_override: Option<&str>, inde
     // ML-KEM-768 seed (64 bytes)
     let mut mlkem_seed = [0u8; 64];
     if let Some(phrase) = seed_override {
-        let input = format!("coffeepie:{}:{}:{}:mlkem768", phrase, purpose, node_id, index);
+        let input = format!("coffeepie:{}:{}:{}:{}:mlkem768", phrase, purpose, node_id, index);
         let hash = simple_hash64(&input);
         mlkem_seed.copy_from_slice(&hash[..64]);
     } else {
@@ -231,16 +231,16 @@ fn generate_keys(node_id: &str, purpose: &str, seed_override: Option<&str>, inde
         node_id: node_id.to_string(),
         purpose: purpose.to_string(),
         ed25519_public_hex: public_hex,
-        ed25519_public_pem,
-        ed25519_seed_hex: hex::encode(&seed),
+        ed25519_public_pem: public_pem,
+        ed25519_seed_hex: hex::encode(seed),
         ed25519_ssh: ssh_key,
-        mlkem768_seed_hex: hex::encode(&mlkem_seed),
+        mlkem768_seed_hex: hex::encode(mlkem_seed),
         fingerprint,
         created_at: now,
     }
 }
 
-fn generate_ca(out_dir: &PathBuf, dry_run: bool) {
+fn generate_ca(out_dir: &Path, dry_run: bool) {
     println!();
     println!("--- Self-Signed CA for Internal L2/L3 Network ---");
 
@@ -253,13 +253,11 @@ fn generate_ca(out_dir: &PathBuf, dry_run: bool) {
         let ca_dir = out_dir.join("ca");
         fs::create_dir_all(&ca_dir).expect("Failed to create CA dir");
 
-        write_file(&ca_dir.join("ca.key"), &hex::encode(&seed), true);
+        write_file(&ca_dir.join("ca.key"), &hex::encode(seed), true);
         write_file(&ca_dir.join("ca.pub"), &hex::encode(ca_pub.as_bytes()), false);
 
-        let conf = format!(
-            "[ca]\norganization = Coffee Pie\nvalidity_days = 3650\nusage = internal_l2_l3_tls\n"
-        );
-        write_file(&ca_dir.join("ca.conf"), &conf, false);
+        let conf = "[ca]\norganization = Coffee Pie\nvalidity_days = 3650\nusage = internal_l2_l3_tls\n";
+        write_file(&ca_dir.join("ca.conf"), conf, false);
     }
 
     println!("  CA key:  {}/ca/ca.key", out_dir.display());
@@ -290,8 +288,8 @@ fn base64_encode(data: &[u8], line_width: usize) -> String {
         let n = (b0 << 16) | (b1 << 8) | b2;
         out.push(CHARS[((n >> 18) & 0x3F) as usize] as char);
         out.push(CHARS[((n >> 12) & 0x3F) as usize] as char);
-        out.push(if chunk.len() > 1 { CHARS[((n >> 6) & 0x3F) as usize] as char } else { b'=' });
-        out.push(if chunk.len() > 2 { CHARS[(n & 0x3F) as usize] as char } else { b'=' });
+        out.push(if chunk.len() > 1 { CHARS[((n >> 6) & 0x3F) as usize] as char } else { '=' });
+        out.push(if chunk.len() > 2 { CHARS[(n & 0x3F) as usize] as char } else { '=' });
     }
     if line_width > 0 {
         let mut wrapped = String::new();

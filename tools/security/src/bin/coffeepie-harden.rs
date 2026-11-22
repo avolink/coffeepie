@@ -430,11 +430,11 @@ fn main() {
     }
 
     let mut results: Vec<CheckResult> = Vec::new();
-    let (mut passed, mut failed, mut fixed, mut skipped, mut errored) = (0u32, 0, 0, 0, 0);
+    let (mut passed, mut failed, mut fixed, mut errored) = (0u32, 0u32, 0u32, 0u32);
+    // No code path skips a check yet; the counter is kept so the JSON report schema stays stable.
+    let skipped = 0u32;
 
     for check in &checks {
-        let mode = if cli.dry_run { "check" } else if cli.undo { "undo" } else { "fix" };
-
         // Run check
         let check_out = exec_ssh(&target, cli.ssh_port, check.check_cmd);
 

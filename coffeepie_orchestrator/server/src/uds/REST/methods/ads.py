@@ -217,7 +217,7 @@ class Ads(Handler):
         }
 
     def _create_campaign(self):
-        from uds.models import CreditAccount, AdCampaign
+        from uds.models import CreditAccount, AdCampaign, TransactionType
         advertiser = self._advertiser
         name = self._params.get('campaign_name', '')
         bid_amount = int(self._params.get('bid_amount', 0))

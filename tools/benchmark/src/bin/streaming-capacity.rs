@@ -6,7 +6,6 @@
 // Each Coffee Pie stream = 1 user. Resolutions affect encoder load.
 
 use clap::Parser;
-use serde::Serialize;
 
 #[derive(Parser)]
 #[command(name = "streaming-capacity")]
@@ -41,7 +40,8 @@ struct Cli {
     json: bool,
 }
 
-#[derive(Debug, Serialize)]
+/// One row of the capacity table, shared by the text and JSON outputs.
+#[derive(Debug)]
 struct StreamEstimate {
     resolution: &'static str,
     fps: u32,
@@ -49,13 +49,6 @@ struct StreamEstimate {
     encoder_load_pct: f64,
     max_streams: u32,
     quality: &'static str,
-}
-
-#[derive(Debug, Serialize)]
-struct CodecCapability {
-    codec: String,
-    max_sessions: u32,
-    streams: Vec<StreamEstimate>,
 }
 
 fn main() {
@@ -109,33 +102,38 @@ fn main() {
         ("4K@120", 120, 5.0, 60, "Limited — extreme"),
     ];
 
+    let estimates: Vec<StreamEstimate> = resolutions.iter().map(|&(name, fps, res_scale, base_br, quality)| {
+        let br = (base_br as f64 * codec_efficiency) as u32;
+        let load = (res_scale / scale) * (br as f64 / effective_bitrate as f64) * (fps as f64 / 60.0);
+        StreamEstimate {
+            resolution: name,
+            fps,
+            bitrate_mbps: br,
+            encoder_load_pct: load * 100.0,
+            max_streams: (total as f64 / load) as u32,
+            quality,
+        }
+    }).collect();
+
     if !cli.json {
         println!("Resolution  FPS  Bitrate   Enc.Load  Max Streams  Quality");
         println!("{}", "-".repeat(65));
-    }
 
-    for (name, fps, res_scale, base_br, quality) in &resolutions {
-        let br = (*base_br as f64 * codec_efficiency) as u32;
-        let load = (res_scale / scale) * (br as f64 / effective_bitrate as f64) * (*fps as f64 / 60.0);
-        let streams = (total as f64 / load) as u32;
-
-        if !cli.json {
+        for e in &estimates {
             println!("{: <12} {: >3}  {: >3} Mbps  {: >5.0}%      {: >5}        {}",
-                name, fps, br, (load * 100.0).min(100.0), streams, quality);
+                e.resolution, e.fps, e.bitrate_mbps, e.encoder_load_pct.min(100.0), e.max_streams, e.quality);
         }
     }
 
     if cli.json {
-        let streams: Vec<serde_json::Value> = resolutions.iter().map(|(name, fps, res_scale, base_br, quality)| {
-            let br = (*base_br as f64 * codec_efficiency) as u32;
-            let load = (res_scale / scale) * (br as f64 / effective_bitrate as f64) * (*fps as f64 / 60.0);
+        let streams: Vec<serde_json::Value> = estimates.iter().map(|e| {
             serde_json::json!({
-                "resolution": name,
-                "fps": fps,
-                "bitrate_mbps": br,
-                "encoder_load_pct": format!("{:.0}", load * 100.0),
-                "max_streams": (total as f64 / load) as u32,
-                "quality": quality,
+                "resolution": e.resolution,
+                "fps": e.fps,
+                "bitrate_mbps": e.bitrate_mbps,
+                "encoder_load_pct": format!("{:.0}", e.encoder_load_pct),
+                "max_streams": e.max_streams,
+                "quality": e.quality,
             })
         }).collect();
 

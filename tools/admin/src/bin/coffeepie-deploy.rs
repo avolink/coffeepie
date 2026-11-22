@@ -19,10 +19,9 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
 use std::fs;
-use std::io::Write;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 #[derive(Parser)]
 #[command(name = "coffeepie-deploy")]

@@ -254,7 +254,7 @@ fn audit_ports(cli: &Cli, report: &mut AuditReport) {
         if parts.len() < 4 { continue; }
         let addr = parts[3];
         if !addr.contains(':') { continue; }
-        let port_str = addr.split(':').last().unwrap_or("0");
+        let port_str = addr.split(':').next_back().unwrap_or("0");
         let port: u16 = port_str.parse().unwrap_or(0);
         if port == 0 { continue; }
 

@@ -17,7 +17,12 @@ use crate::types::{is_safe_identifier, ApiResponse, CapacityReport, CreateSliceR
 pub struct AppState {
     pub adapter: Arc<Box<dyn HypervisorAdapter>>,
     /// Central QFDM broker URL for heartbeats (optional — can be disabled)
+    // Carried in the shared state for handlers; none reads it yet (the
+    // heartbeat worker gets its own copy in main.rs).
+    #[allow(dead_code)]
     pub broker_url: Option<String>,
+    // Same as above: available to handlers, not read by any yet.
+    #[allow(dead_code)]
     pub agent_id: String,
     /// Shared auth token for mutation endpoints (Broker → Agent).
     /// If empty, auth is disabled (insecure — only for development).

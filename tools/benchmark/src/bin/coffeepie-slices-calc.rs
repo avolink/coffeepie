@@ -156,7 +156,7 @@ fn main() {
 
     // Find the limiting dimension
     let max_slices = dims.iter().map(|d| d.slices).min().unwrap_or(0);
-    let mut dims: Vec<SliceDimension> = dims.into_iter().map(|mut d| {
+    let dims: Vec<SliceDimension> = dims.into_iter().map(|mut d| {
         d.usage_pct = if d.slices > 0 {
             (max_slices as f64 / d.slices as f64) * 100.0
         } else {

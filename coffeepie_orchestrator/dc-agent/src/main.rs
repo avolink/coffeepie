@@ -63,13 +63,9 @@ async fn main() -> anyhow::Result<()> {
     // Shared auth token for mutation endpoints (Broker → Agent).
     // If set, all mutation endpoints require `Authorization: Bearer <token>`.
     // If empty, auth is skipped (WARNING: insecure, development only).
-    let auth_token: Option<String> = std::env::var("DC_AGENT_AUTH_TOKEN").ok().and_then(|t| {
-        if t.is_empty() {
-            None
-        } else {
-            Some(t)
-        }
-    });
+    let auth_token: Option<String> = std::env::var("DC_AGENT_AUTH_TOKEN")
+        .ok()
+        .filter(|t| !t.is_empty());
 
     if auth_token.is_none() {
         tracing::warn!(
@@ -80,13 +76,9 @@ async fn main() -> anyhow::Result<()> {
 
     // CORS origin: if set, restrict to this origin.
     // If empty (default), don't add CORS headers at all (server-to-server API).
-    let cors_origin: Option<String> = std::env::var("DC_AGENT_CORS_ORIGIN").ok().and_then(|o| {
-        if o.is_empty() {
-            None
-        } else {
-            Some(o)
-        }
-    });
+    let cors_origin: Option<String> = std::env::var("DC_AGENT_CORS_ORIGIN")
+        .ok()
+        .filter(|o| !o.is_empty());
 
     // ── Build hypervisor adapter ────────────────────────────────────
 

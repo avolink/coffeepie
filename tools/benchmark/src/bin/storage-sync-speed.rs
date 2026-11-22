@@ -4,7 +4,7 @@
 // speeds to estimate real-world sync times for common file sizes.
 
 use std::fs;
-use std::io::{Read, Write, Seek, SeekFrom};
+use std::io::{Read, Write};
 use std::path::PathBuf;
 use std::time::Instant;
 use clap::Parser;
@@ -118,7 +118,7 @@ fn main() {
     if !cli.json { println!(); println!("--- Random I/O Test (Simulating multi-file project sync) ---"); }
 
     let small_file_size = 1024 * 1024; // 1 MB per file
-    let num_files = std::cmp::min(100, (size_bytes / small_file_size) as usize);
+    let num_files = std::cmp::min(100, size_bytes / small_file_size);
     let mut rand_io_speeds = Vec::new();
 
     for i in 1..=cli.iterations {

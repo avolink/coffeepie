@@ -12,8 +12,7 @@
 
 use clap::Parser;
 use regex::Regex;
-use serde::Deserialize;
-use std::collections::{BTreeMap, HashMap, HashSet};
+use std::collections::{BTreeMap, HashSet};
 use std::fs;
 use std::path::PathBuf;
 use std::process;
@@ -51,7 +50,7 @@ const IDENTIFIER_PATTERNS: &[(&str, &str)] = &[
     ("brand_rtm", r"\b(Coffee Pie®|Commanders™|Sentinels™|Rangers™)\b"),
     ("project_name", r"\b(QFDM|OpenUDS|Sunshine|Moonlight|Proxmox|Supabase)\b"),
     ("social_handle", r"\b(Instagram|Facebook|TikTok|YouTube|LinkedIn|Twitter|Discord|GitHub)\b"),
-    ("url", r"https?://[^\s<>\"']+"),
+    ("url", r#"https?://[^\s<>"']+"#),
     ("tech_spec", r"\b(\d+\s*(Wh|GB|MB|Mbps|vMPX/s|TOPS|vCore|INT8))\b"),
 ];
 
@@ -190,11 +189,12 @@ fn main() {
 }
 
 fn check_completeness(dict: &Translations, report: &mut Report) {
-    let lang_set: HashSet<&&str> = ALL_LANGS.iter().collect();
-
     for (key, langs) in dict {
-        let present: HashSet<&&str> = langs.keys().collect();
-        let missing: Vec<&&str> = lang_set.difference(&present).copied().collect();
+        // Reported in ALL_LANGS order so the output is deterministic
+        let missing: Vec<&str> = ALL_LANGS.iter()
+            .copied()
+            .filter(|lang| !langs.contains_key(*lang))
+            .collect();
 
         if !missing.is_empty() {
             report.stats.incomplete_keys += 1;
@@ -206,7 +206,7 @@ fn check_completeness(dict: &Translations, report: &mut Report) {
             report.errors.push(format!(
                 "Missing languages for '{}': {}",
                 truncated,
-                missing.iter().map(|l| l.to_string()).collect::<Vec<_>>().join(", ")
+                missing.join(", ")
             ));
         }
     }
@@ -354,7 +354,7 @@ fn check_html_references(dict: &Translations, html_dir: &PathBuf, report: &mut R
                 let path = entry.path();
                 if path.is_dir() {
                     collect_html(&path, buffer);
-                } else if path.extension().map_or(false, |e| e == "html") {
+                } else if path.extension().is_some_and(|e| e == "html") {
                     if let Ok(content) = fs::read_to_string(&path) {
                         buffer.push_str(&content);
                     }
@@ -367,7 +367,7 @@ fn check_html_references(dict: &Translations, html_dir: &PathBuf, report: &mut R
 
     // Check which dict keys appear in HTML
     let mut orphan_count = 0;
-    for (key, _) in dict {
+    for key in dict.keys() {
         if key.len() < 5 { continue; } // Skip short/structural keys
         if !html_text.contains(key.as_str()) {
             orphan_count += 1;

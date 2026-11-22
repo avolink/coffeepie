@@ -1,0 +1,14 @@
+[package]
+name = "builder"
+version = "5.0.0"
+edition = "2024"
+
+authors = ["Adolfo Gómez <dkmaster@dkmon.com>"]
+license = "BSD-3-Clause"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+chrono = { workspace = true }
+winres = { workspace = true }
