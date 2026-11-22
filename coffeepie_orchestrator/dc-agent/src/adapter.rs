@@ -22,6 +22,8 @@ use crate::types::{CapacityReport, CreateSliceRequest, SliceHandle};
 #[async_trait]
 pub trait HypervisorAdapter: Send + Sync {
     /// Unique name for this adapter type (e.g., "proxmox", "vmware", "qemu-kvm")
+    // Part of the adapter contract; implemented by every adapter, no caller yet.
+    #[allow(dead_code)]
     fn adapter_type(&self) -> &str;
 
     /// List all OS templates available for provisioning
@@ -43,11 +45,15 @@ pub trait HypervisorAdapter: Send + Sync {
     async fn stop_instance(&self, provider_vm_id: &str, node: &str) -> Result<()>;
 
     /// Get the current state of an instance
+    // Part of the adapter contract; no HTTP endpoint exposes it yet.
+    #[allow(dead_code)]
     async fn get_instance_state(&self, provider_vm_id: &str, node: &str) -> Result<crate::types::InstanceState>;
 
     /// Get the IP address of a running instance (for Sunshine streaming)
     async fn get_instance_ip(&self, provider_vm_id: &str, node: &str) -> Result<String>;
 
     /// Get the Sunshine streaming endpoint for a running instance
+    // Part of the adapter contract; no HTTP endpoint exposes it yet.
+    #[allow(dead_code)]
     async fn get_sunshine_endpoint(&self, handle: &SliceHandle) -> Result<crate::types::SunshineEndpoint>;
 }

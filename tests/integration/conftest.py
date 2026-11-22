@@ -114,7 +114,19 @@ def compose_up():
 
 @pytest.fixture(scope="session")
 def orch_url(compose_up):
-    """Orchestrator base URL."""
+    """Orchestrator base URL.
+
+    The orchestrator container is not part of the core stack that
+    ``compose_up`` starts (postgres, redis and the two mocks). Tests that talk
+    to it are skipped — visibly, instead of erroring — when it is not running.
+    Start it with ``docker compose up -d orchestrator`` to run them.
+    """
+    host, port = "localhost", int(ORCHESTRATOR_URL.rsplit(":", 1)[1])
+    try:
+        with socket.create_connection((host, port), timeout=3):
+            pass
+    except OSError:
+        pytest.skip(f"orchestrator is not running on {ORCHESTRATOR_URL}")
     return ORCHESTRATOR_URL
 
 

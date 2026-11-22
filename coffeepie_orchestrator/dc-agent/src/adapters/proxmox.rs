@@ -93,17 +93,6 @@ impl ProxmoxAdapter {
         Ok(())
     }
 
-    /// Build a safe URL path for a node+vm endpoint.
-    /// Node and vm_name are validated as safe identifiers before interpolation.
-    fn safe_path(&self, template: &str, node: &str, vm_name: &str) -> Result<String> {
-        Self::validate_node_and_vm(node, vm_name)?;
-        Ok(format!(
-            "{}{}",
-            self.backend_url,
-            template.replace("{node}", node).replace("{vm}", vm_name)
-        ))
-    }
-
     /// Call GET on a proxmox_backend endpoint.
     /// Validates HTTP status before returning JSON.
     async fn get(&self, path: &str) -> Result<serde_json::Value> {
@@ -487,13 +476,12 @@ impl HypervisorAdapter for ProxmoxAdapter {
                 // The QEMU Guest Agent may return multiple interfaces;
                 // we want one that is reachable for Sunshine streaming.
                 for ip_val in ips {
-                    if let Some(ip_str) = ip_val.as_str() {
-                        if !ip_str.starts_with("127.")
-                            && !ip_str.starts_with("169.254.")
-                            && ip_str.contains('.')
-                        {
-                            return Ok(ip_str.to_string());
-                        }
+                    if let Some(ip_str) = ip_val.as_str()
+                        && !ip_str.starts_with("127.")
+                        && !ip_str.starts_with("169.254.")
+                        && ip_str.contains('.')
+                    {
+                        return Ok(ip_str.to_string());
                     }
                 }
                 // Fallback to first IP if none match the filter

@@ -144,7 +144,7 @@ fn collect_rs_files(dir: &PathBuf, files: &mut Vec<PathBuf>) {
             let path = entry.path();
             if path.is_dir() {
                 collect_rs_files(&path, files);
-            } else if path.extension().map_or(false, |e| e == "rs") {
+            } else if path.extension().is_some_and(|e| e == "rs") {
                 files.push(path);
             }
         }
@@ -161,7 +161,6 @@ fn parse_rust_types(content: &str) -> BTreeMap<String, JsonSchema> {
 
         // Detect struct definitions
         if line.starts_with("pub struct ") || line.starts_with("struct ") {
-            let is_pub = line.starts_with("pub ");
             let name = line
                 .trim_start_matches("pub struct ")
                 .trim_start_matches("struct ")

@@ -102,7 +102,7 @@ fn main() {
     let mut added = Vec::new();
     let mut removed = Vec::new();
     let mut updated = Vec::new();
-    let mut unchanged = 0u32;
+    let mut unchanged = 0usize;
 
     // Find added: in pages but not in data
     for (slug, product) in &scraped_map {
@@ -251,7 +251,7 @@ fn scrape_pages(dir: &PathBuf) -> Vec<Product> {
 
     for entry in entries.flatten() {
         let path = entry.path();
-        if path.extension().map_or(true, |e| e != "html") { continue; }
+        if path.extension().is_none_or(|e| e != "html") { continue; }
 
         let content = match fs::read_to_string(&path) {
             Ok(c) => c,
@@ -273,7 +273,7 @@ fn scrape_pages(dir: &PathBuf) -> Vec<Product> {
 
         // Extract image
         let image = extract_regex(&content, r#"https?://[^\s"']+\.(png|jpg|jpeg|webp)"#)
-            .or_else(|| extract_regex(&content, r"/assets/[^\s"']+\.(png|jpg|jpeg)"))
+            .or_else(|| extract_regex(&content, r#"/assets/[^\s"']+\.(png|jpg|jpeg)"#))
             .unwrap_or_else(|| "/assets/avo/media/placeholder.png".into());
 
         // Determine category from slug prefix or path
@@ -302,7 +302,6 @@ fn extract_meta(content: &str, tag: &str, suffix: &str) -> Option<String> {
 fn extract_regex(content: &str, pattern: &str) -> Option<String> {
     // Simple regex-like extraction without regex crate dependency
     let bytes = content.as_bytes();
-    let mut results = Vec::new();
 
     // Look for $ followed by digits, dots, commas, apostrophes
     if pattern.contains('$') {
@@ -367,9 +366,9 @@ fn categorize(slug: &str, name: &str) -> String {
         "adaptadores".into()
     } else if lower.contains("modulo") || lower.contains("módulo") || lower.contains("module") || lower.contains("pad") {
         "modulos".into()
-    } else if lower.contains("bateria") || lower.contains("battery") || lower.contains("cable") || lower.contains("accesorio") || lower.contains("sensor") {
-        "accesorios".into()
     } else {
-        "accesorios".into() // Default
+        // Accessories (bateria, battery, cable, accesorio, sensor) and the default
+        // for anything unrecognized share the same category.
+        "accesorios".into()
     }
 }

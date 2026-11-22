@@ -21,11 +21,11 @@ async fn ensure_sunshine_running() -> Result<()> {
             .arg("sunshine")
             .output()
             .await;
-        if let Ok(out) = output {
-            if out.status.success() {
-                log::info!("Sunshine is already running");
-                return Ok(());
-            }
+        if let Ok(out) = output
+            && out.status.success()
+        {
+            log::info!("Sunshine is already running");
+            return Ok(());
         }
     }
     #[cfg(target_family = "windows")]
@@ -34,11 +34,11 @@ async fn ensure_sunshine_running() -> Result<()> {
             .args(["/FI", "IMAGENAME eq sunshine.exe", "/NH"])
             .output()
             .await;
-        if let Ok(out) = output {
-            if String::from_utf8_lossy(&out.stdout).contains("sunshine.exe") {
-                log::info!("Sunshine is already running");
-                return Ok(());
-            }
+        if let Ok(out) = output
+            && String::from_utf8_lossy(&out.stdout).contains("sunshine.exe")
+        {
+            log::info!("Sunshine is already running");
+            return Ok(());
         }
     }
 

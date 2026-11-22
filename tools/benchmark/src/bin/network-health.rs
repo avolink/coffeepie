@@ -204,16 +204,30 @@ fn measure_hops(target: &str) -> u32 {
             return stdout.lines().count() as u32;
         }
     }
-    // Fallback: try increasing TTL via ping (Linux)
+    // Fallback: one ping (Linux), then estimate the path length from the TTL
+    // left in the reply.
     if let Ok(output) = Command::new("ping")
         .args(["-c", "1", "-t", "30", "-W", "1", target])
         .output()
     {
-        // Rough: if it succeeds with TTL=30, count lines from ttl-exceeded
-        0 // Can't determine without raw sockets
-    } else {
-        0
+        if output.status.success() {
+            let stdout = String::from_utf8_lossy(&output.stdout);
+            return hops_from_ping_reply(&stdout).unwrap_or(0);
+        }
     }
+    0
+}
+
+/// Rough hop estimate from the `ttl=N` field of a ping reply: hosts start at
+/// 64, 128 or 255 and every router on the way back decrements it by one.
+/// Counts the destination itself as a hop, like a traceroute line count does.
+fn hops_from_ping_reply(stdout: &str) -> Option<u32> {
+    let lower = stdout.to_lowercase();
+    let after = &lower[lower.find("ttl=")? + 4..];
+    let digits: String = after.chars().take_while(|c| c.is_ascii_digit()).collect();
+    let ttl: u32 = digits.parse().ok()?;
+    let initial = [64u32, 128, 255].into_iter().find(|&start| ttl <= start)?;
+    Some(initial - ttl + 1)
 }
 
 fn ping_test(ip: &str, count: u32) -> (u32, f64, f64, f64, f64) {
@@ -276,5 +290,31 @@ fn assess_qfdm_readiness(r: &Results) -> (String, Vec<String>) {
         (format!("⚠ MARGINAL — {} issue(s) to address", issues.len()), issues)
     } else {
         (format!("✗ NOT READY — {} critical issues", issues.len()), issues)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::hops_from_ping_reply;
+
+    #[test]
+    fn hops_from_linux_ping_reply() {
+        let reply = "PING example.org (192.0.2.10) 56(84) bytes of data.\n\
+                     64 bytes from 192.0.2.10: icmp_seq=1 ttl=52 time=18.4 ms\n";
+        assert_eq!(hops_from_ping_reply(reply), Some(13));
+    }
+
+    #[test]
+    fn hops_pick_the_nearest_initial_ttl() {
+        assert_eq!(hops_from_ping_reply("ttl=64"), Some(1));
+        assert_eq!(hops_from_ping_reply("Reply from 192.0.2.10: bytes=32 time=9ms TTL=117"), Some(12));
+        assert_eq!(hops_from_ping_reply("ttl=250"), Some(6));
+    }
+
+    #[test]
+    fn hops_unknown_without_a_ttl_field() {
+        assert_eq!(hops_from_ping_reply(""), None);
+        assert_eq!(hops_from_ping_reply("1 packets transmitted, 0 received"), None);
+        assert_eq!(hops_from_ping_reply("ttl=abc"), None);
     }
 }

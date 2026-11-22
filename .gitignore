@@ -12,6 +12,9 @@
 *-RelWithDebInfo/
 build*/
 Build*/
+# `build*/` also matches the actor's `builder` workspace crate, which is source
+# (every other actor crate depends on it) — keep it tracked.
+!coffeepie_orchestrator/actor/crates/builder/
 target/
 .rcc/
 

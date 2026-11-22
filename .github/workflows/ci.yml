@@ -121,21 +121,6 @@ jobs:
   orchestrator:
     name: Python orchestrator
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_DB: coffeepie_test
-          POSTGRES_USER: coffeepie
-          POSTGRES_PASSWORD: test_pass
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -160,46 +145,31 @@ jobs:
         run: ruff check .
 
       - name: Django checks
+        # settings.py.sample refuses to start without its secrets (none are
+        # embedded), so generate throwaway ones. TEST_UUID makes the sample
+        # settings use an in-memory SQLite default DB, which is enough to
+        # check the project and apply every migration.
         working-directory: coffeepie_orchestrator/server
-        env:
-          DATABASE_URL: postgres://coffeepie:***@localhost:5432/coffeepie_test
-          SECRET_KEY: ci-test-secret
-          DEBUG: "true"
         run: |
-          python manage.py check --deploy 2>/dev/null || true
+          cp src/server/settings.py.sample src/server/settings.py
+          openssl genrsa -out "$RUNNER_TEMP/uds-ci.pem" 2048
+          export UDS_RSA_KEY_FILE="$RUNNER_TEMP/uds-ci.pem"
+          export UDS_SECRET_KEY="$(openssl rand -base64 64 | tr -d '\n')"
+          export UDS_DB_PASSWORD="$(openssl rand -hex 16)"
+          export UDS_ALLOWED_HOSTS=localhost,127.0.0.1
+          export UDS_DEBUG=1
+          export TEST_UUID=ci
+          mkdir -p src/log
+          cd src
+          python manage.py check
           python manage.py migrate --noinput
+          # Fails while models and migrations disagree (last, so the two
+          # commands above still report on their own).
+          python manage.py makemigrations --check --dry-run
 
-  # ═══ Website ═════════════════════════════════════════════
-
-  website:
-    name: Website
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Validate translations.json
-        run: |
-          python -c "
-          import json, sys
-          with open('coffeepie_website/public/translations.json') as f:
-              data = json.load(f)
-          langs = ['es','en','pt','fr','de','ru','hi','ja','zh','ko','ar','el']
-          errors = 0
-          for key, vals in data.items():
-              missing = [l for l in langs if l not in vals]
-              if missing:
-                  print(f'MISSING {missing}: {key[:60]}')
-                  errors += 1
-          print(f'{len(data)} keys, {errors} incomplete')
-          sys.exit(1 if errors > 0 else 0)
-          "
-
-      - name: HTML validation (basic)
-        run: |
-          html_count=$(find coffeepie_website/public -name '*.html' ! -path '*/_files/*' ! -path '*/productos/*' | wc -l)
-          echo "$html_count HTML files found"
-          # Check for common issues
-          ! grep -r '</html>' coffeepie_website/public/*.html | grep -v '</html>' > /dev/null || echo "All HTML files have closing </html>"
+  # The public website (and its translations.json / HTML checks) lives in the
+  # separate `coffeepie-website` repository since `coffeepie_website/` was
+  # removed from this one, so there is no Website job here.
 
   # ═══ Docs Consistency ═══════════════════════════════════
 
@@ -251,12 +221,13 @@ jobs:
           docker compose ps
 
       - name: Wait for readiness
+        # proxmox-mock is the slowest of the four to come up (uvicorn).
         run: |
           for i in $(seq 1 30); do
-            curl -s http://localhost:***&& break
+            curl -fsS http://localhost:8001/health && break
             sleep 2
           done
-          curl -s http://localhost:***
+          curl -fsS http://localhost:8001/health
 
       - name: Install test deps
         run: pip install -r tests/integration/requirements.txt

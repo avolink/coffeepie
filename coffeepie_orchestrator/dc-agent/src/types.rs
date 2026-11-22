@@ -330,13 +330,13 @@ impl CreateSliceRequest {
         }
 
         // Validate preferred_node if provided
-        if let Some(ref node) = self.preferred_node {
-            if !is_safe_identifier(node) {
-                return Err(format!(
-                    "preferred_node contains invalid characters: {}",
-                    node
-                ));
-            }
+        if let Some(ref node) = self.preferred_node
+            && !is_safe_identifier(node)
+        {
+            return Err(format!(
+                "preferred_node contains invalid characters: {}",
+                node
+            ));
         }
 
         Ok(())
