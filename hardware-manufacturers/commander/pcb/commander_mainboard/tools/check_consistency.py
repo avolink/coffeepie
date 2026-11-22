@@ -45,7 +45,8 @@ def schematic_pads(path):
 
 
 def board_pads():
-    b = pcbnew.LoadBoard(os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb"))
+    # CP_BOARD: another board file than the project's own (a working copy in build/)
+    b = pcbnew.LoadBoard(os.environ.get("CP_BOARD") or os.path.join(ROOT, cpmodel.PRJ + ".kicad_pcb"))
     out = {}
     for fp in b.GetFootprints():
         for p in fp.Pads():

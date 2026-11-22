@@ -1,0 +1,12 @@
+# The eMMC is left out of this revision of the mainboard (decided by the user on 2026-11-21).
+#
+# Why: the Radxa ZERO 3E V1.2 layout this core follows has no eMMC - it boots from its microSD card, and that is the
+# arrangement the alpha prototype was tested with.  The eMMC had been put on the place of Radxa's microSD slot,
+# opposite the PMIC; four of its balls could not get a via there and its other vias took the room of the PMIC's top
+# pin row (about 12 links that never closed).  Storage comes back with an eMCP in the place of the memory chip.
+# Boot and flashing: microSD in the hub board's front bay (SDMMC0 through the M.2 socket J41) and USB (J2).
+#
+# The processor's eMMC balls stay unconnected.  Its VCCIO2 supply stays as it was (21_vccio_flash.net).
+SHEET storage
+NC U1 A32 B27 B32 B29 B33 A30 B30 A33 A27 A29 1A16 1B16
+NC U1 1A15 1A17 1A18 1B17 1C15

@@ -42,7 +42,7 @@ SHEET_TITLES = {
     "ethernet": "Gigabit Ethernet PHY, magnetics, RJ45",
     "pmic": "RK817-5 PMIC",
     "power": "5 V rail, service USB-C, VDD_CPU",
-    "storage": "eMMC, EEPROM, service header, buttons (microSD: hub board)",
+    "storage": "EEPROM, service header, buttons (microSD: hub board; no eMMC in this revision)",
     "poe": "PoE PD and isolated 5 V flyback (NEW)",
     "usb3_hub": "USB5744 hub and SuperSpeed bays 1-4 (NEW)",
     "usb2_hub": "USB2517 hub, Hi-Speed bays 5-9 (NEW)",

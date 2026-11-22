@@ -1,4 +1,4 @@
-"""force_vias.py SRC DST DRC.json [--box x0,y0,x1,y1] [--free-only] [--max-cut 2] [--refs REGEX] [--pads FILE] [--report FILE]   (KiCad's Python)
+"""force_vias.py SRC DST DRC.json [--box x0,y0,x1,y1] [--free-only] [--max-cut 2] [--protect REGEX] [--refs REGEX] [--pads FILE] [--report FILE]   (KiCad's Python)
 
 A supply or ground pad that is still open although its own net's plane lies right under it only lacks a via.  This
 sets that via in the pad (0.25 / 0.15 mm, filled and capped like the other vias in pads of this board) for every
@@ -49,6 +49,7 @@ def main():
     box = [float(v) for v in opt[opt.index("--box") + 1].split(",")] if "--box" in opt else None
     free_only = "--free-only" in opt
     max_cut = int(opt[opt.index("--max-cut") + 1]) if "--max-cut" in opt else 2
+    protect = re.compile(opt[opt.index("--protect") + 1]) if "--protect" in opt else None     # nets never cut (the bus)
     refs = re.compile(opt[opt.index("--refs") + 1] if "--refs" in opt else r"U1|U10|U20|[CRL]\d+|FB\d+")
     b = pcbnew.LoadBoard(src)
     pro = os.path.splitext(src)[0] + ".kicad_pro"
@@ -155,6 +156,9 @@ def main():
             continue
         if len({h[1] for h in hit}) > max_cut:
             skipped.append("%s.%s %s: %d nets pass over it (%s)" % (ref, num, net, len({h[1] for h in hit}), ", ".join(sorted({h[1] for h in hit}))))
+            continue
+        if protect is not None and any(protect.fullmatch(h[1]) for h in hit):
+            skipped.append("%s.%s %s: a protected net passes over it (%s)" % (ref, num, net, ", ".join(sorted({h[1] for h in hit if protect.fullmatch(h[1])}))))
             continue
         if any(h[1] == "GND" or big.fullmatch(h[1]) for h in hit):
             skipped.append("%s.%s %s: ground / 5 V / Ethernet track over it" % (ref, num, net))

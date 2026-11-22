@@ -1,14 +1,6 @@
-# eMMC and its processor-side IO supply, in a file of their own (2026-11-18) so that commander_cpu_ram can share them
-# (its src/netlist/shared.txt).  Moved here unchanged from 05_soc_usb_emmc.net and 19_storage_misc.net; the parts keep
-# their sheets (soc_usb, storage), so the mainboard's schematic and board see the same parts in the same places.
-#
-# --- U1I VCCIO2 (eMMC/FSPI) domain: unpopulated on the 3E; Commander adds eMMC ---
-SHEET soc_usb
-P U1 1C13=VCCIO_FLASH
-C42 100nF VCCIO_FLASH GND
-R68 DNP VCC_3V3 VCCIO_FLASH
-R69 0R VCC_1V8 VCCIO_FLASH
-C140 4.7uF VCCIO_FLASH GND
+# eMMC (U20) and its parts.  NOT on the mainboard since 2026-11-21 (the name does not end in .net, so the
+# mainboard does not load it); commander_cpu_ram takes it through its src/netlist/shared.txt.  Unchanged from
+# 21_emmc.net.  The mainboard's side of the story: 21_emmc_absent.net.
 #
 # --- eMMC 5.1, 153-ball (16 GB on the Commander Basic). Standard RK356x hook-up, HS200 at 1.8 V IO.
 #     AUDIT: not present on the 3E schematic - check against the Rockchip RK3566 hardware design guide. ---

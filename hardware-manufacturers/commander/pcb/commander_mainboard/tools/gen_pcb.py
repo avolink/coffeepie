@@ -693,7 +693,8 @@ def main():
         put_c("J53", 2.9, 19.6, 0)                               # control header, in the left SELV corridor
         put_c("J54", 2.9, 36.9, 0)
     else:
-        put("U20", C["EMMC_X"] if CORE_ON_BOTTOM else 15.0, 96.0, 0, bottom=not CORE_ON_BOTTOM)     # the eMMC sits opposite the PMIC, where Radxa has the microSD
+        if "U20" in fps:        # (no eMMC on the mainboard since 2026-11-21; kept for a model that has one)
+            put("U20", C["EMMC_X"] if CORE_ON_BOTTOM else 15.0, 96.0, 0, bottom=not CORE_ON_BOTTOM)     # the eMMC sits opposite the PMIC, where Radxa has the microSD
         edge_mount("J21", 22.5, C["COL_L"], -0.6, (0, 1))        # debug UART, low-profile JST-SH, opening towards the front
         edge_mount("J6", 66.0, sy + C["STRIP_H"], 0.3, (0, 1))
     fixed = [r_ for r_ in ("U40", "U50", "J6", "U20", "U31", "C518", "T1", "J21", "J40", "J2", "J20", "J50", "J51", "J52", "J53", "J54", "SW3") if r_ in fps] + hand

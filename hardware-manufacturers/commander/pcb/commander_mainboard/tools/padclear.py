@@ -47,8 +47,10 @@ def main():
         n = t.GetNetname()
         if t.Type() == pcbnew.PCB_VIA_T:
             x, y, r = ToMM(t.GetPosition().x), ToMM(t.GetPosition().y), ToMM(t.GetWidth(pcbnew.F_Cu)) / 2
+            rh = ToMM(t.GetDrillValue()) / 2
             for (ref, num, pn, layers, rect) in pads:
-                if pn != n and seg_rect(x, y, x, y, rect) < r + cl:
+                # (copper clearance, and the hole-to-copper rule: 0.195 mm from the hole's wall on this board)
+                if pn != n and seg_rect(x, y, x, y, rect) < max(r + cl, rh + 0.2):
                     doomed.append(t)
                     why.append("%s via (%.2f, %.2f) at %s.%s" % (n, x, y, ref, num))
                     break
