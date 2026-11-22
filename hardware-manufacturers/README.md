@@ -3,7 +3,7 @@
 ## Overview
 
 Coffee Pie Codec Terminals are dirt-cheap, highly modular, highly durable,
-easily repairable, upgradeable, and infinitely recyclable ARM SBC devices
+easily repairable, upgradeable, and infinitely recyclable RISC SBC devices
 that connect end users to the QFDM Network. They decode ultra-low-latency
 video/audio streams (H.264 and/or AV1) and relay USB peripherals via USB-IP
 to the user's cloud desktop.
@@ -106,7 +106,7 @@ terminals).
 
 To sell devices under the Coffee Pie brand or as "Coffee Pie Certified":
 
-1. Submit your design at: https://www.coffeepie.co/fabricantes
+1. Submit your design at: manufacturers@coffeepie.co
 2. Demonstrate compliance with the Circular Economy Obligations (Section C
    of the License)
 3. Execute a Brand License Agreement with Grupo 3P1 Colombia
@@ -165,7 +165,7 @@ These obligations are binding. Violation terminates the license.
 
 | Resource | URL |
 |---|---|
-| Manufacturer Registration | https://www.coffeepie.co/fabricantes |
+| Manufacturer Registration | https://www.coffeepie.co/manufacturers |
 | QFDM Royalty Fees Dashboard | https://www.coffeepie.co/panel |
 | Certified Service Partners | https://www.coffeepie.co/dispositivos-certificados |
 | Reference SBC Info | https://wiki.radxa.com/Zero3E |
