@@ -3,7 +3,7 @@
 ## Overview
 
 Coffee Pie Codec Terminals are dirt-cheap, highly modular, highly durable,
-easily repairable, upgradeable, and infinitely recyclable RISC SBC devices
+easily repairable, upgradeable, and infinitely recyclable RISC based SBC devices
 that connect end users to the QFDM Network. They decode ultra-low-latency
 video/audio streams (H.264 and/or AV1) and relay USB peripherals via USB-IP
 to the user's cloud desktop.
@@ -16,7 +16,7 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 
 ## Product Lines
 
-### Commander (Basic Codec Terminal)
+### Commander (Desktop like)
 
 | Spec | Value |
 |---|---|
@@ -24,27 +24,27 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 | NPU | AI real-time upscaling (basic) |
 | Connectivity | Ethernet PoE (100 Mbps) |
 | RAM | 1 GB LPDDR4 |
-| Storage | 16 GB eMMC |
+| Storage | 16 GB eMMC (or eMCP) |
 | Display Output | HDMI 2.0 |
 | USB | 2x USB 2.0 (USB-IP peripherals) |
 | Reference SBC | Radxa Zero 3E |
 | Target Price (BOM) | < 50 USD |
-| Target Users | Home users, students, libraries, NGOs |
+| Target Users | Stationary home users, students, libraries, NGOs |
 
-### Sentinel (Mid-Tier Codec Terminal)
+### Sentinel (Tablet like)
 
 | Spec | Value |
 |---|---|
 | Decoding | 4K@60Hz H.264 + AV1 HW decode |
 | NPU | AI real-time upscaling (enhanced) |
 | Connectivity | Gigabit Ethernet PoE + Wi-Fi 6 |
-| RAM | 2 GB LPDDR4X |
-| Storage | 32 GB eMMC |
+| RAM | 1 GB LPDDR4 |
+| Storage | 16 GB eMMC (or eMCP) |
 | Display Output | HDMI 2.1 |
 | USB | 2x USB 3.0 + 1x USB-C (USB-IP peripherals) |
 | Reference SBC | TBD |
 | Target Price (BOM) | < 75 USD |
-| Target Users | Professionals, SMEs, public sector |
+| Target Users | Professionals on the go, vigilance, sales, etc |
 
 ### Ranger (Pro Codec Terminal)
 
@@ -53,13 +53,13 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 | Decoding | 4K@120Hz or 8K@60Hz AV1 HW decode |
 | NPU | AI real-time upscaling (advanced, zero added latency) |
 | Connectivity | Optical Fiber (1 Gbps) + Wi-Fi 6E |
-| RAM | 4 GB LPDDR5 |
-| Storage | 64 GB eMMC + NVMe slot |
+| RAM | 1 GB LPDDR4 |
+| Storage | 16 GB eMMC (or eMCP) |
 | Display Output | DisplayPort 2.0 + HDMI 2.1 |
 | USB | 4x USB 3.1 (USB-IP peripherals) |
 | Reference SBC | TBD |
 | Target Price (BOM) | < 100 USD |
-| Target Users | Engineers, designers, data scientists, gamers |
+| Target Users | Requiring high mobile range and battery autonomy |
 
 ## Folder Structure
 
