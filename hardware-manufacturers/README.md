@@ -44,9 +44,9 @@ connection to the QFDM Backend is subject to a dirt-cheap QFDM royalty fee
 | USB | 2x USB 3.0 + 1x USB-C (USB-IP peripherals) |
 | Reference SBC | TBD |
 | Target Price (BOM) | < 75 USD |
-| Target Users | Professionals on the go, vigilance, sales, etc |
+| Target Users | Professionals on the go, surveillance, sales, etc |
 
-### Ranger (Pro Codec Terminal)
+### Ranger (Smartphone like)
 
 | Spec | Value |
 |---|---|
