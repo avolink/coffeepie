@@ -10,8 +10,6 @@
 //   coffeepie-payment-test webhook-test --provider bancolombia
 
 use clap::Parser;
-use serde::Serialize;
-use std::fmt;
 
 #[derive(Parser)]
 #[command(name = "coffeepie-payment-test")]
@@ -250,7 +248,7 @@ fn cmd_flow(args: &FlowArgs) {
 
     // Phase 1: Create payment
     if !args.json { println!("[1/3] Creating payment..."); }
-    let tx_id = format!("TX-{}", &ref_id);
+    let tx_id = format!("TX-{}", ref_id);
     if !args.json { println!("      Transaction ID: {}", tx_id); }
 
     match args.method.as_str() {

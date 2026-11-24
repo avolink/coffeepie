@@ -38,7 +38,9 @@ pyrad
 defusedxml
 python-dateutil
 requests
-WeasyPrint
+# 70 removed default_url_fetcher and requires URLFetcher subclasses as
+# url_fetcher; uds/core/reports/report.py still uses the function API.
+WeasyPrint<70
 webencodings
 xml-marshaller
 ipython

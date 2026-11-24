@@ -7,7 +7,6 @@
 use clap::Parser;
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream, SocketAddr};
-use std::thread;
 use std::time::Instant;
 
 #[derive(Parser)]

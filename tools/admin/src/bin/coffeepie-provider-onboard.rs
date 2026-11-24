@@ -15,7 +15,7 @@
 //   coffeepie-provider-onboard --validate registration.json  # Validate existing
 
 use clap::Parser;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::io::{self, Write, BufRead};
 
 #[derive(Parser)]
@@ -67,7 +67,7 @@ struct Cli {
     pricing_cop_per_slice_hour: Option<u32>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct ProviderRegistration {
     provider_id: String,
     company_name: String,
@@ -83,14 +83,14 @@ struct ProviderRegistration {
     submitted_at: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct Contact {
     name: String,
     email: String,
     phone: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct DatacenterInfo {
     location: String,
     tier: u32,
@@ -98,7 +98,7 @@ struct DatacenterInfo {
     nodes: u32,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct HardwareSpecs {
     cpu_threads_per_node: u32,
     total_cpu_threads: u32,
@@ -112,7 +112,7 @@ struct HardwareSpecs {
     overcommit_cpu: u32,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct CapacityEstimate {
     max_slices: u32,
     meets_minimum: bool,
@@ -124,7 +124,7 @@ struct CapacityEstimate {
     bottleneck: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct PricingConfig {
     base_cop_per_slice_hour: u32,
     tier_multiplier: f64,
@@ -132,7 +132,7 @@ struct PricingConfig {
     renewable_discount_pct: u32,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct NetworkInfo {
     connection_type: String,
     has_l2_vlan: bool,
@@ -140,14 +140,14 @@ struct NetworkInfo {
     asn: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct EnergyInfo {
     renewable_pct: u32,
     tier_bonus_pct: f64,
     qualifies_for_tier_v: bool,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct ComplianceChecklist {
     has_gpu_encoding: bool,
     meets_node_minimum: bool,
@@ -165,9 +165,7 @@ fn main() {
         return;
     }
 
-    let reg = if cli.non_interactive {
-        build_from_flags(&cli)
-    } else if cli.json {
+    let reg = if cli.non_interactive || cli.json {
         build_from_flags(&cli)
     } else {
         interactive_wizard()
@@ -265,8 +263,8 @@ fn interactive_wizard() -> ProviderRegistration {
     let total_net_mbps = bw * nodes * 1000;
 
     // Slice math (from coffeepie-slices-calc)
-    let slices_cpu = total_cpu / 1;        // 1 vCore per slice
-    let slices_ram = total_ram / 1;         // 1 GB per slice
+    let slices_cpu = total_cpu;            // 1 vCore per slice
+    let slices_ram = total_ram;             // 1 GB per slice
     let slices_ssd = (storage * 1000) / 8;  // 8 GB per slice (rough)
     let slices_net = total_net_mbps / 8;    // 8 Mbps per slice
     let slices_gpu = total_vram_mb / 125;   // 125 MB VRAM per slice
@@ -300,6 +298,9 @@ fn interactive_wizard() -> ProviderRegistration {
     let cr_month = cr_hour * 24 * 30;
     let cofp_equiv = cr_month / 10; // 1 COFP = 10 Cr (contributor burn rate)
 
+    // Evaluated before `gpu_vendor` is moved into HardwareSpecs below.
+    let has_gpu_encoding = !gpu_vendor.eq_ignore_ascii_case("none");
+
     ProviderRegistration {
         provider_id: format!("PRV-{}-{}", location.split(',').next().unwrap_or("XX").to_uppercase().replace(' ', ""), &nit[..4]),
         company_name: company.clone(),
@@ -326,7 +327,7 @@ fn interactive_wizard() -> ProviderRegistration {
         capacity: CapacityEstimate {
             max_slices,
             meets_minimum: max_slices >= 1_000,
-            simultaneous_users_basic: max_slices / 1,
+            simultaneous_users_basic: max_slices, // 1 slice per basic user
             simultaneous_users_pro: max_slices / 12,
             cr_per_hour_at_50pct: cr_hour,
             cr_per_month_at_50pct: cr_month,
@@ -351,7 +352,7 @@ fn interactive_wizard() -> ProviderRegistration {
             qualifies_for_tier_v: tier >= 5 && renewable >= 90,
         },
         compliance: ComplianceChecklist {
-            has_gpu_encoding: !gpu_vendor.eq_ignore_ascii_case("none"),
+            has_gpu_encoding,
             meets_node_minimum: nodes >= 10,
             meets_slice_minimum: max_slices >= 1_000,
             has_l2_connectivity: has_l2,
@@ -381,8 +382,8 @@ fn build_from_flags(cli: &Cli) -> ProviderRegistration {
     let total_ram = ram * nodes;
     let total_vram_mb = gpu_vram * nodes * 1024;
     let total_net_mbps = bw * nodes * 1000;
-    let slices_cpu = total_cpu / 1;
-    let slices_ram = total_ram / 1;
+    let slices_cpu = total_cpu; // 1 vCore per slice
+    let slices_ram = total_ram; // 1 GB per slice
     let slices_ssd = (storage * 1000) / 8;
     let slices_net = total_net_mbps / 8;
     let slices_gpu = total_vram_mb / 125;
@@ -420,12 +421,12 @@ fn validate_registration(path: &str) {
         Err(e) => { eprintln!("ERROR: Invalid JSON: {}", e); return; }
     };
 
-    let mut issues = Vec::new();
-    if !reg.compliance.meets_node_minimum { issues.push("Less than 10 nodes — minimum requirement not met"); }
+    let mut issues: Vec<String> = Vec::new();
+    if !reg.compliance.meets_node_minimum { issues.push("Less than 10 nodes — minimum requirement not met".into()); }
     if !reg.compliance.meets_slice_minimum { issues.push(format!("Only {} slices — minimum 1'000 required", reg.capacity.max_slices)); }
-    if !reg.compliance.has_gpu_encoding { issues.push("No GPU encoding — NVENC/VAAPI/AMF required"); }
-    if !reg.compliance.has_l2_connectivity { issues.push("L2 VLAN connectivity required for QFDM"); }
-    if !reg.compliance.accepts_terms { issues.push("Terms of Service not accepted"); }
+    if !reg.compliance.has_gpu_encoding { issues.push("No GPU encoding — NVENC/VAAPI/AMF required".into()); }
+    if !reg.compliance.has_l2_connectivity { issues.push("L2 VLAN connectivity required for QFDM".into()); }
+    if !reg.compliance.accepts_terms { issues.push("Terms of Service not accepted".into()); }
 
     if issues.is_empty() {
         println!("✓ Registration valid! Ready to submit.");

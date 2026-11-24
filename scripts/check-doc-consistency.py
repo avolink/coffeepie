@@ -25,13 +25,25 @@ ROOT = Path(__file__).resolve().parent.parent
 
 CHECKS = [
     # ── Wallet holding limit ──
+    # The limit is relative (10% of supply). The docs used to also quote a fixed
+    # 100'000'000'000 COFP figure, which contradicted the 100'000'000 initial
+    # supply under the elastic model and was dropped from all four documents.
     (
-        "Wallet holding limit: 100'000'000'000 COFP per wallet (or 10% of total supply)",
+        "Wallet holding limit: 10% of the total COFP supply per wallet",
         {
-            "AGENTS.md": r"100'000'000'000 COFP per wallet.*(?:or )?10% of the total supply",
-            "README.md": r"100'000'000'000 COFP per wallet.*(?:or )?10% of the total supply",
-            "CONSTITUTION.md": r"100'000'000'000 COFP.*(?:or )?10% of the total supply",
-            "blockchain/README.md": r"100,000,000,000 COFP per wallet.*(?:or )?10% of the total supply",
+            "AGENTS.md": r"10% of the total (?:COFP )?supply\*{0,2} per wallet",
+            "README.md": r"10% of the total (?:COFP )?supply\*{0,2} per wallet",
+            "CONSTITUTION.md": r"10% of the total (?:COFP )?supply\*{0,2} per wallet",
+            "blockchain/README.md": r"10% of the total (?:COFP )?supply\*{0,2} per wallet",
+        },
+    ),
+    (
+        "No stale fixed wallet limit (100'000'000'000 COFP)",
+        {
+            "AGENTS.md": r"^((?!100['’,]000['’,]000['’,]000).)*$",
+            "README.md": r"^((?!100['’,]000['’,]000['’,]000).)*$",
+            "CONSTITUTION.md": r"^((?!100['’,]000['’,]000['’,]000).)*$",
+            "blockchain/README.md": r"^((?!100['’,]000['’,]000['’,]000).)*$",
         },
     ),
     # ── Initial supply ──

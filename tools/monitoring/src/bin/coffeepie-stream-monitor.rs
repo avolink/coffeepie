@@ -30,7 +30,7 @@ use serde::Serialize;
 use std::io::Write;
 use std::process::Command;
 use std::thread;
-use std::time::{Duration, Instant};
+use std::time::Duration;
 
 #[derive(Parser)]
 #[command(name = "coffeepie-stream-monitor")]
@@ -117,12 +117,12 @@ fn main() {
     } else if cli.daemon {
         run_daemon(&cli);
     } else {
-        let report = poll_sunshine(&cli, &mut Vec::new());
+        let report = poll_sunshine(&cli, &[]);
         output_report(&report, &cli);
     }
 }
 
-fn poll_sunshine(cli: &Cli, prev_state: &mut Vec<StreamStats>) -> MonitorReport {
+fn poll_sunshine(cli: &Cli, prev_state: &[StreamStats]) -> MonitorReport {
     let streams = fetch_streams(cli, prev_state);
     let healthy = streams.iter().filter(|s| s.status == "healthy").count() as u32;
     let degraded = streams.len() as u32 - healthy;
@@ -138,7 +138,7 @@ fn poll_sunshine(cli: &Cli, prev_state: &mut Vec<StreamStats>) -> MonitorReport 
     }
 }
 
-fn fetch_streams(cli: &Cli, prev: &mut Vec<StreamStats>) -> Vec<StreamStats> {
+fn fetch_streams(cli: &Cli, prev: &[StreamStats]) -> Vec<StreamStats> {
     // Try Sunshine API first, fall back to synthetic data for dev/testing
     if let Some(streams) = try_sunshine_api(&cli.sunshine_url) {
         return process_streams(streams, cli, prev);
@@ -173,7 +173,7 @@ struct RawSunshineStream {
     uptime: Option<u64>,
 }
 
-fn process_streams(raw: Vec<RawSunshineStream>, cli: &Cli, prev: &mut Vec<StreamStats>) -> Vec<StreamStats> {
+fn process_streams(raw: Vec<RawSunshineStream>, cli: &Cli, prev: &[StreamStats]) -> Vec<StreamStats> {
     raw.into_iter().map(|r| {
         let client_id = r.client.unwrap_or_else(|| "unknown".into());
         let fps = r.fps.unwrap_or(0.0);
@@ -185,7 +185,7 @@ fn process_streams(raw: Vec<RawSunshineStream>, cli: &Cli, prev: &mut Vec<Stream
             .find(|p| p.client_id == client_id)
             .map(|p| p.frame_drops)
             .unwrap_or(drops);
-        let drops_delta = if drops >= prev_drops { drops - prev_drops } else { 0 };
+        let drops_delta = drops.saturating_sub(prev_drops);
 
         let latency = r.latency.unwrap_or(0.0);
         let mut alerts = Vec::new();
@@ -224,7 +224,7 @@ fn process_streams(raw: Vec<RawSunshineStream>, cli: &Cli, prev: &mut Vec<Stream
     }).collect()
 }
 
-fn synthetic_streams(cli: &Cli, _prev: &mut Vec<StreamStats>) -> Vec<StreamStats> {
+fn synthetic_streams(cli: &Cli, _prev: &[StreamStats]) -> Vec<StreamStats> {
     // Generate realistic-looking synthetic streams for development/testing
     let base = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
@@ -238,12 +238,15 @@ fn synthetic_streams(cli: &Cli, _prev: &mut Vec<StreamStats>) -> Vec<StreamStats
         let fps_jitter = (base as i64 + i as i64 * 7) % 5; // 0-4 FPS variation
         let fps = 60.0 - fps_jitter as f64;
         let bitrate = 15.0 + ((base + i as u64 * 13) % 20) as f64; // 15-35 Mbps
-        let drops = ((base + i as u64 * 3) % 50) as u64;
+        let drops = (base + i as u64 * 3) % 50;
         let latency = 5.0 + ((base + i as u64 * 11) % 30) as f64; // 5-35ms
 
-        let status = if fps < 30.0 { "degraded" }
-            else if drops > 100 { "degraded" }
-            else { "healthy" };
+        // Same thresholds as real streams (--fps-min / --max-frame-drops)
+        let status = if fps < cli.fps_min as f64 || drops > cli.max_frame_drops as u64 {
+            "degraded"
+        } else {
+            "healthy"
+        };
 
         streams.push(StreamStats {
             client_id: format!("client-{:04}", i + 1),
@@ -297,7 +300,7 @@ fn output_report(report: &MonitorReport, cli: &Cli) {
             _ => "?",
         };
 
-        println!("  {: <14} {: >4.0f} {: >5.1f} {: >7} {: >5.0f} {: >8} {: >4} {}",
+        println!("  {: <14} {: >4.0} {: >5.1} {: >7} {: >5.0} {: >8} {: >4} {}",
             s.client_id, s.fps, s.bitrate_mbps,
             s.frame_drops, s.latency_ms,
             s.codec.to_uppercase(),
@@ -316,7 +319,7 @@ fn output_report(report: &MonitorReport, cli: &Cli) {
         println!("  ⚠ {} degraded stream(s) detected!", report.degraded);
         for s in &report.streams {
             if s.status == "degraded" {
-                println!("    {} — FPS: {:.0f}, Drops: {}, Lat: {:.0f}ms",
+                println!("    {} — FPS: {:.0}, Drops: {}, Lat: {:.0}ms",
                     s.client_id, s.fps, s.frame_drops, s.latency_ms);
             }
         }
@@ -331,7 +334,7 @@ fn run_daemon(cli: &Cli) {
     println!();
 
     loop {
-        let report = poll_sunshine(cli, &mut prev_state);
+        let report = poll_sunshine(cli, &prev_state);
         output_report(&report, cli);
 
         // Update previous state for delta calculations
@@ -351,7 +354,7 @@ fn run_metrics_server(cli: &Cli) {
 
     for stream in listener.incoming() {
         if let Ok(mut stream) = stream {
-            let report = poll_sunshine(cli, &mut Vec::new());
+            let report = poll_sunshine(cli, &[]);
             let metrics = format_prometheus(&report);
 
             let response = format!(

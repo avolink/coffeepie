@@ -1,0 +1,23 @@
+# Lint policy for the orchestrator server (a fork of OpenUDS).
+#
+# CI gates on the rules that flag code which is broken at runtime: syntax
+# errors, undefined names, invalid comparisons/assertions and misplaced
+# statements. The style families that newer ruff releases enable by default
+# (import order, pyupgrade, blind-except, ...) report thousands of findings in
+# code inherited from upstream; rewriting it would only make upstream merges
+# harder, so they are not part of the gate. Widen `select` deliberately, one
+# family at a time, together with the fixes.
+target-version = "py312"
+
+extend-exclude = [
+    # Python 2 sample client kept verbatim from upstream; not importable code.
+    "samples/REST3.py",
+]
+
+[lint]
+select = ["E9", "F63", "F7", "F82"]
+
+[lint.per-file-ignores]
+# Transport scripts are templates: the broker ships them to the client, which
+# executes them with the script parameters injected as the global `sp`.
+"src/uds/transports/*/scripts/**" = ["F821"]

@@ -231,8 +231,8 @@ fn check_redis(addr: &str, _timeout: Duration) -> (String, u64, String) {
     let start = Instant::now();
     // Use redis-cli for proper protocol check
     let output = Command::new("redis-cli")
-        .args(["-h", &addr.split(':').next().unwrap_or("localhost"),
-               "-p", &addr.split(':').nth(1).unwrap_or("6379"),
+        .args(["-h", addr.split(':').next().unwrap_or("localhost"),
+               "-p", addr.split(':').nth(1).unwrap_or("6379"),
                "PING"])
         .output();
 
@@ -329,17 +329,15 @@ fn run_metrics_server(cli: &Cli) {
     let listener = std::net::TcpListener::bind(format!("0.0.0.0:{}", port))
         .expect("Failed to bind metrics port");
 
-    for stream in listener.incoming() {
-        if let Ok(mut stream) = stream {
-            let report = run_checks(cli);
-            let metrics = format_prometheus(&report);
+    for mut stream in listener.incoming().flatten() {
+        let report = run_checks(cli);
+        let metrics = format_prometheus(&report);
 
-            let response = format!(
-                "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {}\r\n\r\n{}",
-                metrics.len(), metrics
-            );
-            let _ = stream.write_all(response.as_bytes());
-        }
+        let response = format!(
+            "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {}\r\n\r\n{}",
+            metrics.len(), metrics
+        );
+        let _ = stream.write_all(response.as_bytes());
     }
 }
 

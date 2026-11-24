@@ -22,7 +22,6 @@
 
 use clap::Parser;
 use serde::Serialize;
-use std::fmt;
 
 #[derive(Parser)]
 #[command(name = "coffeepie-billing")]

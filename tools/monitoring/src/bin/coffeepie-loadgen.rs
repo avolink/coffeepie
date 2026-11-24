@@ -19,9 +19,9 @@
 
 use clap::Parser;
 use serde::Serialize;
-use std::io::{Read, Write};
-use std::net::{SocketAddr, TcpStream, ToSocketAddrs};
-use std::sync::atomic::{AtomicU32, AtomicU64, Ordering};
+use std::io::Write;
+use std::net::{TcpStream, ToSocketAddrs};
+use std::sync::atomic::{AtomicU32, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
 use std::thread;
@@ -280,7 +280,7 @@ fn main() {
     if success_rate < 95.0 { recommendations.push("Success rate < 95% — check orchestrator logs".into()); }
     if failed > succeeded / 2 { recommendations.push("High failure rate — reduce concurrency or check network".into()); }
     if counters.stream_errors.load(Ordering::SeqCst) > 0 { recommendations.push("Stream errors detected — check Sunshine service".into()); }
-    if elapsed.as_secs() > duration.as_secs() as u64 * 2 { recommendations.push("Test ran much longer than duration — system overloaded".into()); }
+    if elapsed.as_secs() > duration.as_secs() * 2 { recommendations.push("Test ran much longer than duration — system overloaded".into()); }
 
     let report = LoadReport {
         config: LoadConfig {
